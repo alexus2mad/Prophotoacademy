@@ -19,6 +19,15 @@ assert.equal(result.programs.length,fixture.programs.length+2);
 assert.equal(result.images.length,fixture.images.length);
 assert.equal(result.settings.heroImageId,fixture.settings.heroImageId);
 assert.equal(result.settings.primaryProgramId,fixture.settings.primaryProgramId);
+assert.equal(result.hub.heroImageId,fixture.hub.heroImageId);
+assert.equal(result.hub.phone,fixture.hub.phone);
+for(const room of fixture.rooms){const projected=result.rooms.find(item=>item.id===room.id);assert.equal(projected.imageId,room.imageId);assert.equal(projected.slug,room.slug);assert.deepEqual(projected.galleryImageIds,room.galleryImageIds);}
+for(const session of fixture.practiceSessions){const projected=result.practiceSessions.find(item=>item.id===session.id);assert.equal(projected.roomId,session.roomId);assert.deepEqual(projected.programIds,session.programIds);assert.equal(projected.verified,false);}
+const nativeRoom={...documents.find(d=>d._type==='studioRoom'),_id:'native-room'};delete nativeRoom.legacyId;documents.push(nativeRoom);
+const nativeSession={...documents.find(d=>d._type==='practiceSession'),_id:'native-session',room:{_type:'reference',_ref:'native-room'},programs:[{_type:'reference',_ref:'new-program'}]};delete nativeSession.legacyId;documents.push(nativeSession);
+const nativeEcosystem=await (await evaluate(parse(query),{dataset:documents})).get();
+assert.equal(nativeEcosystem.practiceSessions.find(item=>item.id==='native-session').roomId,'native-room');
+assert.deepEqual(nativeEcosystem.practiceSessions.find(item=>item.id==='native-session').programIds,['new-program']);
 const settingsDoc=documents.find(document=>document._id==='site-settings');
 const selected=settingsDoc.primaryProgram;
 settingsDoc.primaryProgram={_type:'reference',_ref:'new-program'};

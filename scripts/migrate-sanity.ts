@@ -18,11 +18,11 @@ for(const image of seed.images){
  let assetId=assetHashes[hash]||`image-${hash}-${image.width}x${image.height}-webp`;
  if(write){
   const existing=await client!.fetch<string|undefined>('*[_type == "sanity.imageAsset" && sha1 == $hash][0]._id',{hash});
-  assetId=existing||(await client!.assets.upload('image',bytes,{filename:`${image.id}.webp`,source:{id:image.driveId,name:'Google Drive',url:`https://drive.google.com/file/d/${image.driveId}/view`}}))._id;
+  assetId=existing||(await client!.assets.upload('image',bytes,{filename:`${image.id}.webp`,source:{id:image.driveId||image.id,name:image.driveId?'Google Drive':'ProPhoto Hub',url:image.driveId?`https://drive.google.com/file/d/${image.driveId}/view`:(image as typeof image & {sourceUrl?:string}).sourceUrl}}))._id;
  }
  assetHashes[hash]=assetId;
  const {src,width,height,bytes:_,originalWidth,originalHeight,...metadata}=image as typeof image & {bytes?:number;originalWidth?:number;originalHeight?:number};
- docs.push({...metadata,_id:`image-${image.id}`,_type:'editorialImage',legacyId:image.id,image:{_type:'image',asset:ref(assetId)},source});
+ docs.push({...metadata,_id:`image-${image.id}`,_type:'editorialImage',legacyId:image.id,image:{_type:'image',asset:ref(assetId)},source:image.driveId?source:{system:'wix',capturedAt:'2026-10-07'}});
 }
 for(const [i,work]of seed.works.entries()){const {imageId,...data}=work;docs.push({...data,_id:work.id,_type:'studentWork',legacyId:work.id,image:ref(`image-${imageId}`),sortOrder:i,source});}
 for(const instructor of seed.instructors){const {imageId,...data}=instructor;docs.push({...data,_id:`instructor-${instructor.id}`,_type:'instructor',legacyId:instructor.id,image:ref(`image-${imageId}`),source});}
@@ -31,6 +31,9 @@ for(const offering of seed.offerings){const {programId,...data}=offering;docs.pu
 for(const [i,t]of seed.testimonials.entries())docs.push({...t,_id:t.id,_type:'testimonial',legacyId:t.id,sortOrder:i,source});
 for(const page of seed.pages)docs.push({...page,_id:page.id,_type:'editorialPage',legacyId:page.id,slug:{_type:'slug',current:page.slug},source});
 const {heroImageId,primaryProgramId,...settings}=seed.settings;docs.push({...settings,_id:'site-settings',_type:'siteSettings',heroImage:ref(`image-${heroImageId}`),...(primaryProgramId?{primaryProgram:ref(primaryProgramId)}:{}),source});
+for(const [i,room]of seed.rooms.entries()){const {imageId,galleryImageIds,slug,...data}=room;docs.push({...data,_id:room.id,_type:'studioRoom',legacyId:room.id,slug:{_type:'slug',current:slug},image:ref(`image-${imageId}`),gallery:keyed(galleryImageIds.map(id=>ref(`image-${id}`))),sortOrder:i,source:{system:'wix',capturedAt:'2026-10-07'}});}
+for(const session of seed.practiceSessions){const {imageId,roomId,programIds,slug,...data}=session;docs.push({...data,_id:session.id,_type:'practiceSession',legacyId:session.id,slug:{_type:'slug',current:slug},image:ref(`image-${imageId}`),room:ref(roomId),programs:keyed(programIds.map(ref)),source:{system:'editorial-plan',capturedAt:'2026-10-07'}});}
+const {heroImageId:hubHero,...hub}=seed.hub;docs.push({...hub,_id:'hub-settings',_type:'hubSettings',heroImage:ref(`image-${hubHero}`),source:{system:'wix',capturedAt:'2026-10-07'}});
 const ids=new Set(docs.map(d=>d._id));
 const assetIds=new Set(Object.values(assetHashes));
 function checkRefs(value:unknown){if(Array.isArray(value))value.forEach(checkRefs);else if(value&&typeof value==='object'){const obj=value as Record<string,unknown>;if(obj._ref&&!assetIds.has(String(obj._ref))&&!ids.has(obj._ref))throw new Error(`Broken reference: ${obj._ref}`);Object.values(obj).forEach(checkRefs);}}

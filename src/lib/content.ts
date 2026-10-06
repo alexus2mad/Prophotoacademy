@@ -14,7 +14,10 @@ const query=`{
   "works": *[_type == "studentWork"] | order(sortOrder asc) {..., "id": coalesce(legacyId,_id), "imageId": coalesce(image->legacyId,image->_id)},
   "pages": *[_type == "editorialPage"] {..., "id": coalesce(legacyId,_id), "slug": slug.current},
   "testimonials": *[_type == "testimonial"] | order(sortOrder asc) {..., "id": coalesce(legacyId,_id), "image": screenshot.asset->url, "programId": coalesce(program->legacyId,program->_id)},
-  "settings": *[_type == "siteSettings" && _id == "site-settings"][0] {..., "primaryProgramId": coalesce(primaryProgram->legacyId,primaryProgram->_id,""), "heroImageId": coalesce(heroImage->legacyId,heroImage->_id)}
+  "settings": *[_type == "siteSettings" && _id == "site-settings"][0] {..., "primaryProgramId": coalesce(primaryProgram->legacyId,primaryProgram->_id,""), "heroImageId": coalesce(heroImage->legacyId,heroImage->_id)},
+  "rooms": *[_type == "studioRoom"] | order(sortOrder asc) {...,"id":coalesce(legacyId,_id),"slug":slug.current,"imageId":coalesce(image->legacyId,image->_id),"galleryImageIds":coalesce(gallery[]->{"id":coalesce(legacyId,_id)}.id,[]),"features":coalesce(features,[])},
+  "practiceSessions": *[_type == "practiceSession"] {...,"id":coalesce(legacyId,_id),"slug":slug.current,"imageId":coalesce(image->legacyId,image->_id),"roomId":coalesce(room->legacyId,room->_id),"programIds":coalesce(programs[]->{"id":coalesce(legacyId,_id)}.id,[]),"enrollmentOfferingId":coalesce(enrollmentOffering->legacyId,enrollmentOffering->_id)},
+  "hub": *[_type == "hubSettings" && _id == "hub-settings"][0] {...,"heroImageId":coalesce(heroImage->legacyId,heroImage->_id)}
 }`;
 type SanityImage = ImageAsset & {image:{asset:{_ref:string};crop?:{left:number;right:number;top:number;bottom:number};hotspot?:{x:number;y:number}}};
 export const getContent=cache(async ():Promise<AcademyContent> => {
@@ -29,6 +32,7 @@ export const getContent=cache(async ():Promise<AcademyContent> => {
   const client=createClient({projectId,dataset,apiVersion:'2026-10-01',useCdn:!preview,token:process.env.SANITY_API_READ_TOKEN,perspective:preview?'drafts':'published'});
   const content=await client.fetch<Omit<AcademyContent,'images'> & {images:SanityImage[]}>(query,{}, {next:{revalidate:preview?0:60,tags:['academy-content']}});
   if(!content.settings || !content.programs?.length) throw new Error('Sanity content is empty. Run the reviewed migration before switching modes.');
+  if(!content.hub||!content.rooms?.length)throw new Error('Hub content is missing. Import the ecosystem migration before publishing the connected sites.');
   const builder=createImageUrlBuilder(client);
   const images=content.images.map(image=>{
     const crop=image.image.crop||{left:0,right:0,top:0,bottom:0};
