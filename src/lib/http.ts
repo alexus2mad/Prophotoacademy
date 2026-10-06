@@ -4,6 +4,7 @@ export function validationError(issues:{path:PropertyKey[]}[],messages:Record<st
 export function guardMutation(request:Request,scope:string){
  const origin=request.headers.get('origin');const site=new URL(process.env.NEXT_PUBLIC_SITE_URL||'http://127.0.0.1:3000');
  const allowed=new Set([site.origin]);
+ for(const configured of [process.env.NEXT_PUBLIC_ACADEMY_URL,process.env.NEXT_PUBLIC_HUB_URL])if(configured?.startsWith('https://')||configured?.startsWith('http://'))allowed.add(new URL(configured).origin);
  if(process.env.NODE_ENV==='development'&&['127.0.0.1','localhost','[::1]'].includes(site.hostname))for(const host of ['127.0.0.1','localhost','[::1]']){const alias=new URL(site);alias.hostname=host;allowed.add(alias.origin);}
  if(!origin || !allowed.has(origin))throw new HttpError(403,'Запит із цього джерела не дозволено.');
  const address=process.env.TRUST_PROXY==='1'?request.headers.get('x-forwarded-for')?.split(',')[0].trim()||'unknown':'local';

@@ -1,0 +1,151 @@
+.ecosystem-nav { display:flex;align-items:center;gap:16px;flex-shrink:0;font-size:14px;color:var(--secondary); }
+.ecosystem-nav a { min-height:44px;display:inline-flex;align-items:center;border-bottom:1px solid transparent;transition:color var(--control),border-color var(--control); }
+.ecosystem-nav a[aria-current] { color:var(--accent);border-color:var(--accent); }
+.ecosystem-nav a:hover { color:var(--text); }
+.ecosystem-nav>span { color:var(--border); }
+.brand-logo-hub { filter:none;width:136px; }
+.brand-logo-hub.brand-logo-large { width:220px; }
+.header-inner { gap:24px; }
+.desktop-nav { margin-left:auto;gap:24px; }
+.menu-dialog .ecosystem-nav { flex-direction:row;justify-content:flex-start;border-top:1px solid var(--border);margin-top:28px;padding-top:16px;font-size:16px; }
+.menu-dialog .ecosystem-nav a { font-size:16px; }
+.ecosystem-signature { margin-top:24px;max-width:230px;font-size:13px;line-height:21px;color:var(--secondary); }
+.footer-focused { padding-block:24px; }
+.footer-focused .footer-bottom { margin-top:0;padding-top:0;border:0; }
+.hub-opening { display:grid;grid-template-columns:1fr 1.12fr;gap:64px;align-items:center;padding-top:24px; }
+.hub-opening h1 { max-width:9ch;font-size:clamp(48px,5.2vw,72px); }
+.hub-opening .eyebrow { margin-bottom:20px; }
+.hub-opening .lead { color:var(--secondary);font-size:17px;line-height:27px;max-width:440px;margin:24px 0; }
+.hub-opening-photo { height:460px;overflow:hidden;border-radius:4px; }
+.hub-opening-rates { display:grid;max-width:440px;margin:0 0 24px; }
+.hub-opening-rates a { display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:40px;border-bottom:1px solid var(--border);font-size:14px;transition:color var(--control),border-color var(--control); }
+.hub-opening-rates a:hover { color:var(--accent);border-color:var(--accent); }
+.hub-opening-rates small { color:var(--secondary);font-size:12px; }
+.hub-location { display:flex;flex-direction:column;gap:4px;font-size:13px;margin-bottom:28px;color:var(--secondary); }
+.hub-location a { width:fit-content;min-height:28px; }
+.hub-location a:hover { color:var(--accent); }
+.hub-spaces { margin-top:64px; }
+.hub-spaces .section-heading>p { font-size:12px;max-width:250px; }
+.room-grid { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px; }
+.room-photo { display:block;height:240px;overflow:hidden;border-radius:4px; }
+.room-card { min-width:0; }
+.room-heading { display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin-top:20px; }
+.room-heading h3 { font-size:24px;transition:color var(--control); }
+.room-heading>span { font-size:15px;white-space:nowrap; }
+.room-heading small { font-size:12px;color:var(--secondary); }
+.room-card>p { min-height:40px;font-size:12px;line-height:20px;margin-top:8px;color:var(--secondary); }
+.room-card>.button { margin-top:16px; }
+.practice-preview { display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;padding-top:40px;border-top:1px solid var(--border); }
+.practice-preview-photo { height:320px;overflow:hidden;border-radius:4px; }
+.practice-preview h2 { font-size:clamp(30px,3vw,42px);max-width:17ch; }
+.practice-preview p:not(.practice-location) { font-size:15px;line-height:25px;color:var(--secondary);margin-top:20px;max-width:480px; }
+.practice-location { font-size:12px;color:var(--accent);margin-bottom:16px; }
+.practice-preview p.practice-stage { font-size:12px;line-height:20px;color:var(--muted);margin-top:16px; }
+.practice-preview .text-link { margin-top:12px; }
+.practice-preview--compact { grid-template-columns:.8fr 1fr;gap:32px; }
+.practice-preview--compact .practice-preview-photo { height:260px; }
+.practice-preview--compact h2 { font-size:30px; }
+.hub-arrival,.room-detail-body { display:grid;grid-template-columns:1fr 1fr;gap:80px; }
+.hub-arrival p,.room-detail-body p { margin-top:20px;color:var(--secondary);max-width:520px; }
+.hub-arrival h3 { font-size:30px; }
+.hub-arrival .text-link,.room-detail-body .text-link { margin-top:16px; }
+.hub-detail { padding-top:48px; }
+.hub-detail-opening { display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:start; }
+.hub-detail-opening h1 { font-size:clamp(42px,4.5vw,64px);max-width:13ch; }
+.hub-detail-opening .breadcrumb { display:inline-flex;margin-bottom:24px; }
+.hub-detail-opening .eyebrow { margin-bottom:20px; }
+.hub-detail-opening .lead { font-size:17px;color:var(--secondary);margin-top:24px;max-width:520px; }
+.hub-detail-opening>figure { height:480px;overflow:hidden;border-radius:4px; }
+.room-detail-price { font-family:var(--font-display),sans-serif;font-size:32px;margin-top:32px; }
+.room-detail-price>span { font-family:var(--font-manrope),sans-serif;font-size:14px;color:var(--secondary); }
+.hub-detail-opening .button { margin-top:24px; }
+.equipment-note,.practice-independent { font-size:13px;color:var(--secondary);line-height:22px;margin-top:24px;max-width:470px; }
+.room-detail-body { margin-top:80px;padding-top:40px;border-top:1px solid var(--border); }
+.room-detail-body h2 { font-size:32px; }
+.room-features { padding-left:18px;line-height:2;color:var(--secondary); }
+.room-extra-photo { margin-top:64px; }
+.room-extra-photo img { border-radius:4px; }
+.room-extra-photo figcaption { font-size:11px;color:var(--muted);margin-top:8px; }
+.practice-detail .practice-stage { margin-top:24px;color:var(--accent);font-size:13px; }
+.practice-facts { display:flex;gap:48px;margin-top:28px; }
+.practice-facts dt { font-size:12px;color:var(--muted); }
+.practice-facts dd { margin:4px 0 0; }
+.practice-delivery { display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:64px; }
+.practice-delivery h2 { font-size:26px; }
+.practice-delivery ul { padding-left:18px;color:var(--secondary); }
+.practice-next { margin-top:64px;padding-top:32px;border-top:1px solid var(--border);max-width:640px; }
+.practice-next h2 { font-size:32px; }
+.practice-next p { color:var(--secondary);margin:20px 0 8px; }
+.practice-online-alternative { font-size:12px;color:var(--secondary);margin-top:16px; }
+.practice-online-alternative a { text-decoration:underline;text-underline-offset:4px; }
+.hub-contact { padding-top:64px; }
+.hub-contact-grid { display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-top:64px; }
+.hub-contact-grid h2 { font-size:32px;margin-bottom:24px; }
+.hub-contact-grid p { margin-bottom:24px;color:var(--secondary); }
+.hub-contact-grid>div { display:flex;flex-direction:column;align-items:flex-start; }
+.contact-large { font-size:28px;margin-bottom:20px; }
+.booking-page { padding-top:32px; }
+.booking-top { display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:24px; }
+.booking-top h1 { font-size:36px; }
+.studio-booking-frame { width:100%;height:1600px;border:0;border-radius:4px;background:var(--canvas); }
+.booking-support { margin-top:24px;font-size:13px;color:var(--secondary); }
+.booking-support a { text-decoration:underline;text-underline-offset:4px; }
+@media(hover:hover) and (pointer:fine) {
+ .room-card:hover .room-heading h3 { color:var(--accent); }
+ .room-photo:hover [data-photo-motion] { --photo-zoom:1.055; }
+}
+@media(max-width:1199px) { .hub-opening,.hub-detail-opening { gap:40px; }.room-heading { flex-wrap:wrap;gap:4px; }.room-grid { gap:24px; } }
+@media(max-width:1023px) { .desktop-nav { display:none; }.header-actions { margin-left:auto; }.hub-opening-photo { height:420px; }.room-photo { height:180px; }.practice-preview { gap:32px; } }
+@media(max-width:767px) {
+ html { scroll-padding-top:120px; }
+ .site-header { height:108px; }
+ .header-inner { flex-wrap:wrap;gap:0 12px;align-content:center; }
+ .header-inner>.ecosystem-nav { order:3;width:100%;justify-content:center;height:32px;gap:20px;font-size:13px; }
+ .header-inner>.ecosystem-nav a { min-height:32px; }
+ .header-focused { height:72px; }
+ .header-focused .header-inner { flex-wrap:nowrap; }
+ .brand-logo-hub { width:110px; }
+ .brand-logo-hub.brand-logo-large { width:190px; }
+ .hub-opening { grid-template-columns:1fr;gap:24px;padding-top:8px; }
+ .hub-opening-photo { height:180px;grid-row:1; }
+ .hub-opening h1 { font-size:42px;line-height:46px;max-width:12ch; }
+ .hub-opening .eyebrow { margin-bottom:14px; }
+ .hub-opening .lead { font-size:14px;line-height:23px;margin:16px 0; }
+ .hub-location { margin-bottom:20px;font-size:12px; }
+ .hub-opening-rates { margin-bottom:16px; }
+ .hub-opening-rates a { min-height:44px;font-size:13px; }
+ .hub-spaces { margin-top:48px; }
+ .hub-spaces h2 { font-size:30px; }
+ .hub-spaces .section-heading>p { margin-top:12px;max-width:none; }
+ .room-grid { grid-template-columns:1fr;gap:40px; }
+ .room-photo { height:220px; }
+ .room-heading { flex-wrap:nowrap;margin-top:16px; }
+ .room-heading h3 { font-size:26px; }
+ .room-card>p { min-height:0; }
+ .room-card>.button { margin-top:16px; }
+ .practice-preview,.practice-preview--compact { grid-template-columns:1fr;gap:24px;padding-top:28px; }
+ .practice-preview-photo,.practice-preview--compact .practice-preview-photo { height:220px; }
+ .practice-preview h2,.practice-preview--compact h2 { font-size:30px;line-height:34px; }
+ .practice-preview p:not(.practice-location) { font-size:14px;line-height:23px;margin-top:16px; }
+ .hub-arrival,.room-detail-body,.hub-contact-grid { grid-template-columns:1fr;gap:40px; }
+ .hub-arrival h2 { font-size:32px; }
+ .hub-detail { padding-top:24px; }
+ .hub-detail-opening { grid-template-columns:1fr;gap:28px; }
+ .hub-detail-opening h1 { font-size:40px;line-height:44px; }
+ .hub-detail-opening .lead { font-size:15px;line-height:24px;margin-top:20px; }
+ .hub-detail-opening>figure { height:260px; }
+ .room-detail-price { margin-top:24px; }
+ .room-detail-body { margin-top:48px;padding-top:28px; }
+ .practice-delivery { grid-template-columns:1fr;gap:24px; }
+ .hub-contact { padding-top:32px; }
+ .hub-contact h1 { font-size:40px; }
+ .hub-contact-grid { margin-top:40px; }
+ .contact-large { font-size:24px; }
+ .booking-top { display:block; }
+ .booking-top h1 { font-size:28px;line-height:34px; }
+ .booking-top .text-link { margin-top:12px;font-size:12px; }
+ .studio-booking-frame { height:2100px; }
+ .ecosystem-signature { max-width:250px; }
+}
+
+.ecosystem-founder-name { font-size:28px;margin-top:32px; }

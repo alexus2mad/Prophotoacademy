@@ -19,6 +19,14 @@ beforeEach(()=>{dbFile=path.resolve('.data',`flow-test-${randomUUID()}.sqlite`);
 afterEach(()=>{vi.unstubAllGlobals();database().close();for(const suffix of ['','-wal','-shm'])rmSync(dbFile+suffix,{force:true});});
 
 describe('customer API flow',()=>{
+ it('retains the guided practice and business context without creating an order',async()=>{
+  const payload={name:'Local QA',contact:'qa@example.com',consent:true,site:'hub',practiceSessionId:'practice-content-hub',locality:'kyiv'};
+  expect((await inquiry(request('/api/inquiries',payload))).status).toBe(200);
+  const data=JSON.parse((database().prepare('SELECT data FROM inquiries').get() as {data:string}).data);
+  expect(data.interest).toBe('guided-practice');expect(data.practiceTitle).toBe('Контент-практика в ProPhoto Hub');expect(data.site).toBe('hub');
+  expect((database().prepare('SELECT COUNT(*) AS count FROM orders').get() as {count:number}).count).toBe(0);
+  expect((await inquiry(request('/api/inquiries',{...payload,practiceSessionId:'invented'}))).status).toBe(400);
+ });
  it('creates one price snapshot for repeated submissions and rejects changed idempotent requests',async()=>{
   const payload=input();const first=await checkout(request('/api/checkout',payload));const second=await checkout(request('/api/checkout',payload));
   expect(first.status).toBe(200);expect(await first.json()).toEqual(await second.json());

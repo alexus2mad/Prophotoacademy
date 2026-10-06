@@ -8,6 +8,7 @@ import {InquiryButton} from './inquiry';
 import {Gallery} from './gallery';
 
 import {MobileEnrollment} from './mobile-enrollment';
+import {PracticePreview} from './practice-preview';
 import {ProgramPackages} from './program-packages';
 export function ProgramPage({program,content}:{program:Program;content:AcademyContent}) {
   const offering=findOffering(content,program.id);const price=startingPrice(offering);
@@ -20,6 +21,7 @@ export function ProgramPage({program,content}:{program:Program;content:AcademyCo
     {!!offering?.packages.length&&<ProgramPackages offering={offering} program={program}/>}
     <div className="program-layout" id="program-overview"><div className="program-content"><section><h2>Чого ви навчитеся</h2><ul className="outcomes">{program.outcomes.map((outcome,i)=><li key={outcome}><span className="outcome-number">0{i+1}</span><span className="outcome-copy">{outcome}</span></li>)}</ul></section><section><h2>Для кого ця програма</h2><ul className="audience-list">{program.audience.map(a=><li key={a}><Check/>{a}</li>)}</ul></section>
     {!!program.modules.length&&<section><h2>Що будемо вивчати</h2>{program.modules.map((module,i)=><details key={module.title} open={i===0}><summary>{module.title}</summary><ul>{module.topics.map(topic=><li key={topic}>{topic}</li>)}</ul></details>)}</section>}
+    <PracticePreview content={content} programId={program.id} compact/>
     <section id="instructors"><h2>Ваші викладачі</h2><div className="instructors-grid">{content.instructors.filter(i=>program.instructorIds.includes(i.id)).map(instructor=><article className="instructor-card" key={instructor.id}><div className="instructor-photo"><Photo image={findImage(content,instructor.imageId)}/></div><h3>{instructor.name}</h3><p>{instructor.role}</p><p>{instructor.bio}</p></article>)}</div></section>
     {!!program.workIds.length&&<section><h2>Роботи студентів</h2><Gallery works={content.works.filter(w=>program.workIds.includes(w.id))} images={content.images}/></section>}
     {!!program.faqs.length&&<section><h2>Відповіді перед стартом</h2>{program.faqs.map(faq=><details key={faq.question}><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}</section>}

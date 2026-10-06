@@ -3,7 +3,7 @@
 import {useEffect} from 'react';
 import {usePathname} from 'next/navigation';
 
-const frames='.exhibition-hero,.program-hero-photo,.learning-photo,.instructor-photo,.course-image,.preview-photo,.work-image';
+const frames='.exhibition-hero,.program-hero-photo,.learning-photo,.instructor-photo,.course-image,.preview-photo,.work-image,.hub-opening-photo,.room-photo,.hub-detail-opening>figure,.practice-preview-photo';
 const clamp=(value:number)=>Math.max(-1,Math.min(1,value));
 
 // Only visible photographs are updated, and only in response to user input.
