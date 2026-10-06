@@ -1,0 +1,122 @@
+{
+  "commercial": {
+    "src": "/images/commercial.webp",
+    "width": 603,
+    "height": 835,
+    "bytes": 43476,
+    "originalWidth": 603,
+    "originalHeight": 835
+  },
+  "founder": {
+    "src": "/images/founder.webp",
+    "width": 1200,
+    "height": 1500,
+    "bytes": 57306,
+    "originalWidth": 4127,
+    "originalHeight": 5159
+  },
+  "hero": {
+    "src": "/images/hero.webp",
+    "width": 1800,
+    "height": 1200,
+    "bytes": 75268,
+    "originalWidth": 5760,
+    "originalHeight": 3840
+  },
+  "instagram": {
+    "src": "/images/instagram.webp",
+    "width": 1200,
+    "height": 2133,
+    "bytes": 256994,
+    "originalWidth": 2145,
+    "originalHeight": 3813
+  },
+  "oleksandra": {
+    "src": "/images/oleksandra.webp",
+    "width": 1200,
+    "height": 2135,
+    "bytes": 356998,
+    "originalWidth": 1736,
+    "originalHeight": 3088
+  },
+  "olena": {
+    "src": "/images/olena.webp",
+    "width": 1200,
+    "height": 1594,
+    "bytes": 184138,
+    "originalWidth": 4480,
+    "originalHeight": 5952
+  },
+  "practice": {
+    "src": "/images/practice.webp",
+    "width": 853,
+    "height": 683,
+    "bytes": 37684,
+    "originalWidth": 853,
+    "originalHeight": 683
+  },
+  "student-cherries": {
+    "src": "/images/student-cherries.webp",
+    "width": 853,
+    "height": 1280,
+    "bytes": 40340,
+    "originalWidth": 853,
+    "originalHeight": 1280
+  },
+  "student-pasta": {
+    "src": "/images/student-pasta.webp",
+    "width": 921,
+    "height": 1280,
+    "bytes": 88824,
+    "originalWidth": 921,
+    "originalHeight": 1280
+  },
+  "student-perfume": {
+    "src": "/images/student-perfume.webp",
+    "width": 1080,
+    "height": 1352,
+    "bytes": 29266,
+    "originalWidth": 1080,
+    "originalHeight": 1352
+  },
+  "student-portrait": {
+    "src": "/images/student-portrait.webp",
+    "width": 1080,
+    "height": 1440,
+    "bytes": 37922,
+    "originalWidth": 1080,
+    "originalHeight": 1440
+  },
+  "student-shoes": {
+    "src": "/images/student-shoes.webp",
+    "width": 1022,
+    "height": 1280,
+    "bytes": 107292,
+    "originalWidth": 1022,
+    "originalHeight": 1280
+  },
+  "student-splash": {
+    "src": "/images/student-splash.webp",
+    "width": 860,
+    "height": 1280,
+    "bytes": 48670,
+    "originalWidth": 860,
+    "originalHeight": 1280
+  },
+  "visual": {
+    "src": "/images/visual.webp",
+    "width": 1200,
+    "height": 1486,
+    "bytes": 270268,
+    "originalWidth": 2268,
+    "originalHeight": 2808
+  },
+  "workshop": {
+    "src": "/images/workshop.webp",
+    "width": 1200,
+    "height": 800,
+    "bytes": 44948,
+    "originalWidth": 1235,
+    "originalHeight": 823
+  }
+}

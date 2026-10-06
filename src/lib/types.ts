@@ -1,0 +1,12 @@
+export type Availability = 'open' | 'limited' | 'soldOut' | 'waitlist' | 'archived';
+export type ImageAsset = {id: string; src: string; alt: string; credit: string; driveId: string; width: number; height: number; position?: string; fit?: 'cover' | 'contain'};
+export type Package = {id: string; name: string; price: number; previousPrice?: number; availability: Availability; description: string; includes: string[]};
+export type Offering = {id: string; programId: string; startDate?: string; duration: string; format: 'online' | 'offline' | 'hybrid'; location?: string; availability: Availability; verificationRequired: boolean; packages: Package[]; sourceNotes?: string[]};
+export type Program = {id: string; slug: string; title: string; shortTitle: string; category: 'course' | 'class' | 'individual' | 'corporate'; level: 'beginner' | 'intermediate' | 'all'; eyebrow: string; audienceLabel?:string; homepageDescription?:string; description: string; audience: string[]; outcomes: string[]; imageId: string; instructorIds: string[]; workIds: string[]; modules: {title: string; topics: string[]}[]; faqs: {question: string; answer: string}[]; sourceUrl: string; featured: boolean; seo?: {title?:string;description?:string}};
+export type Instructor = {id: string; name: string; role: string; bio: string; imageId: string};
+export type Work = {id: string; title: string; imageId: string; device: 'phone' | 'camera'; author?: string};
+export type PortableBlock = {_type: 'block'; _key: string; style: string; children: {_type: 'span'; _key: string; text: string; marks: string[]}[]; markDefs: Record<string, unknown>[]; listItem?: string};
+export type EditorialPage = {id: string; slug: string; title: string; body: PortableBlock[]; sourceUrl: string};
+export type Testimonial = {id: string; name: string; kind?: 'quote' | 'story'; quote?: string; image?: string; programId?: string; sourceUrl: string};
+export type SiteSettings = {name: string; email: string; phone: string; address: string; instagram: string; telegram: string; youtube: string; shop: string; primaryProgramId?:string; heroImageId: string; heroTitle: string; heroDescription: string};
+export type AcademyContent = {programs: Program[]; offerings: Offering[]; images: ImageAsset[]; instructors: Instructor[]; works: Work[]; pages: EditorialPage[]; testimonials: Testimonial[]; settings: SiteSettings};

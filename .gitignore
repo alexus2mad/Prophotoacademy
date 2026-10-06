@@ -1,0 +1,12 @@
+node_modules/
+.next/
+.env*
+!.env.example
+.data/
+playwright-report/
+test-results/
+*.tsbuildinfo
+public/images/*-original.jpg
+content/source/pages/
+content/source/brand/*.zip
+content/source/brand/type/

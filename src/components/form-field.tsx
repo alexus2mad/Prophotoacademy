@@ -1,0 +1,2 @@
+import type {InputHTMLAttributes} from 'react';
+export function FormField({id,label,error,...input}:{id:string;label:string;error?:string}&InputHTMLAttributes<HTMLInputElement>){return <div className="form-field"><label htmlFor={id}>{label}</label><input {...input} id={id} aria-invalid={error?true:undefined} aria-describedby={error?`${id}-error`:undefined}/>{error&&<p id={`${id}-error`} className="form-error" role="alert">{error}</p>}</div>;}

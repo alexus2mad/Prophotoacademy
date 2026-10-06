@@ -1,0 +1,24 @@
+[
+  {
+    "name": "prophoto-study",
+    "source": "public/brand/prophoto-study.svg",
+    "display": "public/brand/prophoto-study-trimmed.svg",
+    "viewBox": [
+      162,
+      337,
+      1609,
+      406
+    ]
+  },
+  {
+    "name": "prophoto",
+    "source": "public/brand/prophoto.svg",
+    "display": "public/brand/prophoto-trimmed.svg",
+    "viewBox": [
+      185,
+      257,
+      1550,
+      566
+    ]
+  }
+]

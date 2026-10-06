@@ -1,0 +1,14 @@
+{
+  "capturedAt": "2026-10-07",
+  "siteId": "694a5cc146bb9192fcdbb5ac",
+  "tool": "Webflow data_cms_tool get_collection_list",
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"label\":\"Read migration collection inventory\",\"action\":\"get_collection_list\",\"result\":{\"collections\":[]}}"
+      }
+    ],
+    "isError": false
+  }
+}

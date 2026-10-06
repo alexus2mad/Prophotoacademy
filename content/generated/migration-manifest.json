@@ -1,0 +1,50 @@
+{
+  "mode": "dry-run",
+  "documents": 54,
+  "images": 15,
+  "assetHashes": {
+    "98f38148844730667feb19c3ef8de233c5a57b8d": "image-98f38148844730667feb19c3ef8de233c5a57b8d-1800x1200-webp",
+    "69a0daced26349e9457695f9a20b1d2f1420c1dc": "image-69a0daced26349e9457695f9a20b1d2f1420c1dc-1200x1486-webp",
+    "786812b2e099200da4d1f6e807cd918b1d5726e6": "image-786812b2e099200da4d1f6e807cd918b1d5726e6-603x835-webp",
+    "ffe18a70ee10889041d4c1ae97671e8223243fee": "image-ffe18a70ee10889041d4c1ae97671e8223243fee-1200x2133-webp",
+    "eae7148c0393d57aa1305222498a8a97c7ef582e": "image-eae7148c0393d57aa1305222498a8a97c7ef582e-1200x1500-webp",
+    "cc50d4385cbf28b188d686af070e476f1f81ecf0": "image-cc50d4385cbf28b188d686af070e476f1f81ecf0-1200x1594-webp",
+    "e78b287ff3178b40b9f4236fd2c657611caf5a97": "image-e78b287ff3178b40b9f4236fd2c657611caf5a97-1200x2135-webp",
+    "aa81c806a5187492f8e9827d3ff6ef937a285e80": "image-aa81c806a5187492f8e9827d3ff6ef937a285e80-853x683-webp",
+    "fd9511387744385424f30d843dc455140e1ed8de": "image-fd9511387744385424f30d843dc455140e1ed8de-1200x800-webp",
+    "72f1cde45675932ba888587399e5f376084a6866": "image-72f1cde45675932ba888587399e5f376084a6866-853x1280-webp",
+    "a421a3935bf776cb9aeb5b9edcd02c521f3dedcf": "image-a421a3935bf776cb9aeb5b9edcd02c521f3dedcf-1080x1440-webp",
+    "43d8cd1a8a1efc93206ed4e312071d8b24cf5497": "image-43d8cd1a8a1efc93206ed4e312071d8b24cf5497-921x1280-webp",
+    "82789c516f25870672247c36a87aa9a206cc6d1a": "image-82789c516f25870672247c36a87aa9a206cc6d1a-1022x1280-webp",
+    "f58c00e1f7b9257a73bfcab49409c9e1d901bf35": "image-f58c00e1f7b9257a73bfcab49409c9e1d901bf35-860x1280-webp",
+    "5ed8b679f141503cd510d9d9bf73ec6a7685eca5": "image-5ed8b679f141503cd510d9d9bf73ec6a7685eca5-1080x1352-webp"
+  },
+  "conflicts": [
+    {
+      "id": "offering-visual-2026-03",
+      "notes": [
+        "Дата 13.03.2026 минула; наступний набір не підтверджено."
+      ]
+    },
+    {
+      "id": "offering-commercial-2026-11",
+      "notes": [
+        "Головна: 26.09.2026 та від 6000 грн. Детальна сторінка: 06.11.2026 та BASE 9600 грн.",
+        "Тривалість 7–13 тижнів у загальному описі; 8/12 тижнів у пакетах. Потрібна редакторська перевірка."
+      ]
+    },
+    {
+      "id": "offering-instagram-2026-10",
+      "notes": [
+        "Старт 02.10.2026 минув; PLATINUM EXPERT закрито. Актуальність акційної ціни не підтверджено."
+      ]
+    },
+    {
+      "id": "offering-lab-2026-09",
+      "notes": [
+        "Подія завершена. Цінові групи квитків на джерелі неоднозначні; не мігровані як доступні продукти."
+      ]
+    }
+  ],
+  "cmsInventory": "verified: Webflow get_collection_list returned collections=[] on 2026-10-07; source material is static pages and assets"
+}

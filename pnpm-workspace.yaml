@@ -1,0 +1,26 @@
+allowBuilds:
+  esbuild: true
+  sharp: true
+minimumReleaseAgeExclude:
+  - '@next/env@16.4.0'
+  - '@next/swc-darwin-arm64@16.4.0'
+  - '@next/swc-darwin-x64@16.4.0'
+  - '@next/swc-linux-arm64-gnu@16.4.0'
+  - '@next/swc-linux-arm64-musl@16.4.0'
+  - '@next/swc-linux-x64-gnu@16.4.0'
+  - '@next/swc-linux-x64-musl@16.4.0'
+  - '@next/swc-win32-arm64-msvc@16.4.0'
+  - '@next/swc-win32-x64-msvc@16.4.0'
+  - '@sanity/access-ui@6.18.0'
+  - '@sanity/cli-build@6.4.4'
+  - '@sanity/cli@8.14.0'
+  - '@sanity/diff@6.18.0'
+  - '@sanity/mutator@6.18.0'
+  - '@sanity/schema@6.18.0'
+  - '@sanity/types@6.18.0'
+  - '@sanity/ui@4.3.1 || 5.0.0-alpha.14'
+  - '@sanity/util@6.18.0'
+  - '@sanity/validation@6.18.0'
+  - '@sanity/workbench-cli@2.8.3'
+  - next@16.4.0
+  - sanity@6.18.0
