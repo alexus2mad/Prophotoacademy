@@ -10,7 +10,7 @@ export function EcosystemNav({site,onNavigate}:{site:SiteBrand;onNavigate?:()=>v
  return <nav className="ecosystem-nav" aria-label="Напрями ProPhoto"><a href={siteHref('academy')} aria-current={site==='academy'?'true':undefined} onClick={onNavigate} data-ecosystem-target="academy">Навчання</a><span aria-hidden="true">·</span><a href={siteHref('hub')} aria-current={site==='hub'?'true':undefined} onClick={onNavigate} data-ecosystem-target="hub">Студія</a></nav>;
 }
 export function Header({site='academy'}:{site?:SiteBrand}){
- const path=usePathname();const [scrolled,setScrolled]=useState(false);const dialog=useRef<HTMLDialogElement>(null);
+ const path=usePathname().replace(/\/+$/,'')||'/';const [scrolled,setScrolled]=useState(false);const dialog=useRef<HTMLDialogElement>(null);
  const focused=(site==='hub'&&path.endsWith('/booking'))||path==='/checkout'||path==='/thanks';
  const home=site==='academy'?path==='/':path==='/hub'||path==='/';
  const links=site==='hub'?[[siteHref('hub','#spaces'),'Зали'],[siteHref('hub','contact'),'Контакти']]:[['/student-work','Роботи студентів'],['/about-us','Академія']];

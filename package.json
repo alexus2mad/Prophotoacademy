@@ -16,7 +16,11 @@
     "content:migrate": "tsx scripts/migrate-sanity.ts",
     "outbox:deliver": "tsx scripts/deliver-outbox.ts",
     "content:query": "node scripts/validate-sanity-query.mjs",
-    "activity:import": "tsx scripts/import-activity.ts"
+    "activity:import": "tsx scripts/import-activity.ts",
+    "pages:build": "node scripts/build-pages.mjs",
+    "pages:validate": "node scripts/validate-pages.mjs",
+    "pages:publish": "node scripts/publish-pages.mjs",
+    "pages:serve": "node scripts/serve-pages.mjs"
   },
   "dependencies": {
     "@portabletext/react": "^6.0.0",

@@ -9,6 +9,7 @@ export function InquiryButton({children='Допоможіть обрати',prog
   return <button className={className} onClick={()=>window.dispatchEvent(new CustomEvent('academy:inquiry',{detail:{programId,offeringId,packageId,practiceSessionId,title}}))}>{children}</button>;
 }
 export function InquiryDialog({site='academy',privacyUrl='/privacy-policy'}:{site?:'academy'|'hub';privacyUrl?:string}) {
+  const review=process.env.NEXT_PUBLIC_REVIEW_MODE==='pages';
   const dialog=useRef<HTMLDialogElement>(null);
   const [context,setContext]=useState<InquiryContext>({});
   const [state,setState]=useState<'idle'|'sending'|'success'|'error'>('idle');
@@ -21,6 +22,7 @@ export function InquiryDialog({site='academy',privacyUrl='/privacy-policy'}:{sit
     return ()=>window.removeEventListener('academy:inquiry',open);
   },[]);
   async function submit(event:React.FormEvent<HTMLFormElement>) {
+    if(review){event.preventDefault();return;}
     event.preventDefault();setState('sending');setError('');setFieldErrors({});
     const form=event.currentTarget;const data=new FormData(form);
     try {
@@ -34,6 +36,7 @@ export function InquiryDialog({site='academy',privacyUrl='/privacy-policy'}:{sit
     <button className="icon-button dialog-close" aria-label="Закрити" onClick={()=>dialog.current?.close()}><X size={22}/></button>
     {state==='success'?<div className="success-state" role="status"><Check size={32}/><h2 id="inquiry-title">{localCapture?'Заявку збережено':'Заявку отримано'}</h2><p>{localCapture?'Демонстраційний режим. Заявку збережено локально; команді ProPhoto вона ще не надсилається.':'Команда ProPhoto зв’яжеться з вами за вказаним контактом.'}</p><button className="button" onClick={()=>dialog.current?.close()}>Готово</button></div>:<>
       <h2 id="inquiry-title">{context.title||'Знайдемо вашу програму'}</h2>
+      {review&&<p className="mock-notice" role="note">Форма показана для огляду. Заявки не надсилаються й дані не зберігаються.</p>}
       <p className="muted">{context.practiceSessionId?'Залиште контакт. Повідомимо про формат, дату й вартість, коли підтвердимо деталі практики.':'Залиште контакт. Допоможемо з форматом, пакетом і найближчим набором.'}</p>
       {context.practiceSessionId&&<p className="practice-online-alternative">Навчаєтеся поза Києвом? <a href={siteHref('academy','courses?format=online')}>Переглянути онлайн-навчання</a></p>}<form onSubmit={submit} className="form-stack">
         <FormField id="inquiry-name" label="Ваше ім’я" name="name" autoComplete="name" required minLength={2} maxLength={80} error={fieldErrors.name}/>
@@ -45,7 +48,7 @@ export function InquiryDialog({site='academy',privacyUrl='/privacy-policy'}:{sit
         <label className="checkbox-label"><input name="marketingUpdates" type="checkbox"/><span>Хочу отримувати анонси навчання та практики ProPhoto</span></label>
         {fieldErrors.consent&&<p id="inquiry-consent-error" className="form-error">{fieldErrors.consent}</p>}
         {error&&!Object.keys(fieldErrors).length&&<p className="form-error" role="alert">{error}</p>}
-        <button className="button" disabled={state==='sending'}>{state==='sending'?'Надсилаємо…':'Надіслати заявку'}</button>
+        <button className="button" disabled={state==='sending'||review}>{review?'Недоступно в огляді':state==='sending'?'Надсилаємо…':'Надіслати заявку'}</button>
       </form>
     </>}
   </dialog>;

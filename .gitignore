@@ -10,3 +10,6 @@ public/images/*-original.jpg
 content/source/pages/
 content/source/brand/*.zip
 content/source/brand/type/
+.pages-build/
+pages-out/
+.pages-index*
