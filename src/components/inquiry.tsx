@@ -1,4 +1,5 @@
 'use client';
+import {getAcquisition} from '@/lib/attribution';
 import {useEffect,useRef,useState} from 'react';
 import {Check,X} from 'lucide-react';
 import {siteHref} from '@/lib/ecosystem';
@@ -23,7 +24,7 @@ export function InquiryDialog({site='academy',privacyUrl='/privacy-policy'}:{sit
     event.preventDefault();setState('sending');setError('');setFieldErrors({});
     const form=event.currentTarget;const data=new FormData(form);
     try {
-      const response=await fetch('/api/inquiries',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:data.get('name'),contact:data.get('contact'),message:data.get('message'),website:data.get('website'),consent:data.get('consent')==='on',programId:context.programId,offeringId:context.offeringId,packageId:context.packageId,practiceSessionId:context.practiceSessionId,site,locality:context.practiceSessionId?'kyiv':undefined})});
+      const response=await fetch('/api/inquiries',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:data.get('name'),contact:data.get('contact'),message:data.get('message'),website:data.get('website'),consent:data.get('consent')==='on',programId:context.programId,offeringId:context.offeringId,packageId:context.packageId,acquisition:getAcquisition(site),marketingUpdates:data.get('marketingUpdates')==='on',practiceSessionId:context.practiceSessionId,site,locality:context.practiceSessionId?'kyiv':undefined})});
       const result=await response.json();
       if(!response.ok){const fields=result.fieldErrors||{};setFieldErrors(fields);const name=Object.keys(fields)[0];if(name)(form.elements.namedItem(name) as HTMLElement|null)?.focus();throw new Error(result.error||'Не вдалося надіслати заявку.');}
       setLocalCapture(result.mode==='local');setState('success');
@@ -41,6 +42,7 @@ export function InquiryDialog({site='academy',privacyUrl='/privacy-policy'}:{sit
         {fieldErrors.message&&<p id="inquiry-message-error" className="form-error">{fieldErrors.message}</p>}
         <label className="honeypot" aria-hidden="true">Website<input name="website" tabIndex={-1} autoComplete="off"/></label>
         <label className="checkbox-label"><input type="checkbox" name="consent" required aria-invalid={fieldErrors.consent?true:undefined} aria-describedby={fieldErrors.consent?'inquiry-consent-error':undefined}/> <span>Погоджуюся з <a href={privacyUrl}>політикою конфіденційності</a>.</span></label>
+        <label className="checkbox-label"><input name="marketingUpdates" type="checkbox"/><span>Хочу отримувати анонси навчання та практики ProPhoto</span></label>
         {fieldErrors.consent&&<p id="inquiry-consent-error" className="form-error">{fieldErrors.consent}</p>}
         {error&&!Object.keys(fieldErrors).length&&<p className="form-error" role="alert">{error}</p>}
         <button className="button" disabled={state==='sending'}>{state==='sending'?'Надсилаємо…':'Надіслати заявку'}</button>

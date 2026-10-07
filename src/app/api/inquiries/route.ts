@@ -2,7 +2,8 @@ import {z} from 'zod';
 import {getContent} from '@/lib/content';
 import {saveInquiry} from '@/lib/ledger';
 import {guardMutation,jsonBody,errorResponse,HttpError,validationError} from '@/lib/http';
-const schema=z.object({name:z.string().trim().min(2).max(80),contact:z.string().trim().max(160).refine(value=>z.email().safeParse(value).success||/^\+?[\d\s()-]{9,24}$/.test(value),'Вкажіть email або телефон'),message:z.string().trim().max(2000).nullable().optional(),programId:z.string().max(100).optional(),offeringId:z.string().max(100).optional(),packageId:z.string().max(100).optional(),practiceSessionId:z.string().max(100).optional(),site:z.enum(['academy','hub']).default('academy'),locality:z.enum(['kyiv','other']).optional(),website:z.string().max(100).nullable().optional(),consent:z.literal(true)}).strict();
+import {acquisitionSchema} from '@/lib/acquisition-schema';
+const schema=z.object({name:z.string().trim().min(2).max(80),contact:z.string().trim().max(160).refine(value=>z.email().safeParse(value).success||/^\+?[\d\s()-]{9,24}$/.test(value),'Вкажіть email або телефон'),message:z.string().trim().max(2000).nullable().optional(),programId:z.string().max(100).optional(),offeringId:z.string().max(100).optional(),packageId:z.string().max(100).optional(),practiceSessionId:z.string().max(100).optional(),site:z.enum(['academy','hub']).default('academy'),locality:z.enum(['kyiv','other']).optional(),marketingUpdates:z.boolean().default(false),acquisition:acquisitionSchema.optional(),website:z.string().max(100).nullable().optional(),consent:z.literal(true)}).strict();
 export const runtime='nodejs';
 export async function POST(request:Request){
  try{

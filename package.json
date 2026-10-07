@@ -15,7 +15,8 @@
     "content:validate": "tsx scripts/validate-content.ts",
     "content:migrate": "tsx scripts/migrate-sanity.ts",
     "outbox:deliver": "tsx scripts/deliver-outbox.ts",
-    "content:query": "node scripts/validate-sanity-query.mjs"
+    "content:query": "node scripts/validate-sanity-query.mjs",
+    "activity:import": "tsx scripts/import-activity.ts"
   },
   "dependencies": {
     "@portabletext/react": "^6.0.0",

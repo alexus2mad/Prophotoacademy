@@ -1,8 +1,9 @@
+import {acquisitionSchema} from './acquisition-schema';
 import {z} from 'zod';
 import type {AcademyContent,Offering,Package,Program} from './types';
 import {canEnroll} from './format';
 import {HttpError} from './http';
-export const checkoutInput=z.object({offeringId:z.string().min(1).max(100),packageId:z.string().min(1).max(100),name:z.string().trim().min(2).max(80),email:z.email().max(160),phone:z.string().trim().regex(/^\+?[\d\s()-]{9,24}$/),consent:z.literal(true),token:z.string().regex(/^[a-f0-9]{64}$/),idempotencyKey:z.uuid()}).strict();
+export const checkoutInput=z.object({acquisition:acquisitionSchema.optional(),offeringId:z.string().min(1).max(100),packageId:z.string().min(1).max(100),name:z.string().trim().min(2).max(80),email:z.email().max(160),phone:z.string().trim().regex(/^\+?[\d\s()-]{9,24}$/),consent:z.literal(true),token:z.string().regex(/^[a-f0-9]{64}$/),idempotencyKey:z.uuid()}).strict();
 const demoProgram={id:'demo-program',title:'Демонстрація оформлення',shortTitle:'Демонстрація оформлення',imageId:'visual'} as Program;
 const demoPackage:Package={id:'demo-base',name:'BASE · демо',price:9600,availability:'open',description:'Лише перевірка локального процесу',includes:[]};
 const demoOffering:Offering={id:'demo-offering',programId:'demo-program',duration:'Демонстрація',format:'online',availability:'open',verificationRequired:false,packages:[demoPackage]};

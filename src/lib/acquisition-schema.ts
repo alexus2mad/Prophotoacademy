@@ -1,0 +1,2 @@
+import {z} from 'zod';
+export const acquisitionSchema=z.object({site:z.enum(['academy','hub']),landingPath:z.string().max(200).regex(/^\/[\p{L}\p{N}%_/.-]*$/u),utmSource:z.string().max(100).regex(/^[\p{L}\p{N}_.+ -]+$/u).optional(),utmMedium:z.string().max(100).regex(/^[\p{L}\p{N}_.+ -]+$/u).optional(),utmCampaign:z.string().max(100).regex(/^[\p{L}\p{N}_.+ -]+$/u).optional(),fromSite:z.enum(['academy','hub']).optional()}).strict();

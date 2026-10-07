@@ -2,8 +2,9 @@ import {DatabaseSync} from 'node:sqlite';
 import {mkdirSync} from 'node:fs';
 import path from 'node:path';
 import {createHash,randomBytes,randomUUID} from 'node:crypto';
+import type {Acquisition} from './attribution';
 export type OrderStatus='pending'|'approved'|'declined'|'canceled'|'refunded';
-export type Order={id:string;tokenHash:string;idempotencyKey:string;fingerprint:string;offeringId:string;packageId:string;programTitle:string;packageName:string;amount:number;currency:string;customer:{name:string;email:string;phone:string};status:OrderStatus;mode:'mock'|'wayforpay';createdAt:number};
+export type Order={id:string;tokenHash:string;idempotencyKey:string;fingerprint:string;offeringId:string;packageId:string;programId?:string;programTitle:string;packageName:string;amount:number;currency:string;customer:{name:string;email:string;phone:string};status:OrderStatus;mode:'mock'|'wayforpay';createdAt:number;acquisition?:Acquisition};
 const globalLedger=globalThis as unknown as {academyDatabases?:Map<string,DatabaseSync>};
 export function database(){
  const file=process.env.DATABASE_PATH||path.join(process.cwd(),'.data','academy.sqlite');
