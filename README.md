@@ -85,3 +85,9 @@ The supplied ProPhoto Study vector logo appears in header and footer. Display SV
 ## Homepage course priority
 
 In Studio → Site settings, choose **Основна програма** to feature a course in the homepage opening and put it first in the catalog. Its cover, title, format and duration are reused. The optional **Homepage course introduction** on the program provides concise opening copy; the regular summary is the fallback. Clear the selection to restore the general academy opening. The selected course is omitted from the secondary homepage previews. Course-specific testimonials appear only when their program reference is confirmed; other reviews retain an academy-wide heading. The local fixture and dry-run migration currently select Інста, яка продає.
+
+## Private GitHub project and review build
+
+Source repository: https://github.com/alexus2mad/Prophotoacademy (private). `main` holds the full Next.js + Sanity application; `gh-pages` holds only a generated static review export. The current GitHub account plan rejected Pages hosting for this private repository, so no github.io URL is live yet.
+
+Run `pnpm pages:build`, `pnpm pages:validate`, and `pnpm pages:serve` to review the static version locally. `pnpm pages:publish` rebuilds, validates, and updates only the separate deployment branch. It preserves the normal source tree and index. The review is marked noindex, displays a review notice, disables inquiry submissions, and omits private APIs/Studio/customer records. Booking links lead explicitly to the existing studio website.

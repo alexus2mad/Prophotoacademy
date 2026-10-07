@@ -5,7 +5,7 @@ import {rm} from 'node:fs/promises';
 const root=fileURLToPath(new URL('../',import.meta.url));const output=path.resolve(root,'pages-out');const index=path.resolve(root,'.pages-index');
 execFileSync(process.execPath,[path.join(root,'scripts/build-pages.mjs')],{cwd:root,stdio:'inherit'});
 execFileSync(process.execPath,[path.join(root,'scripts/validate-pages.mjs')],{cwd:root,stdio:'inherit'});
-const options=['-c','safe.directory='+path.resolve(root),'-c','credential.helper=','-c','credential.helper=!gh auth git-credential','--git-dir='+path.join(root,'.git')];
+const options=['-c','safe.directory='+path.resolve(root),'-c','core.autocrlf=false','-c','credential.helper=','-c','credential.helper=!gh auth git-credential','--git-dir='+path.join(root,'.git')];
 function git(args,settings={}){return execFileSync('git',[...options,...args],{cwd:root,encoding:'utf8',...settings});}
 const remote=git(['remote','get-url','origin']).trim();
 if(remote!=='https://github.com/alexus2mad/Prophotoacademy.git')throw new Error('Unexpected publication repository');
