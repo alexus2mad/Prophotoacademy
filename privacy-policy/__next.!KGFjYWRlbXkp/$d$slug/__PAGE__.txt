@@ -1,0 +1,94 @@
+1:"$Sreact.fragment"
+2:"/Prophotoacademy/_next/static/chunks/2wafe5roozf0h.js"
+3:I[74554,["$2"],"default"]
+4:"/Prophotoacademy/_next/static/chunks/3q50mw3a0gess.js"
+5:I[77659,["$2","$4"],"default"]
+6:I[51347,["$2"],"default"]
+7:"/Prophotoacademy/_next/static/chunks/0pf71j470u50n.js"
+8:"/Prophotoacademy/_next/static/chunks/3xv8nszo0h5iu.js"
+9:"/Prophotoacademy/_next/static/chunks/1vidatfau2eow.js"
+a:I[37233,["$2","$7","$8","$9"],""]
+b:"PhotographyMotion"
+c:I[82820,["$2"],"$b"]
+10:"EcosystemMeasurement"
+11:I[89039,["$2","$7","$8"],"$10"]
+12:I[6062,["$2","$7","$8"],"Header"]
+13:I[19073,["$2","$7","$8"],"Footer"]
+14:I[47965,["$2","$7","$8","$9"],"InquiryDialog"]
+50:"ViewportBoundary"
+51:I[90121,["$2"],"$50"]
+52:"MetadataBoundary"
+53:I[90121,["$2"],"$52"]
+54:"$Sreact.suspense"
+:HL["/Prophotoacademy/_next/static/chunks/3e9jksxbfpmyb.css","style"]
+e:X
+18:X
+18:C
+19:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$1","c",{"children":[["$","div",null,{"className":"container","children":[["$","div",null,{"className":"page-heading","children":["$","h1",null,{"children":"Політика конфіденційності"}]}],["$","article",null,{"className":"prose","children":[["$","p","708ad833f9a55ea2",{"children":["Ця Політика конфіденційності визначає порядок збору, використання, зберігання та захисту персональних даних користувачів сайту ",["$","a","s1",{"href":"https://prophotoacademy.com.ua","children":["https://prophotoacademy.com.ua"]}]," "," (далі — «Сайт»)."]}],["$","p","9a410d2fcac6684c",{"children":["Користуючись Сайтом, ви підтверджуєте згоду з умовами цієї Політики конфіденційності."]}],["$","h3","0f63e03fdc582ca2",{"children":["1. Загальні положення"]}],["$","p","7f61c672ce383c11",{"children":["1.1. ","Адміністрація Сайту поважає право користувачів на конфіденційність та захист персональних даних."]}],["$","p","62380521456953f7",{"children":["1.2. ","Персональні дані обробляються відповідно до Закону України «Про захист персональних даних»."]}],["$","p","4fba89751debf7ec",{"children":["1.3. ","Ця Політика застосовується до всієї інформації, яку Сайт може отримати про користувача під час використання Сайту."]}],"$L1a","$L1b","$L1c","$L1d","$L1e","$L1f","$L20","$L21","$L22","$L23","$L24","$L25","$L26","$L27","$L28","$L29","$L2a","$L2b","$L2c","$L2d","$L2e","$L2f","$L30","$L31","$L32","$L33","$L34","$L35","$L36","$L37","$L38","$L39","$L3a","$L3b","$L3c","$L3d","$L3e","$L3f","$L40","$L41","$L42","$L43","$L44","$L45","$L46","$L47","$L48","$L49","$L4a","$L4b","$L4c"]}]]}],["$L4d"],"$L4e"]}],"p":"$@4f","v":null,"s":"$e"}}]]
+16:[["children",{"s":{"n":"slug","t":"d","k":"privacy-policy","s":["about-us","checkout","contacts","courses","fonts","hub","reviews","student-work","thanks"]},"h":65632,"d":{"r":["$","$1","c",{"children":[null,["$","$L3",null,{"parallelRouterKey":"children","template":["$","$L6",null,{}]}]]}],"p":"$@17","v":"$18","s":"$e"},"c":"$Q19"}]]
+f:[["children",{"s":"(academy)","h":131168,"d":{"r":["$","$1","c",{"children":[[["$","script","script-0",{"src":"/Prophotoacademy/_next/static/chunks/0pf71j470u50n.js","async":true}],["$","script","script-1",{"src":"/Prophotoacademy/_next/static/chunks/3xv8nszo0h5iu.js","async":true}]],[["$","$L11",null,{"site":"academy"}],["$","$L12",null,{"site":"academy"}],["$","main",null,{"id":"main","children":["$","$L3",null,{"parallelRouterKey":"children","template":["$","$L6",null,{}],"notFound":[["$","div",null,{"className":"container status-panel","children":[["$","p",null,{"className":"eyebrow","children":"404"}],["$","h1",null,{"children":"Цей кадр загубився"}],["$","p",null,{"children":"Сторінки немає, але ваша наступна програма може бути зовсім поруч."}],["$","$La",null,{"href":"/courses","className":"button","children":"Переглянути програми"}]]}],[]]}]}],["$","$L13",null,{"settings":{"name":"Pro Photo Academy","email":"academyprophoto@gmail.com","phone":"+380634323517","address":"Київ, вул. Введенська, 32","instagram":"https://www.instagram.com/popovaelena_photo/","telegram":"https://t.me/prophotoclub","youtube":"https://www.youtube.com/@olenapopova-prophoto","shop":"https://prophotoshop.com.ua","heroImageId":"hero","heroTitle":"Навчіться бачити більше","heroDescription":"Фотографія, відео та контент для себе й брендів. Навчайтеся на телефон або камеру — онлайн та в Києві.","primaryProgramId":"program-instagram"}}],["$","$L14",null,{"site":"academy"}]]]}],"p":"$@15","v":null,"s":"$e"},"c":"$Q16"}]]
+0:{"t":{"t":{"s":"","h":131152,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/Prophotoacademy/_next/static/chunks/3e9jksxbfpmyb.css","precedence":"next"}],["$","script","script-0",{"src":"/Prophotoacademy/_next/static/chunks/2wafe5roozf0h.js","async":true}]],["$","html",null,{"lang":"uk","data-scroll-behavior":"smooth","className":"_0tiFQW_variable KhNozG_variable","children":["$","body",null,{"children":[["$","a",null,{"className":"skip-link","href":"#main","children":"Перейти до вмісту"}],["$","aside",null,{"className":"review-notice","aria-label":"Режим огляду","children":[["$","span",null,{"children":"Огляд дизайну · заявки й оплата недоступні"}],["$","a",null,{"href":"https://github.com/alexus2mad/Prophotoacademy","target":"_blank","rel":"noreferrer","children":"GitHub"}]]}],["$","$L3",null,{"parallelRouterKey":"children","error":"$5","errorStyles":[],"errorScripts":[["$","script","script-0",{"src":"/Prophotoacademy/_next/static/chunks/3q50mw3a0gess.js","async":true}]],"template":["$","$L6",null,{}],"notFound":[["$","div",null,{"className":"container status-panel","children":[["$","p",null,{"className":"eyebrow","children":"404"}],["$","h1",null,{"children":"Цей кадр загубився"}],["$","p",null,{"children":"Сторінки немає, але ваша наступна програма може бути зовсім поруч."}],["$","$La",null,{"href":"/courses","className":"button","children":"Переглянути програми"}]]}],[]]}],["$","$Lc",null,{}]]}]}]]}],"p":"$@d","v":null,"s":"$e"},"c":"$Qf"},"h":{"r":["$","$1","h",{"children":[null,["$","$L51",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L53",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$54",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Політика конфіденційності · Pro Photo Academy"}],["$","meta","1",{"name":"robots","content":"noindex, nofollow"}],["$","link","2",{"rel":"canonical","href":"https://alexus2mad.github.io/Prophotoacademy/privacy-policy/"}],["$","meta","3",{"property":"og:title","content":"Політика конфіденційності · Pro Photo Academy"}],["$","meta","4",{"property":"og:site_name","content":"Pro Photo Academy"}],["$","meta","5",{"property":"og:image","content":"https://alexus2mad.github.io/Prophotoacademy/Prophotoacademy/images/hero.webp"}],["$","meta","6",{"property":"og:image:width","content":"1800"}],["$","meta","7",{"property":"og:image:height","content":"1200"}],["$","meta","8",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","9",{"name":"twitter:title","content":"Політика конфіденційності · Pro Photo Academy"}],["$","meta","10",{"name":"twitter:image","content":"https://alexus2mad.github.io/Prophotoacademy/Prophotoacademy/images/hero.webp"}],["$","meta","11",{"name":"twitter:image:width","content":"1800"}],["$","meta","12",{"name":"twitter:image:height","content":"1200"}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@55","v":null,"s":"$e"}},"a":"$@56","u":"$@57","b":"KShYP9O0vb13PRFZWylrS"}
+58:I[90121,["$2"],"OutletBoundary"]
+1a:["$","h3","b576166a1905f69c",{"children":["2. Які персональні дані ми збираємо"]}]
+1b:["$","p","56e5bd982ccd5027",{"children":["Ми можемо збирати такі дані:"]}]
+1c:["$","p","b422ab277790b524",{"children":["ім’я та прізвище;"]}]
+1d:["$","p","435ccb2a2d16f1fe",{"children":["номер телефону;"]}]
+1e:["$","p","bcf45f455b485517",{"children":["адреса електронної пошти;"]}]
+1f:["$","p","9fb3a97e1ffb6f51",{"children":["нікнейми в соціальних мережах;"]}]
+20:["$","p","d155b6c7860a7c7c",{"children":["платіжна інформація (передається безпосередньо платіжним сервісам і не зберігається на Сайті);"]}]
+21:["$","p","0de49c737d7673a6",{"children":["інші дані, які користувач добровільно надає через форми зворотного зв’язку, реєстрації або замовлення послуг."]}]
+22:["$","p","c01e323547aac53d",{"children":["Також автоматично можуть збиратися технічні дані:"]}]
+23:["$","p","3cbaf2977c07a295",{"children":["IP-адреса;"]}]
+24:["$","p","db6d05687223ce33",{"children":["тип браузера та пристрою;"]}]
+25:["$","p","de3d4d5bfd9181fd",{"children":["файли cookie;"]}]
+26:["$","p","857590f3ec37f855",{"children":["дані про відвідування сторінок Сайту."]}]
+27:["$","h3","a947bef61fb97f91",{"children":["3. Мета збору персональних даних"]}]
+28:["$","p","4255c709f7771fce",{"children":["надання освітніх та інформаційних послуг;"]}]
+29:["$","p","a6722b601791901a",{"children":["зв’язку з користувачем (консультації, відповіді на запити);"]}]
+2a:["$","p","91a45ffcd15e9173",{"children":["надсилання інформаційних та маркетингових матеріалів (за згодою користувача);"]}]
+2b:["$","p","482e57f684ba8867",{"children":["покращення роботи Сайту та якості сервісів;"]}]
+2c:["$","p","22dfb5e9a7930a11",{"children":["виконання вимог законодавства України."]}]
+2d:["$","p","0f922ce3ae0d229f",{"children":["Персональні дані використовуються з метою:"]}]
+2e:["$","h3","134aba2c5943960f",{"children":["4. Захист персональних даних"]}]
+2f:["$","p","266b36059a90356a",{"children":["4.1. ","Адміністрація Сайту вживає всіх необхідних технічних та організаційних заходів для захисту персональних даних від несанкціонованого доступу, втрати, знищення або розголошення."]}]
+30:["$","p","1238781cee207926",{"children":["4.2. ","Ця Політика застосовується до всієї інформації, яку Сайт може отримати про користувача під час використання Сайту."]}]
+31:["$","h3","f34c7c4e64422f27",{"children":["5. Передача персональних даних третім особам"]}]
+32:["$","p","08c6c9e661ca79a8",{"children":["5.1. ","Персональні дані користувачів не передаються третім особам, за винятком таких випадків:"]}]
+33:["$","p","63bbf2051a616bec",{"children":["за згодою користувача;"]}]
+34:["$","p","262504988f007401",{"children":["у разі необхідності для надання послуг (платіжні сервіси, сервіси email-розсилок);"]}]
+35:["$","p","99ea21394ad162b6",{"children":["у випадках, передбачених законодавством України."]}]
+36:["$","h3","bcb2ee142d0fba00",{"children":["6. Використання файлів cookie"]}]
+37:["$","p","1f36672103d31d5f",{"children":["Сайт використовує файли cookie для:"]}]
+38:["$","p","2c0e42480d59033b",{"children":["коректної роботи Сайту;"]}]
+39:["$","p","1af58e5d5856c0b1",{"children":["аналітики та покращення користувацького досвіду;"]}]
+3a:["$","p","160afa0cb8edb306",{"children":["маркетингових цілей."]}]
+3b:["$","p","cbb06d618fced4be",{"children":["Користувач може змінити налаштування cookie у своєму браузері або відмовитися від їх використання."]}]
+3c:["$","h3","dba26a0071870386",{"children":["7. Права користувача"]}]
+3d:["$","p","757da9175e10d043",{"children":["Користувач має право:"]}]
+3e:["$","p","42236cb7af57b485",{"children":["отримувати інформацію про свої персональні дані;"]}]
+3f:["$","p","c62ed77d63d64278",{"children":["вимагати зміни або видалення персональних даних;"]}]
+40:["$","p","3d9f40952a8b0f4e",{"children":["відкликати згоду на обробку персональних даних;"]}]
+41:["$","p","9a5f84a8b4be53f6",{"children":["звернутися до Адміністрації Сайту з будь-яких питань щодо обробки персональних даних."]}]
+42:["$","h3","ab297f225551f484",{"children":["8. Зміни до Політики конфіденційності"]}]
+43:["$","p","00252ff79ec5c951",{"children":["Адміністрація Сайту має право вносити зміни до цієї Політики конфіденційності без попереднього повідомлення користувачів."]}]
+44:["$","p","de2f3b09b0cc93ab",{"children":["Актуальна версія Політики завжди доступна на Сайті."]}]
+45:["$","h3","1bc867fbff471bb6",{"children":["9. Використання контенту користувачів у навчальних чатах"]}]
+46:["$","p","1bdf81c4664b7532",{"children":["9.1. ","Під час участі в онлайн-курсах школи ","ProPhotoAcademy"," студенти можуть розміщувати текстові повідомлення, зображення, відео та інші файли у загальних навчальних чатах курсів."]}]
+47:["$","p","9b3f7864dd226c8b",{"children":["9.2. ","Розміщуючи будь-який контент у загальних чатах курсів, студент надає згоду школі ","ProPhotoAcademy"," на використання такого контенту (повністю або частково) у інформаційних, навчальних та рекламних матеріалах, зокрема у публікаціях на вебсайті, у соціальних мережах, презентаціях та інших маркетингових матеріалах."]}]
+48:["$","p","7a24de6a40371d31",{"children":["9.3. ","Використання контенту здійснюється ","без розкриття персональних даних користувача",", за винятком випадків, коли користувач надав на це окрему згоду.","",["$","br","node-5",{}],"","За окремою згодою користувача",", школа ","ProPhotoAcademy"," має право зазначати ім’я автора контенту, а також здійснювати відмітку (tag) акаунту користувача в соціальній мережі Instagram та інших соціальних мережах."]}]
+49:["$","p","099cc92cd3cf59bd",{"children":["9.4. ","Школа ","ProPhotoAcademy"," залишає за собою право здійснювати редагування такого контенту без спотворення його змісту."]}]
+4a:["$","p","a6d9712214b43ef6",{"children":["9.5. ","Користувач має право у будь-який момент звернутися до Адміністрації з вимогою припинити подальше використання його контенту."]}]
+4b:["$","h3","0962b60fb847407b",{"children":["10. Контактна інформація"]}]
+4c:["$","p","d39721787a783c60",{"children":["З усіх питань, пов’язаних із Політикою конфіденційності, ви можете звернутися за електронною адресою: ","elenapopova00@gmail.com"]}]
+4d:["$","script","script-0",{"src":"/Prophotoacademy/_next/static/chunks/1vidatfau2eow.js","async":true}]
+4e:["$","$L58",null,{"children":["$","$54",null,{"name":"Next.MetadataOutlet","children":"$@59"}]}]
+e:300
+59:null
+57:true
+e:C
+56:0
+17:"$undefined"
+15:"$undefined"
+d:"$undefined"
+55:"$undefined"
+4f:"$undefined"
