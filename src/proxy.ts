@@ -7,10 +7,6 @@ export function proxy(request:NextRequest){
     return NextResponse.next();
   }
   const url=request.nextUrl.clone();
-  if(url.pathname==='/hub'||url.pathname.startsWith('/hub/')){
-    url.pathname=url.pathname.slice(4)||'/';
-    return NextResponse.redirect(url,308);
-  }
   const path=hubRewritePath(url.pathname);
   if(!path)return NextResponse.next();
   url.pathname=path;

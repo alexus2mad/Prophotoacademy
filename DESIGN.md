@@ -84,3 +84,7 @@ Inspect 360, 390, 768, 1024 and 1440 px widths; check enlarged text, touch targe
 Focus refinement verified on October 7, 2026: no decorative action arrows on the homepage, no horizontal overflow at 360/390 px, visible course choices in the initial 390×844 and 1440×900 views, mobile menu navigation, package comparison, inquiry context and production build.
 
 Primary course verification on October 7, 2026: the course title and direct action are visible at 390×844, alongside the first alternative program; 1440×900 shows both alternatives. Catalog order, direct course navigation, five selection/fallback tests, migration references and GROQ projection (legacy/native IDs and cleared selection) passed. Reviews use the course-specific heading only when a confirmed course reference exists.
+
+## Connected ProPhoto businesses
+
+Academy and Hub share KyivType/Manrope, canvas, sage accent, spacing, controls and photograph motion. A compact Навчання · Студія connector makes the current destination clear. Academy retains its flagship course opening. Hub uses actual room photography, a direct price overview and calendar access in the opening; these rates remain visible at mobile widths. Photography and product information distinguish the businesses. Booking and enrollment omit cross-offers. Guided practice appears after learning context and remains explicitly in planning until delivery details are verified. Hub uses its existing studio logo; Academy retains the supplied Study vector.

@@ -1,3 +1,4 @@
+import type {Acquisition} from './attribution';
 import {z} from 'zod';
 import {timingSafeEqual} from 'node:crypto';
 import {database,hash,type Order} from './ledger';
@@ -25,7 +26,7 @@ export function normalizeContact(value:string){
  let digits=clean.replace(/\D/g,'');if(digits.length===10&&digits.startsWith('0'))digits='38'+digits;
  return digits?'+'+digits:clean;
 }
-type Customer={id:string;name:string;contacts:string[];interests:string[];marketingUpdates:boolean;locality?:string;acquisition?:unknown;activity:CustomerActivity[];inquiries:number;lastSeen:string};
+type Customer={id:string;name:string;contacts:string[];interests:string[];marketingUpdates:boolean;marketingUpdatedAt?:number;locality?:string;acquisition?:Acquisition;activity:CustomerActivity[];inquiries:number;lastSeen:string};
 export function recommendNextStep(customer:Pick<Customer,'activity'|'locality'|'interests'>,content:AcademyContent){
  if(customer.locality==='other')return {label:'Онлайн-навчання',href:siteHref('academy','courses?format=online')};
  const practice=customer.activity.filter(a=>a.kind==='practice-completed'&&a.status==='completed').sort((a,b)=>b.occurredAt.localeCompare(a.occurredAt))[0];
@@ -40,12 +41,12 @@ export function customerOverview(){
   const keys=contacts.filter(Boolean).map(normalizeContact);const matched=groups.filter(item=>item.contacts.some(contact=>keys.includes(contact)));
   let item=matched[0];
   if(!item){item={id:'customer-'+hash(keys[0]).slice(0,16),name,contacts:[],interests:[],marketingUpdates:false,activity:[],inquiries:0,lastSeen:at};groups.push(item);}
-  for(const duplicate of matched.slice(1)){item.contacts.push(...duplicate.contacts);item.interests.push(...duplicate.interests);item.activity.push(...duplicate.activity);item.inquiries+=duplicate.inquiries;groups.splice(groups.indexOf(duplicate),1);}
+  for(const duplicate of matched.slice(1)){item.contacts.push(...duplicate.contacts);item.interests.push(...duplicate.interests);item.activity.push(...duplicate.activity);item.inquiries+=duplicate.inquiries;if((duplicate.marketingUpdatedAt||0)>(item.marketingUpdatedAt||0)){item.marketingUpdates=duplicate.marketingUpdates;item.marketingUpdatedAt=duplicate.marketingUpdatedAt;}groups.splice(groups.indexOf(duplicate),1);}
   item.contacts=[...new Set([...item.contacts,...keys])];if(Date.parse(at)>Date.parse(item.lastSeen)){item.lastSeen=at;item.name=name;}
   return item;
  }
  const rows=db.prepare('SELECT data,created_at FROM inquiries ORDER BY created_at ASC').all() as {data:string;created_at:number}[];
- for(const row of rows){const data=JSON.parse(row.data);const item=customer(data.name,[data.contact],new Date(row.created_at).toISOString());item.inquiries++;item.interests.push(data.interest||'education');item.marketingUpdates=data.marketingUpdates===true;item.locality=data.locality||item.locality;item.acquisition=data.acquisition||item.acquisition;}
+ for(const row of rows){const data=JSON.parse(row.data);const item=customer(data.name,[data.contact],new Date(row.created_at).toISOString());item.inquiries++;item.interests.push(data.interest||'education');item.marketingUpdates=data.marketingUpdates===true;item.marketingUpdatedAt=row.created_at;item.locality=data.locality||item.locality;item.acquisition=data.acquisition||item.acquisition;}
  const orders=(db.prepare('SELECT data FROM orders').all() as {data:string}[]).map(row=>JSON.parse(row.data) as Order).filter(order=>order.mode==='wayforpay'&&['approved','refunded'].includes(order.status));
  for(const order of orders){const at=new Date(order.createdAt*1000).toISOString();const item=customer(order.customer.name,[order.customer.email,order.customer.phone],at);item.activity.push({id:order.id,source:'academy',kind:'course-enrollment',updatedAt:at,occurredAt:at,status:order.status==='approved'?'completed':'refunded',customer:order.customer,revenue:order.amount,programId:order.programId,productTitle:order.programTitle});item.interests.push('education');item.acquisition??=order.acquisition;}
  const records=(db.prepare('SELECT data FROM customer_activity').all() as {data:string}[]).map(row=>JSON.parse(row.data) as CustomerActivity);

@@ -1,5 +1,7 @@
 # Pro Photo Academy
 
+The connected ecosystem is implemented here. Review Academy at `/` and Hub at `/hub`; production keeps both domains. Hub has direct room booking, first-screen rates and separate contacts. Guided practice starts as an inquiry offer. The private team view is `/operations`. See [ECOSYSTEM.md](ECOSYSTEM.md) for deployment, shared Sanity content, customer records and attribution.
+
 A local Next.js + Sanity implementation of the academy redesign. Ukrainian content, a direct program catalog, course details, student photography, inquiries and checkout are included. The current default uses the reviewed migration fixture and local payment simulation.
 
 ## Run locally
@@ -43,7 +45,10 @@ Browser review uses the rendered local site; see `reports/design-review.md` for 
 | `studentWork` | Gallery title, equipment, photo and confirmed author when known |
 | `testimonial` | Attributed student quotation or academy-written case story, distinguished explicitly |
 | `editorialPage` | Legal content in Portable Text |
-| `siteSettings` | Primary course selection, general homepage fallback, contacts and external links |
+| `siteSettings` | Primary course selection, general homepage fallback, Academy contacts and links |
+| `studioRoom` | Hub spaces, base rates, confirmed features, photographs and booking keys |
+| `hubSettings` | Separate Hub contacts, location, studio calendar and editorial settings |
+| `practiceSession` | Related courses, studio space, planning/verification gate and delivery details |
 
 Imported IDs remain stable. New documents use their native Sanity IDs. Programs and intakes are separate so a new cohort does not require duplicating the entire course. The frontend reads published content by default and authenticated drafts in preview. It does not silently substitute the fixture when Sanity is misconfigured.
 
@@ -71,7 +76,7 @@ Live Sanity preview, provider payments and Make delivery remain unverified until
 
 ## Migration and assets
 
-See `MIGRATION.md`. The connected Webflow site returned an empty collection list, so useful content was normalized from static pages and source assets. The 6 programs, 6 intakes, 15 selected photographs, 2 instructors, 6 student works, 16 reviews/case stories, 2 legal pages and site settings produce 54 Sanity documents plus image assets.
+See `MIGRATION.md`. The connected Webflow site returned an empty collection list, so useful content was normalized from static pages and source assets. The Academy source retains 6 programs, 6 intakes, 2 instructors, 6 student works, 16 reviews/case stories and 2 legal pages. With 19 photographs, 3 Hub spaces, a planned practice session and separate site settings, the ecosystem migration produces 63 Sanity documents plus image assets.
 
 Original route slugs are preserved for courses and legal pages. Individual and corporate training have direct new routes. Utility redirects lead to useful pages. Student work and the complete catalog are directly accessible from the header.
 

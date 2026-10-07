@@ -41,3 +41,7 @@ The production backend is Sanity. Webflow supplies migration evidence only. The 
 ## Editorial priority update
 
 The user identified Інста, яка продає as the current main course. The normalized fixture selects it through `settings.primaryProgramId`; the importer converts that ID to the Sanity `primaryProgram` reference. An optional program-level homepage introduction supports concise course-led copy. This is an editorial decision following migration, not a claim inherited from Webflow. Source dates, prices, availability and testimonial attribution are preserved. Existing cloud documents remain protected by the importer’s create-if-missing behavior; editors can choose the primary course directly in Studio.
+
+## ProPhoto Hub extension
+
+The ecosystem migration adds 4 room photographs, 3 studio-room documents, Hub settings and one planned practice session: 63 documents and 19 images in total. Sources are the public Wix room pages and existing Plainstack embed inspected on 7 October 2026. The dry run preserves rate provenance and renovation notices. No live booking API, cloud data or domain settings were changed. See ECOSYSTEM.md for the editorial gate and production setup.
