@@ -54,6 +54,14 @@ UI components do not import the server-only content transport, `next/headers`, N
 
 The GitHub review uses the same components and hooks. `ReviewCatalog` and `ReviewBooking` read static-page queries after hydration; they reuse the production catalog and studio booking presentation. The exporter changes only framework entry points and unavailable server actions. It must not embed a separate UI implementation in build-script strings. Its root layout is adapted with a TypeScript AST so formatting changes do not break publication.
 
+## Cashbox ownership
+
+`alexus2mad/ps-booking` owns the shared cashbox, merchant-wide WayForPay imports, product classification, reporting and financial operations. Academy links to that application's authenticated cashbox; it must not add a competing finance dashboard, transaction-list scheduler or refund submission API. Account privileges in Academy do not confer access to the booking application's manager session.
+
+Academy owns its checkout orders, verified purchase receipts, fulfillment events and learning entitlements. Its existing WayForPay callback remains the immediate fulfillment boundary. A successful browser return never grants access. Full, confirmed refunds revoke only the related purchase grant; partial refunds preserve access. Do not infer a purchase or entitlement from product names, a booking or an aggregate revenue report.
+
+The inspected booking service has reports and product-management endpoints, but no signed Academy event feed or refund-submission endpoint. Any future event integration must be explicitly implemented in that service and authenticated; do not assume such an API exists or forward an administrator's browser cookie between sites. See `docs/PS_BOOKING_BOUNDARY.md` for the verified interface and remaining integration work.
+
 ## Verification
 
 Run `pnpm architecture:check`, `pnpm typecheck` and `pnpm test`. Build the production app and the static review when composition, routing or build adapters change. Check the affected journeys in the browser, including mobile, keyboard access, dialogs, package comparison, gallery navigation and disabled review submissions.

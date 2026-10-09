@@ -65,6 +65,7 @@ export const callbackInput = z.object({
   transactionStatus: z.string().max(40),
   reasonCode: z.union([z.string(), z.number()]),
   merchantSignature: z.string().regex(/^[a-fA-F0-9]{32}$/),
+  refundAmount: z.union([z.number(), z.string()]).optional(),
 });
 export function verifyCallback(
   raw: unknown,
@@ -107,9 +108,48 @@ export function verifyCallback(
     Expired: 'canceled',
     Voided: 'canceled',
     Refunded: 'refunded',
+    RefundInProcessing: 'approved',
   };
   if (!statuses[data.transactionStatus]) throw new HttpError(400, 'Unknown transaction status');
   return statuses[data.transactionStatus];
+}
+// Only check the Academy order being fulfilled. Merchant-wide imports, financial
+// reports and refund submission are owned by ps-booking.
+export async function confirmedOrderStatus(
+  raw: unknown,
+  order: Order,
+  merchant: string,
+  secret: string,
+): Promise<OrderStatus> {
+  const status = verifyCallback(raw, order, merchant, secret);
+  if (status !== 'refunded') return status;
+  const response = await fetch('https://api.wayforpay.com/api', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    cache: 'no-store',
+    signal: AbortSignal.timeout(15_000),
+    body: JSON.stringify({
+      transactionType: 'CHECK_STATUS',
+      merchantAccount: merchant,
+      orderReference: order.id,
+      merchantSignature: sign([merchant, order.id], secret),
+      apiVersion: 1,
+    }),
+  });
+  if (!response.ok) throw new HttpError(502, 'Payment confirmation unavailable');
+  const checked = callbackInput.parse(await response.json());
+  const confirmed = verifyCallback(checked, order, merchant, secret);
+  if (confirmed !== 'refunded') return confirmed;
+  // Ambiguous provider responses are retried, never interpreted as a full refund.
+  const refunded = Number(checked.refundAmount);
+  if (
+    checked.refundAmount === undefined ||
+    !Number.isFinite(refunded) ||
+    refunded < 0 ||
+    refunded > order.amount
+  )
+    throw new HttpError(502, 'Refund amount confirmation unavailable');
+  return Math.round(refunded * 100) === Math.round(order.amount * 100) ? 'refunded' : 'approved';
 }
 export function callbackAck(orderReference: string, secret: string) {
   const time = Math.floor(Date.now() / 1000);
