@@ -61,6 +61,20 @@ export type ServiceStatus = { name: string; configured: boolean; detail: string 
 export type AdminMutationReply = { ok?: boolean; result?: unknown; error?: string };
 export type AdminReply<T> = { ok?: boolean; result: T; error?: string };
 export type ManagementMember = Member & { session_verified_at: string };
+export type CustomerAcademyAccount = {
+  userId: string | null;
+  email: string;
+  hasAccount: boolean;
+  courses: {
+    id: string;
+    title: string;
+    access: { packageName: string; startsAt: string; expiresAt: string | null }[];
+  }[];
+};
+export type CustomerAccessRow = Pick<
+  Grant,
+  'id' | 'user_id' | 'email' | 'course_id' | 'package_name' | 'starts_at' | 'expires_at'
+> & { title: string };
 export type GrantStatistics = {
   grantId: string;
   progress: number;

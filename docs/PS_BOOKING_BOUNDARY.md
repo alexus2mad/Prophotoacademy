@@ -12,6 +12,12 @@ Booking's `/api/academy/*` endpoints call Academy's fixed `/api/integrations/ps-
 
 All editable student-management UI is in booking. Identity, access and progress stay in the Academy database so protected content can enforce them directly. Academy's browser admin API exposes authoring only. `/operations` redirects and `/api/operations/customers` is retired. See `LEARNING_OPERATIONS.md` for activation.
 
+## Customer-card account connection
+
+Booking customer cards use the signed `customer.summary` action to read a minimal Academy projection: verified account ID/email and course access (title, package, start, expiry). The action requires the same current verified administrator session as other management reads. The booking endpoint additionally requires its studio-manager session and derives lookup emails from the saved customer contacts, never from caller-supplied search parameters.
+
+Matching is exact after trimming and lowercasing; no phone/name matching or Gmail alias consolidation. Shared CRM email contacts and multiple matching accounts require review. There is no persisted email-based authorization or duplicate student store: registered-account grants are selected by immutable user ID. Pending unclaimed grants remain distinct from a verified account. Revoked, expired and empty grants are omitted, and future intake start dates remain explicit. CRM contact changes neither update the login nor grant course access.
+
 ## Verified existing implementation
 
 Repository: `alexus2mad/ps-booking`, local checkout `E:/Projects/WIX_Koren_studio`, inspected commit `0033f86`.

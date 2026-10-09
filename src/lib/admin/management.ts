@@ -9,6 +9,7 @@ import { claimIdentity, changeAdministrator, normalizeEmail } from '../auth/iden
 import { adminOverview, adminPeople, adminPerson, adminTeam } from './queries';
 import { manageAccess } from './access';
 import { recordAttendance } from '../learning/live';
+import { customerAccounts } from './customer-account';
 import type { ManagementMember } from './types';
 
 export async function acceptManagementRequest(body: string, headers: Headers) {
@@ -123,6 +124,12 @@ export async function managementAction(action: string, value: unknown, session?:
     return { ok: true };
   }
   if (action === 'overview') return adminOverview();
+  if (action === 'customer.summary') {
+    const input = z
+      .object({ emails: z.array(z.string().trim().toLowerCase().pipe(z.email())).min(1).max(20) })
+      .parse(value);
+    return { accounts: await customerAccounts(databasePool(), input.emails) };
+  }
   if (action === 'people') {
     const input = z.object({ q: z.string().max(100).optional() }).parse(value || {});
     return { people: await adminPeople(input.q) };

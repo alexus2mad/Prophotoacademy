@@ -28,6 +28,7 @@ vi.mock('../src/lib/content', () => ({
   getContent: async () => ({ programs: [], offerings: [] }),
 }));
 import { manageAccess } from '../src/lib/admin/access';
+import { customerAccounts } from '../src/lib/admin/customer-account';
 import { acceptManagementRequest, managementAction } from '../src/lib/admin/management';
 import { saveProgress } from '../src/lib/learning/service';
 const pg = new PGlite(),
@@ -167,6 +168,55 @@ describe('management is authorized by verified identity through ps-booking', () 
       (await pg.query("SELECT * FROM academy.audit WHERE action='access.revoke'")).rows,
     ).toHaveLength(1);
   });
+  it('returns a narrow account summary with current grants by immutable identity, not grant email', async () => {
+    const owner = randomUUID(),
+      email = 'crm.student@example.com';
+    await pg.query('INSERT INTO academy.profiles(id,email,verified_at) VALUES($1,$2,now())', [
+      owner,
+      email,
+    ]);
+    for (const row of [
+      [owner, email, 'Lifetime', '-1 day', null, false, '["lesson"]'],
+      [owner, email, 'Upcoming', '1 day', '30 days', false, '["lesson"]'],
+      [owner, email, 'Expired', '-3 days', '-1 day', false, '["lesson"]'],
+      [owner, email, 'Revoked', '-1 day', null, true, '["lesson"]'],
+      [owner, email, 'Empty', '-1 day', null, false, '[]'],
+      [student, email, 'Wrong identity', '-1 day', null, false, '["lesson"]'],
+      [null, 'pending@example.com', 'Pending', '-1 day', null, false, '["lesson"]'],
+    ])
+      await pg.query(
+        `INSERT INTO academy.grants(user_id,email,course_id,release_id,package_name,source,starts_at,expires_at,revoked_at,lesson_ids)
+      VALUES($1,$2,'course','release',$3,'admin',now()+$4::interval,now()+$5::interval,CASE WHEN $6 THEN now() END,$7)`,
+        row,
+      );
+    const [account, pending, unknown] = await customerAccounts(database.connection!, [
+      email,
+      'pending@example.com',
+      'crmstudent@example.com',
+    ]);
+    expect(account).toMatchObject({ userId: owner, email, hasAccount: true });
+    expect(account.courses).toHaveLength(1);
+    expect(account.courses[0].access.map((a) => a.packageName)).toEqual(['Lifetime', 'Upcoming']);
+    expect(pending).toMatchObject({ hasAccount: false, userId: null });
+    expect(pending.courses[0].access[0].packageName).toBe('Pending');
+    expect(unknown).toMatchObject({ hasAccount: false, courses: [] });
+    const result = await managementAction(
+      'customer.summary',
+      { emails: ['  CRM.Student@EXAMPLE.com  '] },
+      token,
+    );
+    expect(result).toEqual({ accounts: [account] });
+    for (const field of ['manifest', 'lesson_ids', 'role', 'purchases', 'progress'])
+      expect(JSON.stringify(result)).not.toContain('"' + field + '"');
+    await pg.query('UPDATE academy.grants SET revoked_at=now() WHERE user_id=$1', [owner]);
+    expect((await customerAccounts(database.connection!, [email]))[0].courses).toEqual([]);
+    await expect(managementAction('customer.summary', { emails: [email] })).rejects.toThrow(
+      'email',
+    );
+    await expect(
+      managementAction('customer.summary', { emails: Array(21).fill(email) }, token),
+    ).rejects.toThrow();
+  });
   it('requires fresh verification for privilege changes and honors revoked roles immediately', async () => {
     await pg.exec("UPDATE academy.management_sessions SET verified_at=now()-interval '11 minutes'");
     await expect(
@@ -178,5 +228,8 @@ describe('management is authorized by verified identity through ps-booking', () 
     ).rejects.toThrow('ще раз');
     await pg.query("UPDATE academy.profiles SET role='student' WHERE id=$1", [admin]);
     await expect(managementAction('people', {}, token)).rejects.toThrow('права');
+    await expect(
+      managementAction('customer.summary', { emails: ['student@example.com'] }, token),
+    ).rejects.toThrow('права');
   });
 });
