@@ -2,8 +2,8 @@
 6:"/Prophotoacademy/_next/static/chunks/20bm4h-x9zr-g.js"
 7:I[74554,["$6"],"default"]
 8:I[35101,["$6"],"default"]
-b:"/Prophotoacademy/_next/static/chunks/3m2rqj5k165xg.js"
-c:"/Prophotoacademy/_next/static/chunks/0u50jp49agtna.js"
+b:"/Prophotoacademy/_next/static/chunks/3ilx1ayzzq4b9.js"
+c:"/Prophotoacademy/_next/static/chunks/0yocfgrwj-ixh.js"
 d:I[37233,["$6","$b","$c"],""]
 e:I[90121,["$6"],"OutletBoundary"]
 f:"$Sreact.suspense"
@@ -12,7 +12,7 @@ f:"$Sreact.suspense"
 14:"MetadataBoundary"
 15:I[90121,["$6"],"$14"]
 17:I[83196,["$6"],"default",1]
-:HL["/Prophotoacademy/_next/static/chunks/3e9jksxbfpmyb.css","style"]
+:HL["/Prophotoacademy/_next/static/chunks/0jkiml7arocyz.css","style"]
 :HL["/Prophotoacademy/_next/static/media/kyivtype_medium-s.p.261_azj9dnu52.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/Prophotoacademy/_next/static/media/kyivtype_regular-s.p.1s2rzvspm89kl.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/Prophotoacademy/_next/static/media/manrope_0-s.p.0ichc44-obr6o.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
@@ -21,8 +21,8 @@ f:"$Sreact.suspense"
 9:X
 a:[["children",{"s":"__PAGE__","h":512,"d":{"r":["$","$1","c",{"children":[["$","div",null,{"className":"container status-panel","children":[["$","h1",null,{"children":"Оформлення навчання"}],["$","p",null,{"children":"У GitHub-огляді заявки й оплата недоступні. Тут можна переглянути програми, пакети та дизайн сайту."}],["$","$Ld",null,{"className":"button","href":"/courses","children":"До програм"}]]}],null,["$","$Le",null,{"children":["$","$f",null,{"name":"Next.MetadataOutlet","children":"$@10"}]}]]}],"p":false,"v":null}}]]
 5:[["children",{"s":"checkout","h":512,"d":{"r":["$","$1","c",{"children":[null,["$","$L7",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L8",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],"p":false,"v":"$9"},"c":"$Qa"}]]
-3:[["children",{"s":"(academy)","h":512,"d":{"r":["$","$1","c",{"children":[[["$","script","script-0",{"src":"/Prophotoacademy/_next/static/chunks/3m2rqj5k165xg.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/Prophotoacademy/_next/static/chunks/0u50jp49agtna.js","async":true,"nonce":"$undefined"}]],"$L4"]}],"p":false,"v":null},"c":"$Q5"}]]
-0:{"P":null,"c":["","checkout",""],"q":"","i":false,"t":{"t":{"s":"","h":528,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/Prophotoacademy/_next/static/chunks/3e9jksxbfpmyb.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/Prophotoacademy/_next/static/chunks/20bm4h-x9zr-g.js","async":true,"nonce":"$undefined"}]],"$L2"]}],"p":false,"v":null},"c":"$Q3"},"h":{"r":["$","$1","h",{"children":[null,["$","$L12",null,{"children":"$L13"}],["$","$L15",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$f",null,{"name":"Next.Metadata","children":"$L16"}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":false,"v":null}},"m":"$undefined","G":["$17",[["$","link","0",{"rel":"stylesheet","href":"/Prophotoacademy/_next/static/chunks/3e9jksxbfpmyb.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]]],"S":true,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"VRK2N-s358IA1ppjJy-Hz"}
+3:[["children",{"s":"(academy)","h":512,"d":{"r":["$","$1","c",{"children":[[["$","script","script-0",{"src":"/Prophotoacademy/_next/static/chunks/3ilx1ayzzq4b9.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/Prophotoacademy/_next/static/chunks/0yocfgrwj-ixh.js","async":true,"nonce":"$undefined"}]],"$L4"]}],"p":false,"v":null},"c":"$Q5"}]]
+0:{"P":null,"c":["","checkout",""],"q":"","i":false,"t":{"t":{"s":"","h":528,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/Prophotoacademy/_next/static/chunks/0jkiml7arocyz.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/Prophotoacademy/_next/static/chunks/20bm4h-x9zr-g.js","async":true,"nonce":"$undefined"}]],"$L2"]}],"p":false,"v":null},"c":"$Q3"},"h":{"r":["$","$1","h",{"children":[null,["$","$L12",null,{"children":"$L13"}],["$","$L15",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$f",null,{"name":"Next.Metadata","children":"$L16"}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":false,"v":null}},"m":"$undefined","G":["$17",[["$","link","0",{"rel":"stylesheet","href":"/Prophotoacademy/_next/static/chunks/0jkiml7arocyz.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]]],"S":true,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"0nc-VCP8lW-GH6qb0bbys"}
 18:"/Prophotoacademy/_next/static/chunks/3q50mw3a0gess.js"
 19:I[77659,["$6","$18"],"default"]
 1a:"PhotographyMotion"

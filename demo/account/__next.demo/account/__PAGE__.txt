@@ -1,0 +1,41 @@
+1:"$Sreact.fragment"
+2:"/Prophotoacademy/_next/static/chunks/20bm4h-x9zr-g.js"
+3:I[74554,["$2"],"default"]
+4:"/Prophotoacademy/_next/static/chunks/3q50mw3a0gess.js"
+5:I[77659,["$2","$4"],"default"]
+6:I[35101,["$2"],"default"]
+7:"/Prophotoacademy/_next/static/chunks/03cir3q1yz20e.js"
+8:I[37233,["$2","$7"],""]
+9:"PhotographyMotion"
+a:I[2541,["$2"],"$9"]
+13:I[20618,["$2","$7"],"Image"]
+14:I[88966,["$2","$7"],"AccountMenu"]
+1a:"ViewportBoundary"
+1b:I[90121,["$2"],"$1a"]
+1c:"MetadataBoundary"
+1d:I[90121,["$2"],"$1c"]
+1e:"$Sreact.suspense"
+:HL["/Prophotoacademy/_next/static/chunks/0jkiml7arocyz.css","style"]
+:HL["/Prophotoacademy/images/instagram.webp","image"]
+c:X
+f:X
+f:C
+12:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$1","c",{"children":[["$","div",null,{"className":"learning-app","children":[["$","div",null,{"className":"learning-demo-note","children":["Демонстрація кабінету · приклади даних, без реальних оплат",["$","$L8",null,{"href":"/demo/admin","children":"Редактор курсів"}]]}],["$","header",null,{"className":"workspace-header","children":[["$","$L8",null,{"href":"/","className":"brand-link","aria-label":"ProPhoto — головна","children":["$","$L13",null,{"src":"/Prophotoacademy/brand/prophoto-study-trimmed.svg","alt":"ProPhoto Study — академія фотографії","width":1609,"height":406,"className":"brand-logo ","unoptimized":true}]}],["$","$L8",null,{"className":"workspace-area","href":"/demo/account","children":"Моє навчання"}],["$","$L14",null,{"member":{"id":"00000000-0000-4000-8000-000000000010","email":"student@example.com","name":"Олександра","role":"admin","verified_at":"2026-10-09T08:00:00Z","created_at":"2026-10-01T08:00:00Z"},"demo":true}]]}],["$","div",null,{"className":"workspace-layout","children":[["$","nav",null,{"className":"workspace-nav","aria-label":"Особистий кабінет","children":[["$","$L8","courses",{"aria-current":"page","href":"/demo/account","children":"Мої курси"}],["$","$L8","purchases",{"href":"/demo/account/purchases","children":"Мої покупки"}],["$","$L8","settings",{"href":"/demo/account/settings","children":"Налаштування"}]]}],["$","main",null,{"id":"main","className":"workspace-content","children":[["$","div",null,{"className":"workspace-page-heading","children":[["$","h1",null,{"children":"Раді бачити вас, Олександра"}],["$","p",null,{"children":"Продовжуйте з того місця, де зупинилися"}]]}],["$","div",null,{"className":"student-dashboard-grid","children":[["$","article",null,{"className":"learning-course-card is-featured","children":[["$","div",null,{"className":"learning-course-image","children":["$","img",null,{"src":"/Prophotoacademy/images/instagram.webp","alt":""}]}],["$","div",null,{"className":"learning-course-copy","children":[["$","p",null,{"className":"learning-meta","children":"PLATINUM EXPERT"}],["$","h2",null,{"children":"Інста, яка продає"}],["$","div",null,{"className":"learning-progress","children":[["$","div",null,{"children":[["$","span",null,{"children":"2 із 6 уроків завершено"}],["$","span",null,{"children":[33,"%"]}]]}],["$","progress",null,{"max":100,"value":33,"aria-label":"2 із 6 уроків завершено"}]]}],[["$","p",null,{"className":"learning-next","children":["Наступний урок ",["$","strong",null,{"children":"Візуальна мова вашого бренду"}]]}],["$","$L8",null,{"className":"button","href":"/demo/learn/visual-language","children":"Продовжити навчання"}]],null]}]]}],["$","aside",null,{"className":"next-session-card","children":[["$","h2",null,{"children":"Наступна зустріч"}],[["$","p",null,{"className":"session-title","children":"Розбір ваших ідей"}],["$","p",null,{"className":"session-date","children":"15 жовтня 2026 р."}],["$","p",null,{"children":["19:00"," ","· Київ"]}],"$L15"]]}]]}],false,"$L16"]}]]}]]}],["$L17"],"$L18"]}],"p":"$@19","v":null,"s":"$c"}}]]
+10:[["children",{"s":"account","h":96,"d":{"r":["$","$1","c",{"children":[null,["$","$L3",null,{"parallelRouterKey":"children","template":["$","$L6",null,{}]}]]}],"p":"$@11","v":"$f","s":"$c"},"c":"$Q12"}]]
+d:[["children",{"s":"demo","h":96,"d":{"r":["$","$1","c",{"children":[null,["$","$L3",null,{"parallelRouterKey":"children","template":["$","$L6",null,{}]}]]}],"p":"$@e","v":"$f","s":"$c"},"c":"$Q10"}]]
+0:{"t":{"t":{"s":"","h":80,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/Prophotoacademy/_next/static/chunks/0jkiml7arocyz.css","precedence":"next"}],["$","script","script-0",{"src":"/Prophotoacademy/_next/static/chunks/20bm4h-x9zr-g.js","async":true}]],["$","html",null,{"lang":"uk","data-scroll-behavior":"smooth","className":"_0tiFQW_variable KhNozG_variable","children":["$","body",null,{"children":[["$","a",null,{"className":"skip-link","href":"#main","children":"Перейти до вмісту"}],["$","aside",null,{"className":"review-notice","aria-label":"Режим огляду","children":[["$","span",null,{"children":"Огляд дизайну · заявки й оплата недоступні"}],["$","a",null,{"href":"https://github.com/alexus2mad/Prophotoacademy","target":"_blank","rel":"noreferrer","children":"GitHub"}]]}],["$","$L3",null,{"parallelRouterKey":"children","error":"$5","errorStyles":[],"errorScripts":[["$","script","script-0",{"src":"/Prophotoacademy/_next/static/chunks/3q50mw3a0gess.js","async":true}]],"template":["$","$L6",null,{}],"notFound":[["$","div",null,{"className":"container status-panel","children":[["$","p",null,{"className":"eyebrow","children":"404"}],["$","h1",null,{"children":"Цей кадр загубився"}],["$","p",null,{"children":"Сторінки немає, але ваша наступна програма може бути зовсім поруч."}],["$","$L8",null,{"href":"/courses","className":"button","children":"Переглянути програми"}]]}],[]]}],["$","$La",null,{}]]}]}]]}],"p":"$@b","v":null,"s":"$c"},"c":"$Qd"},"h":{"r":["$","$1","h",{"children":[null,["$","$L1b",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L1d",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$1e",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Демо кабінету · ProPhoto"}],["$","meta","1",{"name":"robots","content":"noindex, nofollow"}],["$","meta","2",{"property":"og:title","content":"Демо кабінету · ProPhoto"}],["$","meta","3",{"property":"og:locale","content":"uk_UA"}],["$","meta","4",{"property":"og:type","content":"website"}],["$","meta","5",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","6",{"name":"twitter:title","content":"Демо кабінету · ProPhoto"}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@1f","v":null,"s":"$c"}},"a":"$@20","u":"$@21","b":"0nc-VCP8lW-GH6qb0bbys"}
+22:I[90121,["$2"],"OutletBoundary"]
+15:["$","$L8",null,{"className":"button button-secondary","href":"/demo/learn/live-review","children":"Деталі зустрічі"}]
+16:["$","div",null,{"className":"learning-support","children":[["$","p",null,{"children":"Потрібна допомога з навчанням?"}],["$","$L8",null,{"href":"/contacts","children":"Зв’язатися з академією"}]]}]
+17:["$","script","script-0",{"src":"/Prophotoacademy/_next/static/chunks/03cir3q1yz20e.js","async":true}]
+18:["$","$L22",null,{"children":["$","$1e",null,{"name":"Next.MetadataOutlet","children":"$@23"}]}]
+c:300
+23:null
+21:true
+c:C
+20:0
+11:"$undefined"
+e:"$undefined"
+b:"$undefined"
+1f:"$undefined"
+19:"$undefined"

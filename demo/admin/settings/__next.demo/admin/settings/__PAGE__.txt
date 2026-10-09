@@ -1,0 +1,47 @@
+1:"$Sreact.fragment"
+2:"/Prophotoacademy/_next/static/chunks/20bm4h-x9zr-g.js"
+3:I[74554,["$2"],"default"]
+4:"/Prophotoacademy/_next/static/chunks/3q50mw3a0gess.js"
+5:I[77659,["$2","$4"],"default"]
+6:I[35101,["$2"],"default"]
+7:"/Prophotoacademy/_next/static/chunks/03cir3q1yz20e.js"
+8:I[37233,["$2","$7"],""]
+9:"PhotographyMotion"
+a:I[2541,["$2"],"$9"]
+15:I[20618,["$2","$7"],"Image"]
+16:I[88966,["$2","$7"],"AccountMenu"]
+21:"ViewportBoundary"
+22:I[90121,["$2"],"$21"]
+23:"MetadataBoundary"
+24:I[90121,["$2"],"$23"]
+25:"$Sreact.suspense"
+:HL["/Prophotoacademy/_next/static/chunks/0jkiml7arocyz.css","style"]
+c:X
+f:X
+f:C
+14:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$1","c",{"children":[["$","div",null,{"className":"learning-app","children":[["$","div",null,{"className":"learning-demo-note","children":["Демонстрація кабінету · приклади даних, без реальних оплат",["$","$L8",null,{"href":"/demo/account","children":"Кабінет студента"}]]}],["$","header",null,{"className":"workspace-header","children":[["$","$L8",null,{"href":"/","className":"brand-link","aria-label":"ProPhoto — головна","children":["$","$L15",null,{"src":"/Prophotoacademy/brand/prophoto-study-trimmed.svg","alt":"ProPhoto Study — академія фотографії","width":1609,"height":406,"className":"brand-logo ","unoptimized":true}]}],["$","$L8",null,{"className":"workspace-area","href":"/demo/admin","children":"Матеріали курсів"}],["$","$L16",null,{"member":{"id":"00000000-0000-4000-8000-000000000010","email":"student@example.com","name":"Олександра","role":"admin","verified_at":"2026-10-09T08:00:00Z","created_at":"2026-10-01T08:00:00Z"},"demo":true}]]}],["$","div",null,{"className":"workspace-layout workspace-admin","children":[["$","nav",null,{"className":"workspace-nav","aria-label":"Адміністрування","children":[["$","$L8","courses",{"href":"/demo/admin/courses","children":"Курси"}],["$","a","management",{"href":"https://booking.plainstack.net/academy.html","target":"_blank","rel":"noopener noreferrer","aria-label":"Керування студентами — ps-booking, нова вкладка","children":"Керування студентами"}],["$","a","cashbox",{"href":"https://booking.plainstack.net/admin.html?view=cashbox&channel=wayforpay","target":"_blank","rel":"noopener noreferrer","aria-label":"Каса — ps-booking, нова вкладка","children":"Каса"}],["$","$L8","settings",{"aria-current":"page","href":"/demo/admin/settings","children":"Налаштування"}]]}],["$","main",null,{"id":"main","className":"workspace-content","children":[["$","div",null,{"className":"workspace-page-heading","children":[["$","h1",null,{"children":"Налаштування платформи"}],["$","p",null,{"children":"Підключення сервісів і готовність до запуску"}]]}],["$","section",null,{"className":"admin-panel","children":["$","ul",null,{"className":"admin-list","children":[["$","li","Supabase",{"children":[["$","div",null,{"children":[["$","strong",null,{"children":"Supabase"}],["$","p",null,{"children":"У демонстрації використано лише синтетичні дані"}]]}],["$","span",null,{"className":"admin-badge","children":"Потрібне підключення"}]]}],["$","li","Sanity Learning",{"children":[["$","div",null,{"children":[["$","strong",null,{"children":"Sanity Learning"}],["$","p",null,{"children":"У демонстрації використано лише синтетичні дані"}]]}],["$","span",null,{"className":"admin-badge","children":"Потрібне підключення"}]]}],["$","li","Mux",{"children":[["$","div",null,{"children":["$L17","$L18"]}],"$L19"]}],"$L1a","$L1b"]}]}],"$L1c","$L1d"]}]]}]]}],["$L1e"],"$L1f"]}],"p":"$@20","v":null,"s":"$c"}}]]
+12:[["children",{"s":"settings","h":96,"d":{"r":["$","$1","c",{"children":[null,["$","$L3",null,{"parallelRouterKey":"children","template":["$","$L6",null,{}]}]]}],"p":"$@13","v":"$f","s":"$c"},"c":"$Q14"}]]
+10:[["children",{"s":"admin","h":96,"d":{"r":["$","$1","c",{"children":[null,["$","$L3",null,{"parallelRouterKey":"children","template":["$","$L6",null,{}]}]]}],"p":"$@11","v":"$f","s":"$c"},"c":"$Q12"}]]
+d:[["children",{"s":"demo","h":96,"d":{"r":["$","$1","c",{"children":[null,["$","$L3",null,{"parallelRouterKey":"children","template":["$","$L6",null,{}]}]]}],"p":"$@e","v":"$f","s":"$c"},"c":"$Q10"}]]
+0:{"t":{"t":{"s":"","h":80,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/Prophotoacademy/_next/static/chunks/0jkiml7arocyz.css","precedence":"next"}],["$","script","script-0",{"src":"/Prophotoacademy/_next/static/chunks/20bm4h-x9zr-g.js","async":true}]],["$","html",null,{"lang":"uk","data-scroll-behavior":"smooth","className":"_0tiFQW_variable KhNozG_variable","children":["$","body",null,{"children":[["$","a",null,{"className":"skip-link","href":"#main","children":"Перейти до вмісту"}],["$","aside",null,{"className":"review-notice","aria-label":"Режим огляду","children":[["$","span",null,{"children":"Огляд дизайну · заявки й оплата недоступні"}],["$","a",null,{"href":"https://github.com/alexus2mad/Prophotoacademy","target":"_blank","rel":"noreferrer","children":"GitHub"}]]}],["$","$L3",null,{"parallelRouterKey":"children","error":"$5","errorStyles":[],"errorScripts":[["$","script","script-0",{"src":"/Prophotoacademy/_next/static/chunks/3q50mw3a0gess.js","async":true}]],"template":["$","$L6",null,{}],"notFound":[["$","div",null,{"className":"container status-panel","children":[["$","p",null,{"className":"eyebrow","children":"404"}],["$","h1",null,{"children":"Цей кадр загубився"}],["$","p",null,{"children":"Сторінки немає, але ваша наступна програма може бути зовсім поруч."}],["$","$L8",null,{"href":"/courses","className":"button","children":"Переглянути програми"}]]}],[]]}],["$","$La",null,{}]]}]}]]}],"p":"$@b","v":null,"s":"$c"},"c":"$Qd"},"h":{"r":["$","$1","h",{"children":[null,["$","$L22",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L24",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$25",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"ProPhoto"}],["$","meta","1",{"name":"robots","content":"noindex, nofollow"}],["$","meta","2",{"property":"og:title","content":"ProPhoto"}],["$","meta","3",{"property":"og:locale","content":"uk_UA"}],["$","meta","4",{"property":"og:type","content":"website"}],["$","meta","5",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","6",{"name":"twitter:title","content":"ProPhoto"}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@26","v":null,"s":"$c"}},"a":"$@27","u":"$@28","b":"0nc-VCP8lW-GH6qb0bbys"}
+29:I[90121,["$2"],"OutletBoundary"]
+17:["$","strong",null,{"children":"Mux"}]
+18:["$","p",null,{"children":"У демонстрації використано лише синтетичні дані"}]
+19:["$","span",null,{"className":"admin-badge","children":"Потрібне підключення"}]
+1a:["$","li","Resend",{"children":[["$","div",null,{"children":[["$","strong",null,{"children":"Resend"}],["$","p",null,{"children":"У демонстрації використано лише синтетичні дані"}]]}],["$","span",null,{"className":"admin-badge","children":"Потрібне підключення"}]]}]
+1b:["$","li","ps-booking",{"children":[["$","div",null,{"children":[["$","strong",null,{"children":"ps-booking"}],["$","p",null,{"children":"У демонстрації використано лише синтетичні дані"}]]}],["$","span",null,{"className":"admin-badge","children":"Потрібне підключення"}]]}]
+1c:["$","p",null,{"className":"admin-muted","children":"Наявність конфігурації не замінює перевірку доставки листів, платежів і доступу перед запуском"}]
+1d:["$","section",null,{"className":"admin-section admin-panel","children":[["$","h2",null,{"children":"Спільна каса"}],["$","p",null,{"children":"Звіти та фінансові операції ведуться в ps-booking. Для входу використовується обліковий запис тієї системи"}],["$","a",null,{"className":"button button-secondary","href":"https://booking.plainstack.net/admin.html?view=cashbox&channel=wayforpay","target":"_blank","rel":"noopener noreferrer","children":"Відкрити касу"}]]}]
+1e:["$","script","script-0",{"src":"/Prophotoacademy/_next/static/chunks/03cir3q1yz20e.js","async":true}]
+1f:["$","$L29",null,{"children":["$","$25",null,{"name":"Next.MetadataOutlet","children":"$@2a"}]}]
+c:300
+2a:null
+28:true
+c:C
+27:0
+13:"$undefined"
+11:"$undefined"
+e:"$undefined"
+b:"$undefined"
+26:"$undefined"
+20:"$undefined"

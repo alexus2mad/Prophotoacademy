@@ -1,0 +1,32 @@
+1:"$Sreact.fragment"
+4:"/Prophotoacademy/_next/static/chunks/20bm4h-x9zr-g.js"
+5:I[74554,["$4"],"default"]
+6:I[35101,["$4"],"default"]
+9:"/Prophotoacademy/_next/static/chunks/21zu1vmdemcji.js"
+a:I[37233,["$4","$9"],""]
+b:I[90121,["$4"],"OutletBoundary"]
+c:"$Sreact.suspense"
+e:"ViewportBoundary"
+f:I[90121,["$4"],"$e"]
+11:"MetadataBoundary"
+12:I[90121,["$4"],"$11"]
+14:I[83196,["$4"],"default",1]
+:HL["/Prophotoacademy/_next/static/chunks/0jkiml7arocyz.css","style"]
+:HL["/Prophotoacademy/_next/static/media/kyivtype_medium-s.p.261_azj9dnu52.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/Prophotoacademy/_next/static/media/kyivtype_regular-s.p.1s2rzvspm89kl.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/Prophotoacademy/_next/static/media/manrope_0-s.p.0ichc44-obr6o.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/Prophotoacademy/_next/static/media/manrope_1-s.p.3z14krew9bt7_.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/Prophotoacademy/_next/static/media/manrope_2-s.p.1884clw-w6t77.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+7:X
+8:[["children",{"s":"__PAGE__","h":512,"d":{"r":["$","$1","c",{"children":[["$","main",null,{"className":"workspace-empty","children":[["$","h1",null,{"children":"Демонстрація кабінету"}],["$","p",null,{"children":"У GitHub-огляді використовуються лише приклади даних"}],["$","$La",null,{"className":"button","href":"/demo/account","children":"Відкрити демонстрацію"}]]}],[["$","script","script-0",{"src":"/Prophotoacademy/_next/static/chunks/21zu1vmdemcji.js","async":true,"nonce":"$undefined"}]],["$","$Lb",null,{"children":["$","$c",null,{"name":"Next.MetadataOutlet","children":"$@d"}]}]]}],"p":false,"v":null}}]]
+3:[["children",{"s":"account","h":512,"d":{"r":["$","$1","c",{"children":[null,["$","$L5",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L6",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],"p":false,"v":"$7"},"c":"$Q8"}]]
+0:{"P":null,"c":["","account",""],"q":"","i":false,"t":{"t":{"s":"","h":528,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/Prophotoacademy/_next/static/chunks/0jkiml7arocyz.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/Prophotoacademy/_next/static/chunks/20bm4h-x9zr-g.js","async":true,"nonce":"$undefined"}]],"$L2"]}],"p":false,"v":null},"c":"$Q3"},"h":{"r":["$","$1","h",{"children":[null,["$","$Lf",null,{"children":"$L10"}],["$","$L12",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$c",null,{"name":"Next.Metadata","children":"$L13"}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":false,"v":null}},"m":"$undefined","G":["$14",[["$","link","0",{"rel":"stylesheet","href":"/Prophotoacademy/_next/static/chunks/0jkiml7arocyz.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]]],"S":true,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"0nc-VCP8lW-GH6qb0bbys"}
+15:"/Prophotoacademy/_next/static/chunks/3q50mw3a0gess.js"
+16:I[77659,["$4","$15"],"default"]
+17:"PhotographyMotion"
+18:I[2541,["$4"],"$17"]
+7:C
+2:["$","html",null,{"lang":"uk","data-scroll-behavior":"smooth","className":"_0tiFQW_variable KhNozG_variable","children":["$","body",null,{"children":[["$","a",null,{"className":"skip-link","href":"#main","children":"Перейти до вмісту"}],["$","aside",null,{"className":"review-notice","aria-label":"Режим огляду","children":[["$","span",null,{"children":"Огляд дизайну · заявки й оплата недоступні"}],["$","a",null,{"href":"https://github.com/alexus2mad/Prophotoacademy","target":"_blank","rel":"noreferrer","children":"GitHub"}]]}],["$","$L5",null,{"parallelRouterKey":"children","error":"$16","errorStyles":[],"errorScripts":[["$","script","script-0",{"src":"/Prophotoacademy/_next/static/chunks/3q50mw3a0gess.js","async":true,"nonce":"$undefined"}]],"template":["$","$L6",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[["$","div",null,{"className":"container status-panel","children":[["$","p",null,{"className":"eyebrow","children":"404"}],["$","h1",null,{"children":"Цей кадр загубився"}],["$","p",null,{"children":"Сторінки немає, але ваша наступна програма може бути зовсім поруч."}],["$","$La",null,{"href":"/courses","className":"button","children":"Переглянути програми"}]]}],[]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","$L18",null,{}]]}]}]
+10:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+d:null
+13:[["$","title","0",{"children":"ProPhoto"}],["$","meta","1",{"name":"robots","content":"noindex, nofollow"}],["$","meta","2",{"property":"og:title","content":"ProPhoto"}],["$","meta","3",{"property":"og:locale","content":"uk_UA"}],["$","meta","4",{"property":"og:type","content":"website"}],["$","meta","5",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","6",{"name":"twitter:title","content":"ProPhoto"}]]

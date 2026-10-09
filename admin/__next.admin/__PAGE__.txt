@@ -1,0 +1,32 @@
+1:"$Sreact.fragment"
+2:"/Prophotoacademy/_next/static/chunks/20bm4h-x9zr-g.js"
+3:I[74554,["$2"],"default"]
+4:"/Prophotoacademy/_next/static/chunks/3q50mw3a0gess.js"
+5:I[77659,["$2","$4"],"default"]
+6:I[35101,["$2"],"default"]
+7:"/Prophotoacademy/_next/static/chunks/21zu1vmdemcji.js"
+8:I[37233,["$2","$7"],""]
+9:"PhotographyMotion"
+a:I[2541,["$2"],"$9"]
+11:I[90121,["$2"],"OutletBoundary"]
+12:"$Sreact.suspense"
+15:"ViewportBoundary"
+16:I[90121,["$2"],"$15"]
+17:"MetadataBoundary"
+18:I[90121,["$2"],"$17"]
+:HL["/Prophotoacademy/_next/static/chunks/0jkiml7arocyz.css","style"]
+c:X
+f:X
+f:C
+10:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$1","c",{"children":[["$","main",null,{"className":"workspace-empty","children":[["$","h1",null,{"children":"Демонстрація кабінету"}],["$","p",null,{"children":"У GitHub-огляді використовуються лише приклади даних"}],["$","$L8",null,{"className":"button","href":"/demo/admin/courses","children":"Відкрити демонстрацію"}]]}],[["$","script","script-0",{"src":"/Prophotoacademy/_next/static/chunks/21zu1vmdemcji.js","async":true}]],["$","$L11",null,{"children":["$","$12",null,{"name":"Next.MetadataOutlet","children":"$@13"}]}]]}],"p":"$@14","v":null,"s":"$c"}}]]
+d:[["children",{"s":"admin","h":96,"d":{"r":["$","$1","c",{"children":[null,["$","$L3",null,{"parallelRouterKey":"children","template":["$","$L6",null,{}]}]]}],"p":"$@e","v":"$f","s":"$c"},"c":"$Q10"}]]
+0:{"t":{"t":{"s":"","h":80,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/Prophotoacademy/_next/static/chunks/0jkiml7arocyz.css","precedence":"next"}],["$","script","script-0",{"src":"/Prophotoacademy/_next/static/chunks/20bm4h-x9zr-g.js","async":true}]],["$","html",null,{"lang":"uk","data-scroll-behavior":"smooth","className":"_0tiFQW_variable KhNozG_variable","children":["$","body",null,{"children":[["$","a",null,{"className":"skip-link","href":"#main","children":"Перейти до вмісту"}],["$","aside",null,{"className":"review-notice","aria-label":"Режим огляду","children":[["$","span",null,{"children":"Огляд дизайну · заявки й оплата недоступні"}],["$","a",null,{"href":"https://github.com/alexus2mad/Prophotoacademy","target":"_blank","rel":"noreferrer","children":"GitHub"}]]}],["$","$L3",null,{"parallelRouterKey":"children","error":"$5","errorStyles":[],"errorScripts":[["$","script","script-0",{"src":"/Prophotoacademy/_next/static/chunks/3q50mw3a0gess.js","async":true}]],"template":["$","$L6",null,{}],"notFound":[["$","div",null,{"className":"container status-panel","children":[["$","p",null,{"className":"eyebrow","children":"404"}],["$","h1",null,{"children":"Цей кадр загубився"}],["$","p",null,{"children":"Сторінки немає, але ваша наступна програма може бути зовсім поруч."}],["$","$L8",null,{"href":"/courses","className":"button","children":"Переглянути програми"}]]}],[]]}],["$","$La",null,{}]]}]}]]}],"p":"$@b","v":null,"s":"$c"},"c":"$Qd"},"h":{"r":["$","$1","h",{"children":[null,["$","$L16",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L18",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$12",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"ProPhoto"}],["$","meta","1",{"name":"robots","content":"noindex, nofollow"}],["$","meta","2",{"property":"og:title","content":"ProPhoto"}],["$","meta","3",{"property":"og:locale","content":"uk_UA"}],["$","meta","4",{"property":"og:type","content":"website"}],["$","meta","5",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","6",{"name":"twitter:title","content":"ProPhoto"}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@19","v":null,"s":"$c"}},"a":"$@1a","u":"$@1b","b":"0nc-VCP8lW-GH6qb0bbys"}
+13:null
+c:300
+1b:true
+c:C
+1a:0
+e:"$undefined"
+b:"$undefined"
+19:"$undefined"
+14:"$undefined"
