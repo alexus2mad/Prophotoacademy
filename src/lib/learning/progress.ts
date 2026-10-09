@@ -23,7 +23,8 @@ export const rangeSeconds = (ranges: Interval[]) =>
   mergeRanges(ranges).reduce((sum, [a, b]) => sum + b - a, 0);
 export function expectedSeconds(block: LearningBlock) {
   if (block.expectedSeconds) return block.expectedSeconds;
-  if (block.kind === 'video') return block.duration || 60;
+  if (block.kind === 'video' || (block.kind === 'zoom' && block.mediaId))
+    return block.duration || 60;
   if (block.kind === 'article')
     return Math.max(5, ((block.body?.trim().split(/\s+/).length || 1) * 60) / 200);
   if (block.kind === 'pdf') return (block.pageSeconds || [10]).reduce((a, b) => a + b, 0);
@@ -32,7 +33,8 @@ export function expectedSeconds(block: LearningBlock) {
 export function blockFraction(block: LearningBlock, state?: BlockProgress) {
   if (!state || state.revision !== block.revision) return 0;
   if (state.completed) return 1;
-  if (block.kind === 'video')
+  if (block.mediaId !== state.mediaId) return 0;
+  if (block.kind === 'video' || (block.kind === 'zoom' && block.mediaId))
     return Math.min(
       1,
       rangeSeconds(state.ranges) / ((block.duration || expectedSeconds(block)) * 0.9),
@@ -54,8 +56,8 @@ export function blockFraction(block: LearningBlock, state?: BlockProgress) {
   return 0;
 }
 export function lessonFraction(lesson: Lesson, state: LessonProgress) {
-  if (state.manual) return 1;
   const blocks = lesson.blocks.filter((b) => b.required);
+  if (state.manual && blocks.every((b) => state.manualRevisions?.[b.id] === b.revision)) return 1;
   if (!blocks.length) return 0;
   const total = blocks.reduce((sum, b) => sum + expectedSeconds(b), 0);
   return (
@@ -69,15 +71,23 @@ export function applyProgress(
   event: ProgressEvent,
   maxElapsed: number,
 ) {
-  if (event.manual) return { ...previous, manual: 'student' as const };
+  if (event.manual)
+    return {
+      ...previous,
+      manual: 'student' as const,
+      manualRevisions: Object.fromEntries(
+        lesson.blocks.filter((b) => b.required).map((b) => [b.id, b.revision]),
+      ),
+    };
   const block = lesson.blocks.find((b) => b.id === event.blockId && b.revision === event.revision);
   if (!block) throw new Error('Матеріал змінився. Оновіть урок');
   const current = previous.blocks[block.id];
   const state: BlockProgress =
-    current?.revision === block.revision
+    current?.revision === block.revision && current?.mediaId === block.mediaId
       ? structuredClone(current)
       : {
           revision: block.revision,
+          mediaId: block.mediaId,
           ranges: [],
           coverage: [],
           activeSeconds: 0,
@@ -86,7 +96,7 @@ export function applyProgress(
         };
   const elapsed = Math.max(0, Math.min(event.elapsed, maxElapsed, 30));
   // Playback timestamps alone are insufficient: credit cannot exceed the elapsed session budget at 2x.
-  if (block.kind === 'video' && event.ranges) {
+  if ((block.kind === 'video' || (block.kind === 'zoom' && block.mediaId)) && event.ranges) {
     const ranges = mergeRanges(event.ranges, block.duration || expectedSeconds(block));
     if (rangeSeconds(ranges) <= elapsed * 2 + 1)
       state.ranges = mergeRanges(
@@ -118,4 +128,22 @@ export function applyProgress(
       Math.min(event.position, block.duration || expectedSeconds(block)),
     );
   return { ...previous, lastBlockId: block.id, blocks: { ...previous.blocks, [block.id]: state } };
+}
+
+// A bounded wall-clock coverage ledger allows offline retries without counting overlapping tabs twice.
+export function studyBudget(previous: LessonProgress, event: ProgressEvent, now = Date.now()) {
+  const end = Math.min(
+    now / 1000,
+    Date.parse(event.observedAt || new Date(now).toISOString()) / 1000,
+  );
+  const cutoff = now / 1000 - 172800;
+  const start = Math.max(cutoff, end - Math.min(30, event.elapsed));
+  const before = mergeRanges(
+    (previous.studyRanges || []).map(([a, b]) => [Math.max(a, cutoff), b]),
+  );
+  const ranges = mergeRanges([...before, [start, end]]);
+  return {
+    elapsed: Math.max(0, Math.min(30, rangeSeconds(ranges) - rangeSeconds(before))),
+    ranges,
+  };
 }

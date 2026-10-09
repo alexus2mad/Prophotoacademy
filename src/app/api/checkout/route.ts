@@ -50,6 +50,8 @@ export async function POST(request: Request) {
           currency: 'UAH',
           customer: { name: input.name, email: input.email, phone: input.phone },
           mode: mode as 'mock' | 'wayforpay',
+          merchantAccount:
+            mode === 'wayforpay' ? process.env.WAYFORPAY_MERCHANT_ACCOUNT : undefined,
           fulfillment:
             mode === 'wayforpay'
               ? await purchaseAccess(input.offeringId, input.packageId)

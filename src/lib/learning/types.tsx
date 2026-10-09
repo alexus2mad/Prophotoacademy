@@ -63,6 +63,7 @@ export type Grant = {
 };
 export type Interval = [number, number];
 export type BlockProgress = {
+  mediaId?: string;
   revision: number;
   ranges: Interval[];
   coverage: number[];
@@ -74,9 +75,12 @@ export type BlockProgress = {
 export type LessonProgress = {
   blocks: Record<string, BlockProgress>;
   manual?: 'student' | 'admin';
+  manualRevisions?: Record<string, number>;
+  studyRanges?: Interval[];
   lastBlockId?: string;
 };
 export type ProgressRow = {
+  last_active_at?: string;
   user_id: string;
   course_id: string;
   lesson_id: string;
@@ -86,6 +90,7 @@ export type ProgressRow = {
   updated_at: string;
 };
 export type ProgressEvent = {
+  observedAt?: string;
   id: string;
   sessionId: string;
   sequence: number;
@@ -116,6 +121,7 @@ export type LearningMedia = {
   status: 'uploading' | 'processing' | 'ready' | 'failed';
   duration: number | null;
   page_count: number | null;
+  metadata?: { pageSeconds?: number[] };
 };
 export type MediaAccess = {
   url?: string;
@@ -150,4 +156,39 @@ export type LearningView = {
   progress: LessonProgress;
   nextLessonId?: string;
 };
+export type RecordingContext = { sessions: LiveSession[]; media: LearningMedia[] };
 export type MediaDisplay = LearningMedia & { demoUrl?: string };
+import type { z } from 'zod';
+import type { packageRuleSchema } from './schema';
+export type PackageRuleInput = z.infer<typeof packageRuleSchema>;
+export type SanityCourseDocument = CourseDraft & { _id: string; _rev: string };
+export type UploadInput = {
+  courseId: string;
+  kind: 'video' | 'image' | 'pdf';
+  title: string;
+  mime: string;
+};
+export type EnrollmentCardView = {
+  id: string;
+  courseId: string;
+  title: string;
+  cover: string;
+  packageName: string;
+  progress: number;
+  completed: number;
+  total: number;
+  nextLessonId?: string;
+  nextLessonTitle?: string;
+  expiresAt: string | null;
+  status: 'active' | 'expired' | 'scheduled';
+};
+export type ProgressSample = Omit<ProgressEvent, 'id' | 'sessionId' | 'sequence'>;
+export type LessonBlockProps = {
+  block: LearningBlock;
+  courseId: string;
+  lessonId: string;
+  state?: BlockProgress;
+  demo?: boolean;
+  preview?: boolean;
+  onProgress: (sample: ProgressSample) => void;
+};

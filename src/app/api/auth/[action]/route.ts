@@ -21,6 +21,17 @@ export async function POST(request: Request, { params }: ActionRouteProps) {
       await client.auth.signOut();
       return Response.json({ ok: true });
     }
+    if (action === 'profile') {
+      const user = await requireMember();
+      const { name } = z
+        .object({ name: z.string().trim().min(2).max(80) })
+        .parse(await jsonBody(request));
+      await databasePool().query('UPDATE academy.profiles SET name=$1 WHERE id=$2', [
+        name,
+        user.id,
+      ]);
+      return Response.json({ ok: true });
+    }
     const input = inputSchema.parse(await jsonBody(request));
     const email = normalizeEmail(input.email);
     if (!(await consumeRateLimit('auth:' + action + ':' + email, action === 'send' ? 3 : 10, 600)))
@@ -55,10 +66,6 @@ export async function POST(request: Request, { params }: ActionRouteProps) {
         [key, JSON.stringify(Date.now())],
       );
       return Response.json({ ok: true, redirect: safeReturnTo(input.next) });
-    }
-    if (action === 'profile') {
-      const user = await requireMember();
-      return Response.json({ id: user.id, email: user.email });
     }
     throw new HttpError(404, 'Не знайдено');
   } catch (error) {

@@ -24,3 +24,9 @@ export type AccountPageProps = {
   }>;
 };
 export type LearningPageProps = { params: Promise<{ course: string; lesson: string }> };
+export type LessonMediaRouteProps = {
+  params: Promise<{ course: string; lesson: string; id: string }>;
+};
+export type DemoLessonPageProps = { params: Promise<{ lesson: string }> };
+export type PreviewPageProps = { params: Promise<{ id: string; lesson: string }> };
+export type AdminMediaProps = { params: Promise<{ id: string; media: string }> };

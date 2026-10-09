@@ -1,6 +1,7 @@
 import type { ValidationIssue } from './http/types';
 import { hash, rateLimit } from './ledger';
 import { consumeRateLimit, managedDatabase } from './database/client';
+import { ZodError } from 'zod';
 export class HttpError extends Error {
   constructor(
     public status: number,
@@ -42,7 +43,7 @@ export async function guardMutation(request: Request, scope: string) {
       : 'local';
   if (
     !(managedDatabase()
-      ? await consumeRateLimit(`${scope}:${hash(address)}`, 20, 60)
+      ? await consumeRateLimit(`${scope}:${hash(address)}`, scope === 'progress' ? 600 : 20, 60)
       : rateLimit(`${scope}:${hash(address)}`))
   )
     throw new HttpError(429, 'Забагато запитів. Спробуйте через хвилину.');
@@ -76,11 +77,15 @@ export function errorResponse(error: unknown) {
   return Response.json(
     {
       error:
-        error instanceof HttpError ? error.message : 'Не вдалося виконати запит. Спробуйте ще раз.',
+        error instanceof HttpError
+          ? error.message
+          : error instanceof ZodError
+            ? error.issues[0]?.message || 'Перевірте поля'
+            : 'Не вдалося виконати запит. Спробуйте ще раз.',
       fieldErrors: error instanceof HttpError ? error.fieldErrors : undefined,
     },
     {
-      status: error instanceof HttpError ? error.status : 500,
+      status: error instanceof HttpError ? error.status : error instanceof ZodError ? 400 : 500,
       headers: { 'Cache-Control': 'no-store' },
     },
   );

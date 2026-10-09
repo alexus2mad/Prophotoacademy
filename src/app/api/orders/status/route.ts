@@ -9,6 +9,8 @@ export async function GET(request: Request) {
   return Response.json(
     {
       status: order.status,
+      learningAccess:
+        order.status === 'approved' && order.mode === 'wayforpay' && !!order.fulfillment,
       programTitle: order.programTitle,
       packageName: order.packageName,
       mode: order.mode,

@@ -1,6 +1,14 @@
 import type { SqlConnection } from '../database/types';
 import type { Member, VerifiedIdentity } from './types';
 import { audit } from '../database/client';
+import { HttpError } from '../http';
+
+export async function assertAdministrator(db: SqlConnection, actorId: string) {
+  await db.query('SELECT pg_advisory_xact_lock(710091)');
+  const actor = (await db.query<Member>('SELECT * FROM academy.profiles WHERE id=$1', [actorId]))
+    .rows[0];
+  if (actor?.role !== 'admin') throw new HttpError(403, 'Administrator required');
+}
 
 export const normalizeEmail = (email: string) => email.trim().toLowerCase();
 export function safeReturnTo(value: string | null | undefined) {
@@ -61,10 +69,7 @@ export async function changeAdministrator(
   reason: string,
 ) {
   const email = normalizeEmail(emailInput);
-  await db.query('SELECT pg_advisory_xact_lock(710091)');
-  const actor = (await db.query<Member>('SELECT * FROM academy.profiles WHERE id=$1', [actorId]))
-    .rows[0];
-  if (actor?.role !== 'admin') throw new Error('Administrator required');
+  await assertAdministrator(db, actorId);
   const target = (
     await db.query<Member>('SELECT * FROM academy.profiles WHERE email=$1 FOR UPDATE', [email])
   ).rows[0];
@@ -72,7 +77,8 @@ export async function changeAdministrator(
     const count = await db.query(
       "SELECT count(*)::int AS count FROM academy.profiles WHERE role='admin'",
     );
-    if (count.rows[0].count <= 1) throw new Error('Не можна видалити останнього адміністратора');
+    if (count.rows[0].count <= 1)
+      throw new HttpError(409, 'Не можна видалити останнього адміністратора');
   }
   if (target)
     await db.query('UPDATE academy.profiles SET role=$1 WHERE id=$2', [

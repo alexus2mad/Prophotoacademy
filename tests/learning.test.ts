@@ -4,7 +4,12 @@ import { readFile } from 'node:fs/promises';
 import { claimIdentity, changeAdministrator, safeReturnTo } from '../src/lib/auth/identity';
 import { fulfillOrder } from '../src/lib/commerce/orders';
 import { accessDates, canReadLesson } from '../src/lib/learning/access';
-import { applyProgress, lessonFraction, rangeSeconds } from '../src/lib/learning/progress';
+import {
+  applyProgress,
+  lessonFraction,
+  rangeSeconds,
+  studyBudget,
+} from '../src/lib/learning/progress';
 import type { SqlConnection } from '../src/lib/database/types';
 import type { Grant, Lesson, ProgressEvent } from '../src/lib/learning/types';
 import type { Order } from '../src/lib/ledger/types';
@@ -158,6 +163,27 @@ describe('payment fulfillment and access', () => {
   });
 });
 describe('intelligent progress', () => {
+  it('credits interrupted sessions but not overlapping tabs or duplicated coverage', () => {
+    const now = Date.parse('2026-10-09T12:00:00Z');
+    const first = studyBudget(
+      { blocks: {} },
+      { ...event, elapsed: 10, observedAt: '2026-10-09T11:59:40Z' },
+      now,
+    );
+    expect(first.elapsed).toBe(10);
+    const duplicate = studyBudget(
+      { blocks: {}, studyRanges: first.ranges },
+      { ...event, elapsed: 10, observedAt: '2026-10-09T11:59:40Z' },
+      now,
+    );
+    expect(duplicate.elapsed).toBe(0);
+    const next = studyBudget(
+      { blocks: {}, studyRanges: first.ranges },
+      { ...event, elapsed: 10, observedAt: '2026-10-09T11:59:45Z' },
+      now,
+    );
+    expect(next.elapsed).toBe(5);
+  });
   it('merges replay and refuses credit for a seek beyond the elapsed budget', () => {
     let state = applyProgress(lesson, { blocks: {} }, event, 30);
     state = applyProgress(lesson, state, event, 30);
@@ -190,5 +216,11 @@ describe('intelligent progress', () => {
     const state = applyProgress(lesson, { blocks: {} }, { ...event, manual: true }, 0);
     expect(state.manual).toBe('student');
     expect(lessonFraction(lesson, state)).toBe(1);
+    expect(
+      lessonFraction(
+        { ...lesson, blocks: lesson.blocks.map((b) => ({ ...b, revision: 2 })) },
+        state,
+      ),
+    ).toBe(0);
   });
 });

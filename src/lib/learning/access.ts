@@ -28,7 +28,9 @@ export function liveStatus(start: string, end: string, status: string, now = Dat
   return status === 'canceled'
     ? 'canceled'
     : now < Date.parse(start)
-      ? 'upcoming'
+      ? status === 'rescheduled'
+        ? 'rescheduled'
+        : 'upcoming'
       : now <= Date.parse(end)
         ? 'live'
         : 'finished';

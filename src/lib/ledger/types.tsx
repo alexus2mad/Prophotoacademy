@@ -20,6 +20,7 @@ export type Order = {
   createdAt: number;
   acquisition?: Acquisition;
   fulfillment?: AccessSnapshot;
+  merchantAccount?: string;
 };
 export type LedgerGlobals = { academyDatabases?: Map<string, DatabaseSync> };
 export type ColumnRecord = { name: string };

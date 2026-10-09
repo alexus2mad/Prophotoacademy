@@ -1,3 +1,4 @@
 import './environment';
 import { deliverOutbox } from '../src/lib/ledger';
-console.log(await deliverOutbox());
+import { deliverNotifications } from '../src/lib/notifications/delivery';
+console.log(await (process.env.DATABASE_URL ? deliverNotifications() : deliverOutbox()));

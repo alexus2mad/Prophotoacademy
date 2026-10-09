@@ -1,4 +1,5 @@
-import { activitySchema, authorizeOperations, recordActivity } from '@/lib/operations';
+import { activitySchema, authorizeOperations } from '@/lib/operations';
+import { recordCustomerActivity } from '@/lib/commerce/activity';
 import { getContent } from '@/lib/content';
 import { errorResponse, HttpError, jsonBody } from '@/lib/http';
 export const runtime = 'nodejs';
@@ -29,7 +30,7 @@ export async function POST(request: Request) {
         ? content.practiceSessions.find((s) => s.id === activity.practiceSessionId)?.title
         : content.rooms.find((r) => r.id === activity.roomId)?.title;
     return Response.json(
-      { ok: true, ...recordActivity({ ...activity, productTitle }) },
+      { ok: true, ...(await recordCustomerActivity({ ...activity, productTitle })) },
       { headers: { 'Cache-Control': 'no-store' } },
     );
   } catch (error) {

@@ -62,9 +62,9 @@ describe('shared private customer records', () => {
     ).toBe('/courses?format=online');
   });
   it('requires configured server authorization to read or ingest records', async () => {
-    expect((await GET(new Request('http://localhost/api/operations/customers'))).status).toBe(401);
+    expect((await GET()).status).toBe(410);
     vi.stubEnv('OPERATIONS_TOKEN', '');
-    expect((await GET(new Request('http://localhost/api/operations/customers'))).status).toBe(503);
+    expect((await GET()).status).toBe(410);
     expect(
       (
         await POST(
