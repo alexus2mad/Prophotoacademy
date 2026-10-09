@@ -7,3 +7,4 @@ export type SourceImage = (typeof seed.images)[number] & {
   originalHeight?: number;
 };
 export type MigrationDocument = { _id: string; _type: string };
+export type LegacyRow = Record<string, string | number | null>;

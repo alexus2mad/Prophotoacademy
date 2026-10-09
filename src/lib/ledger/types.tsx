@@ -1,5 +1,6 @@
 import type { DatabaseSync } from 'node:sqlite';
 import type { Acquisition } from '../attribution/types';
+import type { AccessSnapshot } from '../learning/types';
 export type OrderStatus = 'pending' | 'approved' | 'declined' | 'canceled' | 'refunded';
 export type Order = {
   id: string;
@@ -18,6 +19,7 @@ export type Order = {
   mode: 'mock' | 'wayforpay';
   createdAt: number;
   acquisition?: Acquisition;
+  fulfillment?: AccessSnapshot;
 };
 export type LedgerGlobals = { academyDatabases?: Map<string, DatabaseSync> };
 export type ColumnRecord = { name: string };

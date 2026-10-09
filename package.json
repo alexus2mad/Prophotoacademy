@@ -7,6 +7,8 @@
     "node": ">=22.12"
   },
   "scripts": {
+    "db:migrate": "tsx scripts/database-migrate.ts",
+    "db:import-legacy": "tsx scripts/migrate-ledger.ts",
     "architecture:check": "node scripts/check-architecture.mjs",
     "format": "prettier --write \"src/**/*.{ts,tsx}\" \"scripts/**/*.{ts,mjs,tsx}\" \"tests/**/*.{ts,tsx}\" \"sanity/**/*.{ts,tsx}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx}\" \"scripts/**/*.{ts,mjs,tsx}\" \"tests/**/*.{ts,tsx}\" \"sanity/**/*.{ts,tsx}\"",
@@ -26,24 +28,33 @@
     "pages:serve": "node scripts/serve-pages.mjs"
   },
   "dependencies": {
+    "@mux/mux-player-react": "^3.14.0",
+    "@mux/ts": "^15.6.1",
     "@portabletext/react": "^6.0.0",
     "@sanity/client": "^7.20.0",
     "@sanity/image-url": "^2.0.0",
     "@sanity/preview-url-secret": "^4.1.5",
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.117.3",
     "@tailwindcss/postcss": "^4.2.0",
     "cheerio": "^1.2.0",
     "lucide-react": "^0.577.0",
     "next": "16.4.0",
     "next-sanity": "13.3.4",
+    "pdfjs-dist": "^6.4.299",
+    "pg": "^8.23.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-markdown": "^10.1.0",
     "sanity": "6.18.0",
     "tailwindcss": "^4.2.0",
     "zod": "^4.3.0"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.5.8",
     "@playwright/test": "^1.58.0",
     "@types/node": "^22.19.0",
+    "@types/pg": "^8.23.1",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "prettier": "3.6.2",

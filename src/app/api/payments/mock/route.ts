@@ -5,7 +5,7 @@ export const runtime = 'nodejs';
 export async function POST(request: Request) {
   try {
     if ((process.env.PAYMENT_MODE || 'mock') !== 'mock') throw new HttpError(404, 'Not found');
-    guardMutation(request, 'mock');
+    await guardMutation(request, 'mock');
     const input = z
       .object({
         token: z.string().regex(/^[a-f0-9]{64}$/),

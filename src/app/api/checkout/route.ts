@@ -1,12 +1,18 @@
 import { getContent } from '@/lib/content';
 import { checkoutInput, resolvePurchase } from '@/lib/checkout';
-import { createOrder, hash, orderByKey, IdempotencyConflict } from '@/lib/ledger';
+import {
+  createOrder,
+  hash,
+  orderByKey,
+  IdempotencyConflict,
+  purchaseAccess,
+} from '@/lib/commerce/orders';
 import { guardMutation, jsonBody, errorResponse, HttpError, validationError } from '@/lib/http';
 import { purchasePayload } from '@/lib/wayforpay';
 export const runtime = 'nodejs';
 export async function POST(request: Request) {
   try {
-    guardMutation(request, 'checkout');
+    await guardMutation(request, 'checkout');
     const parsed = checkoutInput.safeParse(await jsonBody(request));
     if (!parsed.success)
       throw validationError(parsed.error.issues, {
@@ -22,7 +28,7 @@ export async function POST(request: Request) {
       input.packageId,
     );
     const fingerprint = hash(JSON.stringify(input));
-    const existing = orderByKey(input.idempotencyKey);
+    const existing = await orderByKey(input.idempotencyKey);
     if (existing && existing.fingerprint !== fingerprint)
       throw new HttpError(409, 'Цей запит уже використано.');
     const mode = process.env.PAYMENT_MODE || 'mock';
@@ -30,7 +36,7 @@ export async function POST(request: Request) {
       throw new HttpError(503, 'Платіжний режим не налаштований.');
     const order =
       existing ||
-      createOrder(
+      (await createOrder(
         {
           idempotencyKey: input.idempotencyKey,
           fingerprint,
@@ -44,9 +50,13 @@ export async function POST(request: Request) {
           currency: 'UAH',
           customer: { name: input.name, email: input.email, phone: input.phone },
           mode: mode as 'mock' | 'wayforpay',
+          fulfillment:
+            mode === 'wayforpay'
+              ? await purchaseAccess(input.offeringId, input.packageId)
+              : undefined,
         },
         input.token,
-      );
+      ));
     return Response.json(
       mode === 'mock'
         ? { mode, url: `/thanks?token=${input.token}`, orderId: order.id }

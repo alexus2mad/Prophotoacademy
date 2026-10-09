@@ -22,7 +22,10 @@ export function isHubHost(host: string) {
   return name === new URL(configured).hostname.toLowerCase().replace(/^www\./, '');
 }
 export function hubRewritePath(path: string) {
-  if (/^\/(api|_next|images|brand|studio|operations)(\/|$)/.test(path)) return undefined;
+  if (
+    /^\/(api|_next|images|brand|studio|operations|account|login|learn|admin|demo)(\/|$)/.test(path)
+  )
+    return undefined;
   if (path.startsWith('/hub/') || path === '/hub') return undefined;
   return `/hub${path === '/' ? '' : path}`;
 }

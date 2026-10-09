@@ -5,11 +5,11 @@ import { NextRequest } from 'next/server';
 import { proxy } from '../src/proxy';
 afterEach(() => vi.unstubAllEnvs());
 describe('separate ecosystem destinations', () => {
-  it('allows the internal Hub rewrite to resolve without redirecting back to itself', () => {
+  it('allows the internal Hub rewrite to resolve without redirecting back to itself', async () => {
     vi.stubEnv('PROPHOTO_SITE', 'hub');
-    const first = proxy(new NextRequest('https://www.prophotohub.com.ua/'));
+    const first = await proxy(new NextRequest('https://www.prophotohub.com.ua/'));
     expect(first.headers.get('x-middleware-rewrite')).toBe('https://www.prophotohub.com.ua/hub');
-    const second = proxy(new NextRequest('https://www.prophotohub.com.ua/hub'));
+    const second = await proxy(new NextRequest('https://www.prophotohub.com.ua/hub'));
     expect(second.headers.get('location')).toBeNull();
     expect(second.headers.get('x-middleware-next')).toBe('1');
   });

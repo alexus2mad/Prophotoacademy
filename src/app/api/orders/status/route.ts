@@ -1,10 +1,10 @@
-import { orderByToken } from '@/lib/ledger';
+import { orderByToken } from '@/lib/commerce/orders';
 export const runtime = 'nodejs';
 export async function GET(request: Request) {
   const token = new URL(request.url).searchParams.get('token');
   if (!token || !/^[a-f0-9]{64}$/.test(token))
     return Response.json({ error: 'Invalid token' }, { status: 404 });
-  const order = orderByToken(token);
+  const order = await orderByToken(token);
   if (!order) return Response.json({ error: 'Order not found' }, { status: 404 });
   return Response.json(
     {

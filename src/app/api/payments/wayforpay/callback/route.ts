@@ -1,6 +1,6 @@
 import { jsonBody, errorResponse, HttpError } from '@/lib/http';
 import { callbackInput, verifyCallback, callbackAck } from '@/lib/wayforpay';
-import { orderById, updateOrder } from '@/lib/ledger';
+import { orderById, updateOrder } from '@/lib/commerce/orders';
 export const runtime = 'nodejs';
 export async function POST(request: Request) {
   try {
@@ -11,10 +11,10 @@ export async function POST(request: Request) {
     const raw = await jsonBody(request);
     const parsed = callbackInput.safeParse(raw);
     if (!parsed.success) throw new HttpError(400, 'Invalid callback');
-    const order = orderById(parsed.data.orderReference);
+    const order = await orderById(parsed.data.orderReference);
     if (!order) throw new HttpError(404, 'Order not found');
     const status = verifyCallback(raw, order, merchant, secret);
-    updateOrder(order.id, status);
+    await updateOrder(order.id, status, merchant);
     return Response.json(callbackAck(order.id, secret), {
       headers: { 'Cache-Control': 'no-store' },
     });

@@ -9,3 +9,18 @@ export type CheckoutPageProps = {
 export type ThanksPageProps = { searchParams: Promise<{ token?: string }> };
 export type BookingPageProps = { searchParams: Promise<{ room?: string }> };
 export type ErrorBoundaryProps = { reset: () => void };
+export type ActionRouteProps = { params: Promise<{ action: string }> };
+export type IdRouteProps = { params: Promise<{ id: string }> };
+export type AccountPageProps = {
+  searchParams: Promise<{
+    next?: string;
+    view?: string;
+    q?: string;
+    business?: string;
+    from?: string;
+    to?: string;
+    page?: string;
+    course?: string;
+  }>;
+};
+export type LearningPageProps = { params: Promise<{ course: string; lesson: string }> };

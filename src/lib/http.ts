@@ -1,5 +1,6 @@
 import type { ValidationIssue } from './http/types';
 import { hash, rateLimit } from './ledger';
+import { consumeRateLimit, managedDatabase } from './database/client';
 export class HttpError extends Error {
   constructor(
     public status: number,
@@ -17,7 +18,7 @@ export function validationError(issues: ValidationIssue[], messages: Record<stri
   }
   return new HttpError(400, Object.values(fields)[0] || 'Перевірте поля форми.', fields);
 }
-export function guardMutation(request: Request, scope: string) {
+export async function guardMutation(request: Request, scope: string) {
   const origin = request.headers.get('origin');
   const site = new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://127.0.0.1:3000');
   const allowed = new Set([site.origin]);
@@ -39,7 +40,11 @@ export function guardMutation(request: Request, scope: string) {
     process.env.TRUST_PROXY === '1'
       ? request.headers.get('x-forwarded-for')?.split(',')[0].trim() || 'unknown'
       : 'local';
-  if (!rateLimit(`${scope}:${hash(address)}`))
+  if (
+    !(managedDatabase()
+      ? await consumeRateLimit(`${scope}:${hash(address)}`, 20, 60)
+      : rateLimit(`${scope}:${hash(address)}`))
+  )
     throw new HttpError(429, 'Забагато запитів. Спробуйте через хвилину.');
 }
 export async function jsonBody(request: Request, maxBytes = 8192) {

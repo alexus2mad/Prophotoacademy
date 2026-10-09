@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { getContent } from '@/lib/content';
-import { saveInquiry } from '@/lib/ledger';
+import { saveInquiry } from '@/lib/commerce/orders';
 import { guardMutation, jsonBody, errorResponse, HttpError, validationError } from '@/lib/http';
 import { acquisitionSchema } from '@/lib/acquisition-schema';
 const schema = z
@@ -30,7 +30,7 @@ const schema = z
 export const runtime = 'nodejs';
 export async function POST(request: Request) {
   try {
-    guardMutation(request, 'inquiry');
+    await guardMutation(request, 'inquiry');
     const input = schema.safeParse(await jsonBody(request));
     if (!input.success)
       throw validationError(input.error.issues, {
@@ -60,7 +60,7 @@ export async function POST(request: Request) {
     if ((input.data.offeringId && !offering) || (input.data.packageId && !pack))
       throw new HttpError(400, 'Пакет не знайдено.');
     const { website, ...data } = input.data;
-    saveInquiry({
+    await saveInquiry({
       ...data,
       interest: session ? 'guided-practice' : 'education',
       practiceTitle: session?.title,
