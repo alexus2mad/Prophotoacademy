@@ -1,5 +1,7 @@
 # Pro Photo Academy
 
+The UI follows Atomic Design with owned component folders, colocated `types.tsx` and `hooks.tsx`, semantic HTML, KISS and SOLID. Read [ARCHITECTURE.md](ARCHITECTURE.md) and [AGENTS.md](AGENTS.md) before development. Run `pnpm architecture:check`, `pnpm typecheck`, `pnpm test` and `pnpm format:check` for verification.
+
 The connected ecosystem is implemented here. Review Academy at `/` and Hub at `/hub`; production keeps both domains. Hub has direct room booking, first-screen rates and separate contacts. Guided practice starts as an inquiry offer. The private team view is `/operations`. See [ECOSYSTEM.md](ECOSYSTEM.md) for deployment, shared Sanity content, customer records and attribution.
 
 A local Next.js + Sanity implementation of the academy redesign. Ukrainian content, a direct program catalog, course details, student photography, inquiries and checkout are included. The current default uses the reviewed migration fixture and local payment simulation.

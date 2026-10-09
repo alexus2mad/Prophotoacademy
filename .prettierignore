@@ -1,0 +1,9 @@
+node_modules
+.next
+.pages-build
+pages-out
+/content
+/public
+/reports/screenshots
+.data
+pnpm-lock.yaml

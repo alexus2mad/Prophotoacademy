@@ -1,0 +1,26 @@
+import type { DatabaseSync } from 'node:sqlite';
+import type { Acquisition } from '../attribution/types';
+export type OrderStatus = 'pending' | 'approved' | 'declined' | 'canceled' | 'refunded';
+export type Order = {
+  id: string;
+  tokenHash: string;
+  idempotencyKey: string;
+  fingerprint: string;
+  offeringId: string;
+  packageId: string;
+  programId?: string;
+  programTitle: string;
+  packageName: string;
+  amount: number;
+  currency: string;
+  customer: { name: string; email: string; phone: string };
+  status: OrderStatus;
+  mode: 'mock' | 'wayforpay';
+  createdAt: number;
+  acquisition?: Acquisition;
+};
+export type LedgerGlobals = { academyDatabases?: Map<string, DatabaseSync> };
+export type ColumnRecord = { name: string };
+export type SerializedRecord = { data: string };
+export type RateLimitRecord = { count: number };
+export type OutboxJob = { id: string; kind: string; data: string; attempts: number };

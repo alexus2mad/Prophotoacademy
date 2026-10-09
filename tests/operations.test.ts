@@ -1,25 +1,157 @@
-import {afterEach,beforeEach,describe,expect,it,vi} from 'vitest';
-import {randomUUID} from 'node:crypto';
-import {rmSync} from 'node:fs';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { randomUUID } from 'node:crypto';
+import { rmSync } from 'node:fs';
 import path from 'node:path';
 import seed from '../content/academy.json';
-import {database,saveInquiry,createOrder,updateOrder} from '../src/lib/ledger';
-import {customerOverview,recordActivity,normalizeContact,recommendNextStep,type CustomerActivity} from '../src/lib/operations';
-import type {AcademyContent} from '../src/lib/types';
-import {GET} from '../src/app/api/operations/customers/route';
-import {POST} from '../src/app/api/ecosystem/activity/route';
-vi.mock('@/lib/content',()=>({getContent:async()=>seed}));
-let file:string;const secret='test-secret-with-32-characters-123456';
-beforeEach(()=>{file=path.resolve('.data','ecosystem-'+randomUUID()+'.sqlite');vi.stubEnv('DATABASE_PATH',file);vi.stubEnv('OPERATIONS_TOKEN',secret);vi.stubEnv('ECOSYSTEM_INGEST_TOKEN',secret);});
-afterEach(()=>{database().close();for(const suffix of ['','-wal','-shm'])rmSync(file+suffix,{force:true});vi.unstubAllEnvs();});
-function booking(change:Partial<CustomerActivity>={}):CustomerActivity{return {id:'booking-1',source:'plainstack',kind:'studio-booking',status:'completed',updatedAt:'2026-10-07T12:00:00Z',occurredAt:'2026-10-07T12:00:00Z',customer:{name:'Synthetic QA',email:'qa@example.com',phone:'+380630000000'},roomId:'room-cyclorama',revenue:1200,...change};}
-describe('shared private customer records',()=>{
- it('recommends the same room after practice and keeps remote learners online',()=>{const activity=booking({kind:'practice-completed',practiceSessionId:'practice-content-hub'});expect(recommendNextStep({activity:[activity],interests:[],locality:'kyiv'},seed as AcademyContent)?.href).toContain('room=tsyklorama');expect(recommendNextStep({activity:[activity],interests:[],locality:'other'},seed as AcademyContent)?.href).toBe('/courses?format=online');});
- it('requires configured server authorization to read or ingest records',async()=>{expect((await GET(new Request('http://localhost/api/operations/customers'))).status).toBe(401);vi.stubEnv('OPERATIONS_TOKEN','');expect((await GET(new Request('http://localhost/api/operations/customers'))).status).toBe(503);expect((await POST(new Request('http://localhost/api/ecosystem/activity',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(booking())}))).status).toBe(401);});
- it('rejects unrecognized spaces and records confirmed provider context',async()=>{const request=(body:unknown)=>new Request('http://localhost/api/ecosystem/activity',{method:'POST',headers:{Authorization:'Bearer '+secret,'Content-Type':'application/json'},body:JSON.stringify(body)});expect((await POST(request(booking({roomId:'invented'})))).status).toBe(400);expect((await POST(request(booking()))).status).toBe(200);expect(customerOverview().metrics.studioBookings).toBe(1);});
- it('merges course and booking contacts without inferring promotional permission',()=>{saveInquiry({name:'Synthetic QA',contact:'QA@example.com',consent:true,interest:'guided-practice',marketingUpdates:false,locality:'kyiv'});recordActivity(booking());const result=customerOverview();expect(result.customers).toHaveLength(1);expect(result.customers[0].marketingUpdates).toBe(false);expect(result.customers[0].contacts).toContain('+380630000000');expect(normalizeContact('063 000 00 00')).toBe('+380630000000');});
- it('deduplicates retries and prevents stale updates from reviving canceled bookings',()=>{const first=booking();expect(recordActivity(first).changed).toBe(true);expect(recordActivity(first).changed).toBe(false);recordActivity(booking({status:'canceled',updatedAt:'2026-10-08T12:00:00Z'}));expect(recordActivity(first).changed).toBe(false);expect(customerOverview().metrics.studioBookings).toBe(0);});
- it('counts practice to studio only when the booking follows completed practice',()=>{recordActivity(booking({id:'practice-1',kind:'practice-completed',practiceSessionId:'practice-content-hub',occurredAt:'2026-10-06T12:00:00Z',revenue:undefined}));recordActivity(booking());recordActivity(booking({id:'booking-2',occurredAt:'2026-10-09T12:00:00Z'}));const result=customerOverview();expect(result.metrics.practiceToStudioCustomers).toBe(1);expect(result.metrics.repeatStudioCustomers).toBe(1);expect(result.metrics.contributionMargin).toBeNull();});
- it('calculates contribution margin only after every paid record has costs',()=>{recordActivity(booking({cost:400}));expect(customerOverview().metrics.contributionMargin).toBe(800);recordActivity(booking({id:'booking-2'}));expect(customerOverview().metrics.contributionMargin).toBeNull();});
- it('excludes mock approval from real acquisition metrics',()=>{const order=createOrder({idempotencyKey:randomUUID(),fingerprint:'test',offeringId:'demo',packageId:'base',programTitle:'Synthetic',packageName:'BASE',amount:1000,currency:'UAH',customer:{name:'Synthetic QA',email:'qa@example.com',phone:'+380630000000'},mode:'mock'},'a'.repeat(64));updateOrder(order.id,'approved');expect(customerOverview().metrics.enrollments).toBe(0);});
+import { database, saveInquiry, createOrder, updateOrder } from '../src/lib/ledger';
+import {
+  customerOverview,
+  recordActivity,
+  normalizeContact,
+  recommendNextStep,
+} from '../src/lib/operations';
+import type { CustomerActivity } from '../src/lib/operations/types';
+import type { AcademyContent } from '../src/lib/content/types';
+import { GET } from '../src/app/api/operations/customers/route';
+import { POST } from '../src/app/api/ecosystem/activity/route';
+vi.mock('@/lib/content', () => ({ getContent: async () => seed }));
+let file: string;
+const secret = 'test-secret-with-32-characters-123456';
+beforeEach(() => {
+  file = path.resolve('.data', 'ecosystem-' + randomUUID() + '.sqlite');
+  vi.stubEnv('DATABASE_PATH', file);
+  vi.stubEnv('OPERATIONS_TOKEN', secret);
+  vi.stubEnv('ECOSYSTEM_INGEST_TOKEN', secret);
+});
+afterEach(() => {
+  database().close();
+  for (const suffix of ['', '-wal', '-shm']) rmSync(file + suffix, { force: true });
+  vi.unstubAllEnvs();
+});
+function booking(change: Partial<CustomerActivity> = {}): CustomerActivity {
+  return {
+    id: 'booking-1',
+    source: 'plainstack',
+    kind: 'studio-booking',
+    status: 'completed',
+    updatedAt: '2026-10-07T12:00:00Z',
+    occurredAt: '2026-10-07T12:00:00Z',
+    customer: { name: 'Synthetic QA', email: 'qa@example.com', phone: '+380630000000' },
+    roomId: 'room-cyclorama',
+    revenue: 1200,
+    ...change,
+  };
+}
+describe('shared private customer records', () => {
+  it('recommends the same room after practice and keeps remote learners online', () => {
+    const activity = booking({
+      kind: 'practice-completed',
+      practiceSessionId: 'practice-content-hub',
+    });
+    expect(
+      recommendNextStep(
+        { activity: [activity], interests: [], locality: 'kyiv' },
+        seed as AcademyContent,
+      )?.href,
+    ).toContain('room=tsyklorama');
+    expect(
+      recommendNextStep(
+        { activity: [activity], interests: [], locality: 'other' },
+        seed as AcademyContent,
+      )?.href,
+    ).toBe('/courses?format=online');
+  });
+  it('requires configured server authorization to read or ingest records', async () => {
+    expect((await GET(new Request('http://localhost/api/operations/customers'))).status).toBe(401);
+    vi.stubEnv('OPERATIONS_TOKEN', '');
+    expect((await GET(new Request('http://localhost/api/operations/customers'))).status).toBe(503);
+    expect(
+      (
+        await POST(
+          new Request('http://localhost/api/ecosystem/activity', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(booking()),
+          }),
+        )
+      ).status,
+    ).toBe(401);
+  });
+  it('rejects unrecognized spaces and records confirmed provider context', async () => {
+    const request = (body: unknown) =>
+      new Request('http://localhost/api/ecosystem/activity', {
+        method: 'POST',
+        headers: { Authorization: 'Bearer ' + secret, 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+    expect((await POST(request(booking({ roomId: 'invented' })))).status).toBe(400);
+    expect((await POST(request(booking()))).status).toBe(200);
+    expect(customerOverview().metrics.studioBookings).toBe(1);
+  });
+  it('merges course and booking contacts without inferring promotional permission', () => {
+    saveInquiry({
+      name: 'Synthetic QA',
+      contact: 'QA@example.com',
+      consent: true,
+      interest: 'guided-practice',
+      marketingUpdates: false,
+      locality: 'kyiv',
+    });
+    recordActivity(booking());
+    const result = customerOverview();
+    expect(result.customers).toHaveLength(1);
+    expect(result.customers[0].marketingUpdates).toBe(false);
+    expect(result.customers[0].contacts).toContain('+380630000000');
+    expect(normalizeContact('063 000 00 00')).toBe('+380630000000');
+  });
+  it('deduplicates retries and prevents stale updates from reviving canceled bookings', () => {
+    const first = booking();
+    expect(recordActivity(first).changed).toBe(true);
+    expect(recordActivity(first).changed).toBe(false);
+    recordActivity(booking({ status: 'canceled', updatedAt: '2026-10-08T12:00:00Z' }));
+    expect(recordActivity(first).changed).toBe(false);
+    expect(customerOverview().metrics.studioBookings).toBe(0);
+  });
+  it('counts practice to studio only when the booking follows completed practice', () => {
+    recordActivity(
+      booking({
+        id: 'practice-1',
+        kind: 'practice-completed',
+        practiceSessionId: 'practice-content-hub',
+        occurredAt: '2026-10-06T12:00:00Z',
+        revenue: undefined,
+      }),
+    );
+    recordActivity(booking());
+    recordActivity(booking({ id: 'booking-2', occurredAt: '2026-10-09T12:00:00Z' }));
+    const result = customerOverview();
+    expect(result.metrics.practiceToStudioCustomers).toBe(1);
+    expect(result.metrics.repeatStudioCustomers).toBe(1);
+    expect(result.metrics.contributionMargin).toBeNull();
+  });
+  it('calculates contribution margin only after every paid record has costs', () => {
+    recordActivity(booking({ cost: 400 }));
+    expect(customerOverview().metrics.contributionMargin).toBe(800);
+    recordActivity(booking({ id: 'booking-2' }));
+    expect(customerOverview().metrics.contributionMargin).toBeNull();
+  });
+  it('excludes mock approval from real acquisition metrics', () => {
+    const order = createOrder(
+      {
+        idempotencyKey: randomUUID(),
+        fingerprint: 'test',
+        offeringId: 'demo',
+        packageId: 'base',
+        programTitle: 'Synthetic',
+        packageName: 'BASE',
+        amount: 1000,
+        currency: 'UAH',
+        customer: { name: 'Synthetic QA', email: 'qa@example.com', phone: '+380630000000' },
+        mode: 'mock',
+      },
+      'a'.repeat(64),
+    );
+    updateOrder(order.id, 'approved');
+    expect(customerOverview().metrics.enrollments).toBe(0);
+  });
 });

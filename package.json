@@ -7,6 +7,9 @@
     "node": ">=22.12"
   },
   "scripts": {
+    "architecture:check": "node scripts/check-architecture.mjs",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\" \"scripts/**/*.{ts,mjs,tsx}\" \"tests/**/*.{ts,tsx}\" \"sanity/**/*.{ts,tsx}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx}\" \"scripts/**/*.{ts,mjs,tsx}\" \"tests/**/*.{ts,tsx}\" \"sanity/**/*.{ts,tsx}\"",
     "dev": "next dev --hostname 127.0.0.1",
     "build": "next build",
     "start": "next start --hostname 127.0.0.1",
@@ -43,6 +46,7 @@
     "@types/node": "^22.19.0",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
+    "prettier": "3.6.2",
     "sharp": "^0.34.5",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
