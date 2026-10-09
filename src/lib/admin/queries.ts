@@ -181,7 +181,7 @@ export async function adminTeam(): Promise<TeamData> {
       )
     ).rows,
     invitations: (
-      await db.query(
+      await db.query<TeamData['invitations'][number]>(
         'SELECT email,created_at FROM academy.admin_invitations WHERE claimed_at IS NULL ORDER BY created_at',
       )
     ).rows,

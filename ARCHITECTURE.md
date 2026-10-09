@@ -74,6 +74,8 @@ The static review uses only `/demo` records and shared presentation components. 
 
 ## Verification
 
+The local learning sandbox lives in `scripts/sandbox`. It generates an isolated copy of the app and substitutes only infrastructure boundaries. Its persisted synthetic records stay under `.data/learning-sandbox`; its generated source stays under `.learning-sandbox`. Neither belongs in production or the GitHub review. Never add a production test-login branch, disable live payments for a rehearsal, or point sandbox management links at production. See `docs/LEARNING_SANDBOX.md`.
+
 Run `pnpm architecture:check`, `pnpm typecheck` and `pnpm test`. Build the production app and the static review when composition, routing or build adapters change. Check the affected journeys in the browser, including mobile, keyboard access, dialogs, package comparison, gallery navigation and disabled review submissions.
 
 The architecture guard enforces folder ownership, type placement, hook placement, layer dependencies, server boundaries and runtime cycles. Its tests check invalid arrangements as well as allowed compositions. It cannot prove semantic HTML, KISS, SOLID, good names or appropriate abstraction: those remain review responsibilities.
