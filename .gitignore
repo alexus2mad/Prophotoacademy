@@ -13,3 +13,5 @@ content/source/brand/type/
 .pages-build/
 pages-out/
 .pages-index*
+.pages-build/
+public/learning/pdf.worker.min.mjs

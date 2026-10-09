@@ -40,6 +40,15 @@ export function Header({ site = 'academy' }: HeaderProps) {
           ) : (
             <>
               <Link
+                href={siteHref(
+                  'academy',
+                  process.env.NEXT_PUBLIC_REVIEW_MODE === 'pages' ? 'demo/account' : 'account',
+                )}
+                className="header-account-link"
+              >
+                Кабінет
+              </Link>
+              <Link
                 href={siteHref(site, site === 'hub' ? 'booking' : 'courses')}
                 className={`button button-small ${site === 'academy' && home ? 'button-secondary' : ''}`}
               >
@@ -63,6 +72,15 @@ export function Header({ site = 'academy' }: HeaderProps) {
           closeOnBackdrop
         >
           <nav aria-label="Мобільна навігація">
+            <Link
+              href={siteHref(
+                'academy',
+                process.env.NEXT_PUBLIC_REVIEW_MODE === 'pages' ? 'demo/account' : 'account',
+              )}
+              onClick={() => dialog.current?.close()}
+            >
+              Кабінет
+            </Link>
             {(site === 'hub'
               ? [
                   [siteHref('hub', '#spaces'), 'Зали'],

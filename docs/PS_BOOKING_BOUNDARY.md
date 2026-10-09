@@ -1,6 +1,16 @@
-# Cashbox belongs to ps-booking
+# Management and cashbox belong to ps-booking
 
-Updated 9 October 2026 following the owner's correction. This supersedes the cashbox implementation section of the learning-platform plan.
+Updated 9 October 2026 following the owner's corrections. This supersedes the cashbox and student-administration UI sections of the learning-platform plan.
+
+## Student-management implementation
+
+The new `/academy.html` area in `ps-booking` provides email-code login, student search, pending access by email, per-student purchases and learning progress, grant/upgrade/extend/revoke/restore/transfer controls, administrator privileges and Zoom attendance. It is linked from the existing studio administrator menu. Studio and cashbox rights remain separate; an Academy administrator does not acquire those privileges implicitly.
+
+The changes are implemented in branch `codex/academy-management`, using an isolated worktree at `E:/Projects/photoacademy/ps-booking-integration`. They are not a production deployment. Booking migration `017-academy-management.sql` stores encrypted upstream management credentials; Academy migration `202610090003_booking_management.sql` stores their hashes, verified identities and replay nonces.
+
+Booking's `/api/academy/*` endpoints call Academy's fixed `/api/integrations/ps-booking` route over HTTPS. Both servers share a random 32+ character key. The signed body contains an action, validated input and an opaque verified-user credential; browsers never receive that credential. Timestamp validation, single-use nonces, current-role checks and recent verification protect commands. Access and privilege mutations are audited. Last-admin removal is prevented transactionally.
+
+All editable student-management UI is in booking. Identity, access and progress stay in the Academy database so protected content can enforce them directly. Academy's browser admin API exposes authoring only. `/operations` redirects and `/api/operations/customers` is retired. See `LEARNING_OPERATIONS.md` for activation.
 
 ## Verified existing implementation
 
@@ -31,4 +41,4 @@ If adding refund initiation or Academy reconciliation, implement it in ps-bookin
 
 Until that producer exists, immediate fulfillment uses the existing Academy callback. Missed callback/refund recovery across the two services remains a release integration item; an admin can explicitly change course access without creating a financial effect.
 
-The booking repository was inspected read-only; it has not been changed or deployed by this task.
+The original booking checkout and unrelated SEO work remain untouched. Implementation is isolated in the worktree above; no real customers, payments, emails or production permissions were changed.

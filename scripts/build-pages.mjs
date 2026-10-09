@@ -39,9 +39,20 @@ await writeFile(
   path.join(stage, 'src/lib/content.ts'),
   `import fixture from '../../content/academy.json';import type {AcademyContent} from './content/types';export async function getContent():Promise<AcademyContent>{return fixture as AcademyContent;}export {findImage,findOffering} from './content/selectors';`,
 );
-for (const name of ['api', 'studio', 'operations'])
+for (const name of ['api', 'studio', 'operations', 'account', 'admin', 'learn', 'login'])
   await rm(path.join(stage, 'src/app', name), { recursive: true, force: true });
 await rm(path.join(stage, 'src/proxy.ts'), { force: true });
+for (const [route, destination] of [
+  ['account', '/demo/account'],
+  ['admin', '/demo/admin/courses'],
+  ['login', '/demo/account'],
+]) {
+  await mkdir(path.join(stage, 'src/app', route), { recursive: true });
+  await writeFile(
+    path.join(stage, 'src/app', route, 'page.tsx'),
+    `import Link from 'next/link';export default function ReviewEntry(){return <main className="workspace-empty"><h1>Демонстрація кабінету</h1><p>У GitHub-огляді використовуються лише приклади даних</p><Link className="button" href="${destination}">Відкрити демонстрацію</Link></main>;}`,
+  );
+}
 const layout = prepareReviewLayout(await readFile(path.join(stage, 'src/app/layout.tsx'), 'utf8'));
 await writeFile(path.join(stage, 'src/app/layout.tsx'), layout);
 await writeFile(
@@ -141,8 +152,18 @@ const env = {
   NEXT_PUBLIC_ACADEMY_URL: site,
   NEXT_PUBLIC_HUB_URL: site + '/hub',
   NEXT_PUBLIC_GA_MEASUREMENT_ID: '',
+  NEXT_PUBLIC_SUPABASE_URL: '',
+  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: '',
+  NEXT_PUBLIC_BASE_PATH: basePath,
   NEXT_TELEMETRY_DISABLED: '1',
 };
+for (const key of Object.keys(env))
+  if (
+    /^(DATABASE_URL|SANITY_.*TOKEN|SUPABASE_SERVICE_ROLE_KEY|MUX_|RESEND_|WAYFORPAY_|PS_BOOKING_MANAGEMENT_SECRET|CRON_SECRET|OPERATIONS_TOKEN|ECOSYSTEM_INGEST_TOKEN)/.test(
+      key,
+    )
+  )
+    delete env[key];
 await new Promise((resolve, reject) => {
   const child = spawn(
     process.execPath,

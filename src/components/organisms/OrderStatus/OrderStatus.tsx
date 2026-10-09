@@ -19,6 +19,11 @@ export function OrderStatus({ token }: OrderStatusProps) {
       )}
       <h1>{label[0]}</h1>
       <p>{label[1]}</p>
+      {order?.learningAccess && (
+        <Link className="button" href="/account">
+          Перейти до навчання
+        </Link>
+      )}
       {order && (
         <p>
           {order.programTitle}

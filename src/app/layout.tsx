@@ -6,6 +6,7 @@ import { PreviewBanner } from '@/components/organisms/PreviewBanner/PreviewBanne
 import { PhotographyMotion } from '@/components/behaviors/PhotographyMotion/PhotographyMotion';
 import './design-system.css';
 import './ecosystem.css';
+import './learning.css';
 const manrope = localFont({
   src: [
     { path: './fonts/manrope-0.woff2', weight: '400', style: 'normal' },

@@ -1,4 +1,5 @@
 export type Status = {
+  learningAccess?: boolean;
   status: 'pending' | 'approved' | 'declined' | 'canceled' | 'refunded';
   mode: 'mock' | 'wayforpay';
   retryUrl: string;

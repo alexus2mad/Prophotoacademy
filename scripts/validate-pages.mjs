@@ -37,7 +37,15 @@ async function inspect(dir) {
   }
 }
 await inspect(output);
-for (const privatePath of ['api', 'operations', 'studio', '.data']) {
+for (const privatePath of [
+  'api',
+  'operations',
+  'studio',
+  'learn',
+  'admin/courses',
+  'account/purchases',
+  '.data',
+]) {
   try {
     await stat(path.join(output, privatePath));
     errors.push('Private path exported: ' + privatePath);
@@ -52,6 +60,9 @@ for (const slug of [
   'hub/mainhall',
   'hub/booking',
   'hub/content-practice',
+  'demo/account',
+  'demo/learn/visual-language',
+  'demo/admin/courses/instagram',
 ])
   try {
     await stat(path.join(output, slug, 'index.html'));

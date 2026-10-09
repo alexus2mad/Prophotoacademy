@@ -54,13 +54,23 @@ UI components do not import the server-only content transport, `next/headers`, N
 
 The GitHub review uses the same components and hooks. `ReviewCatalog` and `ReviewBooking` read static-page queries after hydration; they reuse the production catalog and studio booking presentation. The exporter changes only framework entry points and unavailable server actions. It must not embed a separate UI implementation in build-script strings. Its root layout is adapted with a TypeScript AST so formatting changes do not break publication.
 
-## Cashbox ownership
+## Administration and cashbox ownership
+
+`ps-booking` owns the student-management interface: student search, access grants/upgrades/extensions/revocations/restorations, curriculum transfers, student statistics, administrator delegation and Zoom attendance. Academy has no browser routes for those mutations. Its `/admin` routes are limited to course authoring, package definitions, media, Zoom scheduling and configuration. Account menus link directly to booking's management area; legacy `/operations` redirects there and its shared-token customer API returns 410.
+
+The Academy database remains the authoritative identity, entitlement and progress store, beside the protected learning services. Do not create a second editable copy of student accounts in booking. Booking owns authenticated management commands through `/api/academy/*`, forwarding them server-to-server to `/api/integrations/ps-booking`. Each request uses HMAC over timestamp, single-use nonce and exact body, plus an opaque credential for a verified administrator. Booking stores that credential encrypted and exposes only its own HttpOnly session cookie. Every request checks the current immutable user ID and role; privilege changes require fresh verification. This boundary replaces browser operations tokens without sharing cookies across origins.
 
 `alexus2mad/ps-booking` owns the shared cashbox, merchant-wide WayForPay imports, product classification, reporting and financial operations. Academy links to that application's authenticated cashbox; it must not add a competing finance dashboard, transaction-list scheduler or refund submission API. Account privileges in Academy do not confer access to the booking application's manager session.
 
 Academy owns its checkout orders, verified purchase receipts, fulfillment events and learning entitlements. Its existing WayForPay callback remains the immediate fulfillment boundary. A successful browser return never grants access. Full, confirmed refunds revoke only the related purchase grant; partial refunds preserve access. Do not infer a purchase or entitlement from product names, a booking or an aggregate revenue report.
 
-The inspected booking service has reports and product-management endpoints, but no signed Academy event feed or refund-submission endpoint. Any future event integration must be explicitly implemented in that service and authenticated; do not assume such an API exists or forward an administrator's browser cookie between sites. See `docs/PS_BOOKING_BOUNDARY.md` for the verified interface and remaining integration work.
+The management bridge is not a payment-event feed. The existing booking cashbox still has no Academy payment-event producer or refund-submission endpoint. Any financial reconciliation integration belongs in that repository. See `docs/PS_BOOKING_BOUNDARY.md` and `docs/LEARNING_OPERATIONS.md` for setup and activation requirements.
+
+## Private learning content
+
+`src/lib/learning` owns entitlement, authoring, media and completion policies. `src/lib/admin` owns protected management commands and read models used by booking; it is not an Academy management UI. Domain services never depend on presentation components. Public Sanity marketing content is separate from the verified-private learning dataset. Published curricula are immutable and grants retain their assigned release. PDFs/images use a verified-private Storage bucket; Mux uses signed playback. Media URLs are issued only after authorization and expire; files already downloaded cannot be recalled.
+
+The static review uses only `/demo` records and shared presentation components. It excludes real API, learning, account-management and authoring routes. Never place real student records, tokens or paid lesson material in demo data.
 
 ## Verification
 

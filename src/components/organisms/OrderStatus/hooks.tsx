@@ -67,8 +67,13 @@ export function useOrderStatus({ token }: OrderStatusProps) {
       setBusy(false);
     }
   }
-  const label = order
-    ? labels[order.status]
-    : ['Перевіряємо замовлення', 'Зачекайте кілька секунд.'];
+  const label = order?.learningAccess
+    ? [
+        'Ваш курс уже в кабінеті',
+        'Оплату підтверджено. Увійдіть за email, який ви вказали під час оформлення, і починайте навчання',
+      ]
+    : order
+      ? labels[order.status]
+      : ['Перевіряємо замовлення', 'Зачекайте кілька секунд.'];
   return { order, error, busy, refresh, simulate, label };
 }
