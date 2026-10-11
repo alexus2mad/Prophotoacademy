@@ -1,0 +1,53 @@
+<template>
+  <style>
+    @font-face{font-family:KyivType;src:url('assets/fonts/kyivtype-regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:block}
+    @font-face{font-family:Manrope;src:url('assets/fonts/manrope-0.woff2') format('woff2');font-weight:400;font-style:normal;font-display:block}
+    @font-face{font-family:Manrope;src:url('assets/fonts/manrope-1.woff2') format('woff2');font-weight:500;font-style:normal;font-display:block}
+    #root{position:relative;width:100%;height:100%;overflow:hidden;color:#F2EFE7}
+    #scene-02-prepare-ground{position:absolute;inset:0;background:#101211}
+    .fscene-02-prepare-copy{position:absolute;left:96px;top:180px;width:736px;height:622px}
+    .fscene-02-prepare-eyebrow{position:absolute;left:0;top:0;margin:0;font-family:Manrope;font-size:22px;font-weight:500;line-height:1.3;letter-spacing:2.4px;color:#D5E4B9}
+    .fscene-02-prepare-title{position:absolute;left:0;top:89px;margin:0;font-family:KyivType;font-size:112px;font-weight:400;line-height:1.05;letter-spacing:-1.6px}
+    .fscene-02-prepare-title span{display:block}
+    .fscene-02-prepare-support{position:absolute;left:0;top:548px;margin:0;white-space:nowrap;font-family:Manrope;font-size:30px;font-weight:400;line-height:1.4;letter-spacing:-.5px;color:#B9BDB4}
+    .fscene-02-prepare-viewport{position:absolute;left:924px;top:170px;width:900px;height:650px;overflow:hidden;background:#101211}
+    .fscene-02-prepare-capture{position:absolute;left:-240px;top:-150px;width:1150px;height:1228px;max-width:none;display:block;object-fit:fill}
+    .fscene-02-prepare-preview{top:-300px}
+    .fscene-02-prepare-composition,.fscene-02-prepare-preview{opacity:0}
+  </style>
+  <div data-hf-id="hf-trap" id="root" data-composition-id="02-prepare" data-width="1920" data-height="1080" data-duration="11">
+    <div data-hf-id="hf-2fka" id="scene-02-prepare-ground" class="clip" data-start="0" data-duration="11" data-track-index="0"></div>
+    <div data-hf-id="hf-dhx5" class="clip fscene-02-prepare-copy" data-start="0" data-duration="11" data-track-index="1">
+      <p data-hf-id="hf-on6i" class="fscene-02-prepare-eyebrow">ДЛЯ КОМАНДИ</p>
+      <h1 data-hf-id="hf-dcnl" class="fscene-02-prepare-title"><span data-hf-id="hf-mmrb">Ідея</span><span data-hf-id="hf-04ny">набуває</span><span data-hf-id="hf-sj4l">форми</span></h1>
+      <p data-hf-id="hf-30po" class="fscene-02-prepare-support">Програма · Урок · Матеріали</p>
+    </div>
+    <div data-hf-id="hf-y9z1" class="clip fscene-02-prepare-viewport" data-start="0" data-duration="11" data-track-index="2">
+      <img data-hf-id="hf-4u86" class="fscene-02-prepare-capture fscene-02-prepare-outline" src="assets/manager-outline.jpg" width="1150" height="1228" alt="Програма курсу з обраним уроком Мета й аудиторія">
+      <img data-hf-id="hf-ns32" class="fscene-02-prepare-capture fscene-02-prepare-composition" src="assets/manager-composition.jpg" width="1150" height="1228" alt="Матеріали уроку Композиція та світло">
+      <img data-hf-id="hf-i6ww" class="fscene-02-prepare-capture fscene-02-prepare-preview" src="assets/manager-preview.jpg" width="1150" height="1228" alt="Справжній попередній перегляд тексту уроку">
+    </div>
+  </div>
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script>
+    (function(){
+      const tl=gsap.timeline({paused:true});
+      window.__timelines=window.__timelines||{};
+      window.__timelines['02-prepare']=tl;
+      // Keep every captured pixel at native resolution throughout the shot.
+      tl.set('.fscene-02-prepare-outline',{opacity:1},0);
+      tl.fromTo('.fscene-02-prepare-eyebrow',{opacity:0,y:10},{opacity:1,y:0,duration:.55,ease:'power3.out'},0);
+      tl.fromTo('.fscene-02-prepare-title',{opacity:0,y:18},{opacity:1,y:0,duration:.9,ease:'expo.out'},.08);
+      tl.fromTo('.fscene-02-prepare-outline',{x:6,y:10},{x:0,y:0,duration:1.1,ease:'expo.out'},0);
+      // Observed state change: the selected lesson changes, with no synthetic click.
+      tl.set('.fscene-02-prepare-outline',{opacity:0},3.4);
+      tl.set('.fscene-02-prepare-composition',{opacity:1},3.4);
+      tl.fromTo('.fscene-02-prepare-support',{opacity:0,y:14},{opacity:1,y:0,duration:.85,ease:'expo.out'},3.65);
+      // The real preview opens and settles on the lesson prose, retaining the outline.
+      tl.set('.fscene-02-prepare-composition',{opacity:0},7);
+      tl.set('.fscene-02-prepare-preview',{opacity:1},7);
+      tl.fromTo('.fscene-02-prepare-preview',{y:0},{y:-20,duration:1.1,ease:'expo.out'},7);
+      tl.to({},{duration:11},0);
+    })();
+  </script>
+</template>

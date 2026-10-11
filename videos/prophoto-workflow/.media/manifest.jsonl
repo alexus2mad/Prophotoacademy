@@ -1,0 +1,29 @@
+{"id":"bgm_001","type":"bgm","path":"assets/audio/scene-01.wav","source":"existing","description":"scene 01","duration":5.5,"provenance":{"provider":"local","adopted":true}}
+{"id":"bgm_002","type":"bgm","path":"assets/audio/scene-02.wav","source":"existing","description":"scene 02","duration":11,"provenance":{"provider":"local","adopted":true}}
+{"id":"bgm_003","type":"bgm","path":"assets/audio/scene-03.wav","source":"existing","description":"scene 03","duration":8.5,"provenance":{"provider":"local","adopted":true}}
+{"id":"bgm_004","type":"bgm","path":"assets/audio/scene-04.wav","source":"existing","description":"scene 04","duration":8.5,"provenance":{"provider":"local","adopted":true}}
+{"id":"bgm_005","type":"bgm","path":"assets/audio/scene-05.wav","source":"existing","description":"scene 05","duration":12,"provenance":{"provider":"local","adopted":true}}
+{"id":"bgm_006","type":"bgm","path":"assets/audio/scene-06.wav","source":"existing","description":"scene 06","duration":9,"provenance":{"provider":"local","adopted":true}}
+{"id":"bgm_007","type":"bgm","path":"assets/audio/score.mp3","source":"existing","description":"score","duration":55,"provenance":{"provider":"local","adopted":true}}
+{"id":"bgm_008","type":"bgm","path":"assets/audio/voice-01.mp3","source":"existing","description":"voice 01","duration":3.7,"provenance":{"provider":"local","adopted":true}}
+{"id":"bgm_009","type":"bgm","path":"assets/audio/voice-02.mp3","source":"existing","description":"voice 02","duration":9.4,"provenance":{"provider":"local","adopted":true}}
+{"id":"bgm_010","type":"bgm","path":"assets/audio/voice-03.mp3","source":"existing","description":"voice 03","duration":7,"provenance":{"provider":"local","adopted":true}}
+{"id":"bgm_011","type":"bgm","path":"assets/audio/voice-04.mp3","source":"existing","description":"voice 04","duration":7.1,"provenance":{"provider":"local","adopted":true}}
+{"id":"bgm_012","type":"bgm","path":"assets/audio/voice-05.mp3","source":"existing","description":"voice 05","duration":10,"provenance":{"provider":"local","adopted":true}}
+{"id":"bgm_013","type":"bgm","path":"assets/audio/voice-06.mp3","source":"existing","description":"voice 06","duration":6.7,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_001","type":"image","path":"assets/manager-access-granted.jpg","source":"existing","description":"manager access granted","width":1265,"height":712,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_002","type":"image","path":"assets/manager-composition.jpg","source":"existing","description":"manager composition","width":1151,"height":1228,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_003","type":"image","path":"assets/manager-grant-form.jpg","source":"existing","description":"manager grant form","width":1265,"height":712,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_004","type":"image","path":"assets/manager-outline.jpg","source":"existing","description":"manager outline","width":1151,"height":1228,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_005","type":"image","path":"assets/manager-preview.jpg","source":"existing","description":"manager preview","width":1151,"height":1228,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_006","type":"image","path":"assets/practice-original.jpg","source":"existing","description":"practice original","width":853,"height":683,"provenance":{"provider":"local","adopted":true}}
+{"id":"icon_001","type":"icon","path":"assets/prophoto-study-trimmed.svg","source":"existing","description":"prophoto study trimmed","provenance":{"provider":"local","adopted":true}}
+{"id":"image_007","type":"image","path":"assets/student-composition-full.jpg","source":"existing","description":"student composition full","width":1151,"height":2109,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_008","type":"image","path":"assets/student-dashboard.jpg","source":"existing","description":"student dashboard","width":1151,"height":1228,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_009","type":"image","path":"assets/student-first-lesson.jpg","source":"existing","description":"student first lesson","width":1151,"height":1228,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_010","type":"image","path":"assets/student-perfume-original.jpg","source":"existing","description":"student perfume original","width":1080,"height":1352,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_011","type":"image","path":"assets/student-photo-saved.jpg","source":"existing","description":"student photo saved","width":1151,"height":1228,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_012","type":"image","path":"assets/student-photo.jpg","source":"existing","description":"student photo","width":1151,"height":1228,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_013","type":"image","path":"assets/student-resume.jpg","source":"existing","description":"student resume","width":1151,"height":1228,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_014","type":"image","path":"assets/student-splash-original.jpg","source":"existing","description":"student splash original","width":860,"height":1280,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_015","type":"image","path":"assets/student-workbook.jpg","source":"existing","description":"student workbook","width":1151,"height":1228,"provenance":{"provider":"local","adopted":true}}

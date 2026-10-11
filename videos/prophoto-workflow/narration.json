@@ -1,0 +1,50 @@
+{
+  "provider": "ElevenLabs",
+  "voice_id": "GVRiwBELe0czFUAJj0nX",
+  "clips": [
+    {
+      "file": "assets/audio/voice-01.mp3",
+      "text": "Гарний кадр починається ще до натискання кнопки.",
+      "id": "01",
+      "alignment": "assets/audio/voice-01.alignment.json",
+      "duration": 3.68
+    },
+    {
+      "file": "assets/audio/voice-02.mp3",
+      "text": "З ідеї. З розуміння світла. З уроку, у якому все на своєму місці. Менеджер готує програму й матеріали.",
+      "id": "02",
+      "alignment": "assets/audio/voice-02.alignment.json",
+      "duration": 9.44
+    },
+    {
+      "file": "assets/audio/voice-03.mp3",
+      "text": "Обирає потрібні уроки. Відкриває доступ. І навчання вже у вашому кабінеті.",
+      "id": "03",
+      "alignment": "assets/audio/voice-03.alignment.json",
+      "duration": 6.96
+    },
+    {
+      "file": "assets/audio/voice-04.mp3",
+      "text": "Ви одразу знаєте, з чого почати. Один наступний крок — замість довгих пошуків.",
+      "id": "04",
+      "alignment": "assets/audio/voice-04.alignment.json",
+      "duration": 7.12
+    },
+    {
+      "file": "assets/audio/voice-05.mp3",
+      "text": "Читайте. Розглядайте деталі. Працюйте з матеріалами. Ваш прогрес зберігається, щоб наступного разу просто продовжити.",
+      "id": "05",
+      "alignment": "assets/audio/voice-05.alignment.json",
+      "duration": 10.0
+    },
+    {
+      "file": "assets/audio/voice-06.mp3",
+      "text": "Менше пошуку. Більше практики. ПроФото. Від знань — до вашого наступного кадру.",
+      "id": "06",
+      "alignment": "assets/audio/voice-06.alignment.json",
+      "duration": 6.72
+    }
+  ],
+  "voice": "Anton",
+  "model": "eleven_v3"
+}

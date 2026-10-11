@@ -1,0 +1,152 @@
+<template>
+  <style>
+    @font-face {
+      font-family: 'KyivType';
+      src: url('assets/fonts/kyivtype-regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Manrope';
+      src: url('assets/fonts/manrope-0.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Manrope';
+      src: url('assets/fonts/manrope-1.woff2') format('woff2');
+      font-weight: 500;
+      font-style: normal;
+    }
+    #root {
+      position: relative;
+      width:100%;
+      height:100%;
+      overflow: hidden;
+      color: #F2EFE7;
+    }
+    [class~="scene-03-access-ground"],
+    [class~="scene-03-access-content"] {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+    }
+    [class~="scene-03-access-ground"] { background: #101211; }
+    [class~="scene-03-access-title"] {
+      position: absolute;
+      left: 96px;
+      top: 148px;
+      width: 1728px;
+      margin: 0;
+      font-family: 'KyivType';
+      font-weight: 400;
+      font-size: 110px;
+      line-height: 1.05;
+      letter-spacing: -2.2px;
+    }
+    [class~="scene-03-access-stage"] {
+      position: absolute;
+      left: 365px;
+      top: 360px;
+      width: 1190px;
+      height: 398px;
+      overflow: hidden;
+    }
+    [class~="scene-03-access-receipt-crop"] {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1190px;
+      height: 375px;
+      overflow: hidden;
+    }
+    [class~="scene-03-access-receipt-image"] {
+      position: absolute;
+      left: -37.5px;
+      top: -652.5px;
+      width: 1899px;
+      height: 1068px;
+      max-width: none;
+    }
+    [class~="scene-03-access-student-reveal"],
+    [class~="scene-03-access-student-still"] {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1190px;
+      height: 398px;
+    }
+    [class~="scene-03-access-student-reveal"] {
+      overflow: hidden;
+      background: #101211;
+    }
+    [class~="scene-03-access-student-crop"] {
+      position: absolute;
+      left: 65px;
+      top: 0;
+      width: 1060px;
+      height: 398px;
+      overflow: hidden;
+    }
+    [class~="scene-03-access-student-image"] {
+      position: absolute;
+      left: -40px;
+      top: -350px;
+      width: 1150px;
+      height: 1228px;
+      max-width: none;
+    }
+  </style>
+
+  <div data-hf-id="hf-g9wg" id="root" data-composition-id="03-access" data-width="1920" data-height="1080" data-duration="8.5">
+    <div data-hf-id="hf-gpur" class="clip scene-03-access-ground" data-start="0" data-duration="8.5" data-track-index="0"></div>
+    <div data-hf-id="hf-nenu" class="clip scene-03-access-content" data-start="0" data-duration="8.5" data-track-index="1">
+      <h1 data-hf-id="hf-6knz" id="scene-03-access-title-manager" class="scene-03-access-title">Доступ відкрито</h1>
+      <h1 data-hf-id="hf-rd4h" id="scene-03-access-title-student" class="scene-03-access-title">Курс уже в кабінеті</h1>
+
+      <div data-hf-id="hf-x5cz" class="scene-03-access-stage">
+        <!-- Enlarge the actual assignment confirmation for comfortable video reading. -->
+        <div data-hf-id="hf-pwbv" id="scene-03-access-receipt" class="scene-03-access-receipt-crop">
+          <img data-hf-id="hf-vdii" class="scene-03-access-receipt-image" src="assets/manager-access-granted.jpg" width="1266" height="712" alt="Курс призначено студенту в кабінеті менеджера" data-layout-allow-overflow="true">
+        </div>
+        <!-- A translating mask and equal counter-translation reveal an unmoving native crop. -->
+        <div data-hf-id="hf-rso2" id="scene-03-access-student-reveal" class="scene-03-access-student-reveal">
+          <div data-hf-id="hf-xln4" id="scene-03-access-student-still" class="scene-03-access-student-still">
+            <div data-hf-id="hf-5amr" class="scene-03-access-student-crop">
+              <img data-hf-id="hf-12tf" class="scene-03-access-student-image" src="assets/student-dashboard.jpg" width="1150" height="1228" alt="Доступний курс у студентському кабінеті" data-layout-allow-overflow="true">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script>
+    window.__timelines = window.__timelines || {};
+    const accessTimeline = gsap.timeline({ paused: true });
+
+    accessTimeline.fromTo('#scene-03-access-title-manager',
+      { y: 18, opacity: 0.75 },
+      { y: 0, opacity: 1, duration: 0.9, ease: 'expo.out' }, 0);
+    accessTimeline.fromTo('#scene-03-access-receipt',
+      { y: 18, opacity: 0.8 },
+      { y: 0, opacity: 1, duration: 1.1, ease: 'expo.out' }, 0);
+
+    accessTimeline.fromTo('#scene-03-access-student-reveal',
+      { x: -1190 },
+      { x: 0, duration: 0.85, ease: 'power4.inOut' }, 4.5);
+    accessTimeline.fromTo('#scene-03-access-student-still',
+      { x: 1190 },
+      { x: 0, duration: 0.85, ease: 'power4.inOut' }, 4.5);
+    accessTimeline.set('#scene-03-access-title-manager', { opacity: 0 }, 4.5);
+    accessTimeline.fromTo('#scene-03-access-title-student',
+      { y: 18, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.9, ease: 'expo.out' }, 4.5);
+
+    // Keep the native student card steady for the remainder of the fixed scene.
+    accessTimeline.set('#scene-03-access-student-reveal', { x: 0 }, 8.5);
+    window.__timelines['03-access'] = accessTimeline;
+  </script>
+</template>

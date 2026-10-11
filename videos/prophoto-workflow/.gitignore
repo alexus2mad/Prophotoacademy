@@ -1,0 +1,9 @@
+node_modules/
+renders/
+snapshots/
+.hyperframes/
+.thumbnails/
+.waveform-cache/
+.media/preferences.json
+.media/library/
+*.log

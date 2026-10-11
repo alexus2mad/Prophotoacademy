@@ -1,0 +1,39 @@
+{
+  "voices": [
+    {
+      "frame": 1,
+      "path": "assets/audio/scene-01.wav",
+      "duration_s": 5.5
+    },
+    {
+      "frame": 2,
+      "path": "assets/audio/scene-02.wav",
+      "duration_s": 11
+    },
+    {
+      "frame": 3,
+      "path": "assets/audio/scene-03.wav",
+      "duration_s": 8.5
+    },
+    {
+      "frame": 4,
+      "path": "assets/audio/scene-04.wav",
+      "duration_s": 8.5
+    },
+    {
+      "frame": 5,
+      "path": "assets/audio/scene-05.wav",
+      "duration_s": 12
+    },
+    {
+      "frame": 6,
+      "path": "assets/audio/scene-06.wav",
+      "duration_s": 9
+    }
+  ],
+  "bgm": {
+    "path": "assets/audio/score.mp3",
+    "volume": 0.12
+  },
+  "sfx": []
+}

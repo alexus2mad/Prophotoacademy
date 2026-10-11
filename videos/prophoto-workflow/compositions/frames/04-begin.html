@@ -1,0 +1,50 @@
+<template>
+  <style>
+    @font-face { font-family: KyivType; src: url('assets/fonts/kyivtype-regular.woff2') format('woff2'); font-weight: 400; font-style: normal; }
+    @font-face { font-family: Manrope; src: url('assets/fonts/manrope-0.woff2') format('woff2'); font-weight: 400; font-style: normal; }
+    @font-face { font-family: Manrope; src: url('assets/fonts/manrope-1.woff2') format('woff2'); font-weight: 500; font-style: normal; }
+    #root { width:100%; height:100%; position: relative; overflow: hidden; color: #F2EFE7; }
+    #scene-04-begin-ground { position: absolute; inset: 0; background: #101211; }
+    #scene-04-begin-eyebrow { position: absolute; left: 96px; top: 178px; margin: 0; font-family: Manrope; font-size: 22px; font-weight: 500; line-height: 1.3; letter-spacing: 3px; color: #D5E4B9; }
+    #scene-04-begin-title { position: absolute; left: 96px; top: 285px; width: 584px; margin: 0; font-family: KyivType; font-weight: 400; font-size: 100px; line-height: 1.05; letter-spacing: -2.5px; }
+    [class~="scene-04-begin-line"] { display: block; white-space: nowrap; }
+    #scene-04-begin-support { position: absolute; left: 99px; top: 676px; margin: 0; font-family: Manrope; font-size: 32px; font-weight: 400; line-height: 1.4; color: #B9BDB4; }
+    #scene-04-begin-dashboard { position: absolute; left: 955px; top: 296px; width: 630px; height: 400px; overflow: hidden; }
+    #scene-04-begin-dashboard-image { position: absolute; left: -463px; top: -350px; width: 1150px; height: 1228px; max-width: none; display: block; }
+    #scene-04-begin-lesson { position: absolute; left: 770px; top: 176px; width: 1000px; height: 620px; overflow: hidden; visibility: hidden; }
+    #scene-04-begin-lesson-image { position: absolute; left: 0; top: -130.434783px; width: 1000px; height: 1067.826087px; max-width: none; display: block; }
+  </style>
+  <div data-hf-id="hf-wvd4" id="root" data-composition-id="04-begin" data-duration="8.5" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-jpnx" id="scene-04-begin-ground" class="clip" data-start="0" data-duration="8.5" data-track-index="0"></div>
+    <p data-hf-id="hf-5v9p" id="scene-04-begin-eyebrow">ДЛЯ ВАС</p>
+    <h1 data-hf-id="hf-vscy" id="scene-04-begin-title"><span data-hf-id="hf-ekel" class="scene-04-begin-line">Один</span><span data-hf-id="hf-uq3w" class="scene-04-begin-line">наступний</span><span data-hf-id="hf-szem" class="scene-04-begin-line">крок</span></h1>
+    <p data-hf-id="hf-ic22" id="scene-04-begin-support">У вашому темпі</p>
+    <div data-hf-id="hf-wpky" id="scene-04-begin-dashboard">
+      <img data-hf-id="hf-3b6d" id="scene-04-begin-dashboard-image" src="assets/student-dashboard.jpg" alt="Курс і кнопка Почати навчання в кабінеті учня" width="1150" height="1228">
+    </div>
+    <div data-hf-id="hf-zb92" id="scene-04-begin-lesson">
+      <img data-hf-id="hf-nq9s" id="scene-04-begin-lesson-image" src="assets/student-first-lesson.jpg" alt="Перший урок Мета й аудиторія з навчальним матеріалом" width="1150" height="1228" data-layout-allow-overflow="true">
+    </div>
+  </div>
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      const select = name => '#scene-04-begin-' + name + '';
+      // First observed state: native-pixel crop of the actual course CTA.
+      tl.fromTo(select('eyebrow'), { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 0);
+      tl.fromTo('[class~="scene-04-begin-line"]', { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.9, stagger: 0.08, ease: 'power3.out' }, 0.08);
+      tl.fromTo(select('dashboard'), { opacity: 1, y: 14 }, { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out' }, 0);
+      tl.set(select('support'), { opacity: 0 }, 0);
+      // Hard cut to the observed lesson state; scale remains below source resolution.
+      tl.set(select('dashboard'), { visibility: 'hidden' }, 3.6);
+      tl.set(select('lesson'), { visibility: 'visible' }, 3.6);
+      tl.fromTo(select('lesson'), { y: 12 }, { y: 0, duration: 0.8, ease: 'power3.out', immediateRender: false }, 3.6);
+      tl.fromTo(select('support'), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 4.65);
+      // The final reading state holds without drift through the frame boundary.
+      tl.to({}, { duration: 8.5 }, 0);
+      window.__timelines = window.__timelines || {};
+      window.__timelines['04-begin'] = tl;
+    })();
+  </script>
+</template>

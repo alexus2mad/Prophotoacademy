@@ -1,0 +1,59 @@
+<template>
+  <style>
+    @font-face{font-family:KyivType;src:url('assets/fonts/kyivtype-regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:block}
+    @font-face{font-family:Manrope;src:url('assets/fonts/manrope-0.woff2') format('woff2');font-weight:400;font-style:normal;font-display:block}
+    @font-face{font-family:Manrope;src:url('assets/fonts/manrope-1.woff2') format('woff2');font-weight:500;font-style:normal;font-display:block}
+    #root{position:relative;width:100%;height:100%;overflow:hidden;color:#F2EFE7;font-family:Manrope}
+    #scene-06-next-frame-ground{position:absolute;inset:0;background:#101211}
+    #scene-06-next-frame-opening,#scene-06-next-frame-endcard{position:absolute;inset:0;overflow:hidden}
+    #scene-06-next-frame-photo-window{position:absolute;left:960px;top:0;width:960px;height:896px;overflow:hidden}
+    #scene-06-next-frame-photo{position:absolute;left:-60px;top:-240px;width:1080px;height:1352px;max-width:none;display:block}
+    #scene-06-next-frame-opening-logo{position:absolute;left:96px;top:112px;width:320px;height:80.75px;display:block;filter:invert(1)}
+    #scene-06-next-frame-opening-title{position:absolute;left:96px;top:330px;width:784px;margin:0;font-family:KyivType;font-size:112px;font-weight:400;line-height:1.08;letter-spacing:-1.6px}
+    #scene-06-next-frame-less,#scene-06-next-frame-more{display:block}
+    #scene-06-next-frame-more{color:#D5E4B9;margin-top:30px}
+    #scene-06-next-frame-endcard{background:#101211}
+    #scene-06-next-frame-end-logo{position:absolute;left:96px;top:120px;width:310px;height:78.22px;display:block;filter:invert(1)}
+    #scene-06-next-frame-end-title{position:absolute;left:96px;top:326px;width:1650px;margin:0;font-family:KyivType;font-size:110px;font-weight:400;line-height:1.08;letter-spacing:-1.6px}
+    #scene-06-next-frame-your,#scene-06-next-frame-next{display:block}
+    #scene-06-next-frame-next{color:#D5E4B9}
+    #scene-06-next-frame-cta{position:absolute;left:96px;top:674px;display:flex;align-items:center;justify-content:center;height:90px;padding:0 42px;border-radius:999px;background:#D5E4B9;color:#101211;font-family:Manrope;font-size:34px;font-weight:500;line-height:1.3;white-space:nowrap}
+    #scene-06-next-frame-destination{position:absolute;left:100px;top:791px;margin:0;color:#B9BDB4;font-family:Manrope;font-size:28px;font-weight:400;line-height:1.4}
+  </style>
+  <div data-hf-id="hf-9nz5" id="root" data-composition-id="06-next-frame" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-z2jx" id="scene-06-next-frame-ground" class="clip" data-start="0" data-duration="9" data-track-index="0"></div>
+    <div data-hf-id="hf-gn6z" id="scene-06-next-frame-opening" class="clip" data-start="0" data-duration="3.8" data-track-index="1">
+      <div data-hf-id="hf-gms9" id="scene-06-next-frame-photo-window">
+        <img data-hf-id="hf-2i1k" id="scene-06-next-frame-photo" src="assets/student-perfume-original.jpg" alt="Студентська предметна фотографія парфумів" width="1080" height="1352">
+      </div>
+      <img data-hf-id="hf-100f" id="scene-06-next-frame-opening-logo" src="assets/prophoto-study-trimmed.svg" alt="ProPhoto Study" width="320" height="80.75">
+      <h1 data-hf-id="hf-9qqv" id="scene-06-next-frame-opening-title"><span data-hf-id="hf-tg4w" id="scene-06-next-frame-less">Менше пошуку</span><span data-hf-id="hf-mfro" id="scene-06-next-frame-more">Більше практики</span></h1>
+    </div>
+    <div data-hf-id="hf-w3h6" id="scene-06-next-frame-endcard" class="clip" data-start="3.8" data-duration="5.2" data-track-index="2">
+      <img data-hf-id="hf-qsg8" id="scene-06-next-frame-end-logo" src="assets/prophoto-study-trimmed.svg" alt="ProPhoto Study" width="310" height="78.22">
+      <h2 data-hf-id="hf-boo5" id="scene-06-next-frame-end-title"><span data-hf-id="hf-f18d" id="scene-06-next-frame-your">До вашого</span><span data-hf-id="hf-fq91" id="scene-06-next-frame-next">наступного кадру</span></h2>
+      <div data-hf-id="hf-ggh8" id="scene-06-next-frame-cta">Навчайтеся з ProPhoto</div>
+      <p data-hf-id="hf-6xtl" id="scene-06-next-frame-destination">prophotoacademy.com.ua</p>
+    </div>
+  </div>
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script>
+    (() => {
+      const el = (suffix) => document.getElementById('scene-06-next-frame-' + suffix);
+      const timeline = gsap.timeline({paused:true});
+      timeline.set(el('opening'), {opacity:1}, 0);
+      timeline.set(el('endcard'), {opacity:0}, 0);
+      timeline.fromTo(el('less'), {y:20,opacity:0}, {y:0,opacity:1,duration:0.58,ease:'power3.out'}, 0);
+      timeline.fromTo(el('more'), {y:22,opacity:0}, {y:0,opacity:1,duration:0.68,ease:'power3.out'}, 1.5);
+      timeline.set(el('opening'), {opacity:0}, 3.8);
+      timeline.set(el('endcard'), {opacity:1}, 3.8);
+      timeline.fromTo(el('your'), {y:22,opacity:0}, {y:0,opacity:1,duration:0.66,ease:'power3.out'}, 4.75);
+      timeline.fromTo(el('next'), {y:22,opacity:0}, {y:0,opacity:1,duration:0.76,ease:'power3.out'}, 5.52);
+      timeline.fromTo(el('cta'), {y:16,opacity:0}, {y:0,opacity:1,duration:0.72,ease:'power3.out'}, 6.72);
+      timeline.fromTo(el('destination'), {y:12,opacity:0}, {y:0,opacity:1,duration:0.72,ease:'power3.out'}, 6.72);
+      timeline.set(el('endcard'), {opacity:1}, 9);
+      window.__timelines = window.__timelines || {};
+      window.__timelines['06-next-frame'] = timeline;
+    })();
+  </script>
+</template>

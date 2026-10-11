@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="assets/vendor/gsap.min.js" integrity="sha384-sG0Hv1tP1lZCk9KQmrIbY/XNwi+OY84GQqhMscbnsoBFqAz8KNCil1kvfL3Hbbk2" crossorigin="anonymous"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #000;
+      }
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #101211;
+      }
+      .scene {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  <style id="film-finishing-styles">
+@font-face{font-family:Manrope;src:url('assets/fonts/manrope-0.woff2') format('woff2');font-weight:400}
+.narration-caption{position:absolute!important;inset:auto 0 0!important;width:100%;height:184px!important;display:flex;justify-content:center;align-items:center;z-index:80;box-sizing:border-box;background:#101211}
+.narration-caption{color:#F2EFE7;font-family:Manrope,sans-serif;font-weight:400;font-size:30px;line-height:1.4;text-align:center;margin:0;padding:0 240px}
+.demo-disclosure{position:absolute!important;inset:32px 96px auto auto!important;width:auto!important;height:auto!important;z-index:81;color:#B9BDB4;font:400 20px/1.3 Manrope,sans-serif}
+</style>
+</head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="54.5"
+      data-width="1920"
+      data-height="1080"
+    >
+<p id="narration-caption-0" class="clip narration-caption" data-start="0.6" data-duration="3.820" data-track-index="30" data-layout-allow-caption-zone>Гарний кадр починається ще до натискання кнопки.</p>
+<p id="narration-caption-1" class="clip narration-caption" data-start="6.1" data-duration="0.800" data-track-index="30" data-layout-allow-caption-zone>З ідеї.</p>
+<p id="narration-caption-2" class="clip narration-caption" data-start="6.9" data-duration="1.920" data-track-index="30" data-layout-allow-caption-zone>З розуміння світла.</p>
+<p id="narration-caption-3" class="clip narration-caption" data-start="8.82" data-duration="3.680" data-track-index="30" data-layout-allow-caption-zone>З уроку, у якому все на своєму місці.</p>
+<p id="narration-caption-4" class="clip narration-caption" data-start="12.5" data-duration="3.180" data-track-index="30" data-layout-allow-caption-zone>Менеджер готує програму й матеріали.</p>
+<p id="narration-caption-5" class="clip narration-caption" data-start="17.1" data-duration="1.680" data-track-index="30" data-layout-allow-caption-zone>Обирає потрібні уроки.</p>
+<p id="narration-caption-6" class="clip narration-caption" data-start="18.78" data-duration="1.760" data-track-index="30" data-layout-allow-caption-zone>Відкриває доступ.</p>
+<p id="narration-caption-7" class="clip narration-caption" data-start="20.54" data-duration="3.660" data-track-index="30" data-layout-allow-caption-zone>І навчання вже у вашому кабінеті.</p>
+<p id="narration-caption-8" class="clip narration-caption" data-start="25.6" data-duration="2.240" data-track-index="30" data-layout-allow-caption-zone>Ви одразу знаєте, з чого почати.</p>
+<p id="narration-caption-9" class="clip narration-caption" data-start="27.84" data-duration="5.020" data-track-index="30" data-layout-allow-caption-zone>Один наступний крок — замість довгих пошуків.</p>
+<p id="narration-caption-10" class="clip narration-caption" data-start="34.1" data-duration="0.960" data-track-index="30" data-layout-allow-caption-zone>Читайте.</p>
+<p id="narration-caption-11" class="clip narration-caption" data-start="35.06" data-duration="1.440" data-track-index="30" data-layout-allow-caption-zone>Розглядайте деталі.</p>
+<p id="narration-caption-12" class="clip narration-caption" data-start="36.5" data-duration="1.920" data-track-index="30" data-layout-allow-caption-zone>Працюйте з матеріалами.</p>
+<p id="narration-caption-13" class="clip narration-caption" data-start="38.42" data-duration="5.820" data-track-index="30" data-layout-allow-caption-zone>Ваш прогрес зберігається, щоб наступного разу просто продовжити.</p>
+<p id="narration-caption-14" class="clip narration-caption" data-start="46.1" data-duration="1.160" data-track-index="30" data-layout-allow-caption-zone>Менше пошуку.</p>
+<p id="narration-caption-15" class="clip narration-caption" data-start="47.26" data-duration="1.240" data-track-index="30" data-layout-allow-caption-zone>Більше практики.</p>
+<p id="narration-caption-16" class="clip narration-caption" data-start="48.5" data-duration="1.120" data-track-index="30" data-layout-allow-caption-zone>ПроФото.</p>
+<p id="narration-caption-17" class="clip narration-caption" data-start="49.62" data-duration="3.340" data-track-index="30" data-layout-allow-caption-zone>Від знань — до вашого наступного кадру.</p>
+<div id="film-demo-disclosure" class="clip demo-disclosure" data-start="5.5" data-duration="40" data-track-index="31">Демонстрація · тестові дані</div>
+      <div
+        id="el-01-shutter"
+        class="scene"
+        data-composition-id="01-shutter"
+        data-composition-src="compositions/frames/01-shutter.html"
+        data-start="0"
+        data-duration="5.5"
+        data-track-index="1"
+      ></div>
+      <audio
+        id="el-01-shutter-voice"
+        src="assets/audio/scene-01.wav"
+        data-start="0"
+        data-duration="5.5"
+        data-track-index="10"
+        data-volume="0.75"
+      ></audio>
+
+      <div
+        id="el-02-prepare"
+        class="scene"
+        data-composition-id="02-prepare"
+        data-composition-src="compositions/frames/02-prepare.html"
+        data-start="5.5"
+        data-duration="11"
+        data-track-index="1"
+      ></div>
+      <audio
+        id="el-02-prepare-voice"
+        src="assets/audio/scene-02.wav"
+        data-start="5.5"
+        data-duration="11"
+        data-track-index="10"
+        data-volume="0.75"
+      ></audio>
+
+      <div
+        id="el-03-access"
+        class="scene"
+        data-composition-id="03-access"
+        data-composition-src="compositions/frames/03-access.html"
+        data-start="16.5"
+        data-duration="8.5"
+        data-track-index="1"
+      ></div>
+      <audio
+        id="el-03-access-voice"
+        src="assets/audio/scene-03.wav"
+        data-start="16.5"
+        data-duration="8.5"
+        data-track-index="10"
+        data-volume="0.75"
+      ></audio>
+
+      <div
+        id="el-04-begin"
+        class="scene"
+        data-composition-id="04-begin"
+        data-composition-src="compositions/frames/04-begin.html"
+        data-start="25"
+        data-duration="8.5"
+        data-track-index="1"
+      ></div>
+      <audio
+        id="el-04-begin-voice"
+        src="assets/audio/scene-04.wav"
+        data-start="25"
+        data-duration="8.5"
+        data-track-index="10"
+        data-volume="0.75"
+      ></audio>
+
+      <div
+        id="el-05-learn"
+        class="scene"
+        data-composition-id="05-learn"
+        data-composition-src="compositions/frames/05-learn.html"
+        data-start="33.5"
+        data-duration="12"
+        data-track-index="1"
+      ></div>
+      <audio
+        id="el-05-learn-voice"
+        src="assets/audio/scene-05.wav"
+        data-start="33.5"
+        data-duration="12"
+        data-track-index="10"
+        data-volume="0.75"
+      ></audio>
+
+      <div
+        id="el-06-next-frame"
+        class="scene"
+        data-composition-id="06-next-frame"
+        data-composition-src="compositions/frames/06-next-frame.html"
+        data-start="45.5"
+        data-duration="9"
+        data-track-index="1"
+      ></div>
+      <audio
+        id="el-06-next-frame-voice"
+        src="assets/audio/scene-06.wav"
+        data-start="45.5"
+        data-duration="9"
+        data-track-index="10"
+        data-volume="0.75"
+      ></audio>
+
+      <!-- BGM -->
+      <audio
+        id="el-bgm"
+        src="assets/audio/score.mp3"
+        data-start="0"
+        data-duration="54.5"
+        data-track-index="11"
+        data-volume="1"
+       data-automation="{&quot;version&quot;:1,&quot;lanes&quot;:[{&quot;target&quot;:&quot;volume&quot;,&quot;points&quot;:[{&quot;t&quot;:0,&quot;v&quot;:0},{&quot;t&quot;:0.4,&quot;v&quot;:0.36},{&quot;t&quot;:1,&quot;v&quot;:0.28},{&quot;t&quot;:44.8,&quot;v&quot;:0.28},{&quot;t&quot;:45.5,&quot;v&quot;:0.36},{&quot;t&quot;:46.1,&quot;v&quot;:0.28},{&quot;t&quot;:52.9,&quot;v&quot;:0.32},{&quot;t&quot;:54.5,&quot;v&quot;:0}]}]}"></audio>
+
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>
