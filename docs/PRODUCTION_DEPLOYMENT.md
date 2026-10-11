@@ -1,6 +1,8 @@
 # Academy production deployment
 
-The selected host is the existing Hetzner server at `46.224.208.120`, SSH port `58222`. The owner approved this change from Vercel on 11 October 2026. Academy runs as a separate service and OS account, alongside ps-booking. Its initial origin is `https://learn.prophotoacademy.com.ua`; the existing public marketing domain is not cut over by this setup.
+The selected host is the existing Hetzner server at `46.224.208.120`, SSH port `58222`. The owner approved this change from Vercel on 11 October 2026. Academy runs as a separate service and OS account, alongside ps-booking. Its initial origin is `https://staging.prophotoacademy.com.ua`; the existing public marketing domain is not cut over by this setup.
+
+The owner explicitly requested a staging subdomain while the existing Webflow site stays operational. Keep the apex and `www` DNS records and existing mail routing unchanged. The staging HTTPS host sends `X-Robots-Tag: noindex, nofollow, noarchive` on every response. Payment mode remains mock until a separate activation.
 
 ## Services and configuration
 
