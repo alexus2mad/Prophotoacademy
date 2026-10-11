@@ -1,0 +1,11 @@
+[Unit]
+Description=Deliver Academy email every five minutes
+
+[Timer]
+OnCalendar=*:0/5
+Persistent=true
+RandomizedDelaySec=10
+Unit=prophotoacademy-email.service
+
+[Install]
+WantedBy=timers.target

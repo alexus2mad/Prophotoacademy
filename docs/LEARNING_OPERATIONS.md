@@ -6,7 +6,7 @@ Academy: verified email login, student dashboard, personal purchases/profile, le
 
 ## Configure before activation
 
-1. Deploy Academy as a full Next.js application on Vercel with the production Academy origin. GitHub Pages is a synthetic review and cannot authenticate students or process purchases
+1. Deploy Academy as a full Next.js application. The current selected host is Hetzner, as documented in [PRODUCTION_DEPLOYMENT.md](PRODUCTION_DEPLOYMENT.md); Vercel remains a supported alternative. GitHub Pages is a synthetic review and cannot authenticate students or process purchases
 2. Configure Supabase URL, publishable key, service-role key and a PostgreSQL connection. Use TLS and the transaction pooler for serverless requests. Keep the `academy` schema out of exposed Data API schemas; all its tables have RLS with no anonymous/authenticated policies
 3. Run `pnpm db:migrate`. Back up the legacy SQLite ledger, run `pnpm db:import-legacy --file=<private-path>` as a dry run, inspect counts, then add `--write`. The importer is repeatable and reconciles source IDs. It preserves historical orders but does not invent entitlements for unmapped old purchases
 4. Configure Supabase email OTP templates to contain the token, disable unrelated sign-in providers, and configure Resend SMTP with a verified sender/domain. Test actual delivery and rate limits. `alex.maksiutenko@gmail.com` bootstraps once, only after verified email ownership. Delegated privileges and pending invitations are managed in booking
@@ -37,4 +37,4 @@ Temporary URLs expire, but a valid URL can work until its expiry after access re
 - Test a guest purchase followed by login, wrong-user reads, package restrictions, scheduled lessons, revoked/expired access and media downloads
 - Run architecture checks, TypeScript, tests, production build, Pages build and Pages validation. Review desktop/mobile journeys and keyboard dialogs. Synthetic review fixtures are not migration input
 
-No live service accounts, real lesson content, merchant configuration or production deployment are provisioned by this implementation. The release gate stays closed until these checks are performed with the configured services.
+See [PRODUCTION_DEPLOYMENT.md](PRODUCTION_DEPLOYMENT.md) for provisioned services. Real lesson content, email delivery, video configuration and merchant activation still require their corresponding checks before being offered to students.
