@@ -1,0 +1,25 @@
+{
+  "text": "Підборіддя трохи вище. Навіть для такого кадру потрібен план. Менеджер готує урок, додає матеріали й публікує курс. Відкриває доступ. Студент дивиться, пробує, повертається до збереженого уроку. А менеджер бачить прогрес. Оце вже мистецтво. ПроФото. Щоб аж йой!",
+  "description": "Native Ukrainian woman around thirty, charismatic creative director. Contemporary Ukrainian pronunciation with no Russian accent. Warm textured mid-low register, lively precise consonants, natural breaths, unmistakable personality. Deliver the first short direction with completely serious dry comic understatement, as if directing a supermodel. Conversational energetic momentum through the course workflow. A tiny smile of delighted satisfaction on the art reveal. Finish the brand slogan with a spontaneous playful burst of joy on the final Ukrainian word yoy. Never monotonous, sleepy, formal, syrupy, shouting or sales announcer. Close clean studio sound, no music.",
+  "seed": 31011,
+  "model": "eleven_ttv_v3",
+  "previews": [
+    {
+      "file": "assets/audio/campaign-take-1.mp3",
+      "duration": 17.321041666666666,
+      "generatedVoiceId": "8MpTfjEGrKslmp18m5TB"
+    },
+    {
+      "file": "assets/audio/campaign-take-2.mp3",
+      "duration": 19.410833333333333,
+      "generatedVoiceId": "Qwe0SvretFwPjJJjt01v"
+    },
+    {
+      "file": "assets/audio/campaign-take-3.mp3",
+      "duration": 16.92920833333333,
+      "generatedVoiceId": "1ODvyf3VJ7epz1NoDBDz"
+    }
+  ],
+  "selectedTake": 3,
+  "note": "Fresh performance authorized by user; selected ordinal follows prior Voice 3 preference. Not the identical saved voice."
+}

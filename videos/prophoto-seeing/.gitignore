@@ -1,0 +1,16 @@
+node_modules/
+renders/
+snapshots/
+.hyperframes/
+.thumbnails/
+.waveform-cache/
+.media/preferences.json
+.media/library/
+*.log
+check-*.json
+assets/images/*-original.jpg
+# Superseded auditions stay local and are never needed to rebuild this edit
+assets/audio/voice-audition-*.mp3
+assets/audio/narration*
+voice-design.json
+shots.json

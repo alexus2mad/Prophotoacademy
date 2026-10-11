@@ -1,0 +1,208 @@
+<template
+  ><style>
+    @font-face {
+      font-family: KyivType;
+      src: url('assets/fonts/kyivtype-regular.woff2') format('woff2');
+      font-weight: 400;
+    }
+    @font-face {
+      font-family: Manrope;
+      src: url('assets/fonts/manrope-0.woff2') format('woff2');
+      font-weight: 400;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    #root {
+      position: relative;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      background: #101211;
+      color: #f2efe7;
+      font-family: Manrope, sans-serif;
+    }
+    .role {
+      position: absolute;
+      left: 120px;
+      top: 83px;
+      font-size: 32px;
+      line-height: 1.2;
+      color: #d5e4b9;
+    }
+    .window {
+      position: absolute;
+      left: 120px;
+      top: 170px;
+      width: 1680px;
+      height: 760px;
+      overflow: hidden;
+      border: 1px solid #454b40;
+      border-radius: 20px;
+      background: #101211;
+    }
+    .world {
+      position: absolute;
+      inset: 0;
+      transform-origin: 0 0;
+      will-change: transform;
+    }
+    .source {
+      position: absolute;
+      display: block;
+      max-width: none;
+    }
+    .layer {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .full-photo {
+      width: 1920px;
+      height: 1080px;
+      object-fit: cover;
+      display: block;
+    }
+    .display {
+      font-family: KyivType, serif;
+      font-weight: 400;
+      letter-spacing: -3px;
+      line-height: 1.04;
+    }
+    .cursor {
+      position: absolute;
+      width: 32px;
+      height: 44px;
+      z-index: 5;
+      filter: drop-shadow(0 2px 3px #000000);
+      pointer-events: none;
+    }
+    .ring {
+      position: absolute;
+      width: 72px;
+      height: 72px;
+      border: 3px solid #d5e4b9;
+      border-radius: 50%;
+      z-index: 4;
+      opacity: 0;
+      pointer-events: none;
+    }
+    #end-card {
+      height: 1080px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      padding: 200px 120px 110px;
+      background: #101211;
+    }
+    .brand-logo {
+      width: 335px;
+      height: auto;
+      filter: invert(1);
+      display: block;
+    }
+    .tagline {
+      font-size: 132px;
+      margin-top: 76px;
+    }
+    .end-note {
+      font-size: 34px;
+      margin-top: 35px;
+      color: #b9bdb4;
+    }
+    .end-url {
+      font-size: 28px;
+      letter-spacing: 1px;
+      margin-top: 98px;
+      color: #d5e4b9;
+    }
+  </style>
+  <div
+    id="root"
+    data-composition-id="06-portrait"
+    data-duration="7.5"
+    data-width="1920"
+    data-height="1080"
+  >
+    <div
+      id="scene-06-portrait-clip-1"
+      class="clip layer"
+      data-start="0"
+      data-duration="3.5"
+      data-track-index="0"
+    >
+      <div id="hero-reveal">
+        <img
+          class="full-photo"
+          src="assets/images/potato-hero.png"
+          alt="The fictional potato fashion portrait"
+        />
+      </div>
+    </div>
+    <div
+      id="scene-06-portrait-clip-2"
+      class="clip layer"
+      data-start="2.5"
+      data-duration="1"
+      data-track-index="1"
+    >
+      <div id="splash-reveal">
+        <img
+          class="full-photo"
+          src="assets/images/potato-splash.png"
+          alt="Potato suspended in a studio water splash"
+        />
+      </div>
+    </div>
+    <div
+      id="scene-06-portrait-clip-3"
+      class="clip layer"
+      data-start="3.5"
+      data-duration="4"
+      data-track-index="2"
+    >
+      <div id="end-card">
+        <img class="brand-logo" src="assets/prophoto-study-trimmed.svg" alt="ProPhoto Study" />
+        <h1 class="display tagline">Щоб аж йой</h1>
+        <p class="end-note">Від уроку — до власного кадру</p>
+        <p class="end-url">prophotoacademy.com.ua</p>
+      </div>
+    </div>
+  </div>
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo(
+        '#hero-reveal',
+        { scale: 1.025 },
+        { scale: 1.085, duration: 2.5, ease: 'power2.inOut' },
+        0,
+      );
+      tl.fromTo(
+        '#splash-reveal',
+        { scale: 1.08 },
+        { scale: 1, duration: 1, ease: 'power2.out' },
+        2.5,
+      );
+      tl.fromTo(
+        '.brand-logo',
+        { y: 16, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.55, ease: 'power3.out' },
+        3.5,
+      );
+      tl.fromTo(
+        '.tagline',
+        { y: 32, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.65, ease: 'power3.out' },
+        4.1,
+      );
+      tl.fromTo('.end-note', { opacity: 0 }, { opacity: 1, duration: 0.6 }, 4.5);
+      tl.fromTo('.end-url', { opacity: 0 }, { opacity: 1, duration: 0.5 }, 5);
+      window.__timelines['06-portrait'] = tl;
+    })();
+  </script></template
+>

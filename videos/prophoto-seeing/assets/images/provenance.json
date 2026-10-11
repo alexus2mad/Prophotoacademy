@@ -1,0 +1,20 @@
+{
+  "generator": "OpenAI image generation",
+  "created": "2026-10-11",
+  "purpose": "Approved fictional potato fashion campaign linked to a course-platform workflow",
+  "images": [
+    {
+      "file": "potato-opening.png",
+      "direction": "An ordinary upright russet potato, unglamorous and recognizably real, on an ivory studio plinth with soft side lighting and abundant negative space"
+    },
+    {
+      "file": "potato-hero.png",
+      "direction": "The same potato photographed as a luxury fashion muse, rich black silk, golden side light, crisp tactile skin and droplets, premium editorial still life"
+    },
+    {
+      "file": "potato-splash.png",
+      "direction": "The same potato suspended diagonally in a crystal-clear studio water splash on a black background, absurd high-fashion product finale"
+    }
+  ],
+  "disclosure": "Fictional campaign imagery; not student work or an actual teacher recording"
+}
