@@ -21,9 +21,11 @@ export function LearningCourseCard({
         />
         {course.status === 'active' && course.nextLessonId ? (
           <>
-            <p className="learning-next">
-              Наступний урок <strong>{course.nextLessonTitle}</strong>
-            </p>
+            {course.progress < 1 && (
+              <p className="learning-next">
+                Наступний урок <strong>{course.nextLessonTitle}</strong>
+              </p>
+            )}
             <Link className="button" href={lessonHref(course.courseId, course.nextLessonId, demo)}>
               {course.progress >= 1
                 ? 'Переглянути матеріали'

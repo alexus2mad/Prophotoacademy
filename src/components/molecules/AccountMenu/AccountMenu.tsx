@@ -7,7 +7,7 @@ export function AccountMenu({ member, demo = false }: AccountMenuProps) {
   const { logout, error } = useAccountMenu();
   return (
     <details className="account-menu">
-      <summary>
+      <summary aria-label="Меню облікового запису">
         <span className="account-avatar" aria-hidden="true">
           {(member.name || member.email).slice(0, 1).toUpperCase()}
         </span>

@@ -45,7 +45,7 @@ export function CourseEditor(props: CourseEditorProps) {
           {h.message}
         </p>
       )}
-      <p className="admin-muted">
+      <p className="admin-muted editor-save-status">
         {h.dirty ? 'Є незбережені зміни' : 'Чернетка збережена'} · Опубліковані версії не змінюються
         для наявних студентів
       </p>

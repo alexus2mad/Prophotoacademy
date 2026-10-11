@@ -33,6 +33,7 @@ export function useCourseSessions({ courseId, demo }: CourseSessionsProps) {
   function reset() {
     setId('');
     setLessonId('');
+    setOfferingId('');
     setTitle('');
     setUrl('');
     setStart('');
@@ -43,7 +44,7 @@ export function useCourseSessions({ courseId, demo }: CourseSessionsProps) {
   async function save(e: FormEvent) {
     e.preventDefault();
     try {
-      await h.mutate('/api/admin/sessions', {
+      const savedId = await h.mutate<string>('/api/admin/sessions', {
         id: id || undefined,
         course_id: courseId,
         lesson_id: lessonId,
@@ -56,7 +57,10 @@ export function useCourseSessions({ courseId, demo }: CourseSessionsProps) {
         status,
         recording_media_id: recording || null,
       });
-      router.refresh();
+      if (savedId) {
+        setId(savedId);
+        router.refresh();
+      }
     } catch (error) {
       h.setError(error instanceof Error ? error.message : 'Перевірте розклад');
     }

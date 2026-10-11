@@ -96,6 +96,36 @@ export async function prepareSandbox(root) {
     ],
   });
   content.offerings.unshift(offering);
+  const workshop = structuredClone(example);
+  Object.assign(workshop, {
+    id: 'program-sandbox-content-lab',
+    slug: 'sandbox-content-lab',
+    title: 'Контент для бренду — тестовий курс',
+    description: 'Чотири практичні уроки від задуму до розбору готового контенту',
+    modules: [
+      {
+        id: 'sandbox-planning',
+        title: 'Підготовка',
+        topics: ['Мета й аудиторія', 'Композиція та світло'],
+      },
+      { id: 'sandbox-practice', title: 'Практика', topics: ['План зйомки', 'Розбір контенту'] },
+    ],
+  });
+  content.programs.unshift(workshop);
+  const workshopOffering = structuredClone(offering);
+  Object.assign(workshopOffering, {
+    id: 'offering-sandbox-content-lab',
+    programId: workshop.id,
+    packages: [
+      {
+        ...offering.packages[0],
+        id: 'sandbox-content-lab-access',
+        name: 'Контент-практика',
+        includes: ['Чотири уроки та спільний розбір'],
+      },
+    ],
+  });
+  content.offerings.unshift(workshopOffering);
   await save(
     'src/app/studio/[[...tool]]/page.tsx',
     "export default function SandboxStudio(){return <main><h1>Керуйте курсами в редакторі Академії</h1><a href='/admin/courses'>Курси</a></main>;}\n",

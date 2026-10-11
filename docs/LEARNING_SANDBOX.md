@@ -30,6 +30,18 @@ The fixed local code is **123456**. Request a code before entering it; it is sin
 
 The browser shares Academy cookies between tabs. Use **Вийти** before switching Academy identities. ps-booking keeps its own separate manager session.
 
+## Multi-lesson rehearsal
+
+The additional **Контент для бренду — тестовий курс** program seeds two modules and four lessons: **Мета й аудиторія**, **Композиція та світло**, **План зйомки**, and **Розбір контенту**. It preserves the original single-lesson course.
+
+Create and save this draft in the editor. Add articles to the first three lessons and a Zoom block to the fourth. `node scripts/sandbox/add-course-media.mjs` optionally adds the existing sample image and two-page workbook through authenticated upload APIs. It is restricted to this synthetic program and skips material kinds already present. Reload the editor after running it, then publish and configure the package through the UI.
+
+Grant the student all four lessons in ps-booking. Test navigation, protected images, PDF pagination and text access, manual completion, revocation/restoration, and attendance. The saved rehearsal contains an upcoming synthetic Zoom meeting on 11 October 2026 at 18:00 Kyiv time and a past one on 9 October. Repeatedly saving the newly created past session must update the same record. Confirming its attendance in ps-booking brings the course from 75% to 100%. Never join the placeholder Zoom link.
+
+After that exact fixture has been exercised, `node scripts/sandbox/verify-course-flow.mjs` checks persisted grants/completion, media boundaries, disabled payments, meeting deduplication and calendar export. It is an assertion script for the saved walkthrough, not a general course seeder. Results and screenshots belong in `.data/learning-sandbox/multi-lesson/`. Build their local gallery with `node scripts/sandbox/course-flow-evidence.mjs`.
+
+Email-code requests retain the production rate limit of three requests per address in ten minutes, including across sandbox restarts. Wait for the window to expire if switching accounts repeatedly; do not disable this protection for testing.
+
 ## Persistence and isolation
 
 - Generated application: `.learning-sandbox/app`, rebuilt on each launch from the production source. Do not edit it.
@@ -46,4 +58,4 @@ Run `pnpm test` for database, identity, access and sandbox boundary tests. After
 
 Walkthrough screenshots are saved in `.data/learning-sandbox/screenshots/`. The screenshot index at `.data/learning-sandbox/walkthrough.html` documents the observed sequence. Keep synthetic evidence local; do not include real customer data or credentials.
 
-This rehearsal covers draft creation, text/PDF upload and publication, pending email access, student login, protected reading, completion, manager statistics, revocation/restoration, mobile curriculum and responsive widths. Live email delivery, real purchases, Sanity permissions, Mux processing, production storage, video playback, image upload and Zoom attendance require separate provider-backed verification before activation.
+The rehearsals cover draft creation, publication, pending email access, student login, protected text/image/PDF reading, completion, manager statistics, revocation/restoration, Zoom scheduling and attendance, mobile curriculum and responsive widths. Live email delivery, real purchases, Sanity permissions, Mux processing, production storage and video playback require separate provider-backed verification before activation. Browser manual-completion checks do not substitute for automatic coverage-tracking tests.
