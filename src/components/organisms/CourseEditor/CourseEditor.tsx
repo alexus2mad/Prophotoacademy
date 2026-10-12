@@ -186,7 +186,7 @@ export function CourseEditor(props: CourseEditorProps) {
                 >
                   {h.preview ? 'Редагувати' : 'Переглянути текст'}
                 </button>
-                {props.data.releases[0] && (
+                {!h.dirty && (
                   <Link
                     href={
                       (props.demo ? '/demo' : '') +
@@ -244,6 +244,7 @@ export function CourseEditor(props: CourseEditorProps) {
                   <option value="pdf">PDF</option>
                   <option value="file">Додатковий PDF-файл</option>
                   <option value="zoom">Зустріч Zoom</option>
+                  <option value="quiz">Тест для самоперевірки</option>
                 </select>
               </label>
             </>

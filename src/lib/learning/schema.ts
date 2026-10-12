@@ -6,7 +6,7 @@ const id = z
   .regex(/^[a-zA-Z0-9_-]+$/);
 export const blockSchema = z.object({
   id,
-  kind: z.enum(['video', 'article', 'image', 'pdf', 'file', 'zoom']),
+  kind: z.enum(['video', 'article', 'image', 'pdf', 'file', 'zoom', 'quiz']),
   title: z.string().max(160),
   required: z.boolean(),
   body: z.string().max(100_000).optional(),
@@ -17,6 +17,37 @@ export const blockSchema = z.object({
   duration: z.number().positive().optional(),
   pageSeconds: z.array(z.number().positive().max(3600)).max(1000).optional(),
   revision: z.number().int().min(1),
+  presentation: z.enum(['reading', 'practice']).optional(),
+  quiz: z
+    .object({
+      passingScore: z.number().int().min(1).max(100),
+      questions: z
+        .array(
+          z.object({
+            id,
+            prompt: z.string().max(1000),
+            options: z
+              .array(z.object({ id, text: z.string().max(1000) }))
+              .min(2)
+              .max(6),
+            correctOptionId: id.optional(),
+            explanation: z.string().max(2000).optional(),
+          }),
+        )
+        .max(20),
+    })
+    .superRefine((quiz, ctx) => {
+      const unique = (values: string[]) => new Set(values).size === values.length;
+      if (
+        !unique(quiz.questions.map((q) => q.id)) ||
+        quiz.questions.some((q) => !unique(q.options.map((o) => o.id)))
+      )
+        ctx.addIssue({
+          code: 'custom',
+          message: 'Запитання й варіанти мають мати унікальні ідентифікатори',
+        });
+    })
+    .optional(),
 });
 export const lessonSchema = z.object({
   id,
@@ -76,6 +107,10 @@ export const progressSchema = z.object({
   page: z.number().int().nonnegative().optional(),
   position: z.number().nonnegative().optional(),
   manual: z.boolean().optional(),
+  quizAnswers: z
+    .record(id, id)
+    .refine((answers) => Object.keys(answers).length <= 20)
+    .optional(),
 });
 export const liveSchema = z
   .object({

@@ -1,6 +1,6 @@
 export type LearningBlock = {
   id: string;
-  kind: 'video' | 'article' | 'image' | 'pdf' | 'file' | 'zoom';
+  kind: 'video' | 'article' | 'image' | 'pdf' | 'file' | 'zoom' | 'quiz';
   title: string;
   required: boolean;
   body?: string;
@@ -10,6 +10,8 @@ export type LearningBlock = {
   expectedSeconds?: number;
   duration?: number;
   pageSeconds?: number[];
+  presentation?: 'reading' | 'practice';
+  quiz?: LessonQuiz;
   revision: number;
 };
 export type Lesson = {
@@ -71,6 +73,7 @@ export type BlockProgress = {
   pageSeconds: Record<string, number>;
   position: number;
   completed?: boolean;
+  quiz?: QuizResult;
 };
 export type LessonProgress = {
   blocks: Record<string, BlockProgress>;
@@ -102,6 +105,7 @@ export type ProgressEvent = {
   page?: number;
   position?: number;
   manual?: boolean;
+  quizAnswers?: Record<string, string>;
 };
 export type ProgressReply = {
   state: LessonProgress;
@@ -191,4 +195,21 @@ export type LessonBlockProps = {
   demo?: boolean;
   preview?: boolean;
   onProgress: (sample: ProgressSample) => void;
+};
+export type QuizOption = { id: string; text: string };
+export type QuizQuestion = {
+  id: string;
+  prompt: string;
+  options: QuizOption[];
+  correctOptionId?: string;
+  explanation?: string;
+};
+export type LessonQuiz = { questions: QuizQuestion[]; passingScore: number };
+export type QuizResult = {
+  attemptId: string;
+  answers: Record<string, string>;
+  correct: number;
+  total: number;
+  passed: boolean;
+  feedback: { questionId: string; correct: boolean; explanation: string }[];
 };

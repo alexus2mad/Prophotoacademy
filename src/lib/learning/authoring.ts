@@ -39,7 +39,23 @@ function sanityModules(draft: CourseDraft) {
       ...l,
       _key: l.id,
       _type: 'learningLesson',
-      blocks: l.blocks.map((b) => ({ ...b, _key: b.id, _type: 'learningBlock' })),
+      blocks: l.blocks.map((b) => ({
+        ...b,
+        _key: b.id,
+        _type: 'learningBlock',
+        ...(b.quiz
+          ? {
+              quiz: {
+                ...b.quiz,
+                questions: b.quiz.questions.map((q) => ({
+                  ...q,
+                  _key: q.id,
+                  options: q.options.map((o) => ({ ...o, _key: o.id })),
+                })),
+              },
+            }
+          : {}),
+      })),
     })),
   }));
 }
@@ -113,7 +129,8 @@ export async function saveDraft(id: string, input: unknown, actorId: string) {
       before &&
       before.kind === block.kind &&
       before.mediaId === block.mediaId &&
-      before.body === block.body;
+      before.body === block.body &&
+      JSON.stringify(before.quiz) === JSON.stringify(block.quiz);
     block.revision = unchanged ? before.revision : Math.max(0, ...known.map((b) => b.revision)) + 1;
   }
   const { revision, ...value } = draft;
@@ -153,6 +170,21 @@ export async function publishCourse(id: string, revision: string, actorId: strin
   ).rows;
   for (const lesson of lessons)
     for (const block of lesson.blocks) {
+      if (
+        block.kind === 'quiz' &&
+        (!block.quiz?.questions.length ||
+          block.quiz.questions.some(
+            (q) =>
+              !q.prompt.trim() ||
+              !q.explanation?.trim() ||
+              q.options.some((o) => !o.text.trim()) ||
+              !q.options.some((o) => o.id === q.correctOptionId),
+          ))
+      )
+        throw new HttpError(
+          400,
+          'Заповніть запитання, варіанти, правильні відповіді та пояснення тесту',
+        );
       if (block.kind === 'file' && block.required)
         throw new HttpError(
           400,

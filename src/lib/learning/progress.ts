@@ -6,6 +6,7 @@ import type {
   BlockProgress,
   ProgressEvent,
 } from './types';
+import { gradeQuiz } from './quiz';
 export function mergeRanges(input: Interval[], limit = Infinity): Interval[] {
   const sorted = input
     .map(([a, b]) => [Math.max(0, a), Math.min(limit, b)] as Interval)
@@ -23,6 +24,7 @@ export const rangeSeconds = (ranges: Interval[]) =>
   mergeRanges(ranges).reduce((sum, [a, b]) => sum + b - a, 0);
 export function expectedSeconds(block: LearningBlock) {
   if (block.expectedSeconds) return block.expectedSeconds;
+  if (block.kind === 'quiz') return (block.quiz?.questions.length || 1) * 30;
   if (block.kind === 'video' || (block.kind === 'zoom' && block.mediaId))
     return block.duration || 60;
   if (block.kind === 'article')
@@ -57,7 +59,15 @@ export function blockFraction(block: LearningBlock, state?: BlockProgress) {
 }
 export function lessonFraction(lesson: Lesson, state: LessonProgress) {
   const blocks = lesson.blocks.filter((b) => b.required);
-  if (state.manual && blocks.every((b) => state.manualRevisions?.[b.id] === b.revision)) return 1;
+  if (
+    state.manual &&
+    blocks.every((b) =>
+      b.kind === 'quiz'
+        ? blockFraction(b, state.blocks[b.id]) === 1
+        : state.manualRevisions?.[b.id] === b.revision,
+    )
+  )
+    return 1;
   if (!blocks.length) return 0;
   const total = blocks.reduce((sum, b) => sum + expectedSeconds(b), 0);
   return (
@@ -76,7 +86,7 @@ export function applyProgress(
       ...previous,
       manual: 'student' as const,
       manualRevisions: Object.fromEntries(
-        lesson.blocks.filter((b) => b.required).map((b) => [b.id, b.revision]),
+        lesson.blocks.filter((b) => b.required && b.kind !== 'quiz').map((b) => [b.id, b.revision]),
       ),
     };
   const block = lesson.blocks.find((b) => b.id === event.blockId && b.revision === event.revision);
@@ -95,6 +105,10 @@ export function applyProgress(
           position: 0,
         };
   const elapsed = Math.max(0, Math.min(event.elapsed, maxElapsed, 30));
+  if (block.kind === 'quiz' && event.quizAnswers && block.quiz) {
+    state.quiz = gradeQuiz(block.quiz, event.quizAnswers, event.id);
+    state.completed = state.completed || state.quiz.passed;
+  }
   // Playback timestamps alone are insufficient: credit cannot exceed the elapsed session budget at 2x.
   if ((block.kind === 'video' || (block.kind === 'zoom' && block.mediaId)) && event.ranges) {
     const ranges = mergeRanges(event.ranges, block.duration || expectedSeconds(block));

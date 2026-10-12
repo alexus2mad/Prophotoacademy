@@ -1,0 +1,58 @@
+import { LessonMaterial } from '@/components/organisms/LessonMaterial/LessonMaterial';
+import { lessonBlockGroups } from '@/lib/learning/presentation';
+import type { LessonBodyProps } from './types';
+
+export function LessonBody({
+  lesson,
+  courseId,
+  moduleTitle,
+  progress,
+  sessions,
+  demo,
+  preview,
+  onProgress,
+}: LessonBodyProps) {
+  const outline = lesson.blocks.filter((b) => ['article', 'quiz'].includes(b.kind) && b.title);
+  return (
+    <>
+      <div className="lesson-heading">
+        {moduleTitle && <p className="learning-meta">{moduleTitle}</p>}
+        <h1>{lesson.title}</h1>
+        <p>{lesson.summary}</p>
+      </div>
+      {outline.length > 3 && (
+        <details className="lesson-outline">
+          <summary>У цьому уроці</summary>
+          <nav aria-label="Розділи уроку">
+            {outline.map((b) => (
+              <a key={b.id} href={'#material-' + b.id}>
+                {b.title}
+              </a>
+            ))}
+          </nav>
+        </details>
+      )}
+      {lessonBlockGroups(lesson.blocks).map((group) => (
+        <div
+          key={group[0].id}
+          className={group.length > 1 ? 'lesson-image-pair' : 'lesson-material-group'}
+        >
+          {group.map((block) => (
+            <div key={block.id} id={'material-' + block.id} className="lesson-material-anchor">
+              <LessonMaterial
+                block={block}
+                courseId={courseId}
+                lessonId={lesson.id}
+                state={progress?.blocks[block.id]}
+                sessions={sessions}
+                demo={demo}
+                preview={preview}
+                onProgress={onProgress}
+              />
+            </div>
+          ))}
+        </div>
+      ))}
+    </>
+  );
+}

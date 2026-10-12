@@ -1,5 +1,6 @@
 'use client';
 import { useLessonBlockEditor } from './hooks';
+import { QuizEditor } from '@/components/molecules/QuizEditor/QuizEditor';
 import type { LessonBlockEditorProps } from './types';
 export function LessonBlockEditor(props: LessonBlockEditorProps) {
   const { block, onChange, onDelete, onMove, first, last } = props,
@@ -11,6 +12,7 @@ export function LessonBlockEditor(props: LessonBlockEditorProps) {
     pdf: 'PDF',
     file: 'Додатковий файл',
     zoom: 'Зустріч Zoom',
+    quiz: 'Тест',
   };
   return (
     <section className="editor-block">
@@ -59,8 +61,23 @@ export function LessonBlockEditor(props: LessonBlockEditorProps) {
         />
         Обов’язковий для завершення уроку
       </label>
-      {block.kind === 'article' ? (
+      {block.kind === 'quiz' ? (
+        <QuizEditor
+          quiz={block.quiz || { passingScore: 80, questions: [] }}
+          onChange={(quiz) => onChange({ quiz })}
+        />
+      ) : block.kind === 'article' ? (
         <>
+          <label>
+            Оформлення
+            <select
+              value={block.presentation || 'reading'}
+              onChange={(e) => onChange({ presentation: e.target.value as 'reading' | 'practice' })}
+            >
+              <option value="reading">Основний текст</option>
+              <option value="practice">Практичне завдання</option>
+            </select>
+          </label>
           <div className="editor-format-toolbar" aria-label="Форматування тексту">
             <button type="button" onClick={() => h.markdown('**', '**')}>
               Жирний

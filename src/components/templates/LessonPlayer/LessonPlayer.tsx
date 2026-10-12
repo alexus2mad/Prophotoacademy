@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { CourseCurriculum } from '@/components/molecules/CourseCurriculum/CourseCurriculum';
-import { LessonMaterial } from '@/components/organisms/LessonMaterial/LessonMaterial';
+import { LessonBody } from '@/components/organisms/LessonBody/LessonBody';
 import { lessonFraction } from '@/lib/learning/progress';
 import { lessonHref } from '@/lib/learning/selectors';
 import { useLessonPlayer } from './hooks';
@@ -41,28 +41,20 @@ export function LessonPlayer(props: LessonPlayerProps) {
           </aside>
         )}
         <main className="lesson-canvas" id="main">
-          <div className="lesson-heading">
-            <p className="learning-meta">{module?.title}</p>
-            <h1>{view.lesson.title}</h1>
-            <p>{view.lesson.summary}</p>
-          </div>
           {error && (
             <p role="alert" className="learning-error">
               {error}
             </p>
           )}
-          {view.lesson.blocks.map((block) => (
-            <LessonMaterial
-              key={block.id}
-              block={block}
-              courseId={view.enrollment.course.id}
-              lessonId={view.lesson.id}
-              state={progress.blocks[block.id]}
-              sessions={view.enrollment.sessions}
-              demo={demo}
-              onProgress={onProgress}
-            />
-          ))}
+          <LessonBody
+            lesson={view.lesson}
+            courseId={view.enrollment.course.id}
+            moduleTitle={module?.title}
+            progress={progress}
+            sessions={view.enrollment.sessions}
+            demo={demo}
+            onProgress={onProgress}
+          />
           <footer className="lesson-footer">
             <div className="lesson-completion" role="status">
               <strong>

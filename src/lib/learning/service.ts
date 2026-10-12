@@ -3,6 +3,7 @@ import { databasePool, transaction } from '../database/client';
 import { HttpError } from '../http';
 import { canReadLesson } from './access';
 import { applyProgress, lessonFraction, expectedSeconds, studyBudget } from './progress';
+import { gradeQuiz, publicLearningBlock } from './quiz';
 import type {
   CourseRelease,
   Grant,
@@ -85,7 +86,7 @@ export function safeEnrollment(
               summary: l.id === currentLessonId ? l.summary : '',
               blocks:
                 l.id === currentLessonId && canReadLesson(enrollment.grants, l)
-                  ? l.blocks
+                  ? l.blocks.map(publicLearningBlock)
                   : l.blocks.map((b) => ({
                       id: b.id,
                       kind: b.kind,
@@ -107,7 +108,7 @@ export function safeEnrollment(
     })),
   };
 }
-export async function studentLesson(userId: string, courseId: string, lessonId: string) {
+async function authorizedLesson(userId: string, courseId: string, lessonId: string) {
   const courses = await studentCourses(userId),
     candidates = courses.filter((c) => c.course.id === courseId);
   for (const enrollment of candidates) {
@@ -125,13 +126,31 @@ export async function studentLesson(userId: string, courseId: string, lessonId: 
   }
   throw new HttpError(403, 'Цей урок наразі недоступний для вашого пакета');
 }
+export async function studentLesson(userId: string, courseId: string, lessonId: string) {
+  const view = await authorizedLesson(userId, courseId, lessonId);
+  return {
+    ...view,
+    lesson: { ...view.lesson, blocks: view.lesson.blocks.map(publicLearningBlock) },
+  };
+}
 export async function saveProgress(
   userId: string,
   courseId: string,
   lessonId: string,
   event: ProgressEvent,
 ) {
-  const view = await studentLesson(userId, courseId, lessonId);
+  const view = await authorizedLesson(userId, courseId, lessonId);
+  if (event.quizAnswers) {
+    const block = view.lesson.blocks.find(
+      (b) => b.id === event.blockId && b.revision === event.revision && b.kind === 'quiz',
+    );
+    if (!block?.quiz) throw new HttpError(400, 'Тест змінився. Оновіть урок');
+    try {
+      gradeQuiz(block.quiz, event.quizAnswers, event.id);
+    } catch {
+      throw new HttpError(400, 'Оберіть одну відповідь на кожне запитання');
+    }
+  }
   if (event.manual && view.lesson.blocks.some((b) => b.kind === 'zoom' && b.required))
     throw new HttpError(400, 'Участь у зустрічі підтверджує викладач, або перегляньте запис');
   return transaction(async (db) => {

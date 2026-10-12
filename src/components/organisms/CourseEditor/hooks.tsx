@@ -84,9 +84,10 @@ export function useCourseEditor({ initial, demo }: CourseEditorProps) {
             id: crypto.randomUUID(),
             kind,
             title: '',
-            required: kind !== 'file',
+            required: kind !== 'file' && kind !== 'quiz',
             revision: 1,
             ...(kind === 'article' ? { body: '' } : {}),
+            ...(kind === 'quiz' ? { quiz: { passingScore: 80, questions: [] } } : {}),
           },
         ],
       });

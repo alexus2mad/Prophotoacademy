@@ -70,7 +70,7 @@ export const learningSchema = [
       defineField({
         name: 'kind',
         type: 'string',
-        options: { list: ['video', 'article', 'image', 'pdf', 'file', 'zoom'] },
+        options: { list: ['video', 'article', 'image', 'pdf', 'file', 'zoom', 'quiz'] },
       }),
       text('title', 'Title'),
       defineField({ name: 'required', type: 'boolean' }),
@@ -79,6 +79,43 @@ export const learningSchema = [
       text('mediaId', 'Protected media ID'),
       text('alt', 'Alternative text'),
       text('caption', 'Caption'),
+      defineField({
+        name: 'presentation',
+        type: 'string',
+        options: { list: ['reading', 'practice'] },
+      }),
+      defineField({
+        name: 'quiz',
+        type: 'object',
+        fields: [
+          defineField({ name: 'passingScore', type: 'number' }),
+          defineField({
+            name: 'questions',
+            type: 'array',
+            of: [
+              defineArrayMember({
+                type: 'object',
+                fields: [
+                  text('id', 'Stable ID'),
+                  text('prompt', 'Question'),
+                  text('correctOptionId', 'Correct option ID'),
+                  defineField({ name: 'explanation', type: 'text' }),
+                  defineField({
+                    name: 'options',
+                    type: 'array',
+                    of: [
+                      defineArrayMember({
+                        type: 'object',
+                        fields: [text('id', 'Stable ID'), text('text', 'Answer')],
+                      }),
+                    ],
+                  }),
+                ],
+              }),
+            ],
+          }),
+        ],
+      }),
       defineField({ name: 'expectedSeconds', type: 'number' }),
       defineField({ name: 'duration', type: 'number' }),
       defineField({

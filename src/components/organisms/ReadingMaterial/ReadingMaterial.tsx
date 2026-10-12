@@ -9,10 +9,16 @@ export function ReadingMaterial(props: ReadingMaterialProps) {
     <section
       ref={ref}
       data-reading-block
-      className={'lesson-block ' + (block.kind === 'image' ? 'lesson-image' : 'lesson-reading')}
+      className={
+        'lesson-block ' +
+        (block.kind === 'image' ? 'lesson-image' : 'lesson-reading') +
+        (block.presentation === 'practice' ? ' lesson-practice' : '')
+      }
       aria-label={block.title}
     >
-      {!block.required && <p className="learning-meta">Додатковий матеріал</p>}
+      {!block.required && block.presentation !== 'practice' && (
+        <p className="learning-meta">Додатковий матеріал</p>
+      )}
       {block.title && <h2>{block.title}</h2>}
       {block.kind === 'image' ? (
         <figure>

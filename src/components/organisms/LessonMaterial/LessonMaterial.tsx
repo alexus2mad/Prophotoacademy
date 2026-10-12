@@ -3,11 +3,13 @@ import { ReadingMaterial } from '@/components/organisms/ReadingMaterial/ReadingM
 import { LearningVideo } from '@/components/organisms/LearningVideo/LearningVideo';
 import { LearningPdf } from '@/components/organisms/LearningPdf/LearningPdf';
 import { ZoomLesson } from '@/components/organisms/ZoomLesson/ZoomLesson';
+import { LessonQuiz } from '@/components/organisms/LessonQuiz/LessonQuiz';
 import { useLessonMedia } from './hooks';
 import type { LessonMaterialProps } from './types';
 export function LessonMaterial(props: LessonMaterialProps) {
   const { media, retry } = useLessonMedia(props),
     { block, sessions, lessonId, demo } = props;
+  if (block.kind === 'quiz') return <LessonQuiz {...props} />;
   if (media.error)
     return (
       <div className="lesson-block">
@@ -38,6 +40,7 @@ export function LessonMaterial(props: LessonMaterialProps) {
   return (
     <section className="lesson-block lesson-file">
       <h2>{block.title}</h2>
+      {block.body && <p className="learning-meta">{block.body}</p>}
       {media.url ? (
         <a
           className="button button-secondary"
