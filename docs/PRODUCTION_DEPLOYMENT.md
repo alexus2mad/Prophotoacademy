@@ -57,3 +57,11 @@ Run architecture checks, TypeScript, relevant tests, production build and the st
 After deployment, verify the health endpoint, login, management bridge, course authoring, private media authorization and an actual administrator email-code login. Enable the email timer only after sender configuration is verified. Keep payments disabled until the separate payment release checks pass. Mux video upload/playback also requires its own credentials before video lessons can be published.
 
 Rollback switches `current` to the prior verified release and restarts `prophotoacademy.service`. Database migrations are not rolled back automatically. Booking's service, schema, payment configuration and release directory remain independent.
+
+## Lesson authoring update — 12 October 2026
+
+The shared lesson renderer supports paired uncropped photographs, a collapsible section outline, a practical-exercise treatment and editable quizzes. The source lecture was adapted into a private draft for the visual-content program, with 20 blocks, ten selected visual examples, one optimized 104-page PDF and six self-check questions. The rest of that course remains draft outlines; no incomplete curriculum or package mapping was published. Teaching files and the authored payload are held outside Git in private Storage/Sanity and ignored operational files.
+
+Verification covered 96 automated tests, eight local quiz/access integration checks, private download redirects, student progress persistence, administrator preview and all five responsive widths (360, 390, 768, 1024 and 1440). Source changes are `cce45cf` (lesson composition and quiz authoring/grading) and `babb9b7` (fresh private downloads). See `LESSON_AUTHORING.md` for maintenance policies.
+
+Staging runs `babb9b772ff19454ceb47da23c983a547f7f0d33`. The preceding feature release is `cce45cfe4a83209ca430963a88672d79829321fd`; the pre-feature release remains `e26abbbb3abce9da71f4b791307754c14c2924a9`. Activation preserved `PAYMENT_MODE=disabled`, nginx and the email timer. No database migration was required for the quiz JSON state. The private lesson is available through the authenticated course editor preview; no grants, purchases or emails were created on staging by this import.

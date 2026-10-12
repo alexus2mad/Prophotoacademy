@@ -28,7 +28,7 @@ Progress requests have unique IDs, session sequences and bounded observed-time i
 
 Zoom schedules use `Europe/Kyiv`, reject spring DST gaps, and explicitly resolve repeated autumn times. Students see a labelled local timezone. Rosters live in booking; canceled or unfinished sessions cannot receive attendance. A recording must be a ready video owned by that course.
 
-Temporary URLs expire, but a valid URL can work until its expiry after access revocation. Already downloaded material cannot be revoked. Reopen a lesson to refresh expired links. PDF page estimates are calculated during the authenticated author upload and can be adjusted; review image-only PDFs and very long pages before publishing.
+Temporary URLs expire, but a valid URL can work until its expiry after access revocation. Already downloaded material cannot be revoked. Supplementary file downloads request a fresh authorized URL when clicked; reopen a lesson to refresh other expired media links. PDF page estimates are calculated during the authenticated author upload and can be adjusted; review image-only PDFs and very long pages before publishing.
 
 ## Operations and release checks
 
