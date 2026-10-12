@@ -74,6 +74,8 @@ The management bridge is not a payment-event feed. The existing booking cashbox 
 
 The static review uses only `/demo` records and shared presentation components. It excludes real API, learning, account-management and authoring routes. Never place real student records, tokens or paid lesson material in demo data.
 
+`LessonBody` shares the editorial reading layout between the player and saved-draft preview. Quiz authoring and grading policies live in `src/lib/learning`: answer keys stay out of student payloads, and authenticated submissions use the existing idempotent progress transaction. Supplementary self-checks do not gate navigation. See `docs/LESSON_AUTHORING.md`. File downloads reauthorize and mint a fresh private URL at click time, so a long reading session cannot leave a stale download link.
+
 ## Verification
 
 The local learning sandbox lives in `scripts/sandbox`. It generates an isolated copy of the app and substitutes only infrastructure boundaries. Its persisted synthetic records stay under `.data/learning-sandbox`; its generated source stays under `.learning-sandbox`. Neither belongs in production or the GitHub review. Never add a production test-login branch, disable live payments for a rehearsal, or point sandbox management links at production. See `docs/LEARNING_SANDBOX.md`.

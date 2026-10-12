@@ -3,6 +3,7 @@ import { gradeQuiz, publicLearningBlock } from '../src/lib/learning/quiz';
 import { applyProgress, lessonFraction } from '../src/lib/learning/progress';
 import { blockSchema, progressSchema } from '../src/lib/learning/schema';
 import { lessonBlockGroups } from '../src/lib/learning/presentation';
+import { mediaResponse } from '../src/lib/learning/media-response';
 import type { LearningBlock, Lesson, ProgressEvent } from '../src/lib/learning/types';
 
 const block: LearningBlock = {
@@ -39,6 +40,19 @@ const event: ProgressEvent = {
 };
 
 describe('lesson self-checks', () => {
+  it('uses uncached, newly authorized redirects for downloads without accepting a client destination', async () => {
+    const response = mediaResponse(
+      new Request('https://academy.test/media?download=1&url=https://bad.test'),
+      { url: 'https://storage.test/temporary-file' },
+    );
+    expect(response.status).toBe(302);
+    expect(response.headers.get('location')).toBe('https://storage.test/temporary-file');
+    expect(response.headers.get('cache-control')).toBe('private, no-store');
+    const json = mediaResponse(new Request('https://academy.test/media'), {
+      url: 'https://storage.test/temporary-file',
+    });
+    expect(await json.json()).toEqual({ url: 'https://storage.test/temporary-file' });
+  });
   it('withholds keys and explanations until submission without mutating the source', () => {
     const safe = publicLearningBlock(block);
     expect(safe.quiz?.questions[0]).not.toHaveProperty('correctOptionId');

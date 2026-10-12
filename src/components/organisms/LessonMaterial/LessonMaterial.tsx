@@ -9,6 +9,13 @@ import type { LessonMaterialProps } from './types';
 export function LessonMaterial(props: LessonMaterialProps) {
   const { media, retry } = useLessonMedia(props),
     { block, sessions, lessonId, demo } = props;
+  const downloadUrl = demo
+    ? media.url
+    : block.mediaId
+      ? (props.preview
+          ? `/api/admin/courses/${props.courseId}/media/${block.mediaId}`
+          : `/api/learning/${props.courseId}/${lessonId}/media/${block.mediaId}`) + '?download=1'
+      : undefined;
   if (block.kind === 'quiz') return <LessonQuiz {...props} />;
   if (media.error)
     return (
@@ -41,10 +48,10 @@ export function LessonMaterial(props: LessonMaterialProps) {
     <section className="lesson-block lesson-file">
       <h2>{block.title}</h2>
       {block.body && <p className="learning-meta">{block.body}</p>}
-      {media.url ? (
+      {downloadUrl ? (
         <a
           className="button button-secondary"
-          href={media.url}
+          href={downloadUrl}
           target="_blank"
           rel="noopener noreferrer"
         >

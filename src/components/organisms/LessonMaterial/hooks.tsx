@@ -8,7 +8,7 @@ export function useLessonMedia({ block, courseId, lessonId, demo, preview }: Les
   const [media, setMedia] = useState<MediaAccess>({}),
     [attempt, setAttempt] = useState(0);
   useEffect(() => {
-    if (!block.mediaId) return;
+    if (!block.mediaId || (block.kind === 'file' && !demo)) return;
     const controller = new AbortController();
     setMedia({});
     if (demo) {
@@ -34,6 +34,6 @@ export function useLessonMedia({ block, courseId, lessonId, demo, preview }: Les
         if (!controller.signal.aborted) setMedia({ error: e.message });
       });
     return () => controller.abort();
-  }, [block.mediaId, courseId, lessonId, demo, preview, attempt]);
+  }, [block.mediaId, block.kind, courseId, lessonId, demo, preview, attempt]);
   return { media, retry: () => setAttempt((value) => value + 1) };
 }
