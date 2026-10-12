@@ -76,6 +76,8 @@ The static review uses only `/demo` records and shared presentation components. 
 
 `LessonBody` shares the editorial reading layout between the player and saved-draft preview. Quiz authoring and grading policies live in `src/lib/learning`: answer keys stay out of student payloads, and authenticated submissions use the existing idempotent progress transaction. Supplementary self-checks do not gate navigation. See `docs/LESSON_AUTHORING.md`. File downloads reauthorize and mint a fresh private URL at click time, so a long reading session cannot leave a stale download link.
 
+`CourseEditor` composes the `CourseOutline` and one focused `LessonBlockEditor`. The block editor is an organism because it composes protected media players through `EditorMediaPreview`; metadata disclosures and material selection remain molecules. Media previews use administrator authorization and no-op progress callbacks. Pure immutable draft updates live in `src/lib/learning/editor.ts`, keeping asynchronous uploads from replacing unrelated edits.
+
 ## Verification
 
 The local learning sandbox lives in `scripts/sandbox`. It generates an isolated copy of the app and substitutes only infrastructure boundaries. Its persisted synthetic records stay under `.data/learning-sandbox`; its generated source stays under `.learning-sandbox`. Neither belongs in production or the GitHub review. Never add a production test-login branch, disable live payments for a rehearsal, or point sandbox management links at production. See `docs/LEARNING_SANDBOX.md`.
