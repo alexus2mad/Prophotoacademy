@@ -1,6 +1,7 @@
 'use client';
 import { LessonProse } from '@/components/molecules/LessonProse/LessonProse';
 import { useReadingMaterial } from './hooks';
+import { blockFraction } from '@/lib/learning/progress';
 import type { ReadingMaterialProps } from './types';
 export function ReadingMaterial(props: ReadingMaterialProps) {
   const { block, url } = props;
@@ -9,6 +10,7 @@ export function ReadingMaterial(props: ReadingMaterialProps) {
     <section
       ref={ref}
       data-reading-block
+      data-reading-complete={blockFraction(block, props.state) >= 1}
       className={
         'lesson-block ' +
         (block.kind === 'image' ? 'lesson-image' : 'lesson-reading') +

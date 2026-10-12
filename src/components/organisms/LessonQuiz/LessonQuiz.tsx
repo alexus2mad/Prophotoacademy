@@ -1,4 +1,5 @@
 'use client';
+import { Check, X } from 'lucide-react';
 import { useLessonQuiz } from './hooks';
 import type { LessonQuizProps } from './types';
 
@@ -18,7 +19,12 @@ export function LessonQuiz(props: LessonQuizProps) {
         </p>
       </header>
       {h.reviewing && h.result && (
-        <div ref={h.resultHeading} tabIndex={-1} className="quiz-result" role="status">
+        <div
+          ref={h.resultHeading}
+          tabIndex={-1}
+          className={'quiz-result ' + (h.result.passed ? 'is-passed' : 'is-failed')}
+          role="status"
+        >
           <strong>
             {h.result.correct} із {h.result.total} правильних відповідей
           </strong>
@@ -50,28 +56,55 @@ export function LessonQuiz(props: LessonQuizProps) {
                 {question.prompt}
               </legend>
               <div className="quiz-options">
-                {question.options.map((option) => (
-                  <label
-                    key={option.id}
-                    className={
-                      'quiz-option' + (h.answers[question.id] === option.id ? ' is-selected' : '')
-                    }
-                  >
-                    <input
-                      type="radio"
-                      name={block.id + '-' + question.id}
-                      value={option.id}
-                      required
-                      checked={h.answers[question.id] === option.id}
-                      onChange={() => h.setAnswers({ ...h.answers, [question.id]: option.id })}
-                    />
-                    <span>{option.text}</span>
-                  </label>
-                ))}
+                {question.options.map((option) => {
+                  const selected = h.answers[question.id] === option.id;
+                  const correct =
+                    !!feedback &&
+                    (feedback.correctOptionId === option.id || (feedback.correct && selected));
+                  const incorrect = !!feedback && selected && !feedback.correct;
+                  return (
+                    <label
+                      key={option.id}
+                      className={
+                        'quiz-option' +
+                        (selected ? ' is-selected' : '') +
+                        (correct ? ' is-correct' : incorrect ? ' is-incorrect' : '')
+                      }
+                    >
+                      <input
+                        type="radio"
+                        name={block.id + '-' + question.id}
+                        value={option.id}
+                        required
+                        checked={h.answers[question.id] === option.id}
+                        onChange={() => h.setAnswers({ ...h.answers, [question.id]: option.id })}
+                      />
+                      <span className="quiz-option-content">
+                        <span>{option.text}</span>
+                        {(correct || incorrect) && (
+                          <span className="quiz-option-verdict">
+                            {correct ? (
+                              <Check size={17} aria-hidden="true" />
+                            ) : (
+                              <X size={17} aria-hidden="true" />
+                            )}
+                            {correct
+                              ? selected
+                                ? 'Ваша відповідь — правильно'
+                                : 'Правильна відповідь'
+                              : 'Ваша відповідь — неправильно'}
+                          </span>
+                        )}
+                      </span>
+                    </label>
+                  );
+                })}
               </div>
               {feedback && (
-                <div className={'quiz-feedback' + (feedback.correct ? ' is-correct' : '')}>
-                  <strong>{feedback.correct ? 'Правильно' : 'Варто переглянути'}</strong>
+                <div
+                  className={'quiz-feedback ' + (feedback.correct ? 'is-correct' : 'is-incorrect')}
+                >
+                  <strong>{feedback.correct ? 'Правильно' : 'Неправильно'}</strong>
                   <p>{feedback.explanation}</p>
                 </div>
               )}

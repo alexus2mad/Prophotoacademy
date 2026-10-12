@@ -1,5 +1,6 @@
 'use client';
 import { useLearningPdf } from './hooks';
+import { blockFraction } from '@/lib/learning/progress';
 import type { LearningPdfProps } from './types';
 export function LearningPdf(props: LearningPdfProps) {
   const { block, url } = props;
@@ -9,6 +10,7 @@ export function LearningPdf(props: LearningPdfProps) {
     <section
       ref={container}
       data-reading-block
+      data-reading-complete={blockFraction(block, props.state) >= 1}
       className="lesson-block lesson-pdf"
       aria-label={block.title}
     >

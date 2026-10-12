@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { youtubeVideoId } from './youtube';
 const id = z
   .string()
   .min(1)
@@ -13,6 +14,11 @@ export const blockSchema = z.object({
   alt: z.string().max(500).optional(),
   caption: z.string().max(1000).optional(),
   mediaId: z.uuid().optional(),
+  youtubeUrl: z
+    .string()
+    .max(500)
+    .refine((url) => !!youtubeVideoId(url), 'Вставте дійсне HTTPS-посилання на відео YouTube')
+    .optional(),
   expectedSeconds: z.number().positive().max(86400).optional(),
   duration: z.number().positive().optional(),
   pageSeconds: z.array(z.number().positive().max(3600)).max(1000).optional(),
@@ -51,6 +57,7 @@ export const blockSchema = z.object({
 });
 export const lessonSchema = z.object({
   id,
+  number: z.number().int().min(1).max(20000).optional(),
   title: z.string().min(1).max(180),
   summary: z.string().max(2000),
   releaseAt: z.iso.datetime().optional(),
@@ -76,6 +83,11 @@ export const draftSchema = z
     revision: z.string().optional(),
   })
   .superRefine((course, ctx) => {
+    const numbers = course.modules.flatMap((m) =>
+      m.lessons.flatMap((l) => (l.number ? [l.number] : [])),
+    );
+    if (new Set(numbers).size !== numbers.length)
+      ctx.addIssue({ code: 'custom', message: 'Номери лекцій у курсі мають бути унікальні' });
     const ids = course.modules.flatMap((m) => [
       m.id,
       ...m.lessons.flatMap((l) => [l.id, ...l.blocks.map((b) => b.id)]),

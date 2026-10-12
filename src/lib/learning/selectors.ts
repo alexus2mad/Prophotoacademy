@@ -1,6 +1,7 @@
 import type { EnrolledCourse, EnrollmentCardView } from './types';
 import { canReadLesson, grantActive } from './access';
 import { lessonFraction } from './progress';
+import { lessonLabel } from './numbering';
 export function enrollmentCard(enrollment: EnrolledCourse): EnrollmentCardView {
   const lessons = enrollment.course.modules
     .flatMap((m) => m.lessons)
@@ -42,7 +43,7 @@ export function enrollmentCard(enrollment: EnrolledCourse): EnrollmentCardView {
     completed: fractions.filter((f) => f >= 0.999999).length,
     total: lessons.length,
     nextLessonId: next?.id,
-    nextLessonTitle: next?.title,
+    nextLessonTitle: next ? lessonLabel(enrollment.course, next) : undefined,
     expiresAt: expires,
     status: active.length ? (available.length ? 'active' : 'scheduled') : 'expired',
   };

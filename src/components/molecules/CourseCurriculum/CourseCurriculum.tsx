@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { lessonLabel } from '@/lib/learning/numbering';
 import { Check, Lock, Play } from 'lucide-react';
 import { LearningProgress } from '@/components/atoms/LearningProgress/LearningProgress';
 import { canReadLesson } from '@/lib/learning/access';
@@ -60,7 +61,7 @@ export function CourseCurriculum({
                       ) : null}
                     </span>
                     <span>
-                      {lesson.title}
+                      {lessonLabel(enrollment.course, lesson)}
                       {!available && lesson.releaseAt && (
                         <small>З {displayDate(lesson.releaseAt)}</small>
                       )}

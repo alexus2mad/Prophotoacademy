@@ -57,6 +57,7 @@ export function LessonBlockEditor(props: LessonBlockEditorProps) {
         <input
           type="checkbox"
           checked={block.required}
+          disabled={!!block.youtubeUrl}
           onChange={(e) => onChange({ required: e.target.checked })}
         />
         Обов’язковий для завершення уроку
@@ -111,45 +112,72 @@ export function LessonBlockEditor(props: LessonBlockEditorProps) {
         </p>
       ) : (
         <>
-          <label>
-            Файл
-            <input
-              type="file"
-              disabled={h.uploading}
-              accept={
-                block.kind === 'video'
-                  ? 'video/*'
-                  : block.kind === 'image'
-                    ? 'image/jpeg,image/png,image/webp'
-                    : 'application/pdf'
-              }
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (file) void h.upload(file);
-              }}
-            />
-          </label>
-          {block.mediaId && (
-            <p className="admin-muted">
-              Матеріал прикріплено{block.duration ? ` · ${Math.round(block.duration / 60)} хв` : ''}
-              {block.pageSeconds ? ` · ${block.pageSeconds.length} сторінок` : ''}
-            </p>
+          {block.kind === 'video' && (
+            <label>
+              Посилання YouTube · додатковий запис
+              <input
+                type="url"
+                placeholder="https://youtu.be/…"
+                value={block.youtubeUrl || ''}
+                onChange={(e) =>
+                  onChange({
+                    youtubeUrl: e.target.value || undefined,
+                    ...(e.target.value
+                      ? { mediaId: undefined, duration: undefined, required: false }
+                      : {}),
+                  })
+                }
+              />
+              <span className="admin-muted">
+                Запис YouTube не впливає на відсоток завершення. Для захищеного відео з відстеженням
+                перегляду завантажте файл
+              </span>
+            </label>
           )}
-          {block.kind === 'video' && block.mediaId && (
-            <button
-              className="button button-secondary"
-              type="button"
-              disabled={h.busy}
-              onClick={h.check}
-            >
-              Перевірити готовність
-            </button>
-          )}
-          {h.uploadMessage && <p role="status">{h.uploadMessage}</p>}
-          {h.error && (
-            <p className="learning-error" role="alert">
-              {h.error}
-            </p>
+          {!block.youtubeUrl && (
+            <>
+              <label>
+                Файл
+                <input
+                  type="file"
+                  disabled={h.uploading}
+                  accept={
+                    block.kind === 'video'
+                      ? 'video/*'
+                      : block.kind === 'image'
+                        ? 'image/jpeg,image/png,image/webp'
+                        : 'application/pdf'
+                  }
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) void h.upload(file);
+                  }}
+                />
+              </label>
+              {block.mediaId && (
+                <p className="admin-muted">
+                  Матеріал прикріплено
+                  {block.duration ? ` · ${Math.round(block.duration / 60)} хв` : ''}
+                  {block.pageSeconds ? ` · ${block.pageSeconds.length} сторінок` : ''}
+                </p>
+              )}
+              {block.kind === 'video' && block.mediaId && (
+                <button
+                  className="button button-secondary"
+                  type="button"
+                  disabled={h.busy}
+                  onClick={h.check}
+                >
+                  Перевірити готовність
+                </button>
+              )}
+              {h.uploadMessage && <p role="status">{h.uploadMessage}</p>}
+              {h.error && (
+                <p className="learning-error" role="alert">
+                  {h.error}
+                </p>
+              )}
+            </>
           )}
         </>
       )}

@@ -2,6 +2,7 @@ import type { Lesson, LessonProgress, LiveSession, ProgressSample } from '@/lib/
 export type LessonBodyProps = {
   lesson: Lesson;
   courseId: string;
+  number?: number;
   moduleTitle?: string;
   progress?: LessonProgress;
   sessions: LiveSession[];

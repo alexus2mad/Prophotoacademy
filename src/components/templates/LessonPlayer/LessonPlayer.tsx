@@ -1,8 +1,10 @@
 'use client';
+import { lessonNumber } from '@/lib/learning/numbering';
 import Link from 'next/link';
 import { CourseCurriculum } from '@/components/molecules/CourseCurriculum/CourseCurriculum';
 import { LessonBody } from '@/components/organisms/LessonBody/LessonBody';
-import { lessonFraction } from '@/lib/learning/progress';
+import { LessonCompletion } from '@/components/molecules/LessonCompletion/LessonCompletion';
+import { lessonBlockFraction } from '@/lib/learning/progress';
 import { lessonHref } from '@/lib/learning/selectors';
 import { useLessonPlayer } from './hooks';
 import type { LessonPlayerProps } from './types';
@@ -10,7 +12,9 @@ export function LessonPlayer(props: LessonPlayerProps) {
   const { view, demo } = props,
     { progress, status, error, drawer, collapsed, contents, onProgress, confirm } =
       useLessonPlayer(props);
-  const complete = lessonFraction(view.lesson, progress) >= 0.999;
+  const unreadMaterial = view.lesson.blocks.some(
+    (b) => b.required && b.kind !== 'quiz' && lessonBlockFraction(b, progress) < 1,
+  );
   const module = view.enrollment.course.modules.find((m) =>
     m.lessons.some((l) => l.id === view.lesson.id),
   );
@@ -48,6 +52,7 @@ export function LessonPlayer(props: LessonPlayerProps) {
           )}
           <LessonBody
             lesson={view.lesson}
+            number={lessonNumber(view.enrollment.course, view.lesson.id)}
             courseId={view.enrollment.course.id}
             moduleTitle={module?.title}
             progress={progress}
@@ -56,14 +61,7 @@ export function LessonPlayer(props: LessonPlayerProps) {
             onProgress={onProgress}
           />
           <footer className="lesson-footer">
-            <div className="lesson-completion" role="status">
-              <strong>
-                {complete
-                  ? 'Урок завершено'
-                  : `${Math.round(lessonFraction(view.lesson, progress) * 100)}% уроку опрацьовано`}
-              </strong>
-              {status}
-            </div>
+            <LessonCompletion lesson={view.lesson} progress={progress} status={status} />
             {view.nextLessonId ? (
               <Link
                 className="button"
@@ -77,13 +75,14 @@ export function LessonPlayer(props: LessonPlayerProps) {
               </Link>
             )}
           </footer>
-          {!complete && !view.lesson.blocks.some((b) => b.required && b.kind === 'zoom') && (
+          {unreadMaterial && !view.lesson.blocks.some((b) => b.required && b.kind === 'zoom') && (
             <div className="lesson-manual">
               <button type="button" onClick={confirm}>
                 Я опрацював матеріал
               </button>
               <p className="learning-meta">
-                Для роботи офлайн або якщо автоматичне збереження не спрацювало
+                Уже прочитали урок, але прогрес неповний? Підтвердьте опрацювання — повторно читати
+                не потрібно
               </p>
             </div>
           )}

@@ -1,8 +1,9 @@
 import { HttpError } from '../http';
+import { numberCourse } from './numbering';
 import type { CourseDraft } from './types';
 
 export function publicationDraft(draft: CourseDraft, lessonIds?: string[]): CourseDraft {
-  if (lessonIds === undefined) return structuredClone(draft);
+  if (lessonIds === undefined) return numberCourse(structuredClone(draft));
   const known = new Set(
     draft.modules.flatMap((module) => module.lessons.map((lesson) => lesson.id)),
   );
@@ -13,7 +14,7 @@ export function publicationDraft(draft: CourseDraft, lessonIds?: string[]): Cour
   )
     throw new HttpError(400, 'Оберіть наявні уроки для публікації');
   const selected = new Set(lessonIds);
-  const result = structuredClone(draft);
+  const result = numberCourse(structuredClone(draft));
   result.modules = result.modules
     .map((module) => ({
       ...module,

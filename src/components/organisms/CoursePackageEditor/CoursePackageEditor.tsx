@@ -1,4 +1,5 @@
 'use client';
+import { lessonLabel } from '@/lib/learning/numbering';
 import { useCoursePackageEditor } from './hooks';
 import type { CoursePackageEditorProps } from './types';
 export function CoursePackageEditor(props: CoursePackageEditorProps) {
@@ -110,7 +111,7 @@ export function CoursePackageEditor(props: CoursePackageEditorProps) {
                       )
                     }
                   />
-                  {l.title}
+                  {lessonLabel(h.release!.manifest, l)}
                 </label>
               ))}
           </fieldset>

@@ -10,7 +10,9 @@ export async function enrollmentOptions(offering?: Offering): Promise<Enrollment
   if (!offering || !managedDatabase() || mode === 'mock') return { mode, packageIds: [] };
   const rules = await databasePool().query<PackageIdRow>(
     `SELECT p.package_id,
-     (SELECT jsonb_agg(lesson->>'title')
+     (SELECT jsonb_agg(CASE WHEN lesson->>'number' IS NOT NULL
+        THEN 'Лекція ' || (lesson->>'number') || ' — ' || (lesson->>'title')
+        ELSE lesson->>'title' END)
       FROM jsonb_array_elements(r.manifest->'modules') module,
            jsonb_array_elements(module->'lessons') lesson
       WHERE p.lesson_ids ? (lesson->>'id')) AS lesson_titles

@@ -1,4 +1,5 @@
 'use client';
+import { lessonLabel } from '@/lib/learning/numbering';
 import { displayDate } from '@/lib/learning/selectors';
 import { useCourseSessions } from './hooks';
 import { managementUrl } from '@/lib/commerce/cashbox';
@@ -51,7 +52,7 @@ export function CourseSessions(props: CourseSessionsProps) {
               <option value="">Оберіть урок</option>
               {lessons.map((l) => (
                 <option key={l.id} value={l.id}>
-                  {l.title}
+                  {lessonLabel(props.data.releases[0].manifest, l)}
                 </option>
               ))}
             </select>

@@ -59,21 +59,16 @@ export function blockFraction(block: LearningBlock, state?: BlockProgress) {
 }
 export function lessonFraction(lesson: Lesson, state: LessonProgress) {
   const blocks = lesson.blocks.filter((b) => b.required);
-  if (
-    state.manual &&
-    blocks.every((b) =>
-      b.kind === 'quiz'
-        ? blockFraction(b, state.blocks[b.id]) === 1
-        : state.manualRevisions?.[b.id] === b.revision,
-    )
-  )
-    return 1;
   if (!blocks.length) return 0;
   const total = blocks.reduce((sum, b) => sum + expectedSeconds(b), 0);
   return (
-    blocks.reduce((sum, b) => sum + blockFraction(b, state.blocks[b.id]) * expectedSeconds(b), 0) /
-    total
+    blocks.reduce((sum, b) => sum + lessonBlockFraction(b, state) * expectedSeconds(b), 0) / total
   );
+}
+export function lessonBlockFraction(block: LearningBlock, state: LessonProgress) {
+  if (state.manual && block.kind !== 'quiz' && state.manualRevisions?.[block.id] === block.revision)
+    return 1;
+  return blockFraction(block, state.blocks[block.id]);
 }
 export function applyProgress(
   lesson: Lesson,

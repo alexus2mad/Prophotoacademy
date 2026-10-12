@@ -61,7 +61,7 @@ export function useLessonPlayer({ view, userId, demo }: LessonPlayerProps) {
       if (!queue.current.sessionId) queue.current.sessionId = crypto.randomUUID();
       const event = {
         ...sample,
-        observedAt: new Date().toISOString(),
+        observedAt: sample.observedAt || new Date().toISOString(),
         id: crypto.randomUUID(),
         sessionId: queue.current.sessionId,
         sequence: ++queue.current.sequence,

@@ -7,6 +7,7 @@ export type LearningBlock = {
   alt?: string;
   caption?: string;
   mediaId?: string;
+  youtubeUrl?: string;
   expectedSeconds?: number;
   duration?: number;
   pageSeconds?: number[];
@@ -16,6 +17,7 @@ export type LearningBlock = {
 };
 export type Lesson = {
   id: string;
+  number?: number;
   title: string;
   summary: string;
   releaseAt?: string;
@@ -187,6 +189,7 @@ export type EnrollmentCardView = {
   status: 'active' | 'expired' | 'scheduled';
 };
 export type ProgressSample = Omit<ProgressEvent, 'id' | 'sessionId' | 'sequence'>;
+export type ReadingObservation = Pick<ProgressSample, 'elapsed' | 'observedAt' | 'coverage'>;
 export type LessonBlockProps = {
   block: LearningBlock;
   courseId: string;
@@ -211,5 +214,10 @@ export type QuizResult = {
   correct: number;
   total: number;
   passed: boolean;
-  feedback: { questionId: string; correct: boolean; explanation: string }[];
+  feedback: {
+    questionId: string;
+    correct: boolean;
+    correctOptionId?: string;
+    explanation: string;
+  }[];
 };

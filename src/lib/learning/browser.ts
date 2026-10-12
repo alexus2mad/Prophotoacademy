@@ -7,6 +7,7 @@ export async function pdfLibrary() {
 export const readingActive = () => document.visibilityState === 'visible' && document.hasFocus();
 export function mostVisibleReadingBlock() {
   return [...document.querySelectorAll<HTMLElement>('[data-reading-block]')]
+    .filter((element) => element.dataset.readingComplete !== 'true')
     .map((element) => {
       const rect = element.getBoundingClientRect();
       return {

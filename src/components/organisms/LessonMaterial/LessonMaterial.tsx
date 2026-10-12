@@ -4,6 +4,7 @@ import { LearningVideo } from '@/components/organisms/LearningVideo/LearningVide
 import { LearningPdf } from '@/components/organisms/LearningPdf/LearningPdf';
 import { ZoomLesson } from '@/components/organisms/ZoomLesson/ZoomLesson';
 import { LessonQuiz } from '@/components/organisms/LessonQuiz/LessonQuiz';
+import { YouTubeRecording } from '@/components/organisms/YouTubeRecording/YouTubeRecording';
 import { useLessonMedia } from './hooks';
 import type { LessonMaterialProps } from './types';
 export function LessonMaterial(props: LessonMaterialProps) {
@@ -17,6 +18,7 @@ export function LessonMaterial(props: LessonMaterialProps) {
           : `/api/learning/${props.courseId}/${lessonId}/media/${block.mediaId}`) + '?download=1'
       : undefined;
   if (block.kind === 'quiz') return <LessonQuiz {...props} />;
+  if (block.kind === 'video' && block.youtubeUrl) return <YouTubeRecording block={block} />;
   if (media.error)
     return (
       <div className="lesson-block">

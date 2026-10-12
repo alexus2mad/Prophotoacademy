@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { pdfLibrary, readingActive, mostVisibleReadingBlock } from '@/lib/learning/browser';
+import { createReadingTracker } from '@/lib/learning/reading';
 import type { PDFDocumentProxy } from 'pdfjs-dist';
 import type { LearningPdfProps } from './types';
 export function useLearningPdf({ url, block, onProgress }: LearningPdfProps) {
@@ -86,42 +87,36 @@ export function useLearningPdf({ url, block, onProgress }: LearningPdfProps) {
   }, [pdf, page, scale, containerWidth]);
   useEffect(() => {
     if (!ready) return;
-    let activeAt = Date.now(),
-      last = Date.now(),
-      elapsed = 0;
-    const active = () => {
-      activeAt = Date.now();
-    };
-    const flush = () => {
-      if (elapsed) {
+    let activeAt = Date.now();
+    const tracker = createReadingTracker(
+      (sample) =>
         callback.current({
           blockId: block.id,
           revision: block.revision,
-          elapsed: Math.min(30, elapsed),
           page,
-        });
-        elapsed = 0;
-      }
+          ...sample,
+        }),
+      5,
+    );
+    const active = () => {
+      activeAt = Date.now();
     };
+    const flush = tracker.flush;
     const timer = setInterval(() => {
-      const now = Date.now(),
-        delta = Math.min(2, (now - last) / 1000);
+      const now = Date.now();
       const visible = mostVisibleReadingBlock();
-      last = now;
-      if (
+      const active =
         readingActive() &&
         now - activeAt < 90000 &&
         visible?.element === container.current &&
-        visible.visible >= 80
-      ) {
-        elapsed += delta;
-        if (elapsed >= 5) flush();
-      }
+        visible.visible >= 80;
+      tracker.tick(now, active ? [] : null);
     }, 1000);
     ['pointermove', 'keydown', 'scroll'].forEach((event) =>
       window.addEventListener(event, active, { passive: true }),
     );
     document.addEventListener('visibilitychange', flush);
+    window.addEventListener('pagehide', flush);
     return () => {
       clearInterval(timer);
       flush();
@@ -129,6 +124,7 @@ export function useLearningPdf({ url, block, onProgress }: LearningPdfProps) {
         window.removeEventListener(event, active),
       );
       document.removeEventListener('visibilitychange', flush);
+      window.removeEventListener('pagehide', flush);
     };
   }, [ready, page, block.id, block.revision]);
   return {

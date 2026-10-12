@@ -1,9 +1,10 @@
 import { lessonWithRecording } from './recordings';
+import { numberCourse } from './numbering';
 import { databasePool, transaction } from '../database/client';
 import { HttpError } from '../http';
 import { canReadLesson } from './access';
 import { applyProgress, lessonFraction, expectedSeconds, studyBudget } from './progress';
-import { gradeQuiz, publicLearningBlock } from './quiz';
+import { gradeQuiz, publicLearningBlock, quizReviewProgress } from './quiz';
 import type {
   CourseRelease,
   Grant,
@@ -45,7 +46,7 @@ export async function studentCourses(userId: string): Promise<EnrolledCourse[]> 
   return releases.map((r) => ({
     course: {
       ...r.manifest,
-      modules: r.manifest.modules.map((m) => ({
+      modules: numberCourse(r.manifest).modules.map((m) => ({
         ...m,
         lessons: m.lessons.map((l) =>
           lessonWithRecording(
@@ -95,6 +96,7 @@ export function safeEnrollment(
                       revision: b.revision,
                       expectedSeconds: expectedSeconds(b),
                       duration: b.duration,
+                      mediaId: b.mediaId,
                       pageSeconds: b.pageSeconds,
                     })),
             })),
@@ -120,7 +122,10 @@ async function authorizedLesson(userId: string, courseId: string, lessonId: stri
     return {
       enrollment: safeEnrollment(enrollment, lessonId),
       lesson,
-      progress: enrollment.progress.find((p) => p.lesson_id === lessonId)?.state || { blocks: {} },
+      progress: quizReviewProgress(
+        lesson,
+        enrollment.progress.find((p) => p.lesson_id === lessonId)?.state || { blocks: {} },
+      ),
       nextLessonId: allowed[index + 1]?.id,
     };
   }
@@ -170,7 +175,7 @@ export async function saveProgress(
     );
     if (!inserted.rowCount)
       return {
-        state: previous,
+        state: quizReviewProgress(view.lesson, previous),
         progress: lessonFraction(view.lesson, previous),
         completed: !!old?.completed_at,
       };
@@ -183,7 +188,7 @@ export async function saveProgress(
       throw new HttpError(403, 'Недійсний сеанс навчання');
     if (session && event.sequence <= session.sequence)
       return {
-        state: previous,
+        state: quizReviewProgress(view.lesson, previous),
         progress: lessonFraction(view.lesson, previous),
         completed: !!old?.completed_at,
       };
@@ -209,6 +214,10 @@ export async function saveProgress(
         complete ? state.manual || 'automatic' : null,
       ],
     );
-    return { state, progress: fraction, completed: complete };
+    return {
+      state: quizReviewProgress(view.lesson, state),
+      progress: fraction,
+      completed: complete,
+    };
   });
 }

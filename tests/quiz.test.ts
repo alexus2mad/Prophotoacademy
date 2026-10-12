@@ -1,5 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { gradeQuiz, publicLearningBlock } from '../src/lib/learning/quiz';
+import { gradeQuiz, publicLearningBlock, quizReviewProgress } from '../src/lib/learning/quiz';
+import { createElement } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
+import { load } from 'cheerio';
+import { LessonQuiz } from '../src/components/organisms/LessonQuiz/LessonQuiz';
 import { applyProgress, lessonFraction } from '../src/lib/learning/progress';
 import { blockSchema, progressSchema } from '../src/lib/learning/schema';
 import { lessonBlockGroups } from '../src/lib/learning/presentation';
@@ -65,9 +69,65 @@ describe('lesson self-checks', () => {
       correct: 0,
       total: 1,
       passed: false,
-      feedback: [{ correct: false, explanation: 'The sample is round' }],
+      feedback: [{ correct: false, correctOptionId: 'circle', explanation: 'The sample is round' }],
     });
     expect(gradeQuiz(block.quiz!, { question: 'circle' }, 'attempt').passed).toBe(true);
+  });
+  it('distinguishes the wrong selection from the right answer with color classes and explicit labels', () => {
+    const progress = applyProgress(
+      lesson,
+      { blocks: {} },
+      { ...event, quizAnswers: { question: 'square' } },
+      0,
+    );
+    const html = renderToStaticMarkup(
+      createElement(LessonQuiz, {
+        block: publicLearningBlock(block),
+        courseId: 'course',
+        lessonId: lesson.id,
+        state: progress.blocks.quiz,
+        onProgress: () => {},
+      }),
+    );
+    const $ = load(html);
+    expect($('.quiz-option.is-incorrect').text()).toContain('Ваша відповідь — неправильно');
+    expect($('.quiz-option.is-incorrect input').attr('value')).toBe('square');
+    expect($('.quiz-option.is-correct input').attr('value')).toBe('circle');
+    expect($('.quiz-option.is-correct').text()).toContain('Правильна відповідь');
+    expect($('.quiz-result.is-failed')).toHaveLength(1);
+  });
+  it('enriches older submitted results without revealing keys for new or replaced quizzes', () => {
+    const progress = applyProgress(lesson, { blocks: {} }, event, 0);
+    delete progress.blocks.quiz.quiz!.feedback[0].correctOptionId;
+    expect(quizReviewProgress(lesson, progress).blocks.quiz.quiz?.feedback[0].correctOptionId).toBe(
+      'circle',
+    );
+    expect(progress.blocks.quiz.quiz?.feedback[0].correctOptionId).toBeUndefined();
+    expect(quizReviewProgress(lesson, { blocks: {} })).toEqual({ blocks: {} });
+    expect(
+      quizReviewProgress({ ...lesson, blocks: [{ ...block, revision: 2 }] }, progress).blocks.quiz
+        .quiz?.feedback[0].correctOptionId,
+    ).toBeUndefined();
+  });
+  it('credits confirmed reading without bypassing a required quiz', () => {
+    const combined = {
+      ...lesson,
+      blocks: [
+        {
+          id: 'text',
+          kind: 'article' as const,
+          title: 'Text',
+          body: 'Read',
+          expectedSeconds: 30,
+          required: true,
+          revision: 1,
+        },
+        block,
+      ],
+    };
+    const manual = applyProgress(combined, { blocks: {} }, { ...event, manual: true }, 0);
+    expect(lessonFraction(combined, manual)).toBe(0.5);
+    expect(lessonFraction(combined, applyProgress(combined, manual, event, 0))).toBe(1);
   });
   it('rejects unanswered, extra and fabricated options, or a missing answer key', () => {
     const invalidAnswers: Record<string, string>[] = [

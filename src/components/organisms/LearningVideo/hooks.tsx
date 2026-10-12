@@ -16,6 +16,7 @@ export function useLearningVideo({ block, state, onProgress, media }: LearningVi
     let lastTime = player.currentTime || 0,
       lastWall = performance.now(),
       elapsed = 0,
+      observedAt = Date.now(),
       ranges: Interval[] = [],
       seeking = false;
     const preferences = () => {
@@ -38,6 +39,7 @@ export function useLearningVideo({ block, state, onProgress, media }: LearningVi
         blockId: block.id,
         revision: block.revision,
         elapsed: Math.min(elapsed, 30),
+        observedAt: new Date(observedAt).toISOString(),
         ranges: mergeRanges(ranges),
         position: player.currentTime || 0,
       });
@@ -76,7 +78,8 @@ export function useLearningVideo({ block, state, onProgress, media }: LearningVi
       ) {
         ranges.push([lastTime, current]);
         elapsed += delta;
-      }
+        observedAt = Date.now();
+      } else if (elapsed > 0) flush();
       lastTime = current;
       lastWall = now;
       if (elapsed >= 10) flush();

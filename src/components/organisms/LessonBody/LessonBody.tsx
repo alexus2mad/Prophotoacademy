@@ -6,6 +6,7 @@ import type { LessonBodyProps } from './types';
 export function LessonBody({
   lesson,
   courseId,
+  number,
   moduleTitle,
   progress,
   sessions,
@@ -13,17 +14,19 @@ export function LessonBody({
   preview,
   onProgress,
 }: LessonBodyProps) {
-  const outline = lesson.blocks.filter((b) => ['article', 'quiz'].includes(b.kind) && b.title);
+  const outline = lesson.blocks.filter(
+    (b) => ['article', 'quiz', 'video'].includes(b.kind) && b.title,
+  );
   return (
     <div className={`${readingFont.variable} lesson-content`}>
       <div className="lesson-heading">
         {moduleTitle && <p className="learning-meta">{moduleTitle}</p>}
-        <h1>{lesson.title}</h1>
+        <h1>{number ? `Лекція ${number} — ${lesson.title}` : lesson.title}</h1>
         <p>{lesson.summary}</p>
       </div>
       {outline.length > 3 && (
         <details className="lesson-outline">
-          <summary>У цьому уроці</summary>
+          <summary>{number ? `Коротко про лекцію ${number}` : 'У цьому уроці'}</summary>
           <nav aria-label="Розділи уроку">
             {outline.map((b) => (
               <a key={b.id} href={'#material-' + b.id}>

@@ -130,6 +130,7 @@ export async function saveDraft(id: string, input: unknown, actorId: string) {
       before &&
       before.kind === block.kind &&
       before.mediaId === block.mediaId &&
+      before.youtubeUrl === block.youtubeUrl &&
       before.body === block.body &&
       JSON.stringify(before.quiz) === JSON.stringify(block.quiz);
     block.revision = unchanged ? before.revision : Math.max(0, ...known.map((b) => b.revision)) + 1;
@@ -176,6 +177,14 @@ export async function publishCourse(
   ).rows;
   for (const lesson of lessons)
     for (const block of lesson.blocks) {
+      if (block.youtubeUrl) {
+        if (block.kind !== 'video' || block.mediaId || block.required)
+          throw new HttpError(
+            400,
+            'Запис YouTube має бути додатковим відео без прикріпленого файла',
+          );
+        continue;
+      }
       if (
         block.kind === 'quiz' &&
         (!block.quiz?.questions.length ||

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { LessonProse } from '@/components/molecules/LessonProse/LessonProse';
 import { readingFont } from '@/lib/typography/fonts';
 import { hasRequiredMaterial } from '@/lib/learning/presentation';
+import { lessonLabel, lessonNumber } from '@/lib/learning/numbering';
 import { LessonBlockEditor } from '@/components/molecules/LessonBlockEditor/LessonBlockEditor';
 import { CoursePackageEditor } from '@/components/organisms/CoursePackageEditor/CoursePackageEditor';
 import { CourseSessions } from '@/components/organisms/CourseSessions/CourseSessions';
@@ -104,7 +105,7 @@ export function CourseEditor(props: CourseEditorProps) {
                       className={h.activeId === l.id ? 'is-active' : ''}
                       onClick={() => h.setActiveId(l.id)}
                     >
-                      {l.title}
+                      {lessonLabel(h.draft, l)}
                     </button>
                     <button
                       type="button"
@@ -140,6 +141,19 @@ export function CourseEditor(props: CourseEditorProps) {
           {h.active ? (
             <>
               <div className="admin-form">
+                <label>
+                  Номер лекції
+                  <input
+                    type="number"
+                    min={1}
+                    max={20000}
+                    value={h.active.number || ''}
+                    placeholder={String(lessonNumber(h.draft, h.active.id) || 1)}
+                    onChange={(e) =>
+                      h.lesson({ number: e.target.value ? Number(e.target.value) : undefined })
+                    }
+                  />
+                </label>
                 <label>
                   Назва уроку
                   <input
@@ -271,7 +285,7 @@ export function CourseEditor(props: CourseEditorProps) {
                   onChange={(e) => h.selectPublishedLesson(lesson.id, e.target.checked)}
                 />
                 <span>
-                  {lesson.title}
+                  {lessonLabel(h.draft, lesson)}
                   {!hasRequiredMaterial(lesson) && <small>Ще немає обов’язкових матеріалів</small>}
                 </span>
               </label>

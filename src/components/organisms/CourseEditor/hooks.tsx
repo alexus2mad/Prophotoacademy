@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAdminMutation } from '@/lib/admin/hooks';
 import { hasRequiredMaterial } from '@/lib/learning/presentation';
+import { numberedLessons } from '@/lib/learning/numbering';
 import type { CourseDraft, LearningBlock } from '@/lib/learning/types';
 import type { CourseEditorProps, LessonChange, BlockChange } from './types';
 export function useCourseEditor({ initial, demo }: CourseEditorProps) {
@@ -46,11 +47,15 @@ export function useCourseEditor({ initial, demo }: CourseEditorProps) {
   }
   function addLesson(moduleId: string) {
     const id = crypto.randomUUID();
+    const number = Math.max(0, ...numberedLessons(draft).map((l) => l.number || 0)) + 1;
     update({
       ...draft,
       modules: draft.modules.map((m) =>
         m.id === moduleId
-          ? { ...m, lessons: [...m.lessons, { id, title: 'Новий урок', summary: '', blocks: [] }] }
+          ? {
+              ...m,
+              lessons: [...m.lessons, { id, number, title: 'Новий урок', summary: '', blocks: [] }],
+            }
           : m,
       ),
     });

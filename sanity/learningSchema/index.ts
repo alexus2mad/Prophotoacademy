@@ -51,6 +51,12 @@ export const learningSchema = [
     fields: [
       text('id', 'Stable ID'),
       text('title', 'Title'),
+      defineField({
+        name: 'number',
+        title: 'Номер лекції',
+        type: 'number',
+        validation: (r) => r.integer().min(1),
+      }),
       defineField({ name: 'summary', type: 'text' }),
       defineField({ name: 'releaseAt', type: 'datetime' }),
       defineField({ name: 'introductory', type: 'boolean' }),
@@ -77,6 +83,7 @@ export const learningSchema = [
       defineField({ name: 'revision', type: 'number' }),
       defineField({ name: 'body', title: 'Text · Markdown', type: 'text' }),
       text('mediaId', 'Protected media ID'),
+      defineField({ name: 'youtubeUrl', title: 'Додатковий запис YouTube', type: 'url' }),
       text('alt', 'Alternative text'),
       text('caption', 'Caption'),
       defineField({

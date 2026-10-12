@@ -1,5 +1,17 @@
 # Lesson composition and self-checks
 
+## Lecture identity and recordings
+
+Keep `Lesson.number` separate from the title. The player, lesson summary outline, curriculum, dashboard resume card and editor use the same lecture numbering helpers. Numbers continue across modules, explicit numbers reserve their place, and publication freezes resolved numbers before filtering selected lessons. Thus publishing only lecture 2 never renames it lecture 1. New lessons receive the next course-wide number; managers can edit it, and duplicate numbers are rejected. Stable lesson IDs and block revisions continue to own progress.
+
+A video block may have an HTTPS `youtubeUrl` instead of protected uploaded media. Only recognized YouTube hosts and valid video IDs are accepted. The responsive privacy-enhanced embed has native controls, no autoplay and a direct-link fallback. These recordings are supplementary and do not alter completion requirements; viewing on YouTube does not generate verified playback coverage. Publishing rejects required YouTube blocks or ambiguous blocks with both an external link and a media ID. Use signed Mux uploads for protected, tracked required video. YouTube availability and visibility remain controlled by the video's owner.
+
+## Completion feedback
+
+After quiz submission, correct answers use green and the selected incorrect answer uses red, with icons and explicit text so color is never the only signal. Answer keys remain absent before submission; older submitted attempts receive the current matching revision's answer-level feedback on authorized reads.
+
+Reading and PDF observations retain their actual end timestamp and flush short visits when the active material changes. Completed materials leave the dominant-reading selection, allowing adjacent photographs to earn independent inspection time. Delayed retries use the existing server wall-clock ledger to avoid duplicate credit across tabs. The lesson footer explains remaining required material; explicit student confirmation provides recovery for missed/offline reading without bypassing required quizzes. A passed supplementary self-check alone does not complete required reading.
+
 LessonBody supplies the shared student and administrator-preview layout: a readable 42rem text measure, an optional in-lesson outline, uncropped pairs of adjacent photographs, and a distinct practical exercise. Instructional images remain still. Course managers can choose the practice presentation for a text block and preview saved drafts before first publication.
 
 ## Reading typography

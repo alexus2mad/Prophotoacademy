@@ -1,4 +1,5 @@
 'use client';
+import { lessonNumber } from '@/lib/learning/numbering';
 import Link from 'next/link';
 import { LessonBody } from '@/components/organisms/LessonBody/LessonBody';
 import type { LessonPreviewProps } from './types';
@@ -20,6 +21,7 @@ export function LessonPreview({ course, lesson, sessions, demo }: LessonPreviewP
       <main id="main" className="lesson-canvas">
         <LessonBody
           lesson={lesson}
+          number={lessonNumber(course, lesson.id)}
           courseId={course.id}
           sessions={sessions}
           demo={demo}
