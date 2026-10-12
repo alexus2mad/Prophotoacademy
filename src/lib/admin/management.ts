@@ -12,6 +12,8 @@ import { recordAttendance } from '../learning/live';
 import { customerAccounts } from './customer-account';
 import type { ManagementMember } from './types';
 
+const managementSessionSeconds = 90 * 24 * 60 * 60;
+
 export async function acceptManagementRequest(body: string, headers: Headers) {
   const nonce = verifyManagementSignature(
     body,
@@ -38,8 +40,12 @@ export async function acceptManagementRequest(body: string, headers: Headers) {
 async function managementMember(token: string | undefined, fresh = false) {
   if (!token) throw new HttpError(401, 'Підтвердьте email адміністратора');
   const result = await databasePool().query<ManagementMember>(
-    "SELECT p.*,s.verified_at AS session_verified_at FROM academy.management_sessions s JOIN academy.profiles p ON p.id=s.user_id WHERE s.token_hash=$1 AND s.expires_at>now() AND p.role='admin'",
-    [hash(token)],
+    `UPDATE academy.management_sessions s
+     SET expires_at=GREATEST(s.expires_at,now()+$2 * interval '1 second')
+     FROM academy.profiles p
+     WHERE p.id=s.user_id AND s.token_hash=$1 AND s.expires_at>now() AND p.role='admin'
+     RETURNING p.*,s.verified_at AS session_verified_at`,
+    [hash(token), managementSessionSeconds],
   );
   const member = result.rows[0];
   if (!member) throw new HttpError(401, 'Сеанс завершився або права змінено');
@@ -105,18 +111,21 @@ export async function managementAction(action: string, value: unknown, session?:
     if (member.role !== 'admin') throw new HttpError(403, 'Потрібні права адміністратора Академії');
     const token = randomBytes(32).toString('hex');
     await databasePool().query(
-      "INSERT INTO academy.management_sessions(token_hash,user_id,expires_at) VALUES($1,$2,now()+interval '7 days')",
-      [hash(token), member.id],
+      "INSERT INTO academy.management_sessions(token_hash,user_id,expires_at) VALUES($1,$2,now()+$3 * interval '1 second')",
+      [hash(token), member.id, managementSessionSeconds],
     );
     return {
       token,
       user: { id: member.id, email: member.email, name: member.name },
-      expiresIn: 604800,
+      expiresIn: managementSessionSeconds,
     };
   }
   const actor = await managementMember(session, action === 'team.change');
   if (action === 'auth.session')
-    return { user: { id: actor.id, email: actor.email, name: actor.name } };
+    return {
+      user: { id: actor.id, email: actor.email, name: actor.name },
+      expiresIn: managementSessionSeconds,
+    };
   if (action === 'auth.logout') {
     await databasePool().query('DELETE FROM academy.management_sessions WHERE token_hash=$1', [
       hash(session!),

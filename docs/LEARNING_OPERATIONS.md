@@ -40,3 +40,13 @@ Temporary URLs expire, but a valid URL can work until its expiry after access re
 - Run architecture checks, TypeScript, tests, production build, Pages build and Pages validation. Review desktop/mobile journeys and keyboard dialogs. Synthetic review fixtures are not migration input
 
 See [PRODUCTION_DEPLOYMENT.md](PRODUCTION_DEPLOYMENT.md) for provisioned services. Real lesson content, email delivery, video configuration and merchant activation still require their corresponding checks before being offered to students.
+
+## Persistent device sign-in
+
+Academy students and course authors use host-only, HttpOnly, Secure (HTTPS), SameSite=Lax cookies with Supabase's 400-day browser lifetime. Access tokens remain short-lived; renewal rotates and persists their cookies before account pages, checkout and every browser-authenticated API handler. Keep every route that reads `currentMember`/`requireMember`/`requireAdmin` covered by `needsSessionRefresh`. Never replace this with a longer JWT lifetime or public browser storage. The proxy must forward refreshed request cookies and return all Set-Cookie chunks, deletions and no-cache headers.
+
+A valid session visiting `/login` resumes its safe destination. `/login?reauth=1&next=/admin` explicitly opens email verification for sensitive actions. Signing out ends the current device session only; it does not log out other devices. Clearing browser cookies or using private browsing requires a fresh login. Transient authentication-service failures must not be treated as evidence of logout.
+
+The separate Academy management session in ps-booking expires after 90 days without use. Authenticated use renews both the authoritative Academy record and booking's encrypted session/cookie. Existing unexpired seven-day sessions adopt the new window on their next successful use; expired or revoked sessions are never restored. Roll out Academy before booking. Ordinary renewal never changes `verified_at`: privilege changes still require verification within ten minutes, and current roles are checked on every management request. Studio/cashbox login policy remains separate.
+
+Supabase staging settings were checked on 12 October 2026: JWT lifetime 3600 seconds, no session time-box or inactivity limit, concurrent device sessions allowed, refresh-token reuse protection enabled with a ten-second allowance. Keep those protections. See [Supabase sessions](https://supabase.com/docs/guides/auth/sessions) and the [SSR guide](https://supabase.com/docs/guides/auth/server-side/advanced-guide).

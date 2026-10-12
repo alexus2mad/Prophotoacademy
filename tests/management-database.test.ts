@@ -217,6 +217,42 @@ describe('management is authorized by verified identity through ps-booking', () 
       managementAction('customer.summary', { emails: Array(21).fill(email) }, token),
     ).rejects.toThrow();
   });
+  it('renews a valid device session without refreshing its privilege verification', async () => {
+    await pg.exec(
+      "UPDATE academy.management_sessions SET expires_at=now()+interval '1 hour', verified_at=now()-interval '11 minutes'",
+    );
+    const before = (
+      await pg.query<Record<string, unknown>>('SELECT verified_at FROM academy.management_sessions')
+    ).rows[0];
+    expect(await managementAction('auth.session', undefined, token)).toHaveProperty(
+      'expiresIn',
+      90 * 86400,
+    );
+    const after = (
+      await pg.query(
+        "SELECT verified_at,expires_at>now()+interval '89 days' AS renewed FROM academy.management_sessions",
+      )
+    ).rows[0];
+    expect(after).toEqual({ verified_at: before.verified_at, renewed: true });
+  });
+  it('does not restore an expired or logged-out management session', async () => {
+    const expired = 'synthetic-expired-session';
+    await pg.query(
+      "INSERT INTO academy.management_sessions(token_hash,user_id,expires_at) VALUES($1,$2,now()-interval '1 second')",
+      [createHash('sha256').update(expired).digest('hex'), admin],
+    );
+    await expect(managementAction('auth.session', undefined, expired)).rejects.toThrow('Сеанс');
+    const other = 'synthetic-other-device';
+    await pg.query(
+      "INSERT INTO academy.management_sessions(token_hash,user_id,expires_at) VALUES($1,$2,now()+interval '1 day')",
+      [createHash('sha256').update(other).digest('hex'), admin],
+    );
+    await managementAction('auth.logout', undefined, other);
+    await expect(managementAction('auth.session', undefined, other)).rejects.toThrow('Сеанс');
+    await expect(managementAction('auth.session', undefined, token)).resolves.toHaveProperty(
+      'user',
+    );
+  });
   it('requires fresh verification for privilege changes and honors revoked roles immediately', async () => {
     await pg.exec("UPDATE academy.management_sessions SET verified_at=now()-interval '11 minutes'");
     await expect(

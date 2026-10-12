@@ -57,7 +57,8 @@ export async function authClient(writable = false) {
       async getClaims(token?: string) {
         return { data: { claims: { session_id: token || jar.get(cookieName)?.value || '' } } };
       },
-      async signOut() {
+      async signOut(...options: unknown[]) {
+        void options;
         if (writable) jar.delete(cookieName);
         return { error: null };
       },

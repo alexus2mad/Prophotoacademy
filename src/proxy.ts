@@ -1,8 +1,9 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { hubRewritePath, isHubHost } from './lib/ecosystem';
 import { refreshSession } from './lib/auth/proxy';
+import { isAccountPage, needsSessionRefresh } from './lib/auth/session';
 export async function proxy(request: NextRequest) {
-  const accountRoute = /^\/(account|login|learn|admin)(\/|$)/.test(request.nextUrl.pathname);
+  const accountRoute = isAccountPage(request.nextUrl.pathname);
   if (
     accountRoute &&
     isHubHost(request.headers.get('host') || '') &&
@@ -14,8 +15,7 @@ export async function proxy(request: NextRequest) {
     );
     return NextResponse.redirect(target);
   }
-  if (accountRoute || request.nextUrl.pathname.startsWith('/api/auth/'))
-    return refreshSession(request);
+  if (needsSessionRefresh(request.nextUrl.pathname)) return refreshSession(request);
   if (!isHubHost(request.headers.get('host') || '')) {
     const base = process.env.NEXT_PUBLIC_HUB_URL;
     if (

@@ -1,11 +1,13 @@
 import { createServerClient } from '@supabase/ssr';
-import { createClient } from '@supabase/supabase-js';
+import type { CookieMethodsServer } from '@supabase/ssr';
+import { createClient, isAuthRetryableFetchError } from '@supabase/supabase-js';
 import { cookies } from 'next/headers';
 import { cache } from 'react';
 import { redirect } from 'next/navigation';
 import { HttpError } from '../http';
 import { databasePool, transaction } from '../database/client';
 import { claimIdentity, safeReturnTo } from './identity';
+import { sessionCookieOptions } from './session';
 import type { Member } from './types';
 
 export const authConfigured = () =>
@@ -17,24 +19,17 @@ export const authConfigured = () =>
 export async function authClient(writable = false) {
   if (!authConfigured()) throw new HttpError(503, 'Кабінет ще налаштовується');
   const jar = await cookies();
+  const cookieMethods: CookieMethodsServer = { getAll: () => jar.getAll() };
+  if (writable)
+    cookieMethods.setAll = (values) => {
+      for (const { name, value, options } of values) jar.set(name, value, options);
+    };
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
     {
-      cookieOptions: {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax',
-        path: '/',
-      },
-      cookies: {
-        getAll: () => jar.getAll(),
-        setAll: writable
-          ? (values) => {
-              for (const { name, value, options } of values) jar.set(name, value, options);
-            }
-          : undefined,
-      },
+      cookieOptions: sessionCookieOptions(),
+      cookies: cookieMethods,
     },
   );
 }
@@ -52,6 +47,11 @@ export const currentMember = cache(async () => {
     data: { user },
     error,
   } = await client.auth.getUser();
+  if (
+    error &&
+    (isAuthRetryableFetchError(error) || error.status === 429 || (error.status ?? 0) >= 500)
+  )
+    throw new HttpError(503, 'Не вдалося перевірити сеанс. Спробуйте ще раз');
   if (error || !user?.email || !user.email_confirmed_at) return null;
   const member = (
     await databasePool().query<Member>('SELECT * FROM academy.profiles WHERE id=$1', [user.id])

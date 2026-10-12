@@ -18,7 +18,8 @@ export async function POST(request: Request, { params }: ActionRouteProps) {
     const { action } = await params;
     const client = await authClient(true);
     if (action === 'logout') {
-      await client.auth.signOut();
+      const { error } = await client.auth.signOut({ scope: 'local' });
+      if (error) throw new HttpError(503, 'Не вдалося вийти. Спробуйте ще раз');
       return Response.json({ ok: true });
     }
     if (action === 'profile') {

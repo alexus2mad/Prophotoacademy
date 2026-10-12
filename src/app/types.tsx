@@ -14,6 +14,7 @@ export type IdRouteProps = { params: Promise<{ id: string }> };
 export type AccountPageProps = {
   searchParams: Promise<{
     next?: string;
+    reauth?: string;
     view?: string;
     q?: string;
     business?: string;
