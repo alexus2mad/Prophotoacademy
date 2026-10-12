@@ -31,23 +31,27 @@ export function ProgramHero({ program, offering, image, presentation }: ProgramH
           )}
           <div>
             <span>
-              {isCustom
-                ? 'Початок'
-                : status === 'archived'
-                  ? 'Відбулася'
-                  : hasFutureStart
-                    ? 'Дата на сторінці курсу'
-                    : 'Найближчий старт'}
+              {presentation.testEnrollment
+                ? 'Тестовий запис'
+                : isCustom
+                  ? 'Початок'
+                  : status === 'archived'
+                    ? 'Відбулася'
+                    : hasFutureStart
+                      ? 'Дата на сторінці курсу'
+                      : 'Найближчий старт'}
             </span>
-            {isCustom
-              ? 'Узгодимо з вами'
-              : status === 'archived'
-                ? dateLabel(offering?.startDate)
-                : open
+            {presentation.testEnrollment
+              ? 'Без оплати'
+              : isCustom
+                ? 'Узгодимо з вами'
+                : status === 'archived'
                   ? dateLabel(offering?.startDate)
-                  : hasFutureStart
+                  : open
                     ? dateLabel(offering?.startDate)
-                    : 'Уточнюємо набір'}
+                    : hasFutureStart
+                      ? dateLabel(offering?.startDate)
+                      : 'Уточнюємо набір'}
           </div>
         </div>
         <div className="program-hero-actions">

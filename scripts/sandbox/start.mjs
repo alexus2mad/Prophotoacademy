@@ -124,6 +124,7 @@ try {
     if (process.env[key]) env[key] = process.env[key];
   Object.assign(env, {
     NODE_ENV: 'development',
+    PAYMENT_MODE: 'disabled',
     NEXT_TELEMETRY_DISABLED: '1',
     SANDBOX_RPC_URL: 'http://127.0.0.1:3202',
     SANDBOX_RPC_TOKEN: token,

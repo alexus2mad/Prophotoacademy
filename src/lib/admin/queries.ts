@@ -117,7 +117,7 @@ export async function adminPeople(query = ''): Promise<AdminPerson[]> {
 }
 export async function purchasesFor(email: string): Promise<PurchaseView[]> {
   const result = await databasePool().query(
-    "SELECT id,data,created_at FROM academy.orders WHERE lower(trim(data->'customer'->>'email'))=$1 AND data->>'mode'='wayforpay' ORDER BY created_at DESC LIMIT 200",
+    "SELECT id,data,created_at FROM academy.orders WHERE lower(trim(data->'customer'->>'email'))=$1 AND data->>'mode' IN ('wayforpay','disabled') ORDER BY created_at DESC LIMIT 200",
     [email],
   );
   return result.rows.map((r) => ({

@@ -70,6 +70,7 @@ export async function prepareSandbox(root) {
     id: 'program-sandbox',
     slug: 'sandbox-practice',
     title: 'Тестова контент-практика',
+    shortTitle: 'Тестова контент-практика',
     description: 'Локальний навчальний курс для перевірки роботи платформи',
     modules: [
       { id: 'sandbox-module', title: 'Перші кроки', topics: ['Плануємо контент для бренду'] },
@@ -101,6 +102,7 @@ export async function prepareSandbox(root) {
     id: 'program-sandbox-content-lab',
     slug: 'sandbox-content-lab',
     title: 'Контент для бренду — тестовий курс',
+    shortTitle: 'Контент для бренду',
     description: 'Чотири практичні уроки від задуму до розбору готового контенту',
     modules: [
       {

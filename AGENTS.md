@@ -19,6 +19,7 @@ Read [ARCHITECTURE.md](ARCHITECTURE.md) before changing the application. It is t
 - Use `pnpm format` / `pnpm format:check` for the shared code style. Do not edit generated build output.
 - Commit each significant verified change. Preserve other work and keep credentials and customer data out of Git.
 - GitHub Pages publishes only the validated static export from `gh-pages`. Production backend actions remain unavailable in that review.
+- Enrollment modes are explicit server configuration. `disabled` grants real test access with zero charge and no financial records; `mock` grants no access; `wayforpay` requires verified callbacks. Never infer bypass from missing keys, let the browser choose mode/price/rights, or restore revoked access through checkout. Preserve published package validation and see `docs/COURSE_CHECKOUT.md`.
 - Student/account management, privilege changes, access administration, attendance and student statistics belong in `ps-booking`'s admin interface. Academy retains authoring and the student experience. Use the authenticated management bridge; do not add duplicate student-admin screens or browser operations tokens. The shared cashbox and merchant-wide financial operations also remain in `ps-booking`.
 
 <!-- BEGIN:nextjs-agent-rules -->

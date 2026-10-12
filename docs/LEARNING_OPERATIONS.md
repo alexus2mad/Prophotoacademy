@@ -18,6 +18,8 @@ Academy: verified email login, student dashboard, personal purchases/profile, le
 10. Review teaching content, package-to-lesson mappings, access months and intake dates before opening checkout. Instagram BASE promises five months; lifetime packages must remain lifetime. The editor checks known published duration promises. Seeded public outlines are drafts, not supplied teaching material
 11. Keep the existing WayForPay checkout/callback addresses and configure verified merchant credentials. Approved callbacks fulfill known orders exactly once. Browser redirects and mock payments never grant access. Confirm full/partial refunds and failed/duplicate callbacks in a provider sandbox before taking real payments
 
+For the owner-approved payment-disabled rollout, follow `COURSE_CHECKOUT.md`. Explicit `PAYMENT_MODE=disabled` grants published, mapped packages without financial effects; it is distinct from the mock payment demo. Apply migration `202610120001` first.
+
 ## Learning and progress
 
 Required blocks determine completion, weighted by expected study time. Video uses unique 90% coverage, articles 90% coverage plus 80% active reading time, images five seconds by default and PDFs 90% pages with page reading time. Supplementary blocks do not lower completion. Opening/downloading a file is not completion. These are product heuristics, not proof of attention or comprehension.

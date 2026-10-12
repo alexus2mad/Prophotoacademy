@@ -40,13 +40,14 @@ export function useCheckoutForm({ offeringId, packageId }: CheckoutFormProps) {
       });
       const result = await response.json();
       if (!response.ok) {
+        if (response.status >= 400 && response.status < 500) identity.current = null;
         const fields = result.fieldErrors || {};
         setFieldErrors(fields);
         const name = Object.keys(fields)[0];
         if (name) (formElement.elements.namedItem(name) as HTMLElement | null)?.focus();
         throw new Error(result.error || 'Не вдалося оформити замовлення.');
       }
-      if (result.mode === 'mock') {
+      if (result.mode === 'mock' || result.mode === 'disabled') {
         window.location.assign(result.url);
         return;
       }

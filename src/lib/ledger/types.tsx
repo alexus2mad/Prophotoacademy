@@ -1,7 +1,14 @@
 import type { DatabaseSync } from 'node:sqlite';
 import type { Acquisition } from '../attribution/types';
 import type { AccessSnapshot } from '../learning/types';
-export type OrderStatus = 'pending' | 'approved' | 'declined' | 'canceled' | 'refunded';
+import type { PaymentMode } from '../commerce/types';
+export type OrderStatus =
+  | 'pending'
+  | 'approved'
+  | 'declined'
+  | 'canceled'
+  | 'refunded'
+  | 'enrolled';
 export type Order = {
   id: string;
   tokenHash: string;
@@ -16,7 +23,8 @@ export type Order = {
   currency: string;
   customer: { name: string; email: string; phone: string };
   status: OrderStatus;
-  mode: 'mock' | 'wayforpay';
+  mode: PaymentMode;
+  listAmount?: number;
   createdAt: number;
   acquisition?: Acquisition;
   fulfillment?: AccessSnapshot;

@@ -7,4 +7,5 @@ export type ProgramPresentation = {
   inquiryTitle: string;
   buttonLabel: string;
   hasFutureStart: boolean;
+  testEnrollment?: boolean;
 };

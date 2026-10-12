@@ -26,12 +26,12 @@ const post = (value) => ({
   body: JSON.stringify(value),
 });
 for (const endpoint of [
-  '/api/checkout',
   '/api/payments/mock',
   '/api/payments/wayforpay/callback',
   '/api/cron/platform',
 ])
   await check('Disabled: ' + endpoint, academy + endpoint, post({}), 503);
+await check('Checkout validates enrollment input', academy + '/api/checkout', post({}), 400);
 await check(
   'Booking payment mutations disabled',
   booking + '/api/admin/wayforpay/sync',

@@ -59,9 +59,10 @@ assert.equal((await fetch(media.url)).status, 200);
 pass('Enrolled student receives a working temporary PDF URL without shared caching');
 await request(academy, '/api/admin/courses/' + course.id, { cookie: student, status: 403 });
 pass('Enrolled student cannot author courses');
-for (const endpoint of ['/api/checkout', '/api/payments/mock', '/api/payments/wayforpay/callback'])
+for (const endpoint of ['/api/payments/mock', '/api/payments/wayforpay/callback'])
   await request(academy, endpoint, { value: {}, status: 503 });
-pass('Checkout, mock payments, and real payment callbacks remain disabled');
+await request(academy, '/api/checkout', { value: {}, status: 400 });
+pass('Test enrollment validates input; mock payments and real callbacks remain disabled');
 const manager = await login(booking, 'manager@example.test');
 const person = await (
   await request(booking, '/api/academy/person?email=student%40example.test', { cookie: manager })

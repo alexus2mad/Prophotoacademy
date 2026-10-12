@@ -4,14 +4,15 @@ import { FormField } from '@/components/molecules/FormField/FormField';
 import { useCheckoutForm } from './hooks';
 import type { CheckoutFormProps } from './types';
 
-export function CheckoutForm({ offeringId, packageId, mock }: CheckoutFormProps) {
-  const { state, error, fieldErrors, submit } = useCheckoutForm({ offeringId, packageId, mock });
+export function CheckoutForm({ offeringId, packageId, mode, email, name }: CheckoutFormProps) {
+  const { state, error, fieldErrors, submit } = useCheckoutForm({ offeringId, packageId, mode });
   return (
     <form className="form-stack" onSubmit={submit}>
       <FormField
         id="checkout-name"
         label="Ваше ім’я"
         name="name"
+        defaultValue={name}
         autoComplete="name"
         required
         minLength={2}
@@ -22,6 +23,7 @@ export function CheckoutForm({ offeringId, packageId, mock }: CheckoutFormProps)
         id="checkout-email"
         label="Email для доступу до навчання"
         name="email"
+        defaultValue={email}
         type="email"
         autoComplete="email"
         required
@@ -72,15 +74,14 @@ export function CheckoutForm({ offeringId, packageId, mock }: CheckoutFormProps)
       <Button type="submit" className="button button-wide" disabled={state === 'sending'}>
         {state === 'sending'
           ? 'Готуємо замовлення…'
-          : mock
-            ? 'Перевірити оформлення'
-            : 'Перейти до оплати'}
+          : mode === 'disabled'
+            ? 'Отримати доступ без оплати'
+            : mode === 'mock'
+              ? 'Перевірити оформлення'
+              : 'Перейти до оплати'}
       </Button>
-      {mock && (
-        <p className="mock-notice">
-          Демонстраційний режим. Гроші не списуються. Дані зберігаються лише локально для перевірки
-          оформлення.
-        </p>
+      {mode === 'mock' && (
+        <p className="mock-notice">Демонстрація оформлення. Оплати й доступу до навчання немає.</p>
       )}
     </form>
   );

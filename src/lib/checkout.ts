@@ -3,13 +3,15 @@ import { z } from 'zod';
 import type { AcademyContent, Offering, Package, Program } from './content/types';
 import { canEnroll } from './format';
 import { HttpError } from './http';
+import { paymentMode } from './commerce/payment-mode';
+import { canTestEnroll } from './commerce/selectors';
 export const checkoutInput = z
   .object({
     acquisition: acquisitionSchema.optional(),
     offeringId: z.string().min(1).max(100),
     packageId: z.string().min(1).max(100),
     name: z.string().trim().min(2).max(80),
-    email: z.email().max(160),
+    email: z.string().trim().toLowerCase().pipe(z.email().max(160)),
     phone: z
       .string()
       .trim()
@@ -48,17 +50,15 @@ export function resolvePurchase(
   packageId: string,
   now = new Date(),
 ) {
-  if (
-    offeringId === 'demo-offering' &&
-    packageId === 'demo-base' &&
-    (process.env.PAYMENT_MODE || 'mock') === 'mock'
-  )
+  if (offeringId === 'demo-offering' && packageId === 'demo-base' && paymentMode() === 'mock')
     return { program: demoProgram, offering: demoOffering, pack: demoPackage };
   const offering = content.offerings.find((o) => o.id === offeringId);
   const pack = offering?.packages.find((p) => p.id === packageId);
   const program = content.programs.find((p) => p.id === offering?.programId);
   if (!offering || !pack || !program) throw new HttpError(404, 'Пакет не знайдено.');
-  if (!canEnroll(offering, pack, now))
+  if (
+    !(paymentMode() === 'disabled' ? canTestEnroll(offering, pack) : canEnroll(offering, pack, now))
+  )
     throw new HttpError(409, 'Набір у цей пакет не підтверджено. Залиште заявку академії.');
   return { program, offering, pack };
 }

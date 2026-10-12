@@ -2,6 +2,10 @@
 import { useCallback, useEffect, useState } from 'react';
 import type { OrderStatusProps, Status } from './types';
 const labels = {
+  enrolled: [
+    'Тестовий запис збережено',
+    'Кошти не списувалися. Для перевірки поточного доступу увійдіть до кабінету або зверніться до академії',
+  ],
   pending: [
     'Очікуємо підтвердження',
     'Щойно платіжна система підтвердить оплату, статус замовлення оновиться.',
@@ -70,7 +74,9 @@ export function useOrderStatus({ token }: OrderStatusProps) {
   const label = order?.learningAccess
     ? [
         'Ваш курс уже в кабінеті',
-        'Оплату підтверджено. Увійдіть за email, який ви вказали під час оформлення, і починайте навчання',
+        order.mode === 'disabled'
+          ? 'Доступ надано без оплати. Увійдіть за email, який ви вказали під час оформлення, і починайте навчання'
+          : 'Оплату підтверджено. Увійдіть за email, який ви вказали під час оформлення, і починайте навчання',
       ]
     : order
       ? labels[order.status]

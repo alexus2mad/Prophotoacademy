@@ -64,6 +64,8 @@ The Academy database remains the authoritative identity, entitlement and progres
 
 Academy owns its checkout orders, verified purchase receipts, fulfillment events and learning entitlements. Its existing WayForPay callback remains the immediate fulfillment boundary. A successful browser return never grants access. Full, confirmed refunds revoke only the related purchase grant; partial refunds preserve access. Do not infer a purchase or entitlement from product names, a booking or an aggregate revenue report.
 
+The explicitly configured `PAYMENT_MODE=disabled` rollout enrolls published, mapped packages without charging. `src/lib/commerce/enrollment.ts` writes zero-amount test orders, grants, audit and email jobs atomically, without payment events or transactions. Missing payment keys never enable this mode. Exact retries cannot duplicate access; a new test order cannot renew or restore an earlier grant. See `docs/COURSE_CHECKOUT.md`. The local sandbox also supports this enrollment path while blocking payment callbacks and email dispatch.
+
 The management bridge is not a payment-event feed. The existing booking cashbox still has no Academy payment-event producer or refund-submission endpoint. Any financial reconciliation integration belongs in that repository. See `docs/PS_BOOKING_BOUNDARY.md` and `docs/LEARNING_OPERATIONS.md` for setup and activation requirements.
 
 ## Private learning content

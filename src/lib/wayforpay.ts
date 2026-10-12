@@ -10,7 +10,7 @@ export const safeEqual = (a: string, b: string) => {
     right = Buffer.from(b);
   return left.length === right.length && timingSafeEqual(left, right);
 };
-const config = () => {
+export const paymentConfig = () => {
   const merchant = process.env.WAYFORPAY_MERCHANT_ACCOUNT;
   const secret = process.env.WAYFORPAY_MERCHANT_SECRET;
   const domain = process.env.WAYFORPAY_MERCHANT_DOMAIN;
@@ -20,7 +20,8 @@ const config = () => {
   return { merchant, secret, domain, site };
 };
 export function purchasePayload(order: Order, token: string) {
-  const { merchant, secret, domain, site } = config();
+  if (order.mode !== 'wayforpay') throw new HttpError(409, 'Це замовлення не потребує оплати');
+  const { merchant, secret, domain, site } = paymentConfig();
   const productName = `${order.programTitle} — ${order.packageName}`;
   return {
     merchantAccount: merchant,

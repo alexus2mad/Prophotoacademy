@@ -1,4 +1,4 @@
-import { orderByToken } from '@/lib/commerce/orders';
+import { orderByToken, orderHasAccess } from '@/lib/commerce/orders';
 export const runtime = 'nodejs';
 export async function GET(request: Request) {
   const token = new URL(request.url).searchParams.get('token');
@@ -9,8 +9,7 @@ export async function GET(request: Request) {
   return Response.json(
     {
       status: order.status,
-      learningAccess:
-        order.status === 'approved' && order.mode === 'wayforpay' && !!order.fulfillment,
+      learningAccess: await orderHasAccess(order),
       programTitle: order.programTitle,
       packageName: order.packageName,
       mode: order.mode,

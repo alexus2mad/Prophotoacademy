@@ -3,13 +3,14 @@ import * as local from '../ledger';
 import { databasePool, managedDatabase, transaction } from '../database/client';
 import type { SqlConnection, JsonRow } from '../database/types';
 import type { Order, OrderStatus } from '../ledger/types';
-import type { AccessSnapshot } from '../learning/types';
-import { accessDates } from '../learning/access';
+import type { AccessSnapshot, CourseDraft } from '../learning/types';
+import { grantOrderAccess, enrollWithoutPayment } from './enrollment';
+import { paymentMode } from './payment-mode';
 import { HttpError } from '../http';
 export { hash, IdempotencyConflict } from '../ledger';
 
 function requireBackend() {
-  if (!managedDatabase() && process.env.PAYMENT_MODE === 'wayforpay')
+  if (!managedDatabase() && paymentMode() !== 'mock')
     throw new HttpError(503, 'Платіжний кабінет ще не підключено');
 }
 export async function orderById(id: string) {
@@ -44,15 +45,39 @@ export async function orderByKey(key: string) {
       ).rows[0]?.data
     : local.orderByKey(key);
 }
-export async function purchaseAccess(offeringId: string, packageId: string) {
+export async function orderHasAccess(order: Order) {
+  if (
+    !managedDatabase() ||
+    !['approved', 'enrolled'].includes(order.status) ||
+    order.mode === 'mock'
+  )
+    return false;
+  return Boolean(
+    (
+      await databasePool().query(
+        'SELECT id FROM academy.grants WHERE source_order_id=$1 AND revoked_at IS NULL AND (expires_at IS NULL OR expires_at>now())',
+        [order.id],
+      )
+    ).rowCount,
+  );
+}
+export async function purchaseAccess(offeringId: string, packageId: string, programId: string) {
+  requireBackend();
   if (!managedDatabase()) return undefined;
   const rule = (
     await databasePool().query(
-      'SELECT * FROM academy.package_rules WHERE offering_id=$1 AND package_id=$2',
-      [offeringId, packageId],
+      `SELECT p.*, r.manifest FROM academy.package_rules p
+       JOIN academy.releases r ON r.id=p.release_id AND r.course_id=p.course_id
+       JOIN academy.courses c ON c.id=p.course_id
+       WHERE p.offering_id=$1 AND p.package_id=$2 AND c.program_id=$3 AND c.active_release_id IS NOT NULL`,
+      [offeringId, packageId, programId],
     )
   ).rows[0];
   if (!rule) throw new HttpError(409, 'Навчальні матеріали цього пакета ще готуються');
+  const manifest = rule.manifest as CourseDraft;
+  const lessons = manifest.modules.flatMap((m) => m.lessons.map((l) => l.id));
+  if (!rule.lesson_ids.length || rule.lesson_ids.some((id: string) => !lessons.includes(id)))
+    throw new HttpError(409, 'Навчальні матеріали цього пакета ще готуються');
   return {
     courseId: rule.course_id,
     releaseId: rule.release_id,
@@ -94,7 +119,7 @@ export async function createOrder(
       'INSERT INTO academy.orders(id,token_hash,idempotency_key,fingerprint,data) VALUES($1,$2,$3,$4,$5)',
       [order.id, order.tokenHash, order.idempotencyKey, order.fingerprint, JSON.stringify(order)],
     );
-    return order;
+    return order.mode === 'disabled' ? enrollWithoutPayment(db, order) : order;
   });
 }
 export async function fulfillOrder(
@@ -104,7 +129,6 @@ export async function fulfillOrder(
   merchant: string,
 ) {
   if (order.mode !== 'wayforpay') return;
-  const paidAt = new Date().toISOString();
   const amount = Math.round(order.amount * 100),
     email = order.customer.email.trim().toLowerCase();
   const tx = (
@@ -128,24 +152,7 @@ export async function fulfillOrder(
     'INSERT INTO academy.payment_events(id,transaction_id,status) VALUES($1,$2,$3) ON CONFLICT DO NOTHING',
     [merchant + ':' + order.id + ':' + status, tx.id, status],
   );
-  if (status === 'approved' && order.fulfillment) {
-    const snapshot = order.fulfillment,
-      dates = accessDates(paidAt, snapshot.accessMonths, snapshot.startsAt);
-    await db.query(
-      "INSERT INTO academy.grants(user_id,email,course_id,release_id,lesson_ids,package_name,source_order_id,source,starts_at,expires_at,offering_id) VALUES((SELECT id FROM academy.profiles WHERE email=$1),$1,$2,$3,$4,$5,$6,'purchase',$7,$8,$9) ON CONFLICT(source_order_id) DO NOTHING",
-      [
-        email,
-        snapshot.courseId,
-        snapshot.releaseId,
-        JSON.stringify(snapshot.lessonIds),
-        order.packageName,
-        order.id,
-        dates.startsAt,
-        dates.expiresAt,
-        order.offeringId,
-      ],
-    );
-  }
+  if (status === 'approved' && order.fulfillment) await grantOrderAccess(db, order);
   if (status === 'refunded') {
     await db.query('UPDATE academy.transactions SET refunded_minor=amount_minor WHERE id=$1', [
       tx.id,

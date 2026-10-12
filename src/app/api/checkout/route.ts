@@ -8,7 +8,8 @@ import {
   purchaseAccess,
 } from '@/lib/commerce/orders';
 import { guardMutation, jsonBody, errorResponse, HttpError, validationError } from '@/lib/http';
-import { purchasePayload } from '@/lib/wayforpay';
+import { purchasePayload, paymentConfig } from '@/lib/wayforpay';
+import { paymentMode } from '@/lib/commerce/payment-mode';
 export const runtime = 'nodejs';
 export async function POST(request: Request) {
   try {
@@ -29,11 +30,15 @@ export async function POST(request: Request) {
     );
     const fingerprint = hash(JSON.stringify(input));
     const existing = await orderByKey(input.idempotencyKey);
-    if (existing && existing.fingerprint !== fingerprint)
+    const mode = paymentMode();
+    if (
+      existing &&
+      (existing.fingerprint !== fingerprint ||
+        existing.tokenHash !== hash(input.token) ||
+        existing.mode !== mode)
+    )
       throw new HttpError(409, 'Цей запит уже використано.');
-    const mode = process.env.PAYMENT_MODE || 'mock';
-    if (!['mock', 'wayforpay'].includes(mode))
-      throw new HttpError(503, 'Платіжний режим не налаштований.');
+    if (mode === 'wayforpay') paymentConfig();
     const order =
       existing ||
       (await createOrder(
@@ -46,21 +51,22 @@ export async function POST(request: Request) {
           programId: program.id,
           programTitle: program.title,
           packageName: pack.name,
-          amount: pack.price,
+          amount: mode === 'disabled' ? 0 : pack.price,
+          listAmount: pack.price,
           currency: 'UAH',
           customer: { name: input.name, email: input.email, phone: input.phone },
-          mode: mode as 'mock' | 'wayforpay',
+          mode,
           merchantAccount:
             mode === 'wayforpay' ? process.env.WAYFORPAY_MERCHANT_ACCOUNT : undefined,
           fulfillment:
-            mode === 'wayforpay'
-              ? await purchaseAccess(input.offeringId, input.packageId)
+            mode !== 'mock'
+              ? await purchaseAccess(input.offeringId, input.packageId, program.id)
               : undefined,
         },
         input.token,
       ));
     return Response.json(
-      mode === 'mock'
+      mode !== 'wayforpay'
         ? { mode, url: `/thanks?token=${input.token}`, orderId: order.id }
         : {
             mode,

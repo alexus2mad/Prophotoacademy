@@ -4,6 +4,9 @@ import { notFound } from 'next/navigation';
 import { PortableText } from '@portabletext/react';
 import { getContent } from '@/lib/content';
 import { ProgramTemplate } from '@/components/templates/ProgramTemplate/ProgramTemplate';
+import { connection } from 'next/server';
+import { enrollmentOptions } from '@/lib/commerce/catalog';
+import { findOffering } from '@/lib/content/selectors';
 export async function generateMetadata({ params }: SlugPageProps): Promise<Metadata> {
   const { slug } = await params;
   const content = await getContent();
@@ -18,6 +21,7 @@ export async function generateMetadata({ params }: SlugPageProps): Promise<Metad
     : {};
 }
 export default async function Detail({ params }: SlugPageProps) {
+  if (process.env.NEXT_PUBLIC_REVIEW_MODE !== 'pages') await connection();
   const { slug } = await params;
   const content = await getContent();
   const program = content.programs.find((p) => p.slug === slug);
@@ -37,7 +41,11 @@ export default async function Detail({ params }: SlugPageProps) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }}
         />
-        <ProgramTemplate program={program} content={content} />
+        <ProgramTemplate
+          program={program}
+          content={content}
+          enrollment={await enrollmentOptions(findOffering(content, program.id))}
+        />
       </>
     );
   }

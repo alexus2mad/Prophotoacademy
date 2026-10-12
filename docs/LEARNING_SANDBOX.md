@@ -26,7 +26,7 @@ The fixed local code is **123456**. Request a code before entering it; it is sin
 3. In ps-booking, sign in with the same manager email/code. Open **Студенти → Надати доступ за email**. Enter the student email, choose the course version and lessons, and record the package and reason. No purchase is created.
 4. Sign out of Academy and sign in as the student. The verified email claims the pending enrollment. Open the lesson, read its text, inspect PDF pages and check saved progress. **Я опрацював матеріал** records student-confirmed completion separately from automatic tracking.
 5. In ps-booking, reopen the student. Check course and lesson progress. Cancel access with a reason, refresh the student's lesson, then restore access. Progress must remain intact.
-6. Add or edit material in the manager's draft and publish a new version. Existing students retain the previously assigned version until explicitly transferred in ps-booking. New package rules can be configured against a published version; checkout remains disabled.
+6. Add or edit material in the manager's draft and publish a new version. Existing students retain the previously assigned version until explicitly transferred in ps-booking. Configure a package against a published version, then test its zero-charge checkout from the course landing page. Provider payments remain disabled; the real enrollment service creates synthetic access. See `COURSE_CHECKOUT.md`.
 
 The browser shares Academy cookies between tabs. Use **Вийти** before switching Academy identities. ps-booking keeps its own separate manager session.
 

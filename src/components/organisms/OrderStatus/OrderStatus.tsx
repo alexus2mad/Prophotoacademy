@@ -10,7 +10,7 @@ export function OrderStatus({ token }: OrderStatusProps) {
   const { order, error, busy, refresh, simulate, label } = useOrderStatus({ token });
   return (
     <div className="container status-panel">
-      {order?.status === 'approved' ? (
+      {order && ['approved', 'enrolled'].includes(order.status) ? (
         <Check size={40} />
       ) : order?.status === 'pending' ? (
         <Clock size={40} />

@@ -3,7 +3,13 @@ import { PackageIncludes } from '@/components/molecules/PackageIncludes/PackageI
 import { canEnroll, money } from '@/lib/format';
 import Link from 'next/link';
 import type { PackageCardProps } from './types';
-export function PackageCard({ offering, program, pack }: PackageCardProps) {
+export function PackageCard({
+  offering,
+  program,
+  pack,
+  enrollable,
+  paymentDisabled,
+}: PackageCardProps) {
   return (
     <article
       key={pack.id}
@@ -29,12 +35,12 @@ export function PackageCard({ offering, program, pack }: PackageCardProps) {
         </details>
       )}
       <div className="package-action">
-        {canEnroll(offering, pack) ? (
+        {(enrollable ?? canEnroll(offering, pack)) ? (
           <Link
             href={`/checkout?offering=${encodeURIComponent(offering.id)}&package=${encodeURIComponent(pack.id)}`}
             className="button button-wide"
           >
-            Обрати {pack.name}
+            {paymentDisabled ? 'Отримати доступ' : `Обрати ${pack.name}`}
           </Link>
         ) : pack.availability === 'soldOut' ? null : (
           <InquiryButton

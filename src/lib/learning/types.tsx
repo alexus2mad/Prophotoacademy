@@ -53,7 +53,7 @@ export type Grant = {
   lesson_ids: string[];
   package_name: string;
   source_order_id: string | null;
-  source: 'purchase' | 'admin' | 'migration';
+  source: 'purchase' | 'admin' | 'migration' | 'test';
   starts_at: string;
   expires_at: string | null;
   revoked_at: string | null;

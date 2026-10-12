@@ -11,10 +11,15 @@ import { findImage, findOffering } from '@/lib/content/selectors';
 import { money } from '@/lib/format';
 import { programPresentation } from '@/lib/programs/selectors';
 import type { ProgramTemplateProps } from './types';
-export function ProgramTemplate({ program, content }: ProgramTemplateProps) {
+export function ProgramTemplate({ program, content, enrollment }: ProgramTemplateProps) {
   const offering = findOffering(content, program.id);
   const presentation = programPresentation(program, offering);
-  const { price, open, inquiryTitle, buttonLabel } = presentation;
+  if (enrollment) {
+    presentation.open = enrollment.packageIds.length > 0;
+    presentation.testEnrollment = presentation.open && enrollment.mode === 'disabled';
+  }
+  const { price, inquiryTitle, buttonLabel } = presentation;
+  const open = presentation.open;
   const enrollmentAction = open ? (
     <a href="#packages" className="button button-wide">
       Обрати пакет
@@ -33,7 +38,9 @@ export function ProgramTemplate({ program, content }: ProgramTemplateProps) {
           image={findImage(content, program.imageId)}
           presentation={presentation}
         />
-        {!!offering?.packages.length && <ProgramPackages offering={offering} program={program} />}
+        {!!offering?.packages.length && (
+          <ProgramPackages offering={offering} program={program} enrollment={enrollment} />
+        )}
         <div className="program-layout" id="program-overview">
           <div className="program-content">
             <ProgramOverview program={program} />

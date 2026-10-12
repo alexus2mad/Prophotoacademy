@@ -4,6 +4,7 @@ export const formatMoney = (minor: number, currency = 'UAH') =>
   );
 export const purchaseStatus = (status: string) =>
   ({
+    enrolled: 'Тестовий запис без оплати',
     approved: 'Оплачено',
     pending: 'Очікує оплати',
     refunded: 'Оплату повернено',

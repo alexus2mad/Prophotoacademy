@@ -6,11 +6,9 @@ export function proxy(request: NextRequest) {
     return new NextResponse('Local sandbox only', { status: 403 });
   const path = request.nextUrl.pathname;
   const allowedApi =
-    /^\/api\/(auth|admin|learning)(\/|$)/.test(path) || path === '/api/integrations/ps-booking';
-  if (
-    (path.startsWith('/api/') && !allowedApi) ||
-    /^\/(checkout|thanks|hub\/booking|studio)(\/|$)/.test(path)
-  )
+    /^\/api\/(auth|admin|learning)(\/|$)/.test(path) ||
+    ['/api/integrations/ps-booking', '/api/checkout', '/api/orders/status'].includes(path);
+  if ((path.startsWith('/api/') && !allowedApi) || /^\/(hub\/booking|studio)(\/|$)/.test(path))
     return NextResponse.json(
       { error: 'Оплата та зовнішні інтеграції вимкнені в локальному тесті' },
       { status: 503 },

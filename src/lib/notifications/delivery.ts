@@ -32,13 +32,13 @@ export async function deliverNotifications() {
         continue;
       }
       if (
-        job.kind === 'order-status' &&
+        ['order-status', 'enrollment'].includes(job.kind) &&
         data.customer?.email &&
-        ['approved', 'refunded'].includes(data.status || '')
+        ['approved', 'refunded', 'enrolled'].includes(data.status || '')
       ) {
         if (!process.env.RESEND_API_KEY || !process.env.EMAIL_FROM)
           throw new Error('Email not configured');
-        const approved = data.status === 'approved',
+        const approved = ['approved', 'enrolled'].includes(data.status || ''),
           title = approved ? 'Ваш курс уже в кабінеті' : 'Повернення оплати підтверджено';
         const href = new URL(
           '/account',
@@ -55,7 +55,7 @@ export async function deliverNotifications() {
             from: process.env.EMAIL_FROM,
             to: [data.customer.email],
             subject: title,
-            html: `<h1>${title}</h1><p>${escape(data.programTitle || 'ProPhoto Academy')}</p>${approved ? `<p>Увійдіть за email, який ви вказали під час оформлення.</p><p><a href="${escape(href)}">Перейти до навчання</a></p>` : ''}`,
+            html: `<h1>${title}</h1><p>${escape(data.programTitle || 'ProPhoto Academy')}</p>${data.mode === 'disabled' ? '<p>Тестовий доступ надано без оплати. Кошти не списувалися, майбутнього списання не буде.</p>' : ''}${approved ? `<p>Увійдіть за email, який ви вказали під час оформлення.</p><p><a href="${escape(href)}">Перейти до навчання</a></p>` : ''}`,
           }),
           signal: AbortSignal.timeout(15_000),
         });

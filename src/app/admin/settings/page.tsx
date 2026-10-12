@@ -1,9 +1,26 @@
 import { pageMember } from '@/lib/auth/server';
 import { WorkspaceShell } from '@/components/templates/WorkspaceShell/WorkspaceShell';
 import { AdminSettings } from '@/components/organisms/AdminSettings/AdminSettings';
+import { paymentMode } from '@/lib/commerce/payment-mode';
 export default async function Settings() {
   const member = await pageMember('/admin/settings', true);
+  const mode = paymentMode();
   const services = [
+    {
+      name: 'Оформлення курсів',
+      configured:
+        mode === 'disabled' ||
+        (mode === 'wayforpay' &&
+          !!process.env.WAYFORPAY_MERCHANT_ACCOUNT &&
+          !!process.env.WAYFORPAY_MERCHANT_SECRET &&
+          !!process.env.WAYFORPAY_MERCHANT_DOMAIN),
+      detail:
+        mode === 'disabled'
+          ? 'Тестовий запис без оплати. Доступ відкривається до опублікованих матеріалів налаштованого пакета'
+          : mode === 'wayforpay'
+            ? 'Оплата через WayForPay. Доступ після підтвердження платежу'
+            : 'Демонстрація оформлення без оплати й доступу до курсів',
+    },
     {
       name: 'Supabase',
       configured: !!process.env.DATABASE_URL && !!process.env.SUPABASE_SERVICE_ROLE_KEY,

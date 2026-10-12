@@ -29,6 +29,7 @@ export async function claimIdentity(
   ]);
   if (existing.rows[0] && existing.rows[0].email !== email)
     throw new Error('Account email changes require support');
+  await db.query('SELECT pg_advisory_xact_lock(hashtext($1))', ['identity:' + email]);
   await db.query(
     'INSERT INTO academy.profiles(id,email,verified_at) VALUES($1,$2,$3) ON CONFLICT(id) DO NOTHING',
     [identity.id, email, identity.verifiedAt],

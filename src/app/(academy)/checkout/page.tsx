@@ -7,6 +7,10 @@ import { money } from '@/lib/format';
 import { CheckoutForm } from '@/components/organisms/CheckoutForm/CheckoutForm';
 import { Photo } from '@/components/atoms/Photo/Photo';
 import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
+import { paymentMode } from '@/lib/commerce/payment-mode';
+import { purchaseAccess } from '@/lib/commerce/orders';
+import { currentMember } from '@/lib/auth/server';
+export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: 'Оформлення навчання',
   robots: { index: false, follow: false },
@@ -14,7 +18,8 @@ export const metadata: Metadata = {
 export default async function Checkout({ searchParams }: CheckoutPageProps) {
   const query = await searchParams;
   const content = await getContent();
-  const mock = (process.env.PAYMENT_MODE || 'mock') === 'mock';
+  const mode = paymentMode();
+  const member = await currentMember();
   let purchase;
   try {
     purchase = resolvePurchase(
@@ -22,13 +27,15 @@ export default async function Checkout({ searchParams }: CheckoutPageProps) {
       query.demo === '1' ? 'demo-offering' : query.offering || '',
       query.demo === '1' ? 'demo-base' : query.package || '',
     );
+    if (mode !== 'mock')
+      await purchaseAccess(purchase.offering.id, purchase.pack.id, purchase.program.id);
   } catch {
     return (
       <div className="container status-panel">
         <h1>Уточнімо ваш набір</h1>
         <p>
-          Цей пакет поки недоступний для оплати. Команда підтвердить дату, вартість і наявність
-          місць.
+          Цей пакет ще готується до запису. Команда підтвердить доступність навчальних матеріалів і
+          деталі набору.
         </p>
         <InquiryButton className="button">Зв’язатися з академією</InquiryButton>
         <Link href="/courses" className="text-link">
@@ -43,12 +50,17 @@ export default async function Checkout({ searchParams }: CheckoutPageProps) {
       <div className="page-heading">
         <h1>{query.demo === '1' ? 'Перевірка оформлення' : 'Оформлення навчання'}</h1>
         <p className="muted">
-          Без реєстрації. Контактні дані потрібні для підтвердження замовлення й доступу до
-          матеріалів.
+          Вкажіть email, з яким навчатиметеся. Доступ з’явиться у вашому кабінеті.
         </p>
       </div>
       <div className="checkout-grid">
-        <CheckoutForm offeringId={offering.id} packageId={pack.id} mock={mock} />
+        <CheckoutForm
+          offeringId={offering.id}
+          packageId={pack.id}
+          mode={mode}
+          email={member?.email}
+          name={member?.name}
+        />
         <aside className="checkout-summary">
           <div className="checkout-summary-heading">
             <Photo image={findImage(content, program.imageId)} />
@@ -57,8 +69,18 @@ export default async function Checkout({ searchParams }: CheckoutPageProps) {
               <h2>{program.shortTitle}</h2>
             </div>
           </div>
-          <div className="price">{money(pack.price)}</div>
-          <p className="muted">Разова оплата</p>
+          <div className="price">{money(mode === 'disabled' ? 0 : pack.price)}</div>
+          <p className="muted">
+            {mode === 'disabled'
+              ? `Звичайна вартість пакета — ${money(pack.price)}`
+              : 'Разова оплата'}
+          </p>
+          {mode === 'disabled' && (
+            <p className="checkout-notice">
+              Оплату тимчасово вимкнено. Доступ надається одразу після запису. Дані картки не
+              потрібні, майбутнього списання не буде.
+            </p>
+          )}
           {!!pack.includes.length && (
             <details className="checkout-includes">
               <summary>Що входить у пакет</summary>
