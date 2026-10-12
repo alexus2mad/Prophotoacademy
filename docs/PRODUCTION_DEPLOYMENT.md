@@ -2,7 +2,7 @@
 
 The selected host is the existing Hetzner server at `46.224.208.120`, SSH port `58222`. The owner approved this change from Vercel on 11 October 2026. Academy runs as a separate service and OS account, alongside ps-booking. Its initial origin is `https://staging.prophotoacademy.com.ua`; the existing public marketing domain is not cut over by this setup.
 
-The owner explicitly requested a staging subdomain while the existing Webflow site stays operational. Keep the apex and `www` DNS records and existing mail routing unchanged. The staging HTTPS host sends `X-Robots-Tag: noindex, nofollow, noarchive` on every response. Payment mode remains mock until a separate activation.
+The owner explicitly requested a staging subdomain while the existing Webflow site stays operational. Keep the apex and `www` DNS records and existing mail routing unchanged. The staging HTTPS host sends `X-Robots-Tag: noindex, nofollow, noarchive` on every response. Payment-disabled test enrollment was activated on 12 October 2026; real WayForPay charging remains inactive.
 
 ## Services and configuration
 
@@ -41,6 +41,16 @@ The first administrator completed the normal email-code flow. The database confi
 The two applications share a private management secret through their root-owned runtime files. Booking release `ae2ee13` (`1.11.004`) deployed successfully through its existing GitHub Actions workflow. Its Academy status reports configured, and the course-authoring link redirects to staging. The booking administrator session must still be checked through its separate email-code flow. No studio-manager, cashbox or merchant configuration was changed.
 
 ## Verification and rollback
+
+### Enrollment activation — 12 October 2026
+
+Academy release `e26abbb` is active with explicit `PAYMENT_MODE=disabled`, following migration `202610120001`. Test enrollments create genuine grants with a zero order amount, a distinct test source and no provider financial record. The previous application release is `a081499669ad05307bcef5b9337a3f0f44e01195`; the original runtime environment is retained in a root-only `runtime.env.before-enrollment-*` backup. See `COURSE_CHECKOUT.md` for the manager workflow and real payment activation.
+
+The signed-in browser exposed nginx's response-header buffer limit during Supabase cookie refresh. The Academy HTTPS host now uses `proxy_buffer_size 16k` and `proxy_buffers 8 16k`, preserving streaming and private/no-store responses. `nginx -t` and an authenticated settings-page reload passed; the original virtual host is saved as `prophotoacademy.before-enrollment-header-fix`. This change does not alter other hosts or authentication policy.
+
+The ps-booking label change deployed successfully as `8b73ffe` / `1.11.005`. Academy's 88 tests, architecture checks, TypeScript, production builds and 49-page review validation passed. ps-booking's 436 tests and syntax checks passed. Local browser checks covered checkout → zero-charge enrollment → email login → account/history, with overflow and touch-target checks at 360/390/768/1024/1440px. The management bridge confirmed the same synthetic grant and zero-charge order. Screenshots are saved locally under `.data/enrollment-qa` and contain no production customer records.
+
+Public health, anonymous admin denial, management signature/session checks and nonce replay checks passed after activation. Mock and WayForPay callback endpoints both return 404 in disabled mode. The signed-in settings page confirms the configured enrollment mode. At activation, the only staging course, “Інста, яка продає”, is still unpublished and has no package rules: its checkout correctly remains unavailable until teaching material is published and its package is configured. No teaching content, customer grants or orders were fabricated on staging.
 
 Run architecture checks, TypeScript, relevant tests, production build and the static review export before release. `/api/health` verifies database connectivity and the management migration; it returns no configuration or customer data and is not cached. This health check does not certify SMTP delivery, payment readiness, or media-provider configuration.
 
