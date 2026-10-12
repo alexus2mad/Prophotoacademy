@@ -12,6 +12,7 @@ Read [ARCHITECTURE.md](ARCHITECTURE.md) before changing the application. It is t
 - Links navigate; buttons act. Retain explicit submit types, native dialog semantics, labels, keyboard access, focus states, reduced motion and responsive behavior.
 - Preserve the approved visual design, flagship course emphasis, early course prices, separate Academy/Hub customer journeys and review-mode restrictions unless the user requests a change.
 - Do not add title punctuation, decorative section numbering, excessive arrows or distracting labels. Source images and brand logos remain authoritative.
+- Lesson content uses the scoped Source Sans 3 reading system and shared `LessonProse` renderer. Keep the editor preview consistent with the player; preserve semantic heading levels, native table headers, keyboard scrolling and user text resizing. Do not apply marketing display type to instructional prose. See `docs/LESSON_AUTHORING.md`.
 
 ## Required verification and change handling
 

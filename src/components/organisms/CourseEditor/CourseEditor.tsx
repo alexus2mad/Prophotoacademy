@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
-import ReactMarkdown from 'react-markdown';
+import { LessonProse } from '@/components/molecules/LessonProse/LessonProse';
+import { readingFont } from '@/lib/typography/fonts';
 import { LessonBlockEditor } from '@/components/molecules/LessonBlockEditor/LessonBlockEditor';
 import { CoursePackageEditor } from '@/components/organisms/CoursePackageEditor/CoursePackageEditor';
 import { CourseSessions } from '@/components/organisms/CourseSessions/CourseSessions';
@@ -202,15 +203,13 @@ export function CourseEditor(props: CourseEditorProps) {
                 )}
               </div>
               {h.preview ? (
-                <div className="lesson-prose admin-panel admin-section">
+                <div className={`${readingFont.variable} lesson-content admin-panel admin-section`}>
                   {h.active.blocks
                     .filter((b) => b.kind === 'article')
                     .map((b) => (
-                      <section key={b.id}>
+                      <section key={b.id} className="lesson-block lesson-reading">
                         <h2>{b.title}</h2>
-                        <ReactMarkdown skipHtml disallowedElements={['img']}>
-                          {b.body || ''}
-                        </ReactMarkdown>
+                        <LessonProse>{b.body || ''}</LessonProse>
                       </section>
                     ))}
                 </div>

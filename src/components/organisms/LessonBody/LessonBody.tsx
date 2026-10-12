@@ -1,5 +1,6 @@
 import { LessonMaterial } from '@/components/organisms/LessonMaterial/LessonMaterial';
 import { lessonBlockGroups } from '@/lib/learning/presentation';
+import { readingFont } from '@/lib/typography/fonts';
 import type { LessonBodyProps } from './types';
 
 export function LessonBody({
@@ -14,7 +15,7 @@ export function LessonBody({
 }: LessonBodyProps) {
   const outline = lesson.blocks.filter((b) => ['article', 'quiz'].includes(b.kind) && b.title);
   return (
-    <>
+    <div className={`${readingFont.variable} lesson-content`}>
       <div className="lesson-heading">
         {moduleTitle && <p className="learning-meta">{moduleTitle}</p>}
         <h1>{lesson.title}</h1>
@@ -53,6 +54,6 @@ export function LessonBody({
           ))}
         </div>
       ))}
-    </>
+    </div>
   );
 }

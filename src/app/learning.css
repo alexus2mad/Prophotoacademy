@@ -600,44 +600,6 @@
 .lesson-block .learning-meta {
   margin-bottom: 14px;
 }
-.lesson-prose {
-  font-size: 18px;
-  line-height: 1.85;
-  overflow-wrap: anywhere;
-}
-.lesson-prose p {
-  margin: 0 0 24px;
-}
-.lesson-prose h2 {
-  font-size: 26px;
-  margin: 36px 0 18px;
-}
-.lesson-prose h3 {
-  margin: 32px 0 16px;
-}
-.lesson-prose ul,
-.lesson-prose ol {
-  padding-left: 24px;
-  margin: 0 0 24px;
-}
-.lesson-prose ul {
-  list-style: disc;
-}
-.lesson-prose ol {
-  list-style: decimal;
-}
-.lesson-prose li {
-  margin-bottom: 10px;
-}
-.lesson-prose a {
-  color: #d5e4b9;
-  text-decoration: underline;
-}
-.lesson-prose blockquote {
-  border-left: 2px solid #d5e4b9;
-  padding-left: 24px;
-  color: #cbd0c6;
-}
 .lesson-image img {
   display: block;
   width: 100%;
@@ -1268,10 +1230,6 @@
   }
   .lesson-heading {
     margin-bottom: 30px;
-  }
-  .lesson-prose {
-    font-size: 17px;
-    line-height: 1.8;
   }
   .lesson-block {
     margin-bottom: 32px;

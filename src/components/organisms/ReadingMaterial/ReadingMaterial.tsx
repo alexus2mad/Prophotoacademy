@@ -1,5 +1,5 @@
 'use client';
-import ReactMarkdown from 'react-markdown';
+import { LessonProse } from '@/components/molecules/LessonProse/LessonProse';
 import { useReadingMaterial } from './hooks';
 import type { ReadingMaterialProps } from './types';
 export function ReadingMaterial(props: ReadingMaterialProps) {
@@ -30,11 +30,7 @@ export function ReadingMaterial(props: ReadingMaterialProps) {
           {block.caption && <figcaption>{block.caption}</figcaption>}
         </figure>
       ) : (
-        <div className="lesson-prose">
-          <ReactMarkdown skipHtml disallowedElements={['img']}>
-            {block.body || ''}
-          </ReactMarkdown>
-        </div>
+        <LessonProse>{block.body || ''}</LessonProse>
       )}
     </section>
   );
