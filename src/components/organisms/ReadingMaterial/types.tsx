@@ -1,2 +1,2 @@
 import type { LessonBlockProps } from '@/lib/learning/types';
-export type ReadingMaterialProps = LessonBlockProps & { url?: string };
+export type ReadingMaterialProps = LessonBlockProps & { url?: string; onOpenImage?: () => void };

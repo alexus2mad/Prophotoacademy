@@ -2,9 +2,8 @@
 import { useEffect, useState } from 'react';
 import { demoMedia } from '@/lib/learning/demo';
 import { assetHref } from '@/lib/learning/selectors';
-import type { MediaAccess } from '@/lib/learning/types';
-import type { LessonMaterialProps } from './types';
-export function useLessonMedia({ block, courseId, lessonId, demo, preview }: LessonMaterialProps) {
+import type { MediaAccess, LessonBlockProps } from '@/lib/learning/types';
+export function useLessonMedia({ block, courseId, lessonId, demo, preview }: LessonBlockProps) {
   const [media, setMedia] = useState<MediaAccess>({}),
     [attempt, setAttempt] = useState(0);
   useEffect(() => {

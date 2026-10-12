@@ -1,4 +1,7 @@
+'use client';
 import { LessonMaterial } from '@/components/organisms/LessonMaterial/LessonMaterial';
+import { LessonImageViewer } from '@/components/organisms/LessonImageViewer/LessonImageViewer';
+import { useLessonImages } from './hooks';
 import { lessonBlockGroups } from '@/lib/learning/presentation';
 import { readingFont } from '@/lib/typography/fonts';
 import type { LessonBodyProps } from './types';
@@ -14,6 +17,7 @@ export function LessonBody({
   preview,
   onProgress,
 }: LessonBodyProps) {
+  const { images, selectedIndex, openImage, closeImages } = useLessonImages({ lesson });
   const outline = lesson.blocks.filter(
     (b) => ['article', 'quiz', 'video'].includes(b.kind) && b.title,
   );
@@ -52,11 +56,26 @@ export function LessonBody({
                 demo={demo}
                 preview={preview}
                 onProgress={onProgress}
+                onOpenImage={() => openImage(block.id)}
               />
             </div>
           ))}
         </div>
       ))}
+      {selectedIndex >= 0 && (
+        <LessonImageViewer
+          key={lesson.id}
+          images={images}
+          initialIndex={selectedIndex}
+          courseId={courseId}
+          lessonId={lesson.id}
+          progress={progress}
+          demo={demo}
+          preview={preview}
+          onProgress={onProgress}
+          onClose={closeImages}
+        />
+      )}
     </div>
   );
 }

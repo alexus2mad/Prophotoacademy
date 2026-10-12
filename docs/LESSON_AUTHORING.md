@@ -14,6 +14,12 @@ Reading and PDF observations retain their actual end timestamp and flush short v
 
 LessonBody supplies the shared student and administrator-preview layout: a readable 42rem text measure, an optional in-lesson outline, uncropped pairs of adjacent photographs, and a distinct practical exercise. Instructional images remain still. Course managers can choose the practice presentation for a text block and preview saved drafts before first publication.
 
+## Photo inspection
+
+Every image block opens the lesson's photographs in a native modal viewer, in curriculum order. The shared student and draft-preview viewer keeps captions, alternative text, a photo counter, previous/next arrows and explicit zoom controls. Photos fit uncropped initially; students can enlarge to 4×, drag to inspect details, double-click to toggle enlargement, swipe between fitted photos, or pinch to zoom. Keyboard users can navigate with left/right arrows, zoom with +/−, reset with 0, and pan with Shift plus an arrow. Escape returns focus to the original photograph and preserves the reading position. Images do not animate automatically.
+
+Opening or changing a protected photograph reuses the existing authorized media endpoint and obtains a fresh temporary URL. Failed requests have a retry action; neither private files nor signed URLs enter public fixtures. The active modal is the only reading-observation scope: inspecting a loaded photo can earn the existing image-inspection credit, while content behind the modal cannot accumulate reading time. Navigation resets image zoom, and closing or switching photos flushes the normal progress observation window. This is presentation behavior and requires no curriculum republishing or entitlement changes.
+
 ## Reading typography
 
 Lesson content uses self-hosted Source Sans 3 with Ukrainian glyphs, variable weights and genuine italics. Marketing and navigation retain their existing brand fonts. The font files are Adobe release commit `87b37a2daaed80fcb8e8ccb0085c4d72ddade12e`; the OFL license is alongside them in `src/app/fonts`. Load the shared `readingFont.variable` on `.lesson-content`, never on the entire site.

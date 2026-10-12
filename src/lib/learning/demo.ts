@@ -72,6 +72,16 @@ export const demoCourse: CourseDraft = {
               caption: 'Фотографія з бібліотеки ProPhoto · Олена Попова',
             },
             {
+              id: 'visual-image-detail',
+              kind: 'image',
+              title: 'Порівняйте настрій кадру',
+              required: false,
+              revision: 1,
+              mediaId: '00000000-0000-4000-8000-000000000023',
+              alt: 'Другий фотографічний приклад з відкритої бібліотеки ProPhoto',
+              caption: 'Демонстраційне фото для порівняння у переглядачі',
+            },
+            {
               id: 'visual-article',
               kind: 'article',
               title: 'Подивіться уважніше',
@@ -195,4 +205,5 @@ export const demoMedia: Record<string, string> = {
   '00000000-0000-4000-8000-000000000021':
     'https://storage.googleapis.com/muxdemofiles/mux-video-intro.mp4',
   '00000000-0000-4000-8000-000000000022': '/demo-media/workbook.pdf',
+  '00000000-0000-4000-8000-000000000023': '/images/hero.webp',
 };

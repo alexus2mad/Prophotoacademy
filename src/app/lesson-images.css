@@ -1,0 +1,191 @@
+.lesson-image-open {
+  display: block;
+  position: relative;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  cursor: zoom-in;
+}
+.lesson-image-open-icon {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #ffffff30;
+  border-radius: 50%;
+  background: #101211cc;
+  color: #f2efe7;
+  transition: background 160ms;
+}
+.lesson-image-open:is(:hover, :focus-visible) .lesson-image-open-icon {
+  background: #101211;
+}
+body:has(.lesson-image-viewer[open]) {
+  overflow: hidden;
+}
+.dialog.lesson-image-viewer {
+  width: min(1440px, calc(100vw - 48px));
+  height: calc(100dvh - 48px);
+  max-width: none;
+  max-height: none;
+  padding: 0;
+  overflow: hidden;
+  background: #101211;
+  font-family: var(--font-manrope), sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.lesson-image-viewer[open] {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+.lesson-image-viewer::backdrop {
+  background: #050706ed;
+}
+.lesson-image-viewer .dialog-close {
+  top: 12px;
+  right: 16px;
+  z-index: 2;
+  padding: 0;
+}
+.lesson-image-viewer-header {
+  padding: 22px 76px 22px 24px;
+  border-bottom: 1px solid #343b33;
+  color: #bcc1b8;
+}
+.lesson-image-slide {
+  min-height: 0;
+  min-width: 0;
+  display: grid;
+}
+.lesson-image-viewer-footer {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 48px;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 24px;
+  border-top: 1px solid #343b33;
+}
+.lesson-image-viewer-footer p {
+  max-height: 5lh;
+  overflow: auto;
+  text-align: center;
+  text-wrap: pretty;
+  overflow-wrap: anywhere;
+  font-size: 0.9375rem;
+}
+.lesson-image-viewer .icon-button {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+}
+.lesson-image-viewer button:disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+.image-zoom {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-height: 0;
+  min-width: 0;
+}
+.image-zoom-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 16px;
+}
+.image-zoom-controls .icon-button {
+  background: transparent;
+  border: 0;
+}
+.image-zoom-reset {
+  min-width: 72px;
+  min-height: 48px;
+  padding: 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #f2efe7;
+  font-variant-numeric: tabular-nums;
+}
+.image-zoom-reset:hover {
+  background: #242824;
+}
+.image-zoom-viewport {
+  position: relative;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  touch-action: none;
+  cursor: zoom-in;
+  margin: 0 24px 16px;
+  user-select: none;
+}
+.image-zoom-viewport[data-zoomed='true'] {
+  cursor: grab;
+}
+.image-zoom-viewport[data-zoomed='true']:active {
+  cursor: grabbing;
+}
+.image-zoom-viewport img {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: contain;
+  transform: translate(var(--image-x), var(--image-y)) scale(var(--image-scale));
+  pointer-events: none;
+}
+.image-zoom-loading,
+.lesson-image-message {
+  align-self: center;
+  justify-self: center;
+  text-align: center;
+  padding: 24px;
+}
+.image-zoom-loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+.lesson-image-message .button {
+  margin-top: 16px;
+}
+@media (max-width: 640px) {
+  .dialog.lesson-image-viewer {
+    width: 100vw;
+    height: 100dvh;
+    border: 0;
+    border-radius: 0;
+  }
+  .lesson-image-viewer-header {
+    padding: calc(20px + env(safe-area-inset-top)) 76px 20px 16px;
+  }
+  .lesson-image-viewer .dialog-close {
+    top: calc(10px + env(safe-area-inset-top));
+    right: 12px;
+  }
+  .lesson-image-viewer-footer {
+    gap: 12px;
+    padding: 12px 12px calc(12px + env(safe-area-inset-bottom));
+  }
+  .image-zoom-viewport {
+    margin: 0 12px 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lesson-image-viewer[open] {
+    animation: none;
+  }
+  .lesson-image-open-icon {
+    transition: none;
+  }
+}

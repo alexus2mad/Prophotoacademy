@@ -8,6 +8,7 @@ import './design-system.css';
 import './ecosystem.css';
 import './learning.css';
 import './lesson-typography.css';
+import './lesson-images.css';
 const manrope = localFont({
   src: [
     { path: './fonts/manrope-0.woff2', weight: '400', style: 'normal' },

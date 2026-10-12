@@ -2,6 +2,7 @@
 import { LessonProse } from '@/components/molecules/LessonProse/LessonProse';
 import { useReadingMaterial } from './hooks';
 import { blockFraction } from '@/lib/learning/progress';
+import { Expand } from 'lucide-react';
 import type { ReadingMaterialProps } from './types';
 export function ReadingMaterial(props: ReadingMaterialProps) {
   const { block, url } = props;
@@ -25,7 +26,22 @@ export function ReadingMaterial(props: ReadingMaterialProps) {
       {block.kind === 'image' ? (
         <figure>
           {url ? (
-            <img src={url} alt={block.alt || ''} />
+            props.onOpenImage ? (
+              <button
+                type="button"
+                className="lesson-image-open"
+                aria-haspopup="dialog"
+                aria-label={`Відкрити фото: ${block.alt || block.title || 'Фото уроку'}`}
+                onClick={props.onOpenImage}
+              >
+                <img src={url} alt={block.alt || ''} />
+                <span className="lesson-image-open-icon" aria-hidden="true">
+                  <Expand size={20} />
+                </span>
+              </button>
+            ) : (
+              <img src={url} alt={block.alt || ''} />
+            )
           ) : (
             <p className="learning-status">Завантаження зображення…</p>
           )}

@@ -103,8 +103,28 @@ describe('reading observation windows', () => {
       dataset: { readingComplete: 'false' },
       getBoundingClientRect: first.getBoundingClientRect,
     };
-    vi.stubGlobal('document', { querySelectorAll: () => [first, second] });
+    vi.stubGlobal('document', {
+      querySelector: () => null,
+      querySelectorAll: () => [first, second],
+    });
     vi.stubGlobal('innerHeight', 800);
     expect(mostVisibleReadingBlock()?.element).toBe(second);
+  });
+  it('credits only the open photo and excludes the lesson behind a modal', () => {
+    const background = { dataset: {}, getBoundingClientRect: () => ({ top: 80, bottom: 700 }) };
+    const photo = { dataset: {}, getBoundingClientRect: () => ({ top: 150, bottom: 650 }) };
+    const modal = { querySelectorAll: () => [photo] };
+    vi.stubGlobal('document', {
+      querySelector: () => modal,
+      querySelectorAll: () => [background, photo],
+    });
+    vi.stubGlobal('innerHeight', 800);
+    expect(mostVisibleReadingBlock()?.element).toBe(photo);
+    photo.dataset = { readingComplete: 'true' };
+    expect(mostVisibleReadingBlock()).toBeUndefined();
+  });
+  it('does not accumulate background reading while a non-reading dialog is open', () => {
+    vi.stubGlobal('document', { querySelector: () => ({ querySelectorAll: () => [] }) });
+    expect(mostVisibleReadingBlock()).toBeUndefined();
   });
 });
