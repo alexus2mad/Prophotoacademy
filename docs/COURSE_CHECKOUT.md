@@ -14,10 +14,12 @@ Never infer free access from missing provider keys. Unknown modes fail closed. B
 
 ## Manager workflow
 
-1. In Academy course authoring, supply lessons and required materials and publish the course
+1. In Academy course authoring, supply lessons and required materials, then choose the completed lessons in the publishing dialog. Unselected outlines remain in the draft; empty modules are excluded from the immutable release. Selected lessons still undergo all text, quiz and media validation
 2. In the course's package configuration, choose its published curriculum and lessons, then save the access period and optional intake start
 3. Open the corresponding course landing page: eligible mapped packages now offer test enrollment while payment mode is disabled
 4. Manage student access, extensions, revocation and restoration through the linked ps-booking manager
+
+The test package card and checkout show the lesson titles from the package's assigned release and lesson IDs. This identifies the available teaching material without implying that an unfinished full curriculum is ready. The public query exposes titles only; private blocks, assets and quiz keys remain protected.
 
 Test enrollment can exercise published material from an old/unverified intake without claiming that its historical dates are current. Sold-out and archived offerings/packages remain closed. Unpublished or unmapped packages cannot enroll. Mapping a package makes it eligible during the disabled rollout; publish and map only material intended for testers. Enabling paid mode restores the existing confirmed-intake, current-date and package availability checks.
 

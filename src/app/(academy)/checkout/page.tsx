@@ -10,6 +10,8 @@ import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButto
 import { paymentMode } from '@/lib/commerce/payment-mode';
 import { purchaseAccess } from '@/lib/commerce/orders';
 import { currentMember } from '@/lib/auth/server';
+import { enrollmentOptions } from '@/lib/commerce/catalog';
+import { EnrollmentScope } from '@/components/molecules/EnrollmentScope/EnrollmentScope';
 export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: 'Оформлення навчання',
@@ -45,6 +47,8 @@ export default async function Checkout({ searchParams }: CheckoutPageProps) {
     );
   }
   const { program, offering, pack } = purchase;
+  const scope =
+    mode === 'disabled' ? (await enrollmentOptions(offering)).lessonTitles?.[pack.id] : undefined;
   return (
     <div className="container">
       <div className="page-heading">
@@ -91,6 +95,7 @@ export default async function Checkout({ searchParams }: CheckoutPageProps) {
               </ul>
             </details>
           )}
+          {scope && <EnrollmentScope lessons={scope} />}
         </aside>
       </div>
     </div>

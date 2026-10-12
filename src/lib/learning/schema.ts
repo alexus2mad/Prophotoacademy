@@ -91,6 +91,10 @@ export const packageRuleSchema = z.object({
   accessMonths: z.number().int().min(1).max(120).nullable(),
   startsAt: z.iso.datetime().nullable(),
 });
+export const publicationSchema = z.object({
+  revision: z.string().min(1),
+  lessonIds: z.array(id).min(1).max(20000).optional(),
+});
 export const progressSchema = z.object({
   observedAt: z.iso.datetime().optional(),
   id: z.uuid(),

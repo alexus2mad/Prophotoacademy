@@ -1,5 +1,6 @@
 import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
 import { PackageIncludes } from '@/components/molecules/PackageIncludes/PackageIncludes';
+import { EnrollmentScope } from '@/components/molecules/EnrollmentScope/EnrollmentScope';
 import { canEnroll, money } from '@/lib/format';
 import Link from 'next/link';
 import type { PackageCardProps } from './types';
@@ -9,6 +10,7 @@ export function PackageCard({
   pack,
   enrollable,
   paymentDisabled,
+  availableLessons,
 }: PackageCardProps) {
   return (
     <article
@@ -35,6 +37,9 @@ export function PackageCard({
         </details>
       )}
       <div className="package-action">
+        {paymentDisabled && enrollable && availableLessons && (
+          <EnrollmentScope lessons={availableLessons} />
+        )}
         {(enrollable ?? canEnroll(offering, pack)) ? (
           <Link
             href={`/checkout?offering=${encodeURIComponent(offering.id)}&package=${encodeURIComponent(pack.id)}`}

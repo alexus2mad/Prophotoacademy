@@ -1,4 +1,8 @@
-import type { LearningBlock } from './types';
+import type { LearningBlock, Lesson } from './types';
+
+export function hasRequiredMaterial(lesson: Lesson) {
+  return lesson.blocks.some((block) => block.required);
+}
 
 // Adjacent photographs form pairs without changing their reading order or cropping the sources.
 export function lessonBlockGroups(blocks: LearningBlock[]) {

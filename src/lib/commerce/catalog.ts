@@ -9,7 +9,12 @@ export async function enrollmentOptions(offering?: Offering): Promise<Enrollment
   const mode = paymentMode();
   if (!offering || !managedDatabase() || mode === 'mock') return { mode, packageIds: [] };
   const rules = await databasePool().query<PackageIdRow>(
-    `SELECT p.package_id FROM academy.package_rules p
+    `SELECT p.package_id,
+     (SELECT jsonb_agg(lesson->>'title')
+      FROM jsonb_array_elements(r.manifest->'modules') module,
+           jsonb_array_elements(module->'lessons') lesson
+      WHERE p.lesson_ids ? (lesson->>'id')) AS lesson_titles
+     FROM academy.package_rules p
      JOIN academy.courses c ON c.id=p.course_id
      JOIN academy.releases r ON r.id=p.release_id AND r.course_id=c.id
      WHERE p.offering_id=$1 AND c.program_id=$2 AND c.active_release_id IS NOT NULL
@@ -18,6 +23,7 @@ export async function enrollmentOptions(offering?: Offering): Promise<Enrollment
   );
   return {
     mode,
+    lessonTitles: Object.fromEntries(rules.rows.map((r) => [r.package_id, r.lesson_titles || []])),
     packageIds: offering.packages
       .filter(
         (pack) =>

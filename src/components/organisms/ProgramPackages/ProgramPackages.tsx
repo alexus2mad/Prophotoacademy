@@ -54,6 +54,7 @@ export function ProgramPackages({ offering, program, enrollment }: ProgramPackag
             program={program}
             enrollable={available(pack.id)}
             paymentDisabled={enrollment?.mode === 'disabled'}
+            availableLessons={enrollment?.lessonTitles?.[pack.id]}
           />
         ))}
       </div>

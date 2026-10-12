@@ -335,6 +335,10 @@ input[aria-invalid=true],textarea[aria-invalid=true] { border-color: var(--error
 .checkout-includes summary { font-size: 13px; padding-block: 16px; }
 .checkout-includes .check-list { margin-top: 0; }
 .checkout-summary > .checkout-notice { margin-top: 20px; padding: 16px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; line-height: 1.6; color: var(--text); }
+.enrollment-scope { border-top: 1px solid var(--border); padding-top: 16px; margin: 20px 0; font-size: 14px; line-height: 1.6; }
+.enrollment-scope ul { list-style: disc; padding-left: 20px; margin: 8px 0; }
+.enrollment-scope li + li { margin-top: 6px; }
+.enrollment-scope p:last-child { color: var(--secondary); }
 .checkout-grid > .form-stack { margin-top: 0; align-content: start; }
 .mock-notice { font-size: 11px; color: var(--secondary); border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin-top: 24px; }
 .status-panel { max-width: 640px; margin: 64px auto 96px; text-align: center; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); padding: 48px; display: grid; justify-items: center; gap: 24px; }

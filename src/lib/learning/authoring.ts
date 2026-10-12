@@ -4,6 +4,7 @@ import { databasePool, transaction, audit } from '../database/client';
 import { HttpError } from '../http';
 import { getContent, findImage } from '../content';
 import { draftSchema, packageRuleSchema } from './schema';
+import { publicationDraft } from './publication';
 import type {
   CourseDraft,
   LearningMedia,
@@ -153,8 +154,13 @@ export async function saveDraft(id: string, input: unknown, actorId: string) {
     throw error;
   }
 }
-export async function publishCourse(id: string, revision: string, actorId: string) {
-  const draft = await getDraft(id);
+export async function publishCourse(
+  id: string,
+  revision: string,
+  actorId: string,
+  lessonIds?: string[],
+) {
+  const draft = publicationDraft(await getDraft(id), lessonIds);
   if (revision !== draft.revision)
     throw new HttpError(409, 'Спочатку збережіть останню версію курсу');
   const lessons = draft.modules.flatMap((m) => m.lessons);

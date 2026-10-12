@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { LessonProse } from '@/components/molecules/LessonProse/LessonProse';
 import { readingFont } from '@/lib/typography/fonts';
+import { hasRequiredMaterial } from '@/lib/learning/presentation';
 import { LessonBlockEditor } from '@/components/molecules/LessonBlockEditor/LessonBlockEditor';
 import { CoursePackageEditor } from '@/components/organisms/CoursePackageEditor/CoursePackageEditor';
 import { CourseSessions } from '@/components/organisms/CourseSessions/CourseSessions';
@@ -29,7 +30,7 @@ export function CourseEditor(props: CourseEditorProps) {
           <button
             type="button"
             className="button"
-            onClick={() => h.publishDialog.current?.showModal()}
+            onClick={h.openPublish}
             disabled={h.busy || h.dirty}
           >
             Опублікувати
@@ -256,12 +257,37 @@ export function CourseEditor(props: CourseEditorProps) {
       <CourseSessions courseId={h.draft.id} data={props.data} demo={props.demo} />
       <dialog ref={h.publishDialog} className="admin-dialog" aria-labelledby="publish-title">
         <h2 id="publish-title">Опублікувати нову версію</h2>
+        <p>Оберіть уроки, які готові для студентів. Решта залишаться в чернетці</p>
+        <fieldset className="publish-lessons">
+          <legend>Уроки цієї версії</legend>
+          {h.draft.modules
+            .flatMap((m) => m.lessons)
+            .map((lesson) => (
+              <label className="inline-check" key={lesson.id}>
+                <input
+                  type="checkbox"
+                  checked={h.publishedLessons.includes(lesson.id)}
+                  disabled={!hasRequiredMaterial(lesson)}
+                  onChange={(e) => h.selectPublishedLesson(lesson.id, e.target.checked)}
+                />
+                <span>
+                  {lesson.title}
+                  {!hasRequiredMaterial(lesson) && <small>Ще немає обов’язкових матеріалів</small>}
+                </span>
+              </label>
+            ))}
+        </fieldset>
         <p>
           Ця версія стане доступною для налаштування нових пакетів. Студенти з поточним доступом
           залишаться на призначеній їм версії, доки ви явно не зміните її
         </p>
         <div className="admin-inline-actions">
-          <button type="button" className="button" onClick={h.publish}>
+          <button
+            type="button"
+            className="button"
+            onClick={h.publish}
+            disabled={h.busy || !h.publishedLessons.length}
+          >
             Опублікувати версію
           </button>
           <button

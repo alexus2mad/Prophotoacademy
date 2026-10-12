@@ -2,13 +2,15 @@
 import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAdminMutation } from '@/lib/admin/hooks';
+import { hasRequiredMaterial } from '@/lib/learning/presentation';
 import type { CourseDraft, LearningBlock } from '@/lib/learning/types';
 import type { CourseEditorProps, LessonChange, BlockChange } from './types';
 export function useCourseEditor({ initial, demo }: CourseEditorProps) {
   const [draft, setDraft] = useState(initial),
     [activeId, setActiveId] = useState(initial.modules[0]?.lessons[0]?.id || ''),
     [dirty, setDirty] = useState(false),
-    [preview, setPreview] = useState(false);
+    [preview, setPreview] = useState(false),
+    [publishedLessons, setPublishedLessons] = useState<string[]>([]);
   const h = useAdminMutation(demo),
     router = useRouter(),
     publishDialog = useRef<HTMLDialogElement>(null);
@@ -120,9 +122,23 @@ export function useCourseEditor({ initial, demo }: CourseEditorProps) {
     publishDialog.current?.close();
     await h.mutate(`/api/admin/courses/${draft.id}`, {
       action: 'publish',
-      value: { revision: draft.revision },
+      value: { revision: draft.revision, lessonIds: publishedLessons },
     });
     router.refresh();
+  }
+  function openPublish() {
+    setPublishedLessons(
+      draft.modules
+        .flatMap((m) => m.lessons)
+        .filter(hasRequiredMaterial)
+        .map((l) => l.id),
+    );
+    publishDialog.current?.showModal();
+  }
+  function selectPublishedLesson(id: string, selected: boolean) {
+    setPublishedLessons((current) =>
+      selected ? [...current, id] : current.filter((value) => value !== id),
+    );
   }
   return {
     ...h,
@@ -143,6 +159,9 @@ export function useCourseEditor({ initial, demo }: CourseEditorProps) {
     dirty,
     save,
     publish,
+    openPublish,
+    publishedLessons,
+    selectPublishedLesson,
     publishDialog,
     preview,
     setPreview,

@@ -1008,6 +1008,8 @@
   gap: 12px;
 }
 .admin-dialog {
+  margin: auto;
+  overflow-y: auto;
   max-width: min(640px, calc(100vw - 32px));
   width: 100%;
   max-height: 90svh;
@@ -1023,6 +1025,17 @@
 .admin-dialog h2 {
   margin-top: 0;
 }
+.publish-lessons {
+  border: 1px solid #51594f;
+  border-radius: 8px;
+  margin: 24px 0;
+  padding: 12px 16px;
+  max-height: 40svh;
+  overflow-y: auto;
+}
+.publish-lessons legend { padding: 0 8px; }
+.publish-lessons label { min-height: 44px; padding: 10px 0; align-items: flex-start; }
+.publish-lessons small { display: block; color: #aaafa8; font-size: 14px; margin-top: 4px; }
 .admin-notice {
   padding: 18px 22px;
   border: 1px solid #51594f;

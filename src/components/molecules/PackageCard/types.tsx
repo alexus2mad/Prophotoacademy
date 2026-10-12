@@ -5,4 +5,5 @@ export type PackageCardProps = {
   pack: Package;
   enrollable?: boolean;
   paymentDisabled?: boolean;
+  availableLessons?: string[];
 };
