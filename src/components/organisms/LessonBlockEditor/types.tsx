@@ -8,6 +8,7 @@ export type LessonBlockEditorProps = {
   onMove: (direction: number) => void;
   first: boolean;
   last: boolean;
+  onUploadingChange?: (uploading: boolean) => void;
 };
 
 export type UploadSessionReply = {

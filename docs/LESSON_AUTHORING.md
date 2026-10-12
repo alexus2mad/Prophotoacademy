@@ -1,5 +1,13 @@
 # Lesson composition and self-checks
 
+## Focused authoring workspace
+
+Course editing separates Materials, Access and Meetings. A collapsible course outline selects one lesson and one material at a time; the selected block keeps its stable ID during moves. Lesson metadata and completion settings are secondary disclosures. On narrow screens the outline collapses after selection and focus moves to the editor. Keyboard reorder controls remain available alongside lesson dragging.
+
+`EditorMediaPreview` uses the existing administrator-authorized media route to display private images, uploaded video and PDF pages before their editing fields. YouTube recordings use the same privacy-enhanced player as lessons. Images open the shared zoom viewer. Preview components never submit student progress, persist temporary URLs or bypass storage authorization. Readiness errors offer a refresh action. Replacing a file retains the previous attachment until upload completion succeeds; functional block updates prevent delayed callbacks overwriting unrelated draft edits.
+
+Draft saving and publishing remain explicit. Upload/save operations lock editing, unsaved changes warn on page exit, and publication requires a saved draft. Only the synthetic sandbox should be used to test uploads, mutations and publication during interface work. Real-course UI verification is read-only and does not change immutable curricula, enrollments or completion requirements.
+
 ## Lecture identity and recordings
 
 Keep `Lesson.number` separate from the title. The player, lesson summary outline, curriculum, dashboard resume card and editor use the same lecture numbering helpers. Numbers continue across modules, explicit numbers reserve their place, and publication freezes resolved numbers before filtering selected lessons. Thus publishing only lecture 2 never renames it lecture 1. New lessons receive the next course-wide number; managers can edit it, and duplicate numbers are rejected. Stable lesson IDs and block revisions continue to own progress.

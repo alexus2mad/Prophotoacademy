@@ -3,10 +3,19 @@ import { useRef, useState } from 'react';
 import { useAdminMutation } from '@/lib/admin/hooks';
 import { pdfLibrary } from '@/lib/learning/browser';
 import type { LessonBlockEditorProps, UploadSessionReply, UploadStatusReply } from './types';
-export function useLessonBlockEditor({ block, courseId, demo, onChange }: LessonBlockEditorProps) {
+export function useLessonBlockEditor({
+  block,
+  courseId,
+  demo,
+  onChange,
+  onUploadingChange,
+}: LessonBlockEditorProps) {
   const h = useAdminMutation(demo),
     [uploading, setUploading] = useState(false),
     [uploadMessage, setUploadMessage] = useState(''),
+    [previewVersion, setPreviewVersion] = useState(0),
+    [textPreview, setTextPreview] = useState(false),
+    [deleteOpen, setDeleteOpen] = useState(false),
     text = useRef<HTMLTextAreaElement>(null),
     lastFile = useRef<File | null>(null);
   function markdown(prefix: string, suffix = '') {
@@ -32,6 +41,8 @@ export function useLessonBlockEditor({ block, courseId, demo, onChange }: Lesson
       return;
     }
     setUploading(true);
+    onUploadingChange?.(true);
+    h.setError('');
     setUploadMessage('Підготовка завантаження…');
     try {
       const pdf = file.type === 'application/pdf';
@@ -43,7 +54,10 @@ export function useLessonBlockEditor({ block, courseId, demo, onChange }: Lesson
         title: file.name,
         mime: file.type,
       });
-      if (!session) return;
+      if (!session) {
+        setUploadMessage('');
+        return;
+      }
       setUploadMessage('Завантажуємо файл…');
       const response = await fetch(session.url, {
         method: session.method,
@@ -73,20 +87,29 @@ export function useLessonBlockEditor({ block, courseId, demo, onChange }: Lesson
           await doc.loadingTask.destroy();
         }
       }
-      onChange({ mediaId: session.id, ...(pageSeconds ? { pageSeconds } : {}) });
       setUploadMessage('Обробляємо матеріал…');
       const result = await h.mutate<UploadStatusReply>('/api/admin/upload-complete', {
         id: session.id,
         pageSeconds,
       });
+      if (result)
+        onChange({
+          mediaId: session.id,
+          ...(pageSeconds ? { pageSeconds } : {}),
+          ...(result.duration ? { duration: Number(result.duration) } : {}),
+        });
       if (result?.status === 'ready') {
         setUploadMessage('Матеріал готовий');
-        if (result.duration) onChange({ mediaId: session.id, duration: Number(result.duration) });
-      } else setUploadMessage('Відео обробляється. Перевірте готовність перед публікацією');
+        setPreviewVersion((value) => value + 1);
+      } else if (result)
+        setUploadMessage('Матеріал обробляється. Перевірте готовність перед публікацією');
+      else setUploadMessage('');
     } catch (e) {
-      setUploadMessage(e instanceof Error ? e.message : 'Помилка завантаження');
+      h.setError(e instanceof Error ? e.message : 'Помилка завантаження');
+      setUploadMessage('');
     } finally {
       setUploading(false);
+      onUploadingChange?.(false);
     }
   }
   async function check() {
@@ -95,18 +118,26 @@ export function useLessonBlockEditor({ block, courseId, demo, onChange }: Lesson
         id: block.mediaId,
         pageSeconds: block.pageSeconds,
       });
-      setUploadMessage(result?.status === 'ready' ? 'Матеріал готовий' : 'Обробка триває');
+      setUploadMessage(
+        result ? (result.status === 'ready' ? 'Матеріал готовий' : 'Обробка триває') : '',
+      );
+      if (result?.status === 'ready') setPreviewVersion((value) => value + 1);
       if (result?.duration) onChange({ duration: Number(result.duration) });
     }
   }
   return {
     ...h,
+    previewVersion,
+    textPreview,
+    setTextPreview,
+    deleteOpen,
+    setDeleteOpen,
     uploading,
     uploadMessage,
     upload,
     check,
     text,
     markdown,
-    retry: () => lastFile.current && upload(lastFile.current),
+    retry: () => (lastFile.current ? upload(lastFile.current) : check()),
   };
 }

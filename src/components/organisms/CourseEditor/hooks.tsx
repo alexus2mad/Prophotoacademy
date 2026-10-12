@@ -1,23 +1,75 @@
 'use client';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAdminMutation } from '@/lib/admin/hooks';
 import { hasRequiredMaterial } from '@/lib/learning/presentation';
 import { numberedLessons } from '@/lib/learning/numbering';
+import { changeCourseBlock } from '@/lib/learning/editor';
 import type { CourseDraft, LearningBlock } from '@/lib/learning/types';
-import type { CourseEditorProps, LessonChange, BlockChange } from './types';
+import type {
+  CourseEditorProps,
+  LessonChange,
+  BlockChange,
+  DraftUpdate,
+  EditorSection,
+} from './types';
 export function useCourseEditor({ initial, demo }: CourseEditorProps) {
   const [draft, setDraft] = useState(initial),
-    [activeId, setActiveId] = useState(initial.modules[0]?.lessons[0]?.id || ''),
+    [activeId, selectLesson] = useState(initial.modules[0]?.lessons[0]?.id || ''),
+    [activeBlockId, selectBlock] = useState(''),
+    [outlineOpen, setOutlineOpen] = useState(false),
+    [section, setSection] = useState<EditorSection>('content'),
+    [uploading, setUploading] = useState(false),
     [dirty, setDirty] = useState(false),
-    [preview, setPreview] = useState(false),
     [publishedLessons, setPublishedLessons] = useState<string[]>([]);
   const h = useAdminMutation(demo),
     router = useRouter(),
+    canvas = useRef<HTMLDivElement>(null),
+    focusRequested = useRef(false),
     publishDialog = useRef<HTMLDialogElement>(null);
   const active = draft.modules.flatMap((m) => m.lessons).find((l) => l.id === activeId);
   const module = draft.modules.find((m) => m.lessons.some((l) => l.id === activeId));
-  function update(value: CourseDraft) {
+  const activeBlock = active?.blocks.find((b) => b.id === activeBlockId) || active?.blocks[0];
+  useEffect(() => {
+    const screen = matchMedia('(min-width: 1000px)');
+    const resize = () => setOutlineOpen(screen.matches);
+    resize();
+    screen.addEventListener('change', resize);
+    return () => screen.removeEventListener('change', resize);
+  }, []);
+  useEffect(() => {
+    if (!dirty && !uploading) return;
+    const warn = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+      event.returnValue = '';
+    };
+    window.addEventListener('beforeunload', warn);
+    return () => window.removeEventListener('beforeunload', warn);
+  }, [dirty, uploading]);
+  useEffect(() => {
+    if (!focusRequested.current || !canvas.current) return;
+    focusRequested.current = false;
+    canvas.current.focus({ preventScroll: true });
+    const offset = parseFloat(getComputedStyle(canvas.current).scrollMarginTop) || 0;
+    window.scrollTo({
+      top: window.scrollY + canvas.current.getBoundingClientRect().top - offset,
+      behavior: 'instant',
+    });
+  }, [activeId, activeBlockId, outlineOpen]);
+  function focusEditor() {
+    focusRequested.current = true;
+    if (matchMedia('(max-width: 999px)').matches) setOutlineOpen(false);
+  }
+  function setActiveBlockId(id: string) {
+    selectBlock(id);
+    focusEditor();
+  }
+  function setActiveId(id: string) {
+    selectLesson(id);
+    selectBlock('');
+    focusEditor();
+  }
+  function update(value: DraftUpdate) {
     setDraft(value);
     setDirty(true);
     h.setMessage('');
@@ -32,12 +84,7 @@ export function useCourseEditor({ initial, demo }: CourseEditorProps) {
     });
   }
   function block(id: string, change: BlockChange) {
-    if (!active) return;
-    lesson({
-      blocks: active.blocks.map((b) =>
-        b.id === id ? { ...b, ...change, revision: b.revision + 1 } : b,
-      ),
-    });
+    update((current) => changeCourseBlock(current, id, change));
   }
   function addModule() {
     update({
@@ -83,12 +130,13 @@ export function useCourseEditor({ initial, demo }: CourseEditorProps) {
     update({ ...draft, modules });
   }
   function addBlock(kind: LearningBlock['kind']) {
+    const id = crypto.randomUUID();
     if (active)
       lesson({
         blocks: [
           ...active.blocks,
           {
-            id: crypto.randomUUID(),
+            id,
             kind,
             title: '',
             required: kind !== 'file' && kind !== 'quiz',
@@ -98,6 +146,7 @@ export function useCourseEditor({ initial, demo }: CourseEditorProps) {
           },
         ],
       });
+    setActiveBlockId(id);
   }
   function moveBlock(id: string, direction: number) {
     if (!active) return;
@@ -150,6 +199,15 @@ export function useCourseEditor({ initial, demo }: CourseEditorProps) {
     draft,
     update,
     active,
+    activeBlock,
+    canvas,
+    outlineOpen,
+    setOutlineOpen,
+    setActiveBlockId,
+    section,
+    setSection,
+    uploading,
+    setUploading,
     activeId,
     setActiveId,
     module,
@@ -168,7 +226,5 @@ export function useCourseEditor({ initial, demo }: CourseEditorProps) {
     publishedLessons,
     selectPublishedLesson,
     publishDialog,
-    preview,
-    setPreview,
   };
 }

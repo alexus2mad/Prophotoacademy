@@ -1,0 +1,699 @@
+/* Authoring uses a course tree and one material editor, with media in context. */
+.workspace-admin:has(.course-authoring) {
+  display: block;
+  max-width: 1600px;
+  padding-inline: 32px;
+}
+.workspace-admin:has(.course-authoring) .workspace-nav {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  padding: 0;
+  border-right: 0;
+  border-bottom: 1px solid var(--learn-border);
+  overflow-x: auto;
+}
+.workspace-admin:has(.course-authoring) .workspace-nav a {
+  min-height: 54px;
+  padding: 10px 0;
+  border-radius: 0;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+}
+.workspace-admin:has(.course-authoring) .workspace-nav a[aria-current] {
+  border-bottom-color: var(--accent);
+}
+.workspace-admin:has(.course-authoring) .workspace-content {
+  padding-top: 24px;
+}
+.course-authoring {
+  min-width: 0;
+}
+.course-authoring [hidden] {
+  display: none !important;
+}
+.course-authoring :is(h1, h2, h3) {
+  font-family: var(--font-manrope), sans-serif;
+  letter-spacing: -0.02em;
+}
+.authoring-course-heading {
+  margin-bottom: 24px;
+}
+.authoring-course-heading a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--learn-muted);
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.authoring-course-heading h1 {
+  font-size: clamp(24px, 2.2vw, 32px);
+  max-width: 1100px;
+  margin: 4px 0 0;
+}
+.authoring-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 15;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  background: #101211;
+  border-block: 1px solid var(--learn-border);
+  margin-bottom: 24px;
+}
+.authoring-toolbar nav {
+  display: flex;
+  gap: 4px;
+}
+.authoring-toolbar nav button {
+  min-height: 44px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 0;
+  background: transparent;
+  color: var(--learn-muted);
+  font-size: 15px;
+}
+.authoring-toolbar nav button[aria-pressed='true'] {
+  color: var(--accent);
+  background: #273024;
+}
+.authoring-save-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+.authoring-save-actions > span {
+  font-size: 14px;
+  color: var(--learn-muted);
+}
+.authoring-notice {
+  margin-bottom: 20px;
+}
+.authoring-workspace {
+  overflow-anchor: none;
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 32px;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.authoring-workspace:disabled {
+  opacity: 0.8;
+}
+.authoring-course-tree {
+  align-self: start;
+  position: sticky;
+  top: 96px;
+  border: 1px solid var(--learn-border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.authoring-tree-toggle {
+  display: none;
+}
+.authoring-outline {
+  max-height: calc(100dvh - 120px);
+  overflow: auto;
+  scrollbar-width: thin;
+  padding: 16px 12px;
+}
+.authoring-outline h2 {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 0 8px 16px;
+  margin: 0;
+}
+.authoring-module {
+  border-top: 1px solid var(--learn-border);
+}
+.authoring-module > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 54px;
+  padding: 12px 8px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+}
+.authoring-module > summary::after {
+  content: '+';
+  color: var(--learn-muted);
+}
+.authoring-module[open] > summary::after {
+  content: '−';
+}
+.authoring-module > summary span {
+  margin-left: auto;
+  color: var(--learn-muted);
+  font-size: 14px;
+  font-weight: 400;
+}
+.authoring-module summary::-webkit-details-marker {
+  display: none;
+}
+.authoring-outline ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.authoring-outline button {
+  font-size: 14px;
+  min-height: 44px;
+}
+.authoring-lesson {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  border-radius: 8px;
+  padding: 12px;
+  line-height: 1.5;
+  background: transparent;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+.authoring-lesson[aria-current] {
+  background: #263021;
+  color: var(--accent);
+}
+.authoring-outline .authoring-materials {
+  border-left: 1px solid #4c5945;
+  margin: 10px 0 12px 16px;
+  padding-left: 8px;
+}
+.authoring-materials button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  border-radius: 6px;
+  padding: 8px 10px;
+  margin: 2px 0;
+  background: transparent;
+  color: #c2c7bf;
+  overflow-wrap: anywhere;
+  line-height: 1.5;
+}
+.authoring-materials button span {
+  display: block;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  color: #929e8b;
+  margin-bottom: 2px;
+}
+.authoring-materials button[aria-current] {
+  color: var(--text);
+  background: #242b21;
+  box-shadow: inset 3px 0 var(--accent);
+}
+.authoring-outline button:not(:disabled):hover {
+  background: #242b21;
+}
+.authoring-add {
+  background: none;
+  color: var(--accent);
+  border: 0;
+  padding: 10px 12px;
+  text-align: left;
+}
+.authoring-outline > .button {
+  width: 100%;
+  margin-top: 16px;
+}
+.authoring-outline-options {
+  margin: 0 8px 12px;
+  font-size: 14px;
+}
+.authoring-outline-options summary {
+  min-height: 44px;
+  padding-block: 10px;
+  color: var(--learn-muted);
+  cursor: pointer;
+}
+.authoring-outline-options > div {
+  display: flex;
+  gap: 8px;
+}
+.authoring-outline-options button {
+  border: 1px solid var(--learn-border);
+  background: transparent;
+  color: var(--text);
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+.authoring-outline-options label {
+  margin-bottom: 12px;
+}
+.authoring-canvas {
+  min-width: 0;
+  max-width: 1000px;
+  scroll-margin-top: 96px;
+}
+.authoring-lesson-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  justify-content: space-between;
+  margin: 0 0 20px;
+}
+.authoring-lesson-heading h2 {
+  font-size: clamp(22px, 2vw, 28px);
+  margin: 6px 0 0;
+  line-height: 1.35;
+}
+.authoring-lesson-heading > .button {
+  flex-shrink: 0;
+}
+.authoring-settings {
+  border: 1px solid var(--learn-border);
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+.authoring-settings > summary {
+  min-height: 48px;
+  padding: 12px 20px;
+  font-size: 15px;
+  cursor: pointer;
+  color: #c2c7bf;
+}
+.authoring-settings-fields {
+  display: grid;
+  gap: 20px;
+  padding: 4px 20px 24px;
+}
+.authoring-title-fields {
+  display: grid;
+  grid-template-columns: 130px minmax(0, 1fr);
+  gap: 20px;
+}
+.authoring-material-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.authoring-material-toolbar p {
+  font-size: 14px;
+  color: var(--learn-muted);
+}
+.authoring-add-material {
+  position: relative;
+  border: 0;
+}
+.authoring-add-material summary {
+  cursor: pointer;
+  list-style: none;
+}
+.authoring-add-material summary::-webkit-details-marker {
+  display: none;
+}
+.authoring-add-material > summary::after {
+  content: none !important;
+}
+.authoring-material-options {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: 10;
+  min-width: 230px;
+  display: grid;
+  padding: 8px;
+  border: 1px solid #51594f;
+  border-radius: 12px;
+  background: #191c1a;
+  box-shadow: 0 12px 36px #0008;
+}
+.authoring-material-options button {
+  min-height: 44px;
+  background: none;
+  color: var(--text);
+  border: 0;
+  border-radius: 6px;
+  padding: 10px 12px;
+  text-align: left;
+}
+.authoring-material-options button:hover {
+  background: #30382d;
+}
+.material-editor {
+  background: #191c1a;
+  border: 1px solid var(--learn-border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.material-editor-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--learn-border);
+}
+.material-editor-heading h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0;
+}
+.material-editor-actions {
+  display: flex;
+  gap: 8px;
+}
+.material-editor-actions .icon-button {
+  padding: 0;
+}
+.material-editor-fields {
+  display: grid;
+  gap: 24px;
+  padding: 24px;
+}
+.material-editor-fields label {
+  margin: 0;
+  min-width: 0;
+}
+.material-editor-fields textarea {
+  min-height: 0;
+  resize: vertical;
+  line-height: 1.6;
+}
+.material-editor-fields :is(input, textarea, select) {
+  min-width: 0;
+  max-width: 100%;
+}
+.material-text-controls {
+  display: flex;
+  gap: 16px;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.material-text-controls label {
+  flex: 1;
+  max-width: 320px;
+}
+.material-editor .editor-format-toolbar {
+  margin: 0 0 -12px;
+}
+.editor-text-preview {
+  padding: 24px;
+  border: 1px solid var(--learn-border);
+  border-radius: 10px;
+  background: #101211;
+}
+.material-upload {
+  display: grid;
+  gap: 12px;
+  padding: 20px;
+  border: 1px dashed #66735d;
+  border-radius: 12px;
+  background: #141713;
+}
+.material-upload-label {
+  justify-self: start;
+  position: relative;
+  cursor: pointer;
+}
+.material-upload-label > span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  border: 1px solid #66735d;
+  border-radius: 24px;
+  background: #242b21;
+  color: #f2efe7;
+  padding: 8px 16px;
+  font-size: 14px;
+}
+.material-upload-label:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 24px;
+}
+.material-upload-label:hover > span {
+  background: #30382d;
+}
+.material-upload > button {
+  justify-self: start;
+}
+.material-upload-status {
+  color: var(--accent);
+  font-size: 15px;
+}
+.material-completion-settings {
+  border-top: 1px solid var(--learn-border);
+  padding-top: 4px;
+}
+.material-completion-settings summary {
+  min-height: 48px;
+  padding: 12px 0;
+  font-size: 15px;
+  cursor: pointer;
+}
+.material-completion-settings summary span {
+  display: inline-block;
+  margin-left: 12px;
+  color: var(--learn-muted);
+  font-size: 14px;
+}
+.material-completion-settings > label {
+  margin-top: 16px;
+}
+.material-completion-settings input[type='number'] {
+  max-width: 320px;
+}
+.editor-media-preview {
+  background: #080b09;
+  padding: 20px;
+  border-bottom: 1px solid var(--learn-border);
+}
+.editor-media-preview .lesson-block {
+  margin: 0;
+  max-width: 100%;
+}
+.editor-media-preview .lesson-block > h2,
+.editor-media-preview .lesson-block > .learning-meta {
+  display: none;
+}
+.editor-media-preview video,
+.editor-media-preview mux-player {
+  max-height: 56vh;
+}
+.editor-media-preview .pdf-sheet {
+  max-height: 480px;
+}
+.editor-media-preview .pdf-toolbar {
+  margin: 0 0 16px;
+}
+.editor-photo-preview {
+  position: relative;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  border-radius: 8px;
+  cursor: zoom-in !important;
+}
+.editor-photo-preview img {
+  width: 100%;
+  height: min(440px, 48vh);
+  object-fit: contain;
+}
+.editor-photo-preview > span {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 8px 16px;
+  background: #101211dc;
+  border: 1px solid #ffffff30;
+  border-radius: 24px;
+  font-size: 14px;
+}
+.editor-media-empty {
+  padding: 32px 24px;
+  text-align: center;
+  border-bottom: 1px solid var(--learn-border);
+}
+.editor-media-empty .button {
+  margin-top: 16px;
+}
+.material-delete-confirm {
+  padding: 20px 24px;
+  background: #36251f;
+}
+.authoring-empty {
+  padding: 48px 24px;
+  border: 1px dashed #51594f;
+  border-radius: 12px;
+  text-align: center;
+}
+.authoring-empty p {
+  margin-top: 12px;
+  color: var(--learn-muted);
+}
+.authoring-material-navigation {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 24px;
+}
+.course-authoring .quiz-editor {
+  min-width: 0;
+  display: grid;
+  gap: 20px;
+}
+.course-authoring .quiz-editor fieldset {
+  margin: 0;
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid #51594f;
+  border-radius: 12px;
+  display: grid;
+  gap: 16px;
+}
+.course-authoring .quiz-editor legend {
+  padding-inline: 8px;
+  font-size: 16px;
+}
+.course-authoring .quiz-editor textarea {
+  min-height: 0;
+}
+@media (max-width: 1199px) {
+  .authoring-workspace {
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 24px;
+  }
+  .authoring-save-actions > span {
+    display: none;
+  }
+  .authoring-lesson-heading {
+    display: block;
+  }
+  .authoring-lesson-heading > .button {
+    margin-top: 16px;
+  }
+}
+@media (max-width: 999px) {
+  .workspace-admin:has(.course-authoring) {
+    padding-inline: 24px;
+  }
+  .authoring-workspace {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+  .authoring-course-tree {
+    position: static;
+  }
+  .authoring-tree-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-height: 48px;
+    background: transparent;
+    color: var(--text);
+    border: 0;
+    padding: 14px 18px;
+    cursor: pointer;
+    font-size: 15px;
+  }
+  .authoring-outline {
+    max-height: 420px;
+  }
+  .authoring-outline h2 {
+    display: none;
+  }
+  .authoring-canvas {
+    max-width: none;
+  }
+}
+@media (max-width: 640px) {
+  .authoring-canvas {
+    scroll-margin-top: 140px;
+  }
+  .workspace-admin:has(.course-authoring) {
+    padding-inline: 16px;
+  }
+  .authoring-course-heading {
+    margin-bottom: 20px;
+  }
+  .authoring-toolbar {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-block: 8px;
+  }
+  .authoring-toolbar nav {
+    width: 100%;
+  }
+  .authoring-toolbar nav button {
+    flex: 1;
+    padding-inline: 8px;
+    font-size: 14px;
+  }
+  .authoring-save-actions {
+    width: 100%;
+  }
+  .authoring-save-actions .button {
+    flex: 1;
+    padding: 10px 14px;
+  }
+  .authoring-material-toolbar {
+    gap: 8px;
+  }
+  .authoring-add-material summary {
+    padding-inline: 16px;
+    font-size: 14px;
+  }
+  .authoring-title-fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .material-editor-heading {
+    padding: 12px 16px;
+  }
+  .material-editor-actions {
+    gap: 4px;
+  }
+  .material-editor-fields {
+    padding: 20px 16px;
+    gap: 20px;
+  }
+  .material-text-controls {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .material-text-controls label {
+    max-width: none;
+  }
+  .material-upload {
+    padding: 16px;
+  }
+  .editor-media-preview {
+    padding: 12px;
+  }
+  .editor-text-preview {
+    padding: 16px;
+  }
+  .authoring-material-navigation .button {
+    flex: 1;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+  .course-authoring .quiz-editor fieldset {
+    padding: 16px 12px;
+  }
+}
