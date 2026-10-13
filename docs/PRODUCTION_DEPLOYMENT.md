@@ -10,6 +10,7 @@ The owner explicitly requested a staging subdomain while the existing Webflow si
 - Releases: `/srv/prophotoacademy/releases/<commit>`; `/srv/prophotoacademy/current` selects the active release
 - Runtime configuration: `/etc/prophotoacademy/runtime.env`, root-owned mode `600`; use `deploy/runtime.env.example` for variable names
 - TLS trust: `/etc/prophotoacademy/supabase-ca.crt`; PostgreSQL uses `sslmode=verify-full`
+- Runtime database transport: Supabase's IPv4 **session pooler**, `aws-0-eu-north-1.pooler.supabase.com:5432`, user `prophoto_academy_runtime.bydmqmrbfjufsyhlayku`; the underlying database role remains `prophoto_academy_runtime`
 - Nginx templates: `deploy/nginx-http.conf` for ACME setup, then `deploy/nginx-https.conf`
 - Email retries: `prophotoacademy-email.timer` calls the existing authenticated cron route every five minutes through loopback
 - Booking integration: booking `ACADEMY_ORIGIN` points to the Academy HTTPS origin; its `ACADEMY_MANAGEMENT_SECRET` must equal Academy `PS_BOOKING_MANAGEMENT_SECRET`
@@ -34,6 +35,16 @@ This retention policy applies only to application build directories. Preserve im
 Run `python -m unittest discover -s deploy -p "test_*.py"` when changing cleanup behavior.
 
 Supply `NODE_EXTRA_CA_CERTS` in the process environment before Node starts, as the systemd unit does. For a manual Node command, export it explicitly before invoking Node; loading that variable only through Node's `--env-file` is too late for extra CA initialization. Keep full TLS verification enabled.
+
+### Database network recovery — 13 October 2026
+
+The signed-in account page failed while the application process remained active. `/api/health` returned 503 and PostgreSQL connections failed with `ENETUNREACH`. The host had a valid IPv6 address and default route, and its link-local gateway was reachable, but the provider's upstream router returned “Destination unreachable: No route” for both Supabase and an independent external IPv6 address.
+
+Recovery changed only `DATABASE_URL` in the root-owned runtime configuration to the project's official IPv4 session-pooler endpoint. Supabase's Connect dialog supplies the exact host; custom roles use `ROLE.PROJECT` as the connection username. Keep port 5432/session mode for this persistent server, the existing restricted database password, and `sslmode=verify-full`. Do not guess a regional endpoint, switch to the `postgres` owner, weaken certificate checks, or modify host-wide IPv6/firewall settings. See [Supabase connection guidance](https://supabase.com/docs/guides/database/connecting-to-postgres).
+
+Before applying the change, a read-only transaction verified schema access, the underlying runtime role, and an encrypted, authorized client TLS socket. `pg_stat_ssl` behind a pooler describes the pooler's database connection, not the application's TLS socket. The original environment was preserved in a root-only `runtime.env.before-ipv4-*` backup; only Academy's service was restarted. Reverting an application build must retain this working runtime endpoint. Restore a direct endpoint only after its network path is verified healthy.
+
+Public health recovered to 200, and the existing signed-in account resumed without another code, displaying its existing course access and 1/3 (33%) completion. This was a runtime configuration repair, with no source-code deployment or curriculum change. The two retained application releases remain `de8d58e` (active) and `aa9eeea` (rollback).
 
 ## Provisioned services
 
