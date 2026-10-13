@@ -3,6 +3,7 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFile } from 'node:fs/promises';
 import { createHmac, randomUUID, createHash } from 'node:crypto';
 import type { SqlConnection } from '../src/lib/database/types';
+import type { ProgressRow } from '../src/lib/learning/types';
 import type { AccessChangeInput } from './types';
 const database = vi.hoisted(() => ({ connection: null as SqlConnection | null }));
 vi.mock('../src/lib/database/client', async (importOriginal) => {
@@ -31,6 +32,8 @@ import { manageAccess } from '../src/lib/admin/access';
 import { customerAccounts } from '../src/lib/admin/customer-account';
 import { acceptManagementRequest, managementAction } from '../src/lib/admin/management';
 import { saveProgress } from '../src/lib/learning/service';
+import { migrateQuizCompletion } from '../src/lib/learning/progress-migration';
+import { recordAttendance } from '../src/lib/learning/live';
 const pg = new PGlite(),
   admin = '00000000-0000-4000-8000-000000000101',
   student = '00000000-0000-4000-8000-000000000102';
@@ -196,6 +199,15 @@ describe('management is authorized by verified identity through ps-booking', () 
     await expect(
       saveProgress(student, 'course', 'lesson', { ...event, id: randomUUID(), revision: 999 }),
     ).rejects.toThrow('Тест змінився');
+    await expect(
+      saveProgress(student, 'course', 'lesson', {
+        ...event,
+        id: randomUUID(),
+        kind: 'resume',
+        quizAnswers: undefined,
+        revision: 999,
+      }),
+    ).rejects.toMatchObject({ status: 400 });
     await manageAccess({ ...access, action: 'revoke', reason: 'Synthetic revocation' }, admin);
     await expect(
       saveProgress(student, 'course', 'lesson', { ...event, id: randomUUID(), sequence: 2 }),
@@ -208,6 +220,40 @@ describe('management is authorized by verified identity through ps-booking', () 
     expect(
       (await pg.query("SELECT * FROM academy.audit WHERE action='access.revoke'")).rows,
     ).toHaveLength(1);
+  });
+  it('backfills historical passes once, keeps a rollback copy and separates attendance', async () => {
+    const original = (
+      await pg.query('SELECT * FROM academy.lesson_progress WHERE user_id=$1', [student])
+    ).rows[0] as ProgressRow;
+    const legacy = structuredClone(original.state);
+    delete legacy.quizCompletion;
+    await pg.query(
+      'UPDATE academy.lesson_progress SET state=$1,completed_at=NULL,completion_source=NULL WHERE user_id=$2',
+      [JSON.stringify(legacy), student],
+    );
+    await pg.exec('BEGIN');
+    expect((await migrateQuizCompletion(database.connection!)).changed).toBe(1);
+    expect((await pg.query('SELECT * FROM academy.progress_policy_backup')).rows).toHaveLength(0);
+    expect((await migrateQuizCompletion(database.connection!, true)).passed).toBe(1);
+    expect((await migrateQuizCompletion(database.connection!, true)).changed).toBe(0);
+    expect((await pg.query('SELECT * FROM academy.progress_policy_backup')).rows).toHaveLength(1);
+    await pg.exec('COMMIT');
+    const before = (
+      await pg.query('SELECT * FROM academy.lesson_progress WHERE user_id=$1', [student])
+    ).rows;
+    const sessionId = randomUUID();
+    await pg.query(
+      "INSERT INTO academy.live_sessions(id,course_id,lesson_id,title,zoom_url,starts_at,ends_at) VALUES($1,'course','lesson','Synthetic attendance','https://zoom.us/j/123',now()-interval '2 hours',now()-interval '1 hour')",
+      [sessionId],
+    );
+    await recordAttendance(sessionId, [student], admin);
+    expect(
+      (await pg.query('SELECT * FROM academy.lesson_progress WHERE user_id=$1', [student])).rows,
+    ).toEqual(before);
+    expect(
+      (await pg.query('SELECT attended FROM academy.attendance WHERE session_id=$1', [sessionId]))
+        .rows,
+    ).toEqual([{ attended: true }]);
   });
   it('returns a narrow account summary with current grants by immutable identity, not grant email', async () => {
     const owner = randomUUID(),

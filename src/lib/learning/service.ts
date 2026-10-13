@@ -144,6 +144,12 @@ export async function saveProgress(
   event: ProgressEvent,
 ) {
   const view = await authorizedLesson(userId, courseId, lessonId);
+  if (
+    event.kind === 'resume' &&
+    !event.manual &&
+    !view.lesson.blocks.some((b) => b.id === event.blockId && b.revision === event.revision)
+  )
+    throw new HttpError(400, 'Матеріал змінився. Оновіть урок');
   if (event.quizAnswers) {
     const block = view.lesson.blocks.find(
       (b) => b.id === event.blockId && b.revision === event.revision && b.kind === 'quiz',
