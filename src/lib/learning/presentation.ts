@@ -1,7 +1,12 @@
 import type { LearningBlock, Lesson } from './types';
 
-export function hasRequiredMaterial(lesson: Lesson) {
-  return lesson.blocks.some((block) => block.required);
+export function hasFinalQuiz(lesson: Lesson) {
+  const quizzes = lesson.blocks.filter((block) => block.kind === 'quiz');
+  return (
+    quizzes.length === 1 &&
+    lesson.blocks.at(-1)?.id === quizzes[0].id &&
+    !!quizzes[0].quiz?.questions.length
+  );
 }
 
 // Adjacent photographs form pairs without changing their reading order or cropping the sources.

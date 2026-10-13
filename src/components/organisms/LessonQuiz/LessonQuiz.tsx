@@ -11,11 +11,11 @@ export function LessonQuiz(props: LessonQuizProps) {
   return (
     <section className="lesson-block lesson-quiz" aria-labelledby={'quiz-title-' + block.id}>
       <header className="quiz-heading">
-        <p className="learning-meta">Самоперевірка · {questions.length} запитань</p>
+        <p className="learning-meta">Підсумковий тест · {questions.length} запитань</p>
         <h2 id={'quiz-title-' + block.id}>{block.title || 'Перевірте себе'}</h2>
         <p>
-          Одна відповідь на запитання. Після перевірки ви побачите пояснення й зможете спробувати
-          знову
+          Для завершення уроку потрібно від {block.quiz.passingScore}% правильних відповідей. Одна
+          відповідь на запитання, кількість спроб необмежена
         </p>
       </header>
       {h.reviewing && h.result && (

@@ -1,3 +1,4 @@
+import { hasFinalQuiz } from './presentation';
 import { createClient } from '@sanity/client';
 import { randomUUID } from 'node:crypto';
 import { databasePool, transaction, audit } from '../database/client';
@@ -165,10 +166,10 @@ export async function publishCourse(
   if (revision !== draft.revision)
     throw new HttpError(409, 'Спочатку збережіть останню версію курсу');
   const lessons = draft.modules.flatMap((m) => m.lessons);
-  if (!lessons.length || lessons.some((l) => !l.blocks.length || !l.blocks.some((b) => b.required)))
+  if (!lessons.length || lessons.some((l) => !hasFinalQuiz(l)))
     throw new HttpError(
       400,
-      'Додайте матеріали та принаймні один обов’язковий блок до кожного уроку',
+      'Кожен урок має завершуватися рівно одним підсумковим тестом із запитаннями',
     );
   const media = (
     await databasePool().query<LearningMedia>('SELECT * FROM academy.media WHERE course_id=$1', [
@@ -178,11 +179,8 @@ export async function publishCourse(
   for (const lesson of lessons)
     for (const block of lesson.blocks) {
       if (block.youtubeUrl) {
-        if (block.kind !== 'video' || block.mediaId || block.required)
-          throw new HttpError(
-            400,
-            'Запис YouTube має бути додатковим відео без прикріпленого файла',
-          );
+        if (block.kind !== 'video' || block.mediaId)
+          throw new HttpError(400, 'Запис YouTube має бути відеоблоком без прикріпленого файла');
         continue;
       }
       if (
@@ -199,11 +197,6 @@ export async function publishCourse(
         throw new HttpError(
           400,
           'Заповніть запитання, варіанти, правильні відповіді та пояснення тесту',
-        );
-      if (block.kind === 'file' && block.required)
-        throw new HttpError(
-          400,
-          'Для обов’язкового PDF використайте PDF-блок із відстеженням читання',
         );
       if (block.kind === 'article' && !block.body?.trim())
         throw new HttpError(400, 'Заповніть текст уроків');

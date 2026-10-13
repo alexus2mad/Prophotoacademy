@@ -170,7 +170,7 @@ export function LessonBlockEditor(props: LessonBlockEditorProps) {
                   }
                 />
                 <span className="admin-muted">
-                  Додатковий запис без відстеження перегляду. Для захищеного відео завантажте файл
+                  Для захищеного відео завантажте файл замість посилання YouTube
                 </span>
               </label>
             )}
@@ -263,33 +263,6 @@ export function LessonBlockEditor(props: LessonBlockEditorProps) {
             </label>
           </>
         )}
-        <details className="material-completion-settings">
-          <summary>
-            Участь у прогресі уроку <span>{block.required ? 'Обов’язковий' : 'Додатковий'}</span>
-          </summary>
-          <label className="inline-check">
-            <input
-              type="checkbox"
-              checked={block.required}
-              disabled={!!block.youtubeUrl}
-              onChange={(e) => onChange({ required: e.target.checked })}
-            />
-            Обов’язковий для завершення уроку
-          </label>
-          <label>
-            Очікуваний час опрацювання, секунд
-            <input
-              type="number"
-              min={1}
-              max={86400}
-              placeholder="Визначається автоматично"
-              value={block.expectedSeconds || ''}
-              onChange={(e) =>
-                onChange({ expectedSeconds: e.target.value ? Number(e.target.value) : undefined })
-              }
-            />
-          </label>
-        </details>
       </div>
     </section>
   );

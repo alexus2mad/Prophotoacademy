@@ -13,6 +13,7 @@ Read [ARCHITECTURE.md](ARCHITECTURE.md) before changing the application. It is t
 - Preserve the approved visual design, flagship course emphasis, early course prices, separate Academy/Hub customer journeys and review-mode restrictions unless the user requests a change.
 - Do not add title punctuation, decorative section numbering, excessive arrows or distracting labels. Source images and brand logos remain authoritative.
 - Lesson content uses the scoped Source Sans 3 reading system and shared `LessonProse` renderer. Keep the editor preview consistent with the player; preserve semantic heading levels, native table headers, keyboard scrolling and user text resizing. Do not apply marketing display type to instructional prose. See `docs/LESSON_AUTHORING.md`.
+- Lesson completion is quiz-only: exactly one final quiz per newly published lesson, server grading, durable lesson-level completion preserved across retries and revisions. Never reintroduce reading, scrolling, viewing, attendance or manual-reading credit. Bookmarks and player preferences are independent of completion.
 
 ## Required verification and change handling
 

@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAdminMutation } from '@/lib/admin/hooks';
-import { hasRequiredMaterial } from '@/lib/learning/presentation';
+import { hasFinalQuiz } from '@/lib/learning/presentation';
 import { numberedLessons } from '@/lib/learning/numbering';
 import { changeCourseBlock } from '@/lib/learning/editor';
 import type { CourseDraft, LearningBlock } from '@/lib/learning/types';
@@ -139,7 +139,7 @@ export function useCourseEditor({ initial, demo }: CourseEditorProps) {
             id,
             kind,
             title: '',
-            required: kind !== 'file' && kind !== 'quiz',
+            required: kind === 'quiz',
             revision: 1,
             ...(kind === 'article' ? { body: '' } : {}),
             ...(kind === 'quiz' ? { quiz: { passingScore: 80, questions: [] } } : {}),
@@ -184,7 +184,7 @@ export function useCourseEditor({ initial, demo }: CourseEditorProps) {
     setPublishedLessons(
       draft.modules
         .flatMap((m) => m.lessons)
-        .filter(hasRequiredMaterial)
+        .filter(hasFinalQuiz)
         .map((l) => l.id),
     );
     publishDialog.current?.showModal();

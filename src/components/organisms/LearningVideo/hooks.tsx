@@ -1,8 +1,5 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import { readingActive } from '@/lib/learning/browser';
-import { mergeRanges } from '@/lib/learning/progress';
-import type { Interval } from '@/lib/learning/types';
 import type { LearningVideoProps, LearningVideoElement, PlayerPreferences } from './types';
 export function useLearningVideo({ block, state, onProgress, media }: LearningVideoProps) {
   const ref = useRef<LearningVideoElement | null>(null),
@@ -13,12 +10,8 @@ export function useLearningVideo({ block, state, onProgress, media }: LearningVi
   useEffect(() => {
     const player = ref.current;
     if (!player) return;
-    let lastTime = player.currentTime || 0,
-      lastWall = performance.now(),
-      elapsed = 0,
-      observedAt = Date.now(),
-      ranges: Interval[] = [],
-      seeking = false;
+    let lastSaved = initial.current;
+    let lastSaveAt = 0;
     const preferences = () => {
       try {
         localStorage.setItem(
@@ -35,16 +28,14 @@ export function useLearningVideo({ block, state, onProgress, media }: LearningVi
       } catch {}
     };
     const flush = () => {
-      callback.current({
-        blockId: block.id,
-        revision: block.revision,
-        elapsed: Math.min(elapsed, 30),
-        observedAt: new Date(observedAt).toISOString(),
-        ranges: mergeRanges(ranges),
-        position: player.currentTime || 0,
-      });
-      elapsed = 0;
-      ranges = [];
+      const position = player.currentTime || 0;
+      if (position === lastSaved || player.readyState === 0) return;
+      lastSaved = position;
+      lastSaveAt = Date.now();
+      callback.current({ kind: 'resume', blockId: block.id, revision: block.revision, position });
+    };
+    const bookmark = () => {
+      if (Date.now() - lastSaveAt >= 15000) flush();
     };
     const metadata = () => {
       if (initial.current > 0 && initial.current < (player.duration || Infinity))
@@ -59,60 +50,25 @@ export function useLearningVideo({ block, state, onProgress, media }: LearningVi
         for (const track of Array.from(player.textTracks || []))
           track.mode = track.language === p.captionLanguage ? 'showing' : 'disabled';
       } catch {}
-      lastTime = player.currentTime;
-      lastWall = performance.now();
-    };
-    const sample = () => {
-      const now = performance.now(),
-        delta = (now - lastWall) / 1000,
-        current = player.currentTime;
-      const viewed = current - lastTime;
-      if (
-        !player.paused &&
-        !seeking &&
-        readingActive() &&
-        delta > 0 &&
-        delta < 4 &&
-        viewed > 0 &&
-        viewed <= delta * 2 + 0.3
-      ) {
-        ranges.push([lastTime, current]);
-        elapsed += delta;
-        observedAt = Date.now();
-      } else if (elapsed > 0) flush();
-      lastTime = current;
-      lastWall = now;
-      if (elapsed >= 10) flush();
-    };
-    const onSeeking = () => {
-      seeking = true;
-      flush();
-    };
-    const onSeeked = () => {
-      seeking = false;
-      lastTime = player.currentTime;
-      lastWall = performance.now();
     };
     const fail = () =>
       setError('Відео не вдалося відтворити. Перевірте з’єднання та перезавантажте урок');
     player.addEventListener('loadedmetadata', metadata);
-    player.addEventListener('seeking', onSeeking);
-    player.addEventListener('seeked', onSeeked);
+    player.addEventListener('timeupdate', bookmark);
+    player.addEventListener('seeked', flush);
     player.addEventListener('pause', flush);
     player.addEventListener('ended', flush);
     player.addEventListener('volumechange', preferences);
     player.addEventListener('ratechange', preferences);
     player.addEventListener('error', fail);
     player.textTracks?.addEventListener('change', preferences);
-    const timer = setInterval(sample, 500);
     window.addEventListener('pagehide', flush);
     document.addEventListener('visibilitychange', flush);
     return () => {
-      clearInterval(timer);
       flush();
       player.removeEventListener('loadedmetadata', metadata);
-      player.removeEventListener('seeking', onSeeking);
-      player.removeEventListener('seeked', onSeeked);
+      player.removeEventListener('timeupdate', bookmark);
+      player.removeEventListener('seeked', flush);
       player.removeEventListener('pause', flush);
       player.removeEventListener('ended', flush);
       player.removeEventListener('volumechange', preferences);

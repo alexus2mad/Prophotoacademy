@@ -79,7 +79,7 @@ export const learningSchema = [
         options: { list: ['video', 'article', 'image', 'pdf', 'file', 'zoom', 'quiz'] },
       }),
       text('title', 'Title'),
-      defineField({ name: 'required', type: 'boolean' }),
+      defineField({ name: 'required', type: 'boolean', hidden: true }),
       defineField({ name: 'revision', type: 'number' }),
       defineField({ name: 'body', title: 'Text · Markdown', type: 'text' }),
       text('mediaId', 'Protected media ID'),
@@ -95,7 +95,13 @@ export const learningSchema = [
         name: 'quiz',
         type: 'object',
         fields: [
-          defineField({ name: 'passingScore', type: 'number' }),
+          defineField({
+            name: 'passingScore',
+            title: 'Прохідний відсоток',
+            type: 'number',
+            initialValue: 80,
+            validation: (r) => r.required().integer().min(1).max(100),
+          }),
           defineField({
             name: 'questions',
             type: 'array',
@@ -123,7 +129,7 @@ export const learningSchema = [
           }),
         ],
       }),
-      defineField({ name: 'expectedSeconds', type: 'number' }),
+      defineField({ name: 'expectedSeconds', type: 'number', hidden: true }),
       defineField({ name: 'duration', type: 'number' }),
       defineField({
         name: 'pageSeconds',

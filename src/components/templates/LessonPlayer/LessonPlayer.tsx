@@ -4,17 +4,12 @@ import Link from 'next/link';
 import { CourseCurriculum } from '@/components/molecules/CourseCurriculum/CourseCurriculum';
 import { LessonBody } from '@/components/organisms/LessonBody/LessonBody';
 import { LessonCompletion } from '@/components/molecules/LessonCompletion/LessonCompletion';
-import { lessonBlockFraction } from '@/lib/learning/progress';
 import { lessonHref } from '@/lib/learning/selectors';
 import { useLessonPlayer } from './hooks';
 import type { LessonPlayerProps } from './types';
 export function LessonPlayer(props: LessonPlayerProps) {
   const { view, demo } = props,
-    { progress, status, error, drawer, collapsed, contents, onProgress, confirm } =
-      useLessonPlayer(props);
-  const unreadMaterial = view.lesson.blocks.some(
-    (b) => b.required && b.kind !== 'quiz' && lessonBlockFraction(b, progress) < 1,
-  );
+    { progress, status, error, drawer, collapsed, contents, onProgress } = useLessonPlayer(props);
   const module = view.enrollment.course.modules.find((m) =>
     m.lessons.some((l) => l.id === view.lesson.id),
   );
@@ -59,6 +54,7 @@ export function LessonPlayer(props: LessonPlayerProps) {
             sessions={view.enrollment.sessions}
             demo={demo}
             onProgress={onProgress}
+            progressError={error}
           />
           <footer className="lesson-footer">
             <LessonCompletion lesson={view.lesson} progress={progress} status={status} />
@@ -75,17 +71,6 @@ export function LessonPlayer(props: LessonPlayerProps) {
               </Link>
             )}
           </footer>
-          {unreadMaterial && !view.lesson.blocks.some((b) => b.required && b.kind === 'zoom') && (
-            <div className="lesson-manual">
-              <button type="button" onClick={confirm}>
-                Я опрацював матеріал
-              </button>
-              <p className="learning-meta">
-                Уже прочитали урок, але прогрес неповний? Підтвердьте опрацювання — повторно читати
-                не потрібно
-              </p>
-            </div>
-          )}
         </main>
       </div>
       <dialog

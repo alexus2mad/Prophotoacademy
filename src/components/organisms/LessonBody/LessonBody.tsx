@@ -16,6 +16,7 @@ export function LessonBody({
   demo,
   preview,
   onProgress,
+  progressError,
 }: LessonBodyProps) {
   const { images, selectedIndex, openImage, closeImages } = useLessonImages({ lesson });
   const outline = lesson.blocks.filter(
@@ -56,6 +57,7 @@ export function LessonBody({
                 demo={demo}
                 preview={preview}
                 onProgress={onProgress}
+                progressError={progressError}
                 onOpenImage={() => openImage(block.id)}
               />
             </div>

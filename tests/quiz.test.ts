@@ -78,7 +78,6 @@ describe('lesson self-checks', () => {
       lesson,
       { blocks: {} },
       { ...event, quizAnswers: { question: 'square' } },
-      0,
     );
     const html = renderToStaticMarkup(
       createElement(LessonQuiz, {
@@ -97,7 +96,7 @@ describe('lesson self-checks', () => {
     expect($('.quiz-result.is-failed')).toHaveLength(1);
   });
   it('enriches older submitted results without revealing keys for new or replaced quizzes', () => {
-    const progress = applyProgress(lesson, { blocks: {} }, event, 0);
+    const progress = applyProgress(lesson, { blocks: {} }, event);
     delete progress.blocks.quiz.quiz!.feedback[0].correctOptionId;
     expect(quizReviewProgress(lesson, progress).blocks.quiz.quiz?.feedback[0].correctOptionId).toBe(
       'circle',
@@ -109,7 +108,7 @@ describe('lesson self-checks', () => {
         .quiz?.feedback[0].correctOptionId,
     ).toBeUndefined();
   });
-  it('credits confirmed reading without bypassing a required quiz', () => {
+  it('ignores manual reading and completes only after a passed quiz', () => {
     const combined = {
       ...lesson,
       blocks: [
@@ -125,9 +124,9 @@ describe('lesson self-checks', () => {
         block,
       ],
     };
-    const manual = applyProgress(combined, { blocks: {} }, { ...event, manual: true }, 0);
-    expect(lessonFraction(combined, manual)).toBe(0.5);
-    expect(lessonFraction(combined, applyProgress(combined, manual, event, 0))).toBe(1);
+    const manual = applyProgress(combined, { blocks: {} }, { ...event, manual: true });
+    expect(lessonFraction(combined, manual)).toBe(0);
+    expect(lessonFraction(combined, applyProgress(combined, manual, event))).toBe(1);
   });
   it('rejects unanswered, extra and fabricated options, or a missing answer key', () => {
     const invalidAnswers: Record<string, string>[] = [
@@ -141,28 +140,26 @@ describe('lesson self-checks', () => {
       gradeQuiz(publicLearningBlock(block).quiz!, { question: 'circle' }, 'attempt'),
     ).toThrow();
   });
-  it('stores results, retains a passed completion through replay and resets replaced quizzes', () => {
-    const passed = applyProgress(lesson, { blocks: {} }, event, 0);
+  it('stores results, retains a passed completion through replay and preserves completion across quiz revisions', () => {
+    const passed = applyProgress(lesson, { blocks: {} }, event);
     expect(lessonFraction(lesson, passed)).toBe(1);
-    const replay = applyProgress(
-      lesson,
-      passed,
-      { ...event, id: 'retry', quizAnswers: { question: 'square' } },
-      0,
-    );
+    const replay = applyProgress(lesson, passed, {
+      ...event,
+      id: 'retry',
+      quizAnswers: { question: 'square' },
+    });
     expect(replay.blocks.quiz.quiz?.passed).toBe(false);
     expect(lessonFraction(lesson, replay)).toBe(1);
-    expect(lessonFraction({ ...lesson, blocks: [{ ...block, revision: 2 }] }, replay)).toBe(0);
+    expect(lessonFraction({ ...lesson, blocks: [{ ...block, revision: 2 }] }, replay)).toBe(1);
   });
   it('cannot complete a required quiz through time, client flags or manual reading confirmation', () => {
     const observed = applyProgress(
       lesson,
       { blocks: {} },
       { ...event, elapsed: 30, quizAnswers: undefined },
-      30,
     );
     expect(lessonFraction(lesson, observed)).toBe(0);
-    const manual = applyProgress(lesson, observed, { ...event, manual: true }, 0);
+    const manual = applyProgress(lesson, observed, { ...event, manual: true });
     expect(lessonFraction(lesson, manual)).toBe(0);
     expect(
       progressSchema.parse({

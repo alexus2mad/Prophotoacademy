@@ -4,12 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { claimIdentity, changeAdministrator, safeReturnTo } from '../src/lib/auth/identity';
 import { fulfillOrder } from '../src/lib/commerce/orders';
 import { accessDates, canReadLesson } from '../src/lib/learning/access';
-import {
-  applyProgress,
-  lessonFraction,
-  rangeSeconds,
-  studyBudget,
-} from '../src/lib/learning/progress';
+import { applyProgress, lessonFraction } from '../src/lib/learning/progress';
 import type { SqlConnection } from '../src/lib/database/types';
 import type { Grant, Lesson, ProgressEvent } from '../src/lib/learning/types';
 import type { Order } from '../src/lib/ledger/types';
@@ -162,65 +157,23 @@ describe('payment fulfillment and access', () => {
     expect(canReadLesson([grant], { ...lesson, releaseAt: '2099-01-01' })).toBe(false);
   });
 });
-describe('intelligent progress', () => {
-  it('credits interrupted sessions but not overlapping tabs or duplicated coverage', () => {
-    const now = Date.parse('2026-10-09T12:00:00Z');
-    const first = studyBudget(
-      { blocks: {} },
-      { ...event, elapsed: 10, observedAt: '2026-10-09T11:59:40Z' },
-      now,
-    );
-    expect(first.elapsed).toBe(10);
-    const duplicate = studyBudget(
-      { blocks: {}, studyRanges: first.ranges },
-      { ...event, elapsed: 10, observedAt: '2026-10-09T11:59:40Z' },
-      now,
-    );
-    expect(duplicate.elapsed).toBe(0);
-    const next = studyBudget(
-      { blocks: {}, studyRanges: first.ranges },
-      { ...event, elapsed: 10, observedAt: '2026-10-09T11:59:45Z' },
-      now,
-    );
-    expect(next.elapsed).toBe(5);
+describe('quiz-only progress', () => {
+  it('acknowledges obsolete monitoring and manual events without changing stored history', () => {
+    const previous = { blocks: {}, manual: 'student' as const };
+    for (const input of [
+      event,
+      { ...event, manual: true },
+      { ...event, page: 1 },
+      { ...event, blockId: 'removed' },
+    ]) {
+      expect(applyProgress(lesson, previous, input)).toBe(previous);
+      expect(lessonFraction(lesson, previous)).toBe(0);
+    }
   });
-  it('merges replay and refuses credit for a seek beyond the elapsed budget', () => {
-    let state = applyProgress(lesson, { blocks: {} }, event, 30);
-    state = applyProgress(lesson, state, event, 30);
-    expect(rangeSeconds(state.blocks.video.ranges)).toBe(30);
-    state = applyProgress(lesson, state, { ...event, ranges: [[30, 100]], elapsed: 1 }, 1);
-    expect(rangeSeconds(state.blocks.video.ranges)).toBe(30);
-    state = applyProgress(lesson, state, { ...event, ranges: [[30, 90]], elapsed: 30 }, 30);
-    expect(lessonFraction(lesson, state)).toBe(1);
-  });
-  it('does not count an opened PDF or stale media revision', () => {
-    const pdf: Lesson = {
-      ...lesson,
-      blocks: [
-        {
-          id: 'pdf',
-          kind: 'pdf',
-          title: 'PDF',
-          required: true,
-          revision: 2,
-          pageSeconds: [10, 10],
-        },
-      ],
-    };
-    expect(lessonFraction(pdf, { blocks: {} })).toBe(0);
-    expect(() =>
-      applyProgress(pdf, { blocks: {} }, { ...event, blockId: 'pdf', revision: 1 }, 10),
-    ).toThrow('змінився');
-  });
-  it('retains explicit student confirmation for offline or accessible reading', () => {
-    const state = applyProgress(lesson, { blocks: {} }, { ...event, manual: true }, 0);
-    expect(state.manual).toBe('student');
-    expect(lessonFraction(lesson, state)).toBe(1);
-    expect(
-      lessonFraction(
-        { ...lesson, blocks: lesson.blocks.map((b) => ({ ...b, revision: 2 })) },
-        state,
-      ),
-    ).toBe(0);
+  it('saves a resume position without awarding completion', () => {
+    const state = applyProgress(lesson, { blocks: {} }, { ...event, kind: 'resume', position: 90 });
+    expect(state.blocks.video.position).toBe(90);
+    expect(state.blocks.video.ranges).toBeUndefined();
+    expect(lessonFraction(lesson, state)).toBe(0);
   });
 });

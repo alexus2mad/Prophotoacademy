@@ -9,7 +9,7 @@ export function enrollmentCard(enrollment: EnrolledCourse): EnrollmentCardView {
   const available = lessons.filter((l) => canReadLesson(enrollment.grants, l));
   const last = [...enrollment.progress]
     .sort((a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at))
-    .find((p) => available.some((l) => l.id === p.lesson_id) && !p.completed_at);
+    .find((p) => available.some((l) => l.id === p.lesson_id) && !p.state.quizCompletion);
   const next =
     available.find((l) => l.id === last?.lesson_id) ||
     available.find(
@@ -39,7 +39,9 @@ export function enrollmentCard(enrollment: EnrolledCourse): EnrollmentCardView {
     title: enrollment.course.title,
     cover: enrollment.course.cover,
     packageName: active[0]?.package_name || enrollment.grants[0]?.package_name || '',
-    progress: fractions.length ? fractions.reduce((a, b) => a + b, 0) / fractions.length : 0,
+    progress: fractions.length
+      ? fractions.reduce<number>((a, b) => a + b, 0) / fractions.length
+      : 0,
     completed: fractions.filter((f) => f >= 0.999999).length,
     total: lessons.length,
     nextLessonId: next?.id,

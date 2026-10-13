@@ -107,27 +107,30 @@ export const publicationSchema = z.object({
   revision: z.string().min(1),
   lessonIds: z.array(id).min(1).max(20000).optional(),
 });
-export const progressSchema = z.object({
-  observedAt: z.iso.datetime().optional(),
-  id: z.uuid(),
-  sessionId: z.uuid(),
-  sequence: z.number().int().nonnegative(),
-  blockId: id,
-  revision: z.number().int().positive(),
-  elapsed: z.number().min(0).max(30),
-  ranges: z
-    .array(z.tuple([z.number().nonnegative(), z.number().nonnegative()]))
-    .max(30)
-    .optional(),
-  coverage: z.array(z.number().int().min(0).max(99)).max(100).optional(),
-  page: z.number().int().nonnegative().optional(),
-  position: z.number().nonnegative().optional(),
-  manual: z.boolean().optional(),
-  quizAnswers: z
-    .record(id, id)
-    .refine((answers) => Object.keys(answers).length <= 20)
-    .optional(),
-});
+export const progressSchema = z
+  .object({
+    kind: z.enum(['quiz', 'resume']).optional(),
+    observedAt: z.iso.datetime().optional(),
+    id: z.uuid(),
+    sessionId: z.uuid(),
+    sequence: z.number().int().nonnegative(),
+    blockId: id,
+    revision: z.number().int().positive(),
+    elapsed: z.number().min(0).max(30).optional(),
+    ranges: z
+      .array(z.tuple([z.number().nonnegative(), z.number().nonnegative()]))
+      .max(30)
+      .optional(),
+    coverage: z.array(z.number().int().min(0).max(99)).max(100).optional(),
+    page: z.number().int().nonnegative().optional(),
+    position: z.number().nonnegative().optional(),
+    manual: z.boolean().optional(),
+    quizAnswers: z
+      .record(id, id)
+      .refine((answers) => Object.keys(answers).length <= 20)
+      .optional(),
+  })
+  .refine((event) => event.kind !== 'quiz' || !!event.quizAnswers, 'Потрібні відповіді на тест');
 export const liveSchema = z
   .object({
     id: z.uuid().optional(),

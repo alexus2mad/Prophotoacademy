@@ -47,6 +47,7 @@ beforeAll(async () => {
     '202610090001_learning.sql',
     '202610090002_authoring.sql',
     '202610090003_booking_management.sql',
+    '202610130001_quiz_completion.sql',
   ])
     await pg.exec(await readFile('supabase/migrations/' + file, 'utf8'));
   await pg.query(
@@ -75,8 +76,23 @@ beforeAll(async () => {
                 blocks: [
                   {
                     id: 'image',
-                    kind: 'image',
-                    title: 'Image',
+                    kind: 'quiz',
+                    quiz: {
+                      passingScore: 80,
+                      questions: [
+                        {
+                          id: 'q',
+                          prompt: 'Q',
+                          options: [
+                            { id: 'a', text: 'A' },
+                            { id: 'b', text: 'B' },
+                          ],
+                          correctOptionId: 'a',
+                          explanation: 'A',
+                        },
+                      ],
+                    },
+                    title: 'Quiz',
                     required: true,
                     revision: 1,
                     expectedSeconds: 5,
@@ -148,13 +164,38 @@ describe('management is authorized by verified identity through ps-booking', () 
       sequence: 1,
       blockId: 'image',
       revision: 1,
-      elapsed: 5,
+      quizAnswers: { q: 'a' },
       observedAt: new Date().toISOString(),
     };
     expect((await saveProgress(student, 'course', 'lesson', event)).completed).toBe(true);
     expect(
-      (await saveProgress(student, 'course', 'lesson', event)).state.blocks.image.activeSeconds,
-    ).toBe(5);
+      (await saveProgress(student, 'course', 'lesson', event)).state.blocks.image.quiz?.passed,
+    ).toBe(true);
+    expect((await pg.query('SELECT * FROM academy.quiz_attempts')).rows).toHaveLength(1);
+    await expect(
+      saveProgress(admin, 'course', 'lesson', { ...event, id: randomUUID() }),
+    ).rejects.toThrow('недоступний');
+    const failed = await saveProgress(student, 'course', 'lesson', {
+      ...event,
+      id: randomUUID(),
+      sequence: 2,
+      quizAnswers: { q: 'b' },
+    });
+    expect(failed.state.blocks.image.quiz?.passed).toBe(false);
+    expect(failed.completed).toBe(true);
+    const monitoring = await saveProgress(student, 'course', 'lesson', {
+      ...event,
+      id: randomUUID(),
+      sequence: 3,
+      quizAnswers: undefined,
+      elapsed: 30,
+      manual: true,
+    });
+    expect(monitoring.state.quizCompletion).toEqual(failed.state.quizCompletion);
+    expect((await pg.query('SELECT * FROM academy.quiz_attempts')).rows).toHaveLength(2);
+    await expect(
+      saveProgress(student, 'course', 'lesson', { ...event, id: randomUUID(), revision: 999 }),
+    ).rejects.toThrow('Тест змінився');
     await manageAccess({ ...access, action: 'revoke', reason: 'Synthetic revocation' }, admin);
     await expect(
       saveProgress(student, 'course', 'lesson', { ...event, id: randomUUID(), sequence: 2 }),

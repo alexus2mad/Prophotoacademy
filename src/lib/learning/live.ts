@@ -2,8 +2,7 @@ import { randomUUID } from 'node:crypto';
 import { transaction, databasePool, audit } from '../database/client';
 import { liveSchema } from './schema';
 import { HttpError } from '../http';
-import type { LiveSession, CourseRelease, LessonProgress, ProgressRow } from './types';
-import { lessonFraction } from './progress';
+import type { LiveSession, CourseRelease } from './types';
 import { assertAdministrator } from '../auth/identity';
 export async function saveLiveSession(input: unknown, actorId: string) {
   const session = liveSchema.parse(input),
@@ -89,43 +88,22 @@ export async function recordAttendance(
         .flatMap((m) => m.lessons)
         .find((l) => l.id === session.lesson_id);
       if (!lesson) throw new HttpError(400, 'Студент не належить до цієї групи');
-      await db.query('SELECT pg_advisory_xact_lock(hashtext($1))', [
-        userId + ':' + session.course_id + ':' + session.lesson_id,
-      ]);
-      const old = (
-        await db.query<ProgressRow>(
-          'SELECT * FROM academy.lesson_progress WHERE user_id=$1 AND course_id=$2 AND lesson_id=$3',
-          [userId, session.course_id, session.lesson_id],
-        )
+      const before = (
+        await db.query('SELECT * FROM academy.attendance WHERE session_id=$1 AND user_id=$2', [
+          sessionId,
+          userId,
+        ])
       ).rows[0];
-      const state: LessonProgress = old?.state ? structuredClone(old.state) : { blocks: {} };
-      for (const block of lesson.blocks.filter((b) => b.kind === 'zoom'))
-        state.blocks[block.id] = {
-          ...(state.blocks[block.id] || {
-            revision: block.revision,
-            ranges: [],
-            coverage: [],
-            activeSeconds: 0,
-            pageSeconds: {},
-            position: 0,
-          }),
-          completed: attended,
-        };
-      const complete = lessonFraction(lesson, state) >= 0.999999;
       await db.query(
         'INSERT INTO academy.attendance(session_id,user_id,attended,recorded_by) VALUES($1,$2,$3,$4) ON CONFLICT(session_id,user_id) DO UPDATE SET attended=excluded.attended,recorded_by=excluded.recorded_by,recorded_at=now()',
         [sessionId, userId, attended, actorId],
-      );
-      await db.query(
-        "INSERT INTO academy.lesson_progress(user_id,course_id,lesson_id,state,completed_at,completion_source) VALUES($1,$2,$3,$4,CASE WHEN $5 THEN now() ELSE NULL END,CASE WHEN $5 THEN 'admin' ELSE NULL END) ON CONFLICT(user_id,course_id,lesson_id) DO UPDATE SET state=excluded.state,completed_at=excluded.completed_at,completion_source=excluded.completion_source,updated_at=now()",
-        [userId, session.course_id, session.lesson_id, JSON.stringify(state), complete],
       );
       await audit(db, {
         actorId,
         action: attended ? 'attendance.confirm' : 'attendance.revoke',
         target: sessionId + ':' + userId,
-        before: old?.state,
-        after: state,
+        before,
+        after: { attended },
       });
     }
   });

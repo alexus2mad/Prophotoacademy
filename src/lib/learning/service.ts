@@ -3,7 +3,7 @@ import { numberCourse } from './numbering';
 import { databasePool, transaction } from '../database/client';
 import { HttpError } from '../http';
 import { canReadLesson } from './access';
-import { applyProgress, lessonFraction, expectedSeconds, studyBudget } from './progress';
+import { applyProgress, lessonFraction } from './progress';
 import { gradeQuiz, publicLearningBlock, quizReviewProgress } from './quiz';
 import type {
   CourseRelease,
@@ -94,7 +94,6 @@ export function safeEnrollment(
                       title: '',
                       required: b.required,
                       revision: b.revision,
-                      expectedSeconds: expectedSeconds(b),
                       duration: b.duration,
                       mediaId: b.mediaId,
                       pageSeconds: b.pageSeconds,
@@ -156,12 +155,18 @@ export async function saveProgress(
       throw new HttpError(400, 'Оберіть одну відповідь на кожне запитання');
     }
   }
-  if (event.manual && view.lesson.blocks.some((b) => b.kind === 'zoom' && b.required))
-    throw new HttpError(400, 'Участь у зустрічі підтверджує викладач, або перегляньте запис');
   return transaction(async (db) => {
     await db.query('SELECT pg_advisory_xact_lock(hashtext($1))', [
       userId + ':' + courseId + ':' + lessonId,
     ]);
+    const grants = (
+      await db.query<Grant>(
+        'SELECT * FROM academy.grants WHERE user_id=$1 AND course_id=$2 AND release_id=$3 FOR SHARE',
+        [userId, courseId, view.enrollment.releaseId],
+      )
+    ).rows;
+    if (!canReadLesson(grants, view.lesson))
+      throw new HttpError(403, 'Цей урок наразі недоступний для вашого пакета');
     const old = (
       await db.query<ProgressRow>(
         'SELECT * FROM academy.lesson_progress WHERE user_id=$1 AND course_id=$2 AND lesson_id=$3',
@@ -169,6 +174,12 @@ export async function saveProgress(
       )
     ).rows[0];
     const previous: LessonProgress = old?.state || { blocks: {} };
+    if (event.manual || (!event.quizAnswers && event.kind !== 'resume'))
+      return {
+        state: quizReviewProgress(view.lesson, previous),
+        progress: lessonFraction(view.lesson, previous),
+        completed: !!previous.quizCompletion,
+      };
     const inserted = await db.query(
       'INSERT INTO academy.progress_events(user_id,event_id) VALUES($1,$2) ON CONFLICT DO NOTHING RETURNING event_id',
       [userId, event.id],
@@ -177,7 +188,7 @@ export async function saveProgress(
       return {
         state: quizReviewProgress(view.lesson, previous),
         progress: lessonFraction(view.lesson, previous),
-        completed: !!old?.completed_at,
+        completed: !!previous.quizCompletion,
       };
     const session = (
       await db.query('SELECT * FROM academy.progress_sessions WHERE id=$1 FOR UPDATE', [
@@ -186,33 +197,36 @@ export async function saveProgress(
     ).rows[0];
     if (session && (session.user_id !== userId || session.lesson_id !== lessonId))
       throw new HttpError(403, 'Недійсний сеанс навчання');
-    if (session && event.sequence <= session.sequence)
+    if (session && event.sequence <= session.sequence && !event.quizAnswers)
       return {
         state: quizReviewProgress(view.lesson, previous),
         progress: lessonFraction(view.lesson, previous),
-        completed: !!old?.completed_at,
+        completed: !!previous.quizCompletion,
       };
-    const budget = studyBudget(previous, event);
-    const state = {
-        ...applyProgress(view.lesson, previous, event, budget.elapsed),
-        studyRanges: budget.ranges,
-      },
+    const state = applyProgress(view.lesson, previous, event),
       fraction = lessonFraction(view.lesson, state),
-      complete = fraction >= 0.999999;
+      complete = fraction === 1;
+    if (event.quizAnswers && !event.manual) {
+      await db.query(
+        'INSERT INTO academy.quiz_attempts(user_id,course_id,lesson_id,event_id,quiz_id,revision,result) VALUES($1,$2,$3,$4,$5,$6,$7) ON CONFLICT(user_id,event_id) DO NOTHING',
+        [
+          userId,
+          courseId,
+          lessonId,
+          event.id,
+          event.blockId,
+          event.revision,
+          JSON.stringify(state.blocks[event.blockId].quiz),
+        ],
+      );
+    }
     await db.query(
-      'INSERT INTO academy.progress_sessions(id,user_id,lesson_id,sequence) VALUES($1,$2,$3,$4) ON CONFLICT(id) DO UPDATE SET sequence=excluded.sequence,last_seen=now()',
+      'INSERT INTO academy.progress_sessions(id,user_id,lesson_id,sequence) VALUES($1,$2,$3,$4) ON CONFLICT(id) DO UPDATE SET sequence=greatest(academy.progress_sessions.sequence,excluded.sequence),last_seen=now()',
       [event.sessionId, userId, lessonId, event.sequence],
     );
     await db.query(
       'INSERT INTO academy.lesson_progress(user_id,course_id,lesson_id,state,completed_at,completion_source,last_active_at) VALUES($1,$2,$3,$4,CASE WHEN $5 THEN now() ELSE NULL END,$6,now()) ON CONFLICT(user_id,course_id,lesson_id) DO UPDATE SET state=excluded.state,completed_at=CASE WHEN excluded.completed_at IS NULL THEN NULL ELSE coalesce(academy.lesson_progress.completed_at,excluded.completed_at) END,completion_source=excluded.completion_source,updated_at=now(),last_active_at=now()',
-      [
-        userId,
-        courseId,
-        lessonId,
-        JSON.stringify(state),
-        complete,
-        complete ? state.manual || 'automatic' : null,
-      ],
+      [userId, courseId, lessonId, JSON.stringify(state), complete, complete ? 'automatic' : null],
     );
     return {
       state: quizReviewProgress(view.lesson, state),

@@ -1,19 +1,12 @@
 'use client';
 import { useLearningPdf } from './hooks';
-import { blockFraction } from '@/lib/learning/progress';
 import type { LearningPdfProps } from './types';
 export function LearningPdf(props: LearningPdfProps) {
   const { block, url } = props;
   const { canvas, container, page, setPage, scale, setScale, count, text, error, ready } =
     useLearningPdf(props);
   return (
-    <section
-      ref={container}
-      data-reading-block
-      data-reading-complete={blockFraction(block, props.state) >= 1}
-      className="lesson-block lesson-pdf"
-      aria-label={block.title}
-    >
+    <section ref={container} className="lesson-block lesson-pdf" aria-label={block.title}>
       <h2>{block.title}</h2>
       <div className="pdf-toolbar" role="group" aria-label="Керування PDF">
         <button
@@ -72,10 +65,6 @@ export function LearningPdf(props: LearningPdfProps) {
           </details>
         </>
       )}
-      <p className="learning-meta">
-        Завантаження файлу не змінює прогрес. Після роботи офлайн скористайтеся підтвердженням унизу
-        уроку
-      </p>
     </section>
   );
 }

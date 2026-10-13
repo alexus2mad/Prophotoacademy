@@ -1,10 +1,9 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import { pdfLibrary, readingActive, mostVisibleReadingBlock } from '@/lib/learning/browser';
-import { createReadingTracker } from '@/lib/learning/reading';
+import { pdfLibrary } from '@/lib/learning/browser';
 import type { PDFDocumentProxy } from 'pdfjs-dist';
 import type { LearningPdfProps } from './types';
-export function useLearningPdf({ url, block, onProgress }: LearningPdfProps) {
+export function useLearningPdf({ url }: LearningPdfProps) {
   const [pdf, setPdf] = useState<PDFDocumentProxy | null>(null),
     [page, setPage] = useState(0),
     [scale, setScale] = useState(1),
@@ -13,9 +12,7 @@ export function useLearningPdf({ url, block, onProgress }: LearningPdfProps) {
     [ready, setReady] = useState(false),
     [containerWidth, setContainerWidth] = useState(760);
   const canvas = useRef<HTMLCanvasElement>(null),
-    container = useRef<HTMLElement>(null),
-    callback = useRef(onProgress);
-  callback.current = onProgress;
+    container = useRef<HTMLElement>(null);
   useEffect(() => {
     const element = container.current;
     if (!element) return;
@@ -85,48 +82,6 @@ export function useLearningPdf({ url, block, onProgress }: LearningPdfProps) {
       cancelRender?.();
     };
   }, [pdf, page, scale, containerWidth]);
-  useEffect(() => {
-    if (!ready) return;
-    let activeAt = Date.now();
-    const tracker = createReadingTracker(
-      (sample) =>
-        callback.current({
-          blockId: block.id,
-          revision: block.revision,
-          page,
-          ...sample,
-        }),
-      5,
-    );
-    const active = () => {
-      activeAt = Date.now();
-    };
-    const flush = tracker.flush;
-    const timer = setInterval(() => {
-      const now = Date.now();
-      const visible = mostVisibleReadingBlock();
-      const active =
-        readingActive() &&
-        now - activeAt < 90000 &&
-        visible?.element === container.current &&
-        visible.visible >= 80;
-      tracker.tick(now, active ? [] : null);
-    }, 1000);
-    ['pointermove', 'keydown', 'scroll'].forEach((event) =>
-      window.addEventListener(event, active, { passive: true }),
-    );
-    document.addEventListener('visibilitychange', flush);
-    window.addEventListener('pagehide', flush);
-    return () => {
-      clearInterval(timer);
-      flush();
-      ['pointermove', 'keydown', 'scroll'].forEach((event) =>
-        window.removeEventListener(event, active),
-      );
-      document.removeEventListener('visibilitychange', flush);
-      window.removeEventListener('pagehide', flush);
-    };
-  }, [ready, page, block.id, block.revision]);
   return {
     canvas,
     container,

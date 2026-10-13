@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { publicationDraft } from '../src/lib/learning/publication';
-import { hasRequiredMaterial } from '../src/lib/learning/presentation';
+import { hasFinalQuiz } from '../src/lib/learning/presentation';
 import { publicationSchema } from '../src/lib/learning/schema';
 import { numberCourse } from '../src/lib/learning/numbering';
 import type { CourseDraft } from '../src/lib/learning/types';
@@ -61,8 +61,8 @@ describe('selective course publication', () => {
   it('keeps full-publication callers compatible and leaves validation of media to the publisher', () => {
     expect(publicationDraft(draft)).toEqual(numberCourse(draft));
     expect(publicationDraft(draft)).not.toBe(draft);
-    expect(hasRequiredMaterial(draft.modules[0].lessons[0])).toBe(true);
-    expect(hasRequiredMaterial(draft.modules[0].lessons[1])).toBe(false);
+    expect(hasFinalQuiz(draft.modules[0].lessons[0])).toBe(false);
+    expect(hasFinalQuiz(draft.modules[0].lessons[1])).toBe(false);
   });
   it('validates publication requests before processing a revision', () => {
     expect(publicationSchema.safeParse({ revision: 'current', lessonIds: [] }).success).toBe(false);

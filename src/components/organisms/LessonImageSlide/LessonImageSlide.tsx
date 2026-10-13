@@ -1,19 +1,12 @@
 'use client';
 import { ImageZoom } from '@/components/molecules/ImageZoom/ImageZoom';
-import { blockFraction } from '@/lib/learning/progress';
 import { useLessonImageSlide } from './hooks';
 import type { LessonImageSlideProps } from './types';
 
 export function LessonImageSlide(props: LessonImageSlideProps) {
-  const { media, reading, failed, fail, retry } = useLessonImageSlide(props);
+  const { media, failed, fail, retry } = useLessonImageSlide(props);
   return (
-    <section
-      ref={reading}
-      className="lesson-image-slide"
-      data-reading-block
-      data-reading-complete={blockFraction(props.block, props.state) >= 1}
-      aria-label={props.block.alt || 'Фото уроку'}
-    >
+    <section className="lesson-image-slide" aria-label={props.block.alt || 'Фото уроку'}>
       {media.error || failed ? (
         <div className="lesson-image-message">
           <p role="alert">{media.error || 'Не вдалося завантажити фото'}</p>

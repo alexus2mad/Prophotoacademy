@@ -4,7 +4,13 @@ import { gradeQuiz } from '@/lib/learning/quiz';
 import type { QuizResult } from '@/lib/learning/types';
 import type { LessonQuizProps } from './types';
 
-export function useLessonQuiz({ block, state, preview, onProgress }: LessonQuizProps) {
+export function useLessonQuiz({
+  block,
+  state,
+  preview,
+  onProgress,
+  progressError,
+}: LessonQuizProps) {
   const saved = state?.revision === block.revision ? state.quiz : undefined;
   const [answers, setAnswers] = useState<Record<string, string>>(saved?.answers || {});
   const [localResult, setLocalResult] = useState<QuizResult>();
@@ -15,6 +21,12 @@ export function useLessonQuiz({ block, state, preview, onProgress }: LessonQuizP
   const announceResult = useRef(false);
   const previousAttempt = useRef(saved?.attemptId);
   const result = preview ? localResult : saved;
+  useEffect(() => {
+    if (progressError) {
+      setPending(false);
+      setError(progressError);
+    }
+  }, [progressError]);
   useEffect(() => {
     if (saved && previousAttempt.current !== saved.attemptId) {
       previousAttempt.current = saved.attemptId;
@@ -42,7 +54,12 @@ export function useLessonQuiz({ block, state, preview, onProgress }: LessonQuizP
       setReviewing(true);
     } else {
       setPending(true);
-      onProgress({ blockId: block.id, revision: block.revision, elapsed: 0, quizAnswers: answers });
+      onProgress({
+        kind: 'quiz',
+        blockId: block.id,
+        revision: block.revision,
+        quizAnswers: answers,
+      });
     }
   }
   function retry() {

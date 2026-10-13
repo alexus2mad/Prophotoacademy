@@ -1,5 +1,6 @@
 import type { Lesson, LessonProgress, LiveSession, ProgressSample } from '@/lib/learning/types';
 export type LessonBodyProps = {
+  progressError?: string;
   lesson: Lesson;
   courseId: string;
   number?: number;

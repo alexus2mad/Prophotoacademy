@@ -69,15 +69,23 @@ export type Interval = [number, number];
 export type BlockProgress = {
   mediaId?: string;
   revision: number;
-  ranges: Interval[];
-  coverage: number[];
-  activeSeconds: number;
-  pageSeconds: Record<string, number>;
+  ranges?: Interval[];
+  coverage?: number[];
+  activeSeconds?: number;
+  pageSeconds?: Record<string, number>;
   position: number;
   completed?: boolean;
   quiz?: QuizResult;
 };
+export type QuizCompletion = {
+  quizId: string;
+  revision: number;
+  attemptId: string | null;
+  completedAt: string;
+  source: 'submission' | 'legacy-passing-result' | 'legacy-pass-latch';
+};
 export type LessonProgress = {
+  quizCompletion?: QuizCompletion;
   blocks: Record<string, BlockProgress>;
   manual?: 'student' | 'admin';
   manualRevisions?: Record<string, number>;
@@ -95,13 +103,14 @@ export type ProgressRow = {
   updated_at: string;
 };
 export type ProgressEvent = {
+  kind?: 'quiz' | 'resume';
   observedAt?: string;
   id: string;
   sessionId: string;
   sequence: number;
   blockId: string;
   revision: number;
-  elapsed: number;
+  elapsed?: number;
   ranges?: Interval[];
   coverage?: number[];
   page?: number;
@@ -189,8 +198,8 @@ export type EnrollmentCardView = {
   status: 'active' | 'expired' | 'scheduled';
 };
 export type ProgressSample = Omit<ProgressEvent, 'id' | 'sessionId' | 'sequence'>;
-export type ReadingObservation = Pick<ProgressSample, 'elapsed' | 'observedAt' | 'coverage'>;
 export type LessonBlockProps = {
+  progressError?: string;
   block: LearningBlock;
   courseId: string;
   lessonId: string;

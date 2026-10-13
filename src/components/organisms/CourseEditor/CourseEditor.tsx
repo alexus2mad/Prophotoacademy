@@ -6,7 +6,7 @@ import { LessonSettings } from '@/components/molecules/LessonSettings/LessonSett
 import { MaterialPicker } from '@/components/molecules/MaterialPicker/MaterialPicker';
 import { CoursePackageEditor } from '@/components/organisms/CoursePackageEditor/CoursePackageEditor';
 import { CourseSessions } from '@/components/organisms/CourseSessions/CourseSessions';
-import { hasRequiredMaterial } from '@/lib/learning/presentation';
+import { hasFinalQuiz } from '@/lib/learning/presentation';
 import { lessonLabel, lessonNumber } from '@/lib/learning/numbering';
 import { useCourseEditor } from './hooks';
 import type { CourseEditorProps } from './types';
@@ -229,12 +229,14 @@ export function CourseEditor(props: CourseEditorProps) {
                 <input
                   type="checkbox"
                   checked={h.publishedLessons.includes(lesson.id)}
-                  disabled={!hasRequiredMaterial(lesson)}
+                  disabled={!hasFinalQuiz(lesson)}
                   onChange={(e) => h.selectPublishedLesson(lesson.id, e.target.checked)}
                 />
                 <span>
                   {lessonLabel(h.draft, lesson)}
-                  {!hasRequiredMaterial(lesson) && <small>Ще немає обов’язкових матеріалів</small>}
+                  {!hasFinalQuiz(lesson) && (
+                    <small>Потрібен один підсумковий тест наприкінці уроку</small>
+                  )}
                 </span>
               </label>
             ))}

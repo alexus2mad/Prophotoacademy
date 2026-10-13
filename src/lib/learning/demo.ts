@@ -31,7 +31,7 @@ export const demoCourse: CourseDraft = {
               title: 'Ваш простір для навчання',
               required: true,
               revision: 1,
-              body: 'Це демонстраційний урок кабінету ProPhoto. Він показує, як виглядатимуть матеріали та збереження прогресу.\n\n## Навчайтеся у своєму темпі\n\nВідкривайте уроки в зручному порядку. Кабінет запам’ятає, де ви зупинилися. Відео, конспекти й матеріали до заняття зібрані на одній сторінці.\n\n## Повертайтеся до важливого\n\nПрогрес зберігається автоматично. Якщо ви опрацювали матеріал поза кабінетом, можете підтвердити це самостійно.',
+              body: 'Це демонстраційний урок кабінету ProPhoto. Він показує, як виглядатимуть матеріали та збереження прогресу.\n\n## Навчайтеся у своєму темпі\n\nВідкривайте уроки в зручному порядку. Кабінет запам’ятає, де ви зупинилися. Відео, конспекти й матеріали до заняття зібрані на одній сторінці.\n\n## Повертайтеся до важливого\n\nУрок завершено, коли ви успішно пройшли підсумковий тест. Читайте й переглядайте матеріали у своєму темпі.',
             },
           ],
         },
@@ -148,6 +148,30 @@ export const demoCourse: CourseDraft = {
     },
   ],
 };
+for (const lesson of demoCourse.modules.flatMap((module) => module.lessons)) {
+  lesson.blocks.push({
+    id: lesson.id + '-quiz',
+    kind: 'quiz',
+    title: 'Перевірте себе',
+    required: true,
+    revision: 1,
+    quiz: {
+      passingScore: 80,
+      questions: [
+        {
+          id: 'completion',
+          prompt: 'Що завершує урок у цьому демонстраційному курсі?',
+          options: [
+            { id: 'quiz', text: 'Успішний підсумковий тест' },
+            { id: 'scroll', text: 'Прокручування сторінки' },
+          ],
+          correctOptionId: 'quiz',
+          explanation: 'Прогрес враховує завершені тести. Читання і перегляд не змінюють відсоток.',
+        },
+      ],
+    },
+  });
+}
 export const demoSession: LiveSession = {
   id: '00000000-0000-4000-8000-000000000030',
   course_id: 'instagram',
@@ -167,13 +191,16 @@ const demoProgress: ProgressRow[] = demoCourse.modules[0].lessons.map((lesson) =
   lesson_id: lesson.id,
   state: {
     blocks: {},
-    manual: 'student',
-    manualRevisions: Object.fromEntries(
-      lesson.blocks.filter((b) => b.required).map((b) => [b.id, b.revision]),
-    ),
+    quizCompletion: {
+      quizId: lesson.id + '-quiz',
+      revision: 1,
+      attemptId: 'synthetic-' + lesson.id,
+      completedAt: '2026-10-08T10:00:00Z',
+      source: 'submission',
+    },
   },
   completed_at: '2026-10-08T10:00:00Z',
-  completion_source: 'student',
+  completion_source: 'automatic',
   updated_at: '2026-10-08T10:00:00Z',
 }));
 export const demoEnrollment: EnrolledCourse = {

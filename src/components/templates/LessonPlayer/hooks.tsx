@@ -40,6 +40,12 @@ export function useLessonPlayer({ view, userId, demo }: LessonPlayerProps) {
         if (!response.ok) {
           if ([401, 403].includes(response.status))
             setError('Доступ змінився. Увійдіть знову або зверніться до академії');
+          if ([400, 409, 422].includes(response.status)) {
+            queue.current.events.shift();
+            persist();
+            setError(data.error || 'Матеріал змінився. Оновіть урок');
+            continue;
+          }
           throw new Error(data.error || 'Не вдалося зберегти');
         }
         queue.current.events.shift();
@@ -58,6 +64,7 @@ export function useLessonPlayer({ view, userId, demo }: LessonPlayerProps) {
   }, [demo, persist, view.enrollment.course.id, view.lesson.id]);
   const onProgress = useCallback(
     (sample: ProgressSample) => {
+      setError('');
       if (!queue.current.sessionId) queue.current.sessionId = crypto.randomUUID();
       const event = {
         ...sample,
@@ -67,7 +74,7 @@ export function useLessonPlayer({ view, userId, demo }: LessonPlayerProps) {
         sequence: ++queue.current.sequence,
       };
       if (demo) {
-        current.current = applyProgress(view.lesson, current.current, event, sample.elapsed);
+        current.current = applyProgress(view.lesson, current.current, event);
         setProgress(current.current);
         persist();
         setStatus('Збережено в цьому браузері');
@@ -91,7 +98,7 @@ export function useLessonPlayer({ view, userId, demo }: LessonPlayerProps) {
       }
     } catch {}
     const first = view.lesson.blocks[0];
-    if (first) onProgress({ blockId: first.id, revision: first.revision, elapsed: 0 });
+    if (first) onProgress({ kind: 'resume', blockId: first.id, revision: first.revision });
     const retry = setInterval(() => void send(), 10000);
     const online = () => void send();
     window.addEventListener('online', online);
@@ -106,10 +113,5 @@ export function useLessonPlayer({ view, userId, demo }: LessonPlayerProps) {
     if (innerWidth < 1024) drawer.current?.showModal();
     else setCollapsed((value) => !value);
   }
-  function confirm() {
-    const first = view.lesson.blocks[0];
-    if (first)
-      onProgress({ blockId: first.id, revision: first.revision, elapsed: 0, manual: true });
-  }
-  return { progress, status, error, drawer, collapsed, contents, onProgress, confirm };
+  return { progress, status, error, drawer, collapsed, contents, onProgress };
 }
