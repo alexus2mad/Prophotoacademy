@@ -16,6 +16,23 @@ The owner explicitly requested a staging subdomain while the existing Webflow si
 
 Keep runtime files, database credentials, provider tokens and private learner data outside Git. Do not copy the local sandbox or `.data` into a release. Use a Git archive of the tested commit; install the lockfile with pnpm, run the build as the application account, and retain the previous release for rollback. Do not build Linux production dependencies on Windows.
 
+### Release retention
+
+After **every successful application deployment**, retain exactly the active release and the immediately preceding verified release. Capture the old `current` target before activation; use that full Git SHA as the rollback argument, rather than guessing from directory dates. Finish activation, health checks and the affected browser smoke checks before pruning. Do not build or activate another release concurrently with cleanup.
+
+Run the following on the Academy host, substituting the captured SHA. The first command prints the exact absolute targets without deleting anything; inspect it before applying:
+
+```sh
+python3 /srv/prophotoacademy/current/deploy/prune-releases.py PREVIOUS_FULL_SHA
+python3 /srv/prophotoacademy/current/deploy/prune-releases.py PREVIOUS_FULL_SHA --apply
+```
+
+The helper verifies both retained builds, confines deletion to direct full-SHA directories under `/srv/prophotoacademy/releases`, rejects symlinks and mounts, checks application health, and stops if the active release changes. A failed deployment keeps the existing rollback options. If cleanup itself fails, keep the healthy deployment active, report the failure and rerun cleanup after resolving it. Verify the directory listing afterward. Unknown directory names are left untouched for inspection.
+
+This retention policy applies only to application build directories. Preserve immutable learning curriculum versions, private source archives, teaching assets, student progress, database backups and runtime configuration. Booking's releases remain under its separate deployment process.
+
+Run `python -m unittest discover -s deploy -p "test_*.py"` when changing cleanup behavior.
+
 Supply `NODE_EXTRA_CA_CERTS` in the process environment before Node starts, as the systemd unit does. For a manual Node command, export it explicitly before invoking Node; loading that variable only through Node's `--env-file` is too late for extra CA initialization. Keep full TLS verification enabled.
 
 ## Provisioned services

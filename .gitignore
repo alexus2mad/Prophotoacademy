@@ -16,3 +16,4 @@ pages-out/
 .pages-build/
 public/learning/pdf.worker.min.mjs
 .learning-sandbox/
+__pycache__/
