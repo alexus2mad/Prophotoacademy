@@ -1,5 +1,11 @@
 import type { LearningBlock, Lesson } from './types';
 
+export function lessonChapters(lesson: Lesson) {
+  return lesson.blocks.filter(
+    (block) => ['article', 'quiz', 'video'].includes(block.kind) && block.title.trim(),
+  );
+}
+
 export function hasFinalQuiz(lesson: Lesson) {
   const quizzes = lesson.blocks.filter((block) => block.kind === 'quiz');
   return (

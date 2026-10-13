@@ -565,6 +565,34 @@
   color: #aaafa8;
   margin-top: 4px;
 }
+.lesson-chapters {
+  margin: 4px 10px 14px 20px;
+  border-left: 1px solid #3b4537;
+}
+.lesson-chapters a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 10px 8px 20px;
+  color: #b4bab1;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  border-radius: 0 6px 6px 0;
+  transition:
+    color 150ms,
+    background-color 150ms;
+}
+.lesson-chapters a:hover,
+.lesson-chapters a:focus-visible {
+  color: #f2efe7;
+  background: #20271e;
+}
+.lesson-chapters a[aria-current='location'] {
+  color: #d5e4b9;
+  background: #20271e;
+  box-shadow: -1px 0 #d5e4b9;
+}
 .lesson-canvas {
   padding: 48px clamp(24px, 5vw, 80px) 64px;
   min-width: 0;

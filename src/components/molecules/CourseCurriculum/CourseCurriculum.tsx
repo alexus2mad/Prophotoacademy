@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { lessonLabel } from '@/lib/learning/numbering';
 import { Check, Lock, Play } from 'lucide-react';
 import { LearningProgress } from '@/components/atoms/LearningProgress/LearningProgress';
+import { LessonChapters } from '@/components/molecules/LessonChapters/LessonChapters';
 import { canReadLesson } from '@/lib/learning/access';
 import { lessonFraction } from '@/lib/learning/progress';
 import { lessonHref, displayDate } from '@/lib/learning/selectors';
@@ -67,6 +68,9 @@ export function CourseCurriculum({
                       )}
                     </span>
                   </Link>
+                  {lesson.id === lessonId && available && (
+                    <LessonChapters lesson={lesson} onNavigate={onNavigate} />
+                  )}
                 </li>
               );
             })}

@@ -2,7 +2,7 @@
 import { LessonMaterial } from '@/components/organisms/LessonMaterial/LessonMaterial';
 import { LessonImageViewer } from '@/components/organisms/LessonImageViewer/LessonImageViewer';
 import { useLessonImages } from './hooks';
-import { lessonBlockGroups } from '@/lib/learning/presentation';
+import { lessonBlockGroups, lessonChapters } from '@/lib/learning/presentation';
 import { readingFont } from '@/lib/typography/fonts';
 import type { LessonBodyProps } from './types';
 
@@ -19,9 +19,7 @@ export function LessonBody({
   progressError,
 }: LessonBodyProps) {
   const { images, selectedIndex, openImage, closeImages } = useLessonImages({ lesson });
-  const outline = lesson.blocks.filter(
-    (b) => ['article', 'quiz', 'video'].includes(b.kind) && b.title,
-  );
+  const outline = preview ? lessonChapters(lesson) : [];
   return (
     <div className={`${readingFont.variable} lesson-content`}>
       <div className="lesson-heading">
@@ -47,7 +45,12 @@ export function LessonBody({
           className={group.length > 1 ? 'lesson-image-pair' : 'lesson-material-group'}
         >
           {group.map((block) => (
-            <div key={block.id} id={'material-' + block.id} className="lesson-material-anchor">
+            <div
+              key={block.id}
+              id={'material-' + block.id}
+              className="lesson-material-anchor"
+              tabIndex={-1}
+            >
               <LessonMaterial
                 block={block}
                 courseId={courseId}

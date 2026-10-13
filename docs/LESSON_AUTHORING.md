@@ -20,7 +20,7 @@ After quiz submission, correct answers use green and the selected incorrect answ
 
 A lesson is complete only after passing its final quiz. Reading, scrolling, photos, video, PDF downloads and attendance do not award credit. There are no study timers or manual reading confirmations. Course progress is the number of completed entitled lessons divided by all lessons in the assigned curriculum and package, including scheduled lessons.
 
-LessonBody supplies the shared student and administrator-preview layout: a readable 42rem text measure, an optional in-lesson outline, uncropped pairs of adjacent photographs, and a distinct practical exercise. Instructional images remain still. Course managers can choose the practice presentation for a text block and preview saved drafts before first publication.
+LessonBody supplies the shared student and administrator-preview layout: a readable 42rem text measure, uncropped pairs of adjacent photographs, and a distinct practical exercise. The student's chapter anchors are nested under the current lesson in the curriculum sidebar and mobile drawer; inactive and unavailable lessons render no chapter list. Choosing a chapter closes the mobile drawer and moves keyboard focus to its content. The selected anchor uses a location state, distinct from the active lesson's page state. Administrator previews retain the inline outline because they have no course sidebar. Instructional images remain still. Course managers can choose the practice presentation for a text block and preview saved drafts before first publication.
 
 ## Photo inspection
 
