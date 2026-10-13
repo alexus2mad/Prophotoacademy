@@ -6,7 +6,7 @@ The progress endpoint accepts `kind: quiz` with answers or `kind: resume` with a
 
 Before activation:
 
-1. Back up the database and private content manifests. Apply database migrations, including `202610130001_quiz_completion.sql`.
+1. Back up the database and private content manifests. Apply database migrations, including `202610130001_quiz_completion.sql`, as the schema owner. The restricted application role cannot create tables. This migration grants that role only read/append access to the new evidence tables, with RLS; it does not grant update/delete access to quiz attempts or policy backups.
 2. Run `tsx scripts/migrate-quiz-completion.ts` for a count-only preview. Run with `--apply` to save the transition. Run again and require `changed: 0`.
 3. The migration regrades saved answers against the matching historical published quiz revision. A verified failed result with the old server-owned completion latch preserves the earlier pass, with unknown original attempt ID explicitly recorded. Reading, manual flags, attendance and unverifiable attempts never earn completion. Exact prior rows are retained in the private `academy.progress_policy_backup`; existing observations also remain in state for audit. Resume timestamps are preserved.
 4. Activate the application. Check student and booking statistics, quiz failures/passes/retries, expired access and duplicate requests. Administrator previews must write no student progress.
@@ -16,3 +16,17 @@ Publication requires exactly one nonempty final quiz, a valid passing score, com
 Rollback requires restoring the previous app and the affected progress rows from the backup in a controlled maintenance window. Do not overwrite new quiz attempts or erase post-rollout passes: export and reconcile those before restoring rows. The migration is repeatable and reports counts without logging emails, answer keys or paid content.
 
 Actual lesson payloads, slide coverage manifests, media mappings, backups and reconciliation reports remain private under ignored `.data` and on the restricted staging host. They must never enter Git or the static review export.
+
+## Staging rollout, 13 October 2026
+
+The complete curriculum is immutable version 5. Lectures 2, 3 and 4 account for 104, 78 and 93 source pages respectively (275 total), in 130, 94 and 112 blocks. Each final quiz contains 16 questions with an 80% passing score. Existing recordings, original PDF downloads and previously published media identities remain unchanged. Native Ukrainian articles/tables accompany intact visual examples; product prices are labeled as source-era examples. The private manifest explicitly maps title, agenda, repeated and image-only pages.
+
+The import added 241 protected images. Page dimensions reserve space before loading. Authorized URLs and image elements are created near the viewport; a gallery obtains the selected image on demand. Full comparison/diagram boundaries remain visible. There is no learning credit for loading or inspecting any of these assets.
+
+The backfill examined three saved progress rows, verified one historical pass and left two incomplete. A repeat reported zero changes. The existing BASE rule and one active enrollment moved to version 5 with identical lesson rights, purchase association, start, expiry and revocation fields. Earned completion survived the expanded quizzes. Student and management calculations both returned 1/3 (33%).
+
+Validation: 147 tests across 27 files; architecture checks (424 modules), TypeScript, formatting, production build and 49-page synthetic review export. Database tests cover event deduplication, failed retries after a pass, unauthorized/revoked access, historical backfill, rollback copies and attendance isolation. Live checks confirmed anonymous media denial (401), private asset denial and no student-progress writes during failed/successful administrator-preview quizzes. Responsive checks covered 360, 390, 768, 1024 and 1440 CSS pixels, section anchors, scrollable semantic tables, the mobile curriculum, gallery arrows/zoom/Escape and the complete 93-page PDF in the browser viewer.
+
+Evidence is stored privately in `.data/complete-lessons/`, including coverage, before/after reports and screenshots. The application build is `cd54203`; the schema permission correction is tracked in `36aab0c` and was applied using the schema owner. The public review contains synthetic lessons only.
+
+The ps-booking UI session was signed out during verification; the shared management response calculation was verified against the live enrollment. Browser text-zoom shortcuts did not change the in-app browser scale, so enlarged-text visual testing remains a manual check; responsive reflow and keyboard controls were verified independently.
