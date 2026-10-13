@@ -63,6 +63,7 @@ export const learningSchema = [
       defineField({
         name: 'blocks',
         type: 'array',
+        validation: (r) => r.max(300),
         of: [defineArrayMember({ type: 'learningBlock' })],
       }),
     ],
@@ -86,6 +87,9 @@ export const learningSchema = [
       defineField({ name: 'youtubeUrl', title: 'Додатковий запис YouTube', type: 'url' }),
       text('alt', 'Alternative text'),
       text('caption', 'Caption'),
+      defineField({ name: 'imageWidth', type: 'number' }),
+      defineField({ name: 'imageHeight', type: 'number' }),
+      defineField({ name: 'imageLayout', type: 'string', options: { list: ['wide'] } }),
       defineField({
         name: 'presentation',
         type: 'string',

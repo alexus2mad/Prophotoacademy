@@ -25,16 +25,34 @@ export function ReadingMaterial(props: ReadingMaterialProps) {
                 aria-label={`Відкрити фото: ${block.alt || block.title || 'Фото уроку'}`}
                 onClick={props.onOpenImage}
               >
-                <img src={url} alt={block.alt || ''} />
+                <img
+                  src={url}
+                  alt={block.alt || ''}
+                  width={block.imageWidth}
+                  height={block.imageHeight}
+                  loading="lazy"
+                  decoding="async"
+                />
                 <span className="lesson-image-open-icon" aria-hidden="true">
                   <Expand size={20} />
                 </span>
               </button>
             ) : (
-              <img src={url} alt={block.alt || ''} />
+              <img
+                src={url}
+                alt={block.alt || ''}
+                width={block.imageWidth}
+                height={block.imageHeight}
+                loading="lazy"
+                decoding="async"
+              />
             )
           ) : (
-            <p className="learning-status">Завантаження зображення…</p>
+            <div
+              className="lesson-image-placeholder"
+              style={{ aspectRatio: `${block.imageWidth || 4} / ${block.imageHeight || 3}` }}
+              aria-label="Зображення завантажиться під час перегляду"
+            />
           )}
           {block.caption && <figcaption>{block.caption}</figcaption>}
         </figure>

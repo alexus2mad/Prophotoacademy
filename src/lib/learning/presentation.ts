@@ -14,7 +14,13 @@ export function lessonBlockGroups(blocks: LearningBlock[]) {
   const groups: LearningBlock[][] = [];
   for (const block of blocks) {
     const previous = groups.at(-1);
-    if (block.kind === 'image' && previous?.length === 1 && previous[0].kind === 'image')
+    if (
+      block.kind === 'image' &&
+      !block.imageLayout &&
+      previous?.length === 1 &&
+      previous[0].kind === 'image' &&
+      !previous[0].imageLayout
+    )
       previous.push(block);
     else groups.push([block]);
   }

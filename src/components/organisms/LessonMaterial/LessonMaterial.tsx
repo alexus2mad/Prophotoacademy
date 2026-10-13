@@ -5,10 +5,10 @@ import { LearningPdf } from '@/components/organisms/LearningPdf/LearningPdf';
 import { ZoomLesson } from '@/components/organisms/ZoomLesson/ZoomLesson';
 import { LessonQuiz } from '@/components/organisms/LessonQuiz/LessonQuiz';
 import { YouTubeRecording } from '@/components/organisms/YouTubeRecording/YouTubeRecording';
-import { useLessonMedia } from './hooks';
+import { useLessonMaterial } from './hooks';
 import type { LessonMaterialProps } from './types';
 export function LessonMaterial(props: LessonMaterialProps) {
-  const { media, retry } = useLessonMedia(props),
+  const { media, retry, container } = useLessonMaterial(props),
     { block, sessions, lessonId, demo } = props;
   const downloadUrl = demo
     ? media.url
@@ -30,8 +30,13 @@ export function LessonMaterial(props: LessonMaterialProps) {
         </button>
       </div>
     );
-  if (block.kind === 'article' || block.kind === 'image')
-    return <ReadingMaterial {...props} url={media.url} />;
+  if (block.kind === 'image')
+    return (
+      <div ref={container}>
+        <ReadingMaterial {...props} url={media.url} />
+      </div>
+    );
+  if (block.kind === 'article') return <ReadingMaterial {...props} url={media.url} />;
   if (block.kind === 'video') return <LearningVideo {...props} media={media} />;
   if (block.kind === 'pdf')
     return media.url ? (

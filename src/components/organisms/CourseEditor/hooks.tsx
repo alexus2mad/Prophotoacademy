@@ -130,11 +130,15 @@ export function useCourseEditor({ initial, demo }: CourseEditorProps) {
     update({ ...draft, modules });
   }
   function addBlock(kind: LearningBlock['kind']) {
+    if (kind === 'quiz' && active?.blocks.some((b) => b.kind === 'quiz')) {
+      setActiveBlockId(active.blocks.find((b) => b.kind === 'quiz')!.id);
+      return;
+    }
     const id = crypto.randomUUID();
     if (active)
       lesson({
         blocks: [
-          ...active.blocks,
+          ...active.blocks.filter((b) => b.kind !== 'quiz'),
           {
             id,
             kind,
@@ -144,6 +148,7 @@ export function useCourseEditor({ initial, demo }: CourseEditorProps) {
             ...(kind === 'article' ? { body: '' } : {}),
             ...(kind === 'quiz' ? { quiz: { passingScore: 80, questions: [] } } : {}),
           },
+          ...active.blocks.filter((b) => b.kind === 'quiz'),
         ],
       });
     setActiveBlockId(id);

@@ -13,6 +13,9 @@ export const blockSchema = z.object({
   body: z.string().max(100_000).optional(),
   alt: z.string().max(500).optional(),
   caption: z.string().max(1000).optional(),
+  imageWidth: z.number().int().positive().max(30000).optional(),
+  imageHeight: z.number().int().positive().max(30000).optional(),
+  imageLayout: z.literal('wide').optional(),
   mediaId: z.uuid().optional(),
   youtubeUrl: z
     .string()
@@ -62,7 +65,7 @@ export const lessonSchema = z.object({
   summary: z.string().max(2000),
   releaseAt: z.iso.datetime().optional(),
   introductory: z.boolean().optional(),
-  blocks: z.array(blockSchema).max(100),
+  blocks: z.array(blockSchema).max(300),
 });
 export const draftSchema = z
   .object({

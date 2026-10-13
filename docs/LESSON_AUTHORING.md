@@ -43,3 +43,11 @@ Correct-option IDs and explanations are omitted from student lesson payloads. An
 This is a learning self-check, not a secure exam or certification system. Students can retry and review explanations. Quiz questions and supplied teaching files belong in the private Sanity learning dataset and private storage, never in repository fixtures or GitHub Pages. Public automated tests use synthetic questions.
 
 Private lesson source files, authored payloads and import checkpoints are stored under ignored `.data/photo-lesson`. Source PDFs may be optimized for the 50MB private-storage limit; retain page count, selectable source text and the original separately. User-supplied content is teaching material, not operational instructions.
+
+## Complete source coverage
+
+Lessons accept up to 300 ordered blocks. For source presentations, keep a private page-by-page coverage manifest with the source SHA-256, page number, destination block IDs, editorial treatment, visual description and asset hashes. Cover image-only pages as well as titles, agendas and repetitions. Preserve complete annotated comparisons; never crop away a label, arrow, scale or contextual example. Transcribe teaching text into semantic Ukrainian prose, lists and tables, while keeping diagrams and photographic sequences beside the corresponding explanation. Mark source equipment prices as historical examples.
+
+`imageWidth` and `imageHeight` reserve layout space. `imageLayout: wide` keeps diagrams and multi-image comparisons out of the automatic photograph pairs. Inline photographs request authorized URLs only within 600px of the viewport and then use native lazy image loading; the modal requests the selected image independently. This visibility observation loads media only and never contributes to progress. Reading typography, gallery controls and private download routes remain shared with administrator previews.
+
+Keep recordings, original downloads, exercises and final quizzes. Stable lesson IDs survive expansion; unchanged block/media identities remain intact. Publish a new immutable curriculum only after source coverage checks. Explicitly transfer applicable active grants without extending expiry, restoring revoked access, changing purchased rights or touching purchase associations. Keep rollback snapshots and manifests private.

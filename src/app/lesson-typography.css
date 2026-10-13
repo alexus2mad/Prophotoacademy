@@ -228,6 +228,24 @@
   margin-top: 0.75rem;
   color: #bcc1b8;
 }
+.lesson-image-placeholder {
+  width: 100%;
+  background: #191c1a;
+  border-radius: 0.5rem;
+}
+.lesson-content .lesson-image img {
+  height: auto;
+  object-fit: contain;
+}
+.lesson-completion p {
+  max-width: 42rem;
+  margin-top: 0.75rem;
+  line-height: 1.6;
+}
+.lesson-completion a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
 .lesson-content .lesson-practice {
   padding: 2rem;
 }

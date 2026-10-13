@@ -6,6 +6,9 @@ export type LearningBlock = {
   body?: string;
   alt?: string;
   caption?: string;
+  imageWidth?: number;
+  imageHeight?: number;
+  imageLayout?: 'wide';
   mediaId?: string;
   youtubeUrl?: string;
   expectedSeconds?: number;

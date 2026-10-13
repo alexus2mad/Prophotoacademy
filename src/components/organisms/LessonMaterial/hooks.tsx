@@ -1,13 +1,16 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { demoMedia } from '@/lib/learning/demo';
 import { assetHref } from '@/lib/learning/selectors';
 import type { MediaAccess, LessonBlockProps } from '@/lib/learning/types';
-export function useLessonMedia({ block, courseId, lessonId, demo, preview }: LessonBlockProps) {
+export function useLessonMedia(
+  { block, courseId, lessonId, demo, preview }: LessonBlockProps,
+  enabled = true,
+) {
   const [media, setMedia] = useState<MediaAccess>({}),
     [attempt, setAttempt] = useState(0);
   useEffect(() => {
-    if (!block.mediaId || (block.kind === 'file' && !demo)) return;
+    if (!enabled || !block.mediaId || (block.kind === 'file' && !demo)) return;
     const controller = new AbortController();
     setMedia({});
     if (demo) {
@@ -33,6 +36,26 @@ export function useLessonMedia({ block, courseId, lessonId, demo, preview }: Les
         if (!controller.signal.aborted) setMedia({ error: e.message });
       });
     return () => controller.abort();
-  }, [block.mediaId, block.kind, courseId, lessonId, demo, preview, attempt]);
+  }, [block.mediaId, block.kind, courseId, lessonId, demo, preview, attempt, enabled]);
   return { media, retry: () => setAttempt((value) => value + 1) };
+}
+
+export function useLessonMaterial(props: LessonBlockProps) {
+  const container = useRef<HTMLDivElement>(null);
+  const [nearby, setNearby] = useState(props.block.kind !== 'image');
+  useEffect(() => {
+    if (nearby || !container.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setNearby(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '600px 0px' },
+    );
+    observer.observe(container.current);
+    return () => observer.disconnect();
+  }, [nearby]);
+  return { ...useLessonMedia(props, nearby), container };
 }
