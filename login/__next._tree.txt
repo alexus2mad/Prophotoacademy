@@ -1,4 +1,4 @@
-:HL["/Prophotoacademy/_next/static/chunks/3es2uppa8183w.css","style"]
+:HL["/Prophotoacademy/_next/static/chunks/0nt03depx4qyq.css","style"]
 :HL["/Prophotoacademy/_next/static/media/kyivtype_medium-s.p.261_azj9dnu52.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/Prophotoacademy/_next/static/media/kyivtype_regular-s.p.1s2rzvspm89kl.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/Prophotoacademy/_next/static/media/manrope_0-s.p.0ichc44-obr6o.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
@@ -6,4 +6,4 @@
 :HL["/Prophotoacademy/_next/static/media/manrope_2-s.p.1884clw-w6t77.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"login","h":96,"c":"$Q2"}]]
-0:{"b":"sinz9bi-VTa_n0SH29-2R","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"o_lCsj6jzoiaVro1c6qzH","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
