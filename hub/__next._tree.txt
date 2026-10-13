@@ -6,4 +6,4 @@
 :HL["/Prophotoacademy/_next/static/media/manrope_2-s.p.1884clw-w6t77.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"hub","h":96,"c":"$Q2"}]]
-0:{"b":"o_lCsj6jzoiaVro1c6qzH","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"sjM1k6zUns49DTI41f7i6","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
