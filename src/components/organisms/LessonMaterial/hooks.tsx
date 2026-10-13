@@ -52,7 +52,7 @@ export function useLessonMaterial(props: LessonBlockProps) {
           observer.disconnect();
         }
       },
-      { rootMargin: '600px 0px' },
+      { rootMargin: '2000px 0px' },
     );
     observer.observe(container.current);
     return () => observer.disconnect();

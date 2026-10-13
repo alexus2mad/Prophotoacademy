@@ -4,6 +4,7 @@ import { Expand } from 'lucide-react';
 import type { ReadingMaterialProps } from './types';
 export function ReadingMaterial(props: ReadingMaterialProps) {
   const { block, url } = props;
+  // The viewport gate supplies image URLs; load immediately once it authorizes them.
   return (
     <section
       className={
@@ -30,7 +31,7 @@ export function ReadingMaterial(props: ReadingMaterialProps) {
                   alt={block.alt || ''}
                   width={block.imageWidth}
                   height={block.imageHeight}
-                  loading="lazy"
+                  loading="eager"
                   decoding="async"
                 />
                 <span className="lesson-image-open-icon" aria-hidden="true">
@@ -43,7 +44,7 @@ export function ReadingMaterial(props: ReadingMaterialProps) {
                 alt={block.alt || ''}
                 width={block.imageWidth}
                 height={block.imageHeight}
-                loading="lazy"
+                loading="eager"
                 decoding="async"
               />
             )
