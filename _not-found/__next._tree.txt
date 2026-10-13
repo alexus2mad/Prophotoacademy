@@ -1,4 +1,4 @@
-:HL["/Prophotoacademy/_next/static/chunks/3vjgs_wdxdgf4.css","style"]
+:HL["/Prophotoacademy/_next/static/chunks/1z80iu_u5m_l9.css","style"]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"/_not-found","h":96,"c":"$Q2"}]]
-0:{"b":"zGbhkj7POVkBLsR6K3E3r","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"M5i1l7x7x2wWAkc5k_AZ0","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
