@@ -9,7 +9,8 @@ import { useLessonPlayer } from './hooks';
 import type { LessonPlayerProps } from './types';
 export function LessonPlayer(props: LessonPlayerProps) {
   const { view, demo } = props,
-    { progress, status, error, drawer, collapsed, contents, onProgress } = useLessonPlayer(props);
+    { progress, status, error, drawer, collapsed, contents, onProgress, currentChapterId } =
+      useLessonPlayer(props);
   const module = view.enrollment.course.modules.find((m) =>
     m.lessons.some((l) => l.id === view.lesson.id),
   );
@@ -17,6 +18,7 @@ export function LessonPlayer(props: LessonPlayerProps) {
     enrollment: view.enrollment,
     lessonId: view.lesson.id,
     currentProgress: progress,
+    currentChapterId,
     demo,
   };
   return (

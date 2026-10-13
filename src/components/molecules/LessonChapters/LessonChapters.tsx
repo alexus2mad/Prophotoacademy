@@ -1,22 +1,24 @@
 'use client';
 import { lessonChapters } from '@/lib/learning/presentation';
-import { useSelectedChapter } from './hooks';
+import { useChapterReveal } from './hooks';
 import type { LessonChaptersProps } from './types';
 
-export function LessonChapters({ lesson, onNavigate }: LessonChaptersProps) {
-  const selectedHash = useSelectedChapter(lesson.id);
+export function LessonChapters({ lesson, currentChapterId, onNavigate }: LessonChaptersProps) {
+  const navigation = useChapterReveal(currentChapterId);
   const chapters = lessonChapters(lesson);
+  const currentIndex = chapters.findIndex((chapter) => chapter.id === currentChapterId);
   if (!chapters.length) return null;
   return (
-    <nav className="lesson-chapters" aria-label={`Розділи уроку: ${lesson.title}`}>
+    <nav ref={navigation} className="lesson-chapters" aria-label={`Розділи уроку: ${lesson.title}`}>
       <ol>
-        {chapters.map((chapter) => {
+        {chapters.map((chapter, index) => {
           const href = '#material-' + chapter.id;
           return (
             <li key={chapter.id}>
               <a
                 href={href}
-                aria-current={selectedHash === href ? 'location' : undefined}
+                className={index < currentIndex ? 'is-past' : undefined}
+                aria-current={chapter.id === currentChapterId ? 'location' : undefined}
                 onClick={onNavigate}
               >
                 {chapter.title}

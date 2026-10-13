@@ -3,6 +3,7 @@ export type CourseCurriculumProps = {
   enrollment: EnrolledCourse;
   lessonId: string;
   currentProgress: LessonProgress;
+  currentChapterId?: string;
   demo?: boolean;
   onNavigate?: () => void;
 };

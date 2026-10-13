@@ -1,9 +1,11 @@
 'use client';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { applyProgress } from '@/lib/learning/progress';
+import { useCurrentChapter } from '@/components/molecules/LessonChapters/hooks';
 import type { LessonProgress, ProgressReply, ProgressSample } from '@/lib/learning/types';
 import type { LessonPlayerProps, ProgressQueue } from './types';
 export function useLessonPlayer({ view, userId, demo }: LessonPlayerProps) {
+  const currentChapterId = useCurrentChapter(view.lesson);
   const [progress, setProgress] = useState(view.progress),
     [status, setStatus] = useState('Збережено'),
     [collapsed, setCollapsed] = useState(false),
@@ -113,5 +115,5 @@ export function useLessonPlayer({ view, userId, demo }: LessonPlayerProps) {
     if (innerWidth < 1024) drawer.current?.showModal();
     else setCollapsed((value) => !value);
   }
-  return { progress, status, error, drawer, collapsed, contents, onProgress };
+  return { progress, status, error, drawer, collapsed, contents, onProgress, currentChapterId };
 }

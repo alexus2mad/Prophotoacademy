@@ -11,6 +11,7 @@ export function CourseCurriculum({
   enrollment,
   lessonId,
   currentProgress,
+  currentChapterId,
   demo = false,
   onNavigate,
 }: CourseCurriculumProps) {
@@ -69,7 +70,11 @@ export function CourseCurriculum({
                     </span>
                   </Link>
                   {lesson.id === lessonId && available && (
-                    <LessonChapters lesson={lesson} onNavigate={onNavigate} />
+                    <LessonChapters
+                      lesson={lesson}
+                      currentChapterId={currentChapterId}
+                      onNavigate={onNavigate}
+                    />
                   )}
                 </li>
               );

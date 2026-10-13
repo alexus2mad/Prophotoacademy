@@ -583,6 +583,9 @@
     color 150ms,
     background-color 150ms;
 }
+.lesson-chapters a.is-past {
+  color: #858d81;
+}
 .lesson-chapters a:hover,
 .lesson-chapters a:focus-visible {
   color: #f2efe7;
