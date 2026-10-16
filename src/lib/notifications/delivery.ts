@@ -1,5 +1,6 @@
 import { randomUUID } from 'node:crypto';
-import { databasePool, transaction } from '../database/client';
+import { after } from 'next/server';
+import { databasePool, managedDatabase, transaction } from '../database/client';
 import type { NotificationJob } from './types';
 const escape = (value: string) =>
   value.replace(
@@ -95,4 +96,15 @@ export async function deliverNotifications() {
     }
   }
   return { delivered };
+}
+
+// Deliver just-queued jobs once the response is sent, so payment notices reach Make.com
+// immediately; the five-minute timer still retries anything that fails.
+export function deliverSoon() {
+  if (!managedDatabase()) return;
+  try {
+    after(() => deliverNotifications().catch(() => undefined));
+  } catch {
+    // Outside a request (scripts, tests) the timer delivers instead.
+  }
 }

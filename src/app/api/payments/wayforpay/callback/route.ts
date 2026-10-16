@@ -8,6 +8,7 @@ import {
   confirmedOrderStatus,
 } from '@/lib/wayforpay';
 import { orderById, updateOrder } from '@/lib/commerce/orders';
+import { deliverSoon } from '@/lib/notifications/delivery';
 export const runtime = 'nodejs';
 export async function POST(request: Request) {
   let reference = '',
@@ -27,6 +28,7 @@ export async function POST(request: Request) {
     verifyCallback(raw, order, merchant, secret);
     const status = await confirmedOrderStatus(parsed.data, order, merchant, secret);
     await updateOrder(order.id, status, merchant, callbackDetails(parsed.data));
+    deliverSoon();
     return Response.json(callbackAck(parsed.data.orderReference, secret), {
       headers: { 'Cache-Control': 'no-store' },
     });

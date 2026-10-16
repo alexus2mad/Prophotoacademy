@@ -11,6 +11,7 @@ import { guardMutation, jsonBody, errorResponse, HttpError, validationError } fr
 import { purchasePayload, paymentConfig } from '@/lib/wayforpay';
 import { paymentMode } from '@/lib/commerce/payment-mode';
 import { isProduct } from '@/lib/commerce/selectors';
+import { deliverSoon } from '@/lib/notifications/delivery';
 export const runtime = 'nodejs';
 export async function POST(request: Request) {
   try {
@@ -77,6 +78,7 @@ export async function POST(request: Request) {
         },
         input.token,
       ));
+    if (!existing) deliverSoon();
     return Response.json(
       mode !== 'wayforpay'
         ? { mode, url: `/thanks?token=${input.token}`, orderId: order.id }
