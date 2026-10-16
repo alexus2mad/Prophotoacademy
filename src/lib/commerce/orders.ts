@@ -179,9 +179,10 @@ export async function fulfillOrder(
   }
 }
 const serverEvents = {
-  approved: 'payment_success_server',
-  declined: 'payment_decline_server',
-  refunded: 'payment_refund_server',
+  // Names the academy's Make.com scenario routes on (Успішна оплата / Оплату відхилено).
+  approved: 'payment_success',
+  declined: 'payment_decline',
+  refunded: 'payment_refund',
 } as const;
 export async function updateOrder(
   id: string,

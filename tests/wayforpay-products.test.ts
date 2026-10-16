@@ -217,7 +217,7 @@ describe('ticket and service products', () => {
     const { orderId } = await response.json();
     await callback(post('/api/payments/wayforpay/callback', providerCallback(orderId, 900)));
     const queued = await events();
-    expect(queued.map((e) => e.data.event)).toEqual(['payment_start', 'payment_success_server']);
+    expect(queued.map((e) => e.data.event)).toEqual(['payment_start', 'payment_success']);
     expect(queued[1].data).toMatchObject({
       orderReference: orderId,
       amount: 900,

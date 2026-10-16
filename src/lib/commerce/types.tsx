@@ -34,6 +34,6 @@ export type PaymentEventName =
   | 'payment_approved'
   | 'payment_declined'
   | 'payment_pending'
-  | 'payment_success_server'
-  | 'payment_decline_server'
-  | 'payment_refund_server';
+  | 'payment_success'
+  | 'payment_decline'
+  | 'payment_refund';
