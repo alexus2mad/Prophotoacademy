@@ -988,6 +988,18 @@
   font-size: 14px;
   color: #aaafa8;
 }
+.promo-list li {
+  flex-wrap: wrap;
+}
+.promo-list li > div {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+.admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
 .admin-badge {
   border: 1px solid #51594f;
   border-radius: 20px;

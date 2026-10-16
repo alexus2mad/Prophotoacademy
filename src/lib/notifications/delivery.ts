@@ -39,7 +39,12 @@ export async function deliverNotifications() {
         if (!process.env.RESEND_API_KEY || !process.env.EMAIL_FROM)
           throw new Error('Email not configured');
         const approved = ['approved', 'enrolled'].includes(data.status || ''),
-          title = approved ? 'Ваш курс уже в кабінеті' : 'Повернення оплати підтверджено';
+          product = data.productKind === 'product',
+          title = !approved
+            ? 'Повернення оплати підтверджено'
+            : product
+              ? 'Оплату підтверджено'
+              : 'Ваш курс уже в кабінеті';
         const href = new URL(
           '/account',
           process.env.NEXT_PUBLIC_ACADEMY_URL || process.env.NEXT_PUBLIC_SITE_URL!,
@@ -55,7 +60,7 @@ export async function deliverNotifications() {
             from: process.env.EMAIL_FROM,
             to: [data.customer.email],
             subject: title,
-            html: `<h1>${title}</h1><p>${escape(data.programTitle || 'ProPhoto Academy')}</p>${data.mode === 'disabled' ? '<p>Тестовий доступ надано без оплати. Кошти не списувалися, майбутнього списання не буде.</p>' : ''}${approved ? `<p>Увійдіть за email, який ви вказали під час оформлення.</p><p><a href="${escape(href)}">Перейти до навчання</a></p>` : ''}`,
+            html: `<h1>${title}</h1><p>${escape(data.programTitle || 'ProPhoto Academy')}${product && data.packageName ? '<br>' + escape(data.packageName) : ''}</p>${data.mode === 'disabled' ? '<p>Тестовий доступ надано без оплати. Кошти не списувалися, майбутнього списання не буде.</p>' : ''}${approved && product ? '<p>Команда академії зв’яжеться з вами щодо деталей.</p>' : ''}${approved && !product ? `<p>Увійдіть за email, який ви вказали під час оформлення.</p><p><a href="${escape(href)}">Перейти до навчання</a></p>` : ''}`,
           }),
           signal: AbortSignal.timeout(15_000),
         });

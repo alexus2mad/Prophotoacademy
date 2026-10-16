@@ -2,6 +2,7 @@ import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButto
 import { PackageIncludes } from '@/components/molecules/PackageIncludes/PackageIncludes';
 import { EnrollmentScope } from '@/components/molecules/EnrollmentScope/EnrollmentScope';
 import { canEnroll, money } from '@/lib/format';
+import { isProduct } from '@/lib/commerce/selectors';
 import Link from 'next/link';
 import type { PackageCardProps } from './types';
 export function PackageCard({
@@ -45,7 +46,11 @@ export function PackageCard({
             href={`/checkout?offering=${encodeURIComponent(offering.id)}&package=${encodeURIComponent(pack.id)}`}
             className="button button-wide"
           >
-            {paymentDisabled ? 'Отримати доступ' : `Обрати ${pack.name}`}
+            {paymentDisabled
+              ? 'Отримати доступ'
+              : isProduct(pack)
+                ? 'Придбати'
+                : `Обрати ${pack.name}`}
           </Link>
         ) : pack.availability === 'soldOut' ? null : (
           <InquiryButton

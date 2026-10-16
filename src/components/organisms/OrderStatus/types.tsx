@@ -5,7 +5,9 @@ export type Status = {
   retryUrl: string;
   programTitle: string;
   packageName: string;
+  productKind?: PackageKind;
 };
 export type OrderStatusProps = { token: string };
 import type { PaymentMode } from '@/lib/commerce/types';
 import type { OrderStatus } from '@/lib/ledger/types';
+import type { PackageKind } from '@/lib/content/types';

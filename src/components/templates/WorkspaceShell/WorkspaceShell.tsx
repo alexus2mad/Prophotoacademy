@@ -14,6 +14,7 @@ export function WorkspaceShell({
   const links = admin
     ? [
         ['courses', 'Курси'],
+        ['promo-codes', 'Промокоди'],
         ['management', 'Керування студентами'],
         ['cashbox', 'Каса'],
         ['settings', 'Налаштування'],

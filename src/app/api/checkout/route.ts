@@ -10,6 +10,7 @@ import {
 import { guardMutation, jsonBody, errorResponse, HttpError, validationError } from '@/lib/http';
 import { purchasePayload, paymentConfig } from '@/lib/wayforpay';
 import { paymentMode } from '@/lib/commerce/payment-mode';
+import { isProduct } from '@/lib/commerce/selectors';
 export const runtime = 'nodejs';
 export async function POST(request: Request) {
   try {
@@ -21,6 +22,9 @@ export async function POST(request: Request) {
         email: 'Вкажіть коректний email.',
         phone: 'Вкажіть коректний телефон.',
         consent: 'Підтвердьте згоду з умовами.',
+        telegram: 'Вкажіть нік Telegram латиницею, без посилання.',
+        instagram: 'Вкажіть нік Instagram латиницею, без посилання.',
+        promoCode: 'Промокод недійсний',
       });
     const input = parsed.data;
     const { program, pack } = resolvePurchase(
@@ -51,15 +55,23 @@ export async function POST(request: Request) {
           programId: program.id,
           programTitle: program.title,
           packageName: pack.name,
+          productKind: isProduct(pack) ? 'product' : 'course',
           amount: mode === 'disabled' ? 0 : pack.price,
           listAmount: pack.price,
           currency: 'UAH',
-          customer: { name: input.name, email: input.email, phone: input.phone },
+          customer: {
+            name: input.name,
+            email: input.email,
+            phone: input.phone,
+            telegram: input.telegram?.replace(/^@/, '') || undefined,
+            instagram: input.instagram?.replace(/^@/, '') || undefined,
+          },
+          promoCode: input.promoCode || undefined,
           mode,
           merchantAccount:
             mode === 'wayforpay' ? process.env.WAYFORPAY_MERCHANT_ACCOUNT : undefined,
           fulfillment:
-            mode !== 'mock'
+            mode !== 'mock' && !isProduct(pack)
               ? await purchaseAccess(input.offeringId, input.packageId, program.id)
               : undefined,
         },
@@ -70,6 +82,8 @@ export async function POST(request: Request) {
         ? { mode, url: `/thanks?token=${input.token}`, orderId: order.id }
         : {
             mode,
+            orderId: order.id,
+            amount: order.amount,
             action: 'https://secure.wayforpay.com/pay',
             fields: purchasePayload(order, input.token),
           },

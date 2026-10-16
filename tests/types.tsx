@@ -14,3 +14,4 @@ export type AccessChangeInput = {
   expiresAt: string | null;
   reason: string;
 };
+export type OutboxEventRow = { id: string; kind: string; data: Record<string, unknown> };

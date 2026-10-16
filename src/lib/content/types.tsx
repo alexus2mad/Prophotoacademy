@@ -11,9 +11,12 @@ export type ImageAsset = {
   position?: string;
   fit?: 'cover' | 'contain';
 };
+// A course package grants learning access; a product (event ticket, test payment) records the purchase only.
+export type PackageKind = 'course' | 'product';
 export type Package = {
   id: string;
   name: string;
+  kind?: PackageKind;
   price: number;
   previousPrice?: number;
   availability: Availability;

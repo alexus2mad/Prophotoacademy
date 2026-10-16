@@ -12,6 +12,7 @@ export async function GET(request: Request) {
       learningAccess: await orderHasAccess(order),
       programTitle: order.programTitle,
       packageName: order.packageName,
+      productKind: order.productKind,
       mode: order.mode,
       retryUrl:
         order.mode === 'mock' && order.offeringId === 'demo-offering'

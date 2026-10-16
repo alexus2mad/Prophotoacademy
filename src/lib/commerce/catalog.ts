@@ -1,6 +1,6 @@
 import { databasePool, managedDatabase } from '../database/client';
 import { paymentMode } from './payment-mode';
-import { canTestEnroll } from './selectors';
+import { canTestEnroll, isProduct } from './selectors';
 import { canEnroll } from '../format';
 import type { Offering } from '../content/types';
 import type { EnrollmentOptions, PackageIdRow } from './types';
@@ -27,10 +27,11 @@ export async function enrollmentOptions(offering?: Offering): Promise<Enrollment
     mode,
     lessonTitles: Object.fromEntries(rules.rows.map((r) => [r.package_id, r.lesson_titles || []])),
     packageIds: offering.packages
-      .filter(
-        (pack) =>
-          rules.rows.some((r) => r.package_id === pack.id) &&
-          (mode === 'disabled' ? canTestEnroll(offering, pack) : canEnroll(offering, pack)),
+      .filter((pack) =>
+        isProduct(pack)
+          ? mode === 'wayforpay' && canEnroll(offering, pack)
+          : rules.rows.some((r) => r.package_id === pack.id) &&
+            (mode === 'disabled' ? canTestEnroll(offering, pack) : canEnroll(offering, pack)),
       )
       .map((p) => p.id),
   };

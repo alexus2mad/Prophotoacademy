@@ -2,6 +2,7 @@ import type { DatabaseSync } from 'node:sqlite';
 import type { Acquisition } from '../attribution/types';
 import type { AccessSnapshot } from '../learning/types';
 import type { PaymentMode } from '../commerce/types';
+import type { PackageKind } from '../content/types';
 export type OrderStatus =
   | 'pending'
   | 'approved'
@@ -21,7 +22,10 @@ export type Order = {
   packageName: string;
   amount: number;
   currency: string;
-  customer: { name: string; email: string; phone: string };
+  customer: { name: string; email: string; phone: string; telegram?: string; instagram?: string };
+  productKind?: PackageKind;
+  promoCode?: string;
+  discountPercent?: number;
   status: OrderStatus;
   mode: PaymentMode;
   listAmount?: number;

@@ -1,11 +1,15 @@
 'use client';
 import { Button } from '@/components/atoms/Button/Button';
 import { FormField } from '@/components/molecules/FormField/FormField';
+import { PromoCodeField } from '@/components/molecules/PromoCodeField/PromoCodeField';
 import { useCheckoutForm } from './hooks';
 import type { CheckoutFormProps } from './types';
 
-export function CheckoutForm({ offeringId, packageId, mode, email, name }: CheckoutFormProps) {
-  const { state, error, fieldErrors, submit } = useCheckoutForm({ offeringId, packageId, mode });
+export function CheckoutForm(props: CheckoutFormProps) {
+  const { mode, kind, email, name } = props;
+  const { state, error, fieldErrors, promo, changePromo, applyPromo, submit } =
+    useCheckoutForm(props);
+  const product = kind === 'product';
   return (
     <form className="form-stack" onSubmit={submit}>
       <FormField
@@ -21,7 +25,7 @@ export function CheckoutForm({ offeringId, packageId, mode, email, name }: Check
       />
       <FormField
         id="checkout-email"
-        label="Email для доступу до навчання"
+        label={product ? 'Email для підтвердження' : 'Email для доступу до навчання'}
         name="email"
         defaultValue={email}
         type="email"
@@ -41,6 +45,40 @@ export function CheckoutForm({ offeringId, packageId, mode, email, name }: Check
         placeholder="+380"
         error={fieldErrors.phone}
       />
+      <div className="form-row">
+        <FormField
+          id="checkout-telegram"
+          label="Нік у Telegram (необов’язково)"
+          name="telegram"
+          autoComplete="off"
+          spellCheck={false}
+          maxLength={65}
+          pattern="@?[A-Za-z0-9_.]{1,64}"
+          placeholder="@nickname"
+          error={fieldErrors.telegram}
+        />
+        <FormField
+          id="checkout-instagram"
+          label="Нік в Instagram (необов’язково)"
+          name="instagram"
+          autoComplete="off"
+          spellCheck={false}
+          maxLength={65}
+          pattern="@?[A-Za-z0-9_.]{1,64}"
+          placeholder="@nickname"
+          error={fieldErrors.instagram}
+        />
+      </div>
+      {mode === 'wayforpay' && (
+        <PromoCodeField
+          value={promo.value}
+          quote={promo.quote}
+          error={promo.error}
+          checking={promo.checking}
+          onChange={changePromo}
+          onApply={applyPromo}
+        />
+      )}
       <label className="checkbox-label">
         <input
           name="consent"
@@ -71,14 +109,20 @@ export function CheckoutForm({ offeringId, packageId, mode, email, name }: Check
           {error}
         </p>
       )}
-      <Button type="submit" className="button button-wide" disabled={state === 'sending'}>
+      <Button
+        type="submit"
+        className="button button-wide"
+        disabled={state === 'sending' || state === 'paying'}
+      >
         {state === 'sending'
           ? 'Готуємо замовлення…'
-          : mode === 'disabled'
-            ? 'Отримати доступ без оплати'
-            : mode === 'mock'
-              ? 'Перевірити оформлення'
-              : 'Перейти до оплати'}
+          : state === 'paying'
+            ? 'Відкрито вікно оплати…'
+            : mode === 'disabled'
+              ? 'Отримати доступ без оплати'
+              : mode === 'mock'
+                ? 'Перевірити оформлення'
+                : 'Перейти до оплати'}
       </Button>
       {mode === 'mock' && (
         <p className="mock-notice">Демонстрація оформлення. Оплати й доступу до навчання немає.</p>

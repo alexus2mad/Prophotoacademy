@@ -6,6 +6,8 @@ import type { Order, OrderStatus } from '../ledger/types';
 import type { AccessSnapshot, CourseDraft } from '../learning/types';
 import { grantOrderAccess, enrollWithoutPayment } from './enrollment';
 import { paymentMode } from './payment-mode';
+import { reservePromo } from './promo';
+import { queuePaymentEvent } from './payment-events';
 import { HttpError } from '../http';
 export { hash, IdempotencyConflict } from '../ledger';
 
@@ -115,10 +117,23 @@ export async function createOrder(
       createdAt: Math.floor(Date.now() / 1000),
       status: 'pending',
     };
+    if (order.promoCode) {
+      if (order.mode !== 'wayforpay')
+        throw new HttpError(422, 'Промокод не потрібен', { promoCode: 'Промокод не потрібен' });
+      const quote = await reservePromo(db, {
+        code: order.promoCode,
+        programId: order.programId || '',
+        amount: order.listAmount ?? order.amount,
+        email: order.customer.email,
+      });
+      order.amount = quote.amount;
+      order.discountPercent = quote.percent;
+    }
     await db.query(
       'INSERT INTO academy.orders(id,token_hash,idempotency_key,fingerprint,data) VALUES($1,$2,$3,$4,$5)',
       [order.id, order.tokenHash, order.idempotencyKey, order.fingerprint, JSON.stringify(order)],
     );
+    if (order.mode === 'wayforpay') await queuePaymentEvent(db, order, 'payment_start');
     return order.mode === 'disabled' ? enrollWithoutPayment(db, order) : order;
   });
 }
@@ -163,10 +178,16 @@ export async function fulfillOrder(
     );
   }
 }
+const serverEvents = {
+  approved: 'payment_success_server',
+  declined: 'payment_decline_server',
+  refunded: 'payment_refund_server',
+} as const;
 export async function updateOrder(
   id: string,
   status: OrderStatus,
   merchant = process.env.WAYFORPAY_MERCHANT_ACCOUNT || '',
+  details: Record<string, unknown> = {},
 ) {
   requireBackend();
   if (!managedDatabase()) return local.updateOrder(id, status);
@@ -186,6 +207,13 @@ export async function updateOrder(
         'INSERT INTO academy.outbox(id,kind,data) VALUES($1,$2,$3) ON CONFLICT DO NOTHING',
         [id + ':' + status, 'order-status', JSON.stringify({ ...order, orderId: id })],
       );
+      if (order.mode === 'wayforpay' && status in serverEvents)
+        await queuePaymentEvent(
+          db,
+          order,
+          serverEvents[status as keyof typeof serverEvents],
+          details,
+        );
     }
     return order;
   });

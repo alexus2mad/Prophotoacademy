@@ -23,10 +23,13 @@ export function purchasePayload(order: Order, token: string) {
   if (order.mode !== 'wayforpay') throw new HttpError(409, 'Це замовлення не потребує оплати');
   const { merchant, secret, domain, site } = paymentConfig();
   const productName = `${order.programTitle} — ${order.packageName}`;
+  const [firstName, ...lastNames] = order.customer.name.trim().split(/\s+/);
   return {
     merchantAccount: merchant,
     merchantDomainName: domain,
     merchantAuthType: 'SimpleSignature',
+    // The on-page widget reads this name; the hosted form reads merchantAuthType.
+    authorizationType: 'SimpleSignature',
     merchantSignature: sign(
       [
         merchant,
@@ -48,7 +51,8 @@ export function purchasePayload(order: Order, token: string) {
     productName: [productName],
     productCount: [1],
     productPrice: [order.amount],
-    clientFirstName: order.customer.name,
+    clientFirstName: firstName,
+    clientLastName: lastNames.join(' ') || firstName,
     clientEmail: order.customer.email,
     clientPhone: order.customer.phone,
     language: 'UA',
@@ -67,7 +71,22 @@ export const callbackInput = z.object({
   reasonCode: z.union([z.string(), z.number()]),
   merchantSignature: z.string().regex(/^[a-fA-F0-9]{32}$/),
   refundAmount: z.union([z.number(), z.string()]).optional(),
+  cardType: z.string().max(40).optional(),
+  paymentSystem: z.string().max(40).optional(),
+  fee: z.union([z.number(), z.string()]).optional(),
 });
+// Provider details forwarded with server payment events, as the original site did.
+export function callbackDetails(data: z.infer<typeof callbackInput>) {
+  return {
+    transactionStatus: data.transactionStatus,
+    reasonCode: data.reasonCode,
+    authCode: data.authCode,
+    cardPan: data.cardPan,
+    cardType: data.cardType || '',
+    paymentSystem: data.paymentSystem || '',
+    fee: data.fee ?? '',
+  };
+}
 export function verifyCallback(
   raw: unknown,
   order: Order,

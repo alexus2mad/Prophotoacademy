@@ -6,6 +6,8 @@ export type NotificationJob = {
     mode?: string;
     status?: string;
     programTitle?: string;
+    packageName?: string;
+    productKind?: string;
     customer?: { email: string };
     [key: string]: unknown;
   };

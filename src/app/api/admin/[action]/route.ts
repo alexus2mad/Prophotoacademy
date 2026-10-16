@@ -3,6 +3,8 @@ import { requireAdmin } from '@/lib/auth/server';
 import { createCourse } from '@/lib/learning/authoring';
 import { createMediaUpload, finishMediaUpload } from '@/lib/learning/media';
 import { saveLiveSession } from '@/lib/learning/live';
+import { savePromoCode } from '@/lib/commerce/promo';
+import { getContent } from '@/lib/content';
 import { errorResponse, guardMutation, HttpError, jsonBody } from '@/lib/http';
 import type { ActionRouteProps } from '@/app/types';
 export async function POST(request: Request, { params }: ActionRouteProps) {
@@ -18,6 +20,12 @@ export async function POST(request: Request, { params }: ActionRouteProps) {
         user.id,
       );
     else if (action === 'sessions') result = await saveLiveSession(input, user.id);
+    else if (action === 'promo-codes')
+      result = await savePromoCode(
+        input,
+        user.id,
+        (await getContent()).programs.map((p) => p.id),
+      );
     else if (action === 'uploads') {
       const value = z
         .object({
