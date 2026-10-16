@@ -327,6 +327,7 @@ describe('promo codes', () => {
     await expect(savePromoCode(promo('BIG', { percent: 100 }), admin, lab)).rejects.toThrow();
     expect(discountedAmount(1, 90)).toBe(1);
     expect(discountedAmount(7500, 5)).toBe(7125);
+    expect(discountedAmount(29999, 5)).toBe(28499);
   });
   it('is unavailable outside paid mode', async () => {
     vi.stubEnv('PAYMENT_MODE', 'disabled');

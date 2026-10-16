@@ -7,9 +7,9 @@ import type { PromoCode, PromoCodeRow, PromoLookup, PromoQuote } from './types';
 const invalid = (message = 'Промокод недійсний') =>
   new HttpError(422, message, { promoCode: message });
 
-// Whole hryvnias, never below the 1 UAH minimum a card payment needs.
+// Whole hryvnias rounded down, as the original site did, never below the 1 UAH card minimum.
 export const discountedAmount = (amount: number, percent: number) =>
-  Math.max(1, Math.round((amount * (100 - percent)) / 100));
+  Math.max(1, Math.floor((amount * (100 - percent)) / 100));
 
 // Paid orders and other buyers' checkouts still within their payment window hold a use.
 // A buyer's own unfinished attempt does not, so closing the widget and retrying works.
