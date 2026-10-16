@@ -15,7 +15,7 @@ import { enrollmentOptions } from '@/lib/commerce/catalog';
 import { EnrollmentScope } from '@/components/molecules/EnrollmentScope/EnrollmentScope';
 export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
-  title: 'Оформлення навчання',
+  title: 'Оформлення замовлення',
   robots: { index: false, follow: false },
 };
 export default async function Checkout({ searchParams }: CheckoutPageProps) {

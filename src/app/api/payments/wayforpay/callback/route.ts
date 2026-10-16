@@ -10,11 +10,15 @@ import {
 import { orderById, updateOrder } from '@/lib/commerce/orders';
 export const runtime = 'nodejs';
 export async function POST(request: Request) {
+  let reference = '',
+    transaction = '';
   try {
     if (process.env.PAYMENT_MODE !== 'wayforpay') throw new HttpError(404, 'Not found');
     const raw = await callbackBody(request);
     const parsed = callbackInput.safeParse(raw);
     if (!parsed.success) throw new HttpError(400, 'Invalid callback');
+    reference = parsed.data.orderReference;
+    transaction = parsed.data.transactionStatus;
     const merchant = process.env.WAYFORPAY_MERCHANT_ACCOUNT;
     const secret = process.env.WAYFORPAY_MERCHANT_SECRET;
     if (!merchant || !secret) throw new HttpError(503, 'Payment verification unavailable');
@@ -27,6 +31,15 @@ export async function POST(request: Request) {
       headers: { 'Cache-Control': 'no-store' },
     });
   } catch (error) {
+    // Rejected provider callbacks are otherwise invisible; log no card or customer data.
+    console.warn(
+      'WayForPay callback rejected',
+      JSON.stringify({
+        reference,
+        transaction,
+        reason: error instanceof Error ? error.message : 'unknown',
+      }),
+    );
     return errorResponse(error);
   }
 }
