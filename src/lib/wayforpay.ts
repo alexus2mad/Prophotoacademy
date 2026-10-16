@@ -60,6 +60,24 @@ export function purchasePayload(order: Order, token: string) {
     returnUrl: `${site}/thanks?token=${token}`,
   };
 }
+// WayForPay posts its JSON without an application/json content type, and some
+// integrations receive it as a form body whose only key is the JSON. The signature,
+// not the header, authenticates the callback, so accept any of these encodings.
+export async function callbackBody(request: Request, maxBytes = 16_384) {
+  const text = await request.text();
+  if (text.length > maxBytes) throw new HttpError(413, 'Callback too large');
+  try {
+    return JSON.parse(text);
+  } catch {}
+  const form = new URLSearchParams(text);
+  const keys = [...form.keys()];
+  if (keys.length === 1 && !form.get(keys[0]))
+    try {
+      return JSON.parse(keys[0]);
+    } catch {}
+  if (keys.length) return Object.fromEntries(form);
+  throw new HttpError(400, 'Invalid callback');
+}
 export const callbackInput = z.object({
   merchantAccount: z.string().max(100),
   orderReference: z.string().max(100),

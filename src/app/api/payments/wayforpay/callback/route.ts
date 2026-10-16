@@ -1,5 +1,6 @@
-import { jsonBody, errorResponse, HttpError } from '@/lib/http';
+import { errorResponse, HttpError } from '@/lib/http';
 import {
+  callbackBody,
   callbackInput,
   callbackDetails,
   verifyCallback,
@@ -11,7 +12,7 @@ export const runtime = 'nodejs';
 export async function POST(request: Request) {
   try {
     if (process.env.PAYMENT_MODE !== 'wayforpay') throw new HttpError(404, 'Not found');
-    const raw = await jsonBody(request);
+    const raw = await callbackBody(request);
     const parsed = callbackInput.safeParse(raw);
     if (!parsed.success) throw new HttpError(400, 'Invalid callback');
     const merchant = process.env.WAYFORPAY_MERCHANT_ACCOUNT;

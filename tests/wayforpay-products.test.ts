@@ -194,6 +194,24 @@ describe('ticket and service products', () => {
       learningAccess: false,
     });
   });
+  it('accepts provider callbacks sent without a JSON content type', async () => {
+    for (const encode of [(body: string) => body, (body: string) => encodeURIComponent(body)]) {
+      await pg.exec(
+        'TRUNCATE academy.orders,academy.transactions,academy.payment_events,academy.outbox CASCADE',
+      );
+      const { orderId } = await (await checkout(post('/api/checkout', payload()))).json();
+      const response = await callback(
+        new Request(origin + '/api/payments/wayforpay/callback', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: encode(JSON.stringify(providerCallback(orderId, 900))),
+        }),
+      );
+      expect(response.status).toBe(200);
+      expect(await response.json()).toMatchObject({ orderReference: orderId, status: 'accept' });
+      expect((await order()).status).toBe('approved');
+    }
+  });
   it('sends the original site Make.com events from stored order data', async () => {
     const response = await checkout(post('/api/checkout', payload()));
     const { orderId } = await response.json();
