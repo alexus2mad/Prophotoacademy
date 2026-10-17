@@ -13,7 +13,7 @@ const shared = {
 };
 const templates: Record<string, EmailContent> = {
   'confirm-signup': {
-    subject: 'Ваш код для входу в ProPhoto Academy',
+    subject: 'Підтвердьте email у ProPhoto Academy',
     preheader: 'Введіть цей код, щоб підтвердити email і увійти до кабінету.',
     heading: 'Підтвердьте email',
     paragraphs: [
@@ -22,7 +22,7 @@ const templates: Record<string, EmailContent> = {
     ...shared,
   },
   'magic-link': {
-    subject: 'Ваш код для входу в ProPhoto Academy',
+    subject: 'Ваш код входу до ProPhoto Academy',
     preheader: 'Введіть цей код на сторінці входу до кабінету.',
     heading: 'Код для входу',
     paragraphs: ['Введіть цей код на сторінці входу, щоб відкрити кабінет ProPhoto Academy.'],
