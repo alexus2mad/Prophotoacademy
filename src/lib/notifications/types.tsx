@@ -9,7 +9,26 @@ export type NotificationJob = {
     packageName?: string;
     productKind?: string;
     fulfillment?: unknown;
-    customer?: { email: string };
+    id?: string;
+    orderId?: string;
+    amount?: number;
+    listAmount?: number;
+    promoCode?: string;
+    discountPercent?: number;
+    customer?: { email: string; name?: string };
     [key: string]: unknown;
   };
 };
+export type EmailDetail = { label: string; value: string };
+// One branded layout serves app emails and Supabase auth templates (whose code is a placeholder).
+export type EmailContent = {
+  subject: string;
+  preheader: string;
+  heading: string;
+  paragraphs: string[];
+  code?: string;
+  details?: EmailDetail[];
+  action?: { label: string; href: string };
+  note?: string;
+};
+export type RenderedEmail = { subject: string; html: string; text: string };

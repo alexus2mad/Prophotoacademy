@@ -1,12 +1,9 @@
 import { randomUUID } from 'node:crypto';
 import { after } from 'next/server';
 import { databasePool, managedDatabase, transaction } from '../database/client';
+import { renderEmail, siteOrigin } from './email-layout';
+import { orderEmail } from './emails';
 import type { NotificationJob } from './types';
-const escape = (value: string) =>
-  value.replace(
-    /[&<>"']/g,
-    (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]!,
-  );
 export async function deliverNotifications() {
   const db = databasePool(),
     claim = randomUUID();
@@ -32,26 +29,11 @@ export async function deliverNotifications() {
         );
         continue;
       }
-      if (
-        ['order-status', 'enrollment'].includes(job.kind) &&
-        data.customer?.email &&
-        ['approved', 'refunded', 'enrolled'].includes(data.status || '')
-      ) {
+      const email = orderEmail(job.kind, data, siteOrigin());
+      if (email) {
         if (!process.env.RESEND_API_KEY || !process.env.EMAIL_FROM)
           throw new Error('Email not configured');
-        const approved = ['approved', 'enrolled'].includes(data.status || ''),
-          product = data.productKind === 'product',
-          // Paid courses without mapped lessons are opened by the team, as on the original site.
-          manual = !product && !data.fulfillment,
-          title = !approved
-            ? 'Повернення оплати підтверджено'
-            : product || manual
-              ? 'Оплату підтверджено'
-              : 'Ваш курс уже в кабінеті';
-        const href = new URL(
-          '/account',
-          process.env.NEXT_PUBLIC_ACADEMY_URL || process.env.NEXT_PUBLIC_SITE_URL!,
-        ).href;
+        const message = renderEmail(email);
         const response = await fetch('https://api.resend.com/emails', {
           method: 'POST',
           headers: {
@@ -61,9 +43,10 @@ export async function deliverNotifications() {
           },
           body: JSON.stringify({
             from: process.env.EMAIL_FROM,
-            to: [data.customer.email],
-            subject: title,
-            html: `<h1>${title}</h1><p>${escape(data.programTitle || 'ProPhoto Academy')}${product && data.packageName ? '<br>' + escape(data.packageName) : ''}</p>${data.mode === 'disabled' ? '<p>Тестовий доступ надано без оплати. Кошти не списувалися, майбутнього списання не буде.</p>' : ''}${approved && product ? '<p>Команда академії зв’яжеться з вами щодо деталей.</p>' : ''}${approved && manual ? '<p>Команда академії відкриє вам доступ до навчання і зв’яжеться з вами найближчим часом.</p>' : ''}${approved && !product && !manual ? `<p>Увійдіть за email, який ви вказали під час оформлення.</p><p><a href="${escape(href)}">Перейти до навчання</a></p>` : ''}`,
+            to: [data.customer!.email],
+            subject: message.subject,
+            html: message.html,
+            text: message.text,
           }),
           signal: AbortSignal.timeout(15_000),
         });
