@@ -359,14 +359,15 @@
       "duration": "8–11 тижнів",
       "format": "hybrid",
       "location": "Київ",
-      "availability": "waitlist",
-      "verificationRequired": true,
+      "availability": "open",
+      "verificationRequired": false,
+      "openAfterStart": true,
       "packages": [
         {
           "id": "visual-base",
           "name": "BASE",
           "price": 7500,
-          "availability": "waitlist",
+          "availability": "open",
           "description": "Самостійно, у своєму темпі",
           "includes": [
             "8 тижнів · 2 лекції на тиждень",
@@ -389,7 +390,7 @@
           "id": "visual-platinum",
           "name": "PLATINUM",
           "price": 25500,
-          "availability": "waitlist",
+          "availability": "limited",
           "description": "Практика й підтримка викладача",
           "includes": [
             "11 тижнів · 3 лекції на тиждень",
@@ -401,7 +402,7 @@
         }
       ],
       "sourceNotes": [
-        "Дата 13.03.2026 минула; наступний набір не підтверджено."
+        "Продається як на попередньому сайті: старт 13.03.2026 минув, курс доступний у записі. BASE відкриває уроки автоматично, PLATINUM — доступ надає команда."
       ]
     },
     {
@@ -412,7 +413,7 @@
       "format": "hybrid",
       "location": "Київ",
       "availability": "limited",
-      "verificationRequired": true,
+      "verificationRequired": false,
       "packages": [
         {
           "id": "commercial-base",
@@ -465,14 +466,15 @@
       "startDate": "2026-10-02",
       "duration": "5 тижнів",
       "format": "online",
-      "availability": "waitlist",
-      "verificationRequired": true,
+      "availability": "open",
+      "verificationRequired": false,
+      "openAfterStart": true,
       "packages": [
         {
           "id": "instagram-base",
           "name": "BASE",
           "price": 4200,
-          "availability": "waitlist",
+          "availability": "open",
           "description": "Самостійна робота з матеріалами",
           "includes": [
             "14 лекцій",
@@ -496,7 +498,7 @@
         }
       ],
       "sourceNotes": [
-        "Старт 02.10.2026 минув; PLATINUM EXPERT закрито. Актуальність акційної ціни не підтверджено."
+        "Продається як на попередньому сайті: BASE 4200 грн після старту 02.10.2026; PLATINUM EXPERT — місць немає."
       ]
     },
     {

@@ -63,7 +63,14 @@ export async function orderHasAccess(order: Order) {
     ).rowCount,
   );
 }
-export async function purchaseAccess(offeringId: string, packageId: string, programId: string) {
+// Without a package rule, paid mode may sell the package with access granted by the team
+// (as on the original site); test enrollment always requires published, mapped lessons.
+export async function purchaseAccess(
+  offeringId: string,
+  packageId: string,
+  programId: string,
+  { optional = false } = {},
+) {
   requireBackend();
   if (!managedDatabase()) return undefined;
   const rule = (
@@ -75,7 +82,10 @@ export async function purchaseAccess(offeringId: string, packageId: string, prog
       [offeringId, packageId, programId],
     )
   ).rows[0];
-  if (!rule) throw new HttpError(409, 'Навчальні матеріали цього пакета ще готуються');
+  if (!rule) {
+    if (optional) return undefined;
+    throw new HttpError(409, 'Навчальні матеріали цього пакета ще готуються');
+  }
   const manifest = rule.manifest as CourseDraft;
   const lessons = manifest.modules.flatMap((m) => m.lessons.map((l) => l.id));
   if (!rule.lesson_ids.length || rule.lesson_ids.some((id: string) => !lessons.includes(id)))

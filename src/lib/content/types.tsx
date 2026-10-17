@@ -32,6 +32,8 @@ export type Offering = {
   location?: string;
   availability: Availability;
   verificationRequired: boolean;
+  // Recorded or self-paced intakes stay purchasable after their start date.
+  openAfterStart?: boolean;
   packages: Package[];
   sourceNotes?: string[];
 };

@@ -10,6 +10,8 @@ import { POST as callback } from '../src/app/api/payments/wayforpay/callback/rou
 import { GET as orderStatus } from '../src/app/api/orders/status/route';
 import { savePromoCode, discountedAmount } from '../src/lib/commerce/promo';
 import { resolvePurchase, testProduct } from '../src/lib/checkout';
+import { enrollmentOptions } from '../src/lib/commerce/catalog';
+import { canEnroll } from '../src/lib/format';
 import { sign } from '../src/lib/wayforpay';
 import type { SqlConnection } from '../src/lib/database/types';
 import type { OrderRow, OutboxEventRow } from './types';
@@ -266,6 +268,53 @@ describe('ticket and service products', () => {
   it('does not test-enroll products while payments are disabled', async () => {
     vi.stubEnv('PAYMENT_MODE', 'disabled');
     expect((await checkout(post('/api/checkout', payload()))).status).toBe(409);
+  });
+});
+
+describe('courses sold like the original site', () => {
+  const visual = () => content.offerings.find((o) => o.id === 'offering-visual-2026-03')!;
+  it('keeps recorded intakes on sale after their start date only when marked', () => {
+    const after = new Date('2027-01-15T12:00:00Z');
+    expect(canEnroll(visual(), visual().packages[0], after)).toBe(true);
+    expect(canEnroll({ ...visual(), openAfterStart: false }, visual().packages[0], after)).toBe(
+      false,
+    );
+    expect(
+      canEnroll(
+        visual(),
+        visual().packages.find((p) => p.id === 'visual-gold'),
+      ),
+    ).toBe(false);
+  });
+  it('sells a paid course package without mapped lessons for the team to open', async () => {
+    const options = await enrollmentOptions(visual());
+    expect(options.packageIds).toEqual(['visual-base', 'visual-platinum']);
+    const input = payload({ offeringId: 'offering-visual-2026-03', packageId: 'visual-platinum' });
+    const response = await checkout(post('/api/checkout', input));
+    expect(response.status).toBe(200);
+    const { orderId, fields } = await response.json();
+    expect(fields.amount).toBe(25500);
+    expect(await order()).toMatchObject({ productKind: 'course', amount: 25500 });
+    expect((await order()).fulfillment).toBeUndefined();
+    await callback(post('/api/payments/wayforpay/callback', providerCallback(orderId, 25500)));
+    expect((await order()).status).toBe('approved');
+    expect((await pg.query('SELECT * FROM academy.grants')).rows).toHaveLength(0);
+    expect((await events()).map((e) => e.data.event)).toEqual(['payment_start', 'payment_success']);
+    const status = await orderStatus(
+      new Request(origin + '/api/orders/status?token=' + input.token),
+    );
+    expect(await status.json()).toMatchObject({ status: 'approved', learningAccess: false });
+  });
+  it('still requires mapped lessons for zero-charge test enrollment', async () => {
+    vi.stubEnv('PAYMENT_MODE', 'disabled');
+    expect((await enrollmentOptions(visual())).packageIds).toEqual([]);
+    const response = await checkout(
+      post(
+        '/api/checkout',
+        payload({ offeringId: 'offering-visual-2026-03', packageId: 'visual-platinum' }),
+      ),
+    );
+    expect(response.status).toBe(409);
   });
 });
 

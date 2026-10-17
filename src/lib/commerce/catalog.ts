@@ -30,8 +30,9 @@ export async function enrollmentOptions(offering?: Offering): Promise<Enrollment
       .filter((pack) =>
         isProduct(pack)
           ? mode === 'wayforpay' && canEnroll(offering, pack)
-          : rules.rows.some((r) => r.package_id === pack.id) &&
-            (mode === 'disabled' ? canTestEnroll(offering, pack) : canEnroll(offering, pack)),
+          : mode === 'disabled'
+            ? rules.rows.some((r) => r.package_id === pack.id) && canTestEnroll(offering, pack)
+            : canEnroll(offering, pack),
       )
       .map((p) => p.id),
   };

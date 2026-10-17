@@ -8,6 +8,7 @@ export type NotificationJob = {
     programTitle?: string;
     packageName?: string;
     productKind?: string;
+    fulfillment?: unknown;
     customer?: { email: string };
     [key: string]: unknown;
   };

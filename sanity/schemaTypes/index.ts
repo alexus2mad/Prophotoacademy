@@ -326,6 +326,14 @@ export const schemaTypes = [
           'Clear only after dates, prices and seat availability are confirmed. Past intakes stay unavailable automatically.',
       }),
       defineField({
+        name: 'openAfterStart',
+        title: 'Keep selling after the start date',
+        type: 'boolean',
+        initialValue: false,
+        description:
+          'For recorded or self-paced intakes. Live cohorts close automatically on their start date.',
+      }),
+      defineField({
         name: 'packages',
         title: 'Packages',
         type: 'array',
@@ -336,6 +344,15 @@ export const schemaTypes = [
             fields: [
               text('id', 'Stable package ID', true),
               text('name', 'Name', true),
+              defineField({
+                name: 'kind',
+                title: 'Kind',
+                type: 'string',
+                initialValue: 'course',
+                options: { list: ['course', 'product'] },
+                description:
+                  'Course grants lessons; product (ticket, service) records the purchase only.',
+              }),
               defineField({
                 name: 'price',
                 title: 'Price in UAH',

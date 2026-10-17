@@ -5,12 +5,24 @@ import { resolvePurchase, checkoutInput } from '../src/lib/checkout';
 import type { AcademyContent, Offering } from '../src/lib/content/types';
 const content = seed as AcademyContent;
 describe('enrollment integrity', () => {
-  it('does not sell a stale, unverified or sold-out intake', () => {
-    for (const offering of content.offerings)
-      expect(canEnroll(offering, offering.packages[0], new Date('2026-10-07'))).toBe(false);
-    expect(() =>
-      resolvePurchase(content, 'offering-commercial-2026-11', 'commercial-base'),
-    ).toThrow(/не підтверджено/);
+  it('does not sell a stale, unverified, archived or sold-out intake', () => {
+    const live = content.offerings.find((o) => o.id === 'offering-commercial-2026-11')!;
+    const base = { ...live, verificationRequired: false, openAfterStart: false } as Offering;
+    const day = new Date('2026-10-07');
+    const soldOut = base.packages.find((p) => p.availability === 'soldOut');
+    expect(canEnroll({ ...base, verificationRequired: true }, base.packages[0], day)).toBe(false);
+    expect(canEnroll(base, base.packages[0], new Date('2026-11-07'))).toBe(false);
+    expect(canEnroll({ ...base, availability: 'archived' }, base.packages[0], day)).toBe(false);
+    expect(canEnroll(base, soldOut, day)).toBe(false);
+    const unverified = {
+      ...content,
+      offerings: content.offerings.map((o) =>
+        o.id === base.id ? { ...o, verificationRequired: true } : o,
+      ),
+    };
+    expect(() => resolvePurchase(unverified, base.id, 'commercial-base')).toThrow(
+      /не підтверджено/,
+    );
   });
   it('allows only a verified future intake and available package', () => {
     const offering = { ...content.offerings[1], verificationRequired: false } as Offering;

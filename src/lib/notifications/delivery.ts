@@ -41,9 +41,11 @@ export async function deliverNotifications() {
           throw new Error('Email not configured');
         const approved = ['approved', 'enrolled'].includes(data.status || ''),
           product = data.productKind === 'product',
+          // Paid courses without mapped lessons are opened by the team, as on the original site.
+          manual = !product && !data.fulfillment,
           title = !approved
             ? 'Повернення оплати підтверджено'
-            : product
+            : product || manual
               ? 'Оплату підтверджено'
               : 'Ваш курс уже в кабінеті';
         const href = new URL(
@@ -61,7 +63,7 @@ export async function deliverNotifications() {
             from: process.env.EMAIL_FROM,
             to: [data.customer.email],
             subject: title,
-            html: `<h1>${title}</h1><p>${escape(data.programTitle || 'ProPhoto Academy')}${product && data.packageName ? '<br>' + escape(data.packageName) : ''}</p>${data.mode === 'disabled' ? '<p>Тестовий доступ надано без оплати. Кошти не списувалися, майбутнього списання не буде.</p>' : ''}${approved && product ? '<p>Команда академії зв’яжеться з вами щодо деталей.</p>' : ''}${approved && !product ? `<p>Увійдіть за email, який ви вказали під час оформлення.</p><p><a href="${escape(href)}">Перейти до навчання</a></p>` : ''}`,
+            html: `<h1>${title}</h1><p>${escape(data.programTitle || 'ProPhoto Academy')}${product && data.packageName ? '<br>' + escape(data.packageName) : ''}</p>${data.mode === 'disabled' ? '<p>Тестовий доступ надано без оплати. Кошти не списувалися, майбутнього списання не буде.</p>' : ''}${approved && product ? '<p>Команда академії зв’яжеться з вами щодо деталей.</p>' : ''}${approved && manual ? '<p>Команда академії відкриє вам доступ до навчання і зв’яжеться з вами найближчим часом.</p>' : ''}${approved && !product && !manual ? `<p>Увійдіть за email, який ви вказали під час оформлення.</p><p><a href="${escape(href)}">Перейти до навчання</a></p>` : ''}`,
           }),
           signal: AbortSignal.timeout(15_000),
         });

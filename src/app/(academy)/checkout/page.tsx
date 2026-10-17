@@ -24,6 +24,7 @@ export default async function Checkout({ searchParams }: CheckoutPageProps) {
   const mode = paymentMode();
   const member = await currentMember();
   let purchase;
+  let automaticAccess = false;
   try {
     purchase = resolvePurchase(
       content,
@@ -31,7 +32,11 @@ export default async function Checkout({ searchParams }: CheckoutPageProps) {
       query.demo === '1' ? 'demo-base' : query.package || '',
     );
     if (mode !== 'mock' && !isProduct(purchase.pack))
-      await purchaseAccess(purchase.offering.id, purchase.pack.id, purchase.program.id);
+      automaticAccess = Boolean(
+        await purchaseAccess(purchase.offering.id, purchase.pack.id, purchase.program.id, {
+          optional: mode === 'wayforpay',
+        }),
+      );
   } catch {
     return (
       <div className="container status-panel">
@@ -64,7 +69,9 @@ export default async function Checkout({ searchParams }: CheckoutPageProps) {
         <p className="muted">
           {product
             ? 'Залиште контакти — підтвердження надійде на email, а команда академії зв’яжеться з вами щодо деталей.'
-            : 'Вкажіть email, з яким навчатиметеся. Доступ з’явиться у вашому кабінеті.'}
+            : automaticAccess || mode !== 'wayforpay'
+              ? 'Вкажіть email, з яким навчатиметеся. Доступ з’явиться у вашому кабінеті.'
+              : 'Вкажіть email, з яким навчатиметеся. Після оплати команда академії відкриє вам доступ і зв’яжеться з вами.'}
         </p>
       </div>
       <div className="checkout-grid">

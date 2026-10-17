@@ -73,7 +73,9 @@ export async function POST(request: Request) {
             mode === 'wayforpay' ? process.env.WAYFORPAY_MERCHANT_ACCOUNT : undefined,
           fulfillment:
             mode !== 'mock' && !isProduct(pack)
-              ? await purchaseAccess(input.offeringId, input.packageId, program.id)
+              ? await purchaseAccess(input.offeringId, input.packageId, program.id, {
+                  optional: mode === 'wayforpay',
+                })
               : undefined,
         },
         input.token,

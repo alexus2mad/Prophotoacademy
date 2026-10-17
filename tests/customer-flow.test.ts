@@ -94,7 +94,7 @@ describe('customer API flow', () => {
           request('/api/checkout', {
             ...input(),
             offeringId: seed.offerings[0].id,
-            packageId: seed.offerings[0].packages[0].id,
+            packageId: seed.offerings[0].packages.find((p) => p.availability === 'soldOut')!.id,
           }),
         )
       ).status,
