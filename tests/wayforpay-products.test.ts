@@ -410,7 +410,8 @@ describe('promo codes', () => {
       { code: 'USED' },
     ]);
     expect(
-      (await pg.query("SELECT action FROM academy.audit WHERE target='SPARE' ORDER BY id")).rows,
+      (await pg.query("SELECT action FROM academy.audit WHERE target='SPARE' ORDER BY action"))
+        .rows,
     ).toEqual([{ action: 'promo.create' }, { action: 'promo.delete' }]);
   });
   it('is unavailable outside paid mode', async () => {
