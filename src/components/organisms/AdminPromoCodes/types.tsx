@@ -15,3 +15,4 @@ export type PromoDraft = {
   programIds: string[];
   note: string;
 };
+export type DeletedPromo = { code: string };

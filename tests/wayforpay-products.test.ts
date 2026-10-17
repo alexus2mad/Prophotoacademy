@@ -8,7 +8,7 @@ import { POST as promoPreview } from '../src/app/api/checkout/promo/route';
 import { POST as widgetEvent } from '../src/app/api/checkout/events/route';
 import { POST as callback } from '../src/app/api/payments/wayforpay/callback/route';
 import { GET as orderStatus } from '../src/app/api/orders/status/route';
-import { savePromoCode, discountedAmount } from '../src/lib/commerce/promo';
+import { savePromoCode, discountedAmount, deletePromoCode } from '../src/lib/commerce/promo';
 import { resolvePurchase, testProduct } from '../src/lib/checkout';
 import { enrollmentOptions } from '../src/lib/commerce/catalog';
 import { canEnroll } from '../src/lib/format';
@@ -136,6 +136,7 @@ beforeAll(async () => {
     '202610090001_learning.sql',
     '202610120001_test_enrollment.sql',
     '202610170001_promo_codes.sql',
+    '202610170002_promo_code_delete.sql',
   ])
     await pg.exec(await readFile('supabase/migrations/' + file, 'utf8'));
 });
@@ -395,6 +396,22 @@ describe('promo codes', () => {
     expect(discountedAmount(1, 90)).toBe(1);
     expect(discountedAmount(7500, 5)).toBe(7125);
     expect(discountedAmount(29999, 5)).toBe(28499);
+  });
+  it('deletes unused codes and only deactivates codes that orders mention', async () => {
+    await savePromoCode(promo('SPARE'), admin, lab);
+    await savePromoCode(promo('USED'), admin, lab);
+    expect((await checkout(post('/api/checkout', payload({ promoCode: 'USED' })))).status).toBe(
+      200,
+    );
+    await expect(deletePromoCode({ code: 'spare' }, admin)).resolves.toEqual({ code: 'SPARE' });
+    await expect(deletePromoCode({ code: 'USED' }, admin)).rejects.toThrow('можна лише вимкнути');
+    await expect(deletePromoCode({ code: 'GHOST' }, admin)).rejects.toThrow('не знайдено');
+    expect((await pg.query('SELECT code FROM academy.promo_codes ORDER BY code')).rows).toEqual([
+      { code: 'USED' },
+    ]);
+    expect(
+      (await pg.query("SELECT action FROM academy.audit WHERE target='SPARE' ORDER BY id")).rows,
+    ).toEqual([{ action: 'promo.create' }, { action: 'promo.delete' }]);
   });
   it('is unavailable outside paid mode', async () => {
     vi.stubEnv('PAYMENT_MODE', 'disabled');

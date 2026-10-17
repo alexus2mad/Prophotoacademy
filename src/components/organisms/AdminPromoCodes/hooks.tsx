@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useAdminMutation } from '@/lib/admin/hooks';
 import type { FormEvent } from 'react';
 import type { PromoCode } from '@/lib/commerce/types';
-import type { AdminPromoCodesProps, PromoDraft } from './types';
+import type { AdminPromoCodesProps, DeletedPromo, PromoDraft } from './types';
 
 const empty: PromoDraft = {
   code: '',
@@ -30,8 +30,10 @@ export function useAdminPromoCodes({ demo }: AdminPromoCodesProps) {
   const h = useAdminMutation(demo);
   const [draft, setDraft] = useState<PromoDraft>(empty);
   const [editing, setEditing] = useState('');
+  const [confirmingDelete, setConfirmingDelete] = useState(false);
   const update = (patch: Partial<PromoDraft>) => setDraft((d) => ({ ...d, ...patch }));
   function edit(code: PromoCode) {
+    setConfirmingDelete(false);
     setEditing(code.code);
     setDraft({
       code: code.code,
@@ -45,6 +47,7 @@ export function useAdminPromoCodes({ demo }: AdminPromoCodesProps) {
     });
   }
   function reset() {
+    setConfirmingDelete(false);
     setEditing('');
     setDraft(empty);
     h.setError('');
@@ -67,5 +70,21 @@ export function useAdminPromoCodes({ demo }: AdminPromoCodesProps) {
     setEditing(saved.code);
     router.refresh();
   }
-  return { ...h, draft, update, editing, edit, reset, save };
+  // Two clicks, no browser dialog: the first arms the button, the second deletes.
+  async function remove() {
+    if (!confirmingDelete) {
+      setConfirmingDelete(true);
+      return;
+    }
+    const deleted = await h.mutate<DeletedPromo>('/api/admin/promo-code-delete', {
+      code: editing,
+    });
+    setConfirmingDelete(false);
+    if (!deleted) return;
+    setEditing('');
+    setDraft(empty);
+    h.setMessage(`Промокод ${deleted.code} видалено`);
+    router.refresh();
+  }
+  return { ...h, draft, update, editing, edit, reset, save, remove, confirmingDelete };
 }

@@ -156,6 +156,16 @@ export function AdminPromoCodes(props: AdminPromoCodesProps) {
                 Новий промокод
               </button>
             )}
+            {h.editing && (
+              <button
+                className="button button-secondary"
+                type="button"
+                onClick={h.remove}
+                disabled={h.busy}
+              >
+                {h.confirmingDelete ? 'Підтвердити видалення' : 'Видалити'}
+              </button>
+            )}
           </div>
           {h.error && (
             <p className="learning-error" role="alert">
@@ -166,8 +176,8 @@ export function AdminPromoCodes(props: AdminPromoCodesProps) {
         </form>
       </section>
       <p className="admin-muted">
-        Знижка не змінює вже створені замовлення. Код можна вимкнути, але не видалити: оплачені
-        замовлення зберігають його в історії
+        Знижка не змінює вже створені замовлення. Код, який ще не використовували, можна видалити;
+        використаний — лише вимкнути, бо замовлення зберігають його в історії
       </p>
     </>
   );

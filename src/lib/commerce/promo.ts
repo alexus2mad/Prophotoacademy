@@ -140,3 +140,35 @@ export async function savePromoCode(raw: unknown, actorId: string, programIds: s
     return toPromo(saved);
   });
 }
+
+// Orders keep the code they used, so only a code no order mentions can be deleted.
+export async function deletePromoCode(raw: unknown, actorId: string) {
+  const { code } = z
+    .object({
+      code: z
+        .string()
+        .trim()
+        .toUpperCase()
+        .regex(/^[A-Z0-9_-]{3,32}$/),
+    })
+    .strict()
+    .parse(raw);
+  return transaction(async (db) => {
+    await db.query('SELECT pg_advisory_xact_lock(hashtext($1))', ['promo:' + code]);
+    const before = (
+      await db.query<PromoCodeRow>('SELECT * FROM academy.promo_codes WHERE code=$1 FOR UPDATE', [
+        code,
+      ])
+    ).rows[0];
+    if (!before) throw new HttpError(404, 'Промокод не знайдено');
+    const used = await db.query(
+      "SELECT 1 FROM academy.orders WHERE data->>'promoCode'=$1 LIMIT 1",
+      [code],
+    );
+    if (used.rowCount)
+      throw new HttpError(409, 'Код уже використано в замовленнях — його можна лише вимкнути');
+    await db.query('DELETE FROM academy.promo_codes WHERE code=$1', [code]);
+    await audit(db, { actorId, action: 'promo.delete', target: code, before: toPromo(before) });
+    return { code };
+  });
+}
