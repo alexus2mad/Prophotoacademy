@@ -6,7 +6,7 @@ import { hash } from '../ledger';
 import { HttpError } from '../http';
 import { consumeRateLimit, databasePool, transaction } from '../database/client';
 import { claimIdentity, changeAdministrator, normalizeEmail } from '../auth/identity';
-import { adminOverview, adminPeople, adminPerson, adminTeam } from './queries';
+import { adminOverview, adminPeople, adminPerson, adminTeam, sessionRoster } from './queries';
 import { manageAccess } from './access';
 import { recordAttendance } from '../learning/live';
 import { customerAccounts } from './customer-account';
@@ -150,11 +150,7 @@ export async function managementAction(action: string, value: unknown, session?:
   if (action === 'team') return adminTeam();
   if (action === 'roster') {
     const input = z.object({ sessionId: z.uuid() }).parse(value);
-    const people = await databasePool().query(
-      'SELECT DISTINCT p.id,p.email,p.name,coalesce(a.attended,false) AS attended FROM academy.live_sessions s JOIN academy.grants g ON g.course_id=s.course_id AND (s.offering_id IS NULL OR g.offering_id=s.offering_id) AND g.lesson_ids ? s.lesson_id JOIN academy.profiles p ON p.id=g.user_id LEFT JOIN academy.attendance a ON a.session_id=s.id AND a.user_id=p.id WHERE s.id=$1 ORDER BY p.email',
-      [input.sessionId],
-    );
-    return { people: people.rows };
+    return { people: await sessionRoster(input.sessionId) };
   }
   if (action === 'team.change') {
     const input = z

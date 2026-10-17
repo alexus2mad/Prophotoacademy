@@ -2,7 +2,7 @@
 
 ## Ownership
 
-Academy: verified email login, student dashboard, personal purchases/profile, lessons, content authoring and protected media. ps-booking: student accounts, access administration, administrator privileges, student statistics, attendance and the existing cashbox. There is one authoritative identity/access/progress store in Academy PostgreSQL and one management UI in booking. Do not enable legacy shared browser tokens.
+Academy: verified email login, student dashboard, personal purchases/profile, lessons, content authoring, protected media and, since 17 October 2026, student accounts, access administration, administrator privileges, student statistics and attendance (`/admin/students`, `/admin/team`). ps-booking: the existing cashbox and a read-only Academy panel in its customer card. There is one authoritative identity/access/progress store in Academy PostgreSQL and one management UI in the Academy admin. Do not enable legacy shared browser tokens.
 
 ## Configure before activation
 

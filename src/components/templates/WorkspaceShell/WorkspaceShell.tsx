@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { BrandLogo } from '@/components/atoms/BrandLogo/BrandLogo';
 import { AccountMenu } from '@/components/molecules/AccountMenu/AccountMenu';
-import { cashboxUrl, managementUrl } from '@/lib/commerce/cashbox';
+import { cashboxUrl } from '@/lib/commerce/cashbox';
 import type { WorkspaceShellProps } from './types';
 export function WorkspaceShell({
   children,
@@ -14,8 +14,9 @@ export function WorkspaceShell({
   const links = admin
     ? [
         ['courses', 'Курси'],
+        ['students', 'Студенти'],
+        ['team', 'Команда'],
         ['promo-codes', 'Промокоди'],
-        ['management', 'Керування студентами'],
         ['cashbox', 'Каса'],
         ['settings', 'Налаштування'],
       ]
@@ -46,10 +47,10 @@ export function WorkspaceShell({
       <div className={'workspace-layout' + (admin ? ' workspace-admin' : '')}>
         <nav className="workspace-nav" aria-label={admin ? 'Адміністрування' : 'Особистий кабінет'}>
           {links.map(([key, label]) =>
-            key === 'cashbox' || key === 'management' ? (
+            key === 'cashbox' ? (
               <a
                 key={key}
-                href={key === 'cashbox' ? cashboxUrl() : managementUrl()}
+                href={cashboxUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label + ' — ps-booking, нова вкладка'}

@@ -57,6 +57,7 @@ export type PurchaseView = {
   status: string;
   createdAt: string;
 };
+export type RosterPerson = { id: string; email: string; name: string; attended: boolean };
 export type ServiceStatus = { name: string; configured: boolean; detail: string };
 export type AdminMutationReply = { ok?: boolean; result?: unknown; error?: string };
 export type AdminReply<T> = { ok?: boolean; result: T; error?: string };

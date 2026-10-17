@@ -7,6 +7,7 @@ import type {
   AdminOverviewData,
   CourseEditorData,
   PurchaseView,
+  RosterPerson,
   TeamData,
   UserDetail,
 } from './types';
@@ -186,4 +187,14 @@ export async function adminTeam(): Promise<TeamData> {
       )
     ).rows,
   };
+}
+
+// Students whose grants include the session's lesson, with confirmed attendance.
+export async function sessionRoster(sessionId: string) {
+  return (
+    await databasePool().query<RosterPerson>(
+      'SELECT DISTINCT p.id,p.email,p.name,coalesce(a.attended,false) AS attended FROM academy.live_sessions s JOIN academy.grants g ON g.course_id=s.course_id AND (s.offering_id IS NULL OR g.offering_id=s.offering_id) AND g.lesson_ids ? s.lesson_id JOIN academy.profiles p ON p.id=g.user_id LEFT JOIN academy.attendance a ON a.session_id=s.id AND a.user_id=p.id WHERE s.id=$1 ORDER BY p.email',
+      [sessionId],
+    )
+  ).rows;
 }

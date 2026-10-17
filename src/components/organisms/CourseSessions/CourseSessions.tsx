@@ -2,7 +2,7 @@
 import { lessonLabel } from '@/lib/learning/numbering';
 import { displayDate } from '@/lib/learning/selectors';
 import { useCourseSessions } from './hooks';
-import { managementUrl } from '@/lib/commerce/cashbox';
+import { SessionRoster } from '@/components/organisms/SessionRoster/SessionRoster';
 import type { CourseSessionsProps } from './types';
 import type { LiveSession } from '@/lib/learning/types';
 export function CourseSessions(props: CourseSessionsProps) {
@@ -165,16 +165,9 @@ export function CourseSessions(props: CourseSessionsProps) {
         <section className="admin-section">
           <h3>Підтвердження участі</h3>
           <p className="admin-muted">
-            Список студентів і підтвердження відвідування ведуться в панелі ps-booking
+            Студенти з доступом до цього уроку. Участь підтверджуйте після завершення зустрічі
           </p>
-          <a
-            className="button button-secondary"
-            href={managementUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Керувати відвідуванням
-          </a>
+          <SessionRoster sessionId={h.id} title={h.title || 'Зустріч'} demo={props.demo} />
         </section>
       )}
     </section>

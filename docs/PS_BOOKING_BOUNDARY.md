@@ -1,5 +1,7 @@
 # Management and cashbox belong to ps-booking
 
+> **Superseded for student management on 17 October 2026.** At the owner's request, student accounts, access, administrator delegation, statistics and attendance moved to the Academy admin (`/admin/students`, `/admin/team`). Booking's `/academy.html` now signs managers in only for its customer-card Academy panel and redirects to the Academy admin. The cashbox sections below still apply.
+
 Updated 9 October 2026 following the owner's corrections. This supersedes the cashbox and student-administration UI sections of the learning-platform plan.
 
 ## Student-management implementation

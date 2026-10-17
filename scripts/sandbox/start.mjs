@@ -156,7 +156,7 @@ try {
   );
   child.once('exit', () => void stop());
   console.log(
-    'Local learning sandbox: http://127.0.0.1:3200/sandbox\nManagement: http://127.0.0.1:3201/academy.html\nmanager@example.test / student@example.test — code 123456\nPayments disabled. Saved data: ' +
+    'Local learning sandbox: http://127.0.0.1:3200/sandbox\nStudents & team: http://127.0.0.1:3200/admin/students\nBooking customer card bridge: http://127.0.0.1:3201/academy.html\nmanager@example.test / student@example.test — code 123456\nPayments disabled. Saved data: ' +
       directory,
   );
 } catch (error) {

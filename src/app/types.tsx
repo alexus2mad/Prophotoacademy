@@ -11,6 +11,8 @@ export type BookingPageProps = { searchParams: Promise<{ room?: string }> };
 export type ErrorBoundaryProps = { reset: () => void };
 export type ActionRouteProps = { params: Promise<{ action: string }> };
 export type IdRouteProps = { params: Promise<{ id: string }> };
+export type StudentPageProps = { params: Promise<{ email: string }> };
+export type StudentsPageProps = { searchParams: Promise<{ q?: string }> };
 export type AccountPageProps = {
   searchParams: Promise<{
     next?: string;

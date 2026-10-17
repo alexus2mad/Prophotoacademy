@@ -43,7 +43,7 @@ export async function prepareSandbox(root) {
   );
   await save(
     'src/lib/commerce/cashbox.ts',
-    "export const managementUrl=()=> 'http://127.0.0.1:3201/academy.html';export const cashboxUrl=()=> 'http://127.0.0.1:3201/admin.html?view=cashbox';\n",
+    "export const cashboxUrl=()=> 'http://127.0.0.1:3201/admin.html?view=cashbox';\n",
   );
   await save('src/proxy.ts', await readFile(path.join(root, 'scripts/sandbox/proxy.ts'), 'utf8'));
   await save(

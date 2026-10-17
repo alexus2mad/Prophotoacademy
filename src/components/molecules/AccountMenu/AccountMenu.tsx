@@ -2,7 +2,6 @@
 import Link from 'next/link';
 import { useAccountMenu } from './hooks';
 import type { AccountMenuProps } from './types';
-import { managementUrl } from '@/lib/commerce/cashbox';
 export function AccountMenu({ member, demo = false }: AccountMenuProps) {
   const { logout, error } = useAccountMenu();
   return (
@@ -17,9 +16,7 @@ export function AccountMenu({ member, demo = false }: AccountMenuProps) {
         <p>{member.email}</p>
         {member.role === 'admin' && (
           <>
-            <a href={managementUrl()} target="_blank" rel="noopener noreferrer">
-              Керування студентами
-            </a>
+            <Link href={demo ? '/demo/admin/students' : '/admin/students'}>Студенти</Link>
             <Link href={demo ? '/demo/admin/courses' : '/admin/courses'}>Редактор курсів</Link>
           </>
         )}

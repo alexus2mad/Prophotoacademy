@@ -15,3 +15,5 @@ export type AccessChangeInput = {
   reason: string;
 };
 export type OutboxEventRow = { id: string; kind: string; data: Record<string, unknown> };
+export type AdminAuthState = { role: 'admin' | 'student'; fresh: boolean };
+export type GrantRevocationRow = { revoked_at: string | null };
