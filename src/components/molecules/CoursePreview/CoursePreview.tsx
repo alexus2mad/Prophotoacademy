@@ -13,7 +13,8 @@ export function CoursePreview({ program, offering, image }: CoursePreviewProps) 
         <span className="preview-audience">{audienceLabel(program)}</span>
         <h3>{program.shortTitle}</h3>
         <p className="preview-meta">
-          {offering ? formatLabel[offering.format] : 'За запитом'} · {offering?.duration}
+          {offering ? formatLabel[offering.format] : 'За запитом'}
+          {offering?.duration && <> · {offering.duration}</>}
         </p>
         <span className="preview-price">
           {price !== undefined ? `від ${money(price)}` : 'За вашим запитом'}

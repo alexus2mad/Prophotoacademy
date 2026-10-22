@@ -3503,7 +3503,7 @@
     "heroImageId": "hero",
     "heroTitle": "Навчіться бачити більше",
     "heroDescription": "Фотографія, відео та контент для себе й брендів. Навчайтеся на телефон або камеру — онлайн та в Києві.",
-    "primaryProgramId": "program-instagram"
+    "primaryProgramId": "program-commercial"
   },
   "rooms": [
     {"id":"room-cyclorama","slug":"mainhall","bookingKey":"tsyklorama","title":"Циклорама","description":"Простора зала з великими вікнами та білою циклорамою. Для портретів, предметної зйомки, фото й відео.","imageId":"hub-cyclorama","galleryImageIds":["hub-cyclorama","hub-wide"],"pricePerHour":1200,"minimumMinutes":30,"area":80,"features":["Біла циклорама","Великі вікна","Фото та відео"],"equipmentNote":"Студія оновлює обладнання. Уточніть актуальне оснащення перед зйомкою.","sourceUrl":"https://www.prophotohub.com.ua/mainhall"},

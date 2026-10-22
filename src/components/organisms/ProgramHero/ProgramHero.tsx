@@ -7,10 +7,10 @@ export function ProgramHero({ program, offering, image, presentation }: ProgramH
   const { price, open, isCustom, status, inquiryTitle, buttonLabel, hasFutureStart } = presentation;
   return (
     <section className="program-hero">
-      <div>
-        <nav className="breadcrumb" aria-label="Шлях до сторінки">
-          <Link href="/courses">Усі програми</Link>
-        </nav>
+      <nav className="breadcrumb" aria-label="Шлях до сторінки">
+        <Link href="/courses">Усі програми</Link>
+      </nav>
+      <div className="program-hero-copy">
         <h1>{program.shortTitle}</h1>
         <p className="lead">{program.description}</p>
         {price !== undefined && (
@@ -72,7 +72,9 @@ export function ProgramHero({ program, offering, image, presentation }: ProgramH
         </div>
       </div>
       <figure className="program-hero-photo">
-        <Photo image={image} priority />
+        <div className="program-hero-image">
+          <Photo image={image} priority sizes="(max-width: 767px) calc(100vw - 40px), 48vw" />
+        </div>
         <figcaption>{image.credit}</figcaption>
       </figure>
     </section>

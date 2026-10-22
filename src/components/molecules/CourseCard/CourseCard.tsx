@@ -21,10 +21,7 @@ export function CourseCard({ program, offering, image }: CourseCardProps) {
           <h3>{program.shortTitle}</h3>
         </div>
         <div className="course-image">
-          <Photo
-            image={image}
-            sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1199px) 46vw, 30vw"
-          />
+          <Photo image={image} sizes="(max-width: 767px) calc(100vw - 40px), 46vw" />
           {!custom && (
             <span
               className={`badge ${status === 'limited' || status === 'open' ? 'badge-accent' : ''}`}

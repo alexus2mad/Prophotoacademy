@@ -33,7 +33,7 @@ export function AcademyHomeTemplate({ content }: AcademyHomeTemplateProps) {
       <PhotographyManifesto content={content} />
       <LearningSection content={content} />
       <div className="container editorial-section" data-editorial-reveal>
-        <PracticePreview content={content} programId={primary?.id} />
+        <PracticePreview content={content} />
       </div>
       <FounderSection content={content} />
       {!!testimonials.length && (
