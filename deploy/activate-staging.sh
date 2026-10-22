@@ -11,7 +11,7 @@ python3 /usr/local/lib/prophotoacademy/validate-staging.py
 [[ "$(realpath "$release")" == "$release" ]] || exit 2
 exec 9>/run/lock/academy-staging-deploy.lock
 flock -n 9 || exit 2
-previous="$(readlink -f "$base/current" 2>/dev/null || true)"
+previous=""; if [[ -L "$base/current" ]]; then previous="$(readlink -f "$base/current")"; fi
 ln -s "$release" "$base/current.next"
 mv -Tf "$base/current.next" "$base/current"
 systemctl restart prophotoacademy-staging

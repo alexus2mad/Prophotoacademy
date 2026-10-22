@@ -59,13 +59,15 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("previous", help="Full SHA of the previous verified deployment")
     parser.add_argument("--apply", action="store_true", help="Delete listed obsolete releases")
+    parser.add_argument("--environment", choices=("production", "staging"), default="production")
     args = parser.parse_args()
-    base = Path("/srv/prophotoacademy")
+    base = Path("/srv/prophotoacademy" if args.environment == "production" else "/srv/prophotoacademy-staging")
+    port = 3140 if args.environment == "production" else 3141
     active, rollback, obsolete = plan_cleanup(base, args.previous)
     print(json.dumps({"active": str(active), "rollback": str(rollback),
                       "remove": [str(path) for path in obsolete]}, indent=2), flush=True)
     if args.apply:
-        with urllib.request.urlopen("http://127.0.0.1:3140/api/health", timeout=10) as response:
+        with urllib.request.urlopen(f"http://127.0.0.1:{port}/api/health", timeout=10) as response:
             if response.status != 200 or json.load(response).get("ok") is not True:
                 raise RuntimeError("Health check failed; no releases removed")
         apply_cleanup(base, args.previous, active, obsolete)

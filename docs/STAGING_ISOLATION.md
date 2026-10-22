@@ -1,74 +1,133 @@
 # Separate staging and production
 
-## Provisioning status (22 October 2026)
+## Live topology — 23 October 2026 (Europe/Kyiv)
 
-The OVH server is 54.39.230.141 (SSH 58222). Production currently runs as
-prophotoacademy on loopback port 3140, under /srv/prophotoacademy, with its
-existing Supabase project bydmqmrbfjufsyhlayku and private Sanity learning data.
+Both apps run on OVH 54.39.230.141 (SSH 58222), with separate Linux accounts,
+processes, release directories, configuration, databases, authentication, private
+storage and CMS projects. They share the VPS kernel, disk, network and nginx;
+resource limits reduce interference but do not provide two-server availability.
 
-Prepared staging resources:
+| Setting | Production | Staging |
+| --- | --- | --- |
+| Domain | prophotoacademy.com.ua | staging.prophotoacademy.com.ua |
+| Linux account / service | prophotoacademy | prophotoacademy-staging |
+| Loopback port | 3140 | 3141 |
+| Release root | /srv/prophotoacademy | /srv/prophotoacademy-staging |
+| Environment file | /etc/prophotoacademy/runtime.env | /etc/prophotoacademy-staging/runtime.env |
+| Supabase project | bydmqmrbfjufsyhlayku | jxfyofiqhjmiguujrtdd (Ireland) |
+| Sanity project | sfzp6094 | p0dn7nmp |
+| Private learning dataset | learning | learning-staging |
+| Payments | wayforpay | mock (no charge, no grants) |
+| Application email / Make | Existing production services | No production keys or hooks |
+| Search indexing | Public site | noindex header |
 
-- Linux account and release root: prophotoacademy-staging, /srv/prophotoacademy-staging.
-- Service: prophotoacademy-staging.service, loopback port 3141, 75% CPU and 768 MB memory ceiling.
-- Root-owned configuration: /etc/prophotoacademy-staging/runtime.env (0600).
-- Supabase: jxfyofiqhjmiguujrtdd, ProPhotoAcademy Staging, Ireland.
-- Seven Academy migrations applied to a new empty database; no production users copied.
-- Restricted prophoto_academy_runtime role, RLS enabled, private learning storage bucket.
-- Sanity: p0dn7nmp, ProPhotoAcademy Staging, separate private learning-staging dataset.
-- New source archive is the currently deployed application revision 5e51620e28df954d79a7ea8651924b2dead58122.
-- Production source has local uncommitted email/schema edits; these are deliberately excluded.
+Runtime environment files are root-owned mode 0600. Staging cannot read
+production files or secrets. Its service has a 75% CPU quota and 768 MB memory
+ceiling. Both services start at boot. Staging has no email-dispatch timer.
 
-Activation is pending credential transfer approval and final configuration.
-The staging service is not running, and nginx still sends both domains to production.
-Do not describe staging as isolated for users until the routing cutover is verified.
+Production active: aa6f6aa4630be415d02d120732e5df795da6b5dd.
+Production rollback: 5e51620e28df954d79a7ea8651924b2dead58122.
+Staging first active release: 5e51620e28df954d79a7ea8651924b2dead58122.
+Staging has one release because this is its first deployment; retain the previous
+verified staging release after the next deployment.
+
+No production students, orders, progress or paid files were copied into staging.
+Its seven schema migrations, restricted runtime role and private learning bucket
+are initialized. Use synthetic development data.
+
+## Remaining staging login configuration
+
+Staging uses a fresh Supabase Auth project. Its Site URL is set correctly, but
+its free default email provider does not permit editing the OTP email templates.
+The application expects a code, while the provider's default template sends a
+sign-in link. A separate staging SMTP provider and code templates are still
+needed before ordinary email-code login/admin testing is ready. Do not copy
+production SMTP/Resend credentials into the staging app or disable authentication.
+No first staging administrator was created or pre-verified manually.
+
+Production Auth Site URL and both signup/sign-in email templates now point to
+the production domain; OTP placeholders and subjects were preserved. Saved
+templates under supabase/templates match these corrections. The generator takes
+an explicit origin argument; use https://prophotoacademy.com.ua for production.
 
 ## Staging deployment
 
-Install the reviewed scripts as root:
+Reviewed installed files:
 
-- validate-staging.py -> /usr/local/lib/prophotoacademy/validate-staging.py (0644).
-- build-staging.sh -> /usr/local/sbin/academy-build-staging (0755).
-- activate-staging.sh -> /usr/local/sbin/academy-activate-staging (0755).
+- deploy/validate-staging.py -> /usr/local/lib/prophotoacademy/validate-staging.py
+- deploy/build-staging.sh -> /usr/local/sbin/academy-build-staging
+- deploy/activate-staging.sh -> /usr/local/sbin/academy-activate-staging
+- deploy/prophotoacademy-staging.service -> /etc/systemd/system/prophotoacademy-staging.service
 
-Upload a git archive to /srv/prophotoacademy-staging/incoming/FULL_SHA.tar.gz.
-Then run:
+Upload a clean git archive to
+/srv/prophotoacademy-staging/incoming/FULL_SHA.tar.gz, then:
 
     sudo academy-build-staging FULL_SHA
     sudo academy-activate-staging FULL_SHA
 
-Build and activation are separate. Neither command switches production.
-Builds use an isolated systemd unit, a separate package cache, a 1 CPU quota,
-and an 1800 MB memory cap. Activation checks staging health and rolls back on failure.
-The service runs the environment guard before every startup. No production
-database reference, live payment mode, Make hook, Resend key, booking bridge key,
-or production Sanity project is permitted.
+These commands never activate production. Build and activation are separate.
+Builds use Webpack, a separate cache, a 1 CPU quota, 2200 MB RAM and 1536 MB
+swap ceiling. The initial Turbopack build hit its lower memory limit; the bounded
+Webpack build completed successfully. Completed/active releases cannot be
+rebuilt; incomplete failed builds may be retried. Both environment builders
+share /run/lock/academy-build.lock.
 
-The first staging version uses mock payments: no charges or course grants.
-No email-delivery timer is enabled for staging. Supabase Auth is independent;
-its own email settings must be configured separately. Use synthetic accounts.
+Activation checks health and rolls back on failure. The staging service runs
+the environment guard before every startup. It rejects production database
+references, privileged database users, TLS downgrades, live payments, production
+notification hooks, booking bridge secrets and the production CMS project.
 
-## Remaining cutover checks
+## Production deployment and integrations
 
-1. Store the approved staging-only server keys; verify the guard passes.
-2. Configure staging authentication origin and code-based emails.
-3. Build and health-check staging; verify its keys access only the staging projects.
-4. Build production with production public URLs and update its runtime origins.
-   Do not rebuild or overwrite the active release directory.
-5. Route staging nginx traffic to 3141. Preserve the old exact WayForPay callback
-   path as a proxy to production for previously issued payment requests.
-6. Move booking's signed bridge origin to production or preserve its exact
-   integration endpoint during transition. Do not pass its credential to staging.
-7. Verify authentication, mutation-origin checks, storage separation, payment modes,
-   public redirects, and noindex on staging. Keep production online.
-8. Retain the active release and previous verified rollback independently per
-   environment. The existing prune-releases.py is production-only; never run it
-   against staging by changing paths casually.
-9. Record verified activation and rollback revisions here.
+The legacy academy-build command now refuses to run; an environment must be selected explicitly.
 
-No automated production CI workflow currently exists in this repository.
-A future workflow must use separate deployment credentials and explicit production
-promotion; sharing the ubuntu administrative SSH key with staging CI would defeat
-the intended deployment isolation.
+Production builds are explicit:
 
-Both environments share the VPS kernel, disk, network and nginx. Resource limits
-reduce interference but do not provide the availability isolation of two servers.
+    sudo systemd-run --wait --pipe --collect -p CPUQuota=100% -p MemoryMax=2200M -p MemorySwapMax=1536M -p Nice=15 /usr/local/sbin/academy-build-production FULL_SHA /srv/prophotoacademy/incoming/FULL_SHA.tar.gz
+
+Build from a committed, tested archive. The production command refuses to
+overwrite an active/completed release. Verify a candidate on a spare loopback
+port with the production environment before switching current and restarting
+prophotoacademy.service. Keep the previous symlink and environment backup for
+rollback. A source rollback also needs production public URLs baked into its
+build; the retained pre-split build was originally compiled for staging.
+
+No automatic deployment workflow exists in this Academy repository. A push does
+not promote staging to production. Future CI must use separate scoped deployment
+credentials and explicit production promotion, not the ubuntu administrative key.
+
+Nginx's live template is deploy/nginx-environments.conf. The main domain proxies
+to 3140; staging proxies to 3141; www redirects to the main domain. The exact old
+staging /api/payments/wayforpay/callback still proxies to production for previously
+issued payment requests. Signatures remain verified by production; staging has
+no merchant secret. Newly issued production payments use the production callback.
+Old staging return-page links are not a general proxy to production.
+
+Booking remains on Hetzner 46.224.208.120. Its ACADEMY_ORIGIN is now
+https://prophotoacademy.com.ua, so CRM and admin links use the production Academy.
+Booking's privileges, cashbox and database were not migrated.
+
+## Retention and verification
+
+Use the installed guarded cleanup helper for the correct environment. Inspect
+the plan before adding --apply:
+
+    sudo python3 /usr/local/lib/prophotoacademy/prune-releases.py PREVIOUS_SHA --environment production
+    sudo python3 /usr/local/lib/prophotoacademy/prune-releases.py PREVIOUS_SHA --environment staging
+
+Keep the active and previous verified releases independently. Do not delete
+curricula, databases, runtime files or user assets. The obsolete production
+24d21f9 release was removed after verification.
+
+Verified: both builds, architecture (470 modules), TypeScript, all 174 application
+tests, and nine Linux deployment tests. The first CPU-limited test run had one
+sandbox database initialization exceed its 5-second timeout; the full suite passed
+with --maxWorkers=1 --testTimeout=15000 and unchanged assertions.
+
+Live checks passed for both domains: home and database health, unauthenticated
+admin API denial, own-origin requests accepted and cross-origin requests rejected.
+A synthetic staging database write was absent from production and then removed.
+Staging storage and CMS credentials verified against private staging resources;
+staging OS access to production files/secrets is denied. Browser checks confirmed
+each site's navigation remains on its own domain. www and booking return healthy
+responses; staging has noindex and the production homepage does not.

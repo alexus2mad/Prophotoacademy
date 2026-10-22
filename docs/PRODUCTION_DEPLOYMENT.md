@@ -1,5 +1,8 @@
 # Academy production deployment
 
+> Current topology and deployment commands: [Staging and production isolation](STAGING_ISOLATION.md). The historical provisioning notes below predate the OVH migration and domain split.
+
+
 The selected host is the existing Hetzner server at `46.224.208.120`, SSH port `58222`. The owner approved this change from Vercel on 11 October 2026. Academy runs as a separate service and OS account, alongside ps-booking. Its initial origin is `https://staging.prophotoacademy.com.ua`; the existing public marketing domain is not cut over by this setup.
 
 The owner explicitly requested a staging subdomain while the existing Webflow site stays operational. Keep the apex and `www` DNS records and existing mail routing unchanged. The staging HTTPS host sends `X-Robots-Tag: noindex, nofollow, noarchive` on every response. Payment-disabled test enrollment was activated on 12 October 2026; real WayForPay charging remains inactive.
