@@ -1,4 +1,4 @@
-import { Photo } from '@/components/atoms/Photo/Photo';
+import { PhotoStack } from '@/components/molecules/PhotoStack/PhotoStack';
 import { formatLabel, money, startingPrice } from '@/lib/format';
 import { ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
@@ -6,8 +6,12 @@ import type { AcademyHeroProps } from './types';
 
 export function AcademyHero({ primary, offering, heroImage, content }: AcademyHeroProps) {
   const cover = content.images.find((image) => image.id === 'editorial-strawberry') || heroImage;
-  const underwater =
-    content.images.find((image) => image.id === 'editorial-underwater') || heroImage;
+  const photographs = [
+    cover,
+    ...['editorial-underwater', 'visual', 'editorial-portrait'].flatMap(
+      (id) => content.images.find((image) => image.id === id) || [],
+    ),
+  ];
   const price = startingPrice(offering);
   return (
     <section className="academy-cover" aria-labelledby="hero-title">
@@ -20,12 +24,13 @@ export function AcademyHero({ primary, offering, heroImage, content }: AcademyHe
           Бачити <em>більше</em>
         </h1>
         <div className="cover-composition">
-          <figure className="cover-main">
-            <div className="cover-main-photo">
-              <Photo image={cover} priority sizes="(max-width: 767px) calc(100vw - 40px), 65vw" />
-            </div>
-            <figcaption>Фото: {cover.credit}</figcaption>
-          </figure>
+          <div className="cover-main">
+            <PhotoStack
+              images={photographs}
+              label="Фотографії академії"
+              sizes="(max-width: 767px) calc(100vw - 64px), 60vw"
+            />
+          </div>
           <div className="cover-statement">
             {primary ? (
               <>
@@ -57,12 +62,6 @@ export function AcademyHero({ primary, offering, heroImage, content }: AcademyHe
               </>
             )}
           </div>
-          <figure className="cover-inset">
-            <div className="cover-inset-photo">
-              <Photo image={underwater} sizes="(max-width: 767px) 42vw, 25vw" />
-            </div>
-            <figcaption>Світло. Колір. Твоя уява.</figcaption>
-          </figure>
         </div>
         <div className="cover-navigation">
           <a href="#courses" className="text-link">

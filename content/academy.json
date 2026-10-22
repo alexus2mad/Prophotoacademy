@@ -27,8 +27,29 @@
       ],
       "workIds": [
         "student-portrait",
+        "student-strawberry-flight",
+        "student-city-portrait",
+        "student-shoes",
+        "student-soft-portrait",
+        "student-coffee-orbit",
+        "student-backlit-portrait",
+        "student-red-tulips",
+        "student-colour-portrait",
         "student-pasta",
-        "student-shoes"
+        "student-glass-lines",
+        "student-silhouette-study",
+        "student-blue-facade",
+        "student-portrait-shadow",
+        "student-coffee-pause",
+        "student-wedding-field",
+        "student-city-rain",
+        "student-oyster-table",
+        "student-apple-layers",
+        "student-fresh-sneakers",
+        "student-pepper-pattern",
+        "student-chocolate-spice",
+        "student-pink-meringue",
+        "student-watch-light"
       ],
       "modules": [
         {
@@ -121,9 +142,30 @@
         "olena"
       ],
       "workIds": [
+        "student-lemon-flight",
+        "student-strawberry-flight",
+        "student-red-lipstick",
         "student-cherries",
+        "student-apple-layers",
+        "student-beauty-shadows",
         "student-perfume",
-        "student-splash"
+        "student-colour-play",
+        "student-water-skincare",
+        "student-splash",
+        "student-citrus-glasses",
+        "student-lipstick-study",
+        "student-olive-light",
+        "student-pineapple-drinks",
+        "student-watch-light",
+        "student-lipstick-balance",
+        "student-white-texture",
+        "student-chocolate-spice",
+        "student-glass-spark",
+        "student-berry-spoons",
+        "student-colour-sculpture",
+        "student-pepper-pattern",
+        "student-pink-meringue",
+        "student-cola-reflection"
       ],
       "modules": [
         {
@@ -212,7 +254,25 @@
       "workIds": [
         "student-pasta",
         "student-shoes",
-        "student-cherries"
+        "student-cherries",
+        "student-strawberry-flight",
+        "student-apple-layers",
+        "student-fresh-sneakers",
+        "student-olive-light",
+        "student-coffee-orbit",
+        "student-coffee-pause",
+        "student-colour-play",
+        "student-oyster-table",
+        "student-red-tulips",
+        "student-berry-spoons",
+        "student-citrus-glasses",
+        "student-glass-lines",
+        "student-city-rain",
+        "student-blue-facade",
+        "student-pepper-pattern",
+        "student-chocolate-spice",
+        "student-pink-meringue",
+        "student-watch-light"
       ],
       "modules": [
         {
@@ -797,6 +857,321 @@
       "driveId": "1KgpImv63s8QLAvE4hUQJR0BLCpOWBc2H",
       "width": 1200,
       "height": 1800
+    },
+    {
+      "id": "student-strawberry-flight",
+      "src": "/images/student-strawberry-flight.webp",
+      "alt": "Полуниці над чорною мискою на яскравому жовтому тлі",
+      "credit": "Робота студента академії",
+      "driveId": "1EHl5JOT3WM0EwtNlT2gr_xWxoSBPQOWS",
+      "width": 615,
+      "height": 1280
+    },
+    {
+      "id": "student-apple-layers",
+      "src": "/images/student-apple-layers.webp",
+      "alt": "Скибочки яблука зависли в повітрі на темному тлі",
+      "credit": "Робота студента академії",
+      "driveId": "1R-35zyoYO9JNZc6_tpPG4aQGNAnfpG-T",
+      "width": 1024,
+      "height": 1280
+    },
+    {
+      "id": "student-fresh-sneakers",
+      "src": "/images/student-fresh-sneakers.webp",
+      "alt": "Кросівки серед зелені та інгредієнтів на білому тлі",
+      "credit": "Робота студента академії",
+      "driveId": "16f8mea5mIuKsne3X8t3UFVE04dNBdWao",
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "id": "student-olive-light",
+      "src": "/images/student-olive-light.webp",
+      "alt": "Баночка оливок і пляшка олії в м’якому бічному світлі",
+      "credit": "Робота студента академії",
+      "driveId": "1ZOt78PrDPnviDN2bg5TusRYMPzQv49Dq",
+      "width": 960,
+      "height": 1280
+    },
+    {
+      "id": "student-coffee-orbit",
+      "src": "/images/student-coffee-orbit.webp",
+      "alt": "Біла чашка серед розсипаних кавових зерен",
+      "credit": "Робота студента академії",
+      "driveId": "1V7Liz_fVTPSAyt6Og4JsM7xNs9q9mXVt",
+      "width": 1280,
+      "height": 1280
+    },
+    {
+      "id": "student-coffee-pause",
+      "src": "/images/student-coffee-pause.webp",
+      "alt": "Кава, журнал і аксесуари на темно-зеленій поверхні",
+      "credit": "Робота студента академії",
+      "driveId": "1gKVg3cFX7THxbz_EPV45QEnJ-K1HnBbY",
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "id": "student-colour-play",
+      "src": "/images/student-colour-play.webp",
+      "alt": "Різнокольорові цукерки у пензлі на тлі яскравих бризок",
+      "credit": "Робота студента академії",
+      "driveId": "1PoqKZb156aKYsj_1Z6BSal5zulCIDFpH",
+      "width": 1024,
+      "height": 1279
+    },
+    {
+      "id": "student-oyster-table",
+      "src": "/images/student-oyster-table.webp",
+      "alt": "Руки над тарілкою устриць у приглушеному світлі",
+      "credit": "Робота студента академії",
+      "driveId": "19GICDLVNt-p_pkloCCgdsqes01Ff5-zT",
+      "width": 719,
+      "height": 1280
+    },
+    {
+      "id": "student-red-tulips",
+      "src": "/images/student-red-tulips.webp",
+      "alt": "Червоні тюльпани в насиченій зелені",
+      "credit": "Робота студента академії",
+      "driveId": "181OTbQzl11a_I3hYyIe8AXK89R-T-w7b",
+      "width": 960,
+      "height": 1280
+    },
+    {
+      "id": "student-berry-spoons",
+      "src": "/images/student-berry-spoons.webp",
+      "alt": "Ряд металевих ложок із ягодами та гранатом",
+      "credit": "Робота студента академії",
+      "driveId": "1voYDPEaORPq2wV-ovJ6QRArQh23W0PrJ",
+      "width": 975,
+      "height": 1280
+    },
+    {
+      "id": "student-citrus-glasses",
+      "src": "/images/student-citrus-glasses.webp",
+      "alt": "Два келихи з жовтими напоями на тлі кола світла",
+      "credit": "Робота студента академії",
+      "driveId": "1Xw8WihrcWJ8pVIGEzrc8baythb2yT8sr",
+      "width": 853,
+      "height": 1280
+    },
+    {
+      "id": "student-glass-lines",
+      "src": "/images/student-glass-lines.webp",
+      "alt": "Скляний дах із синіми відблисками та геометрією балок",
+      "credit": "Робота студента академії",
+      "driveId": "1q5aT7IKziO62oA9tKukKr5Re_x3xgUg0",
+      "width": 962,
+      "height": 1280
+    },
+    {
+      "id": "student-city-rain",
+      "src": "/images/student-city-rain.webp",
+      "alt": "Вечірні вогні міста крізь краплі на склі",
+      "credit": "Робота студента академії",
+      "driveId": "10BzwAJ8raFYzp28jf_8zAAO0cMY6934G",
+      "width": 840,
+      "height": 1280
+    },
+    {
+      "id": "student-blue-facade",
+      "src": "/images/student-blue-facade.webp",
+      "alt": "Блакитний фасад із червоними геометричними деталями",
+      "credit": "Робота студента академії",
+      "driveId": "1WBQPHCh9moGmr5tY4SCrFdDN2Xtul9AE",
+      "width": 694,
+      "height": 1099
+    },
+    {
+      "id": "student-pepper-pattern",
+      "src": "/images/student-pepper-pattern.webp",
+      "alt": "Червоні перці й томати утворюють візерунок на жовтому тлі",
+      "credit": "Робота студента академії",
+      "driveId": "11HJqZreetQR52Zs-plmi1SsAiiX3SCb2",
+      "width": 1158,
+      "height": 1144
+    },
+    {
+      "id": "student-chocolate-spice",
+      "src": "/images/student-chocolate-spice.webp",
+      "alt": "Плитка шоколаду, кориця, мигдаль і бадьян на теплому тлі",
+      "credit": "Робота студента академії",
+      "driveId": "18APaBEaZ9dlwYnY8Jj9vZC2NKcU5ReWT",
+      "width": 1280,
+      "height": 1280
+    },
+    {
+      "id": "student-pink-meringue",
+      "src": "/images/student-pink-meringue.webp",
+      "alt": "Рожеві солодощі, віничок і скляна креманка на темному тлі",
+      "credit": "Робота студента академії",
+      "driveId": "1pcrCrimZtabMeKEyVTyzFWaYFrECFwtf",
+      "width": 891,
+      "height": 1280
+    },
+    {
+      "id": "student-watch-light",
+      "src": "/images/student-watch-light.webp",
+      "alt": "Наручний годинник у вузькому промені світла на чорному тлі",
+      "credit": "Робота студента академії",
+      "driveId": "17f9cRLlmZIuZ7J8vk8D6HMMdemxJKk6I",
+      "width": 1280,
+      "height": 1280
+    },
+    {
+      "id": "student-red-lipstick",
+      "src": "/images/student-red-lipstick.webp",
+      "alt": "Червона помада у світлі на темно-червоному тлі",
+      "credit": "Робота студента академії",
+      "driveId": "1vQ-f4ubcXjLdDD7WmzWADJrN0CmSHoIq",
+      "width": 602,
+      "height": 796
+    },
+    {
+      "id": "student-pineapple-drinks",
+      "src": "/images/student-pineapple-drinks.webp",
+      "alt": "Жовті напої у келихах поруч з ананасом",
+      "credit": "Робота студента академії",
+      "driveId": "1WvJ4zeEhhGBIFLw_pCjqvJ9GqH4j3k4S",
+      "width": 602,
+      "height": 782
+    },
+    {
+      "id": "student-colour-sculpture",
+      "src": "/images/student-colour-sculpture.webp",
+      "alt": "Предмети косметики в червоному та фіолетовому світлі",
+      "credit": "Робота студента академії",
+      "driveId": "1C6hOvKGRbIoZtSbaHk1JAtDxxDGAAgQU",
+      "width": 603,
+      "height": 853
+    },
+    {
+      "id": "student-lipstick-study",
+      "src": "/images/student-lipstick-study.webp",
+      "alt": "Композиція з помад і пакування на персиковому тлі",
+      "credit": "Робота студента академії",
+      "driveId": "1TeXIEjJki0ieuzFueoFBSiGU2nOONeU3",
+      "width": 1036,
+      "height": 1465
+    },
+    {
+      "id": "student-beauty-shadows",
+      "src": "/images/student-beauty-shadows.webp",
+      "alt": "Косметичні засоби з чіткими тінями на сірому тлі",
+      "credit": "Робота студента академії",
+      "driveId": "1E_rPLsQnjfxNcMLRxg0qWwqQmaSl4uwA",
+      "width": 1112,
+      "height": 1456
+    },
+    {
+      "id": "student-glass-spark",
+      "src": "/images/student-glass-spark.webp",
+      "alt": "Скляний флакон з іскристими деталями на чорному тлі",
+      "credit": "Робота студента академії",
+      "driveId": "1IaaOltvxKBeHJjEh0_Dl2rTM0Pv6ZIKl",
+      "width": 1231,
+      "height": 1471
+    },
+    {
+      "id": "student-cola-reflection",
+      "src": "/images/student-cola-reflection.webp",
+      "alt": "Пляшка напою й кубики льоду з відображенням на чорній поверхні",
+      "credit": "Робота студента академії",
+      "driveId": "1s9aV-4RXqzaIROulZ69cO_8Ru2O19IQl",
+      "width": 853,
+      "height": 1280
+    },
+    {
+      "id": "student-lipstick-balance",
+      "src": "/images/student-lipstick-balance.webp",
+      "alt": "Червона помада на білих каменях",
+      "credit": "Робота студента академії",
+      "driveId": "1s63Q01ALq9CN9DILKHrMwhDaH9_l1du2",
+      "width": 853,
+      "height": 1280
+    },
+    {
+      "id": "student-white-texture",
+      "src": "/images/student-white-texture.webp",
+      "alt": "Баночка косметики на білих каменях у м’якому світлі",
+      "credit": "Робота студента академії",
+      "driveId": "17XqC5HSmNGpiH2JaqWGmHAOAoAy_fd_Q",
+      "width": 853,
+      "height": 1280
+    },
+    {
+      "id": "student-water-skincare",
+      "src": "/images/student-water-skincare.webp",
+      "alt": "Світлий флакон косметики у зеленій воді",
+      "credit": "Робота студента академії",
+      "driveId": "1foBAxWIT-aLIfB7Wxp5rRPF3OiwSA6Mo",
+      "width": 1080,
+      "height": 1329
+    },
+    {
+      "id": "student-city-portrait",
+      "src": "/images/student-city-portrait.webp",
+      "alt": "Жінка в сукні та сонцезахисних окулярах на міській вулиці",
+      "credit": "Робота студента академії",
+      "driveId": "1rUnp2NTammfV5PHoDrexFcPSRgonxTx0",
+      "width": 1080,
+      "height": 1440
+    },
+    {
+      "id": "student-silhouette-study",
+      "src": "/images/student-silhouette-study.webp",
+      "alt": "Чорно-білий чоловічий портрет у контровому світлі",
+      "credit": "Робота студента академії",
+      "driveId": "1Ji1tny88vSnnY2Lm_ipTWylKqoQ5yhWP",
+      "width": 1080,
+      "height": 1440
+    },
+    {
+      "id": "student-soft-portrait",
+      "src": "/images/student-soft-portrait.webp",
+      "alt": "Кольоровий жіночий портрет із м’яким освітленням",
+      "credit": "Робота студента академії",
+      "driveId": "1nd8C85qzUklnL1tE-5N-3HKlu4DUZ--X",
+      "width": 1080,
+      "height": 1440
+    },
+    {
+      "id": "student-backlit-portrait",
+      "src": "/images/student-backlit-portrait.webp",
+      "alt": "Портрет жінки з кучерявим волоссям у контровому світлі",
+      "credit": "Робота студента академії",
+      "driveId": "1s61XIvYw8SCcup703nyqRmAQ5iTU78M_",
+      "width": 1080,
+      "height": 1437
+    },
+    {
+      "id": "student-colour-portrait",
+      "src": "/images/student-colour-portrait.webp",
+      "alt": "Чоловічий портрет у червоному й зеленому світлі",
+      "credit": "Робота студента академії",
+      "driveId": "1IvOKihnmSCiI1b2LLGFcOraVTAou1bcm",
+      "width": 1080,
+      "height": 813
+    },
+    {
+      "id": "student-wedding-field",
+      "src": "/images/student-wedding-field.webp",
+      "alt": "Весільна пара в квітучому полі під хмарним небом",
+      "credit": "Робота студента академії",
+      "driveId": "1AkqByn_3TAOHhfUOJgznl9dAUvXdofg9",
+      "width": 1080,
+      "height": 1350
+    },
+    {
+      "id": "student-portrait-shadow",
+      "src": "/images/student-portrait-shadow.webp",
+      "alt": "Чорно-білий жіночий портрет із візерунком тіней на обличчі",
+      "credit": "Робота студента академії",
+      "driveId": "1RwOgwNJ-1VMEmuqtX6_IHn2mDY3kPjVD",
+      "width": 964,
+      "height": 1205
     }
   ],
   "instructors": [
@@ -817,15 +1192,75 @@
   ],
   "works": [
     {
+      "id": "student-strawberry-flight",
+      "title": "Полунична невагомість",
+      "imageId": "student-strawberry-flight",
+      "device": "phone"
+    },
+    {
+      "id": "student-portrait",
+      "title": "Портрет і світло",
+      "imageId": "student-portrait",
+      "device": "camera"
+    },
+    {
+      "id": "student-lemon-flight",
+      "title": "Лимонна невагомість",
+      "imageId": "commercial",
+      "device": "camera"
+    },
+    {
+      "id": "student-colour-portrait",
+      "title": "Портрет у кольорі",
+      "imageId": "student-colour-portrait",
+      "device": "camera"
+    },
+    {
       "id": "student-cherries",
       "title": "Предметна композиція",
       "imageId": "student-cherries",
       "device": "camera"
     },
     {
-      "id": "student-portrait",
-      "title": "Портрет і світло",
-      "imageId": "student-portrait",
+      "id": "student-coffee-orbit",
+      "title": "Кавова орбіта",
+      "imageId": "student-coffee-orbit",
+      "device": "phone"
+    },
+    {
+      "id": "student-city-rain",
+      "title": "Місто крізь дощ",
+      "imageId": "student-city-rain",
+      "device": "phone"
+    },
+    {
+      "id": "student-water-skincare",
+      "title": "Дотик води",
+      "imageId": "student-water-skincare",
+      "device": "camera"
+    },
+    {
+      "id": "student-pink-meringue",
+      "title": "Рожевий акцент",
+      "imageId": "student-pink-meringue",
+      "device": "phone"
+    },
+    {
+      "id": "student-wedding-field",
+      "title": "Двоє під небом",
+      "imageId": "student-wedding-field",
+      "device": "camera"
+    },
+    {
+      "id": "student-pepper-pattern",
+      "title": "Гострий ритм",
+      "imageId": "student-pepper-pattern",
+      "device": "phone"
+    },
+    {
+      "id": "student-perfume",
+      "title": "Фактура й колір",
+      "imageId": "student-perfume",
       "device": "camera"
     },
     {
@@ -847,9 +1282,165 @@
       "device": "phone"
     },
     {
-      "id": "student-perfume",
-      "title": "Фактура й колір",
-      "imageId": "student-perfume",
+      "id": "student-apple-layers",
+      "title": "Ритм яблука",
+      "imageId": "student-apple-layers",
+      "device": "phone"
+    },
+    {
+      "id": "student-fresh-sneakers",
+      "title": "Свіжий погляд",
+      "imageId": "student-fresh-sneakers",
+      "device": "phone"
+    },
+    {
+      "id": "student-olive-light",
+      "title": "Оливкове світло",
+      "imageId": "student-olive-light",
+      "device": "phone"
+    },
+    {
+      "id": "student-coffee-pause",
+      "title": "Пауза на каву",
+      "imageId": "student-coffee-pause",
+      "device": "phone"
+    },
+    {
+      "id": "student-colour-play",
+      "title": "Гра кольору",
+      "imageId": "student-colour-play",
+      "device": "phone"
+    },
+    {
+      "id": "student-oyster-table",
+      "title": "За столом",
+      "imageId": "student-oyster-table",
+      "device": "phone"
+    },
+    {
+      "id": "student-red-tulips",
+      "title": "Червоний серед зеленого",
+      "imageId": "student-red-tulips",
+      "device": "phone"
+    },
+    {
+      "id": "student-berry-spoons",
+      "title": "Ягідний ритм",
+      "imageId": "student-berry-spoons",
+      "device": "phone"
+    },
+    {
+      "id": "student-citrus-glasses",
+      "title": "Цитрусовий дует",
+      "imageId": "student-citrus-glasses",
+      "device": "phone"
+    },
+    {
+      "id": "student-glass-lines",
+      "title": "Лінії світла",
+      "imageId": "student-glass-lines",
+      "device": "phone"
+    },
+    {
+      "id": "student-blue-facade",
+      "title": "Геометрія міста",
+      "imageId": "student-blue-facade",
+      "device": "phone"
+    },
+    {
+      "id": "student-chocolate-spice",
+      "title": "Шоколад і спеції",
+      "imageId": "student-chocolate-spice",
+      "device": "phone"
+    },
+    {
+      "id": "student-watch-light",
+      "title": "Час у світлі",
+      "imageId": "student-watch-light",
+      "device": "phone"
+    },
+    {
+      "id": "student-red-lipstick",
+      "title": "Червоне на червоному",
+      "imageId": "student-red-lipstick",
+      "device": "camera"
+    },
+    {
+      "id": "student-pineapple-drinks",
+      "title": "Тропічне світло",
+      "imageId": "student-pineapple-drinks",
+      "device": "camera"
+    },
+    {
+      "id": "student-colour-sculpture",
+      "title": "Скульптура кольору",
+      "imageId": "student-colour-sculpture",
+      "device": "camera"
+    },
+    {
+      "id": "student-lipstick-study",
+      "title": "Етюд із помадою",
+      "imageId": "student-lipstick-study",
+      "device": "camera"
+    },
+    {
+      "id": "student-beauty-shadows",
+      "title": "Світло й догляд",
+      "imageId": "student-beauty-shadows",
+      "device": "camera"
+    },
+    {
+      "id": "student-glass-spark",
+      "title": "Іскри у склі",
+      "imageId": "student-glass-spark",
+      "device": "camera"
+    },
+    {
+      "id": "student-cola-reflection",
+      "title": "Червоний рефлекс",
+      "imageId": "student-cola-reflection",
+      "device": "camera"
+    },
+    {
+      "id": "student-lipstick-balance",
+      "title": "Баланс форми",
+      "imageId": "student-lipstick-balance",
+      "device": "camera"
+    },
+    {
+      "id": "student-white-texture",
+      "title": "Біла фактура",
+      "imageId": "student-white-texture",
+      "device": "camera"
+    },
+    {
+      "id": "student-city-portrait",
+      "title": "Портрет у місті",
+      "imageId": "student-city-portrait",
+      "device": "camera"
+    },
+    {
+      "id": "student-silhouette-study",
+      "title": "Мова силуету",
+      "imageId": "student-silhouette-study",
+      "device": "camera"
+    },
+    {
+      "id": "student-soft-portrait",
+      "title": "М’яке світло",
+      "imageId": "student-soft-portrait",
+      "device": "camera"
+    },
+    {
+      "id": "student-backlit-portrait",
+      "title": "На межі світла",
+      "imageId": "student-backlit-portrait",
+      "device": "camera"
+    },
+    {
+      "id": "student-portrait-shadow",
+      "title": "Малюнок тіні",
+      "imageId": "student-portrait-shadow",
       "device": "camera"
     }
   ],
@@ -3506,10 +4097,94 @@
     "primaryProgramId": "program-commercial"
   },
   "rooms": [
-    {"id":"room-cyclorama","slug":"mainhall","bookingKey":"tsyklorama","title":"Циклорама","description":"Простора зала з великими вікнами та білою циклорамою. Для портретів, предметної зйомки, фото й відео.","imageId":"hub-cyclorama","galleryImageIds":["hub-cyclorama","hub-wide"],"pricePerHour":1200,"minimumMinutes":30,"area":80,"features":["Біла циклорама","Великі вікна","Фото та відео"],"equipmentNote":"Студія оновлює обладнання. Уточніть актуальне оснащення перед зйомкою.","sourceUrl":"https://www.prophotohub.com.ua/mainhall"},
-    {"id":"room-podcast","slug":"smallhall","bookingKey":"podcast","title":"Подкаст-зала","description":"Простір для аудіо, відео та розмовного контенту. Подкаст-зона проходить переобладнання.","imageId":"hub-podcast","galleryImageIds":["hub-podcast"],"pricePerHour":1000,"minimumMinutes":30,"features":["Розмовний контент","Аудіо та відео"],"equipmentNote":"Триває переобладнання. Підтвердьте готовність зали й актуальне оснащення з командою.","sourceUrl":"https://www.prophotohub.com.ua/smallhall"},
-    {"id":"room-makeup","slug":"makeuproom","bookingKey":"grymerna","title":"Гримерна","description":"Окремий простір, щоб підготувати образ до зйомки. Дзеркала з підсвіткою та робочі місця.","imageId":"hub-makeup","galleryImageIds":["hub-makeup"],"pricePerHour":200,"minimumMinutes":60,"features":["Дзеркала з підсвіткою","Підготовка образу"],"sourceUrl":"https://www.prophotohub.com.ua/makeuproom"}
+    {
+      "id": "room-cyclorama",
+      "slug": "mainhall",
+      "bookingKey": "tsyklorama",
+      "title": "Циклорама",
+      "description": "Простора зала з великими вікнами та білою циклорамою. Для портретів, предметної зйомки, фото й відео.",
+      "imageId": "hub-cyclorama",
+      "galleryImageIds": [
+        "hub-cyclorama",
+        "hub-wide"
+      ],
+      "pricePerHour": 1200,
+      "minimumMinutes": 30,
+      "area": 80,
+      "features": [
+        "Біла циклорама",
+        "Великі вікна",
+        "Фото та відео"
+      ],
+      "equipmentNote": "Студія оновлює обладнання. Уточніть актуальне оснащення перед зйомкою.",
+      "sourceUrl": "https://www.prophotohub.com.ua/mainhall"
+    },
+    {
+      "id": "room-podcast",
+      "slug": "smallhall",
+      "bookingKey": "podcast",
+      "title": "Подкаст-зала",
+      "description": "Простір для аудіо, відео та розмовного контенту. Подкаст-зона проходить переобладнання.",
+      "imageId": "hub-podcast",
+      "galleryImageIds": [
+        "hub-podcast"
+      ],
+      "pricePerHour": 1000,
+      "minimumMinutes": 30,
+      "features": [
+        "Розмовний контент",
+        "Аудіо та відео"
+      ],
+      "equipmentNote": "Триває переобладнання. Підтвердьте готовність зали й актуальне оснащення з командою.",
+      "sourceUrl": "https://www.prophotohub.com.ua/smallhall"
+    },
+    {
+      "id": "room-makeup",
+      "slug": "makeuproom",
+      "bookingKey": "grymerna",
+      "title": "Гримерна",
+      "description": "Окремий простір, щоб підготувати образ до зйомки. Дзеркала з підсвіткою та робочі місця.",
+      "imageId": "hub-makeup",
+      "galleryImageIds": [
+        "hub-makeup"
+      ],
+      "pricePerHour": 200,
+      "minimumMinutes": 60,
+      "features": [
+        "Дзеркала з підсвіткою",
+        "Підготовка образу"
+      ],
+      "sourceUrl": "https://www.prophotohub.com.ua/makeuproom"
+    }
   ],
-  "hub": {"name":"ProPhoto Hub","phone":"+380964515010","email":"fotostudio.mail@gmail.com","address":"Київ, вул. Саксаганського, 24/25","arrival":"2 під’їзд, 2 поверх","mapsUrl":"https://maps.app.goo.gl/c4eCZFJwDdYnUzbf8","instagram":"https://www.instagram.com/prophoto.hub_/","hours":"10:00–20:00","heroTitle":"Простір для ваших зйомок","heroDescription":"Циклорама, подкаст-зала та гримерна в центрі Києва. Оберіть простір і перевірте вільний час.","heroImageId":"hub-cyclorama","bookingUrl":"https://booking.plainstack.net/embed","privacyUrl":"https://www.prophotoacademy.com.ua/privacy-policy"},
-  "practiceSessions": [{"id":"practice-content-hub","slug":"content-practice","title":"Контент-практика в ProPhoto Hub","description":"Застосуйте знання з курсу на власній зйомці. Плануємо практику з підтримкою викладача для студентів і випускників у Києві.","programIds":["program-instagram"],"roomId":"room-cyclorama","imageId":"hub-cyclorama","status":"planning","verified":false}]
+  "hub": {
+    "name": "ProPhoto Hub",
+    "phone": "+380964515010",
+    "email": "fotostudio.mail@gmail.com",
+    "address": "Київ, вул. Саксаганського, 24/25",
+    "arrival": "2 під’їзд, 2 поверх",
+    "mapsUrl": "https://maps.app.goo.gl/c4eCZFJwDdYnUzbf8",
+    "instagram": "https://www.instagram.com/prophoto.hub_/",
+    "hours": "10:00–20:00",
+    "heroTitle": "Простір для ваших зйомок",
+    "heroDescription": "Циклорама, подкаст-зала та гримерна в центрі Києва. Оберіть простір і перевірте вільний час.",
+    "heroImageId": "hub-cyclorama",
+    "bookingUrl": "https://booking.plainstack.net/embed",
+    "privacyUrl": "https://www.prophotoacademy.com.ua/privacy-policy"
+  },
+  "practiceSessions": [
+    {
+      "id": "practice-content-hub",
+      "slug": "content-practice",
+      "title": "Контент-практика в ProPhoto Hub",
+      "description": "Застосуйте знання з курсу на власній зйомці. Плануємо практику з підтримкою викладача для студентів і випускників у Києві.",
+      "programIds": [
+        "program-instagram"
+      ],
+      "roomId": "room-cyclorama",
+      "imageId": "hub-cyclorama",
+      "status": "planning",
+      "verified": false
+    }
+  ]
 }

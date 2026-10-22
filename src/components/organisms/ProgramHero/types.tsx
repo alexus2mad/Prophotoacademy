@@ -3,6 +3,6 @@ import type { ProgramPresentation } from '@/lib/programs/types';
 export type ProgramHeroProps = {
   program: Program;
   offering?: Offering;
-  image: ImageAsset;
+  images: ImageAsset[];
   presentation: ProgramPresentation;
 };

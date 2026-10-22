@@ -12,6 +12,14 @@ import { money } from '@/lib/format';
 import { programPresentation } from '@/lib/programs/selectors';
 import type { ProgramTemplateProps } from './types';
 export function ProgramTemplate({ program, content, enrollment }: ProgramTemplateProps) {
+  const works = program.workIds.flatMap((id) => content.works.find((work) => work.id === id) || []);
+  const heroImage = findImage(content, program.imageId);
+  const heroImages = [
+    heroImage,
+    ...works
+      .map((work) => findImage(content, work.imageId))
+      .filter((image) => image.id !== heroImage.id),
+  ].slice(0, 5);
   const offering = findOffering(content, program.id);
   const presentation = programPresentation(program, offering);
   if (enrollment) {
@@ -35,7 +43,7 @@ export function ProgramTemplate({ program, content, enrollment }: ProgramTemplat
         <ProgramHero
           program={program}
           offering={offering}
-          image={findImage(content, program.imageId)}
+          images={heroImages}
           presentation={presentation}
         />
         {!!offering?.packages.length && (
@@ -46,16 +54,6 @@ export function ProgramTemplate({ program, content, enrollment }: ProgramTemplat
             <ProgramOverview program={program} />
             <PracticePreview content={content} programId={program.id} compact />
             <ProgramInstructors program={program} content={content} />
-            {!!program.workIds.length && (
-              <section>
-                <h2>Роботи студентів</h2>
-                <Gallery
-                  works={content.works.filter((w) => program.workIds.includes(w.id))}
-                  images={content.images}
-                />
-              </section>
-            )}
-            {!!program.faqs.length && <ProgramFaqs program={program} />}
           </div>
           <aside className="enrollment-panel" aria-label="Запис на навчання">
             <h3>{program.shortTitle}</h3>
@@ -73,6 +71,29 @@ export function ProgramTemplate({ program, content, enrollment }: ProgramTemplat
             )}
           </aside>
         </div>
+        {!!works.length && (
+          <section
+            className="program-student-work student-exhibition"
+            id="student-works"
+            aria-labelledby="student-works-title"
+          >
+            <div className="section-heading">
+              <div>
+                <p className="eyebrow">Роботи студентів академії</p>
+                <h2 id="student-works-title">
+                  Коли знання <em>стають кадром</em>
+                </h2>
+              </div>
+              <p className="section-side">На телефон і камеру</p>
+            </div>
+            <Gallery works={works} images={content.images} />
+          </section>
+        )}
+        {!!program.faqs.length && (
+          <div className="program-faq-section">
+            <ProgramFaqs program={program} />
+          </div>
+        )}
       </div>
       <MobileEnrollment price={price}>
         {open ? (

@@ -19,7 +19,7 @@ export function StudentExhibition({ content }: StudentExhibitionProps) {
           </Link>
         </div>
       </div>
-      <Gallery works={content.works} images={content.images} />
+      <Gallery works={content.works.slice(0, 12)} images={content.images} />
     </section>
   );
 }

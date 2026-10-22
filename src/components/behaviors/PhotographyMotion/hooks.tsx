@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import type { MotionEntry } from './types';
 
 const frames =
-  '.exhibition-hero,.program-hero-image,.learning-photo,.instructor-photo,.course-image,.preview-photo,.work-image,.hub-opening-photo,.room-photo,.hub-detail-opening>figure,.practice-preview-photo';
+  '.exhibition-hero,.learning-photo,.instructor-photo,.course-image,.preview-photo,.work-image,.hub-opening-photo,.room-photo,.hub-detail-opening>figure,.practice-preview-photo';
 const clamp = (value: number) => Math.max(-1, Math.min(1, value));
 function mountMotion() {
   const entries = new Map<HTMLElement, MotionEntry>();

@@ -9,7 +9,7 @@ export function WorkCard({ work, image: img, onOpen }: WorkCardProps) {
         className="work-image"
         aria-label={`Відкрити роботу: ${work.title}`}
       >
-        <Photo image={img} sizes="(max-width: 767px) 87vw, (max-width: 1199px) 43vw, 29vw" />
+        <Photo image={img} sizes="(max-width: 767px) 44vw, 30vw" />
         <span className="work-open" aria-hidden="true">
           <Maximize2 size={16} />
         </span>
