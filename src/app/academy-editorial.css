@@ -978,3 +978,20 @@
 .academy-editorial input[type='checkbox'] {
   accent-color: #626e00;
 }
+/* Display sizes must not inherit the old fixed pixel line heights. */
+.academy-editorial h2 {
+  line-height: 1.12;
+}
+.academy-editorial .dialog h2 {
+  font-size: 32px;
+  line-height: 1.15;
+}
+@media (max-width: 380px) {
+  .academy-editorial .header-inner > .brand-link .brand-logo {
+    width: 90px;
+  }
+  .academy-editorial .header-actions .button {
+    padding-inline: 10px;
+    font-size: 10px;
+  }
+}
