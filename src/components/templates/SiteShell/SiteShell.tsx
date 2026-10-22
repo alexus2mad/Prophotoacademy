@@ -6,7 +6,7 @@ import { InquiryDialog } from '@/components/organisms/InquiryDialog/InquiryDialo
 import type { SiteShellProps } from './types';
 export function SiteShell(props: SiteShellProps) {
   return (
-    <>
+    <div className={props.site === 'academy' ? 'academy-editorial' : undefined}>
       <EcosystemMeasurement site={props.site} />
       <Header site={props.site} />
       <main id="main">{props.children}</main>
@@ -19,6 +19,6 @@ export function SiteShell(props: SiteShellProps) {
         site={props.site}
         privacyUrl={props.site === 'hub' ? props.settings.privacyUrl : undefined}
       />
-    </>
+    </div>
   );
 }

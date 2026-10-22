@@ -12,9 +12,12 @@ export function CatalogTemplate({
 }: CatalogTemplateProps) {
   return (
     <>
-      <div className="container">
+      <div className="container editorial-catalog">
         <div className="page-heading catalog-heading">
-          <h1>Усі програми</h1>
+          <p className="eyebrow">Курси Pro Photo Academy</p>
+          <h1>
+            Знайди свій <em>фокус</em>
+          </h1>
           <p className="lead muted">Курси, класи та індивідуальні формати навчання.</p>
         </div>
         <CatalogFilters key={JSON.stringify(filters)} {...filters} count={programs.length} />

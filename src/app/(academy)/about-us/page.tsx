@@ -12,9 +12,14 @@ export default async function About() {
   const content = await getContent();
   return (
     <>
-      <div className="container">
+      <div className="container academy-about-page">
         <div className="page-heading">
-          <h1>Про академію</h1>
+          <p className="eyebrow">Про академію</p>
+          <h1>
+            Закохані
+            <br />
+            <em>у фотографію</em>
+          </h1>
         </div>
         <section className="about-intro">
           <Photo image={findImage(content, 'workshop')} />

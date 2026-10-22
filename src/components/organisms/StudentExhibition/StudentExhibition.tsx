@@ -6,7 +6,12 @@ export function StudentExhibition({ content }: StudentExhibitionProps) {
     <section className="editorial-section student-exhibition container" data-editorial-reveal>
       <div className="section-heading">
         <div>
-          <h2>Роботи студентів</h2>
+          <p className="eyebrow">Роботи наших студентів</p>
+          <h2>
+            Наступний кадр
+            <br />
+            <em>може бути твоїм</em>
+          </h2>
         </div>
         <div className="section-side">
           <Link href="/student-work" className="text-link">

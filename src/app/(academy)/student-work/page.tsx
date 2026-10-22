@@ -12,9 +12,14 @@ export default async function Work() {
   const content = await getContent();
   return (
     <>
-      <div className="container">
+      <div className="container student-gallery-page">
         <div className="page-heading">
-          <h1>Роботи студентів</h1>
+          <p className="eyebrow">Виставка Pro Photo Academy</p>
+          <h1>
+            Вони вже
+            <br />
+            <em>бачать інакше</em>
+          </h1>
           <p className="lead muted">
             Фотографії на телефон і камеру, створені під час навчання в академії.
           </p>

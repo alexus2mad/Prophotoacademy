@@ -3,5 +3,5 @@ export type AcademyHeroProps = {
   primary?: Program;
   offering?: Offering;
   heroImage: ImageAsset;
-  content: Pick<AcademyContent, 'settings'>;
+  content: Pick<AcademyContent, 'settings' | 'images'>;
 };

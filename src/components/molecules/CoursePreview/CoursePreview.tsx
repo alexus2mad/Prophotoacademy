@@ -7,7 +7,7 @@ export function CoursePreview({ program, offering, image }: CoursePreviewProps) 
   return (
     <Link href={`/${program.slug}`} className="course-preview">
       <div className="preview-photo">
-        <Photo image={image} sizes="110px" />
+        <Photo image={image} sizes="(max-width: 767px) 90vw, 32vw" />
       </div>
       <div className="preview-copy">
         <span className="preview-audience">{audienceLabel(program)}</span>

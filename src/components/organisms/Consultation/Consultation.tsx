@@ -6,7 +6,12 @@ export function Consultation() {
     <section className="consultation-field">
       <div className="container consultation">
         <div>
-          <h2>Допоможемо обрати програму</h2>
+          <p className="eyebrow">Твоя історія починається з кадру</p>
+          <h2>
+            Дозволь собі
+            <br />
+            <em>більше</em>
+          </h2>
           <p>
             Розкажіть, що хочете створювати.
             <br />

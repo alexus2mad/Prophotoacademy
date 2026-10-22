@@ -770,6 +770,33 @@
       "sourceUrl": "https://static.wixstatic.com/media/30b323_dc466e5baafb4c30a8cce4777dacd037~mv2.jpg",
       "width": 1080,
       "height": 720
+    },
+    {
+      "id": "editorial-strawberry",
+      "src": "/images/editorial-strawberry.webp",
+      "alt": "Червоні губи та полуниця у рекламному б’юті-портреті",
+      "credit": "Олена Попова",
+      "driveId": "1Syq4jF75Vh-ipDWxK8gXUd6_N-K5iiqt",
+      "width": 1200,
+      "height": 1800
+    },
+    {
+      "id": "editorial-underwater",
+      "src": "/images/editorial-underwater.webp",
+      "alt": "Підводний портрет із золотистою тканиною у бірюзовому світлі",
+      "credit": "Олена Попова",
+      "driveId": "15-_WVBwt6HcIw0J3ADlkebHPEtrwYVTp",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "id": "editorial-portrait",
+      "src": "/images/editorial-portrait.webp",
+      "alt": "Емоційний чорно-білий портрет чоловіка з піднятими руками",
+      "credit": "Олена Попова",
+      "driveId": "1KgpImv63s8QLAvE4hUQJR0BLCpOWBc2H",
+      "width": 1200,
+      "height": 1800
     }
   ],
   "instructors": [

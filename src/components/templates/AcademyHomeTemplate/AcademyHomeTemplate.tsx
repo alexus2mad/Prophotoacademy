@@ -1,3 +1,4 @@
+import { PhotographyManifesto } from '@/components/organisms/PhotographyManifesto/PhotographyManifesto';
 import { EditorialMotion } from '@/components/behaviors/EditorialMotion/EditorialMotion';
 import { AcademyHero } from '@/components/organisms/AcademyHero/AcademyHero';
 import { AcademyTestimonials } from '@/components/organisms/AcademyTestimonials/AcademyTestimonials';
@@ -29,6 +30,7 @@ export function AcademyHomeTemplate({ content }: AcademyHomeTemplateProps) {
       <AcademyHero primary={primary} offering={offering} heroImage={heroImage} content={content} />
       <CourseSelection primary={primary} courses={courses} content={content} />
       <StudentExhibition content={content} />
+      <PhotographyManifesto content={content} />
       <LearningSection content={content} />
       <div className="container editorial-section" data-editorial-reveal>
         <PracticePreview content={content} programId={primary?.id} />

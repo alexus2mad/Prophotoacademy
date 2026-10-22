@@ -8,17 +8,19 @@ export function LearningSection({ content }: LearningSectionProps) {
         <Photo image={findImage(content, 'practice')} />
       </figure>
       <div className="learning-copy">
-        <h2>Як ми навчаємо</h2>
+        <p className="eyebrow">Від погляду до практики</p>
+        <h2>
+          Талант зростає
+          <br />у процесі
+        </h2>
         <ol className="learning-steps">
           <li>
-            <span>01</span>
             <div>
               <h3>Зрозуміти</h3>
               <p>Світло, композицію та інструменти. Те, що допомагає створювати кадр свідомо.</p>
             </div>
           </li>
           <li>
-            <span>02</span>
             <div>
               <h3>Спробувати</h3>
               <p>
@@ -28,7 +30,6 @@ export function LearningSection({ content }: LearningSectionProps) {
             </div>
           </li>
           <li>
-            <span>03</span>
             <div>
               <h3>Створювати своє</h3>
               <p>Знайти візуальну мову для особистих проєктів, контенту чи роботи з брендами.</p>
