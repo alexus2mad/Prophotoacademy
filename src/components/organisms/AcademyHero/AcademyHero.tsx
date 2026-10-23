@@ -28,7 +28,7 @@ export function AcademyHero({ primary, offering, heroImage, content }: AcademyHe
             <PhotoStack
               images={photographs}
               label="Фотографії академії"
-              sizes="(max-width: 767px) calc(100vw - 64px), 60vw"
+              sizes="(max-width: 767px) calc(100vw - 76px), (max-width: 1100px) calc(54.7vw - 88px), (max-width: 1536px) calc(62.5vw - 88px), 874px"
             />
           </div>
           <div className="cover-statement">

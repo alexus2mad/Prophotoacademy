@@ -3,6 +3,7 @@ import type { PhotoProps } from './types';
 export function Photo({
   image,
   priority = false,
+  eager = false,
   className = '',
   natural = false,
   sizes = '(max-width: 767px) 100vw, 50vw',
@@ -15,6 +16,7 @@ export function Photo({
       height={image.height}
       sizes={sizes}
       preload={priority}
+      loading={!priority && eager ? 'eager' : undefined}
       className={`photo ${natural ? 'photo-natural' : ''} ${className}`}
       style={{
         objectPosition: image.position || '50% 50%',

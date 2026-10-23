@@ -8,9 +8,9 @@
   },
   "scripts": {
     "sandbox:learning": "node scripts/sandbox/start.mjs",
-    "predev": "node scripts/prepare-learning.mjs",
-    "prebuild": "node scripts/prepare-learning.mjs",
-    "prepages:build": "node scripts/prepare-learning.mjs",
+    "predev": "node scripts/prepare-learning.mjs && node scripts/prepare-hero-images.mjs",
+    "prebuild": "node scripts/prepare-learning.mjs && node scripts/prepare-hero-images.mjs",
+    "prepages:build": "node scripts/prepare-learning.mjs && node scripts/prepare-hero-images.mjs",
     "db:migrate": "tsx scripts/database-migrate.ts",
     "db:import-legacy": "tsx scripts/migrate-ledger.ts",
     "architecture:check": "node scripts/check-architecture.mjs",
@@ -29,7 +29,8 @@
     "pages:build": "node scripts/build-pages.mjs",
     "pages:validate": "node scripts/validate-pages.mjs",
     "pages:publish": "node scripts/publish-pages.mjs",
-    "pages:serve": "node scripts/serve-pages.mjs"
+    "pages:serve": "node scripts/serve-pages.mjs",
+    "images:prepare": "node scripts/prepare-hero-images.mjs"
   },
   "dependencies": {
     "@mux/mux-player-react": "^3.14.0",

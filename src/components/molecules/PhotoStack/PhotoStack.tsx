@@ -1,11 +1,10 @@
 'use client';
-import { Photo } from '@/components/atoms/Photo/Photo';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { StackPhoto } from '@/components/atoms/StackPhoto/StackPhoto';
 import { usePhotoStack } from './hooks';
 import type { PhotoStackProps } from './types';
 
 export function PhotoStack({ images, label, sizes }: PhotoStackProps) {
-  const { index, move, start, finish, cancel } = usePhotoStack(images.length);
+  const { index, move, start, finish, cancel, activate } = usePhotoStack(images.length);
   if (!images.length) return null;
   return (
     <div
@@ -20,66 +19,46 @@ export function PhotoStack({ images, label, sizes }: PhotoStackProps) {
         }
       }}
     >
-      <div
+      <button
+        type="button"
         className="photo-stack-stage"
+        disabled={images.length < 2}
+        aria-label={images[index].alt + (images.length > 1 ? '. Наступне фото' : '')}
+        onClick={(event) => activate(event.detail)}
         onPointerDown={(event) => {
-          if (event.isPrimary) start(event.clientX, event.clientY);
+          if (event.isPrimary && event.button === 0) {
+            start(event.clientX, event.clientY);
+            event.currentTarget.setPointerCapture(event.pointerId);
+          }
         }}
-        onPointerUp={(event) => finish(event.clientX, event.clientY)}
+        onPointerUp={(event) => {
+          if (event.isPrimary) finish(event.clientX, event.clientY);
+        }}
         onPointerCancel={cancel}
-        onPointerLeave={cancel}
         onDragStart={(event) => event.preventDefault()}
       >
         {images.map((image, i) => {
           const depth = (i - index + images.length) % images.length;
           return (
-            <div
+            <span
               className="photo-stack-print"
               data-depth={depth}
               key={image.id}
-              role="group"
-              aria-roledescription="слайд"
-              aria-label={i + 1 + ' з ' + images.length}
               aria-hidden={depth !== 0}
             >
-              <div className="photo-stack-image">
-                <Photo image={image} priority={i === 0} sizes={sizes} />
-              </div>
-            </div>
+              <span className="photo-stack-image">
+                <StackPhoto image={image} priority={i === 0} sizes={sizes} />
+              </span>
+            </span>
           );
         })}
-      </div>
-      <div className="photo-stack-footer">
-        <p className="photo-stack-credit" aria-live="polite" aria-atomic="true">
-          {images[index].credit}
-          <span className="sr-only">
-            . Фото {index + 1} з {images.length}
-          </span>
-        </p>
-        {images.length > 1 && (
-          <div className="photo-stack-controls">
-            <button
-              type="button"
-              className="icon-button"
-              onClick={() => move(-1)}
-              aria-label="Попереднє фото"
-            >
-              <ArrowLeft size={18} aria-hidden="true" />
-            </button>
-            <span aria-hidden="true">
-              {index + 1} / {images.length}
-            </span>
-            <button
-              type="button"
-              className="icon-button"
-              onClick={() => move(1)}
-              aria-label="Наступне фото"
-            >
-              <ArrowRight size={18} aria-hidden="true" />
-            </button>
-          </div>
-        )}
-      </div>
+      </button>
+      <p className="photo-stack-credit" aria-live="polite" aria-atomic="true">
+        {images[index].credit}
+        <span className="sr-only">
+          . Фото {index + 1} з {images.length}
+        </span>
+      </p>
     </div>
   );
 }

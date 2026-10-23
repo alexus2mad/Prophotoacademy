@@ -75,7 +75,7 @@ export function ProgramHero({ program, offering, images, presentation }: Program
         <PhotoStack
           images={images}
           label={'Фотографії: ' + program.shortTitle}
-          sizes="(max-width: 767px) calc(100vw - 64px), 44vw"
+          sizes="(max-width: 767px) calc(100vw - 64px), (max-width: 1200px) 44vw, 520px"
         />
       </div>
     </section>

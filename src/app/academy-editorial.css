@@ -941,11 +941,24 @@
   min-width: 0;
 }
 .photo-stack-stage {
+  display: block;
+  width: calc(100% - 40px);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
   position: relative;
   isolation: isolate;
   aspect-ratio: 3 / 4;
   margin: 18px 20px 28px;
   touch-action: pan-y;
+}
+.photo-stack-stage:disabled {
+  cursor: default;
+}
+.photo-stack-stage:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 12px;
 }
 .photo-stack-print {
   position: absolute;
@@ -983,6 +996,7 @@
   z-index: 1;
 }
 .photo-stack-image {
+  display: block;
   height: 100%;
   overflow: hidden;
   background: #000;
@@ -993,37 +1007,13 @@
   height: 100%;
   user-select: none;
 }
-.photo-stack-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  min-height: 44px;
-}
+
 .photo-stack-credit {
   color: var(--secondary);
   font-size: 11px;
   line-height: 1.5;
 }
-.photo-stack-controls {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-shrink: 0;
-}
-.photo-stack-controls > span {
-  font-size: 11px;
-  font-variant-numeric: tabular-nums;
-  min-width: 32px;
-  text-align: center;
-}
-.photo-stack-controls .icon-button {
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  border: 1px solid var(--border);
-  border-radius: 50%;
-}
+
 .program-student-work {
   order: 4;
   width: 100%;
@@ -1058,6 +1048,7 @@
     aspect-ratio: 1;
   }
   .photo-stack-stage {
+    width: calc(100% - 28px);
     margin: 14px 14px 24px;
   }
   .photo-stack-print {
@@ -1069,15 +1060,7 @@
   .photo-stack-print[data-depth='2'] {
     transform: translate(-5px, -4px) rotate(-4deg) scale(0.97);
   }
-  .photo-stack-footer {
-    gap: 8px;
-  }
-  .photo-stack-credit {
-    max-width: 50%;
-  }
-  .photo-stack-controls {
-    gap: 2px;
-  }
+
   .program-student-work {
     padding-top: 32px;
   }

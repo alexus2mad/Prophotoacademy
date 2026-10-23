@@ -1,0 +1,270 @@
+{
+  "/images/visual.webp": [
+    {
+      "src": "/images/hero/visual-458867ea9197-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/visual-9413ffadb7ec-640.webp",
+      "width": 640
+    },
+    {
+      "src": "/images/hero/visual-821ea4e8e399-840.webp",
+      "width": 840
+    },
+    {
+      "src": "/images/hero/visual-472b91329eb5-1200.webp",
+      "width": 1200
+    }
+  ],
+  "/images/commercial.webp": [
+    {
+      "src": "/images/hero/commercial-e45f1b892bed-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/commercial-8bb1b6412556-603.webp",
+      "width": 603
+    }
+  ],
+  "/images/instagram.webp": [
+    {
+      "src": "/images/hero/instagram-f16ea1b2ae21-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/instagram-bc32435a5974-640.webp",
+      "width": 640
+    },
+    {
+      "src": "/images/hero/instagram-4c0c8050ff0d-840.webp",
+      "width": 840
+    },
+    {
+      "src": "/images/hero/instagram-e5239f1fadd2-1200.webp",
+      "width": 1200
+    }
+  ],
+  "/images/practice.webp": [
+    {
+      "src": "/images/hero/practice-2512f241df57-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/practice-27b9a4d89cf1-640.webp",
+      "width": 640
+    },
+    {
+      "src": "/images/hero/practice-d0f8ae924cc5-840.webp",
+      "width": 840
+    },
+    {
+      "src": "/images/hero/practice-b5824a17e101-853.webp",
+      "width": 853
+    }
+  ],
+  "/images/workshop.webp": [
+    {
+      "src": "/images/hero/workshop-98ff664f3fe8-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/workshop-244b851dcf0a-640.webp",
+      "width": 640
+    },
+    {
+      "src": "/images/hero/workshop-dd55aa793003-840.webp",
+      "width": 840
+    },
+    {
+      "src": "/images/hero/workshop-8dac89e16877-1200.webp",
+      "width": 1200
+    }
+  ],
+  "/images/student-cherries.webp": [
+    {
+      "src": "/images/hero/student-cherries-77e652b414e1-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/student-cherries-c825a1d85db4-640.webp",
+      "width": 640
+    },
+    {
+      "src": "/images/hero/student-cherries-310fe367b97b-840.webp",
+      "width": 840
+    },
+    {
+      "src": "/images/hero/student-cherries-26a49aaed435-853.webp",
+      "width": 853
+    }
+  ],
+  "/images/student-portrait.webp": [
+    {
+      "src": "/images/hero/student-portrait-958a5c2af9db-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/student-portrait-d1d414f60aca-640.webp",
+      "width": 640
+    },
+    {
+      "src": "/images/hero/student-portrait-ef58e30214e4-840.webp",
+      "width": 840
+    },
+    {
+      "src": "/images/hero/student-portrait-2516c4b85484-1080.webp",
+      "width": 1080
+    }
+  ],
+  "/images/student-pasta.webp": [
+    {
+      "src": "/images/hero/student-pasta-d836402c2325-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/student-pasta-6631bb0234f3-640.webp",
+      "width": 640
+    },
+    {
+      "src": "/images/hero/student-pasta-8c9236f2d36b-840.webp",
+      "width": 840
+    },
+    {
+      "src": "/images/hero/student-pasta-93795a42dbf1-921.webp",
+      "width": 921
+    }
+  ],
+  "/images/student-shoes.webp": [
+    {
+      "src": "/images/hero/student-shoes-abb4985c1ad8-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/student-shoes-bf4a572c1629-640.webp",
+      "width": 640
+    },
+    {
+      "src": "/images/hero/student-shoes-a4f380d2401a-840.webp",
+      "width": 840
+    },
+    {
+      "src": "/images/hero/student-shoes-4b867d82e581-1022.webp",
+      "width": 1022
+    }
+  ],
+  "/images/editorial-strawberry.webp": [
+    {
+      "src": "/images/hero/editorial-strawberry-117b842e3fba-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/editorial-strawberry-31478a7ca3e7-640.webp",
+      "width": 640
+    },
+    {
+      "src": "/images/hero/editorial-strawberry-d97dbebeb808-840.webp",
+      "width": 840
+    },
+    {
+      "src": "/images/hero/editorial-strawberry-b7a6b41db58b-1200.webp",
+      "width": 1200
+    }
+  ],
+  "/images/editorial-underwater.webp": [
+    {
+      "src": "/images/hero/editorial-underwater-f6e08aae2c18-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/editorial-underwater-cacead61d641-640.webp",
+      "width": 640
+    },
+    {
+      "src": "/images/hero/editorial-underwater-8b454f5caf46-840.webp",
+      "width": 840
+    },
+    {
+      "src": "/images/hero/editorial-underwater-5f68a3ad20b9-1200.webp",
+      "width": 1200
+    },
+    {
+      "src": "/images/hero/editorial-underwater-60b337e4988c-1600.webp",
+      "width": 1600
+    }
+  ],
+  "/images/editorial-portrait.webp": [
+    {
+      "src": "/images/hero/editorial-portrait-5b64fefb1871-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/editorial-portrait-5173cefb6c9a-640.webp",
+      "width": 640
+    },
+    {
+      "src": "/images/hero/editorial-portrait-d325600e1e83-840.webp",
+      "width": 840
+    },
+    {
+      "src": "/images/hero/editorial-portrait-862a4743f65e-1200.webp",
+      "width": 1200
+    }
+  ],
+  "/images/student-strawberry-flight.webp": [
+    {
+      "src": "/images/hero/student-strawberry-flight-904b2b7a3499-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/student-strawberry-flight-3f1ee103bb5a-615.webp",
+      "width": 615
+    }
+  ],
+  "/images/student-apple-layers.webp": [
+    {
+      "src": "/images/hero/student-apple-layers-1c4a3dd47844-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/student-apple-layers-4cb67fd7388e-640.webp",
+      "width": 640
+    },
+    {
+      "src": "/images/hero/student-apple-layers-fedf7f0dca34-840.webp",
+      "width": 840
+    },
+    {
+      "src": "/images/hero/student-apple-layers-8629c14a31d5-1024.webp",
+      "width": 1024
+    }
+  ],
+  "/images/student-red-lipstick.webp": [
+    {
+      "src": "/images/hero/student-red-lipstick-2cd5be604975-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/student-red-lipstick-dbca68d4f040-602.webp",
+      "width": 602
+    }
+  ],
+  "/images/student-city-portrait.webp": [
+    {
+      "src": "/images/hero/student-city-portrait-8c1d46c5028f-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/student-city-portrait-de92f83fa332-640.webp",
+      "width": 640
+    },
+    {
+      "src": "/images/hero/student-city-portrait-b4081b2d01ec-840.webp",
+      "width": 840
+    },
+    {
+      "src": "/images/hero/student-city-portrait-4887b50bdaaf-1080.webp",
+      "width": 1080
+    }
+  ]
+}
