@@ -954,6 +954,7 @@
   touch-action: pan-y;
 }
 .photo-stack-stage:disabled {
+  opacity: 1;
   cursor: default;
 }
 .photo-stack-stage:focus-visible {
