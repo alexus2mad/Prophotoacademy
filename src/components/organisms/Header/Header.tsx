@@ -55,9 +55,11 @@ export function Header({ site = 'academy' }: HeaderProps) {
                 {site === 'hub' ? 'Забронювати' : home ? 'Усі програми' : 'Обрати курс'}
               </Link>
               <button
+                type="button"
                 className="icon-button menu-toggle"
                 onClick={() => dialog.current?.showModal()}
                 aria-label="Відкрити меню"
+                aria-haspopup="dialog"
               >
                 <Menu size={22} />
               </button>
