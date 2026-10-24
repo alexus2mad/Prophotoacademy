@@ -1,5 +1,6 @@
 import type { NextConfig } from 'next';
 const config: NextConfig = {
+  experimental: { agentUpgrade: 'security' },
   serverExternalPackages: ['node:sqlite'],
   outputFileTracingExcludes: { '/*': ['./.data/**/*', './content/source/**/*', './scripts/**/*'] },
   images: { remotePatterns: [{ protocol: 'https', hostname: 'cdn.sanity.io' }] },
