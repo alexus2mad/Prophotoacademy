@@ -1,11 +1,16 @@
 import { preload } from 'react-dom';
 import { Photo } from '@/components/atoms/Photo/Photo';
 import { preparedPhoto } from '@/lib/photography/prepared';
-import type { StackPhotoProps } from './types';
+import type { PreparedPhotoProps } from './types';
 
-export function StackPhoto({ image, priority, sizes }: StackPhotoProps) {
+export function PreparedPhoto({
+  image,
+  priority = false,
+  eager = false,
+  sizes,
+}: PreparedPhotoProps) {
   const prepared = preparedPhoto(image.src);
-  if (!prepared) return <Photo image={image} priority={priority} eager sizes={sizes} />;
+  if (!prepared) return <Photo image={image} priority={priority} eager={eager} sizes={sizes} />;
   if (priority)
     preload(prepared.src, {
       as: 'image',
@@ -21,7 +26,7 @@ export function StackPhoto({ image, priority, sizes }: StackPhotoProps) {
       width={image.width}
       height={image.height}
       alt={image.alt}
-      loading="eager"
+      loading={priority || eager ? 'eager' : 'lazy'}
       fetchPriority={priority ? 'high' : 'low'}
       decoding="async"
       draggable={false}

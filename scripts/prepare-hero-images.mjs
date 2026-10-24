@@ -11,6 +11,9 @@ const ids = new Set([
   'editorial-underwater',
   'visual',
   'editorial-portrait',
+  'student-cherries',
+  'workshop',
+  content.hub.heroImageId,
 ]);
 for (const program of content.programs) {
   ids.add(program.imageId);

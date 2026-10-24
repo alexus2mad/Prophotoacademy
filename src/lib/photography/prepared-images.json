@@ -153,6 +153,28 @@
       "width": 1022
     }
   ],
+  "/images/hub-cyclorama.webp": [
+    {
+      "src": "/images/hero/hub-cyclorama-10dd89ea439e-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/hub-cyclorama-8a2c62d45bf6-640.webp",
+      "width": 640
+    },
+    {
+      "src": "/images/hero/hub-cyclorama-aae7c534bc0b-840.webp",
+      "width": 840
+    },
+    {
+      "src": "/images/hero/hub-cyclorama-7d647029ebb7-1200.webp",
+      "width": 1200
+    },
+    {
+      "src": "/images/hero/hub-cyclorama-3a5f03245d93-1600.webp",
+      "width": 1600
+    }
+  ],
   "/images/editorial-strawberry.webp": [
     {
       "src": "/images/hero/editorial-strawberry-117b842e3fba-480.webp",

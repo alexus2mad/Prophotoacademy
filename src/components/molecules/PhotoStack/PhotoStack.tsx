@@ -1,5 +1,5 @@
 'use client';
-import { StackPhoto } from '@/components/atoms/StackPhoto/StackPhoto';
+import { PreparedPhoto } from '@/components/atoms/PreparedPhoto/PreparedPhoto';
 import { usePhotoStack } from './hooks';
 import type { PhotoStackProps } from './types';
 
@@ -47,7 +47,7 @@ export function PhotoStack({ images, label, sizes }: PhotoStackProps) {
               aria-hidden={depth !== 0}
             >
               <span className="photo-stack-image">
-                <StackPhoto image={image} priority={i === 0} sizes={sizes} />
+                <PreparedPhoto image={image} priority={i === 0} eager sizes={sizes} />
               </span>
             </span>
           );

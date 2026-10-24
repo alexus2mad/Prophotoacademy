@@ -1,6 +1,7 @@
 import { PhotographyManifesto } from '@/components/organisms/PhotographyManifesto/PhotographyManifesto';
 import { EditorialMotion } from '@/components/behaviors/EditorialMotion/EditorialMotion';
-import { AcademyHero } from '@/components/organisms/AcademyHero/AcademyHero';
+import { EcosystemHero } from '@/components/organisms/EcosystemHero/EcosystemHero';
+import { FeaturedProgram } from '@/components/organisms/FeaturedProgram/FeaturedProgram';
 import { AcademyTestimonials } from '@/components/organisms/AcademyTestimonials/AcademyTestimonials';
 import { Consultation } from '@/components/organisms/Consultation/Consultation';
 import { CourseSelection } from '@/components/organisms/CourseSelection/CourseSelection';
@@ -27,7 +28,8 @@ export function AcademyHomeTemplate({ content }: AcademyHomeTemplateProps) {
   return (
     <>
       <EditorialMotion />
-      <AcademyHero primary={primary} offering={offering} heroImage={heroImage} content={content} />
+      <EcosystemHero content={content} />
+      {primary && <FeaturedProgram program={primary} offering={offering} image={heroImage} />}
       <CourseSelection primary={primary} courses={courses} content={content} />
       <StudentExhibition content={content} />
       <PhotographyManifesto content={content} />
