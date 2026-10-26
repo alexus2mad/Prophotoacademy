@@ -1,0 +1,56 @@
+[
+  {
+    "id": "lays",
+    "name": "Lay’s",
+    "src": "/brand/clients/lays.svg",
+    "source": "https://s3.amazonaws.com/webflow-prod-assets/694a5cc146bb9192fcdbb5ac/694e9517d80f62b920297f98_lays-logo-1.svg"
+  },
+  {
+    "id": "bang-olufsen",
+    "name": "Bang & Olufsen",
+    "src": "/brand/clients/bang-olufsen.svg",
+    "source": "https://s3.amazonaws.com/webflow-prod-assets/694a5cc146bb9192fcdbb5ac/69a5513d3bab1b7179bad191_bang-olufsen-1%201.svg"
+  },
+  {
+    "id": "silpo",
+    "name": "Сільпо",
+    "src": "/brand/clients/silpo.svg",
+    "source": "https://s3.amazonaws.com/webflow-prod-assets/694a5cc146bb9192fcdbb5ac/69a551733f27d79742e92589_Silpo_outline_logo%202.svg"
+  },
+  {
+    "id": "ispace",
+    "name": "iSpace",
+    "src": "/brand/clients/ispace.svg",
+    "source": "https://s3.amazonaws.com/webflow-prod-assets/694a5cc146bb9192fcdbb5ac/694acb0e40bd87ffef465008_Group.svg"
+  },
+  {
+    "id": "dynamo",
+    "name": "Динамо Київ",
+    "src": "/brand/clients/dynamo.svg",
+    "source": "https://s3.amazonaws.com/webflow-prod-assets/694a5cc146bb9192fcdbb5ac/69a5512c9cac4d6bcb88f994_FC_Dynamo_Kyiv_logo.svg%201.svg"
+  },
+  {
+    "id": "mcdonalds",
+    "name": "McDonald’s",
+    "src": "/brand/clients/mcdonalds.svg",
+    "source": "https://s3.amazonaws.com/webflow-prod-assets/694a5cc146bb9192fcdbb5ac/694acb0e4cd2a2835898af20_Group%202131329085.svg"
+  },
+  {
+    "id": "instytutum",
+    "name": "INSTYTUTUM",
+    "src": "/brand/clients/instytutum.svg",
+    "source": "https://s3.amazonaws.com/webflow-prod-assets/694a5cc146bb9192fcdbb5ac/69a5514ee1f87a2855b065c4_Layer_1.svg"
+  },
+  {
+    "id": "pepsi",
+    "name": "Pepsi",
+    "src": "/brand/clients/pepsi.svg",
+    "source": "https://s3.amazonaws.com/webflow-prod-assets/694a5cc146bb9192fcdbb5ac/69a55166c32ddbbbd0e1a23c_Pepsi_logo_2008%201.svg"
+  },
+  {
+    "id": "novus",
+    "name": "NOVUS",
+    "src": "/brand/clients/novus.svg",
+    "source": "https://s3.amazonaws.com/webflow-prod-assets/694a5cc146bb9192fcdbb5ac/69a55165dacf132bc1c7f386_Novus_Ukraina_logo.svg"
+  }
+]

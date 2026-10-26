@@ -1,0 +1,168 @@
+{
+  "/images/hero/home-hero-c7f3ba72f21a-2400.webp": [
+    {
+      "src": "/images/hero/home-hero-5d6d10702cf1-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/home-hero-14d7c6d283fe-840.webp",
+      "width": 840
+    },
+    {
+      "src": "/images/hero/home-hero-513639e3b400-1200.webp",
+      "width": 1200
+    },
+    {
+      "src": "/images/hero/home-hero-37f086cf22ff-1600.webp",
+      "width": 1600
+    },
+    {
+      "src": "/images/hero/home-hero-c7f3ba72f21a-2400.webp",
+      "width": 2400
+    }
+  ],
+  "/images/hero/home-courses-3f4be2ba0ede-1200.webp": [
+    {
+      "src": "/images/hero/home-courses-2925cdf6cdb1-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/home-courses-6a747dc315ba-840.webp",
+      "width": 840
+    },
+    {
+      "src": "/images/hero/home-courses-3f4be2ba0ede-1200.webp",
+      "width": 1200
+    }
+  ],
+  "/images/hero/home-workshops-dcd4b01f9635-961.webp": [
+    {
+      "src": "/images/hero/home-workshops-befd41fd203d-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/home-workshops-359b75985684-840.webp",
+      "width": 840
+    },
+    {
+      "src": "/images/hero/home-workshops-dcd4b01f9635-961.webp",
+      "width": 961
+    }
+  ],
+  "/images/hero/home-offline-0e408caba96c-1200.webp": [
+    {
+      "src": "/images/hero/home-offline-f5d9111238a1-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/home-offline-a3ba2fd0fdb2-840.webp",
+      "width": 840
+    },
+    {
+      "src": "/images/hero/home-offline-0e408caba96c-1200.webp",
+      "width": 1200
+    }
+  ],
+  "/images/hero/home-founder-68c2eeea95e4-1600.webp": [
+    {
+      "src": "/images/hero/home-founder-9a23e1214fc5-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/home-founder-f653235f05aa-840.webp",
+      "width": 840
+    },
+    {
+      "src": "/images/hero/home-founder-843569c68921-1200.webp",
+      "width": 1200
+    },
+    {
+      "src": "/images/hero/home-founder-68c2eeea95e4-1600.webp",
+      "width": 1600
+    }
+  ],
+  "/images/hero/home-studio-13d7c1da32fd-1200.webp": [
+    {
+      "src": "/images/hero/home-studio-e6970604e22c-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/home-studio-d8b99b63cefc-840.webp",
+      "width": 840
+    },
+    {
+      "src": "/images/hero/home-studio-13d7c1da32fd-1200.webp",
+      "width": 1200
+    }
+  ],
+  "/images/hero/home-knit-e672b9b9faf1-1200.webp": [
+    {
+      "src": "/images/hero/home-knit-75483ca1fa3d-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/home-knit-01edebf98430-840.webp",
+      "width": 840
+    },
+    {
+      "src": "/images/hero/home-knit-e672b9b9faf1-1200.webp",
+      "width": 1200
+    }
+  ],
+  "/images/hero/home-city-e6ddbd1fa9d6-1200.webp": [
+    {
+      "src": "/images/hero/home-city-37c49dbd2ee6-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/home-city-ddde9d197fbb-840.webp",
+      "width": 840
+    },
+    {
+      "src": "/images/hero/home-city-e6ddbd1fa9d6-1200.webp",
+      "width": 1200
+    }
+  ],
+  "/images/hero/home-sea-21472001940c-1200.webp": [
+    {
+      "src": "/images/hero/home-sea-fc45786cbe7e-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/home-sea-458bd630c7e1-840.webp",
+      "width": 840
+    },
+    {
+      "src": "/images/hero/home-sea-21472001940c-1200.webp",
+      "width": 1200
+    }
+  ],
+  "/images/hero/home-camp-abae57159785-1200.webp": [
+    {
+      "src": "/images/hero/home-camp-c4c19ed6a857-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/home-camp-fd1ddce870f3-840.webp",
+      "width": 840
+    },
+    {
+      "src": "/images/hero/home-camp-abae57159785-1200.webp",
+      "width": 1200
+    }
+  ],
+  "/images/hero/home-shop-0212dda4496d-1200.webp": [
+    {
+      "src": "/images/hero/home-shop-c1820b371ed1-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/home-shop-4362d1a7a4f1-840.webp",
+      "width": 840
+    },
+    {
+      "src": "/images/hero/home-shop-0212dda4496d-1200.webp",
+      "width": 1200
+    }
+  ]
+}

@@ -1,48 +1,44 @@
-import { PhotographyManifesto } from '@/components/organisms/PhotographyManifesto/PhotographyManifesto';
-import { EditorialMotion } from '@/components/behaviors/EditorialMotion/EditorialMotion';
-import { EcosystemHero } from '@/components/organisms/EcosystemHero/EcosystemHero';
-import { FeaturedProgram } from '@/components/organisms/FeaturedProgram/FeaturedProgram';
-import { AcademyTestimonials } from '@/components/organisms/AcademyTestimonials/AcademyTestimonials';
-import { Consultation } from '@/components/organisms/Consultation/Consultation';
-import { CourseSelection } from '@/components/organisms/CourseSelection/CourseSelection';
-import { CustomTraining } from '@/components/organisms/CustomTraining/CustomTraining';
-import { FounderSection } from '@/components/organisms/FounderSection/FounderSection';
-import { LearningSection } from '@/components/organisms/LearningSection/LearningSection';
-import { PracticePreview } from '@/components/organisms/PracticePreview/PracticePreview';
-import { StudentExhibition } from '@/components/organisms/StudentExhibition/StudentExhibition';
-import { findImage, findOffering } from '@/lib/content/selectors';
-import { primaryProgram } from '@/lib/program-priority';
+import localFont from 'next/font/local';
+import { AcademyDesignHero } from '@/components/organisms/AcademyDesignHero/AcademyDesignHero';
+import { AcademyDirections } from '@/components/organisms/AcademyDirections/AcademyDirections';
+import { AcademyDesignFounder } from '@/components/organisms/AcademyDesignFounder/AcademyDesignFounder';
+import { AcademyClients } from '@/components/organisms/AcademyClients/AcademyClients';
+import { AcademyDesignVoices } from '@/components/organisms/AcademyDesignVoices/AcademyDesignVoices';
+import { EcosystemBanner } from '@/components/molecules/EcosystemBanner/EcosystemBanner';
+import { academyDirections, academyHomeTestimonials } from '@/lib/academy-home/selectors';
+import { academyHomePhoto } from '@/lib/photography/academy-home';
+import { siteHref } from '@/lib/ecosystem';
 import type { AcademyHomeTemplateProps } from './types';
+const display = localFont({
+  src: '../../../app/fonts/kyivtype-black.woff2',
+  variable: '--font-home-display',
+  weight: '900',
+  display: 'swap',
+});
 export function AcademyHomeTemplate({ content }: AcademyHomeTemplateProps) {
-  const primary = primaryProgram(content);
-  const offering = primary ? findOffering(content, primary.id) : undefined;
-  const heroImage = findImage(content, primary?.imageId || content.settings.heroImageId);
-  const courses = content.programs
-    .filter((p) => p.featured && p.category === 'course' && p.id !== primary?.id)
-    .slice(0, 3);
-  const quotes = content.testimonials.filter(
-    (t) => t.kind === 'quote' && t.quote && t.quote.length < 700,
-  );
-  const courseQuotes = primary ? quotes.filter((t) => t.programId === primary.id) : [];
-  const testimonials = (courseQuotes.length ? courseQuotes : quotes).slice(0, 2);
   return (
-    <>
-      <EditorialMotion />
-      <EcosystemHero content={content} />
-      {primary && <FeaturedProgram program={primary} offering={offering} image={heroImage} />}
-      <CourseSelection primary={primary} courses={courses} content={content} />
-      <StudentExhibition content={content} />
-      <PhotographyManifesto content={content} />
-      <LearningSection content={content} />
-      <div className="container editorial-section" data-editorial-reveal>
-        <PracticePreview content={content} />
-      </div>
-      <FounderSection content={content} />
-      {!!testimonials.length && (
-        <AcademyTestimonials testimonials={testimonials} courseQuotes={courseQuotes} />
-      )}
-      <CustomTraining />
-      <Consultation />
-    </>
+    <div className={'academy-design-home ' + display.variable}>
+      <AcademyDesignHero shopUrl={content.settings.shop} />
+      <AcademyDirections directions={academyDirections(content)} />
+      <EcosystemBanner
+        name="STUDIO"
+        label="Студія екосистеми"
+        description={content.hub.heroDescription}
+        href={siteHref('hub')}
+        linkLabel="До студії"
+        image={academyHomePhoto('studio')}
+      />
+      <AcademyDesignFounder />
+      <AcademyClients />
+      <AcademyDesignVoices testimonials={academyHomeTestimonials(content)} />
+      <EcosystemBanner
+        name="SHOP"
+        label="Магазин екосистеми"
+        description="Уся необхідна техніка для зйомки — допоможемо підібрати під ваші задачі й бюджет."
+        href={content.settings.shop}
+        linkLabel="До магазину"
+        image={academyHomePhoto('shop')}
+      />
+    </div>
   );
 }

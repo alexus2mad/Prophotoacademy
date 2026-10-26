@@ -1,0 +1,28 @@
+import Link from 'next/link';
+import { PreparedPhoto } from '@/components/atoms/PreparedPhoto/PreparedPhoto';
+import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
+import type { AcademyDirectionCardProps } from './types';
+export function AcademyDirectionCard({ direction }: AcademyDirectionCardProps) {
+  return (
+    <article className="academy-direction">
+      <div className="academy-direction-photo">
+        <PreparedPhoto
+          image={direction.image}
+          sizes="(max-width: 599px) 100vw, (max-width: 899px) 50vw, 33.333vw"
+        />
+      </div>
+      <div className="academy-direction-copy">
+        <h3>
+          {direction.href ? (
+            <Link href={direction.href}>{direction.title}</Link>
+          ) : (
+            <InquiryButton className="academy-direction-action" title={direction.inquiryTitle}>
+              {direction.title}
+            </InquiryButton>
+          )}
+        </h3>
+        {direction.subtitle && <p>{direction.subtitle}</p>}
+      </div>
+    </article>
+  );
+}

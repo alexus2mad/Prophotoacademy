@@ -1,0 +1,68 @@
+[
+  {
+    "id": "hero",
+    "source": "https://drive.google.com/uc?export=download&id=18umR5CgY2x4r4JOjS2zl3b4iPP1EopW7",
+    "originalWidth": 5760,
+    "originalHeight": 3840
+  },
+  {
+    "id": "courses",
+    "source": "https://drive.google.com/uc?export=download&id=1pI6wLpDYGGYyC82Eczf2tzqRUSCQLL5A",
+    "originalWidth": 2268,
+    "originalHeight": 2808
+  },
+  {
+    "id": "workshops",
+    "source": "https://drive.google.com/uc?export=download&id=1W86O4NGNkNbJJg-ETx0AFwdQ04OIO4MQ",
+    "originalWidth": 961,
+    "originalHeight": 640
+  },
+  {
+    "id": "offline",
+    "source": "https://drive.google.com/uc?export=download&id=1pf8rlNNqpAvwRBNQSDSk7sTQVIaHL3mP",
+    "originalWidth": 4127,
+    "originalHeight": 5159
+  },
+  {
+    "id": "founder",
+    "source": "https://drive.google.com/uc?export=download&id=1Mu-7CxmgVE7jVKeJqaqjQDlCGsofa_yF",
+    "originalWidth": 4480,
+    "originalHeight": 5952
+  },
+  {
+    "id": "studio",
+    "source": "https://static.wixstatic.com/media/30b323_0f40b0dac00d4965b37fe41b72271974~mv2.jpg",
+    "originalWidth": 1800,
+    "originalHeight": 1200
+  },
+  {
+    "id": "knit",
+    "source": "https://drive.google.com/uc?export=download&id=1pczBWKfhH6EQPFj6me6oW6zH77KdZgau",
+    "originalWidth": 1376,
+    "originalHeight": 1519
+  },
+  {
+    "id": "city",
+    "source": "https://drive.google.com/uc?export=download&id=1KdQS9HV-RES3Fm8Cd1eLOcWlDYJW_lIM",
+    "originalWidth": 1914,
+    "originalHeight": 3402
+  },
+  {
+    "id": "sea",
+    "source": "https://drive.google.com/uc?export=download&id=1MmbqGoVIqWBemhVHu79Nu9qcxujR0-uL",
+    "originalWidth": 1850,
+    "originalHeight": 2313
+  },
+  {
+    "id": "camp",
+    "source": "https://drive.google.com/uc?export=download&id=17qUog7eTswv11nSKrX1HZHKdM8fGSWRJ",
+    "originalWidth": 2145,
+    "originalHeight": 3813
+  },
+  {
+    "id": "shop",
+    "source": "https://s3.amazonaws.com/webflow-prod-assets/694a5cc146bb9192fcdbb5ac/694ac9b92fb99721fe6dc166_0d976ba5a66c9806b60d99f8c8d488280b14dcc8.avif",
+    "originalWidth": 2000,
+    "originalHeight": 3000
+  }
+]

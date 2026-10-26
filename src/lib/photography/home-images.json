@@ -1,0 +1,102 @@
+{
+  "hero": {
+    "id": "academy-home-hero",
+    "src": "/images/hero/home-hero-c7f3ba72f21a-2400.webp",
+    "alt": "Жінка у чорній сукні під водою — фотографія Олени Попової",
+    "credit": "Олена Попова",
+    "driveId": "18umR5CgY2x4r4JOjS2zl3b4iPP1EopW7",
+    "width": 5760,
+    "height": 3840
+  },
+  "courses": {
+    "id": "academy-home-courses",
+    "src": "/images/hero/home-courses-3f4be2ba0ede-1200.webp",
+    "alt": "Портрет у золотій тканині на тлі блакитного неба",
+    "credit": "Олена Попова",
+    "driveId": "1pI6wLpDYGGYyC82Eczf2tzqRUSCQLL5A",
+    "width": 2268,
+    "height": 2808
+  },
+  "workshops": {
+    "id": "academy-home-workshops",
+    "src": "/images/hero/home-workshops-dcd4b01f9635-961.webp",
+    "alt": "Чорно-білий портрет кучерявої моделі у контровому світлі",
+    "credit": "Олена Попова",
+    "driveId": "1W86O4NGNkNbJJg-ETx0AFwdQ04OIO4MQ",
+    "width": 961,
+    "height": 640
+  },
+  "offline": {
+    "id": "academy-home-offline",
+    "src": "/images/hero/home-offline-0e408caba96c-1200.webp",
+    "alt": "Олена Попова у білому костюмі",
+    "credit": "Pro Photo Academy",
+    "driveId": "1pf8rlNNqpAvwRBNQSDSk7sTQVIaHL3mP",
+    "width": 4127,
+    "height": 5159
+  },
+  "founder": {
+    "id": "academy-home-founder",
+    "src": "/images/hero/home-founder-68c2eeea95e4-1600.webp",
+    "alt": "Олена Попова — засновниця ProPhoto Academy",
+    "credit": "Pro Photo Academy",
+    "driveId": "1Mu-7CxmgVE7jVKeJqaqjQDlCGsofa_yF",
+    "width": 4480,
+    "height": 5952
+  },
+  "studio": {
+    "id": "academy-home-studio",
+    "src": "/images/hero/home-studio-13d7c1da32fd-1200.webp",
+    "alt": "Циклорама та обладнання у ProPhoto Hub",
+    "credit": "ProPhoto Hub",
+    "driveId": "",
+    "width": 1800,
+    "height": 1200
+  },
+  "knit": {
+    "id": "academy-home-knit",
+    "src": "/images/hero/home-knit-e672b9b9faf1-1200.webp",
+    "alt": "Портрет у в’язаній сукні серед природи",
+    "credit": "Олена Попова",
+    "driveId": "1pczBWKfhH6EQPFj6me6oW6zH77KdZgau",
+    "width": 1376,
+    "height": 1519
+  },
+  "city": {
+    "id": "academy-home-city",
+    "src": "/images/hero/home-city-e6ddbd1fa9d6-1200.webp",
+    "alt": "Модель у білому вбранні на міській вулиці",
+    "credit": "Олена Попова",
+    "driveId": "1KdQS9HV-RES3Fm8Cd1eLOcWlDYJW_lIM",
+    "width": 1914,
+    "height": 3402
+  },
+  "sea": {
+    "id": "academy-home-sea",
+    "src": "/images/hero/home-sea-21472001940c-1200.webp",
+    "alt": "Блакитна тканина у русі на морському узбережжі",
+    "credit": "Олена Попова",
+    "driveId": "1MmbqGoVIqWBemhVHu79Nu9qcxujR0-uL",
+    "width": 1850,
+    "height": 2313
+  },
+  "camp": {
+    "id": "academy-home-camp",
+    "src": "/images/hero/home-camp-abae57159785-1200.webp",
+    "alt": "Зйомка з червоною тканиною на скелястому узбережжі",
+    "credit": "Олена Попова",
+    "driveId": "17qUog7eTswv11nSKrX1HZHKdM8fGSWRJ",
+    "width": 2145,
+    "height": 3813
+  },
+  "shop": {
+    "id": "academy-home-shop",
+    "src": "/images/hero/home-shop-0212dda4496d-1200.webp",
+    "alt": "Студійне світло та фотопарасоля",
+    "credit": "ProPhoto",
+    "driveId": "",
+    "width": 2000,
+    "height": 3000,
+    "position": "50% 35%"
+  }
+}

@@ -1,4 +1,6 @@
-import manifest from './prepared-images.json';
+import courseImages from './prepared-images.json';
+import homeImages from './prepared-home-images.json';
+const manifest = { ...courseImages, ...homeImages };
 
 export function preparedPhoto(source: string, basePath = process.env.NEXT_PUBLIC_BASE_PATH || '') {
   const localSource =
