@@ -18,6 +18,7 @@ export function InquiryDialog({
       dialogRef={dialog}
       className="inquiry-dialog"
       aria-labelledby="inquiry-title"
+      aria-describedby={state === 'success' ? undefined : 'inquiry-description'}
       closeLabel="Закрити"
       closeOnBackdrop
       closeIconSize={22}
@@ -43,7 +44,7 @@ export function InquiryDialog({
               Форма показана для огляду. Заявки не надсилаються й дані не зберігаються.
             </p>
           )}
-          <p className="muted">
+          <p className="muted" id="inquiry-description">
             {context.practiceSessionId
               ? 'Залиште контакт. Повідомимо про формат, дату й вартість, коли підтвердимо деталі практики.'
               : 'Залиште контакт. Допоможемо з форматом, пакетом і найближчим набором.'}
@@ -54,7 +55,7 @@ export function InquiryDialog({
               <a href={siteHref('academy', 'courses?format=online')}>Переглянути онлайн-навчання</a>
             </p>
           )}
-          <form onSubmit={submit} className="form-stack">
+          <form onSubmit={submit} className="form-stack" aria-busy={state === 'sending'}>
             <FormField
               id="inquiry-name"
               label="Ваше ім’я"
@@ -76,10 +77,14 @@ export function InquiryDialog({
               error={fieldErrors.contact}
             />
             <label htmlFor="inquiry-message">
-              {context.practiceSessionId
-                ? 'Який контент хочете створити?'
-                : 'Що хочете навчитися знімати?'}{' '}
-              <span className="muted">Необов’язково</span>
+              <span className="inquiry-field-label">
+                <span>
+                  {context.practiceSessionId
+                    ? 'Який контент хочете створити?'
+                    : 'Що хочете навчитися знімати?'}
+                </span>
+                <span className="muted">Необов’язково</span>
+              </span>
               <textarea
                 id="inquiry-message"
                 name="message"

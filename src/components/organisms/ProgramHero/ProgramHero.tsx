@@ -64,11 +64,12 @@ export function ProgramHero({ program, offering, images, presentation }: Program
               {buttonLabel}
             </InquiryButton>
           )}
-          {!offering?.packages.length && (
-            <a href="#program-overview" className="text-link">
-              Деталі програми
-            </a>
-          )}
+          <a
+            href={!open && offering?.packages.length ? '#packages' : '#program-overview'}
+            className="text-link"
+          >
+            {!open && offering?.packages.length ? 'Пакети й вартість' : 'Деталі програми'}
+          </a>
         </div>
       </div>
       <div className="program-hero-photo">

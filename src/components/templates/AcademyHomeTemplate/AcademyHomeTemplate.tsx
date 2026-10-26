@@ -1,5 +1,6 @@
 import localFont from 'next/font/local';
 import { AcademyDesignHero } from '@/components/organisms/AcademyDesignHero/AcademyDesignHero';
+import { Consultation } from '@/components/organisms/Consultation/Consultation';
 import { AcademyDirections } from '@/components/organisms/AcademyDirections/AcademyDirections';
 import { AcademyDesignFounder } from '@/components/organisms/AcademyDesignFounder/AcademyDesignFounder';
 import { AcademyClients } from '@/components/organisms/AcademyClients/AcademyClients';
@@ -28,6 +29,7 @@ export function AcademyHomeTemplate({ content }: AcademyHomeTemplateProps) {
     <div className={`academy-design-home ${display.variable} ${text.variable}`}>
       <AcademyDesignHero shopUrl={content.settings.shop} />
       <AcademyDirections directions={academyDirections(content)} />
+      <Consultation compact />
       <EcosystemBanner
         name="STUDIO"
         label="Студія екосистеми"

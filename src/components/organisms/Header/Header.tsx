@@ -50,6 +50,7 @@ export function Header({ site = 'academy' }: HeaderProps) {
               </Link>
               <Link
                 href={siteHref(site, site === 'hub' ? 'booking' : 'courses')}
+                aria-current={site === 'academy' && path === '/courses' ? 'page' : undefined}
                 className={`button button-small ${site === 'academy' && home ? 'button-secondary' : ''}`}
               >
                 {site === 'hub' ? 'Забронювати' : home ? 'Усі програми' : 'Обрати курс'}
@@ -73,16 +74,19 @@ export function Header({ site = 'academy' }: HeaderProps) {
           closeLabel="Закрити меню"
           closeOnBackdrop
         >
-          <nav aria-label="Мобільна навігація">
-            <Link
-              href={siteHref(
-                'academy',
-                process.env.NEXT_PUBLIC_REVIEW_MODE === 'pages' ? 'demo/account' : 'account',
-              )}
-              onClick={() => dialog.current?.close()}
-            >
-              Кабінет
-            </Link>
+          {site === 'academy' && <p className="menu-eyebrow">ProPhoto Academy</p>}
+          <nav className="menu-primary" aria-label="Мобільна навігація">
+            {site === 'hub' && (
+              <Link
+                href={siteHref(
+                  'academy',
+                  process.env.NEXT_PUBLIC_REVIEW_MODE === 'pages' ? 'demo/account' : 'account',
+                )}
+                onClick={() => dialog.current?.close()}
+              >
+                Кабінет
+              </Link>
+            )}
             {(site === 'hub'
               ? [
                   [siteHref('hub', '#spaces'), 'Зали'],
@@ -91,11 +95,28 @@ export function Header({ site = 'academy' }: HeaderProps) {
                 ]
               : [['/courses', 'Програми'], ...links, ['/contacts', 'Контакти']]
             ).map(([href, label]) => (
-              <Link key={href} href={href} onClick={() => dialog.current?.close()}>
+              <Link
+                key={href}
+                href={href}
+                aria-current={path === href ? 'page' : undefined}
+                onClick={() => dialog.current?.close()}
+              >
                 {label}
               </Link>
             ))}
           </nav>
+          {site === 'academy' && (
+            <Link
+              href={siteHref(
+                'academy',
+                process.env.NEXT_PUBLIC_REVIEW_MODE === 'pages' ? 'demo/account' : 'account',
+              )}
+              className="menu-account-link"
+              onClick={() => dialog.current?.close()}
+            >
+              Кабінет студента
+            </Link>
+          )}
           <EcosystemNav site={site} onNavigate={() => dialog.current?.close()} />
         </Dialog>
       </div>

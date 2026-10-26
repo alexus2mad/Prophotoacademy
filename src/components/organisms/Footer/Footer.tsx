@@ -24,12 +24,18 @@ export function Footer({ settings }: FooterProps) {
     <footer className="site-footer">
       <div className="container">
         <div className="footer-top">
-          <div>
+          <div className="footer-brand">
             <Link href="/" className="brand-link" aria-label="Pro Photo Academy — головна">
               <BrandLogo large />
             </Link>
+            <p>
+              Фотографія, відео та контент.
+              <br />
+              Навчання онлайн і практика в Києві.
+            </p>
           </div>
           <nav aria-label="Навігація у підвалі">
+            <h2 className="footer-group-title">Навчання</h2>
             <Link href="/courses">Програми</Link>
             <Link href="/student-work">Роботи студентів</Link>
             <Link href="/about-us">Академія</Link>
@@ -40,6 +46,7 @@ export function Footer({ settings }: FooterProps) {
             </a>
           </nav>
           <div className="footer-contact">
+            <h2 className="footer-group-title">Будьмо на зв’язку</h2>
             <a href={`mailto:${settings.email}`}>{settings.email}</a>
             <a href={`tel:${settings.phone}`}>{phoneLabel(settings.phone)}</a>
             <span>{settings.address}</span>

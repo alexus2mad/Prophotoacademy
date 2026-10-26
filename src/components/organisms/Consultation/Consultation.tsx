@@ -1,24 +1,31 @@
-'use client';
 import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
+import type { ConsultationProps } from './types';
 
-export function Consultation() {
+export function Consultation({ compact = false }: ConsultationProps) {
   return (
-    <section className="consultation-field">
+    <section
+      className={compact ? 'consultation-field consultation-field--compact' : 'consultation-field'}
+      aria-label="Допомога з вибором навчання"
+    >
       <div className="container consultation">
         <div>
-          <p className="eyebrow">Твоя історія починається з кадру</p>
+          {!compact && <p className="eyebrow">Твоя історія починається з кадру</p>}
           <h2>
-            Дозволь собі
-            <br />
-            <em>більше</em>
+            {compact ? (
+              'Знайдемо вашу програму'
+            ) : (
+              <>
+                Дозволь собі
+                <br />
+                <em>більше</em>
+              </>
+            )}
           </h2>
-          <p>
-            Розкажіть, що хочете створювати.
-            <br />
-            Знайдемо програму і формат разом.
-          </p>
+          <p>Розкажіть, що хочете створювати. Знайдемо програму і формат разом.</p>
         </div>
-        <InquiryButton className="button">Поговорімо про навчання</InquiryButton>
+        <InquiryButton className="button" title="Знайдемо вашу програму">
+          Допоможіть обрати
+        </InquiryButton>
       </div>
     </section>
   );

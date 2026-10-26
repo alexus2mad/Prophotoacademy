@@ -17,3 +17,11 @@ All new theme rules are scoped to the Academy homepage. Course-page stacks, cust
 Inter 4.1 is self-hosted from the official rsms.me distribution with its OFL license. The variable webfont is subset to Latin, Cyrillic and relevant punctuation; real weights are used with font synthesis disabled. The homepage font variables do not change course or learning typography. Every direction has a subtitle, with the individual/corporate lines taken from their existing program content. Card gradients fade out on pointer hover and visible keyboard focus; reduced motion removes that transition.
 
 Direction photographs ease to 1.065 over 1.8 seconds on hover or visible keyboard focus and settle back over 1.4 seconds. A low initial velocity and long deceleration give the movement a soft, continuous feel; the gradient fades over 700 ms. The image stays clipped inside its unchanged frame, with text and focus outlines stationary. CSS transitions reverse from the current scale when interrupted. Reduced-motion users receive no photo zoom or animated fade.
+
+## Public UI and course selection
+
+The Academy hero now has a direct “Обрати навчання” action. A compact consultation section after the six directions offers help choosing a program through the existing inquiry flow. Course pages always expose a secondary path to details or package pricing without changing enrollment availability.
+
+`academy-ui.css` scopes shared controls to public Academy pages: compact catalog headings and filters, consistent action shapes and touch targets, a learning-first mobile menu, readable inquiry fields, and grouped footer navigation. The tablet navigation gap is closed. Native dialogs retain keyboard handling and focus return, describe the inquiry context, and lock background scrolling without shifting the page. Approved photography, card motion, course content, and payment behavior are unchanged.
+
+Local browser checks cover widths from 320 to 1440 pixels, short landscape screens, menu links, filter controls, dialog validation, Escape/focus return, and horizontal overflow. Architecture, TypeScript, formatting, the test suite, and the isolated static production build are required before staging activation.

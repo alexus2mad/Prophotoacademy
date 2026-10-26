@@ -29,6 +29,9 @@ export function AcademyDesignHero({ shopUrl }: AcademyDesignHeroProps) {
             <EcosystemWordmark name="SHOP" />
           </a>
         </nav>
+        <a className="button academy-hero-action" href="#courses">
+          Обрати навчання
+        </a>
       </div>
     </section>
   );
