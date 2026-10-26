@@ -21,7 +21,7 @@ export function AcademyDirectionCard({ direction }: AcademyDirectionCardProps) {
             </InquiryButton>
           )}
         </h3>
-        {direction.subtitle && <p>{direction.subtitle}</p>}
+        <p>{direction.subtitle}</p>
       </div>
     </article>
   );

@@ -10,14 +10,22 @@ import { academyHomePhoto } from '@/lib/photography/academy-home';
 import { siteHref } from '@/lib/ecosystem';
 import type { AcademyHomeTemplateProps } from './types';
 const display = localFont({
-  src: '../../../app/fonts/kyivtype-black.woff2',
+  src: [
+    { path: '../../../app/fonts/kyivtype-light.woff2', weight: '300', style: 'normal' },
+    { path: '../../../app/fonts/kyivtype-black.woff2', weight: '900', style: 'normal' },
+  ],
   variable: '--font-home-display',
-  weight: '900',
+  display: 'swap',
+});
+const text = localFont({
+  src: '../../../app/fonts/inter-home-variable.woff2',
+  variable: '--font-home-text',
+  weight: '100 900',
   display: 'swap',
 });
 export function AcademyHomeTemplate({ content }: AcademyHomeTemplateProps) {
   return (
-    <div className={'academy-design-home ' + display.variable}>
+    <div className={`academy-design-home ${display.variable} ${text.variable}`}>
       <AcademyDesignHero shopUrl={content.settings.shop} />
       <AcademyDirections directions={academyDirections(content)} />
       <EcosystemBanner

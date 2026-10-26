@@ -25,16 +25,19 @@ export function academyDirections(content: AcademyContent): AcademyDirection[] {
     },
     {
       title: 'Індивідуальне навчання',
+      subtitle: individual?.eyebrow || 'Навчання навколо вашої мети',
       image: academyHomePhoto('courses'),
       href: individual ? '/' + individual.slug : '/courses?type=individual',
     },
     {
       title: 'Корпоративне навчання',
+      subtitle: corporate?.eyebrow || 'Сильніший контент усередині команди',
       image: academyHomePhoto('workshops'),
       href: corporate ? '/' + corporate.slug : '/courses?type=corporate',
     },
     {
       title: 'ProPhoto кемп',
+      subtitle: 'Дізнайтеся про наступний кемп',
       image: academyHomePhoto('camp'),
       inquiryTitle: 'Дізнатися про наступний ProPhoto кемп',
     },
