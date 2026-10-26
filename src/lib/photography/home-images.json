@@ -98,5 +98,35 @@
     "width": 2000,
     "height": 3000,
     "position": "50% 35%"
+  },
+  "individual": {
+    "id": "academy-home-individual",
+    "src": "/images/hero/home-individual-907a241cc0ad-1200.webp",
+    "alt": "Студійний портрет моделі на синьо-жовтому тлі",
+    "credit": "Олена Попова",
+    "driveId": "1vVzLboNUGqOSa7imkWeeAgc0Q7jljRRh",
+    "width": 3945,
+    "height": 4931,
+    "position": "50% 45%"
+  },
+  "corporate": {
+    "id": "academy-home-corporate",
+    "src": "/images/hero/home-corporate-c310f5aa4b40-1200.webp",
+    "alt": "Полуниця у воді з бульбашками на бірюзовому тлі",
+    "credit": "Олена Попова",
+    "driveId": "1QGdo1ME8GgJYp7Q_hpSt6LJKOczl0ouE",
+    "width": 2053,
+    "height": 3649,
+    "position": "50% 85%"
+  },
+  "camp-retreat": {
+    "id": "academy-home-camp-retreat",
+    "src": "/images/hero/home-camp-retreat-77447ac041fb-1200.webp",
+    "alt": "Сонячний портрет жінки в солом’яному капелюсі біля моря",
+    "credit": "Олена Попова",
+    "driveId": "1XgCJUwbCjEAdsaa9POMTqwtm8DZIoctw",
+    "width": 2739,
+    "height": 3652,
+    "position": "50% 0%"
   }
 }

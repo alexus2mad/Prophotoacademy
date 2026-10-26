@@ -64,5 +64,23 @@
     "source": "https://s3.amazonaws.com/webflow-prod-assets/694a5cc146bb9192fcdbb5ac/694ac9b92fb99721fe6dc166_0d976ba5a66c9806b60d99f8c8d488280b14dcc8.avif",
     "originalWidth": 2000,
     "originalHeight": 3000
+  },
+  {
+    "id": "individual",
+    "source": "https://drive.google.com/uc?export=download&id=1vVzLboNUGqOSa7imkWeeAgc0Q7jljRRh",
+    "originalWidth": 3945,
+    "originalHeight": 4931
+  },
+  {
+    "id": "corporate",
+    "source": "https://drive.google.com/uc?export=download&id=1QGdo1ME8GgJYp7Q_hpSt6LJKOczl0ouE",
+    "originalWidth": 2053,
+    "originalHeight": 3649
+  },
+  {
+    "id": "camp-retreat",
+    "source": "https://drive.google.com/uc?export=download&id=1XgCJUwbCjEAdsaa9POMTqwtm8DZIoctw",
+    "originalWidth": 2739,
+    "originalHeight": 3652
   }
 ]

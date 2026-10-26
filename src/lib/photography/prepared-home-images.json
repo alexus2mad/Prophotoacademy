@@ -164,5 +164,47 @@
       "src": "/images/hero/home-shop-0212dda4496d-1200.webp",
       "width": 1200
     }
+  ],
+  "/images/hero/home-individual-907a241cc0ad-1200.webp": [
+    {
+      "src": "/images/hero/home-individual-f81dd3dbadf0-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/home-individual-542612de1072-840.webp",
+      "width": 840
+    },
+    {
+      "src": "/images/hero/home-individual-907a241cc0ad-1200.webp",
+      "width": 1200
+    }
+  ],
+  "/images/hero/home-corporate-c310f5aa4b40-1200.webp": [
+    {
+      "src": "/images/hero/home-corporate-e754eec9d8f4-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/home-corporate-d33a00365dd1-840.webp",
+      "width": 840
+    },
+    {
+      "src": "/images/hero/home-corporate-c310f5aa4b40-1200.webp",
+      "width": 1200
+    }
+  ],
+  "/images/hero/home-camp-retreat-77447ac041fb-1200.webp": [
+    {
+      "src": "/images/hero/home-camp-retreat-51860ee7e971-480.webp",
+      "width": 480
+    },
+    {
+      "src": "/images/hero/home-camp-retreat-eb6eadf3bb29-840.webp",
+      "width": 840
+    },
+    {
+      "src": "/images/hero/home-camp-retreat-77447ac041fb-1200.webp",
+      "width": 1200
+    }
   ]
 }
