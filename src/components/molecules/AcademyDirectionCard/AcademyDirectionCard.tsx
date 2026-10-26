@@ -14,10 +14,12 @@ export function AcademyDirectionCard({ direction }: AcademyDirectionCardProps) {
       <div className="academy-direction-copy">
         <h3>
           {direction.href ? (
-            <Link href={direction.href}>{direction.title}</Link>
+            <Link href={direction.href}>
+              <span className="academy-direction-title">{direction.title}</span>
+            </Link>
           ) : (
             <InquiryButton className="academy-direction-action" title={direction.inquiryTitle}>
-              {direction.title}
+              <span className="academy-direction-title">{direction.title}</span>
             </InquiryButton>
           )}
         </h3>

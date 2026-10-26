@@ -16,7 +16,7 @@ All new theme rules are scoped to the Academy homepage. Course-page stacks, cust
 
 Inter 4.1 is self-hosted from the official rsms.me distribution with its OFL license. The variable webfont is subset to Latin, Cyrillic and relevant punctuation; real weights are used with font synthesis disabled. The homepage font variables do not change course or learning typography. Every direction has a subtitle, with the individual/corporate lines taken from their existing program content. Card gradients fade out on pointer hover and visible keyboard focus; reduced motion removes that transition.
 
-Direction photographs ease to 1.065 over 1.8 seconds on hover or visible keyboard focus and settle back over 1.4 seconds. A low initial velocity and long deceleration give the movement a soft, continuous feel; the gradient fades over 700 ms. The image stays clipped inside its unchanged frame, with text and focus outlines stationary. CSS transitions reverse from the current scale when interrupted. Reduced-motion users receive no photo zoom or animated fade.
+Direction photographs ease to 1.065 over 1.8 seconds on hover or visible keyboard focus and settle back over 1.4 seconds. Titles rise 6 pixels with the same timing and easing, without scaling the type or changing its wrapping. Only the inner title span moves, preserving the full-card link/button target; subtitles and focus outlines stay stationary. A low initial velocity and long deceleration give the movement a soft, continuous feel; the gradient fades over 700 ms. The image stays clipped inside its unchanged frame. CSS transitions reverse from their current position when interrupted. Reduced-motion users receive no photo zoom, title movement or animated fade.
 
 ## Public UI and course selection
 
