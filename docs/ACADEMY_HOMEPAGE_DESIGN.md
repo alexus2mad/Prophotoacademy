@@ -15,3 +15,5 @@ Two mockup photographs could not be found in the supplied Drive folders: the dar
 All new theme rules are scoped to the Academy homepage. Course-page stacks, customer accounts, learning, administration, payment behavior, CMS schemas and the Hub design are unchanged.
 
 Inter 4.1 is self-hosted from the official rsms.me distribution with its OFL license. The variable webfont is subset to Latin, Cyrillic and relevant punctuation; real weights are used with font synthesis disabled. The homepage font variables do not change course or learning typography. Every direction has a subtitle, with the individual/corporate lines taken from their existing program content. Card gradients fade out on pointer hover and visible keyboard focus; reduced motion removes that transition.
+
+Direction photographs gently scale to 1.035 on hover or visible keyboard focus over 450 ms, clipped inside the unchanged card frame. Reduced-motion users receive no photo zoom.
