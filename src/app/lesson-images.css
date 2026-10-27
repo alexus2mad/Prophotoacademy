@@ -4,7 +4,7 @@
   width: 100%;
   padding: 0;
   border: 0;
-  border-radius: 12px;
+  border-radius: 0;
   background: transparent;
   cursor: zoom-in;
 }
@@ -18,12 +18,12 @@
   height: 36px;
   border: 1px solid #ffffff30;
   border-radius: 50%;
-  background: #101211cc;
-  color: #f2efe7;
+  background: rgb(5 5 5 / 80%);
+  color: var(--text);
   transition: background 160ms;
 }
 .lesson-image-open:is(:hover, :focus-visible) .lesson-image-open-icon {
-  background: #101211;
+  background: var(--canvas);
 }
 body:has(.lesson-image-viewer[open]) {
   overflow: hidden;
@@ -35,8 +35,8 @@ body:has(.lesson-image-viewer[open]) {
   max-height: none;
   padding: 0;
   overflow: hidden;
-  background: #101211;
-  font-family: var(--font-manrope), sans-serif;
+  background: var(--canvas);
+  font-family: var(--font-home-text), sans-serif;
   font-size: 1rem;
   line-height: 1.5;
 }
@@ -45,7 +45,7 @@ body:has(.lesson-image-viewer[open]) {
   grid-template-rows: auto minmax(0, 1fr) auto;
 }
 .lesson-image-viewer::backdrop {
-  background: #050706ed;
+  background: rgb(5 5 5 / 93%);
 }
 .lesson-image-viewer .dialog-close {
   top: 12px;
@@ -55,8 +55,8 @@ body:has(.lesson-image-viewer[open]) {
 }
 .lesson-image-viewer-header {
   padding: 22px 76px 22px 24px;
-  border-bottom: 1px solid #343b33;
-  color: #bcc1b8;
+  border-bottom: 1px solid var(--border);
+  color: var(--secondary);
 }
 .lesson-image-slide {
   min-height: 0;
@@ -69,7 +69,7 @@ body:has(.lesson-image-viewer[open]) {
   align-items: center;
   gap: 24px;
   padding: 16px 24px;
-  border-top: 1px solid #343b33;
+  border-top: 1px solid var(--border);
 }
 .lesson-image-viewer-footer p {
   max-height: 5lh;
@@ -113,11 +113,11 @@ body:has(.lesson-image-viewer[open]) {
   border: 0;
   border-radius: 8px;
   background: transparent;
-  color: #f2efe7;
+  color: var(--text);
   font-variant-numeric: tabular-nums;
 }
 .image-zoom-reset:hover {
-  background: #242824;
+  background: var(--elevated);
 }
 .image-zoom-viewport {
   position: relative;

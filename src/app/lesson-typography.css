@@ -58,7 +58,7 @@
 .lesson-content .lesson-heading > p:not(.learning-meta) {
   font-size: var(--lesson-body);
   line-height: var(--lesson-leading);
-  color: #bcc1b8;
+  color: var(--secondary);
 }
 .lesson-content .learning-meta {
   font-size: 0.9375rem;
@@ -126,15 +126,15 @@
   margin-bottom: 0;
 }
 .lesson-prose li::marker {
-  color: #bcc1b8;
+  color: var(--secondary);
   font-variant-numeric: tabular-nums;
 }
 .lesson-prose strong {
   font-weight: 600;
-  color: #f2efe7;
+  color: var(--text);
 }
 .lesson-prose a {
-  color: #d5e4b9;
+  color: var(--accent);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.2em;
@@ -143,28 +143,28 @@
   text-decoration-thickness: 2px;
 }
 .lesson-prose blockquote {
-  border-inline-start: 2px solid #8c9e74;
+  border-inline-start: 2px solid var(--control-border);
   padding: 0.25rem 0 0.25rem 1.25rem;
-  color: #cbd0c6;
+  color: var(--secondary);
 }
 .lesson-prose blockquote > * + * {
   margin-top: 1em;
 }
 .lesson-prose hr {
   border: 0;
-  border-top: 1px solid #333a33;
+  border-top: 1px solid var(--border);
   margin-block: 2rem;
 }
 .lesson-prose code {
   font-size: 0.9em;
-  background: #242824;
+  background: var(--elevated);
   border-radius: 0.25rem;
   padding: 0.1em 0.25em;
 }
 .lesson-prose pre {
   white-space: pre-wrap;
   padding: 1rem;
-  background: #191c1a;
+  background: var(--surface);
   border-radius: 0.5rem;
 }
 .lesson-prose pre code {
@@ -174,9 +174,9 @@
 .lesson-table-scroll {
   max-width: 100%;
   overflow-x: auto;
-  border: 1px solid #424b41;
+  border: 1px solid var(--border);
   border-radius: 0.625rem;
-  scrollbar-color: #7c8b6c #191c1a;
+  scrollbar-color: var(--control-border) var(--surface);
 }
 .lesson-table-scroll table {
   width: 100%;
@@ -189,16 +189,16 @@
 .lesson-table-scroll :is(th, td) {
   padding: 0.875rem 1rem;
   vertical-align: top;
-  border-bottom: 1px solid #333a33;
+  border-bottom: 1px solid var(--border);
   min-width: 9rem;
 }
 .lesson-table-scroll th {
-  background: #242824;
+  background: var(--elevated);
   font-weight: 600;
-  color: #f2efe7;
+  color: var(--text);
 }
 .lesson-table-scroll tbody tr:nth-child(even) {
-  background: #191c1a;
+  background: var(--surface);
 }
 .lesson-table-scroll tbody tr:last-child td {
   border-bottom: 0;
@@ -215,10 +215,10 @@
   min-height: 0;
   padding: 0;
   margin-inline-end: 0.5em;
-  accent-color: #d5e4b9;
+  accent-color: var(--accent);
 }
 .lesson-prose .footnotes {
-  border-top: 1px solid #333a33;
+  border-top: 1px solid var(--border);
   padding-top: 1.25rem;
   font-size: 0.9375rem;
 }
@@ -226,11 +226,11 @@
   font-size: 0.9375rem;
   line-height: 1.55;
   margin-top: 0.75rem;
-  color: #bcc1b8;
+  color: var(--secondary);
 }
 .lesson-image-placeholder {
   width: 100%;
-  background: #191c1a;
+  background: var(--surface);
   border-radius: 0.5rem;
 }
 .lesson-content .lesson-image img {

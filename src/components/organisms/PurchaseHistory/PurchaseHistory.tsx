@@ -3,7 +3,7 @@ import { displayDate } from '@/lib/learning/selectors';
 import type { PurchaseHistoryProps } from './types';
 export function PurchaseHistory({ purchases }: PurchaseHistoryProps) {
   return purchases.length ? (
-    <div className="admin-table-wrap">
+    <div className="admin-table-wrap" role="region" aria-label="Історія покупок" tabIndex={0}>
       <table className="admin-table">
         <thead>
           <tr>

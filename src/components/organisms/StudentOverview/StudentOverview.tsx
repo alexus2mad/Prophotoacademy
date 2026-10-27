@@ -16,41 +16,34 @@ export function StudentOverview({
         <p>Продовжуйте з того місця, де зупинилися</p>
       </div>
       {featured ? (
-        <div className="student-dashboard-grid">
+        <div className={'student-dashboard-grid' + (nextSession ? ' has-session' : '')}>
           <LearningCourseCard course={featured} featured demo={demo} />
-          <aside className="next-session-card">
-            <h2>{nextSession ? 'Наступна зустріч' : 'Навчайтеся у своєму темпі'}</h2>
-            {nextSession ? (
-              <>
-                <p className="session-title">{nextSession.title}</p>
-                <p className="session-date">{displayDate(nextSession.starts_at)}</p>
-                <p>
-                  {new Intl.DateTimeFormat('uk-UA', {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    timeZone: 'Europe/Kyiv',
-                  }).format(new Date(nextSession.starts_at))}{' '}
-                  · Київ
-                </p>
-                <Link
-                  className="button button-secondary"
-                  href={lessonHref(nextSession.course_id, nextSession.lesson_id, demo)}
-                >
-                  Деталі зустрічі
-                </Link>
-              </>
-            ) : (
+          {nextSession && (
+            <aside className="next-session-card">
+              <h2>Наступна зустріч</h2>
+              <p className="session-title">{nextSession.title}</p>
+              <p className="session-date">{displayDate(nextSession.starts_at)}</p>
               <p>
-                Усі доступні уроки та матеріали вже у вашому кабінеті. Обирайте зручний час і
-                повертайтеся до важливого.
+                {new Intl.DateTimeFormat('uk-UA', {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  timeZone: 'Europe/Kyiv',
+                }).format(new Date(nextSession.starts_at))}{' '}
+                · Київ
               </p>
-            )}
-          </aside>
+              <Link
+                className="button button-secondary"
+                href={lessonHref(nextSession.course_id, nextSession.lesson_id, demo)}
+              >
+                Деталі зустрічі
+              </Link>
+            </aside>
+          )}
         </div>
       ) : (
         <section className="workspace-empty">
           <h2>Ваш перший курс попереду</h2>
-          <p>Після підтвердження оплати курс з’явиться тут автоматично</p>
+          <p>Курси, до яких ви отримаєте доступ, з’являться тут</p>
           <Link href="/courses" className="button">
             Обрати курс
           </Link>

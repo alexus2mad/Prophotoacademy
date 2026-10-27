@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { Member } from '../src/lib/auth/types';
+import type { FontOptions } from './academy-theme/types';
 
 const auth = vi.hoisted(() => ({
   member: null as Member | null,
@@ -24,6 +25,12 @@ vi.mock('next/navigation', () => ({
   redirect: (path: string) => {
     throw new Error('REDIRECT:' + path);
   },
+}));
+vi.mock('next/font/local', () => ({
+  default: (options: FontOptions) => ({
+    variable: options.variable,
+    className: options.variable,
+  }),
 }));
 import LoginPage from '../src/app/login/page';
 import { POST } from '../src/app/api/auth/[action]/route';

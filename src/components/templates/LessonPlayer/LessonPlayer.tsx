@@ -5,6 +5,7 @@ import { CourseCurriculum } from '@/components/molecules/CourseCurriculum/Course
 import { LessonBody } from '@/components/organisms/LessonBody/LessonBody';
 import { LessonCompletion } from '@/components/molecules/LessonCompletion/LessonCompletion';
 import { lessonHref } from '@/lib/learning/selectors';
+import { academyThemeClassName } from '@/lib/typography/fonts';
 import { useLessonPlayer } from './hooks';
 import type { LessonPlayerProps } from './types';
 export function LessonPlayer(props: LessonPlayerProps) {
@@ -22,7 +23,7 @@ export function LessonPlayer(props: LessonPlayerProps) {
     demo,
   };
   return (
-    <div className="lesson-app">
+    <div className={`lesson-app ${academyThemeClassName}`}>
       {demo && (
         <div className="learning-demo-note">
           Демонстрація · навчальні приклади, прогрес зберігається лише в цьому браузері
