@@ -51,8 +51,10 @@ export function canEnroll(offering: Offering, pack?: Package, now = new Date()) 
     ['open', 'limited'].includes(offering.availability) &&
     (!offering.startDate || offering.openAfterStart || offering.startDate >= today) &&
     (pack
-      ? ['open', 'limited'].includes(pack.availability)
-      : offering.packages.some((p) => ['open', 'limited'].includes(p.availability)))
+      ? !pack.inquiryOnly && ['open', 'limited'].includes(pack.availability)
+      : offering.packages.some(
+          (p) => !p.inquiryOnly && ['open', 'limited'].includes(p.availability),
+        ))
   );
 }
 export function offeringStatus(offering: Offering): Availability {

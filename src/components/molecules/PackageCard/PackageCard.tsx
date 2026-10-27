@@ -17,21 +17,24 @@ export function PackageCard({
     <article
       key={pack.id}
       className="package-card"
+      data-featured={pack.featured || undefined}
       data-unavailable={pack.availability === 'soldOut'}
     >
       <div className="package-header">
         <h3>{pack.name}</h3>
-        {pack.availability === 'soldOut' && <span className="package-status">Місць немає</span>}
+        {pack.featured && <span className="package-popularity">Найпопулярніший</span>}
       </div>
       <div className="price">
         {money(pack.price)}
-        {pack.previousPrice && <span className="previous-price">{money(pack.previousPrice)}</span>}
+        {pack.previousPrice !== undefined && pack.previousPrice > pack.price && (
+          <span className="previous-price">{money(pack.previousPrice)}</span>
+        )}
       </div>
       <div className="package-action">
-        {(enrollable ?? canEnroll(offering, pack)) ? (
+        {!pack.inquiryOnly && (enrollable ?? canEnroll(offering, pack)) ? (
           <Link
             href={`/checkout?offering=${encodeURIComponent(offering.id)}&package=${encodeURIComponent(pack.id)}`}
-            className="button button-wide"
+            className={`button button-wide${pack.featured ? '' : ' button-secondary'}`}
           >
             {paymentDisabled
               ? 'Отримати доступ'
@@ -39,25 +42,29 @@ export function PackageCard({
                 ? 'Придбати'
                 : `Обрати ${pack.name}`}
           </Link>
-        ) : pack.availability === 'soldOut' ? null : (
+        ) : pack.availability === 'soldOut' ? (
+          <span className="package-status">Місць немає</span>
+        ) : (
           <InquiryButton
             programId={program.id}
             offeringId={offering.id}
             packageId={pack.id}
             title={`${program.shortTitle}: ${pack.name}`}
-            className="button button-secondary button-wide"
+            className={`button button-wide${pack.featured ? '' : ' button-secondary'}`}
           >
             Уточнити пакет
           </InquiryButton>
         )}
-        {paymentDisabled && enrollable && availableLessons && (
+        {!pack.inquiryOnly && paymentDisabled && enrollable && availableLessons && (
           <EnrollmentScope lessons={availableLessons} />
         )}
       </div>
       <p>{pack.description}</p>
-      <div className="package-includes-desktop">
-        <PackageIncludes pack={pack} />
-      </div>
+      {!!pack.includes.length && (
+        <div className="package-includes-desktop">
+          <PackageIncludes pack={pack} />
+        </div>
+      )}
       {!!pack.includes.length && (
         <details className="package-includes-mobile">
           <summary>Що входить у пакет</summary>

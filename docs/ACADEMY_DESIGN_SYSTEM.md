@@ -29,6 +29,7 @@ Preserve meaningful success, warning, failure and destructive colors together wi
 ## Composition
 
 - Public pages use bounded 1440px content, responsive gutters and deliberate square-corner photography. Catalog rows align instead of staggering. Course facts and package decisions precede a large photograph on phones; the first available package price and action should be visible at 390 × 844.
+- Package cards use aligned title, price and action rows. The authored featured package uses the elevated neutral surface, a stronger border and “Найпопулярніший”; availability remains independent of emphasis. Mobile comparison places this label above the table and starts with BASE and the featured tier. See [pricing rules](PRICING.md) for amounts and inquiry-only boundaries.
 - Inner-page public headers stay in document flow, with 72% black desktop backgrounds. Only the homepage overlays its hero. Checkout and order status keep reduced navigation.
 - Login, checkout, legal content and status screens use quiet reading/form widths. No decorative animation competes with a transaction or error.
 - The student dashboard has one prominent resume/start action. Upcoming meetings are shown only when available. Purchase history, settings and additional courses remain secondary.

@@ -7,6 +7,7 @@ export const isProduct = (pack: Package) => pack.kind === 'product';
 export function canTestEnroll(offering: Offering, pack: Package) {
   return (
     !isProduct(pack) &&
+    !pack.inquiryOnly &&
     !['soldOut', 'archived'].includes(offering.availability) &&
     !['soldOut', 'archived'].includes(pack.availability)
   );

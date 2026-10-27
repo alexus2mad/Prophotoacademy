@@ -345,6 +345,21 @@ export const schemaTypes = [
               text('id', 'Stable package ID', true),
               text('name', 'Name', true),
               defineField({
+                name: 'featured',
+                title: 'Most popular package',
+                type: 'boolean',
+                initialValue: false,
+                description: 'Highlight one package per intake with the most-popular label.',
+              }),
+              defineField({
+                name: 'inquiryOnly',
+                title: 'Inquiry only',
+                type: 'boolean',
+                initialValue: false,
+                description:
+                  'Accept inquiries only. Blocks checkout and test enrollment until the package is ready.',
+              }),
+              defineField({
                 name: 'kind',
                 title: 'Kind',
                 type: 'string',
@@ -374,9 +389,13 @@ export const schemaTypes = [
         ],
         validation: (r) =>
           r.custom((value) => {
-            const ids = (value as PackageIdentity[] | undefined)?.map((x) => x.id) || [];
+            const packages = (value as PackageIdentity[] | undefined) || [];
+            const ids = packages.map((x) => x.id);
+            if (new Set(ids).size !== ids.length)
+              return 'Package IDs must be unique within an intake';
             return (
-              new Set(ids).size === ids.length || 'Package IDs must be unique within an intake'
+              packages.filter((pack) => pack.featured).length <= 1 ||
+              'Choose at most one most-popular package per intake'
             );
           }),
       }),

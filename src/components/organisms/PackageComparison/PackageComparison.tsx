@@ -17,6 +17,7 @@ export function PackageComparison({
     offeringId,
     programTitle,
   });
+  const featured = selected.find((pack) => pack.featured);
   return (
     <>
       <Button
@@ -79,6 +80,9 @@ export function PackageComparison({
                 </select>
               </div>
             </div>
+          )}
+          {featured && (
+            <p className="comparison-featured-label">{featured.name} · Найпопулярніший</p>
           )}
           <PackageComparisonTable
             items={selected}

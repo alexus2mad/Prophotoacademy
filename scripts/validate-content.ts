@@ -40,8 +40,17 @@ for (const offering of seed.offerings) {
   if (!programIds.has(offering.programId)) errors.push(`Offering reference: ${offering.id}`);
   const ids = offering.packages.map((p) => p.id);
   if (new Set(ids).size !== ids.length) errors.push(`Package IDs: ${offering.id}`);
-  for (const pack of offering.packages)
+  if (offering.packages.filter((pack) => 'featured' in pack && pack.featured).length > 1)
+    errors.push(`Multiple featured packages: ${offering.id}`);
+  for (const pack of offering.packages) {
     if (pack.price <= 0 || !Number.isInteger(pack.price)) errors.push(`Price: ${pack.id}`);
+    if (
+      'previousPrice' in pack &&
+      typeof pack.previousPrice === 'number' &&
+      pack.previousPrice <= pack.price
+    )
+      errors.push(`Previous price must exceed the current price: ${pack.id}`);
+  }
 }
 for (const image of seed.images) {
   if (

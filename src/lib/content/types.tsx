@@ -19,6 +19,8 @@ export type Package = {
   kind?: PackageKind;
   price: number;
   previousPrice?: number;
+  featured?: boolean;
+  inquiryOnly?: boolean;
   availability: Availability;
   description: string;
   includes: string[];

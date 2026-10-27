@@ -294,10 +294,10 @@ describe('courses sold like the original site', () => {
     const response = await checkout(post('/api/checkout', input));
     expect(response.status).toBe(200);
     const { orderId, fields } = await response.json();
-    expect(fields.amount).toBe(25500);
-    expect(await order()).toMatchObject({ productKind: 'course', amount: 25500 });
+    expect(fields.amount).toBe(63900);
+    expect(await order()).toMatchObject({ productKind: 'course', amount: 63900 });
     expect((await order()).fulfillment).toBeUndefined();
-    await callback(post('/api/payments/wayforpay/callback', providerCallback(orderId, 25500)));
+    await callback(post('/api/payments/wayforpay/callback', providerCallback(orderId, 63900)));
     expect((await order()).status).toBe('approved');
     expect((await pg.query('SELECT * FROM academy.grants')).rows).toHaveLength(0);
     expect((await events()).map((e) => e.data.event)).toEqual(['payment_start', 'payment_success']);

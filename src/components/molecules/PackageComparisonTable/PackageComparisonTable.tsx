@@ -13,20 +13,19 @@ export function PackageComparisonTable({
       <thead>
         <tr>
           <td />
-          <>
-            {items.map((pack) => (
-              <th scope="col" key={pack.id}>
-                {pack.name}
-              </th>
-            ))}
-          </>
+          {items.map((pack) => (
+            <th scope="col" key={pack.id} data-featured={pack.featured || undefined}>
+              {pack.name}
+              {pack.featured && <span className="package-popularity">Найпопулярніший</span>}
+            </th>
+          ))}
         </tr>
       </thead>
       <tbody>
         <tr>
           <th scope="row">Вартість</th>
           {items.map((pack) => (
-            <td key={pack.id}>
+            <td key={pack.id} data-featured={pack.featured || undefined}>
               <strong className="comparison-price">{money(pack.price)}</strong>
             </td>
           ))}
@@ -34,25 +33,33 @@ export function PackageComparisonTable({
         <tr>
           <th scope="row">Формат підтримки</th>
           {items.map((pack) => (
-            <td key={pack.id}>{pack.description}</td>
+            <td key={pack.id} data-featured={pack.featured || undefined}>
+              {pack.description}
+            </td>
           ))}
         </tr>
         <tr>
           <th scope="row">Що входить</th>
           {items.map((pack) => (
-            <td key={pack.id}>
-              <ul>
-                {pack.includes.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
+            <td key={pack.id} data-featured={pack.featured || undefined}>
+              {pack.includes.length ? (
+                <ul>
+                  {pack.includes.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              ) : pack.inquiryOnly ? (
+                'Уточнюється'
+              ) : (
+                '—'
+              )}
             </td>
           ))}
         </tr>
         <tr>
           <th scope="row">Наявність</th>
           {items.map((pack) => (
-            <td key={pack.id}>
+            <td key={pack.id} data-featured={pack.featured || undefined}>
               <span className="comparison-status">{pack.statusLabel}</span>
             </td>
           ))}
@@ -62,8 +69,8 @@ export function PackageComparisonTable({
             <span className="sr-only">Запис</span>
           </th>
           {items.map((pack) => (
-            <td key={pack.id}>
-              {pack.purchaseUrl ? (
+            <td key={pack.id} data-featured={pack.featured || undefined}>
+              {pack.purchaseUrl && !pack.inquiryOnly ? (
                 <Link
                   className="text-link"
                   href={pack.purchaseUrl}
@@ -74,6 +81,7 @@ export function PackageComparisonTable({
                 </Link>
               ) : pack.inquiryAllowed ? (
                 <button
+                  type="button"
                   className="text-link"
                   onClick={() => onInquire(pack)}
                   aria-label={`Уточнити ${pack.name}`}

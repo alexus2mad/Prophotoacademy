@@ -3,22 +3,22 @@ import { PackageComparison } from '@/components/organisms/PackageComparison/Pack
 import { canEnroll } from '@/lib/format';
 import type { ProgramPackagesProps } from './types';
 export function ProgramPackages({ offering, program, enrollment }: ProgramPackagesProps) {
-  const available = (id: string) =>
-    enrollment
-      ? enrollment.packageIds.includes(id)
-      : canEnroll(
-          offering,
-          offering.packages.find((p) => p.id === id),
-        );
+  const available = (id: string) => {
+    const pack = offering.packages.find((p) => p.id === id);
+    if (!pack || pack.inquiryOnly) return false;
+    return enrollment ? enrollment.packageIds.includes(id) : canEnroll(offering, pack);
+  };
   const open = offering.packages.some((p) => available(p.id));
   const compared = offering.packages.map((pack) => ({
     ...pack,
     statusLabel:
       pack.availability === 'soldOut'
         ? 'Місць немає'
-        : available(pack.id)
-          ? 'Доступний'
-          : 'Уточнюємо набір',
+        : pack.inquiryOnly
+          ? 'За запитом'
+          : available(pack.id)
+            ? 'Доступний'
+            : 'Уточнюємо набір',
     purchaseUrl: available(pack.id)
       ? `/checkout?offering=${encodeURIComponent(offering.id)}&package=${encodeURIComponent(pack.id)}`
       : undefined,

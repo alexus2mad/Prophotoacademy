@@ -1,1 +1,1 @@
-export type PackageIdentity = { id?: string };
+export type PackageIdentity = { id?: string; featured?: boolean };

@@ -13,7 +13,9 @@ export function usePackageComparison({
 }: PackageComparisonProps) {
   const { dialog } = useDialog();
   const [first, setFirst] = useState(packages[0].id);
-  const [second, setSecond] = useState(packages.at(-1)!.id);
+  const [second, setSecond] = useState(
+    packages.find((pack) => pack.featured && pack.id !== packages[0].id)?.id || packages.at(-1)!.id,
+  );
   function inquire(pack: ComparisonPackage) {
     dialog.current?.close();
     openInquiry({

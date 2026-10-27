@@ -437,7 +437,8 @@
         {
           "id": "visual-gold",
           "name": "GOLD",
-          "price": 19500,
+          "price": 25500,
+          "featured": true,
           "availability": "soldOut",
           "description": "Теорія та практичний воркшоп",
           "includes": [
@@ -449,7 +450,7 @@
         {
           "id": "visual-platinum",
           "name": "PLATINUM",
-          "price": 25500,
+          "price": 63900,
           "availability": "limited",
           "description": "Практика й підтримка викладача",
           "includes": [
@@ -490,7 +491,8 @@
         {
           "id": "commercial-gold",
           "name": "GOLD",
-          "price": 21200,
+          "price": 29900,
+          "featured": true,
           "availability": "soldOut",
           "description": "Навчання з живою практикою",
           "includes": [
@@ -502,7 +504,7 @@
         {
           "id": "commercial-platinum",
           "name": "PLATINUM",
-          "price": 29999,
+          "price": 79900,
           "availability": "limited",
           "description": "Повна програма комерційного кріейтора",
           "includes": [
@@ -545,20 +547,29 @@
         },
         {
           "id": "instagram-expert",
-          "name": "PLATINUM EXPERT",
+          "name": "GOLD",
           "price": 11900,
+          "featured": true,
           "availability": "soldOut",
           "description": "Робота над власним експертним брендом",
           "includes": [
             "18 лекцій",
             "Чат та індивідуальна робота",
             "Доступ назавжди"
-          ],
-          "previousPrice": 16000
+          ]
+        },
+        {
+          "id": "instagram-platinum",
+          "name": "PLATINUM",
+          "price": 29900,
+          "availability": "waitlist",
+          "inquiryOnly": true,
+          "description": "Склад пакета ще уточнюється. Залиште заявку, щоб дізнатися деталі",
+          "includes": []
         }
       ],
       "sourceNotes": [
-        "Продається як на попередньому сайті: BASE 4200 грн після старту 02.10.2026; PLATINUM EXPERT — місць немає."
+        "BASE 4200 грн доступний після старту 02.10.2026. Колишній PLATINUM EXPERT перейменовано на GOLD зі збереженням ID, умов і статусу місць. Новий PLATINUM доступний лише для заявки, доки не визначено його склад і доступ до матеріалів."
       ]
     },
     {
