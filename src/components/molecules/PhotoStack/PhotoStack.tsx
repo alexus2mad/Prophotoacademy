@@ -1,5 +1,7 @@
 'use client';
 import { PreparedPhoto } from '@/components/atoms/PreparedPhoto/PreparedPhoto';
+import { IconButton } from '@/components/atoms/IconButton/IconButton';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { usePhotoStack } from './hooks';
 import type { PhotoStackProps } from './types';
 
@@ -53,12 +55,32 @@ export function PhotoStack({ images, label, sizes }: PhotoStackProps) {
           );
         })}
       </button>
-      <p className="photo-stack-credit" aria-live="polite" aria-atomic="true">
-        {images[index].credit}
-        <span className="sr-only">
-          . Фото {index + 1} з {images.length}
-        </span>
-      </p>
+      <div className="photo-stack-footer">
+        <p className="photo-stack-credit" aria-live="polite" aria-atomic="true">
+          {images[index].credit}
+          <span className="sr-only">
+            . Фото {index + 1} з {images.length}
+          </span>
+        </p>
+        {images.length > 1 && (
+          <div className="photo-stack-controls" aria-label="Керування фотографіями">
+            <IconButton
+              className="photo-stack-control"
+              aria-label="Попереднє фото"
+              onClick={() => move(-1)}
+            >
+              <ChevronLeft size={20} />
+            </IconButton>
+            <IconButton
+              className="photo-stack-control"
+              aria-label="Наступне фото"
+              onClick={() => move(1)}
+            >
+              <ChevronRight size={20} />
+            </IconButton>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

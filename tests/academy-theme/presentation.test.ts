@@ -190,7 +190,25 @@ describe('program purchase decisions', () => {
     expect(sections.indexOf($('#packages')[0])).toBeLessThan(
       sections.indexOf($('#program-overview')[0]),
     );
-    expect($('.program-hero-photo img').length).toBe(1);
+    const gallery = $('.program-hero-photo [role="region"]');
+    expect(gallery.attr('aria-roledescription')).toBe('карусель');
+    expect(gallery.attr('aria-label')).toContain(program.shortTitle);
+    const photos = gallery.find('img');
+    expect(photos.length).toBe(5);
+    expect(new Set(photos.map((_, image) => $(image).attr('src')).get()).size).toBe(5);
+    expect(gallery.find('.photo-stack-print[aria-hidden="false"]').length).toBe(1);
+    expect(gallery.find('.photo-stack-print[aria-hidden="false"]').attr('data-depth')).toBe('0');
+    const stage = gallery.find('button.photo-stack-stage');
+    expect(stage.attr('type')).toBe('button');
+    expect(stage.is(':disabled')).toBe(false);
+    expect(stage.attr('aria-label')).toContain('Наступне фото');
+    for (const label of ['Попереднє фото', 'Наступне фото']) {
+      const control = gallery.find(`button[aria-label="${label}"]`);
+      expect(control.length).toBe(1);
+      expect(control.attr('type')).toBe('button');
+      expect(control.is(':disabled')).toBe(false);
+    }
+    expect(gallery.find('[aria-live="polite"]').text()).toContain('Фото 1 з 5');
     expect($('.program-hero a[href="#packages"]').length).toBe(0);
     expect($('#packages .package-grid a[href^="/checkout?"]').length).toBe(1);
     expect($('.enrollment-panel a[href="#packages"]').length).toBe(1);

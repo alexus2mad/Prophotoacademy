@@ -7,13 +7,13 @@ import { ProgramHero } from '@/components/organisms/ProgramHero/ProgramHero';
 import { ProgramInstructors } from '@/components/organisms/ProgramInstructors/ProgramInstructors';
 import { ProgramOverview } from '@/components/organisms/ProgramOverview/ProgramOverview';
 import { ProgramPackages } from '@/components/organisms/ProgramPackages/ProgramPackages';
-import { findImage, findOffering } from '@/lib/content/selectors';
+import { findOffering } from '@/lib/content/selectors';
 import { money } from '@/lib/format';
-import { programPresentation } from '@/lib/programs/selectors';
+import { programHeroImages, programPresentation } from '@/lib/programs/selectors';
 import type { ProgramTemplateProps } from './types';
 export function ProgramTemplate({ program, content, enrollment }: ProgramTemplateProps) {
   const works = program.workIds.flatMap((id) => content.works.find((work) => work.id === id) || []);
-  const heroImage = findImage(content, program.imageId);
+  const heroImages = programHeroImages(program, content);
   const offering = findOffering(content, program.id);
   const presentation = programPresentation(program, offering);
   if (enrollment) {
@@ -37,7 +37,7 @@ export function ProgramTemplate({ program, content, enrollment }: ProgramTemplat
         <ProgramHero
           program={program}
           offering={offering}
-          image={heroImage}
+          images={heroImages}
           presentation={presentation}
         />
         {!!offering?.packages.length && (

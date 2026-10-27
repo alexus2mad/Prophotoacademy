@@ -1,9 +1,9 @@
-import { Photo } from '@/components/atoms/Photo/Photo';
+import { PhotoStack } from '@/components/molecules/PhotoStack/PhotoStack';
 import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
 import { dateLabel, formatLabel, money } from '@/lib/format';
 import Link from 'next/link';
 import type { ProgramHeroProps } from './types';
-export function ProgramHero({ program, offering, image, presentation }: ProgramHeroProps) {
+export function ProgramHero({ program, offering, images, presentation }: ProgramHeroProps) {
   const { price, open, isCustom, status, inquiryTitle, buttonLabel, hasFutureStart } = presentation;
   return (
     <section className="program-hero">
@@ -62,13 +62,13 @@ export function ProgramHero({ program, offering, image, presentation }: ProgramH
           </div>
         )}
       </div>
-      <figure className="program-hero-photo">
-        <Photo
-          image={image}
-          sizes="(max-width: 599px) calc(100vw - 40px), (max-width: 1023px) calc(100vw - 64px), 42vw"
+      <div className="program-hero-photo">
+        <PhotoStack
+          images={images}
+          label={`Фотографії: ${program.shortTitle}`}
+          sizes="(max-width: 599px) calc(100vw - 88px), 400px"
         />
-        {image.credit && <figcaption>{image.credit}</figcaption>}
-      </figure>
+      </div>
     </section>
   );
 }

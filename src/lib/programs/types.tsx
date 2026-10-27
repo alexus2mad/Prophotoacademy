@@ -1,4 +1,5 @@
-import type { Availability } from '../content/types';
+import type { AcademyContent, Availability } from '../content/types';
+export type ProgramGalleryContent = Pick<AcademyContent, 'images' | 'works'>;
 export type ProgramPresentation = {
   price?: number;
   open: boolean;
