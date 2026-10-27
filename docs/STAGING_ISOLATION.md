@@ -131,3 +131,13 @@ Staging storage and CMS credentials verified against private staging resources;
 staging OS access to production files/secrets is denied. Browser checks confirmed
 each site's navigation remains on its own domain. www and booking return healthy
 responses; staging has noindex and the production homepage does not.
+
+## Academy identity deployment — 27 October 2026
+
+Staging now runs `217001c331582e5c5c426a2c0e67bb43f08bc859`, built from its clean Git archive with the installed staging-only builder. It extends the homepage identity across public, conversion, student, lesson and administrative screens. The earlier card/title motion refinements are included. No schema, content, credentials, payment mode or service API changed.
+
+The previous verified staging release is `92f3cc48bd8eaf7ba2eba440081fc87334cff38d`. After activation and smoke checks, the guarded cleanup command removed obsolete staging release `9d1f052fc57667bc00caed076d085236ee98b4cf`; exactly the active and rollback directories remain. Production still runs `aa6f6aa4630be415d02d120732e5df795da6b5dd` without a service restart. Booking and GitHub Pages were not deployed.
+
+The Linux Webpack build, TypeScript and all 61 generated pages completed successfully. HTTPS checks passed for nine public/demo page routes, database health, two account/admin login redirects, two unauthenticated protected-read denials with no-store, and nine image/font/style assets. Staging keeps its noindex header and passes the configuration-isolation guard. Browser checks confirmed the new catalog, mobile package action before the photograph, demo lesson and editor toolbar. Evidence is retained locally under ignored `.data/academy-redesign/`. These checks did not create a user, submit an order, send email or modify learning progress.
+
+For activation, capture and verify the current staging symlink first. The installed activation script can exit before its health-loop rollback if `systemctl restart` itself fails; this deployment therefore wrapped activation with explicit restoration of the captured release on any failure. Use the same protection until the helper handles that failure path internally. Cleanup must always specify `--environment staging`.
