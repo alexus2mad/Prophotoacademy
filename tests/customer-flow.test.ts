@@ -4,13 +4,26 @@ import { randomUUID } from 'node:crypto';
 import { rmSync } from 'node:fs';
 import path from 'node:path';
 import seed from '../content/academy.json';
+import type { AcademyContent, Offering } from '../src/lib/content/types';
 import { POST as checkout } from '../src/app/api/checkout/route';
 import { POST as inquiry } from '../src/app/api/inquiries/route';
 import { POST as mockPayment } from '../src/app/api/payments/mock/route';
 import { GET as status } from '../src/app/api/orders/status/route';
 import { database, saveInquiry, deliverOutbox, orderByToken } from '../src/lib/ledger';
 
-vi.mock('@/lib/content', () => ({ getContent: async () => seed }));
+const content = structuredClone(seed) as AcademyContent;
+const closedOffering: Offering = {
+  ...content.offerings[0],
+  id: 'qa-sold-out-offering',
+  availability: 'open',
+  verificationRequired: false,
+  startDate: undefined,
+  packages: [
+    { ...content.offerings[0].packages[0], id: 'qa-sold-out-package', availability: 'soldOut' },
+  ],
+};
+content.offerings.push(closedOffering);
+vi.mock('@/lib/content', () => ({ getContent: async () => content }));
 const origin = 'http://127.0.0.1:3000';
 let dbFile: string;
 const input = () => ({
@@ -93,8 +106,8 @@ describe('customer API flow', () => {
         await checkout(
           request('/api/checkout', {
             ...input(),
-            offeringId: seed.offerings[0].id,
-            packageId: seed.offerings[0].packages.find((p) => p.availability === 'soldOut')!.id,
+            offeringId: closedOffering.id,
+            packageId: closedOffering.packages[0].id,
           }),
         )
       ).status,
@@ -102,6 +115,9 @@ describe('customer API flow', () => {
     expect((await checkout(request('/api/checkout', { ...input(), consent: false }))).status).toBe(
       400,
     );
+    expect(
+      (database().prepare('SELECT COUNT(*) AS count FROM orders').get() as CountRow).count,
+    ).toBe(0);
   });
   it('keeps status private and reaches approval through the local simulation', async () => {
     const payload = input();

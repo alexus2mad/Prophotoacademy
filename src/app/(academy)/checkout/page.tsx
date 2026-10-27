@@ -60,18 +60,20 @@ export default async function Checkout({ searchParams }: CheckoutPageProps) {
     <div className="container checkout-page">
       <div className="page-heading">
         <h1>
-          {query.demo === '1'
+          {mode === 'mock' || query.demo === '1'
             ? 'Перевірка оформлення'
             : product
               ? 'Оформлення замовлення'
               : 'Оформлення навчання'}
         </h1>
         <p className="muted">
-          {product
-            ? 'Залиште контакти — підтвердження надійде на email, а команда академії зв’яжеться з вами щодо деталей.'
-            : automaticAccess || mode !== 'wayforpay'
-              ? 'Вкажіть email, з яким навчатиметеся. Доступ з’явиться у вашому кабінеті.'
-              : 'Вкажіть email, з яким навчатиметеся. Після оплати команда академії відкриє вам доступ і зв’яжеться з вами.'}
+          {mode === 'mock'
+            ? 'Перевірте оформлення замовлення. Це тест: без списання коштів і без доступу до навчання.'
+            : product
+              ? 'Залиште контакти — підтвердження надійде на email, а команда академії зв’яжеться з вами щодо деталей.'
+              : automaticAccess || mode === 'disabled'
+                ? 'Вкажіть email, з яким навчатиметеся. Доступ з’явиться у вашому кабінеті.'
+                : 'Вкажіть email, з яким навчатиметеся. Після оплати команда академії відкриє вам доступ і зв’яжеться з вами.'}
         </p>
       </div>
       <div className="checkout-grid">
@@ -95,7 +97,9 @@ export default async function Checkout({ searchParams }: CheckoutPageProps) {
           <p className="muted">
             {mode === 'disabled'
               ? `Звичайна вартість пакета — ${money(pack.price)}`
-              : 'Разова оплата'}
+              : mode === 'mock'
+                ? 'Вартість пакета · у тестовому режимі не списується'
+                : 'Разова оплата'}
           </p>
           {mode === 'disabled' && (
             <p className="checkout-notice">
@@ -103,6 +107,7 @@ export default async function Checkout({ searchParams }: CheckoutPageProps) {
               потрібні, майбутнього списання не буде.
             </p>
           )}
+          {pack.description && <p className="muted">{pack.description}</p>}
           {!!pack.includes.length && (
             <details className="checkout-includes">
               <summary>Що входить у пакет</summary>

@@ -45,6 +45,9 @@ export function ProgramPackages({ offering, program, enrollment }: ProgramPackag
       {open && enrollment?.mode === 'disabled' && (
         <p className="package-source-note">Тестовий запис відкрито — доступ без оплати</p>
       )}
+      {open && enrollment?.mode === 'mock' && (
+        <p className="package-source-note">Тестове оформлення — без оплати й доступу до навчання</p>
+      )}
       <div className="package-grid">
         {offering.packages.map((pack) => (
           <PackageCard

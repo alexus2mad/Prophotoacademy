@@ -7,7 +7,15 @@ import type { EnrollmentOptions, PackageIdRow } from './types';
 
 export async function enrollmentOptions(offering?: Offering): Promise<EnrollmentOptions> {
   const mode = paymentMode();
-  if (!offering || !managedDatabase() || mode === 'mock') return { mode, packageIds: [] };
+  if (!offering) return { mode, packageIds: [] };
+  if (mode === 'mock')
+    return {
+      mode,
+      packageIds: offering.packages
+        .filter((pack) => !isProduct(pack) && canEnroll(offering, pack))
+        .map((pack) => pack.id),
+    };
+  if (!managedDatabase()) return { mode, packageIds: [] };
   const rules = await databasePool().query<PackageIdRow>(
     `SELECT p.package_id,
      (SELECT jsonb_agg(CASE WHEN lesson->>'number' IS NOT NULL

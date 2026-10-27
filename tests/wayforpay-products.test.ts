@@ -285,11 +285,11 @@ describe('courses sold like the original site', () => {
         visual(),
         visual().packages.find((p) => p.id === 'visual-gold'),
       ),
-    ).toBe(false);
+    ).toBe(true);
   });
   it('sells a paid course package without mapped lessons for the team to open', async () => {
     const options = await enrollmentOptions(visual());
-    expect(options.packageIds).toEqual(['visual-base', 'visual-platinum']);
+    expect(options.packageIds).toEqual(['visual-base', 'visual-gold', 'visual-platinum']);
     const input = payload({ offeringId: 'offering-visual-2026-03', packageId: 'visual-platinum' });
     const response = await checkout(post('/api/checkout', input));
     expect(response.status).toBe(200);

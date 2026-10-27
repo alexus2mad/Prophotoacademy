@@ -7,13 +7,19 @@ const content = seed as AcademyContent;
 describe('enrollment integrity', () => {
   it('does not sell a stale, unverified, archived or sold-out intake', () => {
     const live = content.offerings.find((o) => o.id === 'offering-commercial-2026-11')!;
-    const base = { ...live, verificationRequired: false, openAfterStart: false } as Offering;
+    const base: Offering = {
+      ...live,
+      verificationRequired: false,
+      startDate: '2026-11-01',
+      openAfterStart: false,
+    };
     const day = new Date('2026-10-07');
-    const soldOut = base.packages.find((p) => p.availability === 'soldOut');
+    const soldOut = { ...base.packages[0], availability: 'soldOut' as const };
     expect(canEnroll({ ...base, verificationRequired: true }, base.packages[0], day)).toBe(false);
     expect(canEnroll(base, base.packages[0], new Date('2026-11-07'))).toBe(false);
     expect(canEnroll({ ...base, availability: 'archived' }, base.packages[0], day)).toBe(false);
     expect(canEnroll(base, soldOut, day)).toBe(false);
+    expect(canEnroll({ ...base, packages: [soldOut] }, undefined, day)).toBe(false);
     const unverified = {
       ...content,
       offerings: content.offerings.map((o) =>
@@ -25,7 +31,17 @@ describe('enrollment integrity', () => {
     );
   });
   it('allows only a verified future intake and available package', () => {
-    const offering = { ...content.offerings[1], verificationRequired: false } as Offering;
+    const offering: Offering = {
+      ...content.offerings[1],
+      verificationRequired: false,
+      availability: 'open',
+      startDate: '2026-11-01',
+      openAfterStart: false,
+      packages: [
+        { ...content.offerings[1].packages[0], availability: 'open' },
+        { ...content.offerings[1].packages[1], availability: 'soldOut' },
+      ],
+    };
     expect(canEnroll(offering, offering.packages[0], new Date('2026-10-07'))).toBe(true);
     expect(canEnroll(offering, offering.packages[1], new Date('2026-10-07'))).toBe(false);
     expect(canEnroll(offering, offering.packages[0], new Date('2026-11-07'))).toBe(false);
