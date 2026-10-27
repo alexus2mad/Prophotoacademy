@@ -1,9 +1,10 @@
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 import type { EffectCallback } from 'react';
 import type { MotionCard, MotionObserverCallback } from './types';
-import { useDirectionCardMotion } from '../../src/components/behaviors/DirectionCardMotion/hooks';
+import { useCardMotion } from '../../src/components/behaviors/CardMotion/hooks';
 
 const lifecycle = vi.hoisted(() => ({ cleanup: vi.fn() }));
+vi.mock('next/navigation', () => ({ usePathname: () => '/courses' }));
 vi.mock('react', () => ({
   useEffect(effect: EffectCallback) {
     const cleanup = effect();
@@ -32,6 +33,7 @@ class Observer {
   static instances: Observer[] = [];
   observe = vi.fn();
   disconnect = vi.fn();
+  unobserve = vi.fn();
   constructor(
     readonly notify: MotionObserverCallback,
     readonly options: IntersectionObserverInit,
@@ -42,7 +44,16 @@ class Observer {
     this.notify([{ target, isIntersecting }]);
   }
 }
+class MutationObserverStub {
+  static instances: MutationObserverStub[] = [];
+  observe = vi.fn();
+  disconnect = vi.fn();
+  constructor(readonly notify: VoidFunction) {
+    MutationObserverStub.instances.push(this);
+  }
+}
 let cards: Card[], mobile: Preference, reduced: Preference;
+const root = { querySelectorAll: vi.fn(() => cards) };
 const frames = new Map<number, FrameRequestCallback>();
 const browser = Object.assign(new EventTarget(), { innerHeight: 844 });
 const flush = () => {
@@ -57,6 +68,8 @@ beforeEach(() => {
   mobile.matches = true;
   reduced = new Preference();
   Observer.instances = [];
+  MutationObserverStub.instances = [];
+  root.querySelectorAll.mockClear();
   browser.innerHeight = 844;
   frames.clear();
   let nextFrame = 0;
@@ -67,8 +80,9 @@ beforeEach(() => {
       matchMedia: (query: string) => (query.includes('reduce') ? reduced : mobile),
     }),
   );
-  vi.stubGlobal('document', { querySelectorAll: () => cards });
+  vi.stubGlobal('document', { querySelector: vi.fn(() => root) });
   vi.stubGlobal('IntersectionObserver', Observer);
+  vi.stubGlobal('MutationObserver', MutationObserverStub);
   vi.stubGlobal('requestAnimationFrame', (callback: FrameRequestCallback) => {
     frames.set(++nextFrame, callback);
     return nextFrame;
@@ -81,23 +95,50 @@ afterEach(() => {
 });
 it('leaves cards usable without IntersectionObserver support', () => {
   vi.stubGlobal('window', {});
-  expect(() => useDirectionCardMotion()).not.toThrow();
+  expect(() => useCardMotion()).not.toThrow();
   expect(Observer.instances).toHaveLength(0);
   expect(cards.every((card) => !card.active)).toBe(true);
 });
+it('does not observe Hub or learning content outside the public Academy shell', () => {
+  vi.stubGlobal('document', { querySelector: vi.fn(() => null) });
+  useCardMotion();
+  expect(document.querySelector).toHaveBeenCalledWith('.academy-editorial');
+  expect(Observer.instances).toHaveLength(0);
+  expect(MutationObserverStub.instances).toHaveLength(0);
+});
 it('activates cards at the viewport-height center line and clears them on exit', () => {
-  useDirectionCardMotion();
+  useCardMotion();
   const observer = Observer.instances[0];
   expect(observer.options.rootMargin).toBe('-421px 0px -421px 0px');
   expect(observer.observe).toHaveBeenCalledTimes(2);
+  expect(root.querySelectorAll).toHaveBeenCalledWith('[data-card-motion]');
   observer.emit(cards[0], true);
   observer.emit(cards[1], true);
   expect(cards.every((card) => card.active)).toBe(true); // A tablet row can share the center.
   observer.emit(cards[0], false);
   expect(cards.map((card) => card.active)).toEqual([false, true]);
 });
+it('tracks filtered cards without restarting unchanged cards or reviving removed ones', () => {
+  useCardMotion();
+  const observer = Observer.instances[0];
+  const removed = cards[0];
+  observer.emit(removed, true);
+  const added = new Card();
+  cards = [cards[1], added];
+  MutationObserverStub.instances[0].notify();
+  expect(observer.unobserve).toHaveBeenCalledWith(removed);
+  expect(removed.active).toBe(false);
+  expect(observer.observe).toHaveBeenCalledTimes(3);
+  expect(observer.observe).toHaveBeenLastCalledWith(added);
+  observer.emit(removed, true); // A queued entry can arrive after unobserve.
+  expect(removed.active).toBe(false);
+  observer.emit(added, true);
+  expect(added.active).toBe(true);
+  MutationObserverStub.instances[0].notify();
+  expect(observer.observe).toHaveBeenCalledTimes(3);
+});
 it('rebuilds once per frame on resize and ignores callbacks from the old observer', () => {
-  useDirectionCardMotion();
+  useCardMotion();
   const previous = Observer.instances[0];
   browser.innerHeight = 600;
   browser.dispatchEvent(new Event('resize'));
@@ -111,7 +152,7 @@ it('rebuilds once per frame on resize and ignores callbacks from the old observe
 });
 it('honors reduced motion and desktop changes, and resumes when eligible again', () => {
   reduced.matches = true;
-  useDirectionCardMotion();
+  useCardMotion();
   expect(Observer.instances).toHaveLength(0);
   reduced.set(false);
   flush();
@@ -128,11 +169,12 @@ it('honors reduced motion and desktop changes, and resumes when eligible again',
   expect(Observer.instances).toHaveLength(2);
 });
 it('unmount clears active cards and cancels pending work and event listeners', () => {
-  useDirectionCardMotion();
+  useCardMotion();
   const observer = Observer.instances[0];
   observer.emit(cards[0], true);
   browser.dispatchEvent(new Event('resize'));
   lifecycle.cleanup();
+  expect(MutationObserverStub.instances[0].disconnect).toHaveBeenCalledOnce();
   observer.emit(cards[0], true);
   expect(cards[0].active).toBe(false);
   expect(frames.size).toBe(0);

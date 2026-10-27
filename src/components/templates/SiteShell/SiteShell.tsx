@@ -1,4 +1,6 @@
 import { EcosystemMeasurement } from '@/components/behaviors/EcosystemMeasurement/EcosystemMeasurement';
+import { CardMotion } from '@/components/behaviors/CardMotion/CardMotion';
+import { academyThemeClassName } from '@/lib/typography/fonts';
 import { Footer } from '@/components/organisms/Footer/Footer';
 import { Header } from '@/components/organisms/Header/Header';
 import { HubFooter } from '@/components/organisms/HubFooter/HubFooter';
@@ -6,10 +8,15 @@ import { InquiryDialog } from '@/components/organisms/InquiryDialog/InquiryDialo
 import type { SiteShellProps } from './types';
 export function SiteShell(props: SiteShellProps) {
   return (
-    <div className={props.site === 'academy' ? 'academy-editorial' : undefined}>
+    <div
+      className={
+        props.site === 'academy' ? `academy-editorial ${academyThemeClassName}` : undefined
+      }
+    >
       <EcosystemMeasurement site={props.site} />
       <Header site={props.site} />
       <main id="main">{props.children}</main>
+      {props.site === 'academy' && <CardMotion />}
       {props.site === 'academy' ? (
         <Footer settings={props.settings} />
       ) : (

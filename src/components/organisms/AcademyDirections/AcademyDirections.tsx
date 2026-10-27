@@ -1,5 +1,4 @@
 import { AcademyDirectionCard } from '@/components/molecules/AcademyDirectionCard/AcademyDirectionCard';
-import { DirectionCardMotion } from '@/components/behaviors/DirectionCardMotion/DirectionCardMotion';
 import type { AcademyDirectionsProps } from './types';
 export function AcademyDirections({ directions }: AcademyDirectionsProps) {
   return (
@@ -21,7 +20,6 @@ export function AcademyDirections({ directions }: AcademyDirectionsProps) {
           <AcademyDirectionCard key={direction.title} direction={direction} />
         ))}
       </div>
-      <DirectionCardMotion />
     </section>
   );
 }

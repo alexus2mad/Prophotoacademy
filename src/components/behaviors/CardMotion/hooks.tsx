@@ -1,14 +1,36 @@
 'use client';
 import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
-export function useDirectionCardMotion() {
+export function useCardMotion() {
+  const path = usePathname();
   useEffect(() => {
     if (!('IntersectionObserver' in window)) return;
+    const root = document.querySelector('.academy-editorial');
+    if (!root) return;
     const mobile = window.matchMedia('(max-width: 899px), (hover: none)');
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const cards = [...document.querySelectorAll<HTMLElement>('.academy-direction')];
+    const cards = new Set<Element>();
     let observer: IntersectionObserver | undefined;
     let frame = 0;
+    let disposed = false;
+
+    const scan = () => {
+      if (disposed) return;
+      const next = new Set(root.querySelectorAll('[data-card-motion]'));
+      for (const card of cards) {
+        if (!next.has(card)) {
+          observer?.unobserve(card);
+          card.removeAttribute('data-scroll-active');
+          cards.delete(card);
+        }
+      }
+      for (const card of next) {
+        if (cards.has(card)) continue;
+        cards.add(card);
+        observer?.observe(card);
+      }
+    };
 
     const observe = () => {
       frame = 0;
@@ -26,6 +48,7 @@ export function useDirectionCardMotion() {
         (entries) => {
           if (observer !== current) return;
           for (const entry of entries) {
+            if (!cards.has(entry.target)) continue;
             entry.target.toggleAttribute('data-scroll-active', entry.isIntersecting);
           }
         },
@@ -37,12 +60,17 @@ export function useDirectionCardMotion() {
     const schedule = () => {
       if (!frame) frame = requestAnimationFrame(observe);
     };
+    scan();
     observe();
+    const mutations = new MutationObserver(scan);
+    mutations.observe(root, { childList: true, subtree: true });
     mobile.addEventListener('change', schedule);
     reducedMotion.addEventListener('change', schedule);
     window.addEventListener('resize', schedule, { passive: true });
     return () => {
+      disposed = true;
       cancelAnimationFrame(frame);
+      mutations.disconnect();
       observer?.disconnect();
       observer = undefined;
       mobile.removeEventListener('change', schedule);
@@ -50,5 +78,5 @@ export function useDirectionCardMotion() {
       window.removeEventListener('resize', schedule);
       for (const card of cards) card.removeAttribute('data-scroll-active');
     };
-  }, []);
+  }, [path]);
 }

@@ -5,6 +5,7 @@ import { draftMode } from 'next/headers';
 import { PreviewBanner } from '@/components/organisms/PreviewBanner/PreviewBanner';
 import { PhotographyMotion } from '@/components/behaviors/PhotographyMotion/PhotographyMotion';
 import './design-system.css';
+import './academy-theme.css';
 import './ecosystem.css';
 import './learning.css';
 import './lesson-typography.css';

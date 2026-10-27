@@ -1,4 +1,3 @@
-import localFont from 'next/font/local';
 import { AcademyDesignHero } from '@/components/organisms/AcademyDesignHero/AcademyDesignHero';
 import { Consultation } from '@/components/organisms/Consultation/Consultation';
 import { AcademyDirections } from '@/components/organisms/AcademyDirections/AcademyDirections';
@@ -10,23 +9,9 @@ import { academyDirections, academyHomeTestimonials } from '@/lib/academy-home/s
 import { academyHomePhoto } from '@/lib/photography/academy-home';
 import { siteHref } from '@/lib/ecosystem';
 import type { AcademyHomeTemplateProps } from './types';
-const display = localFont({
-  src: [
-    { path: '../../../app/fonts/kyivtype-light.woff2', weight: '300', style: 'normal' },
-    { path: '../../../app/fonts/kyivtype-black.woff2', weight: '900', style: 'normal' },
-  ],
-  variable: '--font-home-display',
-  display: 'swap',
-});
-const text = localFont({
-  src: '../../../app/fonts/inter-home-variable.woff2',
-  variable: '--font-home-text',
-  weight: '100 900',
-  display: 'swap',
-});
 export function AcademyHomeTemplate({ content }: AcademyHomeTemplateProps) {
   return (
-    <div className={`academy-design-home ${display.variable} ${text.variable}`}>
+    <div className="academy-design-home">
       <AcademyDesignHero shopUrl={content.settings.shop} />
       <AcademyDirections directions={academyDirections(content)} />
       <Consultation compact />

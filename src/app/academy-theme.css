@@ -1,0 +1,119 @@
+/* Brand foundation, explicitly applied to Academy surfaces, never the Hub or Studio. */
+.academy-theme {
+  --canvas: #050505;
+  --surface: #121212;
+  --elevated: #232323;
+  --text: #fff;
+  --secondary: #bcbcbc;
+  --muted: #a8a8a8;
+  --border: #333;
+  --control-border: #888;
+  --accent: #fff;
+  --paper: #fff;
+  --ink: #111;
+  --error: #ffb4a8;
+  --success: #b5dfbe;
+  --warning: #f0d28b;
+  --learn-surface: var(--surface);
+  --learn-muted: var(--secondary);
+  --learn-border: var(--border);
+  --font-manrope: var(--font-home-text);
+  --font-display: var(--font-home-text);
+  --control: 160ms;
+  background: var(--canvas);
+  color: var(--text);
+  color-scheme: dark;
+  font-family: var(--font-home-text), Arial, sans-serif;
+  font-weight: 400;
+  font-optical-sizing: none;
+  font-synthesis: none;
+  min-height: 100svh;
+}
+.academy-theme ::selection {
+  background: var(--text);
+  color: var(--ink);
+}
+.academy-theme :focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 5px;
+}
+.academy-theme .button {
+  border-radius: 999px;
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--ink);
+  min-height: 48px;
+  padding: 13px 24px;
+  font-size: 15px;
+  line-height: 1.4;
+  font-weight: 600;
+  text-align: center;
+  white-space: normal;
+}
+.academy-theme .button:hover:not(:disabled) {
+  background: #dedede;
+  border-color: #dedede;
+}
+.academy-theme .button-secondary {
+  background: transparent;
+  border-color: var(--control-border);
+  color: var(--text);
+}
+.academy-theme .button-secondary:hover:not(:disabled) {
+  background: var(--elevated);
+  border-color: var(--text);
+  color: var(--text);
+}
+.academy-theme :is(input, select, textarea) {
+  color: var(--text);
+  background: var(--surface);
+  border-color: var(--control-border);
+}
+.academy-theme :is(input, textarea)::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+.academy-theme .brand-logo {
+  filter: invert(1);
+}
+.academy-theme [data-card-motion]:is([data-scroll-active], :focus-visible, :has(:focus-visible)) {
+  --card-scale: 1.065;
+  --card-title-y: -6px;
+  --card-duration: 1800ms;
+  --card-shade: 0;
+}
+.academy-theme [data-card-photo] {
+  overflow: hidden;
+}
+.academy-theme [data-card-title] {
+  display: inline-block;
+}
+@media (min-width: 900px) and (hover: hover) and (pointer: fine) {
+  .academy-theme [data-card-motion]:hover {
+    --card-scale: 1.065;
+    --card-title-y: -6px;
+    --card-duration: 1800ms;
+    --card-shade: 0;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .academy-theme [data-card-photo] img,
+  .academy-theme [data-card-title] {
+    transition: transform var(--card-duration, 1400ms) cubic-bezier(0.22, 0.1, 0.25, 1);
+  }
+  .academy-theme [data-card-photo] img {
+    transform: scale(var(--card-scale, 1));
+  }
+  .academy-theme [data-card-title] {
+    transform: translateY(var(--card-title-y, 0px));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .academy-theme *,
+  .academy-theme *::before,
+  .academy-theme *::after {
+    scroll-behavior: auto;
+    transition-duration: 0s !important;
+    animation: none !important;
+  }
+}

@@ -1,19 +1,4 @@
-/* The Academy landing frame owns its dark palette; course and Hub pages keep theirs. */
-.academy-editorial:has(.academy-design-home) {
-  --canvas: #050505;
-  --surface: #121212;
-  --elevated: #232323;
-  --text: #fff;
-  --secondary: #bcbcbc;
-  --muted: #a8a8a8;
-  --border: #333;
-  --control-border: #888;
-  --accent: #fff;
-  --ink: #111;
-  --error: #ffb4a8;
-  background: var(--canvas);
-  color-scheme: dark;
-}
+/* Homepage composition; the Academy theme owns shared palette and controls. */
 .academy-editorial:has(.academy-design-home) .site-header {
   margin-bottom: -88px;
   color: #fff;
@@ -188,37 +173,11 @@
   min-width: 0;
   background: #292929;
 }
-.academy-direction:is([data-scroll-active], :has(:focus-visible)) {
-  --direction-scale: 1.065;
-  --direction-title-y: -6px;
-  --direction-duration: 1800ms;
-  --direction-shade: 0;
-}
-@media (min-width: 900px) and (hover: hover) and (pointer: fine) {
-  .academy-direction:hover {
-    --direction-scale: 1.065;
-    --direction-title-y: -6px;
-    --direction-duration: 1800ms;
-    --direction-shade: 0;
-  }
-}
 .academy-direction-photo {
   position: absolute;
   inset: 0;
   z-index: -2;
   overflow: hidden;
-}
-@media (prefers-reduced-motion: no-preference) {
-  .academy-direction-photo img,
-  .academy-direction-title {
-    transition: transform var(--direction-duration, 1400ms) cubic-bezier(0.22, 0.1, 0.25, 1);
-  }
-  .academy-direction-photo img {
-    transform: scale(var(--direction-scale, 1));
-  }
-  .academy-direction-title {
-    transform: translateY(var(--direction-title-y, 0px));
-  }
 }
 .academy-direction::before {
   content: '';
@@ -226,7 +185,7 @@
   inset: 0;
   z-index: -1;
   background: linear-gradient(180deg, #000b 0, #0005 30%, transparent 70%);
-  opacity: var(--direction-shade, 1);
+  opacity: var(--card-shade, 1);
   transition: opacity 700ms cubic-bezier(0.22, 0.1, 0.25, 1);
   pointer-events: none;
 }
