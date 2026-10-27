@@ -59,7 +59,7 @@ export function LessonBlockEditor(props: LessonBlockEditorProps) {
             >
               Залишити
             </button>
-            <button type="button" className="button" onClick={onDelete}>
+            <button type="button" className="button button-danger" onClick={onDelete}>
               Прибрати з чернетки
             </button>
           </div>

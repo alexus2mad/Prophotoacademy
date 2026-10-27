@@ -101,7 +101,7 @@ export function AccessDialog(props: AccessDialogProps) {
           Порожня дата означає безстроковий доступ. Прогрес зберігається. Зміна не впливає на платіж
         </p>
         <button
-          className="button"
+          className={'button' + (h.action === 'revoke' ? ' button-danger' : '')}
           type="submit"
           disabled={h.busy || (h.showMapping && !h.lessons.length)}
         >

@@ -14,12 +14,12 @@ export function AdminCourses({ data, demo = false }: AdminCoursesProps) {
       <div className="admin-grid">
         {data.courses.map((c) => (
           <Link
-            className="admin-panel"
+            className="admin-panel admin-course-card"
             key={c.id}
             href={(demo ? '/demo' : '') + '/admin/courses/' + c.id}
           >
             <span className="admin-badge">{c.active_release_id ? 'Опубліковано' : 'Чернетка'}</span>
-            <h2 style={{ marginTop: 24 }}>{c.title}</h2>
+            <h2>{c.title}</h2>
             <p>Програма та матеріали</p>
           </Link>
         ))}

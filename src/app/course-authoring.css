@@ -33,10 +33,6 @@
 .course-authoring [hidden] {
   display: none !important;
 }
-.course-authoring :is(h1, h2, h3) {
-  font-family: var(--font-manrope), sans-serif;
-  letter-spacing: -0.02em;
-}
 .authoring-course-heading {
   margin-bottom: 24px;
 }
@@ -63,7 +59,7 @@
   align-items: center;
   gap: 16px;
   padding: 12px 0;
-  background: #101211;
+  background: var(--canvas);
   border-block: 1px solid var(--learn-border);
   margin-bottom: 24px;
 }
@@ -82,17 +78,20 @@
 }
 .authoring-toolbar nav button[aria-pressed='true'] {
   color: var(--accent);
-  background: #273024;
+  background: var(--elevated);
 }
 .authoring-save-actions {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 12px;
+  flex-wrap: wrap;
+  margin-left: auto;
 }
 .authoring-save-actions > span {
   font-size: 14px;
   color: var(--learn-muted);
+  min-width: 0;
 }
 .authoring-notice {
   margin-bottom: 20px;
@@ -185,11 +184,12 @@
   overflow-wrap: anywhere;
 }
 .authoring-lesson[aria-current] {
-  background: #263021;
+  background: var(--elevated);
   color: var(--accent);
+  box-shadow: inset 2px 0 var(--accent);
 }
 .authoring-outline .authoring-materials {
-  border-left: 1px solid #4c5945;
+  border-left: 1px solid var(--border);
   margin: 10px 0 12px 16px;
   padding-left: 8px;
 }
@@ -202,7 +202,7 @@
   padding: 8px 10px;
   margin: 2px 0;
   background: transparent;
-  color: #c2c7bf;
+  color: var(--secondary);
   overflow-wrap: anywhere;
   line-height: 1.5;
 }
@@ -210,16 +210,16 @@
   display: block;
   font-size: 14px;
   letter-spacing: 0.02em;
-  color: #929e8b;
+  color: var(--muted);
   margin-bottom: 2px;
 }
 .authoring-materials button[aria-current] {
   color: var(--text);
-  background: #242b21;
+  background: var(--elevated);
   box-shadow: inset 3px 0 var(--accent);
 }
 .authoring-outline button:not(:disabled):hover {
-  background: #242b21;
+  background: var(--elevated);
 }
 .authoring-add {
   background: none;
@@ -283,15 +283,15 @@
 }
 .authoring-settings > summary {
   min-height: 48px;
-  padding: 12px 20px;
+  padding: 16px 24px;
   font-size: 15px;
   cursor: pointer;
-  color: #c2c7bf;
+  color: var(--secondary);
 }
 .authoring-settings-fields {
   display: grid;
   gap: 20px;
-  padding: 4px 20px 24px;
+  padding: 4px 24px 24px;
 }
 .authoring-title-fields {
   display: grid;
@@ -331,9 +331,9 @@
   min-width: 230px;
   display: grid;
   padding: 8px;
-  border: 1px solid #51594f;
+  border: 1px solid var(--control-border);
   border-radius: 12px;
-  background: #191c1a;
+  background: var(--surface);
   box-shadow: 0 12px 36px #0008;
 }
 .authoring-material-options button {
@@ -346,12 +346,12 @@
   text-align: left;
 }
 .authoring-material-options button:hover {
-  background: #30382d;
+  background: var(--elevated);
 }
 .material-editor {
-  background: #191c1a;
+  background: var(--surface);
   border: 1px solid var(--learn-border);
-  border-radius: 16px;
+  border-radius: 12px;
   overflow: hidden;
 }
 .material-editor-heading {
@@ -409,15 +409,15 @@
   padding: 24px;
   border: 1px solid var(--learn-border);
   border-radius: 10px;
-  background: #101211;
+  background: var(--canvas);
 }
 .material-upload {
   display: grid;
   gap: 12px;
-  padding: 20px;
-  border: 1px dashed #66735d;
+  padding: 24px;
+  border: 1px dashed var(--control-border);
   border-radius: 12px;
-  background: #141713;
+  background: var(--canvas);
 }
 .material-upload-label {
   justify-self: start;
@@ -428,10 +428,10 @@
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  border: 1px solid #66735d;
+  border: 1px solid var(--control-border);
   border-radius: 24px;
-  background: #242b21;
-  color: #f2efe7;
+  background: var(--elevated);
+  color: var(--text);
   padding: 8px 16px;
   font-size: 14px;
 }
@@ -441,7 +441,7 @@
   border-radius: 24px;
 }
 .material-upload-label:hover > span {
-  background: #30382d;
+  background: var(--elevated);
 }
 .material-upload > button {
   justify-self: start;
@@ -473,7 +473,7 @@
   max-width: 320px;
 }
 .editor-media-preview {
-  background: #080b09;
+  background: var(--canvas);
   padding: 20px;
   border-bottom: 1px solid var(--learn-border);
 }
@@ -519,7 +519,7 @@
   gap: 8px;
   min-height: 40px;
   padding: 8px 16px;
-  background: #101211dc;
+  background: rgb(5 5 5 / 86%);
   border: 1px solid #ffffff30;
   border-radius: 24px;
   font-size: 14px;
@@ -538,7 +538,7 @@
 }
 .authoring-empty {
   padding: 48px 24px;
-  border: 1px dashed #51594f;
+  border: 1px dashed var(--control-border);
   border-radius: 12px;
   text-align: center;
 }
@@ -561,7 +561,7 @@
   margin: 0;
   min-width: 0;
   padding: 20px;
-  border: 1px solid #51594f;
+  border: 1px solid var(--control-border);
   border-radius: 12px;
   display: grid;
   gap: 16px;
@@ -574,12 +574,15 @@
   min-height: 0;
 }
 @media (max-width: 1199px) {
+  .authoring-toolbar {
+    flex-wrap: wrap;
+  }
   .authoring-workspace {
     grid-template-columns: 260px minmax(0, 1fr);
     gap: 24px;
   }
   .authoring-save-actions > span {
-    display: none;
+    text-align: right;
   }
   .authoring-lesson-heading {
     display: block;
@@ -590,7 +593,7 @@
 }
 @media (max-width: 999px) {
   .workspace-admin:has(.course-authoring) {
-    padding-inline: 24px;
+    padding-inline: 32px;
   }
   .authoring-workspace {
     grid-template-columns: minmax(0, 1fr);
@@ -624,10 +627,10 @@
 }
 @media (max-width: 640px) {
   .authoring-canvas {
-    scroll-margin-top: 140px;
+    scroll-margin-top: 164px;
   }
   .workspace-admin:has(.course-authoring) {
-    padding-inline: 16px;
+    padding-inline: 20px;
   }
   .authoring-course-heading {
     margin-bottom: 20px;
@@ -647,6 +650,13 @@
   }
   .authoring-save-actions {
     width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .authoring-save-actions > span {
+    grid-column: 1 / -1;
+    text-align: left;
   }
   .authoring-save-actions .button {
     flex: 1;
@@ -656,7 +666,7 @@
     gap: 8px;
   }
   .authoring-add-material summary {
-    padding-inline: 16px;
+    padding-inline: 20px;
     font-size: 14px;
   }
   .authoring-title-fields {

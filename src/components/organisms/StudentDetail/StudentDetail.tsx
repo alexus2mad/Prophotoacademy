@@ -77,7 +77,14 @@ export function StudentDetail({ detail, demo }: StudentDetailProps) {
                         />
                         <details>
                           <summary>Прогрес уроків</summary>
-                          <div className="admin-table-wrap">
+                          <div
+                            className="admin-table-wrap"
+                            role="region"
+                            aria-label={
+                              'Прогрес уроків — ' + (release?.manifest.title || grant.course_id)
+                            }
+                            tabIndex={0}
+                          >
                             <table className="admin-table">
                               <thead>
                                 <tr>
@@ -109,7 +116,9 @@ export function StudentDetail({ detail, demo }: StudentDetailProps) {
                       Змінити доступ
                     </Button>
                     <Button
-                      className="button button-secondary"
+                      className={
+                        'button button-secondary' + (grant.revoked_at ? '' : ' button-danger')
+                      }
                       onClick={() => h.openAccess(grant.revoked_at ? 'restore' : 'revoke', grant)}
                     >
                       {grant.revoked_at ? 'Відновити' : 'Скасувати'}
@@ -126,7 +135,12 @@ export function StudentDetail({ detail, demo }: StudentDetailProps) {
       <section className="admin-section">
         <h2>Покупки</h2>
         {detail.purchases.length ? (
-          <div className="admin-table-wrap">
+          <div
+            className="admin-table-wrap"
+            role="region"
+            aria-label="Покупки студента"
+            tabIndex={0}
+          >
             <table className="admin-table">
               <thead>
                 <tr>

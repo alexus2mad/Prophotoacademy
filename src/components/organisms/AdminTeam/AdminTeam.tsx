@@ -15,7 +15,12 @@ export function AdminTeam(props: AdminTeamProps) {
           Адміністратори мають однакові права. Права студії та спільної каси залишаються окремими
         </p>
       </div>
-      <div className="admin-table-wrap">
+      <div
+        className="admin-table-wrap"
+        role="region"
+        aria-label="Адміністратори Академії"
+        tabIndex={0}
+      >
         <table className="admin-table">
           <thead>
             <tr>
@@ -108,7 +113,11 @@ export function AdminTeam(props: AdminTeamProps) {
         </p>
         <p className="admin-muted">{h.change.reason}</p>
         <div className="admin-actions">
-          <Button className="button" onClick={h.confirm} disabled={h.busy}>
+          <Button
+            className={'button' + (h.change.grant ? '' : ' button-danger')}
+            onClick={h.confirm}
+            disabled={h.busy}
+          >
             Підтвердити
           </Button>
         </div>

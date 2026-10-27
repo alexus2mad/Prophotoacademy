@@ -43,7 +43,12 @@ export function AdminStudents({ overview, people, query, demo, demoRoster }: Adm
       {!!overview.courseStats?.length && (
         <section className="admin-section">
           <h2>Прогрес за курсами</h2>
-          <div className="admin-table-wrap">
+          <div
+            className="admin-table-wrap"
+            role="region"
+            aria-label="Прогрес за курсами"
+            tabIndex={0}
+          >
             <table className="admin-table">
               <thead>
                 <tr>
@@ -102,7 +107,12 @@ export function AdminStudents({ overview, people, query, demo, demoRoster }: Adm
           </button>
         </form>
         <StudentLookup demo={demo} />
-        <div className="admin-table-wrap">
+        <div
+          className="admin-table-wrap"
+          role="region"
+          aria-label="Облікові записи студентів"
+          tabIndex={0}
+        >
           <table className="admin-table">
             <thead>
               <tr>

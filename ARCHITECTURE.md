@@ -46,6 +46,10 @@ Apply SOLID through small contracts and composition. Extend an interface through
 
 KISS means clear names, readable control flow and the smallest implementation that meets the requirement. It does not mean hiding validation, accessibility or error handling. Prefer straightforward functions over generic frameworks, duplicated mutable state or clever shortcuts. Keep rendering pure; perform browser effects and network mutations in the appropriate hooks or server handlers.
 
+## Academy visual identity
+
+Academy public and workspace shells explicitly apply the shared `academyThemeClassName` from `src/lib/typography/fonts.ts`. `academy-theme.css` owns neutral brand tokens, shared controls and opt-in card motion; public, lesson and authoring styles own their respective layouts. Do not apply the Academy palette or font aliases globally: Hub and Sanity Studio are excluded. Preserve the homepage composition and Source Sans 3 instructional typography. See [Academy design system](docs/ACADEMY_DESIGN_SYSTEM.md) for dimensions, motion, feedback colors and verification.
+
 ## Next.js and the two build modes
 
 Read the applicable bundled Next.js documentation before changing framework behavior. Server Components remain the default. Put `use client` at the real interactive boundary; do not mark whole templates client merely because they contain an interactive child. Serializable props cross server/client boundaries.
