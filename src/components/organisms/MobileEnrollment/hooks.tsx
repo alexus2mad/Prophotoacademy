@@ -6,7 +6,8 @@ export function useMobileEnrollment() {
   const [visible, setVisible] = useState(false);
   const path = usePathname();
   useEffect(() => {
-    const action = document.querySelector('.program-hero-actions');
+    const action =
+      document.getElementById('packages') || document.querySelector('.program-hero-actions');
     const gallery = document.getElementById('student-works');
     if (!action || !('IntersectionObserver' in window)) return;
     const update = () =>

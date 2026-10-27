@@ -57,7 +57,7 @@ export default async function Checkout({ searchParams }: CheckoutPageProps) {
   const scope =
     mode === 'disabled' ? (await enrollmentOptions(offering)).lessonTitles?.[pack.id] : undefined;
   return (
-    <div className="container">
+    <div className="container checkout-page">
       <div className="page-heading">
         <h1>
           {query.demo === '1'

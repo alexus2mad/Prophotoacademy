@@ -66,10 +66,10 @@
 }
 .academy-editorial .catalog-heading h1 {
   max-width: none;
-  font-size: clamp(40px, 5vw, 72px);
+  font-size: clamp(40px, 4.5vw, 64px);
   line-height: 1.08;
   letter-spacing: -0.045em;
-  margin: 14px 0 18px;
+  margin: 0 0 16px;
 }
 .academy-editorial .catalog-heading .lead {
   max-width: 60ch;
@@ -83,7 +83,7 @@
 }
 .academy-editorial .filters label {
   gap: 8px;
-  font-size: 13px;
+  font-size: 14px;
 }
 .academy-editorial .filters select {
   border-radius: 8px;
@@ -92,7 +92,7 @@
 }
 .academy-editorial .filter-count {
   color: var(--secondary);
-  font-size: 13px;
+  font-size: 14px;
 }
 .academy-editorial .program-hero-actions {
   align-items: center;
@@ -104,13 +104,13 @@
 }
 .academy-editorial .menu-dialog {
   padding: 60px 28px 24px;
-  border-radius: 16px;
+  border-radius: 12px;
   overscroll-behavior: contain;
 }
 .academy-editorial .menu-eyebrow {
   margin-bottom: 20px;
   color: var(--secondary);
-  font-size: 12px;
+  font-size: 14px;
   letter-spacing: 0.06em;
 }
 .academy-editorial .menu-dialog .menu-primary {
@@ -128,7 +128,7 @@
   text-decoration-thickness: 1px;
 }
 .academy-editorial .menu-dialog .menu-account-link {
-  font-family: var(--font-manrope), sans-serif;
+  font-family: var(--font-home-text), sans-serif;
   font-size: 16px;
   min-height: 48px;
   margin-top: 12px;
@@ -143,14 +143,14 @@
   border-top: 1px solid var(--border);
 }
 .academy-editorial .menu-dialog > .ecosystem-nav a {
-  font-family: var(--font-manrope), sans-serif;
-  font-size: 13px;
+  font-family: var(--font-home-text), sans-serif;
+  font-size: 14px;
   padding: 8px 0;
   min-height: 44px;
   border: 0;
 }
 .academy-editorial .inquiry-dialog {
-  border-radius: 16px;
+  border-radius: 12px;
   padding: 52px 36px 32px;
   overscroll-behavior: contain;
 }
@@ -196,7 +196,7 @@
   min-height: 52px;
 }
 .academy-editorial .inquiry-dialog .form-error {
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.5;
 }
 .academy-editorial .footer-brand > p {
@@ -209,7 +209,7 @@
 .academy-editorial .footer-group-title {
   grid-column: 1 / -1;
   margin: 0 0 12px;
-  font-family: var(--font-manrope), sans-serif;
+  font-family: var(--font-home-text), sans-serif;
   font-weight: 600;
   font-size: 14px;
   line-height: 1.4;
@@ -262,11 +262,11 @@
   }
   .academy-editorial .catalog-heading h1 {
     max-width: 16ch;
-    font-size: clamp(40px, 10vw, 56px);
+    font-size: 40px;
   }
   .academy-editorial .filters {
     gap: 16px;
-    padding-block: 20px;
+    padding-block: 0 24px;
   }
   .academy-editorial .inquiry-dialog {
     padding: 56px 24px 24px;
@@ -280,7 +280,7 @@
   }
 }
 
-.academy-editorial:has(.academy-design-home) .site-footer a:hover {
+.academy-editorial .site-footer a:hover {
   color: #fff;
   text-decoration: underline;
   text-underline-offset: 4px;
@@ -300,7 +300,7 @@ html:has(.academy-editorial .dialog[open]) {
   gap: 4px 12px;
 }
 .academy-editorial .inquiry-field-label > .muted {
-  font-size: 12px;
+  font-size: 14px;
 }
 .academy-editorial .footer-bottom,
 .academy-editorial .footer-contact > span {

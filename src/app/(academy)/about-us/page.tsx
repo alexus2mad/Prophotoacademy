@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import { getContent, findImage } from '@/lib/content';
 import { Photo } from '@/components/atoms/Photo/Photo';
+import { PreparedPhoto } from '@/components/atoms/PreparedPhoto/PreparedPhoto';
 import { Consultation } from '@/components/organisms/Consultation/Consultation';
+import { academyHomePhoto } from '@/lib/photography/academy-home';
 export const metadata: Metadata = {
   title: 'Про академію',
   description:
@@ -14,15 +16,14 @@ export default async function About() {
     <>
       <div className="container academy-about-page">
         <div className="page-heading">
-          <p className="eyebrow">Про академію</p>
-          <h1>
-            Закохані
-            <br />
-            <em>у фотографію</em>
-          </h1>
+          <h1>Про академію</h1>
         </div>
         <section className="about-intro">
-          <Photo image={findImage(content, 'workshop')} />
+          <PreparedPhoto
+            image={academyHomePhoto('founder')}
+            priority
+            sizes="(max-width: 767px) calc(100vw - 40px), 44vw"
+          />
           <div>
             <h2>Знання, що працюють у кадрі</h2>
             <p>
@@ -69,7 +70,7 @@ export default async function About() {
           </div>
         </section>
       </div>
-      <Consultation />
+      <Consultation compact />
     </>
   );
 }

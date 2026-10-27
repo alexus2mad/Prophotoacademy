@@ -14,12 +14,6 @@ import type { ProgramTemplateProps } from './types';
 export function ProgramTemplate({ program, content, enrollment }: ProgramTemplateProps) {
   const works = program.workIds.flatMap((id) => content.works.find((work) => work.id === id) || []);
   const heroImage = findImage(content, program.imageId);
-  const heroImages = [
-    heroImage,
-    ...works
-      .map((work) => findImage(content, work.imageId))
-      .filter((image) => image.id !== heroImage.id),
-  ].slice(0, 5);
   const offering = findOffering(content, program.id);
   const presentation = programPresentation(program, offering);
   if (enrollment) {
@@ -43,7 +37,7 @@ export function ProgramTemplate({ program, content, enrollment }: ProgramTemplat
         <ProgramHero
           program={program}
           offering={offering}
-          images={heroImages}
+          image={heroImage}
           presentation={presentation}
         />
         {!!offering?.packages.length && (
@@ -79,10 +73,7 @@ export function ProgramTemplate({ program, content, enrollment }: ProgramTemplat
           >
             <div className="section-heading">
               <div>
-                <p className="eyebrow">Роботи студентів академії</p>
-                <h2 id="student-works-title">
-                  Коли знання <em>стають кадром</em>
-                </h2>
+                <h2 id="student-works-title">Роботи студентів</h2>
               </div>
               <p className="section-side">На телефон і камеру</p>
             </div>

@@ -14,14 +14,19 @@ export function CourseCard({ program, offering, image }: CourseCardProps) {
   const status = offering ? offeringStatus(offering) : 'waitlist';
   const custom = ['individual', 'corporate'].includes(program.category);
   return (
-    <article className="course-card">
+    <article className="course-card" data-card-motion>
       <Link href={`/${program.slug}`} className="course-link">
         <div className="course-card-heading">
           <p className="eyebrow">{audienceLabel(program)}</p>
-          <h3>{program.shortTitle}</h3>
+          <h3>
+            <span data-card-title>{program.shortTitle}</span>
+          </h3>
         </div>
-        <div className="course-image">
-          <Photo image={image} sizes="(max-width: 767px) calc(100vw - 40px), 46vw" />
+        <div className="course-image" data-card-photo>
+          <Photo
+            image={image}
+            sizes="(max-width: 599px) calc(100vw - 40px), (max-width: 1023px) 44vw, 30vw"
+          />
           {!custom && (
             <span
               className={`badge ${status === 'limited' || status === 'open' ? 'badge-accent' : ''}`}

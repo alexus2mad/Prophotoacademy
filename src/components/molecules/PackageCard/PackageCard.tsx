@@ -27,20 +27,7 @@ export function PackageCard({
         {money(pack.price)}
         {pack.previousPrice && <span className="previous-price">{money(pack.previousPrice)}</span>}
       </div>
-      <p>{pack.description}</p>
-      <div className="package-includes-desktop">
-        <PackageIncludes pack={pack} />
-      </div>
-      {!!pack.includes.length && (
-        <details className="package-includes-mobile">
-          <summary>Що входить у пакет</summary>
-          <PackageIncludes pack={pack} />
-        </details>
-      )}
       <div className="package-action">
-        {paymentDisabled && enrollable && availableLessons && (
-          <EnrollmentScope lessons={availableLessons} />
-        )}
         {(enrollable ?? canEnroll(offering, pack)) ? (
           <Link
             href={`/checkout?offering=${encodeURIComponent(offering.id)}&package=${encodeURIComponent(pack.id)}`}
@@ -63,7 +50,20 @@ export function PackageCard({
             Уточнити пакет
           </InquiryButton>
         )}
+        {paymentDisabled && enrollable && availableLessons && (
+          <EnrollmentScope lessons={availableLessons} />
+        )}
       </div>
+      <p>{pack.description}</p>
+      <div className="package-includes-desktop">
+        <PackageIncludes pack={pack} />
+      </div>
+      {!!pack.includes.length && (
+        <details className="package-includes-mobile">
+          <summary>Що входить у пакет</summary>
+          <PackageIncludes pack={pack} />
+        </details>
+      )}
     </article>
   );
 }

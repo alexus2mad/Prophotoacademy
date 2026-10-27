@@ -1,9 +1,9 @@
-import { PhotoStack } from '@/components/molecules/PhotoStack/PhotoStack';
+import { Photo } from '@/components/atoms/Photo/Photo';
 import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
 import { dateLabel, formatLabel, money } from '@/lib/format';
 import Link from 'next/link';
 import type { ProgramHeroProps } from './types';
-export function ProgramHero({ program, offering, images, presentation }: ProgramHeroProps) {
+export function ProgramHero({ program, offering, image, presentation }: ProgramHeroProps) {
   const { price, open, isCustom, status, inquiryTitle, buttonLabel, hasFutureStart } = presentation;
   return (
     <section className="program-hero">
@@ -13,7 +13,7 @@ export function ProgramHero({ program, offering, images, presentation }: Program
       <div className="program-hero-copy">
         <h1>{program.shortTitle}</h1>
         <p className="lead">{program.description}</p>
-        {price !== undefined && (
+        {price !== undefined && !offering?.packages.length && (
           <p className="program-hero-price">
             <strong>від {money(price)}</strong>
           </p>
@@ -54,31 +54,21 @@ export function ProgramHero({ program, offering, images, presentation }: Program
                       : 'Уточнюємо набір'}
           </div>
         </div>
-        <div className="program-hero-actions">
-          {open ? (
-            <a href="#packages" className="button">
-              Обрати пакет
-            </a>
-          ) : (
+        {!open && (
+          <div className="program-hero-actions">
             <InquiryButton programId={program.id} title={inquiryTitle} className="button">
               {buttonLabel}
             </InquiryButton>
-          )}
-          <a
-            href={!open && offering?.packages.length ? '#packages' : '#program-overview'}
-            className="text-link"
-          >
-            {!open && offering?.packages.length ? 'Пакети й вартість' : 'Деталі програми'}
-          </a>
-        </div>
+          </div>
+        )}
       </div>
-      <div className="program-hero-photo">
-        <PhotoStack
-          images={images}
-          label={'Фотографії: ' + program.shortTitle}
-          sizes="(max-width: 767px) calc(100vw - 64px), (max-width: 1200px) 44vw, 520px"
+      <figure className="program-hero-photo">
+        <Photo
+          image={image}
+          sizes="(max-width: 599px) calc(100vw - 40px), (max-width: 1023px) calc(100vw - 64px), 42vw"
         />
-      </div>
+        {image.credit && <figcaption>{image.credit}</figcaption>}
+      </figure>
     </section>
   );
 }

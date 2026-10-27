@@ -41,7 +41,7 @@ export default async function Reviews() {
           ))}
         </div>
       </div>
-      <Consultation />
+      <Consultation compact />
     </>
   );
 }
