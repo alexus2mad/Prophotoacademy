@@ -157,3 +157,11 @@ Staging now runs `edc309f4d714d58957ab07f8f453098302981a99`. Course pages no lon
 Verification passed: all 243 tests, architecture, TypeScript, formatting, local and isolated Linux Webpack production builds, and the validated 53-page synthetic review export. Local Turbopack could not start its CSS worker; the same Webpack compiler used by staging completed successfully. Responsive checks covered 360, 390, 768, 1024 and 1440px, with no horizontal overflow; native curriculum disclosures work by keyboard. All 41 HTTPS staging checks passed, and a live browser screenshot confirms the removed panel and full-width layout. No order was submitted.
 
 Rollback is `3fab3eda61c76556c74f4f132f0569dc40a4f59d`. Guarded cleanup removed `217001c331582e5c5c426a2c0e67bb43f08bc859`, retaining exactly two staging releases. The isolation guard passed, staging remains in mock mode, and production retains both its previous release and process. Evidence is under ignored `.data/pricing-redesign/`; booking and GitHub Pages were not deployed.
+
+## Editorial overview refinement — 28 October 2026
+
+Staging was subsequently updated to `a1ca02eaccf075917e0cb053ece0072ccfa344ef`. The course overview follows a vertical reading path: unnumbered outcomes, a compact audience panel, then full-width curriculum disclosures. Spacing is 64px between sections on desktop and 48px on phones.
+
+Verification passed: architecture, formatting, TypeScript, all 243 tests, local and isolated Linux production builds, the validated 53-page synthetic export, responsive and keyboard checks, independent visual review and 41 live HTTPS checks. The rollback is `edc309f4d714d58957ab07f8f453098302981a99`; guarded cleanup removed `3fab3eda61c76556c74f4f132f0569dc40a4f59d`. Production retained release `aa6f6aa4630be415d02d120732e5df795da6b5dd` and its existing process. Staging isolation passed; booking and GitHub Pages were not deployed.
+
+This deployment note was recovered from the saved release record after local E: filesystem errors interrupted its original documentation commit. The application release itself had already been committed, deployed and verified.
