@@ -18,6 +18,9 @@ async function inspect(dir) {
       if (!$('meta[name="robots"]').attr('content')?.includes('noindex'))
         errors.push('Missing noindex: ' + file);
       if (!$('.review-notice').length) errors.push('Missing review notice: ' + file);
+      for (const rel of ['icon', 'apple-touch-icon']) {
+        if (!$(`link[rel="${rel}"][href]`).length) errors.push('Missing ' + rel + ': ' + file);
+      }
       for (const element of $('img[src],script[src],link[href]').toArray()) {
         const value = $(element).attr('src') || $(element).attr('href');
         if (!value?.startsWith('/')) continue;
@@ -26,7 +29,8 @@ async function inspect(dir) {
           continue;
         }
         const asset = value.slice(prefix.length).split('?')[0];
-        if (!asset.startsWith('/_next') && !/\.(webp|svg|woff2|css|js)$/.test(asset)) continue;
+        if (!asset.startsWith('/_next') && !/\.(webp|svg|png|ico|woff2|css|js)$/.test(asset))
+          continue;
         try {
           await stat(path.join(output, decodeURIComponent(asset)));
         } catch {

@@ -35,6 +35,13 @@ const kyiv = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://127.0.0.1:3000'),
   title: 'ProPhoto',
+  icons: {
+    icon: [
+      { url: '/brand/prophoto-icon.ico', sizes: '16x16 32x32 48x48', type: 'image/x-icon' },
+      { url: '/brand/prophoto-icon.svg', sizes: 'any', type: 'image/svg+xml' },
+    ],
+    apple: { url: '/brand/prophoto-apple-icon.png', sizes: '180x180', type: 'image/png' },
+  },
   openGraph: { type: 'website', locale: 'uk_UA' },
   twitter: { card: 'summary_large_image' },
 };

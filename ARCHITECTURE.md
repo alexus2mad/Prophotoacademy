@@ -52,6 +52,8 @@ Academy public and workspace shells explicitly apply the shared `academyThemeCla
 
 ## Next.js and the two build modes
 
+Root metadata owns the shared ProPhoto favicon. The SVG preserves the two symbol paths from `public/brand/prophoto-study-trimmed.svg`, rendered white on black; the ICO contains 16, 32 and 48px variants, and the Apple icon is 180px. Explicit icon URLs stay under `/brand/` so the review exporter prefixes them correctly. `public/favicon.ico` also serves browsers' conventional fallback request. The review validator checks icon links and their exported files.
+
 Read the applicable bundled Next.js documentation before changing framework behavior. Server Components remain the default. Put `use client` at the real interactive boundary; do not mark whole templates client merely because they contain an interactive child. Serializable props cross server/client boundaries.
 
 UI components do not import the server-only content transport, `next/headers`, Node APIs or Sanity clients. Routes call `getContent`; pure image, offering, catalog and program selectors live in their domain folders. Payment, inquiry, attribution and booking validation remain server responsibilities.
