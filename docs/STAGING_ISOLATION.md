@@ -281,3 +281,20 @@ No application release or runtime setting changed. Staging retains
 `d0cb23960a7952e40f5a87d2e44c9623f305da18` and its existing rollback; production
 retains `aa6f6aa4630be415d02d120732e5df795da6b5dd` and PID 57069. Both services
 remain active, payments remain mock on staging, and booking was untouched.
+
+## Student workspace release — 28 October 2026
+
+Staging received `9553e7910166e7f37eecf7e31e40a09637d6b64c`, with the shared student
+dashboard, purchase history, settings and lesson chrome refresh. Architecture,
+TypeScript, formatting, 280 tests, Windows and isolated Linux production builds,
+and the validated 53-page synthetic export passed. Responsive review covered
+360, 390, 768, 1024 and 1440px, plus keyboard navigation and the mobile drawer.
+Native browser text enlargement could not be confirmed in the review tool.
+
+All 53 existing HTTPS checks and nine student-area checks passed after activation;
+live screenshots confirm the updated dashboard and curriculum. Anonymous private
+routes still redirect to login. Evidence is in ignored `.data/student-area-redesign/`.
+Release cleanup retained the active build and verified rollback
+`d0cb23960a7952e40f5a87d2e44c9623f305da18`. No content, access, identity, payment
+configuration or production release changed. The initial module-level collapse
+is being corrected to lecture-level chapter disclosure at the owner's request.
