@@ -1,5 +1,6 @@
 /* Brand foundation, explicitly applied to Academy surfaces, never the Hub or Studio. */
 .academy-theme {
+  --academy-content-max: 1472px;
   --canvas: #050505;
   --surface: #121212;
   --elevated: #232323;

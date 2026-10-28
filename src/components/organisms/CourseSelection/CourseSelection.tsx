@@ -31,7 +31,7 @@ export function CourseSelection({ primary, courses, content }: CourseSelectionPr
       </div>
       <div className="other-programs">
         <span>Шукаєш інший формат?</span>
-        <Link href="/courses?type=class">Класи та події</Link>
+        <Link href="/courses">Класи та події</Link>
         <Link href="/individual-training">Індивідуально</Link>
         <Link href="/corporate-training">Для команд</Link>
       </div>

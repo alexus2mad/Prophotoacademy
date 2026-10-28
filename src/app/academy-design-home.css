@@ -38,6 +38,9 @@
   background: #050505;
 }
 .academy-design-home {
+  width: 100%;
+  max-width: var(--academy-content-max);
+  margin-inline: auto;
   font-family: var(--font-home-text), sans-serif;
   font-weight: 400;
   font-optical-sizing: none;

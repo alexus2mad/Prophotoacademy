@@ -1,15 +1,8 @@
 import { CourseCard } from '@/components/molecules/CourseCard/CourseCard';
-import { CatalogFilters } from '@/components/organisms/CatalogFilters/CatalogFilters';
 import { Consultation } from '@/components/organisms/Consultation/Consultation';
 import { findImage, findOffering } from '@/lib/content/selectors';
-import Link from 'next/link';
 import type { CatalogTemplateProps } from './types';
-export function CatalogTemplate({
-  content,
-  programs,
-  filters,
-  review = false,
-}: CatalogTemplateProps) {
+export function CatalogTemplate({ content, programs }: CatalogTemplateProps) {
   return (
     <>
       <div className="container editorial-catalog">
@@ -17,7 +10,6 @@ export function CatalogTemplate({
           <h1>Програми навчання</h1>
           <p className="lead muted">Курси, класи та індивідуальні формати навчання.</p>
         </div>
-        <CatalogFilters key={JSON.stringify(filters)} {...filters} count={programs.length} />
         {programs.length ? (
           <div className="course-grid">
             {programs.map((p) => (
@@ -31,15 +23,8 @@ export function CatalogTemplate({
           </div>
         ) : (
           <div className="empty-state">
-            <h2>Поки немає такого поєднання</h2>
-            <p className="muted">
-              {review
-                ? 'Спробуйте інший формат.'
-                : 'Спробуйте інший формат або перегляньте всі програми.'}
-            </p>
-            <Link href="/courses" className="button">
-              Скинути фільтри
-            </Link>
+            <h2>Наразі немає програм</h2>
+            <p className="muted">Зверніться до нас, щоб дізнатися про навчання.</p>
           </div>
         )}
       </div>

@@ -5,20 +5,19 @@ import sharp from 'sharp';
 import fixture from '../content/academy.json';
 import type { AcademyContent } from '../src/lib/content/types';
 import { academyDirections } from '../src/lib/academy-home/selectors';
-import { filterPrograms } from '../src/lib/catalog/selectors';
 import homeImages from '../src/lib/photography/home-images.json';
 import manifest from '../src/lib/photography/prepared-home-images.json';
 import { preparedPhoto } from '../src/lib/photography/prepared';
 
 const content = fixture as AcademyContent;
 describe('Academy homepage destinations and photography', () => {
-  it('opens real program routes or catalog filters with matching programs', () => {
+  it('opens real program routes or the complete catalog', () => {
     for (const direction of academyDirections(content)) {
       if (!direction.href) continue;
       const url = new URL(direction.href, 'https://academy.example');
       if (url.pathname === '/courses') {
-        const query = Object.fromEntries(url.searchParams);
-        expect(filterPrograms(content, query).length).toBeGreaterThan(0);
+        expect(url.search).toBe('');
+        expect(content.programs.length).toBeGreaterThan(0);
       } else {
         expect(content.programs.some((p) => '/' + p.slug === url.pathname)).toBe(true);
       }

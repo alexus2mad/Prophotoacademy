@@ -56,7 +56,7 @@ Read the applicable bundled Next.js documentation before changing framework beha
 
 UI components do not import the server-only content transport, `next/headers`, Node APIs or Sanity clients. Routes call `getContent`; pure image, offering, catalog and program selectors live in their domain folders. Payment, inquiry, attribution and booking validation remain server responsibilities.
 
-The GitHub review uses the same components and hooks. `ReviewCatalog` and `ReviewBooking` read static-page queries after hydration; they reuse the production catalog and studio booking presentation. The exporter changes only framework entry points and unavailable server actions. It must not embed a separate UI implementation in build-script strings. Its root layout is adapted with a TypeScript AST so formatting changes do not break publication.
+The GitHub review uses the same components and hooks. The catalog shares its ordinary server-rendered route and shows the complete program collection without query filtering. `ReviewBooking` reads static-page queries after hydration and reuses the production studio booking presentation. The exporter changes only framework entry points and unavailable server actions. It must not embed a separate UI implementation in build-script strings. Its root layout is adapted with a TypeScript AST so formatting changes do not break publication.
 
 ## Administration and cashbox ownership
 

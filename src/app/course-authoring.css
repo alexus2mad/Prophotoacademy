@@ -1,7 +1,7 @@
 /* Authoring uses a course tree and one material editor, with media in context. */
 .workspace-admin:has(.course-authoring) {
   display: block;
-  max-width: 1600px;
+  max-width: var(--academy-content-max);
   padding-inline: 32px;
 }
 .workspace-admin:has(.course-authoring) .workspace-nav {

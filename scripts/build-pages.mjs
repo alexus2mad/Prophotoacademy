@@ -64,13 +64,6 @@ await writeFile(
   `import {ReviewUnavailableTemplate} from '@/components/templates/ReviewUnavailableTemplate/ReviewUnavailableTemplate';export default function ThanksReview(){return <ReviewUnavailableTemplate title="Статус замовлення" description="Оглядова версія не створює замовлень і не приймає платежів."/>;}`,
 );
 await writeFile(
-  path.join(stage, 'src/app/(academy)/courses/page.tsx'),
-  `import {getContent} from '@/lib/content';import {ReviewCatalog} from '@/components/templates/ReviewCatalog/ReviewCatalog';
-export default async function Courses(){return <ReviewCatalog content={await getContent()}/>;}
-`,
-);
-
-await writeFile(
   path.join(stage, 'src/app/hub/booking/page.tsx'),
   `import {getContent} from '@/lib/content';import {ReviewBooking} from '@/components/organisms/ReviewBooking/ReviewBooking';
 export default async function Booking(){const content=await getContent();return <div className="booking-page container"><ReviewBooking rooms={content.rooms} providerUrl={content.hub.bookingUrl} phone={content.hub.phone}/></div>;}
@@ -136,8 +129,6 @@ async function adaptFiles(dir) {
           /privacyUrl\s*=\s*(["'])\/privacy-policy\1/g,
           `privacyUrl='${basePath}/privacy-policy'`,
         );
-      if (entry.name === 'CatalogFilters.tsx')
-        text = text.replace('action="/courses"', `action="${basePath}/courses/"`);
       await writeFile(file, text);
     }
   }

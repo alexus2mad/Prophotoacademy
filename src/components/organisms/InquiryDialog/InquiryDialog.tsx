@@ -52,7 +52,7 @@ export function InquiryDialog({
           {context.practiceSessionId && (
             <p className="practice-online-alternative">
               Навчаєтеся поза Києвом?{' '}
-              <a href={siteHref('academy', 'courses?format=online')}>Переглянути онлайн-навчання</a>
+              <a href={siteHref('academy', 'courses')}>Переглянути програми</a>
             </p>
           )}
           <form onSubmit={submit} className="form-stack" aria-busy={state === 'sending'}>

@@ -28,3 +28,13 @@ Architecture (509 modules), TypeScript, formatting, focused presentation/motion/
 Reduced-motion behavior is covered by the observer tests and scoped CSS. The available browser tool did not apply native 200% browser/text zoom; this is a remaining manual accessibility check, not a claimed pass. Narrow viewport checks and bounded/scrollable content cover responsive reflow separately.
 
 Local authentication is intentionally unconfigured; login's unavailable state and existing authentication tests were checked. Live email delivery, private-media authorization and real checkout were not reconfigured or exercised against customer accounts during this design review. Synthetic routes share the same presentation components.
+
+## Shared content width and simplified catalog — 28 October 2026
+
+Academy page shells now share `--academy-content-max: 1472px`. Public headers and footers, the homepage, workspace headers/layouts, lesson grid and editor are centered within this cap. Reading text, forms, checkout summaries and status panels retain their narrower measures. Hub keeps its own 1360px container; fullscreen galleries and mobile drawers remain viewport overlays.
+
+The catalog now shows all six programs without filters or a result counter. It preserves the configured primary program and CMS order. Legacy filter query parameters no longer hide programs, and the static review uses the same catalog route and template.
+
+Browser checks cover the catalog, homepage, commercial-content program, synthetic student dashboard, lesson and editor at 360, 390, 768, 1024, 1440, 1920 and 2560px. Additional 390/1920px checks cover login, unavailable checkout, About, student work, reviews, contacts, privacy and Hub. No document-level horizontal overflow was observed. Wide Academy shells measure 1472px, the lesson sidebar remains 300px, lesson prose remains 672px at 18px, and collapsed lesson content remains 1100px. The compact checkout status panel measures 640px. Desktop curriculum collapse and the mobile drawer open/close interaction still work.
+
+Evidence is saved in ignored `.data/content-wrapper/`. Synthetic records were used for workspace checks; no live account, order or progress mutation was made. Architecture (502 modules), formatting, TypeScript, all 243 tests, the production build and the validated 53-page synthetic export pass. This verification does not claim native 200% text zoom, which remains the manual check described above. The changes are prepared locally; this verification is not a staging deployment.

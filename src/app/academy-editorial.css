@@ -8,7 +8,7 @@
   overflow: clip;
 }
 .academy-editorial .container {
-  max-width: 1344px;
+  max-width: var(--academy-content-max);
   width: calc(100% - 2 * var(--page-gutter));
 }
 .academy-editorial .site-header {
@@ -94,12 +94,6 @@
 }
 
 /* A compact, aligned catalogue keeps every programme discoverable. */
-.academy-editorial .filters {
-  background: transparent;
-  padding: 0 0 24px;
-  border-top: 0;
-  border-bottom: 1px solid var(--border);
-}
 .academy-editorial .editorial-catalog .course-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 40px 24px;
@@ -855,6 +849,7 @@
   background: var(--elevated);
 }
 .academy-editorial .status-panel {
+  max-width: 640px;
   border-radius: 12px;
   padding: 48px;
   gap: 24px;

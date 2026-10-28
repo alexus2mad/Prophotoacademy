@@ -92,6 +92,9 @@
   text-align: center;
 }
 .workspace-header {
+  width: 100%;
+  max-width: var(--academy-content-max);
+  margin-inline: auto;
   height: 76px;
   border-bottom: 1px solid var(--learn-border);
   padding: 0 40px;
@@ -125,7 +128,7 @@
   text-underline-offset: 4px;
 }
 .workspace-layout {
-  max-width: 1520px;
+  max-width: var(--academy-content-max);
   margin: auto;
   padding: 0 40px 60px;
 }
@@ -517,6 +520,9 @@
   color: var(--secondary);
 }
 .lesson-header {
+  width: 100%;
+  max-width: var(--academy-content-max);
+  margin-inline: auto;
   height: 64px;
   position: sticky;
   top: 0;
@@ -551,6 +557,9 @@
   font-size: 14px;
 }
 .lesson-layout {
+  width: 100%;
+  max-width: var(--academy-content-max);
+  margin-inline: auto;
   display: grid;
   grid-template-columns: 300px minmax(0, 1fr);
 }
@@ -682,7 +691,7 @@
 .lesson-canvas {
   padding: 48px clamp(24px, 5vw, 80px) 64px;
   min-width: 0;
-  max-width: 1440px;
+  max-width: var(--academy-content-max);
   width: 100%;
   margin: auto;
 }
