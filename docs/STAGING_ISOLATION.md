@@ -35,15 +35,25 @@ No production students, orders, progress or paid files were copied into staging.
 Its seven schema migrations, restricted runtime role and private learning bucket
 are initialized. Use synthetic development data.
 
-## Remaining staging login configuration
+## Staging email-code login — 28 October 2026
 
-Staging uses a fresh Supabase Auth project. Its Site URL is set correctly, but
-its free default email provider does not permit editing the OTP email templates.
-The application expects a code, while the provider's default template sends a
-sign-in link. A separate staging SMTP provider and code templates are still
-needed before ordinary email-code login/admin testing is ready. Do not copy
-production SMTP/Resend credentials into the staging app or disable authentication.
-No first staging administrator was created or pre-verified manually.
+Staging Supabase Auth project `jxfyofiqhjmiguujrtdd` has custom SMTP enabled at
+`smtp.resend.com:465`, with SMTP username `resend` and sender name
+`ProPhoto Academy`. It uses a separately created staging Resend credential with
+sending-only permission, restricted to `mail.prophotoacademy.com.ua`. The
+credential is stored in Supabase SMTP configuration, not in the application
+environment or Git. Do not reuse production credentials or disable authentication.
+
+Email OTP settings are confirmed at eight digits and a 600-second expiry. The
+staging signup and sign-in templates are stored separately in
+`supabase/templates/staging/`; each includes `{{ .Token }}` and points its Academy
+links to the staging origin. Both templates were applied to this staging project.
+An actual request through the staging login form reached the code-entry screen,
+and Resend confirmed the sign-in email as Delivered. The signup template was also
+reloaded and compared with its saved source. Evidence is retained locally under
+ignored `.data/staging-auth-fix/`. Delivery is verified; completing the sign-in
+still requires the recipient to enter their code. No application release,
+production configuration, account privileges or payment settings changed.
 
 Production Auth Site URL and both signup/sign-in email templates now point to
 the production domain; OTP placeholders and subjects were preserved. Saved
