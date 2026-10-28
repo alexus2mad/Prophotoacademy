@@ -298,3 +298,32 @@ Release cleanup retained the active build and verified rollback
 `d0cb23960a7952e40f5a87d2e44c9623f305da18`. No content, access, identity, payment
 configuration or production release changed. The initial module-level collapse
 is being corrected to lecture-level chapter disclosure at the owner's request.
+
+## Lecture navigation and image preloading — 28 October 2026
+
+Staging now runs `46d0865bc34a5a098f7626f9b710b0839efde19a`. Course groups and all
+lecture titles stay visible. The current lecture is bold; its chapter anchors are
+inside a native disclosure that starts closed and opens only through student
+interaction. Inactive lectures remain direct links. Chapter navigation closes the
+mobile drawer while preserving the user's explicit expansion during the lesson.
+
+Image authorization now starts within three viewport heights in either scroll
+direction, replacing the fixed 2,000px buffer. Pending observers adapt to resize;
+admitted images download immediately and no longer observe scrolling. Private
+media checks, URL lifetime and quiz-only progress are unchanged.
+
+Architecture (517 modules), TypeScript, formatting, all 288 tests, Windows and
+isolated Linux production builds, 11 deployment tests, and the validated 53-page
+synthetic review export passed. The default highly parallel test run hit database
+startup timeouts; the complete suite passed with two workers and no test-policy
+changes. Local browser review covered 360, 390, 768, 1024 and 1440px without
+horizontal overflow, keyboard expansion, chapter navigation and drawer behavior.
+
+After activation, all 53 existing HTTPS checks and nine student checks passed.
+Live browser review confirms visible lecture titles, closed initial chapters,
+bold current-lecture text, keyboard opening and loaded photographs. Screenshots
+and operational reports remain in ignored `.data/lecture-navigation-preload/`.
+The application release directory contains only the active build and verified
+rollback `9553e7910166e7f37eecf7e31e40a09637d6b64c`. Production remains on
+`aa6f6aa4630be415d02d120732e5df795da6b5dd` with unchanged PID 57069. Both services
+are healthy and staging isolation passes; no data or runtime settings changed.
