@@ -52,5 +52,21 @@ class StagingIsolation(unittest.TestCase):
         with self.assertRaises(ValueError):
             guard.validate(env)
 
+    def test_isolated_invitation_sender_allowed(self):
+        guard.validate({**self.valid(),
+            "INVITATION_RESEND_API_KEY": "re_staging_test_only",
+            "INVITATION_EMAIL_FROM": "ProPhoto Academy Staging <login@mail.prophotoacademy.com.ua>",
+        })
+
+    def test_incomplete_or_wrong_invitation_sender_rejected(self):
+        variants = [
+            {"INVITATION_RESEND_API_KEY": "re_staging_test_only"},
+            {"INVITATION_EMAIL_FROM": "ProPhoto Academy Staging <login@mail.prophotoacademy.com.ua>"},
+            {"INVITATION_RESEND_API_KEY": "re_staging_test_only", "INVITATION_EMAIL_FROM": "Production <other@example.com>"},
+        ]
+        for variant in variants:
+            with self.subTest(variant=variant), self.assertRaises(ValueError):
+                guard.validate({**self.valid(), **variant})
+
 if __name__ == "__main__":
     unittest.main()

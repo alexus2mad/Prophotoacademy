@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { readFile } from 'node:fs/promises';
 import { orderEmail } from '../src/lib/notifications/emails';
 import { renderEmail } from '../src/lib/notifications/email-layout';
+import { invitationEmail } from '../src/lib/notifications/invitations';
 import type { NotificationJob } from '../src/lib/notifications/types';
 
 const origin = 'https://academy.example';
@@ -73,5 +74,43 @@ describe('Supabase auth templates', () => {
       expect(html).toContain('/brand/prophoto-study-email.png');
       expect(html).toContain('academyprophoto@gmail.com');
     }
+  });
+});
+
+describe('access invitation emails', () => {
+  it('links both audiences to normal email-code login without issuing credentials', () => {
+    for (const kind of ['admin-invitation', 'access-invitation']) {
+      const content = invitationEmail(
+        {
+          id: 'invitation',
+          kind,
+          attempts: 0,
+          data: {
+            customer: { email: 'learner@example.test' },
+            programTitle: '<script>Course</script>',
+            packageName: 'BASE',
+          },
+        },
+        'https://staging.prophotoacademy.com.ua',
+      )!;
+      const login = new URL(content.action!.href);
+      expect(login.origin).toBe('https://staging.prophotoacademy.com.ua');
+      expect(login.pathname).toBe('/login');
+      expect(login.searchParams.get('next')).toBe(
+        kind === 'admin-invitation' ? '/admin' : '/account',
+      );
+      expect(content.code).toBeUndefined();
+      expect(content.subject).toContain('Staging');
+      expect(content.note).toContain('тестової платформи');
+      expect(content.paragraphs.join(' ')).toContain('окремий лист із кодом');
+      const rendered = renderEmail(content, login.origin);
+      expect(rendered.html).not.toContain('<script>');
+      if (kind === 'access-invitation') expect(rendered.html).toContain('&lt;script&gt;Course');
+    }
+  });
+  it('does not turn unrelated events into invitations', () => {
+    expect(
+      invitationEmail({ id: 'x', kind: 'payment-event', attempts: 0, data: order() }, origin),
+    ).toBeNull();
   });
 });

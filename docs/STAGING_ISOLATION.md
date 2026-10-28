@@ -23,7 +23,8 @@ resource limits reduce interference but do not provide two-server availability.
 
 Runtime environment files are root-owned mode 0600. Staging cannot read
 production files or secrets. Its service has a 75% CPU quota and 768 MB memory
-ceiling. Both services start at boot. Staging has no email-dispatch timer.
+ceiling. Both services start at boot. Staging's invitation-only email retry worker
+is documented in [invitation operations](INVITATIONS.md); other notifications stay isolated.
 
 Production active: aa6f6aa4630be415d02d120732e5df795da6b5dd.
 Production rollback: 5e51620e28df954d79a7ea8651924b2dead58122.
@@ -41,8 +42,10 @@ Staging Supabase Auth project `jxfyofiqhjmiguujrtdd` has custom SMTP enabled at
 `smtp.resend.com:465`, with SMTP username `resend` and sender name
 `ProPhoto Academy`. It uses a separately created staging Resend credential with
 sending-only permission, restricted to `mail.prophotoacademy.com.ua`. The
-credential is stored in Supabase SMTP configuration, not in the application
-environment or Git. Do not reuse production credentials or disable authentication.
+credential is stored in Supabase SMTP configuration. The invitation feature also
+uses staging's own sending credential in its root-protected runtime environment,
+under invitation-specific variables. No credentials are stored in Git. Do not
+reuse production credentials or disable authentication.
 
 Email OTP settings are confirmed at eight digits and a 600-second expiry. The
 staging signup and sign-in templates are stored separately in

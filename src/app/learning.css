@@ -1269,6 +1269,34 @@
 .admin-form .admin-notice {
   margin-block: 0;
 }
+.invitation-notice {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  padding: 20px 24px;
+  border: 1px solid var(--learn-border);
+  border-radius: 12px;
+  font-size: 15px;
+}
+.invitation-notice-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+}
+.invitation-notice p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.invitation-notice-summary > p {
+  flex: 1 1 220px;
+  color: var(--secondary);
+}
+.admin-table .invitation-notice {
+  border: 0;
+  padding: 8px 0 0;
+}
 .admin-dialog .admin-actions {
   margin-top: 24px;
 }
@@ -1525,6 +1553,44 @@
   .admin-table th,
   .admin-table td {
     padding: 14px;
+  }
+  .admin-team-table,
+  .admin-team-table tbody {
+    display: block;
+    width: 100%;
+  }
+  .admin-team-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .admin-team-table tbody tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    padding: 20px;
+    border-bottom: 1px solid var(--learn-border);
+  }
+  .admin-team-table tbody tr:last-child {
+    border-bottom: 0;
+  }
+  .admin-team-table td {
+    display: block;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+  }
+  .admin-team-table td:first-child {
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .admin-team-table td > .admin-muted {
+    margin: 0;
+    font-weight: 400;
   }
   .pdf-toolbar {
     gap: 8px;

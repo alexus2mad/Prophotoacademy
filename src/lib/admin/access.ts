@@ -4,6 +4,7 @@ import { transaction, audit } from '../database/client';
 import { HttpError } from '../http';
 import { assertAdministrator } from '../auth/identity';
 import type { Grant, CourseRelease } from '../learning/types';
+import { queueInvitation } from '../notifications/invitations';
 export const accessInput = z.object({
   action: z.enum(['grant', 'upgrade', 'extend', 'revoke', 'restore', 'migrate']),
   grantId: z.uuid().optional(),
@@ -111,6 +112,22 @@ export async function manageAccess(input: unknown, actorId: string) {
       before,
       after: result.rows[0],
     });
+    if (value.action === 'grant') {
+      const course = (
+        await db.query('SELECT title FROM academy.courses WHERE id=$1', [value.courseId])
+      ).rows[0];
+      await queueInvitation(
+        db,
+        {
+          email,
+          audience: 'student',
+          grantId: result.rows[0].id,
+          programTitle: course?.title,
+          packageName: value.packageName,
+        },
+        'access-invitation:' + result.rows[0].id,
+      );
+    }
     return result.rows[0];
   });
 }

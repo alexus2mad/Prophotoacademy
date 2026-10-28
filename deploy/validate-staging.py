@@ -40,6 +40,15 @@ def validate(env):
         raise ValueError("Staging must use mock payments")
     if env.get("NOTIFICATION_MODE") != "local":
         raise ValueError("Staging must use local notifications")
+    # Only administrator-requested invitations may use the separate staging sender.
+    # Payment/Make notifications remain isolated and cannot use this credential.
+    invitation_key = env.get("INVITATION_RESEND_API_KEY", "")
+    invitation_sender = env.get("INVITATION_EMAIL_FROM", "")
+    if invitation_key or invitation_sender:
+        if not invitation_key.startswith("re_"):
+            raise ValueError("A separate staging invitation sending key is required")
+        if invitation_sender != "ProPhoto Academy Staging <login@mail.prophotoacademy.com.ua>":
+            raise ValueError("Staging invitations must use the designated staging sender")
     for key in ("WAYFORPAY_MERCHANT_SECRET", "MAKE_WEBHOOK_URL", "RESEND_API_KEY",
                 "PS_BOOKING_MANAGEMENT_SECRET", "ECOSYSTEM_INGEST_TOKEN",
                 "MUX_TOKEN_ID", "MUX_TOKEN_SECRET", "SANITY_API_WRITE_TOKEN"):

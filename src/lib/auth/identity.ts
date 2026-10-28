@@ -2,6 +2,7 @@ import type { SqlConnection } from '../database/types';
 import type { Member, VerifiedIdentity } from './types';
 import { audit } from '../database/client';
 import { HttpError } from '../http';
+import { queueInvitation } from '../notifications/invitations';
 
 export async function assertAdministrator(db: SqlConnection, actorId: string) {
   await db.query('SELECT pg_advisory_xact_lock(710091)');
@@ -86,11 +87,20 @@ export async function changeAdministrator(
       grant ? 'admin' : 'student',
       target.id,
     ]);
-  else if (grant)
-    await db.query(
-      'INSERT INTO academy.admin_invitations(email,invited_by) VALUES($1,$2) ON CONFLICT(email) DO UPDATE SET invited_by=excluded.invited_by,claimed_at=NULL',
+  else if (grant) {
+    const created = await db.query(
+      'INSERT INTO academy.admin_invitations(email,invited_by) VALUES($1,$2) ON CONFLICT(email) DO UPDATE SET invited_by=excluded.invited_by,claimed_at=NULL,created_at=now() WHERE academy.admin_invitations.claimed_at IS NOT NULL RETURNING created_at::text',
       [email, actorId],
     );
+    if (created.rows[0])
+      await queueInvitation(db, {
+        email,
+        audience: 'admin',
+        invitationCreatedAt: created.rows[0].created_at,
+      });
+  }
+  if (grant && target && target.role !== 'admin')
+    await queueInvitation(db, { email, audience: 'admin' });
   if (!grant) await db.query('DELETE FROM academy.admin_invitations WHERE email=$1', [email]);
   await audit(db, {
     actorId,

@@ -1,4 +1,5 @@
 import { databasePool } from '../database/client';
+import { invitationStatus } from '../notifications/invitations';
 import { getContent } from '../content';
 import { grantStatistics, courseStatistics } from './statistics';
 import type {
@@ -141,6 +142,7 @@ export async function adminPerson(email: string): Promise<UserDetail> {
       )
     ).rows[0] || null;
   const detail: UserDetail = {
+    invitation: await invitationStatus(db, email, 'student'),
     profile,
     email,
     grants: (
@@ -175,17 +177,23 @@ export async function adminPerson(email: string): Promise<UserDetail> {
 }
 export async function adminTeam(): Promise<TeamData> {
   const db = databasePool();
+  const pending = (
+    await db.query<TeamData['invitations'][number]>(
+      'SELECT email,created_at FROM academy.admin_invitations WHERE claimed_at IS NULL ORDER BY created_at',
+    )
+  ).rows;
   return {
     members: (
       await db.query<Member>(
         "SELECT * FROM academy.profiles WHERE role='admin' ORDER BY created_at",
       )
     ).rows,
-    invitations: (
-      await db.query<TeamData['invitations'][number]>(
-        'SELECT email,created_at FROM academy.admin_invitations WHERE claimed_at IS NULL ORDER BY created_at',
-      )
-    ).rows,
+    invitations: await Promise.all(
+      pending.map(async (invitation) => ({
+        ...invitation,
+        notification: await invitationStatus(db, invitation.email, 'admin'),
+      })),
+    ),
   };
 }
 

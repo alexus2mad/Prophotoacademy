@@ -3,6 +3,7 @@ import { after } from 'next/server';
 import { databasePool, managedDatabase, transaction } from '../database/client';
 import { renderEmail, siteOrigin } from './email-layout';
 import { orderEmail } from './emails';
+import { invitationEmail, invitationStillValid, isInvitation } from './invitations';
 import type { NotificationJob } from './types';
 export async function deliverNotifications() {
   const db = databasePool(),
@@ -22,6 +23,7 @@ export async function deliverNotifications() {
   for (const job of jobs) {
     try {
       const data = job.data;
+      const invitation = isInvitation(job.kind);
       if (data.mode === 'mock') {
         await db.query(
           "UPDATE academy.outbox SET state='local',claim_until=NULL WHERE id=$1 AND claim_token=$2",
@@ -29,20 +31,38 @@ export async function deliverNotifications() {
         );
         continue;
       }
-      const email = orderEmail(job.kind, data, siteOrigin());
+      if (invitation && !(await invitationStillValid(db, job))) {
+        await db.query(
+          "UPDATE academy.outbox SET state='canceled',claim_until=NULL,last_error=NULL WHERE id=$1 AND claim_token=$2",
+          [job.id, claim],
+        );
+        continue;
+      }
+      const email = invitation
+        ? invitationEmail(job, siteOrigin())
+        : orderEmail(job.kind, data, siteOrigin());
       if (email) {
-        if (!process.env.RESEND_API_KEY || !process.env.EMAIL_FROM)
-          throw new Error('Email not configured');
+        // Staging's dedicated credential sends invitations only. It never enables
+        // purchases, Make webhooks or other application notifications.
+        const allowDefault = !invitation || process.env.NOTIFICATION_MODE !== 'local';
+        const key = invitation
+          ? process.env.INVITATION_RESEND_API_KEY ||
+            (allowDefault ? process.env.RESEND_API_KEY : undefined)
+          : process.env.RESEND_API_KEY;
+        const from = invitation
+          ? process.env.INVITATION_EMAIL_FROM || (allowDefault ? process.env.EMAIL_FROM : undefined)
+          : process.env.EMAIL_FROM;
+        if (!key || !from) throw new Error('Email not configured');
         const message = renderEmail(email);
         const response = await fetch('https://api.resend.com/emails', {
           method: 'POST',
           headers: {
-            Authorization: 'Bearer ' + process.env.RESEND_API_KEY,
+            Authorization: 'Bearer ' + key,
             'Content-Type': 'application/json',
             'Idempotency-Key': job.id,
           },
           body: JSON.stringify({
-            from: process.env.EMAIL_FROM,
+            from,
             to: [data.customer!.email],
             subject: message.subject,
             html: message.html,

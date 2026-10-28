@@ -1,6 +1,7 @@
 'use client';
 import { Button } from '@/components/atoms/Button/Button';
 import { Dialog } from '@/components/molecules/Dialog/Dialog';
+import { InvitationNotice } from '@/components/molecules/InvitationNotice/InvitationNotice';
 import { useAdminTeam } from './hooks';
 import type { AdminTeamProps } from './types';
 
@@ -21,27 +22,39 @@ export function AdminTeam(props: AdminTeamProps) {
         aria-label="Адміністратори Академії"
         tabIndex={0}
       >
-        <table className="admin-table">
-          <thead>
-            <tr>
-              <th>Email</th>
-              <th>Стан</th>
+        <table className="admin-table admin-team-table" role="table">
+          <thead role="rowgroup">
+            <tr role="row">
+              <th scope="col" role="columnheader">
+                Email
+              </th>
+              <th scope="col" role="columnheader">
+                Стан
+              </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody role="rowgroup">
             {data.members.map((member) => (
-              <tr key={member.id}>
-                <td>
+              <tr key={member.id} role="row">
+                <td role="cell">
                   {member.email}
                   {member.name && <p className="admin-muted">{member.name}</p>}
                 </td>
-                <td>Адміністратор</td>
+                <td role="cell">Адміністратор</td>
               </tr>
             ))}
             {data.invitations.map((invitation) => (
-              <tr key={invitation.email}>
-                <td>{invitation.email}</td>
-                <td>Очікує підтвердження email</td>
+              <tr key={invitation.email} role="row">
+                <td role="cell">{invitation.email}</td>
+                <td role="cell">
+                  <p className="admin-muted">Права очікують першого входу з підтвердженням email</p>
+                  <InvitationNotice
+                    email={invitation.email}
+                    audience="admin"
+                    invitation={invitation.notification}
+                    demo={props.demo}
+                  />
+                </td>
               </tr>
             ))}
           </tbody>
@@ -81,8 +94,8 @@ export function AdminTeam(props: AdminTeamProps) {
           </label>
           <p className="admin-notice">
             Права можна змінювати протягом 10 хвилин після підтвердження email. Останнього
-            адміністратора видалити неможливо. Якщо в людини ще немає акаунта, права з’являться
-            після того, як вона підтвердить свій email
+            адміністратора видалити неможливо. Запрошення містить посилання на вхід. Якщо в людини
+            ще немає акаунта, права з’являться лише після підтвердження її email кодом
           </p>
           <button className="button" type="submit" disabled={h.busy}>
             Переглянути зміну

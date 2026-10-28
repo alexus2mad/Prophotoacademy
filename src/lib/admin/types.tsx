@@ -1,4 +1,5 @@
 import type { Member } from '../auth/types';
+import type { InvitationStatus } from '../notifications/types';
 import type {
   CourseRelease,
   Grant,
@@ -38,8 +39,12 @@ export type AdminCoursesData = {
   courses: AdminCourse[];
   programs: Pick<Program, 'id' | 'title'>[];
 };
-export type TeamData = { members: Member[]; invitations: { email: string; created_at: string }[] };
+export type TeamData = {
+  members: Member[];
+  invitations: { email: string; created_at: string; notification?: InvitationStatus }[];
+};
 export type UserDetail = {
+  invitation?: InvitationStatus;
   profile: AdminPerson | null;
   email: string;
   grants: Grant[];

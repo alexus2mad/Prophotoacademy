@@ -32,3 +32,17 @@ export type EmailContent = {
   note?: string;
 };
 export type RenderedEmail = { subject: string; html: string; text: string };
+export type InvitationAudience = 'student' | 'admin';
+export type InvitationStatus = {
+  state: 'none' | 'pending' | 'sent' | 'retrying' | 'local' | 'canceled';
+  requestedAt: string | null;
+};
+export type InvitationJobRow = NotificationJob & { state: string };
+export type InvitationInput = {
+  email: string;
+  audience: InvitationAudience;
+  grantId?: string;
+  programTitle?: string;
+  packageName?: string;
+  invitationCreatedAt?: string;
+};

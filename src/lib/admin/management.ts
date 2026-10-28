@@ -8,6 +8,8 @@ import { consumeRateLimit, databasePool, transaction } from '../database/client'
 import { claimIdentity, changeAdministrator, normalizeEmail } from '../auth/identity';
 import { adminOverview, adminPeople, adminPerson, adminTeam, sessionRoster } from './queries';
 import { manageAccess } from './access';
+import { resendInvitation } from './invitations';
+import { deliverSoon } from '../notifications/delivery';
 import { recordAttendance } from '../learning/live';
 import { customerAccounts } from './customer-account';
 import type { ManagementMember } from './types';
@@ -163,9 +165,17 @@ export async function managementAction(action: string, value: unknown, session?:
     await transaction((db) =>
       changeAdministrator(db, actor.id, input.email, input.grant, input.reason),
     );
+    deliverSoon();
     return { ok: true };
   }
-  if (action === 'access.change') return manageAccess(value, actor.id);
+  if (action === 'access.change' || action === 'invitation.resend') {
+    const result =
+      action === 'access.change'
+        ? await manageAccess(value, actor.id)
+        : await resendInvitation(value, actor.id);
+    deliverSoon();
+    return result;
+  }
   if (action === 'attendance') {
     const input = z
       .object({

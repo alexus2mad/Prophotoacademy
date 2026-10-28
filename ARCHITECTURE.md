@@ -74,6 +74,8 @@ The explicitly configured `PAYMENT_MODE=disabled` rollout enrolls published, map
 
 The management bridge is not a payment-event feed. The existing booking cashbox still has no Academy payment-event producer or refund-submission endpoint. Any financial reconciliation integration belongs in that repository. See `docs/PS_BOOKING_BOUNDARY.md` and `docs/LEARNING_OPERATIONS.md` for setup and activation requirements.
 
+Administrator-created access and privileges queue invitation email atomically with the change. Delivery rechecks current access, while identity activation still requires the recipient's verified email login. Resends are rate-limited and never mutate rights. The shared admin notice distinguishes queued/provider-accepted email from account verification. See [invitation operations](docs/INVITATIONS.md) for isolated staging credentials and worker configuration.
+
 ## Private learning content
 
 `src/lib/learning` owns entitlement, authoring, media and completion policies. `src/lib/admin` owns protected management commands and read models used by booking; it is not an Academy management UI. Domain services never depend on presentation components. Public Sanity marketing content is separate from the verified-private learning dataset. Published curricula are immutable and grants retain their assigned release. PDFs/images use a verified-private Storage bucket; Mux uses signed playback. Media URLs are issued only after authorization and expire; files already downloaded cannot be recalled.

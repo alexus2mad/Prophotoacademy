@@ -2,9 +2,11 @@
 import Link from 'next/link';
 import { Button } from '@/components/atoms/Button/Button';
 import { LearningProgress } from '@/components/atoms/LearningProgress/LearningProgress';
+import { InvitationNotice } from '@/components/molecules/InvitationNotice/InvitationNotice';
 import { AccessDialog } from '@/components/organisms/AccessDialog/AccessDialog';
 import { money } from '@/lib/format';
 import { useStudentDetail } from './hooks';
+import { hasCurrentAccess } from './selectors';
 import type { StudentDetailProps } from './types';
 
 const day = new Intl.DateTimeFormat('uk-UA', {
@@ -42,14 +44,25 @@ export function StudentDetail({ detail, demo }: StudentDetailProps) {
         <div>
           <h1>{detail.profile?.name || detail.email}</h1>
           <p>
-            {detail.email}
-            {detail.profile ? '' : ' · акаунт ще не створено, доступ чекає підтвердження email'}
+            {detail.profile
+              ? detail.profile.name
+                ? detail.email
+                : 'Акаунт активовано'
+              : 'Акаунт ще не створено. Щоб отримати доступ, людині потрібно увійти з цим email і підтвердити код із листа'}
           </p>
         </div>
         <Button className="button" onClick={() => h.openAccess('grant')}>
           Надати доступ до курсу
         </Button>
       </div>
+      {hasCurrentAccess(detail.grants) && (
+        <InvitationNotice
+          email={detail.email}
+          audience="student"
+          invitation={detail.invitation}
+          demo={demo}
+        />
+      )}
       <section className="admin-section">
         <h2>Курси й навчальний прогрес</h2>
         {detail.grants.length ? (

@@ -5,6 +5,8 @@ import { createMediaUpload, finishMediaUpload } from '@/lib/learning/media';
 import { saveLiveSession } from '@/lib/learning/live';
 import { deletePromoCode, savePromoCode } from '@/lib/commerce/promo';
 import { manageAccess } from '@/lib/admin/access';
+import { resendInvitation } from '@/lib/admin/invitations';
+import { deliverSoon } from '@/lib/notifications/delivery';
 import { changeAdministrator } from '@/lib/auth/identity';
 import { recordAttendance } from '@/lib/learning/live';
 import { transaction } from '@/lib/database/client';
@@ -26,6 +28,7 @@ export async function POST(request: Request, { params }: ActionRouteProps) {
     else if (action === 'sessions') result = await saveLiveSession(input, user.id);
     else if (action === 'promo-code-delete') result = await deletePromoCode(input, user.id);
     else if (action === 'access') result = await manageAccess(input, user.id);
+    else if (action === 'invitation') result = await resendInvitation(input, user.id);
     else if (action === 'team') {
       // Administrator changes need an email code confirmed in the last ten minutes.
       const actor = await requireAdmin(true);
@@ -75,6 +78,7 @@ export async function POST(request: Request, { params }: ActionRouteProps) {
         .parse(input);
       result = await finishMediaUpload(value.id, value.pageSeconds);
     } else throw new HttpError(404, 'Не знайдено');
+    if (['access', 'team', 'invitation'].includes(action)) deliverSoon();
     return Response.json({ ok: true, result });
   } catch (error) {
     return errorResponse(error);
