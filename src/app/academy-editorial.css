@@ -481,19 +481,34 @@
   font-size: 14px;
 }
 .academy-editorial .program-layout {
-  gap: 64px;
+  grid-template-columns: minmax(0, 1fr);
   margin-top: var(--section-gap);
 }
+.academy-editorial .program-content {
+  display: grid;
+  gap: 64px;
+  min-width: 0;
+}
 .academy-editorial .program-content > section {
-  margin-bottom: 64px;
+  margin-bottom: 0;
 }
 .academy-editorial .program-content h2 {
   font-size: 32px;
   margin-bottom: 24px;
 }
+.academy-editorial .program-overview-summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 64px;
+  align-items: start;
+}
 .academy-editorial .outcomes {
   font-size: 16px;
+  line-height: 1.65;
   gap: 24px;
+}
+.academy-editorial .outcomes li {
+  padding-top: 24px;
 }
 .academy-editorial .outcomes .outcome-number {
   color: var(--secondary);
@@ -502,6 +517,31 @@
 .academy-editorial .audience-list {
   font-size: 16px;
   line-height: 1.65;
+  list-style: disc;
+  padding-left: 20px;
+  margin: 0;
+  gap: 16px;
+}
+.academy-editorial .audience-list li {
+  display: list-item;
+  padding-left: 4px;
+}
+.academy-editorial .program-curriculum {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: 64px;
+  align-items: start;
+}
+.academy-editorial .program-curriculum > h2 {
+  max-width: 15ch;
+  margin-bottom: 0;
+}
+.academy-editorial .program-curriculum-modules {
+  min-width: 0;
+}
+.academy-editorial .program-curriculum-modules summary {
+  font-size: 18px;
+  padding-block: 24px;
 }
 .academy-editorial summary {
   font-size: 16px;
@@ -915,10 +955,14 @@
   }
   .academy-editorial .program-layout {
     order: 3;
-    grid-template-columns: minmax(0, 1fr);
   }
-  .academy-editorial .program-layout > .enrollment-panel {
-    display: none;
+  .academy-editorial .program-overview-summary,
+  .academy-editorial .program-curriculum {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+  .academy-editorial .program-curriculum > h2 {
+    max-width: none;
   }
   .academy-editorial .about-intro {
     gap: 32px;
@@ -1088,8 +1132,8 @@
   .academy-editorial .program-content h2 {
     font-size: 28px;
   }
-  .academy-editorial .program-content > section {
-    margin-bottom: 48px;
+  .academy-editorial .program-content {
+    gap: 48px;
   }
   .academy-editorial .outcomes {
     grid-template-columns: 1fr;

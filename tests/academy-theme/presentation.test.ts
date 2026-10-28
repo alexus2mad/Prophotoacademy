@@ -175,7 +175,7 @@ describe('program purchase decisions', () => {
     expect($('button[aria-haspopup="dialog"]').length).toBeGreaterThan(0);
   });
 
-  it('keeps packages before the long overview and avoids redundant hero package anchors', () => {
+  it('keeps packages before the overview without a duplicate desktop enrollment panel', () => {
     const $ = render(
       createElement(ProgramTemplate, {
         program,
@@ -211,7 +211,32 @@ describe('program purchase decisions', () => {
     expect(gallery.find('[aria-live="polite"]').text()).toContain('Фото 1 з 5');
     expect($('.program-hero a[href="#packages"]').length).toBe(0);
     expect($('#packages .package-grid a[href^="/checkout?"]').length).toBe(1);
-    expect($('.enrollment-panel a[href="#packages"]').length).toBe(1);
+    expect($('.program-landing .enrollment-panel').length).toBe(0);
+    const mobileEnrollment = $('.mobile-enroll');
+    expect(mobileEnrollment.find('a.button[href="#packages"]').text()).toBe('Обрати пакет');
+    expect(mobileEnrollment.find('a.button[href="#packages"]').length).toBe(1);
+    expect(mobileEnrollment.attr('aria-hidden')).toBe('true');
+    expect(mobileEnrollment.is('[inert]')).toBe(true);
+    const overview = $('#program-overview');
+    expect(
+      overview
+        .find('h2')
+        .slice(0, 3)
+        .map((_, heading) => $(heading).text())
+        .get(),
+    ).toEqual(['Чого ви навчитеся', 'Для кого ця програма', 'Що будемо вивчати']);
+    for (const text of [...program.outcomes, ...program.audience]) {
+      expect(overview.text()).toContain(text);
+    }
+    expect(
+      overview
+        .find('details > summary')
+        .map((_, summary) => $(summary).text())
+        .get(),
+    ).toEqual(program.modules.map((module) => module.title));
+    for (const module of program.modules) {
+      for (const topic of module.topics) expect(overview.text()).toContain(topic);
+    }
   });
 });
 
