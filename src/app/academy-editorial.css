@@ -496,52 +496,88 @@
   font-size: 32px;
   margin-bottom: 24px;
 }
-.academy-editorial .program-overview-summary {
-  display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
-  gap: 64px;
-  align-items: start;
+.academy-editorial .program-outcomes h2 {
+  margin-bottom: 8px;
 }
-.academy-editorial .outcomes {
-  font-size: 16px;
-  line-height: 1.65;
-  gap: 24px;
+.academy-editorial .program-outcomes .outcomes {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 48px;
+  row-gap: 0;
+  font-size: 20px;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
 }
-.academy-editorial .outcomes li {
-  padding-top: 24px;
+.academy-editorial .program-outcomes .outcomes li {
+  display: block;
+  border-top: 0;
+  border-bottom: 1px solid var(--border);
+  padding: 24px 0;
+  text-wrap: pretty;
 }
-.academy-editorial .outcomes .outcome-number {
-  color: var(--secondary);
-  font-size: 14px;
+.academy-editorial .program-audience {
+  padding: 32px;
+  background: var(--surface);
+  border-radius: 12px;
 }
-.academy-editorial .audience-list {
-  font-size: 16px;
-  line-height: 1.65;
-  list-style: disc;
-  padding-left: 20px;
+.academy-editorial .program-audience h2 {
+  font-size: 24px;
+  margin-bottom: 24px;
+}
+.academy-editorial .program-audience .audience-list {
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 32px;
+  font-size: 17px;
+  line-height: 1.6;
+  list-style: none;
+  padding: 0;
   margin: 0;
-  gap: 16px;
 }
-.academy-editorial .audience-list li {
-  display: list-item;
-  padding-left: 4px;
+.academy-editorial .program-audience .audience-list li {
+  display: block;
+  padding: 0;
+  text-wrap: pretty;
 }
-.academy-editorial .program-curriculum {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-  gap: 64px;
-  align-items: start;
-}
-.academy-editorial .program-curriculum > h2 {
-  max-width: 15ch;
-  margin-bottom: 0;
+.academy-editorial .program-audience .audience-list li + li {
+  border-left: 1px solid var(--border);
+  padding-left: 32px;
 }
 .academy-editorial .program-curriculum-modules {
   min-width: 0;
 }
+.academy-editorial .program-curriculum-modules details {
+  padding-inline: 24px;
+  transition: background 160ms;
+}
+.academy-editorial .program-curriculum-modules details[open] {
+  background: var(--surface);
+}
 .academy-editorial .program-curriculum-modules summary {
-  font-size: 18px;
+  font-size: 20px;
+  min-height: 80px;
   padding-block: 24px;
+}
+.academy-editorial .program-curriculum-modules summary:focus-visible {
+  outline-offset: -4px;
+}
+.academy-editorial .program-curriculum-modules details > ul {
+  padding: 0 0 32px 20px;
+  font-size: 17px;
+  line-height: 1.65;
+  max-width: 72ch;
+}
+.academy-editorial .program-curriculum-modules details > ul li::marker {
+  color: var(--muted);
+}
+@media (hover: hover) {
+  .academy-editorial .program-curriculum-modules details:hover {
+    background: var(--surface);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .academy-editorial .program-curriculum-modules details {
+    transition: none;
+  }
 }
 .academy-editorial summary {
   font-size: 16px;
@@ -956,13 +992,17 @@
   .academy-editorial .program-layout {
     order: 3;
   }
-  .academy-editorial .program-overview-summary,
-  .academy-editorial .program-curriculum {
+  .academy-editorial .program-audience .audience-list {
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
     grid-template-columns: minmax(0, 1fr);
-    gap: 32px;
+    gap: 16px;
   }
-  .academy-editorial .program-curriculum > h2 {
-    max-width: none;
+  .academy-editorial .program-audience .audience-list li + li {
+    border-left: 0;
+    padding-left: 0;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
   }
   .academy-editorial .about-intro {
     gap: 32px;
@@ -1135,8 +1175,30 @@
   .academy-editorial .program-content {
     gap: 48px;
   }
-  .academy-editorial .outcomes {
+  .academy-editorial .program-outcomes .outcomes {
     grid-template-columns: 1fr;
+    font-size: 18px;
+  }
+  .academy-editorial .program-outcomes .outcomes li {
+    padding-block: 20px;
+  }
+  .academy-editorial .program-audience {
+    padding: 24px;
+  }
+  .academy-editorial .program-audience h2 {
+    font-size: 24px;
+  }
+  .academy-editorial .program-curriculum-modules details {
+    padding-inline: 16px;
+  }
+  .academy-editorial .program-curriculum-modules summary {
+    min-height: 72px;
+    font-size: 18px;
+    padding-block: 20px;
+  }
+  .academy-editorial .program-curriculum-modules details > ul {
+    font-size: 16px;
+    padding-bottom: 24px;
   }
   .academy-editorial .instructors-grid {
     grid-template-columns: 1fr;
