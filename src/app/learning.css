@@ -714,40 +714,13 @@
   border-top: 1px solid var(--border);
   padding: 10px 0;
 }
-.curriculum-module summary {
-  cursor: pointer;
-  min-height: 48px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.curriculum-module > h2 {
+  margin: 0;
   font-size: 15px;
-  padding: 8px 10px;
-  list-style: none;
+  line-height: 1.5;
+  padding: 12px 10px;
   color: var(--secondary);
-  border-radius: 8px;
-  transition:
-    background-color 160ms,
-    color 160ms;
-}
-.curriculum-module summary::-webkit-details-marker {
-  display: none;
-}
-.curriculum-module summary:hover {
-  background: var(--elevated);
-  color: var(--text);
-}
-.curriculum-module[data-current='true'] > summary {
-  font-weight: 700;
-  color: var(--text);
-}
-.curriculum-module summary::after {
-  content: '+';
-  margin-left: auto;
-  font-size: 20px;
-  color: var(--secondary);
-}
-.curriculum-module[open] summary::after {
-  content: '−';
+  font-weight: 500;
 }
 .curriculum-module ol {
   list-style: none;
@@ -770,6 +743,23 @@
 }
 .curriculum-lesson:hover {
   background: var(--elevated);
+}
+.curriculum-lecture > summary {
+  list-style: none;
+  cursor: pointer;
+}
+.curriculum-lecture > summary::-webkit-details-marker {
+  display: none;
+}
+.curriculum-lecture > summary::after {
+  content: '+';
+  flex-shrink: 0;
+  margin-left: auto;
+  font-size: 18px;
+  font-weight: 400;
+}
+.curriculum-lecture[open] > summary::after {
+  content: '−';
 }
 .curriculum-lesson[aria-current='page'] {
   background: var(--elevated);
