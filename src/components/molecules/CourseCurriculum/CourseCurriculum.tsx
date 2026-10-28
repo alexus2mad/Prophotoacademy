@@ -30,7 +30,11 @@ export function CourseCurriculum({
     <div className="lesson-sidebar-inner">
       <LearningProgress value={progress} label="Прогрес курсу" />
       {enrollment.course.modules.map((module) => (
-        <details className="curriculum-module" key={module.id} open>
+        <details
+          className="curriculum-module"
+          key={module.id}
+          data-current={module.lessons.some((lesson) => lesson.id === lessonId) || undefined}
+        >
           <summary>{module.title}</summary>
           <ol>
             {module.lessons.map((lesson) => {

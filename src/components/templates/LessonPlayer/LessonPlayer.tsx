@@ -82,14 +82,12 @@ export function LessonPlayer(props: LessonPlayerProps) {
         className="lesson-drawer"
         aria-label="Зміст курсу"
       >
-        <div className="drawer-close">
+        <div className="lesson-drawer-header">
+          <Link href={demo ? '/demo/account' : '/account'}>Мої курси</Link>
           <button type="button" aria-label="Закрити зміст" onClick={() => drawer.current?.close()}>
             ×
           </button>
         </div>
-        <Link href={demo ? '/demo/account' : '/account'} className="button button-secondary">
-          Мої курси
-        </Link>
         <CourseCurriculum {...curriculum} onNavigate={() => drawer.current?.close()} />
       </dialog>
       <nav className="lesson-mobile-controls" aria-label="Навігація уроком">

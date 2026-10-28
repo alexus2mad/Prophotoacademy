@@ -259,6 +259,20 @@ describe('student dashboard decisions', () => {
     expect($('.other-learning-courses progress').attr('value')).toBe('33');
   });
 
+  it('keeps completed materials ahead of expired records and uses secondary actions for other courses', () => {
+    const completed: EnrollmentCardView = { ...course, id: 'completed', progress: 1, completed: 3 };
+    const expired: EnrollmentCardView = { ...course, id: 'expired', status: 'expired' };
+    const $ = render(createElement(StudentOverview, { name: '', courses: [expired, completed] }));
+    expect($('.is-featured a.button').text()).toBe('Переглянути матеріали');
+    expect($('.is-featured progress').attr('value')).toBe('100');
+    expect($('.other-learning-courses a').length).toBe(0);
+    const multiple = render(
+      createElement(StudentOverview, { name: '', courses: [course, completed] }),
+    );
+    expect(multiple('a.button:not(.button-secondary)').length).toBe(1);
+    expect(multiple('.other-learning-courses a.button-secondary').text()).toBe('Відкрити курс');
+  });
+
   it('keeps synthetic lesson and meeting links within the review routes', () => {
     const $ = render(
       createElement(StudentOverview, {

@@ -154,6 +154,7 @@
 .workspace-nav a[aria-current='page'] {
   color: var(--accent);
   border-color: var(--accent);
+  font-weight: 600;
 }
 .workspace-content {
   padding-top: 48px;
@@ -190,46 +191,53 @@
   grid-template-columns: minmax(0, 1fr);
   gap: 24px;
 }
-.student-dashboard-grid.has-session {
-  grid-template-columns: minmax(0, 2.25fr) minmax(250px, 1fr);
-}
 .learning-course-card {
   background: var(--learn-surface);
   border: 1px solid var(--learn-border);
   border-radius: 12px;
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: 40% 1fr;
+  padding: 32px;
   min-width: 0;
 }
+.learning-course-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 112px;
+  gap: 32px;
+  align-items: center;
+  margin-bottom: 32px;
+}
+.learning-course-card.is-featured .learning-course-heading {
+  grid-template-columns: minmax(0, 1fr) 176px;
+}
+.learning-course-heading > div {
+  min-width: 0;
+}
+.learning-course-heading .learning-meta {
+  margin-bottom: 12px;
+}
+.learning-course-heading h2 {
+  font-size: 24px;
+  line-height: 1.2;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.learning-course-card.is-featured h2 {
+  font-size: clamp(28px, 2.5vw, 36px);
+  max-width: 24ch;
+}
 .learning-course-image {
-  position: relative;
-  min-height: 390px;
+  aspect-ratio: 1;
   background: var(--elevated);
-}
-.learning-course-card:not(.is-featured) {
-  grid-template-columns: minmax(0, 1fr);
-}
-.learning-course-card:not(.is-featured) .learning-course-image {
-  min-height: 0;
-  aspect-ratio: 16 / 9;
+  overflow: hidden;
 }
 .learning-course-image img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  position: absolute;
 }
 .learning-course-copy {
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 24px;
-}
-.learning-course-copy h2 {
-  font-size: clamp(26px, 2.8vw, 36px);
-  margin: 0;
+  display: grid;
+  gap: 20px;
 }
 .learning-meta {
   font-size: 14px;
@@ -243,10 +251,32 @@
 }
 .learning-next strong {
   display: block;
-  font-size: 16px;
+  font-size: 18px;
+  line-height: 1.5;
   color: var(--text);
-  margin-top: 5px;
-  font-weight: 400;
+  margin-top: 8px;
+  font-weight: 500;
+}
+.learning-course-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.learning-course-action .learning-next {
+  flex: 1 1 240px;
+  min-width: 0;
+}
+.learning-course-action .button {
+  flex-shrink: 0;
+}
+.learning-access-note {
+  font-size: 14px;
+  color: var(--learn-muted);
+  margin: 0;
 }
 .learning-progress {
   width: 100%;
@@ -281,30 +311,26 @@
 .next-session-card {
   border: 1px solid var(--learn-border);
   border-radius: 12px;
-  padding: 32px;
+  padding: 24px 32px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
 }
 .next-session-card h2 {
-  font-size: 24px;
-  margin: 5px 0 20px;
+  font-size: 20px;
+  margin: 8px 0;
 }
-.next-session-card p {
+.next-session-copy {
+  flex: 1 1 300px;
+  min-width: 0;
+}
+.next-session-card p,
+.next-session-card time {
   margin: 0;
   color: var(--learn-muted);
-}
-.next-session-card .session-title,
-.next-session-card .session-date {
-  color: var(--text);
-}
-.next-session-card .session-date {
-  font-family: var(--font-home-text), sans-serif;
-  font-size: 28px;
-}
-.next-session-card .button {
-  margin-top: auto;
+  font-size: 14px;
 }
 .other-learning-courses {
   margin-top: 48px;
@@ -314,7 +340,7 @@
 }
 .other-learning-courses > div {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: 24px;
 }
 .learning-support {
@@ -445,6 +471,109 @@
 .account-popover :is(a, button):hover {
   background: var(--elevated);
 }
+.account-settings {
+  max-width: 680px;
+  padding: 32px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.account-settings-heading h2 {
+  font-size: 22px;
+  margin: 0 0 32px;
+}
+.account-settings-fields {
+  display: grid;
+  gap: 24px;
+}
+.account-settings-field {
+  display: grid;
+  gap: 8px;
+}
+.account-settings input[readonly] {
+  color: var(--secondary);
+  border-color: var(--border);
+}
+.account-settings-help {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--secondary);
+  margin: 4px 0 0;
+  max-width: 56ch;
+}
+.account-settings-actions {
+  border-top: 1px solid var(--border);
+  margin-top: 32px;
+  padding-top: 24px;
+}
+.account-settings-status {
+  min-height: 24px;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 12px 0 0;
+}
+.purchase-history {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 16px;
+}
+.purchase-history-item {
+  padding: 32px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.purchase-history-course h2 {
+  font-size: 24px;
+  margin: 0 0 8px;
+  overflow-wrap: anywhere;
+}
+.purchase-history-package {
+  font-size: 14px;
+  color: var(--secondary);
+  margin: 0;
+}
+.purchase-history-details {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  border-top: 1px solid var(--border);
+  margin: 24px 0 0;
+  padding-top: 24px;
+}
+.purchase-history-details dt {
+  font-size: 14px;
+  color: var(--secondary);
+  margin-bottom: 8px;
+}
+.purchase-history-details dd {
+  margin: 0;
+  font-size: 16px;
+  overflow-wrap: anywhere;
+}
+.purchase-history-amount dd {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+}
+.purchase-history-status dd[data-status='approved'] {
+  color: var(--success);
+}
+.purchase-history-status dd:is([data-status='declined'], [data-status='failed']) {
+  color: var(--error);
+}
+.purchase-history-empty {
+  padding: 32px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--secondary);
+}
+.purchase-history-empty p {
+  margin: 0;
+}
 .login-page {
   display: grid;
   align-content: center;
@@ -541,7 +670,7 @@
 }
 .lesson-header strong {
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 700;
   flex: 1;
   white-space: nowrap;
   overflow: hidden;
@@ -594,6 +723,22 @@
   font-size: 15px;
   padding: 8px 10px;
   list-style: none;
+  color: var(--secondary);
+  border-radius: 8px;
+  transition:
+    background-color 160ms,
+    color 160ms;
+}
+.curriculum-module summary::-webkit-details-marker {
+  display: none;
+}
+.curriculum-module summary:hover {
+  background: var(--elevated);
+  color: var(--text);
+}
+.curriculum-module[data-current='true'] > summary {
+  font-weight: 700;
+  color: var(--text);
 }
 .curriculum-module summary::after {
   content: '+';
@@ -630,6 +775,7 @@
   background: var(--elevated);
   color: var(--text);
   box-shadow: inset 2px 0 var(--text);
+  font-weight: 700;
 }
 .curriculum-lesson[aria-disabled='true'] {
   opacity: 0.6;
@@ -864,12 +1010,21 @@
   background: #000a;
   backdrop-filter: blur(3px);
 }
-.drawer-close {
+.lesson-drawer-header {
   display: flex;
-  justify-content: flex-end;
-  padding: 12px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
 }
-.drawer-close button {
+.lesson-drawer-header > a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 15px;
+}
+.lesson-drawer-header button {
   min-height: 44px;
   min-width: 44px;
   border: 1px solid var(--control-border);
@@ -1311,12 +1466,14 @@
   color: #ffb6af;
 }
 @media (min-width: 1024px) {
-  .workspace-admin {
+  .workspace-admin,
+  .workspace-student {
     display: grid;
     grid-template-columns: 188px minmax(0, 1fr);
     gap: 40px;
   }
-  .workspace-admin .workspace-nav {
+  .workspace-admin .workspace-nav,
+  .workspace-student .workspace-nav {
     flex-direction: column;
     gap: 5px;
     border-bottom: 0;
@@ -1324,40 +1481,29 @@
     padding: 34px 20px 0 0;
     overflow: visible;
   }
-  .workspace-admin .workspace-nav a {
+  .workspace-admin .workspace-nav a,
+  .workspace-student .workspace-nav a {
     min-height: 48px;
     padding: 8px 14px;
     border: 0;
     border-radius: 8px;
   }
-  .workspace-admin .workspace-nav a[aria-current='page'] {
+  .workspace-admin .workspace-nav a[aria-current='page'],
+  .workspace-student .workspace-nav a[aria-current='page'] {
     background: var(--elevated);
+  }
+  .workspace-student .workspace-nav {
+    align-self: start;
+    position: sticky;
+    top: 24px;
+    padding-top: 48px;
+    padding-bottom: 24px;
   }
   .lesson-sidebar-toggle-mobile {
     display: none;
   }
 }
 @media (max-width: 1199px) {
-  .student-dashboard-grid.has-session {
-    grid-template-columns: 1fr;
-  }
-  .next-session-card {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 24px;
-  }
-  .next-session-card h2 {
-    grid-column: 1;
-    margin: 0 0 12px;
-  }
-  .next-session-card .button {
-    grid-column: 2;
-    grid-row: 2/5;
-    justify-self: end;
-  }
-  .next-session-card p {
-    grid-column: 1;
-  }
   .admin-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1458,35 +1604,43 @@
     width: 100%;
   }
   .learning-course-card {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
+    padding: 24px 20px;
   }
-  .learning-course-image {
-    min-height: 180px;
+  .learning-course-heading,
+  .learning-course-card.is-featured .learning-course-heading {
+    grid-template-columns: minmax(0, 1fr) 72px;
+    gap: 16px;
+    align-items: start;
+    margin-bottom: 24px;
   }
-  .learning-course-card.is-featured .learning-course-copy {
-    grid-row: 1;
+  .learning-course-heading h2,
+  .learning-course-card.is-featured h2 {
+    font-size: 24px;
+    line-height: 1.25;
   }
-  .learning-course-image img {
-    object-position: 50% 44%;
+  .learning-course-heading .learning-meta {
+    margin-bottom: 8px;
   }
   .learning-course-copy {
-    padding: 24px;
     gap: 16px;
+  }
+  .learning-course-action {
+    padding-top: 20px;
+    gap: 20px;
+  }
+  .learning-course-action .learning-next {
+    flex-basis: 100%;
   }
   .learning-course-copy .button {
     width: 100%;
   }
   .next-session-card {
-    display: flex;
-    padding: 24px;
+    padding: 24px 20px;
+    gap: 20px;
   }
   .next-session-card .button {
     width: 100%;
-    margin-top: 16px;
-  }
-  .other-learning-courses > div {
-    grid-template-columns: 1fr;
+    margin-top: 0;
   }
   .learning-support {
     display: block;
@@ -1504,6 +1658,24 @@
   }
   .account-menu summary > span:last-child {
     display: none;
+  }
+  .account-settings,
+  .purchase-history-item,
+  .purchase-history-empty {
+    padding: 24px 20px;
+  }
+  .account-settings-heading h2 {
+    margin-bottom: 24px;
+  }
+  .account-settings-actions .button {
+    width: 100%;
+  }
+  .purchase-history-details {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 16px;
+  }
+  .purchase-history-status {
+    grid-column: 1 / -1;
   }
   .lesson-header {
     padding: 0 16px;

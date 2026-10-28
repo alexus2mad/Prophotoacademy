@@ -9,31 +9,40 @@ export function LearningCourseCard({
 }: LearningCourseCardProps) {
   return (
     <article className={'learning-course-card' + (featured ? ' is-featured' : '')}>
-      <div className="learning-course-image">
-        <img src={assetHref(course.cover)} alt="" />
-      </div>
+      <header className="learning-course-heading">
+        <div>
+          <p className="learning-meta">{course.packageName}</p>
+          <h2>{course.title}</h2>
+        </div>
+        <div className="learning-course-image">
+          <img src={assetHref(course.cover)} alt="" loading={featured ? 'eager' : 'lazy'} />
+        </div>
+      </header>
       <div className="learning-course-copy">
-        <p className="learning-meta">{course.packageName}</p>
-        <h2>{course.title}</h2>
         <LearningProgress
           value={course.progress}
           label={`${course.completed} із ${course.total} уроків завершено`}
         />
         {course.status === 'active' && course.nextLessonId ? (
-          <>
-            {course.progress < 1 && (
+          <div className="learning-course-action">
+            {featured && course.progress < 1 && (
               <p className="learning-next">
                 Наступний урок <strong>{course.nextLessonTitle}</strong>
               </p>
             )}
-            <Link className="button" href={lessonHref(course.courseId, course.nextLessonId, demo)}>
-              {course.progress >= 1
-                ? 'Переглянути матеріали'
-                : course.progress > 0
-                  ? 'Продовжити навчання'
-                  : 'Почати навчання'}
+            <Link
+              className={'button' + (featured ? '' : ' button-secondary')}
+              href={lessonHref(course.courseId, course.nextLessonId, demo)}
+            >
+              {!featured
+                ? 'Відкрити курс'
+                : course.progress >= 1
+                  ? 'Переглянути матеріали'
+                  : course.progress > 0
+                    ? 'Продовжити навчання'
+                    : 'Почати навчання'}
             </Link>
-          </>
+          </div>
         ) : (
           <p className="learning-status">
             {course.status === 'scheduled'
@@ -41,8 +50,12 @@ export function LearningCourseCard({
               : 'Термін доступу завершився'}
           </p>
         )}
-        {course.expiresAt && (
-          <p className="learning-meta">Доступ до {displayDate(course.expiresAt)}</p>
+        {course.status !== 'expired' && (
+          <p className="learning-access-note">
+            {course.expiresAt
+              ? `Доступ до ${displayDate(course.expiresAt)}`
+              : 'Безстроковий доступ'}
+          </p>
         )}
       </div>
     </article>
