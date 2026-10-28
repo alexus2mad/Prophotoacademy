@@ -194,3 +194,40 @@ Staging runs `240d06349ae33ab28be599b658dddb51621d28b8`. Root metadata now adver
 Verification passed architecture, TypeScript, formatting, both review-layout tests, the validated 53-page synthetic export and the isolated Linux production build. Live checks verified icon metadata on seven routes and all four asset URLs, MIME types and decoded raster sizes. Binary assets match local bytes; the SVG matches after normalizing archive-generated CRLF line endings. The existing 53 staging smoke checks passed, and a fresh browser tab received the new metadata. Evidence is under ignored `.data/favicon-fix/`.
 
 The uploaded archive SHA-256 was `36d6668115d096b2bcfcbf5b25f08d18bd9b16b1fdb4f6fa0e585a4c80b90103`. Guarded activation preserved `24cff8fe93d2436654f43ae505cee20198823a34` for rollback. The inspected staging cleanup removed obsolete `a1ca02eaccf075917e0cb053ece0072ccfa344ef`, leaving exactly active and rollback. Production retains release `aa6f6aa4630be415d02d120732e5df795da6b5dd` and PID 57069. Both services remain active and staging isolation passes. No settings, data, purchases or learning progress changed; booking and GitHub Pages were not deployed.
+
+## Invitations and original-color partner logos — 28 October 2026
+
+Staging runs `d0cb23960a7952e40f5a87d2e44c9623f305da18`, including the original
+Webflow partner logo colors, transactional access/administrator invitations,
+delivery status and authorized resend controls, and mobile team rows. Existing
+pending identities still require the recipient's own verified email login.
+
+The dedicated invitation sender is configured in staging's root-protected runtime
+file. It uses staging's own sending-only credential, never the production key.
+General Resend/Make settings remain absent and payments remain mock. The isolated
+`prophotoacademy-staging-email.timer` retries every five minutes; its first runs
+succeeded. One explicitly authorized existing recipient was notified and Resend
+confirmed Delivered. That recipient had independently completed OTP login before
+the notice was sent; the resend preserved their verified identity and privileges.
+No other historical invitations were bulk-sent, and no access was granted by the
+release or verification scripts.
+
+Verification passed architecture (512 modules), formatting, TypeScript, all 276
+tests, local and Linux production builds, 11 Linux deployment tests, and the
+validated 53-page synthetic review export. An initial parallel test run exceeded
+the sandbox database initialization timeout; the complete suite passed serially
+with its intended 15-second timeout and unchanged assertions. Desktop/mobile
+checks confirmed the student and team invitation controls, accessible table
+semantics, demo-safe actions, and all nine original-color logos. The 53 existing
+HTTPS checks plus five invitation/logo checks passed. Textual SVG comparisons
+normalize Git's Windows/Linux line endings; binary logo bytes match exactly.
+Evidence remains in ignored `.data/staging-auth-fix/`.
+
+The archive SHA-256 was
+`ddf9142eed5dc155d40993c37dd96fc71d7da4fe4dcefdafa0e8ad1a0c949c79`.
+Rollback remains `240d06349ae33ab28be599b658dddb51621d28b8`; the inspected retention
+helper removed `24cff8fe93d2436654f43ae505cee20198823a34`. Exactly active and rollback
+remain. Production retains release `aa6f6aa4630be415d02d120732e5df795da6b5dd` and PID
+57069. Booking and GitHub Pages were not deployed. See [invitation operations](INVITATIONS.md)
+before any future production rollout; production's sender must be configured
+explicitly rather than changing its payment or notification modes.
