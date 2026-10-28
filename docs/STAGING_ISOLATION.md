@@ -32,9 +32,11 @@ Staging first active release: 5e51620e28df954d79a7ea8651924b2dead58122.
 Staging has one release because this is its first deployment; retain the previous
 verified staging release after the next deployment.
 
-No production students, orders, progress or paid files were copied into staging.
-Its seven schema migrations, restricted runtime role and private learning bucket
-are initialized. Use synthetic development data.
+At initial setup, no production students, orders, progress or paid files were
+copied into staging. Its seven schema migrations, restricted runtime role and
+private learning bucket were initialized. The separately authorized content-only
+copy on 28 October is recorded below. Continue using synthetic development data
+unless an account or content operation is explicitly authorized.
 
 ## Staging email-code login — 28 October 2026
 
@@ -231,3 +233,51 @@ remain. Production retains release `aa6f6aa4630be415d02d120732e5df795da6b5dd` an
 57069. Booking and GitHub Pages were not deployed. See [invitation operations](INVITATIONS.md)
 before any future production rollout; production's sender must be configured
 explicitly rather than changing its payment or notification modes.
+
+## Production lesson copy and student access — 28 October 2026
+
+The owner-authorized content-only copy populated staging's isolated PostgreSQL,
+private Sanity dataset and private learning bucket. It copied three course
+records and their editable drafts, the active Visual Content curriculum (version
+6), its BASE package mapping, and all 274 ready teaching assets: 271 images and
+three PDFs. The published curriculum retains Lectures 2–4 with 129, 93 and 111
+blocks respectively, including their recordings and final quizzes. Instagram and
+Content Day remain unpublished drafts. Unfinished draft lessons were not
+published, and the existing difference between draft and published Lecture 3 was
+preserved.
+
+Course, lesson, release and media identifiers are unchanged. Every file was
+downloaded from staging after upload and SHA-256 checked against its production
+original (139,581,495 bytes in total). Drafts, release documents, manifests and
+package mappings were compared after insertion. Production's content snapshot
+was checked again before committing; it had not changed during the copy. Media
+uploader references use the existing staging owner rather than importing
+production identities.
+
+No production accounts, invitations, enrollments, orders, transactions, progress,
+attendance or notification jobs were copied. Counts of those staging records
+were identical before and after the content operation. Private snapshots,
+per-file hashes, before-state and completion reports remain root-only under
+`/root/prophotoacademy-setup/staging-course-copy-20261028`; teaching payloads and
+recipient details are excluded from Git and the synthetic review export.
+
+After verification, the explicitly named, already verified staging recipient
+received one administrative BASE grant covering all three published lectures,
+using the existing three-month package duration, through 28 January 2027. This
+independent student entitlement preserves their existing administrator role and
+does not create a payment or import progress. The normal access service recorded
+the audit entry and queued one access notice; the staging worker sent it and
+Resend confirmed Delivered. Stable operation identifiers protect this grant from
+duplication if verification is retried.
+
+Deployed-service checks confirmed all three student lessons, hidden quiz answer
+keys, the editable draft and 274-item media library. A different user was denied
+lesson access. Sample image and PDF downloads succeeded through staging's signed
+URLs; anonymous storage downloads and administrator media requests were denied.
+These were service-level entitlement checks, not an impersonated browser login.
+Local operational evidence is in ignored `.data/course-copy/`.
+
+No application release or runtime setting changed. Staging retains
+`d0cb23960a7952e40f5a87d2e44c9623f305da18` and its existing rollback; production
+retains `aa6f6aa4630be415d02d120732e5df795da6b5dd` and PID 57069. Both services
+remain active, payments remain mock on staging, and booking was untouched.
