@@ -2,8 +2,8 @@
   {
     "id": "lays",
     "name": "Lay’s",
-    "src": "/brand/clients/lays.svg",
-    "source": "https://s3.amazonaws.com/webflow-prod-assets/694a5cc146bb9192fcdbb5ac/694e9517d80f62b920297f98_lays-logo-1.svg"
+    "src": "/brand/clients/lays.webp",
+    "source": "https://s3.amazonaws.com/webflow-prod-assets/694a5cc146bb9192fcdbb5ac/69a5514ee52a6ee83287067e_Lay's_2025.svg%20(1)%201.svg"
   },
   {
     "id": "bang-olufsen",
@@ -21,7 +21,7 @@
     "id": "ispace",
     "name": "iSpace",
     "src": "/brand/clients/ispace.svg",
-    "source": "https://s3.amazonaws.com/webflow-prod-assets/694a5cc146bb9192fcdbb5ac/694acb0e40bd87ffef465008_Group.svg"
+    "source": "https://s3.amazonaws.com/webflow-prod-assets/694a5cc146bb9192fcdbb5ac/69a5514ef758066d4946c7bf_Ispace_Inc._logo%201.svg"
   },
   {
     "id": "dynamo",
@@ -33,7 +33,7 @@
     "id": "mcdonalds",
     "name": "McDonald’s",
     "src": "/brand/clients/mcdonalds.svg",
-    "source": "https://s3.amazonaws.com/webflow-prod-assets/694a5cc146bb9192fcdbb5ac/694acb0e4cd2a2835898af20_Group%202131329085.svg"
+    "source": "https://s3.amazonaws.com/webflow-prod-assets/694a5cc146bb9192fcdbb5ac/69a5512aa1d0b94a1616632d_Group%202131329085.svg"
   },
   {
     "id": "instytutum",

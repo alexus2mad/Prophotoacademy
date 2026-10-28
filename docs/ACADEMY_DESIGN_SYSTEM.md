@@ -26,6 +26,8 @@ Use KyivType Black for public editorial titles, Inter for long course names, sup
 
 Preserve meaningful success, warning, failure and destructive colors together with text. In particular, correct/incorrect quiz responses must remain visibly different. Branding must not neutralize instructional feedback.
 
+Partner logos use their original Webflow brand assets at full opacity, without grayscale, inversion or tint filters. Keep authentic white wordmarks where that is the supplied dark-background variant. `src/lib/photography/home-clients.json` records each original asset URL; preserve the logos' aspect ratios, the existing grid and restrained sizing. Lay’s uses a 320px transparent WebP derivative because its source SVG embeds a large bitmap; retain the source URL when optimizing delivery formats.
+
 ## Composition
 
 - The catalog opens directly into all six programs, without filters or a result counter. Keep the flagship first and the remaining CMS order. Legacy filter query parameters do not hide content. Live and static review use the same route and template.

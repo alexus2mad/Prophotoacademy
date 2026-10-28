@@ -393,8 +393,6 @@
   width: 100%;
   height: 48px;
   object-fit: contain;
-  filter: grayscale(1) invert(1);
-  opacity: 0.82;
 }
 .academy-design-quotes {
   display: grid;
@@ -626,14 +624,4 @@
   .academy-editorial:has(.academy-design-home) .site-header {
     transition: none;
   }
-}
-.academy-design-clients
-  :is(
-    [data-client='lays'],
-    [data-client='bang-olufsen'],
-    [data-client='dynamo'],
-    [data-client='instytutum']
-  )
-  img {
-  filter: grayscale(1);
 }
