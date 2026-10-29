@@ -6,8 +6,8 @@ It includes the account dashboard, purchase history, profile form, lesson chrome
 collapsed lecture chapter lists and three-viewport image preloading.
 
 Public pages, administration, login, marketing content, prices, enrollment rules,
-authentication, invitations, package mappings and dependencies remain on their
-production versions. No database migration or runtime setting is required.
+authentication, invitations and package mappings remain on their production
+versions. No database migration or runtime setting is required.
 Saved lesson previews share the student's reading presentation so teaching
 materials can be reviewed accurately without recording progress.
 
@@ -38,6 +38,17 @@ above or below the viewport. Pending observers adjust to resizing; each image
 stops observing once admitted. Downloads begin immediately after authorization.
 Media authorization, URL lifetime, gallery controls and quiz-only completion
 are unchanged.
+
+## Framework maintenance
+
+The release also updates Next.js from 16.4.0 to 16.4.3, matching staging, in a
+separate security commit. Other dependency versions remain unchanged. Version
+16.4.1 patched the disclosed [Server Actions denial of service](https://github.com/advisories/GHSA-p3m5-59mp-jv5r),
+[image optimization vulnerability](https://github.com/advisories/GHSA-2464-fhr4-w9xw)
+and [typed-array cache vulnerability](https://github.com/advisories/GHSA-673q-mjm6-r5xr).
+The application has no `use server` or `use cache` directives, and Next's resolved
+Sharp is already 0.35.5, the documented image workaround. The patch removes the
+framework's affected version rather than relying on those current conditions.
 
 ## Release checks
 
