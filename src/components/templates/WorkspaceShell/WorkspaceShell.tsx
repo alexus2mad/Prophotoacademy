@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { BrandLogo } from '@/components/atoms/BrandLogo/BrandLogo';
 import { AccountMenu } from '@/components/molecules/AccountMenu/AccountMenu';
 import { cashboxUrl } from '@/lib/commerce/cashbox';
+import { academyThemeClassName } from '@/lib/typography/fonts';
 import type { WorkspaceShellProps } from './types';
 export function WorkspaceShell({
   children,
@@ -26,7 +27,7 @@ export function WorkspaceShell({
         ['settings', 'Налаштування'],
       ];
   return (
-    <div className="learning-app">
+    <div className={admin ? 'learning-app' : `learning-app ${academyThemeClassName}`}>
       {demo && (
         <div className="learning-demo-note">
           Демонстрація кабінету · приклади даних, без реальних оплат
@@ -40,11 +41,11 @@ export function WorkspaceShell({
           <BrandLogo />
         </Link>
         <Link className="workspace-area" href={base + (admin ? '/admin' : '/account')}>
-          {admin ? 'Матеріали курсів' : 'Моє навчання'}
+          {admin ? 'Матеріали курсів' : 'Кабінет студента'}
         </Link>
         <AccountMenu member={member} demo={demo} />
       </header>
-      <div className={'workspace-layout' + (admin ? ' workspace-admin' : '')}>
+      <div className={'workspace-layout ' + (admin ? 'workspace-admin' : 'workspace-student')}>
         <nav className="workspace-nav" aria-label={admin ? 'Адміністрування' : 'Особистий кабінет'}>
           {links.map(([key, label]) =>
             key === 'cashbox' ? (

@@ -2,10 +2,11 @@
 import { lessonNumber } from '@/lib/learning/numbering';
 import Link from 'next/link';
 import { LessonBody } from '@/components/organisms/LessonBody/LessonBody';
+import { academyThemeClassName } from '@/lib/typography/fonts';
 import type { LessonPreviewProps } from './types';
 export function LessonPreview({ course, lesson, sessions, demo }: LessonPreviewProps) {
   return (
-    <div className="lesson-app">
+    <div className={`lesson-app ${academyThemeClassName}`}>
       <div className="learning-demo-note">
         Перегляд збереженої чернетки · прогрес не записується
       </div>

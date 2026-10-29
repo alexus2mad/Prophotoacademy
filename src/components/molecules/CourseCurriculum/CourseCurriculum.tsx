@@ -1,11 +1,9 @@
-import Link from 'next/link';
 import { lessonLabel } from '@/lib/learning/numbering';
-import { Check, Lock, Play } from 'lucide-react';
 import { LearningProgress } from '@/components/atoms/LearningProgress/LearningProgress';
-import { LessonChapters } from '@/components/molecules/LessonChapters/LessonChapters';
+import { CurriculumLesson } from '@/components/molecules/CurriculumLesson/CurriculumLesson';
 import { canReadLesson } from '@/lib/learning/access';
 import { lessonFraction } from '@/lib/learning/progress';
-import { lessonHref, displayDate } from '@/lib/learning/selectors';
+import { lessonHref } from '@/lib/learning/selectors';
 import type { CourseCurriculumProps } from './types';
 export function CourseCurriculum({
   enrollment,
@@ -30,57 +28,33 @@ export function CourseCurriculum({
     <div className="lesson-sidebar-inner">
       <LearningProgress value={progress} label="Прогрес курсу" />
       {enrollment.course.modules.map((module) => (
-        <details className="curriculum-module" key={module.id} open>
-          <summary>{module.title}</summary>
+        <section
+          className="curriculum-module"
+          key={module.id}
+          data-current={module.lessons.some((lesson) => lesson.id === lessonId) || undefined}
+        >
+          <h2>{module.title}</h2>
           <ol>
             {module.lessons.map((lesson) => {
               const available = canReadLesson(enrollment.grants, lesson);
               const complete = fraction(lesson.id) >= 0.999;
               return (
                 <li key={lesson.id}>
-                  <Link
-                    className="curriculum-lesson"
-                    href={available ? lessonHref(enrollment.course.id, lesson.id, demo) : '#'}
-                    aria-current={lesson.id === lessonId ? 'page' : undefined}
-                    aria-disabled={!available}
-                    onClick={(event) => {
-                      if (!available) event.preventDefault();
-                      else onNavigate?.();
-                    }}
-                  >
-                    <span
-                      className={'curriculum-state' + (complete ? ' is-complete' : '')}
-                      aria-label={
-                        complete ? 'Завершено' : !available ? 'Заплановано' : 'Не завершено'
-                      }
-                    >
-                      {complete ? (
-                        <Check size={12} />
-                      ) : !available ? (
-                        <Lock size={10} />
-                      ) : lesson.id === lessonId ? (
-                        <Play size={10} />
-                      ) : null}
-                    </span>
-                    <span>
-                      {lessonLabel(enrollment.course, lesson)}
-                      {!available && lesson.releaseAt && (
-                        <small>З {displayDate(lesson.releaseAt)}</small>
-                      )}
-                    </span>
-                  </Link>
-                  {lesson.id === lessonId && available && (
-                    <LessonChapters
-                      lesson={lesson}
-                      currentChapterId={currentChapterId}
-                      onNavigate={onNavigate}
-                    />
-                  )}
+                  <CurriculumLesson
+                    lesson={lesson}
+                    label={lessonLabel(enrollment.course, lesson)}
+                    href={lessonHref(enrollment.course.id, lesson.id, demo)}
+                    available={available}
+                    complete={complete}
+                    current={lesson.id === lessonId}
+                    currentChapterId={currentChapterId}
+                    onNavigate={onNavigate}
+                  />
                 </li>
               );
             })}
           </ol>
-        </details>
+        </section>
       ))}
     </div>
   );

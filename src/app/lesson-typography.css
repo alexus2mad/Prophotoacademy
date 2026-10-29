@@ -1,5 +1,8 @@
+/* Production admin/login retain their existing presentation outside the student theme.
+   These zero-specificity guards make the two variants mutually exclusive. */
+
 /* Reading typography is scoped to lesson content, including the authoring preview. */
-.lesson-content {
+.lesson-content:not(:where(.academy-theme, .academy-theme *)) {
   --lesson-measure: 42rem;
   --lesson-body: 1.125rem;
   --lesson-leading: 1.7;
@@ -13,7 +16,7 @@
   overflow-wrap: anywhere;
   min-width: 0;
 }
-.lesson-content :is(h1, h2, h3, h4, h5, h6) {
+.lesson-content :is(h1, h2, h3, h4, h5, h6):not(:where(.academy-theme, .academy-theme *)) {
   font-family: inherit;
   font-weight: 600;
   line-height: 1.3;
@@ -21,23 +24,23 @@
   text-wrap: pretty;
   overflow-wrap: anywhere;
 }
-.lesson-content h1 {
+.lesson-content h1:not(:where(.academy-theme, .academy-theme *)) {
   font-size: clamp(2rem, 1.7rem + 0.8vw, 2.5rem);
   line-height: 1.2;
   letter-spacing: -0.015em;
   margin: 0 0 1rem;
 }
-.lesson-content h2 {
+.lesson-content h2:not(:where(.academy-theme, .academy-theme *)) {
   font-size: clamp(1.5rem, 1.35rem + 0.4vw, 1.75rem);
   margin: 0 0 1rem;
 }
-.lesson-content h3 {
+.lesson-content h3:not(:where(.academy-theme, .academy-theme *)) {
   font-size: 1.375rem;
 }
-.lesson-content h4 {
+.lesson-content h4:not(:where(.academy-theme, .academy-theme *)) {
   font-size: 1.25rem;
 }
-.lesson-content :is(h5, h6) {
+.lesson-content :is(h5, h6):not(:where(.academy-theme, .academy-theme *)) {
   font-size: 1.125rem;
 }
 .lesson-content
@@ -49,136 +52,138 @@
     .lesson-file,
     .lesson-zoom,
     .lesson-quiz
-  ) {
+  ):not(:where(.academy-theme, .academy-theme *)) {
   max-width: var(--lesson-measure);
 }
-.lesson-content .lesson-heading {
+.lesson-content .lesson-heading:not(:where(.academy-theme, .academy-theme *)) {
   margin-bottom: 2rem;
 }
-.lesson-content .lesson-heading > p:not(.learning-meta) {
+.lesson-content
+  .lesson-heading
+  > p:not(.learning-meta):not(:where(.academy-theme, .academy-theme *)) {
   font-size: var(--lesson-body);
   line-height: var(--lesson-leading);
   color: #bcc1b8;
 }
-.lesson-content .learning-meta {
+.lesson-content .learning-meta:not(:where(.academy-theme, .academy-theme *)) {
   font-size: 0.9375rem;
   line-height: 1.5;
 }
-.lesson-content .lesson-heading .learning-meta {
+.lesson-content .lesson-heading .learning-meta:not(:where(.academy-theme, .academy-theme *)) {
   margin-bottom: 0.75rem;
 }
-.lesson-content .lesson-outline {
+.lesson-content .lesson-outline:not(:where(.academy-theme, .academy-theme *)) {
   margin-top: 0;
   margin-bottom: var(--lesson-section-gap);
 }
-.lesson-content .lesson-outline :is(summary, a) {
+.lesson-content .lesson-outline :is(summary, a):not(:where(.academy-theme, .academy-theme *)) {
   font-size: 1rem;
   line-height: 1.5;
 }
-.lesson-content .lesson-block {
+.lesson-content .lesson-block:not(:where(.academy-theme, .academy-theme *)) {
   margin-bottom: var(--lesson-section-gap);
 }
-.lesson-content .lesson-image-pair .lesson-block {
+.lesson-content .lesson-image-pair .lesson-block:not(:where(.academy-theme, .academy-theme *)) {
   margin-bottom: 0;
 }
-.lesson-prose {
+.lesson-prose:not(:where(.academy-theme, .academy-theme *)) {
   font-size: var(--lesson-body);
   line-height: var(--lesson-leading);
   overflow-wrap: anywhere;
 }
-.lesson-prose > * {
+.lesson-prose > *:not(:where(.academy-theme, .academy-theme *)) {
   margin-block: 0 var(--lesson-paragraph-gap);
 }
-.lesson-prose > :last-child {
+.lesson-prose > :last-child:not(:where(.academy-theme, .academy-theme *)) {
   margin-bottom: 0;
 }
-.lesson-prose :is(h3, h4, h5, h6) {
+.lesson-prose :is(h3, h4, h5, h6):not(:where(.academy-theme, .academy-theme *)) {
   margin-block: 2rem 0.75rem;
 }
-.lesson-prose > :first-child {
+.lesson-prose > :first-child:not(:where(.academy-theme, .academy-theme *)) {
   margin-top: 0;
 }
-.lesson-prose :is(ul, ol) {
+.lesson-prose :is(ul, ol):not(:where(.academy-theme, .academy-theme *)) {
   padding-inline-start: 1.5em;
 }
-.lesson-prose ul {
+.lesson-prose ul:not(:where(.academy-theme, .academy-theme *)) {
   list-style: disc;
 }
-.lesson-prose ol {
+.lesson-prose ol:not(:where(.academy-theme, .academy-theme *)) {
   list-style: decimal;
 }
-.lesson-prose li {
+.lesson-prose li:not(:where(.academy-theme, .academy-theme *)) {
   padding-inline-start: 0.25em;
 }
-.lesson-prose li + li {
+.lesson-prose li + li:not(:where(.academy-theme, .academy-theme *)) {
   margin-top: 0.5em;
 }
-.lesson-prose li :is(ul, ol) {
+.lesson-prose li :is(ul, ol):not(:where(.academy-theme, .academy-theme *)) {
   margin-block: 0.5em 0;
 }
-.lesson-prose ul ul {
+.lesson-prose ul ul:not(:where(.academy-theme, .academy-theme *)) {
   list-style: circle;
 }
-.lesson-prose li p + p {
+.lesson-prose li p + p:not(:where(.academy-theme, .academy-theme *)) {
   margin-top: 0.75em;
 }
-.lesson-prose li > p {
+.lesson-prose li > p:not(:where(.academy-theme, .academy-theme *)) {
   margin-bottom: 0;
 }
-.lesson-prose li::marker {
+.lesson-prose li:not(:where(.academy-theme, .academy-theme *))::marker {
   color: #bcc1b8;
   font-variant-numeric: tabular-nums;
 }
-.lesson-prose strong {
+.lesson-prose strong:not(:where(.academy-theme, .academy-theme *)) {
   font-weight: 600;
   color: #f2efe7;
 }
-.lesson-prose a {
+.lesson-prose a:not(:where(.academy-theme, .academy-theme *)) {
   color: #d5e4b9;
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.2em;
 }
-.lesson-prose a:hover {
+.lesson-prose a:hover:not(:where(.academy-theme, .academy-theme *)) {
   text-decoration-thickness: 2px;
 }
-.lesson-prose blockquote {
+.lesson-prose blockquote:not(:where(.academy-theme, .academy-theme *)) {
   border-inline-start: 2px solid #8c9e74;
   padding: 0.25rem 0 0.25rem 1.25rem;
   color: #cbd0c6;
 }
-.lesson-prose blockquote > * + * {
+.lesson-prose blockquote > * + *:not(:where(.academy-theme, .academy-theme *)) {
   margin-top: 1em;
 }
-.lesson-prose hr {
+.lesson-prose hr:not(:where(.academy-theme, .academy-theme *)) {
   border: 0;
   border-top: 1px solid #333a33;
   margin-block: 2rem;
 }
-.lesson-prose code {
+.lesson-prose code:not(:where(.academy-theme, .academy-theme *)) {
   font-size: 0.9em;
   background: #242824;
   border-radius: 0.25rem;
   padding: 0.1em 0.25em;
 }
-.lesson-prose pre {
+.lesson-prose pre:not(:where(.academy-theme, .academy-theme *)) {
   white-space: pre-wrap;
   padding: 1rem;
   background: #191c1a;
   border-radius: 0.5rem;
 }
-.lesson-prose pre code {
+.lesson-prose pre code:not(:where(.academy-theme, .academy-theme *)) {
   padding: 0;
   background: transparent;
 }
-.lesson-table-scroll {
+.lesson-table-scroll:not(:where(.academy-theme, .academy-theme *)) {
   max-width: 100%;
   overflow-x: auto;
   border: 1px solid #424b41;
   border-radius: 0.625rem;
   scrollbar-color: #7c8b6c #191c1a;
 }
-.lesson-table-scroll table {
+.lesson-table-scroll table:not(:where(.academy-theme, .academy-theme *)) {
   width: 100%;
   min-width: 30rem;
   border-collapse: collapse;
@@ -186,28 +191,28 @@
   line-height: 1.55;
   text-align: start;
 }
-.lesson-table-scroll :is(th, td) {
+.lesson-table-scroll :is(th, td):not(:where(.academy-theme, .academy-theme *)) {
   padding: 0.875rem 1rem;
   vertical-align: top;
   border-bottom: 1px solid #333a33;
   min-width: 9rem;
 }
-.lesson-table-scroll th {
+.lesson-table-scroll th:not(:where(.academy-theme, .academy-theme *)) {
   background: #242824;
   font-weight: 600;
   color: #f2efe7;
 }
-.lesson-table-scroll tbody tr:nth-child(even) {
+.lesson-table-scroll tbody tr:nth-child(even):not(:where(.academy-theme, .academy-theme *)) {
   background: #191c1a;
 }
-.lesson-table-scroll tbody tr:last-child td {
+.lesson-table-scroll tbody tr:last-child td:not(:where(.academy-theme, .academy-theme *)) {
   border-bottom: 0;
 }
-.lesson-prose .contains-task-list {
+.lesson-prose .contains-task-list:not(:where(.academy-theme, .academy-theme *)) {
   list-style: none;
   padding-inline-start: 0;
 }
-.lesson-prose .task-list-item input {
+.lesson-prose .task-list-item input:not(:where(.academy-theme, .academy-theme *)) {
   appearance: auto;
   display: inline-block;
   width: 1em;
@@ -217,56 +222,337 @@
   margin-inline-end: 0.5em;
   accent-color: #d5e4b9;
 }
-.lesson-prose .footnotes {
+.lesson-prose .footnotes:not(:where(.academy-theme, .academy-theme *)) {
   border-top: 1px solid #333a33;
   padding-top: 1.25rem;
   font-size: 0.9375rem;
 }
-.lesson-content .lesson-image figcaption {
+.lesson-content .lesson-image figcaption:not(:where(.academy-theme, .academy-theme *)) {
   font-size: 0.9375rem;
   line-height: 1.55;
   margin-top: 0.75rem;
   color: #bcc1b8;
 }
-.lesson-image-placeholder {
+.lesson-image-placeholder:not(:where(.academy-theme, .academy-theme *)) {
   width: 100%;
   background: #191c1a;
   border-radius: 0.5rem;
 }
-.lesson-content .lesson-image img {
+.lesson-content .lesson-image img:not(:where(.academy-theme, .academy-theme *)) {
   height: auto;
   object-fit: contain;
 }
-.lesson-completion p {
+.lesson-completion p:not(:where(.academy-theme, .academy-theme *)) {
   max-width: 42rem;
   margin-top: 0.75rem;
   line-height: 1.6;
 }
-.lesson-completion a {
+.lesson-completion a:not(:where(.academy-theme, .academy-theme *)) {
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }
-.lesson-content .lesson-practice {
+.lesson-content .lesson-practice:not(:where(.academy-theme, .academy-theme *)) {
   padding: 2rem;
 }
-.lesson-content .quiz-question legend {
+.lesson-content .quiz-question legend:not(:where(.academy-theme, .academy-theme *)) {
   font-size: 1.25rem;
   line-height: 1.45;
   font-weight: 600;
 }
-.lesson-content .quiz-option {
+.lesson-content .quiz-option:not(:where(.academy-theme, .academy-theme *)) {
   font-size: 1.125rem;
   line-height: 1.5;
 }
-.lesson-content :is(.quiz-heading > p:last-child, .quiz-feedback, .quiz-result p) {
+.lesson-content
+  :is(.quiz-heading > p:last-child, .quiz-feedback, .quiz-result p):not(
+    :where(.academy-theme, .academy-theme *)
+  ) {
   font-size: 1.0625rem;
   line-height: 1.6;
 }
 @media (max-width: 599px) {
-  .lesson-content {
+  .lesson-content:not(:where(.academy-theme, .academy-theme *)) {
     --lesson-section-gap: 2.5rem;
   }
-  .lesson-content .lesson-practice {
+  .lesson-content .lesson-practice:not(:where(.academy-theme, .academy-theme *)) {
+    padding: 1.5rem 1.25rem;
+  }
+}
+
+/* Student account, lesson player and saved lesson preview. */
+/* Reading typography is scoped to lesson content, including the authoring preview. */
+.lesson-content:where(.academy-theme, .academy-theme *) {
+  --lesson-measure: 42rem;
+  --lesson-body: 1.125rem;
+  --lesson-leading: 1.7;
+  --lesson-paragraph-gap: 1.25em;
+  --lesson-section-gap: 3rem;
+  --font-display: var(--font-reading);
+  font-family: var(--font-reading), Arial, sans-serif;
+  font-size: var(--lesson-body);
+  line-height: var(--lesson-leading);
+  letter-spacing: normal;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+.lesson-content :is(h1, h2, h3, h4, h5, h6):where(.academy-theme, .academy-theme *) {
+  font-family: inherit;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: normal;
+  text-wrap: pretty;
+  overflow-wrap: anywhere;
+}
+.lesson-content h1:where(.academy-theme, .academy-theme *) {
+  font-size: clamp(2rem, 1.7rem + 0.8vw, 2.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  margin: 0 0 1rem;
+}
+.lesson-content h2:where(.academy-theme, .academy-theme *) {
+  font-size: clamp(1.5rem, 1.35rem + 0.4vw, 1.75rem);
+  margin: 0 0 1rem;
+}
+.lesson-content h3:where(.academy-theme, .academy-theme *) {
+  font-size: 1.375rem;
+}
+.lesson-content h4:where(.academy-theme, .academy-theme *) {
+  font-size: 1.25rem;
+}
+.lesson-content :is(h5, h6):where(.academy-theme, .academy-theme *) {
+  font-size: 1.125rem;
+}
+.lesson-content
+  :is(
+    .lesson-heading,
+    .lesson-outline,
+    .lesson-reading,
+    .lesson-image,
+    .lesson-file,
+    .lesson-zoom,
+    .lesson-quiz
+  ):where(.academy-theme, .academy-theme *) {
+  max-width: var(--lesson-measure);
+}
+.lesson-content .lesson-heading:where(.academy-theme, .academy-theme *) {
+  margin-bottom: 2rem;
+}
+.lesson-content .lesson-heading > p:not(.learning-meta):where(.academy-theme, .academy-theme *) {
+  font-size: var(--lesson-body);
+  line-height: var(--lesson-leading);
+  color: var(--secondary);
+}
+.lesson-content .learning-meta:where(.academy-theme, .academy-theme *) {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+.lesson-content .lesson-heading .learning-meta:where(.academy-theme, .academy-theme *) {
+  margin-bottom: 0.75rem;
+}
+.lesson-content .lesson-outline:where(.academy-theme, .academy-theme *) {
+  margin-top: 0;
+  margin-bottom: var(--lesson-section-gap);
+}
+.lesson-content .lesson-outline :is(summary, a):where(.academy-theme, .academy-theme *) {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.lesson-content .lesson-block:where(.academy-theme, .academy-theme *) {
+  margin-bottom: var(--lesson-section-gap);
+}
+.lesson-content .lesson-image-pair .lesson-block:where(.academy-theme, .academy-theme *) {
+  margin-bottom: 0;
+}
+.lesson-prose:where(.academy-theme, .academy-theme *) {
+  font-size: var(--lesson-body);
+  line-height: var(--lesson-leading);
+  overflow-wrap: anywhere;
+}
+.lesson-prose > *:where(.academy-theme, .academy-theme *) {
+  margin-block: 0 var(--lesson-paragraph-gap);
+}
+.lesson-prose > :last-child:where(.academy-theme, .academy-theme *) {
+  margin-bottom: 0;
+}
+.lesson-prose :is(h3, h4, h5, h6):where(.academy-theme, .academy-theme *) {
+  margin-block: 2rem 0.75rem;
+}
+.lesson-prose > :first-child:where(.academy-theme, .academy-theme *) {
+  margin-top: 0;
+}
+.lesson-prose :is(ul, ol):where(.academy-theme, .academy-theme *) {
+  padding-inline-start: 1.5em;
+}
+.lesson-prose ul:where(.academy-theme, .academy-theme *) {
+  list-style: disc;
+}
+.lesson-prose ol:where(.academy-theme, .academy-theme *) {
+  list-style: decimal;
+}
+.lesson-prose li:where(.academy-theme, .academy-theme *) {
+  padding-inline-start: 0.25em;
+}
+.lesson-prose li + li:where(.academy-theme, .academy-theme *) {
+  margin-top: 0.5em;
+}
+.lesson-prose li :is(ul, ol):where(.academy-theme, .academy-theme *) {
+  margin-block: 0.5em 0;
+}
+.lesson-prose ul ul:where(.academy-theme, .academy-theme *) {
+  list-style: circle;
+}
+.lesson-prose li p + p:where(.academy-theme, .academy-theme *) {
+  margin-top: 0.75em;
+}
+.lesson-prose li > p:where(.academy-theme, .academy-theme *) {
+  margin-bottom: 0;
+}
+.lesson-prose li:where(.academy-theme, .academy-theme *)::marker {
+  color: var(--secondary);
+  font-variant-numeric: tabular-nums;
+}
+.lesson-prose strong:where(.academy-theme, .academy-theme *) {
+  font-weight: 600;
+  color: var(--text);
+}
+.lesson-prose a:where(.academy-theme, .academy-theme *) {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+.lesson-prose a:hover:where(.academy-theme, .academy-theme *) {
+  text-decoration-thickness: 2px;
+}
+.lesson-prose blockquote:where(.academy-theme, .academy-theme *) {
+  border-inline-start: 2px solid var(--control-border);
+  padding: 0.25rem 0 0.25rem 1.25rem;
+  color: var(--secondary);
+}
+.lesson-prose blockquote > * + *:where(.academy-theme, .academy-theme *) {
+  margin-top: 1em;
+}
+.lesson-prose hr:where(.academy-theme, .academy-theme *) {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin-block: 2rem;
+}
+.lesson-prose code:where(.academy-theme, .academy-theme *) {
+  font-size: 0.9em;
+  background: var(--elevated);
+  border-radius: 0.25rem;
+  padding: 0.1em 0.25em;
+}
+.lesson-prose pre:where(.academy-theme, .academy-theme *) {
+  white-space: pre-wrap;
+  padding: 1rem;
+  background: var(--surface);
+  border-radius: 0.5rem;
+}
+.lesson-prose pre code:where(.academy-theme, .academy-theme *) {
+  padding: 0;
+  background: transparent;
+}
+.lesson-table-scroll:where(.academy-theme, .academy-theme *) {
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 0.625rem;
+  scrollbar-color: var(--control-border) var(--surface);
+}
+.lesson-table-scroll table:where(.academy-theme, .academy-theme *) {
+  width: 100%;
+  min-width: 30rem;
+  border-collapse: collapse;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  text-align: start;
+}
+.lesson-table-scroll :is(th, td):where(.academy-theme, .academy-theme *) {
+  padding: 0.875rem 1rem;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+  min-width: 9rem;
+}
+.lesson-table-scroll th:where(.academy-theme, .academy-theme *) {
+  background: var(--elevated);
+  font-weight: 600;
+  color: var(--text);
+}
+.lesson-table-scroll tbody tr:nth-child(even):where(.academy-theme, .academy-theme *) {
+  background: var(--surface);
+}
+.lesson-table-scroll tbody tr:last-child td:where(.academy-theme, .academy-theme *) {
+  border-bottom: 0;
+}
+.lesson-prose .contains-task-list:where(.academy-theme, .academy-theme *) {
+  list-style: none;
+  padding-inline-start: 0;
+}
+.lesson-prose .task-list-item input:where(.academy-theme, .academy-theme *) {
+  appearance: auto;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  min-height: 0;
+  padding: 0;
+  margin-inline-end: 0.5em;
+  accent-color: var(--accent);
+}
+.lesson-prose .footnotes:where(.academy-theme, .academy-theme *) {
+  border-top: 1px solid var(--border);
+  padding-top: 1.25rem;
+  font-size: 0.9375rem;
+}
+.lesson-content .lesson-image figcaption:where(.academy-theme, .academy-theme *) {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  margin-top: 0.75rem;
+  color: var(--secondary);
+}
+.lesson-image-placeholder:where(.academy-theme, .academy-theme *) {
+  width: 100%;
+  background: var(--surface);
+  border-radius: 0.5rem;
+}
+.lesson-content .lesson-image img:where(.academy-theme, .academy-theme *) {
+  height: auto;
+  object-fit: contain;
+}
+.lesson-completion p:where(.academy-theme, .academy-theme *) {
+  max-width: 42rem;
+  margin-top: 0.75rem;
+  line-height: 1.6;
+}
+.lesson-completion a:where(.academy-theme, .academy-theme *) {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.lesson-content .lesson-practice:where(.academy-theme, .academy-theme *) {
+  padding: 2rem;
+}
+.lesson-content .quiz-question legend:where(.academy-theme, .academy-theme *) {
+  font-size: 1.25rem;
+  line-height: 1.45;
+  font-weight: 600;
+}
+.lesson-content .quiz-option:where(.academy-theme, .academy-theme *) {
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+.lesson-content
+  :is(.quiz-heading > p:last-child, .quiz-feedback, .quiz-result p):where(
+    .academy-theme,
+    .academy-theme *
+  ) {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+@media (max-width: 599px) {
+  .lesson-content:where(.academy-theme, .academy-theme *) {
+    --lesson-section-gap: 2.5rem;
+  }
+  .lesson-content .lesson-practice:where(.academy-theme, .academy-theme *) {
     padding: 1.5rem 1.25rem;
   }
 }

@@ -5,6 +5,7 @@ import { CourseCurriculum } from '@/components/molecules/CourseCurriculum/Course
 import { LessonBody } from '@/components/organisms/LessonBody/LessonBody';
 import { LessonCompletion } from '@/components/molecules/LessonCompletion/LessonCompletion';
 import { lessonHref } from '@/lib/learning/selectors';
+import { academyThemeClassName } from '@/lib/typography/fonts';
 import { useLessonPlayer } from './hooks';
 import type { LessonPlayerProps } from './types';
 export function LessonPlayer(props: LessonPlayerProps) {
@@ -22,7 +23,7 @@ export function LessonPlayer(props: LessonPlayerProps) {
     demo,
   };
   return (
-    <div className="lesson-app">
+    <div className={`lesson-app ${academyThemeClassName}`}>
       {demo && (
         <div className="learning-demo-note">
           Демонстрація · навчальні приклади, прогрес зберігається лише в цьому браузері
@@ -81,14 +82,12 @@ export function LessonPlayer(props: LessonPlayerProps) {
         className="lesson-drawer"
         aria-label="Зміст курсу"
       >
-        <div className="drawer-close">
+        <div className="lesson-drawer-header">
+          <Link href={demo ? '/demo/account' : '/account'}>Мої курси</Link>
           <button type="button" aria-label="Закрити зміст" onClick={() => drawer.current?.close()}>
             ×
           </button>
         </div>
-        <Link href={demo ? '/demo/account' : '/account'} className="button button-secondary">
-          Мої курси
-        </Link>
         <CourseCurriculum {...curriculum} onNavigate={() => drawer.current?.close()} />
       </dialog>
       <nav className="lesson-mobile-controls" aria-label="Навігація уроком">

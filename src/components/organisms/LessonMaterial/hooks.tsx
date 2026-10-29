@@ -44,18 +44,47 @@ export function useLessonMaterial(props: LessonBlockProps) {
   const container = useRef<HTMLDivElement>(null);
   const [nearby, setNearby] = useState(props.block.kind !== 'image');
   useEffect(() => {
-    if (nearby || !container.current) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
+    const element = container.current;
+    if (nearby || !element) return;
+    if (!('IntersectionObserver' in window)) {
+      setNearby(true);
+      return;
+    }
+    let observer: IntersectionObserver | undefined;
+    let frame = 0;
+    let stopped = false;
+
+    const stop = () => {
+      stopped = true;
+      cancelAnimationFrame(frame);
+      frame = 0;
+      observer?.disconnect();
+      observer = undefined;
+      window.removeEventListener('resize', schedule);
+    };
+    const observe = () => {
+      frame = 0;
+      if (stopped) return;
+      observer?.disconnect();
+      // Pixel margins follow viewport height; percentage observer margins use width.
+      const distance = Math.ceil(window.innerHeight * 3);
+      const current = new IntersectionObserver(
+        ([entry]) => {
+          if (stopped || observer !== current || !entry?.isIntersecting) return;
+          stop();
           setNearby(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: '2000px 0px' },
-    );
-    observer.observe(container.current);
-    return () => observer.disconnect();
+        },
+        { rootMargin: `${distance}px 0px` },
+      );
+      observer = current;
+      current.observe(element);
+    };
+    const schedule = () => {
+      if (!stopped && !frame) frame = requestAnimationFrame(observe);
+    };
+    window.addEventListener('resize', schedule, { passive: true });
+    observe();
+    return stop;
   }, [nearby]);
   return { ...useLessonMedia(props, nearby), container };
 }
