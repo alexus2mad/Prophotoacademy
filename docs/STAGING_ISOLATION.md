@@ -26,8 +26,8 @@ production files or secrets. Its service has a 75% CPU quota and 768 MB memory
 ceiling. Both services start at boot. Staging's invitation-only email retry worker
 is documented in [invitation operations](INVITATIONS.md); other notifications stay isolated.
 
-Production active: aa6f6aa4630be415d02d120732e5df795da6b5dd.
-Production rollback: 5e51620e28df954d79a7ea8651924b2dead58122.
+Production active: 5ae3eca80dbb9e8eb1bb1203343be16d99ba591a (29 October 2026).
+Production rollback: aa6f6aa4630be415d02d120732e5df795da6b5dd.
 Staging first active release: 5e51620e28df954d79a7ea8651924b2dead58122.
 Staging has one release because this is its first deployment; retain the previous
 verified staging release after the next deployment.
@@ -327,3 +327,55 @@ The application release directory contains only the active build and verified
 rollback `9553e7910166e7f37eecf7e31e40a09637d6b64c`. Production remains on
 `aa6f6aa4630be415d02d120732e5df795da6b5dd` with unchanged PID 57069. Both services
 are healthy and staging isolation passes; no data or runtime settings changed.
+
+## Selective student production release — 29 October 2026
+
+Production now runs `5ae3eca80dbb9e8eb1bb1203343be16d99ba591a` from
+`codex/student-production`. It starts from the preceding production release,
+not staging HEAD: the student dashboard, purchase history, settings, lesson
+presentation, collapsed lecture chapters and three-viewport image preloading
+were promoted without unrelated public, administration, pricing or checkout
+changes. Student styles are explicitly scoped; existing public/admin/login
+selectors retain their original declarations and order outside that scope.
+The separate UI commit is `1bf42c52c771632baee3d330485352dc7f081d5a`.
+
+A separate security commit updates Next.js from 16.4.0 to 16.4.3, matching staging
+and removing the affected version identified by the October Next.js advisories.
+Other dependency versions and all authentication, payment, learning-domain,
+content, API and database code remain unchanged. No migration or runtime setting
+change was needed. Future deployment must still select the intended environment
+and branch explicitly; this promotion does not make staging the production base.
+
+Verification passed: architecture (478 modules), TypeScript, formatting, 194 tests,
+Windows and isolated Linux production builds, and 53 validated synthetic review
+pages. Browser checks covered 360, 390, 768, 1024 and 1440px without page overflow,
+keyboard lecture expansion, mobile drawer dismissal after chapter navigation,
+gallery zoom/navigation, and failed/successful quiz feedback. The shared demo
+progress moved from 33% to 50% only after passing its third of six lessons.
+
+Before activation, the built candidate passed 14 read-only route/authorization
+checks and 41 static asset checks on a spare loopback port. Those checks passed
+again through production HTTPS after activation. Live browser review confirmed
+the shared student screens and lecture disclosure. The browser had no signed-in
+production student session; protected pages correctly redirected to login, and
+private API reads returned 401 with no-store responses. No real account, purchase,
+quiz completion or private teaching content was changed for these checks.
+
+Atomic activation verified the production process's release directory and database
+health. Runtime files, Nginx configuration, service definitions and staging's
+release/process fingerprint were identical before and after activation. Cleanup
+removed only obsolete production `5e51620e28df954d79a7ea8651924b2dead58122`, retaining
+the active release and `aa6f6aa4630be415d02d120732e5df795da6b5dd` for rollback.
+Staging remains on `46d0865bc34a5a098f7626f9b710b0839efde19a` and is healthy.
+Private screenshots and operational scripts are under ignored
+`.data/production-student-mail/`.
+
+## Inbound mail forwarding — 29 October 2026
+
+With explicit owner confirmation, Imena catch-all forwarding was saved for the
+apex domain. Unknown addresses route to `info`, which forwards to both
+owner-approved Gmail destinations. Both destination rows and the default alias
+were reopened and confirmed after saving. Public apex MX now resolves to
+`mx.imena.ua`; the Resend sending-subdomain MX remains unchanged. Recipient
+addresses and screenshots remain outside Git. Inbox delivery has not been
+confirmed by the recipients; no test message was sent.
