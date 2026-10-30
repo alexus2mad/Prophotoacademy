@@ -379,3 +379,32 @@ were reopened and confirmed after saving. Public apex MX now resolves to
 `mx.imena.ua`; the Resend sending-subdomain MX remains unchanged. Recipient
 addresses and screenshots remain outside Git. Inbox delivery has not been
 confirmed by the recipients; no test message was sent.
+
+## Navigation journey deployment — 30 October 2026
+
+Staging runs `d4cdd895a3f52dedac7b2614e8c47a825a3dd296`, with the truthful homepage
+destinations, URL-addressable course filter, shared navigation and contextual
+inquiry metadata described in [the navigation handoff](NAVIGATION_JOURNEY.md).
+The tested source archive matched SHA-256
+`aa9461a20cfbfdd3c2ac8dd779360f0815b1abbe005254e2857bc9a85f75726c` before the
+isolated Linux Webpack build. Compilation, TypeScript and all 61 generated pages
+passed. The source commit is pushed to `codex/photographic-editorial`.
+
+Guarded activation passed database health and staging isolation checks. Live
+verification passed 300 targeted navigation assertions across 15 HTTPS requests,
+54 commerce/health/assets/access-boundary checks, and nine student-demo/login
+redirect checks. Browser checks confirmed three filtered courses, six unfiltered
+programs, refresh and Back behavior, keyboard dialog focus restoration, contextual
+workshop copy, and mobile menu dismissal at 390px without horizontal overflow.
+No browser errors were observed. No real inquiry, email, order or student-progress
+mutation was submitted. Local pre-release verification remains 311 tests,
+architecture, formatting, TypeScript, the production build and 53 validated
+synthetic review pages.
+
+After inspecting the cleanup plan, the staging-only helper removed obsolete
+`9553e7910166e7f37eecf7e31e40a09637d6b64c`. Exactly the active build and previous
+verified release `46d0865bc34a5a098f7626f9b710b0839efde19a` remain. Production
+retains `5ae3eca80dbb9e8eb1bb1203343be16d99ba591a` and its existing process
+(PID 120275). Runtime settings, databases, CMS content and payment modes were
+unchanged; booking and GitHub Pages were not deployed. Screenshots, checks and
+activation/retention logs are under ignored `.data/navigation-journey/`.
