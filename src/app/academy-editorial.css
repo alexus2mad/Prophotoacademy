@@ -170,6 +170,11 @@
   margin: 0;
   color: var(--muted);
 }
+.academy-editorial .course-description p + p {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+}
 .academy-editorial .course-meta span + span {
   padding-left: 16px;
   border-left: 1px solid var(--border);
@@ -408,6 +413,14 @@
 .academy-editorial .program-facts > div {
   font-size: 15px;
   gap: 4px;
+  max-width: 42ch;
+}
+.academy-editorial .program-equipment,
+.academy-editorial .program-schedule-note {
+  margin-top: 12px;
+  color: var(--secondary);
+  font-size: 15px;
+  line-height: 1.5;
 }
 .academy-editorial .program-facts span {
   font-size: 14px;
@@ -500,6 +513,15 @@
   font-size: 15px;
   line-height: 1.6;
   margin: 20px 0 0;
+}
+.academy-editorial .comparison-fact-state {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 600;
+  color: var(--text);
+}
+.academy-editorial [data-state='unknown'] > .comparison-fact-state {
+  color: var(--secondary);
 }
 .academy-editorial .check-list {
   font-size: 14px;

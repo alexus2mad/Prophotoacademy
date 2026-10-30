@@ -4,6 +4,6 @@ import { useProgramCatalog } from './hooks';
 import type { ProgramCatalogProps } from './types';
 
 export function ProgramCatalog(props: ProgramCatalogProps) {
-  const selection = useProgramCatalog();
+  const selection = useProgramCatalog(props.asOf);
   return <CatalogResults {...props} {...selection} />;
 }

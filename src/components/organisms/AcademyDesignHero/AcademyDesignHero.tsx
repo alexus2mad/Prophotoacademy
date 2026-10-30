@@ -38,6 +38,10 @@ export function AcademyDesignHero({ shopUrl }: AcademyDesignHeroProps) {
             <EcosystemWordmark name="SHOP" />
           </a>
         </nav>
+        <p className="academy-design-hero-description">
+          Курси фотографії, відео та створення контенту на телефон або камеру. Онлайн-навчання та
+          практика в Києві — залежно від програми й пакета.
+        </p>
         <Link className="button academy-hero-action" href="/courses">
           Обрати програму
         </Link>

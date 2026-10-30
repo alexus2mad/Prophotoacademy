@@ -5,6 +5,7 @@ export type CatalogResultsProps = {
   programs: Program[];
   content: Pick<AcademyContent, 'images' | 'offerings'>;
   category: CatalogCategory;
+  asOf: string;
   query?: string;
   motionReady?: boolean;
 };

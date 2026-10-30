@@ -1,7 +1,8 @@
 import type { Program, Offering } from '../content/types';
 import type { ProgramGalleryContent, ProgramPresentation } from './types';
 import { findImage } from '../content/selectors';
-import { canEnroll, offeringStatus, startingPrice } from '../format';
+import { canEnroll, startingPrice } from '../format';
+import { kyivDate } from '../program-schedule';
 
 export function programHeroImages(program: Program, content: ProgramGalleryContent) {
   const hero = findImage(content, program.imageId);
@@ -32,12 +33,15 @@ export function programPresentation(
   now = new Date(),
 ): ProgramPresentation {
   const price = startingPrice(offering);
-  const open = Boolean(offering && canEnroll(offering));
+  const open = Boolean(offering && canEnroll(offering, undefined, now));
   const isCustom = ['individual', 'corporate'].includes(program.category);
-  const status = offering ? offeringStatus(offering) : 'waitlist';
-  const hasFutureStart = Boolean(
-    offering?.startDate && offering.startDate >= now.toISOString().slice(0, 10),
-  );
+  const status =
+    offering?.availability === 'archived'
+      ? 'archived'
+      : open && offering
+        ? offering.availability
+        : 'waitlist';
+  const hasFutureStart = Boolean(offering?.startDate && offering.startDate >= kyivDate(now));
   const inquiryTitle = isCustom
     ? program.title
     : status === 'archived'

@@ -1,6 +1,9 @@
 import type { ReactNode } from 'react';
 export type LayoutProps = { children: ReactNode };
 export type SlugPageProps = { params: Promise<{ slug: string }> };
+export type CoursesPageProps = {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+};
 export type CheckoutPageProps = {
   searchParams: Promise<{ offering?: string; package?: string; demo?: string }>;
 };

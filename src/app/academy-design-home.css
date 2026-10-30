@@ -107,6 +107,13 @@
 .academy-design-hero h1 > strong {
   font-weight: inherit;
 }
+.academy-design-hero-description {
+  max-width: 38rem;
+  margin: 24px auto 0;
+  font-size: 18px;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
 .ecosystem-wordmark {
   display: inline-flex;
   align-items: baseline;
@@ -494,6 +501,10 @@
   .academy-design-hero h1 > span {
     margin-bottom: 0.7em;
     font-size: 0.4em;
+  }
+  .academy-design-hero-description {
+    margin-top: 20px;
+    font-size: 16px;
   }
   .academy-design-hero-photo img {
     object-position: 48% 50% !important;

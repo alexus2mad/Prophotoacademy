@@ -10,6 +10,7 @@ export function CatalogResults({
   content,
   category,
   query,
+  asOf,
   motionReady = false,
 }: CatalogResultsProps) {
   const visiblePrograms = catalogPrograms(programs, category);
@@ -41,6 +42,7 @@ export function CatalogResults({
               program={program}
               offering={findOffering(content, program.id)}
               image={findImage(content, program.imageId)}
+              asOf={asOf}
             />
           ))}
         </div>

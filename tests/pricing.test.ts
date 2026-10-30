@@ -114,8 +114,13 @@ describe('approved pricing and stable package identity', () => {
     expect(gold).toMatchObject({
       name: 'GOLD',
       availability: 'open',
-      description: 'Робота над власним експертним брендом',
-      includes: ['18 лекцій', 'Чат та індивідуальна робота', 'Доступ назавжди'],
+      description: 'Для роботи над власним брендом зі зворотним зв’язком',
+      includes: [
+        '18 лекцій',
+        'Чат, перевірка завдань та індивідуальна робота',
+        'Індивідуальний дзвінок і майстермайнд із розвитку бренду',
+        'Доступ назавжди',
+      ],
     });
     expect(gold?.previousPrice).toBeUndefined();
     expect(platinum).toMatchObject({ availability: 'open', includes: [] });

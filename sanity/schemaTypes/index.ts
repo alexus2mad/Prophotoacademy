@@ -70,6 +70,44 @@ const availability = defineField({
   },
   validation: (rule) => rule.required(),
 });
+const packageComparison = defineField({
+  name: 'comparison',
+  title: 'Confirmed package comparison',
+  type: 'object',
+  description:
+    'Author only source-confirmed facts. Missing fields mean unconfirmed, never excluded. These facts describe the offer; they do not grant learning access.',
+  fields: [
+    ['learning', 'Lessons and study format'],
+    ['support', 'Instructor support'],
+    ['homework', 'Homework review'],
+    ['practice', 'Practical sessions and format'],
+    ['access', 'Material access period'],
+    ['limits', 'Limits and requirements'],
+  ].map(([name, title]) =>
+    defineField({
+      name,
+      title,
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'state',
+          title: 'Evidence status',
+          type: 'string',
+          initialValue: 'unknown',
+          options: {
+            list: [
+              { title: 'Included / confirmed requirement', value: 'included' },
+              { title: 'Explicitly excluded', value: 'excluded' },
+              { title: 'Unconfirmed', value: 'unknown' },
+            ],
+          },
+          validation: (rule) => rule.required(),
+        }),
+        long('text', 'Confirmed detail or exact point to clarify'),
+      ],
+    }),
+  ),
+});
 export const schemaTypes = [
   defineType({
     name: 'studioRoom',
@@ -241,6 +279,8 @@ export const schemaTypes = [
       }),
       text('eyebrow', 'Short introductory line'),
       text('audienceLabel', 'Concise audience label for catalog'),
+      long('equipmentDescription', 'Confirmed equipment guidance'),
+      long('deliveryDescription', 'Online learning and in-person practice'),
       long('description', 'Summary'),
       defineField({
         name: 'homepageDescription',
@@ -331,7 +371,22 @@ export const schemaTypes = [
         type: 'boolean',
         initialValue: false,
         description:
-          'For recorded or self-paced intakes. Live cohorts close automatically on their start date.',
+          'Sales eligibility only. Keeping sales open does not confirm recorded delivery or permission to join an ongoing cohort.',
+      }),
+      defineField({
+        name: 'learningState',
+        title: 'Confirmed delivery state',
+        type: 'string',
+        options: { list: ['recorded', 'selfPaced', 'ongoing'] },
+        description:
+          'Set only with confirmed delivery evidence. Leave empty when the learning state is unknown.',
+      }),
+      defineField({
+        name: 'joiningOpen',
+        title: 'Joining the ongoing cohort is confirmed',
+        type: 'boolean',
+        description:
+          'Presentation fact only, not checkout authorization. Set only when the team confirms that learners may join this ongoing cohort.',
       }),
       defineField({
         name: 'packages',
@@ -383,6 +438,7 @@ export const schemaTypes = [
               availability,
               long('description', 'Summary'),
               strings('includes', 'What is included'),
+              packageComparison,
             ],
             preview: { select: { title: 'name', subtitle: 'price' } },
           }),

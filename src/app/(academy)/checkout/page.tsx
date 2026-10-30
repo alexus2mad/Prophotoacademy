@@ -13,6 +13,7 @@ import { purchaseAccess } from '@/lib/commerce/orders';
 import { currentMember } from '@/lib/auth/server';
 import { enrollmentOptions } from '@/lib/commerce/catalog';
 import { EnrollmentScope } from '@/components/molecules/EnrollmentScope/EnrollmentScope';
+import { OfferingSummary } from '@/components/molecules/OfferingSummary/OfferingSummary';
 export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: 'Оформлення замовлення',
@@ -108,6 +109,12 @@ export default async function Checkout({ searchParams }: CheckoutPageProps) {
             </p>
           )}
           {pack.description && <p className="muted">{pack.description}</p>}
+          <OfferingSummary
+            program={program}
+            offering={offering}
+            packageId={pack.id}
+            packageName={pack.name}
+          />
           {!!pack.includes.length && (
             <details className="checkout-includes">
               <summary>Що входить у пакет</summary>

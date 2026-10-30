@@ -1,10 +1,12 @@
 import { PhotoStack } from '@/components/molecules/PhotoStack/PhotoStack';
 import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
-import { dateLabel, formatLabel, money } from '@/lib/format';
+import { formatLabel, money } from '@/lib/format';
+import { programSchedule } from '@/lib/program-schedule';
 import Link from 'next/link';
 import type { ProgramHeroProps } from './types';
 export function ProgramHero({ program, offering, images, presentation }: ProgramHeroProps) {
-  const { price, open, isCustom, status, inquiryTitle, buttonLabel, hasFutureStart } = presentation;
+  const { price, open, isCustom, inquiryTitle, buttonLabel } = presentation;
+  const schedule = programSchedule(program, offering);
   return (
     <section className="program-hero">
       <nav className="breadcrumb" aria-label="Шлях до сторінки">
@@ -13,6 +15,9 @@ export function ProgramHero({ program, offering, images, presentation }: Program
       <div className="program-hero-copy">
         <h1>{program.shortTitle}</h1>
         <p className="lead">{program.description}</p>
+        {program.equipmentDescription && (
+          <p className="program-equipment">{program.equipmentDescription}</p>
+        )}
         {price !== undefined && !offering?.packages.length && (
           <p className="program-hero-price">
             <strong>від {money(price)}</strong>
@@ -21,7 +26,8 @@ export function ProgramHero({ program, offering, images, presentation }: Program
         <div className="program-facts">
           <div>
             <span>Формат</span>
-            {offering ? formatLabel[offering.format] : 'За запитом'}
+            {program.deliveryDescription ||
+              (offering ? formatLabel[offering.format] : 'За запитом')}
           </div>
           {!isCustom && offering?.duration && (
             <div>
@@ -31,32 +37,27 @@ export function ProgramHero({ program, offering, images, presentation }: Program
           )}
           <div>
             <span>
-              {presentation.testEnrollment
-                ? 'Тестовий запис'
-                : isCustom
-                  ? 'Початок'
-                  : status === 'archived'
-                    ? 'Відбулася'
-                    : hasFutureStart
-                      ? 'Дата на сторінці курсу'
-                      : 'Найближчий старт'}
+              {schedule.status} · {schedule.label}
             </span>
-            {presentation.testEnrollment
-              ? 'Без оплати'
-              : isCustom
-                ? 'Узгодимо з вами'
-                : status === 'archived'
-                  ? dateLabel(offering?.startDate)
-                  : open
-                    ? dateLabel(offering?.startDate)
-                    : hasFutureStart
-                      ? dateLabel(offering?.startDate)
-                      : 'Уточнюємо набір'}
+            {schedule.date ? (
+              <time dateTime={schedule.date}>{schedule.value}</time>
+            ) : (
+              schedule.value
+            )}
           </div>
         </div>
+        {schedule.explanation && <p className="program-schedule-note">{schedule.explanation}</p>}
+        {presentation.testEnrollment && (
+          <p className="program-schedule-note">Тестовий запис — без оплати</p>
+        )}
         {!open && (
           <div className="program-hero-actions">
-            <InquiryButton programId={program.id} title={inquiryTitle} className="button">
+            <InquiryButton
+              programId={program.id}
+              offeringId={offering?.id}
+              title={inquiryTitle}
+              className="button"
+            >
               {buttonLabel}
             </InquiryButton>
           </div>

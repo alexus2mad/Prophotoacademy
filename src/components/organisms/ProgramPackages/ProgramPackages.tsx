@@ -1,6 +1,7 @@
 import { PackageCard } from '@/components/molecules/PackageCard/PackageCard';
 import { PackageComparison } from '@/components/organisms/PackageComparison/PackageComparison';
 import { canEnroll } from '@/lib/format';
+import { OfferingSummary } from '@/components/molecules/OfferingSummary/OfferingSummary';
 import type { ProgramPackagesProps } from './types';
 export function ProgramPackages({ offering, program, enrollment }: ProgramPackagesProps) {
   const available = (id: string) => {
@@ -37,6 +38,7 @@ export function ProgramPackages({ offering, program, enrollment }: ProgramPackag
           />
         )}
       </div>
+      <OfferingSummary program={program} offering={offering} />
       {!open && (
         <p className="package-source-note">
           Актуальну вартість і місця підтвердить команда перед записом.

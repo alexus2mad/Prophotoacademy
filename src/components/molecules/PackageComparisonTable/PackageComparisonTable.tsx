@@ -1,4 +1,5 @@
 import { money } from '@/lib/format';
+import { packageComparisonDimensions, packageComparisonFact } from '@/lib/packages/selectors';
 import Link from 'next/link';
 import type { PackageComparisonTableProps } from './types';
 export function PackageComparisonTable({
@@ -31,31 +32,31 @@ export function PackageComparisonTable({
           ))}
         </tr>
         <tr>
-          <th scope="row">Формат підтримки</th>
+          <th scope="row">Для кого</th>
           {items.map((pack) => (
             <td key={pack.id} data-featured={pack.featured || undefined}>
               {pack.description}
             </td>
           ))}
         </tr>
-        <tr>
-          <th scope="row">Що входить</th>
-          {items.map((pack) => (
-            <td key={pack.id} data-featured={pack.featured || undefined}>
-              {pack.includes.length ? (
-                <ul>
-                  {pack.includes.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              ) : pack.inquiryOnly ? (
-                'Уточнюється'
-              ) : (
-                '—'
-              )}
-            </td>
-          ))}
-        </tr>
+        {packageComparisonDimensions.map((dimension) => (
+          <tr key={dimension.id}>
+            <th scope="row">{dimension.label}</th>
+            {items.map((pack) => {
+              const fact = packageComparisonFact(pack, dimension.id);
+              return (
+                <td
+                  key={pack.id}
+                  data-featured={pack.featured || undefined}
+                  data-state={fact.state}
+                >
+                  <span className="comparison-fact-state">{fact.label}</span>
+                  {fact.text && <p>{fact.text}</p>}
+                </td>
+              );
+            })}
+          </tr>
+        ))}
         <tr>
           <th scope="row">Наявність</th>
           {items.map((pack) => (

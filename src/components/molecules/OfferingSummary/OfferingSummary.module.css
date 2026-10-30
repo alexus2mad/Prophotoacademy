@@ -1,0 +1,21 @@
+.summary {
+  margin: 16px 0 24px;
+  max-width: 70ch;
+  color: var(--secondary);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.summary strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.summary p + p {
+  margin-top: 4px;
+}
+
+.summary button {
+  white-space: normal;
+  text-align: left;
+}

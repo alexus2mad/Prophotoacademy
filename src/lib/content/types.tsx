@@ -13,6 +13,17 @@ export type ImageAsset = {
 };
 // A course package grants learning access; a product (event ticket, test payment) records the purchase only.
 export type PackageKind = 'course' | 'product';
+export type PackageComparisonDimension =
+  | 'learning'
+  | 'support'
+  | 'homework'
+  | 'practice'
+  | 'access'
+  | 'limits';
+export type PackageComparisonFact = {
+  state: 'included' | 'excluded' | 'unknown';
+  text?: string;
+};
 export type Package = {
   id: string;
   name: string;
@@ -24,6 +35,7 @@ export type Package = {
   availability: Availability;
   description: string;
   includes: string[];
+  comparison?: Partial<Record<PackageComparisonDimension, PackageComparisonFact>>;
 };
 export type Offering = {
   id: string;
@@ -34,8 +46,10 @@ export type Offering = {
   location?: string;
   availability: Availability;
   verificationRequired: boolean;
-  // Recorded or self-paced intakes stay purchasable after their start date.
+  // Sales eligibility after the start date; this alone does not establish delivery format.
   openAfterStart?: boolean;
+  learningState?: 'recorded' | 'selfPaced' | 'ongoing';
+  joiningOpen?: boolean;
   packages: Package[];
   sourceNotes?: string[];
 };
@@ -49,6 +63,8 @@ export type Program = {
   eyebrow: string;
   audienceLabel?: string;
   homepageDescription?: string;
+  equipmentDescription?: string;
+  deliveryDescription?: string;
   description: string;
   audience: string[];
   outcomes: string[];

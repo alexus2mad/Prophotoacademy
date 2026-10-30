@@ -1,20 +1,13 @@
 import { Photo } from '@/components/atoms/Photo/Photo';
-import {
-  audienceLabel,
-  formatLabel,
-  money,
-  offeringStatus,
-  programStatusLabel,
-  startingPrice,
-} from '@/lib/format';
+import { audienceLabel, formatLabel, money, offeringStatus, startingPrice } from '@/lib/format';
 import Link from 'next/link';
 import { programSchedule } from '@/lib/program-schedule';
 import type { CourseCardProps } from './types';
-export function CourseCard({ program, offering, image }: CourseCardProps) {
+export function CourseCard({ program, offering, image, asOf }: CourseCardProps) {
   const price = startingPrice(offering);
   const status = offering ? offeringStatus(offering) : 'waitlist';
   const custom = ['individual', 'corporate'].includes(program.category);
-  const schedule = programSchedule(program, offering);
+  const schedule = programSchedule(program, offering, asOf ? new Date(asOf) : undefined);
   const archived = status === 'archived';
   const titleId = `${program.id}-title`;
   const scheduleId = `${program.id}-schedule`;
@@ -36,11 +29,17 @@ export function CourseCard({ program, offering, image }: CourseCardProps) {
         <div className="course-image" data-card-photo>
           <Photo image={image} sizes="(max-width: 599px) 96px, (max-width: 1023px) 144px, 224px" />
         </div>
-        <p className="course-description">{program.description}</p>
+        <div className="course-description">
+          <p>{program.description}</p>
+          {program.equipmentDescription && <p>{program.equipmentDescription}</p>}
+          {program.deliveryDescription && <p>{program.deliveryDescription}</p>}
+        </div>
         <p className="course-meta">
-          <span>{offering ? formatLabel[offering.format] : 'За запитом'}</span>
+          {!program.deliveryDescription && (
+            <span>{offering ? formatLabel[offering.format] : 'За запитом'}</span>
+          )}
           {!custom && offering?.duration && <span>{offering.duration}</span>}
-          {!custom && !archived && <span>{programStatusLabel(program, offering)}</span>}
+          {!custom && !archived && <span>{schedule.status}</span>}
         </p>
         <p className="course-schedule" id={scheduleId}>
           <span>{schedule.label}</span>

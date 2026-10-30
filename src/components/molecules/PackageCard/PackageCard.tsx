@@ -60,6 +60,11 @@ export function PackageCard({
         )}
       </div>
       <p>{pack.description}</p>
+      {!pack.includes.length && !isProduct(pack) && (
+        <p className="package-conditions-note">
+          Уточніть обсяг навчання, підтримку, практику й строк доступу до вибору пакета.
+        </p>
+      )}
       {!!pack.includes.length && (
         <div className="package-includes-desktop">
           <PackageIncludes pack={pack} />
