@@ -15,6 +15,10 @@ vi.mock('react', () => ({
 }));
 class Card {
   active = false;
+  pending = false;
+  closest(selector: string) {
+    return selector === '[data-card-motion-pending]' && this.pending ? this : null;
+  }
   toggleAttribute(name: string, active: boolean) {
     if (name === 'data-scroll-active') this.active = active;
   }
@@ -136,6 +140,33 @@ it('tracks filtered cards without restarting unchanged cards or reviving removed
   expect(added.active).toBe(true);
   MutationObserverStub.instances[0].notify();
   expect(observer.observe).toHaveBeenCalledTimes(3);
+});
+it('waits for a catalog boundary to hydrate before changing its card attributes', () => {
+  cards[0].pending = true;
+  useCardMotion();
+  const observer = Observer.instances[0];
+  expect(observer.observe).toHaveBeenCalledTimes(1);
+  expect(observer.observe).toHaveBeenCalledWith(cards[1]);
+  observer.emit(cards[0], true);
+  expect(cards[0].active).toBe(false);
+  expect(MutationObserverStub.instances[0].observe).toHaveBeenCalledWith(root, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['data-card-motion-pending'],
+  });
+
+  cards[0].pending = false;
+  MutationObserverStub.instances[0].notify();
+  expect(observer.observe).toHaveBeenCalledTimes(2);
+  expect(observer.observe).toHaveBeenLastCalledWith(cards[0]);
+  observer.emit(cards[0], true);
+  expect(cards[0].active).toBe(true);
+
+  cards[0].pending = true;
+  MutationObserverStub.instances[0].notify();
+  observer.emit(cards[0], true);
+  expect(cards[0].active).toBe(false);
 });
 it('rebuilds once per frame on resize and ignores callbacks from the old observer', () => {
   useCardMotion();

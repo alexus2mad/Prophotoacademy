@@ -2,6 +2,7 @@
 import { usePathname } from 'next/navigation';
 
 export function useFooter() {
-  const focused = ['/checkout', '/thanks'].includes(usePathname().replace(/\/+$/, '') || '/');
-  return { focused };
+  const path = usePathname().replace(/\/+$/, '') || '/';
+  const focused = ['/checkout', '/thanks'].includes(path);
+  return { focused, path };
 }

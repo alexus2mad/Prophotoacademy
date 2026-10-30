@@ -10,6 +10,7 @@ export function EcosystemNav({ site, onNavigate }: EcosystemNavProps) {
         aria-current={site === 'academy' ? 'true' : undefined}
         onClick={onNavigate}
         data-ecosystem-target="academy"
+        aria-label={site === 'hub' ? 'Навчання — сайт ProPhoto Academy' : undefined}
       >
         Навчання
       </a>
@@ -19,6 +20,7 @@ export function EcosystemNav({ site, onNavigate }: EcosystemNavProps) {
         aria-current={site === 'hub' ? 'true' : undefined}
         onClick={onNavigate}
         data-ecosystem-target="hub"
+        aria-label={site === 'academy' ? 'Студія — сайт ProPhoto Hub' : undefined}
       >
         Студія
       </a>

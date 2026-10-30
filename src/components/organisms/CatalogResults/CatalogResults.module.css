@@ -1,0 +1,11 @@
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.categories a {
+  min-height: 44px;
+  padding: 11px 20px;
+}

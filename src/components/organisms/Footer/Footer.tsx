@@ -2,12 +2,13 @@
 import { BrandLogo } from '@/components/atoms/BrandLogo/BrandLogo';
 import { siteHref } from '@/lib/ecosystem';
 import { phoneLabel } from '@/lib/format';
+import { academyNavigation } from '@/lib/navigation/academy';
 import Link from 'next/link';
 import { useFooter } from './hooks';
 import type { FooterProps } from './types';
 
 export function Footer({ settings }: FooterProps) {
-  const { focused } = useFooter();
+  const { focused, path } = useFooter();
   if (focused)
     return (
       <footer className="site-footer footer-focused">
@@ -36,12 +37,19 @@ export function Footer({ settings }: FooterProps) {
           </div>
           <nav aria-label="Навігація у підвалі">
             <h2 className="footer-group-title">Навчання</h2>
-            <Link href="/courses">Програми</Link>
-            <Link href="/student-work">Роботи студентів</Link>
-            <Link href="/about-us">Академія</Link>
-            <Link href="/reviews">Відгуки</Link>
-            <Link href="/contacts">Контакти</Link>
-            <a href={siteHref('hub')} data-ecosystem-target="hub">
+            {academyNavigation.map(([href, label]) => (
+              <Link key={href} href={href} aria-current={path === href ? 'page' : undefined}>
+                {label}
+              </Link>
+            ))}
+            <Link href="/reviews" aria-current={path === '/reviews' ? 'page' : undefined}>
+              Відгуки
+            </Link>
+            <a
+              href={siteHref('hub')}
+              data-ecosystem-target="hub"
+              aria-label="ProPhoto Hub · студія — окремий сайт"
+            >
               ProPhoto Hub · студія
             </a>
           </nav>
@@ -51,13 +59,28 @@ export function Footer({ settings }: FooterProps) {
             <a href={`tel:${settings.phone}`}>{phoneLabel(settings.phone)}</a>
             <span>{settings.address}</span>
             <div className="footer-social">
-              <a href={settings.instagram} target="_blank" rel="noreferrer">
+              <a
+                href={settings.instagram}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Instagram — нова вкладка"
+              >
                 Instagram
               </a>
-              <a href={settings.telegram} target="_blank" rel="noreferrer">
+              <a
+                href={settings.telegram}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Telegram — нова вкладка"
+              >
                 Telegram
               </a>
-              <a href={settings.shop} target="_blank" rel="noreferrer">
+              <a
+                href={settings.shop}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Магазин ProPhoto — окремий сайт, нова вкладка"
+              >
                 Магазин
               </a>
             </div>

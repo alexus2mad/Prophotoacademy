@@ -3,6 +3,8 @@ import { getContent } from '@/lib/content';
 import { saveInquiry } from '@/lib/commerce/orders';
 import { guardMutation, jsonBody, errorResponse, HttpError, validationError } from '@/lib/http';
 import { acquisitionSchema } from '@/lib/acquisition-schema';
+import { inquirySourceSchema, inquirySubjectSchema } from '@/lib/inquiries/schema';
+import { inquirySubjectTitle } from '@/lib/inquiries/presentation';
 const schema = z
   .object({
     name: z.string().trim().min(2).max(80),
@@ -19,6 +21,8 @@ const schema = z
     offeringId: z.string().max(100).optional(),
     packageId: z.string().max(100).optional(),
     practiceSessionId: z.string().max(100).optional(),
+    subject: inquirySubjectSchema.optional(),
+    source: inquirySourceSchema.optional(),
     site: z.enum(['academy', 'hub']).default('academy'),
     locality: z.enum(['kyiv', 'other']).optional(),
     marketingUpdates: z.boolean().default(false),
@@ -62,6 +66,7 @@ export async function POST(request: Request) {
     const { website, ...data } = input.data;
     await saveInquiry({
       ...data,
+      subjectTitle: data.subject ? inquirySubjectTitle(data.subject) : undefined,
       interest: session ? 'guided-practice' : 'education',
       practiceTitle: session?.title,
       programTitle: program?.title,

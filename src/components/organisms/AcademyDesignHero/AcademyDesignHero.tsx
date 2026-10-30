@@ -2,6 +2,7 @@ import { PreparedPhoto } from '@/components/atoms/PreparedPhoto/PreparedPhoto';
 import { EcosystemWordmark } from '@/components/atoms/EcosystemWordmark/EcosystemWordmark';
 import { academyHomePhoto } from '@/lib/photography/academy-home';
 import { siteHref } from '@/lib/ecosystem';
+import Link from 'next/link';
 import type { AcademyDesignHeroProps } from './types';
 export function AcademyDesignHero({ shopUrl }: AcademyDesignHeroProps) {
   return (
@@ -19,19 +20,27 @@ export function AcademyDesignHero({ shopUrl }: AcademyDesignHeroProps) {
           <strong>Бачити більше</strong>
         </h1>
         <nav className="academy-design-ecosystem" aria-label="Екосистема ProPhoto">
-          <a href={siteHref('hub')} data-ecosystem-target="hub">
+          <a
+            href={siteHref('hub')}
+            data-ecosystem-target="hub"
+            aria-label="Студія — сайт ProPhoto Hub"
+          >
             <EcosystemWordmark name="STUDIO" />
           </a>
-          <a href="#courses" className="academy-design-current">
+          <Link
+            href="/courses"
+            className="academy-design-current"
+            aria-label="Академія — програми навчання"
+          >
             <EcosystemWordmark name="ACADEMY" />
-          </a>
-          <a href={shopUrl}>
+          </Link>
+          <a href={shopUrl} aria-label="Магазин — окремий сайт ProPhoto">
             <EcosystemWordmark name="SHOP" />
           </a>
         </nav>
-        <a className="button academy-hero-action" href="#courses">
-          Обрати навчання
-        </a>
+        <Link className="button academy-hero-action" href="/courses">
+          Обрати програму
+        </Link>
       </div>
     </section>
   );

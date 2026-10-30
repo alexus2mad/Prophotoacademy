@@ -169,6 +169,63 @@ describe('customer API flow', () => {
       (await inquiry(request('/api/inquiries', { ...payload, programId: 'invented' }))).status,
     ).toBe(400);
   });
+  it.each([
+    ['program-selection', 'header', 'Допоможемо обрати програму'],
+    ['workshops', 'homepage-card', 'Дізнатися про наступні воркшопи'],
+    ['camp', 'homepage-card', 'Дізнатися про наступний ProPhoto кемп'],
+  ])(
+    'preserves the %s inquiry subject and source through the delivery queue',
+    async (subject, source, subjectTitle) => {
+      const acquisition = { site: 'academy', landingPath: '/', utmSource: 'navigation-test' };
+      const payload = {
+        name: 'Local QA',
+        contact: 'qa@example.com',
+        consent: true,
+        marketingUpdates: false,
+        message: 'Маю запитання про навчання',
+        subject,
+        source,
+        acquisition,
+      };
+      expect((await inquiry(request('/api/inquiries', payload))).status).toBe(200);
+      const saved = JSON.parse(
+        (database().prepare('SELECT data FROM inquiries').get() as SerializedRow).data,
+      );
+      const queued = JSON.parse(
+        (database().prepare("SELECT data FROM outbox WHERE kind='inquiry'").get() as SerializedRow)
+          .data,
+      );
+      for (const record of [saved, queued]) {
+        expect(record).toMatchObject({
+          subject,
+          source,
+          subjectTitle,
+          acquisition,
+          marketingUpdates: false,
+          message: payload.message,
+        });
+        expect(record).not.toHaveProperty('programId');
+      }
+      expect(
+        (database().prepare('SELECT COUNT(*) AS count FROM orders').get() as CountRow).count,
+      ).toBe(0);
+    },
+  );
+  it('rejects invented inquiry subjects, sources and client-supplied subject labels', async () => {
+    const payload = { name: 'Local QA', contact: 'qa@example.com', consent: true };
+    for (const context of [
+      { subject: 'invented' },
+      { source: 'invented' },
+      { subject: 'camp', subjectTitle: 'Безкоштовне місце підтверджено' },
+    ]) {
+      expect((await inquiry(request('/api/inquiries', { ...payload, ...context }))).status).toBe(
+        400,
+      );
+    }
+    expect(
+      (database().prepare('SELECT COUNT(*) AS count FROM inquiries').get() as CountRow).count,
+    ).toBe(0);
+  });
   it('rejects malformed and oversized JSON', async () => {
     const malformed = new Request(`${origin}/api/inquiries`, {
       method: 'POST',

@@ -23,7 +23,7 @@ export function Consultation({ compact = false }: ConsultationProps) {
           </h2>
           <p>Розкажіть, що хочете створювати. Знайдемо програму і формат разом.</p>
         </div>
-        <InquiryButton className="button" title="Знайдемо вашу програму">
+        <InquiryButton className="button" subject="program-selection" source="consultation">
           Допоможіть обрати
         </InquiryButton>
       </div>

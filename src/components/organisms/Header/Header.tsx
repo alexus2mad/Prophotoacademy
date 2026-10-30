@@ -2,6 +2,7 @@
 import { BrandLogo } from '@/components/atoms/BrandLogo/BrandLogo';
 import { Dialog } from '@/components/molecules/Dialog/Dialog';
 import { EcosystemNav } from '@/components/molecules/EcosystemNav/EcosystemNav';
+import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
 import { siteHref } from '@/lib/ecosystem';
 import { Menu } from 'lucide-react';
 import Link from 'next/link';
@@ -9,7 +10,7 @@ import { useHeader } from './hooks';
 import type { HeaderProps } from './types';
 
 export function Header({ site = 'academy' }: HeaderProps) {
-  const { path, scrolled, dialog, focused, home, links } = useHeader({ site });
+  const { path, scrolled, dialog, focused, home, links, mobileLinks } = useHeader({ site });
   return (
     <header
       className={`site-header ${scrolled ? 'is-scrolled' : ''} ${focused ? 'header-focused' : ''}`}
@@ -45,16 +46,24 @@ export function Header({ site = 'academy' }: HeaderProps) {
                   process.env.NEXT_PUBLIC_REVIEW_MODE === 'pages' ? 'demo/account' : 'account',
                 )}
                 className="header-account-link"
+                aria-label="Кабінет студента"
               >
                 Кабінет
               </Link>
-              <Link
-                href={siteHref(site, site === 'hub' ? 'booking' : 'courses')}
-                aria-current={site === 'academy' && path === '/courses' ? 'page' : undefined}
-                className={`button button-small ${site === 'academy' && home ? 'button-secondary' : ''}`}
-              >
-                {site === 'hub' ? 'Забронювати' : home ? 'Усі програми' : 'Обрати курс'}
-              </Link>
+              {site === 'academy' && path === '/courses' ? (
+                <InquiryButton
+                  className="button button-small"
+                  subject="program-selection"
+                  source="header"
+                />
+              ) : (
+                <Link
+                  href={siteHref(site, site === 'hub' ? 'booking' : 'courses')}
+                  className={`button button-small ${site === 'academy' && home ? 'button-secondary' : ''}`}
+                >
+                  {site === 'hub' ? 'Забронювати' : 'Обрати програму'}
+                </Link>
+              )}
               <button
                 type="button"
                 className="icon-button menu-toggle"
@@ -87,14 +96,7 @@ export function Header({ site = 'academy' }: HeaderProps) {
                 Кабінет
               </Link>
             )}
-            {(site === 'hub'
-              ? [
-                  [siteHref('hub', '#spaces'), 'Зали'],
-                  [siteHref('hub', 'booking'), 'Бронювання'],
-                  [siteHref('hub', 'contact'), 'Контакти'],
-                ]
-              : [['/courses', 'Програми'], ...links, ['/contacts', 'Контакти']]
-            ).map(([href, label]) => (
+            {mobileLinks.map(([href, label]) => (
               <Link
                 key={href}
                 href={href}

@@ -28,6 +28,9 @@ export function AcademyDesignVoices({ testimonials }: AcademyDesignVoicesProps) 
         <Link href="/reviews" className="academy-inline-link">
           Усі відгуки
         </Link>
+        <Link href="/courses" className="academy-inline-link">
+          Обрати програму
+        </Link>
       </div>
     </div>
   );

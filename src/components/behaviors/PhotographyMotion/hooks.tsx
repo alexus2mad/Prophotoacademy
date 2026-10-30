@@ -53,8 +53,8 @@ function mountMotion() {
   );
   const scan = () => {
     for (const frame of document.querySelectorAll<HTMLElement>(frames)) {
-      // Academy cards own their opt-in motion; instructional and workspace images stay still.
-      if (frame.closest('.academy-theme')) continue;
+      // Ownership and pending markers also cover streamed fragments outside their shell.
+      if (frame.closest('.academy-theme, [data-card-photo], [data-card-motion-pending]')) continue;
       if (entries.has(frame)) continue;
       const image = frame.querySelector<HTMLImageElement>('img');
       if (!image || image.style.objectFit === 'contain') continue;

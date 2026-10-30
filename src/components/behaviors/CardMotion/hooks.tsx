@@ -17,7 +17,12 @@ export function useCardMotion() {
 
     const scan = () => {
       if (disposed) return;
-      const next = new Set(root.querySelectorAll('[data-card-motion]'));
+      // Suspense content must hydrate before this controller mutates its attributes.
+      const next = new Set(
+        Array.from(root.querySelectorAll('[data-card-motion]')).filter(
+          (card) => !card.closest('[data-card-motion-pending]'),
+        ),
+      );
       for (const card of cards) {
         if (!next.has(card)) {
           observer?.unobserve(card);
@@ -63,7 +68,12 @@ export function useCardMotion() {
     scan();
     observe();
     const mutations = new MutationObserver(scan);
-    mutations.observe(root, { childList: true, subtree: true });
+    mutations.observe(root, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['data-card-motion-pending'],
+    });
     mobile.addEventListener('change', schedule);
     reducedMotion.addEventListener('change', schedule);
     window.addEventListener('resize', schedule, { passive: true });

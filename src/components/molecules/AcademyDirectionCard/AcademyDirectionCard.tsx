@@ -20,7 +20,13 @@ export function AcademyDirectionCard({ direction }: AcademyDirectionCardProps) {
               </span>
             </Link>
           ) : (
-            <InquiryButton className="academy-direction-action" title={direction.inquiryTitle}>
+            <InquiryButton
+              className="academy-direction-action"
+              title={direction.inquiryTitle}
+              subject={direction.inquirySubject}
+              source="homepage-card"
+              aria-label={direction.inquiryTitle}
+            >
               <span className="academy-direction-title" data-card-title>
                 {direction.title}
               </span>

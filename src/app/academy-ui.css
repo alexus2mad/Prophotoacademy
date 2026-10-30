@@ -18,6 +18,11 @@
   align-items: center;
   min-height: 44px;
 }
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .academy-editorial .header-inner > .ecosystem-nav {
+    display: none;
+  }
+}
 .academy-editorial .academy-hero-action {
   margin-top: 28px;
   min-width: 194px;
@@ -258,7 +263,7 @@
   }
 }
 
-.academy-editorial .site-footer a:hover {
+.academy-editorial .site-footer a:is(:hover, :focus-visible, [aria-current='page']) {
   color: #fff;
   text-decoration: underline;
   text-underline-offset: 4px;

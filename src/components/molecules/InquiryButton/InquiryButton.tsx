@@ -10,12 +10,20 @@ export function InquiryButton({
   packageId,
   practiceSessionId,
   title,
+  subject,
+  source,
+  'aria-label': ariaLabel,
   className = 'button button-secondary',
 }: InquiryButtonProps) {
   return (
     <Button
       className={className}
-      onClick={() => openInquiry({ programId, offeringId, packageId, practiceSessionId, title })}
+      aria-label={ariaLabel}
+      aria-haspopup="dialog"
+      aria-controls="inquiry-dialog"
+      onClick={() =>
+        openInquiry({ programId, offeringId, packageId, practiceSessionId, title, subject, source })
+      }
     >
       {children}
     </Button>

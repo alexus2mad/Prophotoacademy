@@ -3,6 +3,7 @@ import { Button } from '@/components/atoms/Button/Button';
 import { Dialog } from '@/components/molecules/Dialog/Dialog';
 import { FormField } from '@/components/molecules/FormField/FormField';
 import { siteHref } from '@/lib/ecosystem';
+import { inquiryCopy } from '@/lib/inquiries/presentation';
 import { Check } from 'lucide-react';
 import { useInquiryDialog } from './hooks';
 import type { InquiryDialogProps } from './types';
@@ -13,8 +14,10 @@ export function InquiryDialog({
 }: InquiryDialogProps) {
   const { review, dialog, context, state, error, localCapture, fieldErrors, submit } =
     useInquiryDialog({ site, privacyUrl });
+  const copy = inquiryCopy(context);
   return (
     <Dialog
+      id="inquiry-dialog"
       dialogRef={dialog}
       className="inquiry-dialog"
       aria-labelledby="inquiry-title"
@@ -38,16 +41,14 @@ export function InquiryDialog({
         </div>
       ) : (
         <>
-          <h2 id="inquiry-title">{context.title || 'Знайдемо вашу програму'}</h2>
+          <h2 id="inquiry-title">{context.title || copy.title}</h2>
           {review && (
             <p className="mock-notice" role="note">
               Форма показана для огляду. Заявки не надсилаються й дані не зберігаються.
             </p>
           )}
           <p className="muted" id="inquiry-description">
-            {context.practiceSessionId
-              ? 'Залиште контакт. Повідомимо про формат, дату й вартість, коли підтвердимо деталі практики.'
-              : 'Залиште контакт. Допоможемо з форматом, пакетом і найближчим набором.'}
+            {copy.description}
           </p>
           {context.practiceSessionId && (
             <p className="practice-online-alternative">

@@ -15,7 +15,13 @@ export function useInquiryDialog({ site = 'academy' }: InquiryDialogProps) {
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   useEffect(() => {
     const open = (event: Event) => {
-      setContext((event as CustomEvent<InquiryContext>).detail);
+      const detail = (event as CustomEvent<InquiryContext>).detail;
+      setContext({
+        ...detail,
+        subject:
+          detail.subject ||
+          (!detail.programId && !detail.practiceSessionId ? 'program-selection' : undefined),
+      });
       setState('idle');
       setError('');
       setFieldErrors({});
@@ -48,6 +54,8 @@ export function useInquiryDialog({ site = 'academy' }: InquiryDialogProps) {
           programId: context.programId,
           offeringId: context.offeringId,
           packageId: context.packageId,
+          subject: context.subject,
+          source: context.source,
           acquisition: getAcquisition(site),
           marketingUpdates: data.get('marketingUpdates') === 'on',
           practiceSessionId: context.practiceSessionId,

@@ -1,8 +1,17 @@
-import { CourseCard } from '@/components/molecules/CourseCard/CourseCard';
+import { Suspense } from 'react';
+import { CatalogResults } from '@/components/organisms/CatalogResults/CatalogResults';
 import { Consultation } from '@/components/organisms/Consultation/Consultation';
-import { findImage, findOffering } from '@/lib/content/selectors';
+import { ProgramCatalog } from '@/components/organisms/ProgramCatalog/ProgramCatalog';
 import type { CatalogTemplateProps } from './types';
 export function CatalogTemplate({ content, programs }: CatalogTemplateProps) {
+  const catalogContent = {
+    images: content.images.filter((image) =>
+      programs.some((program) => program.imageId === image.id),
+    ),
+    offerings: content.offerings.filter((offering) =>
+      programs.some((program) => program.id === offering.programId),
+    ),
+  };
   return (
     <>
       <div className="container editorial-catalog">
@@ -10,23 +19,11 @@ export function CatalogTemplate({ content, programs }: CatalogTemplateProps) {
           <h1>Програми навчання</h1>
           <p className="lead muted">Курси, класи та індивідуальні формати навчання.</p>
         </div>
-        {programs.length ? (
-          <div className="course-grid">
-            {programs.map((p) => (
-              <CourseCard
-                key={p.id}
-                program={p}
-                offering={findOffering(content, p.id)}
-                image={findImage(content, p.imageId)}
-              />
-            ))}
-          </div>
-        ) : (
-          <div className="empty-state">
-            <h2>Наразі немає програм</h2>
-            <p className="muted">Зверніться до нас, щоб дізнатися про навчання.</p>
-          </div>
-        )}
+        <Suspense
+          fallback={<CatalogResults content={catalogContent} programs={programs} category="all" />}
+        >
+          <ProgramCatalog content={catalogContent} programs={programs} />
+        </Suspense>
       </div>
       <Consultation compact />
     </>

@@ -1,6 +1,7 @@
 'use client';
 import { useDialog } from '@/components/molecules/Dialog/hooks';
 import { siteHref } from '@/lib/ecosystem';
+import { academyNavigation, academySupportingNavigation } from '@/lib/navigation/academy';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import type { HeaderProps } from './types';
@@ -18,10 +19,17 @@ export function useHeader({ site = 'academy' }: HeaderProps) {
           [siteHref('hub', '#spaces'), 'Зали'],
           [siteHref('hub', 'contact'), 'Контакти'],
         ]
-      : [
-          ['/student-work', 'Роботи студентів'],
-          ['/about-us', 'Академія'],
-        ];
+      : path === '/courses'
+        ? academyNavigation
+        : academySupportingNavigation;
+  const mobileLinks =
+    site === 'hub'
+      ? [
+          [siteHref('hub', '#spaces'), 'Зали'],
+          [siteHref('hub', 'booking'), 'Бронювання'],
+          [siteHref('hub', 'contact'), 'Контакти'],
+        ]
+      : academyNavigation;
   useEffect(() => {
     const update = () => setScrolled(window.scrollY > 12);
     update();
@@ -31,5 +39,5 @@ export function useHeader({ site = 'academy' }: HeaderProps) {
   useEffect(() => {
     dialog.current?.close();
   }, [path]);
-  return { path, scrolled, dialog, focused, home, links };
+  return { path, scrolled, dialog, focused, home, links, mobileLinks };
 }
