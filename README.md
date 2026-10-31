@@ -1,5 +1,9 @@
 # Pro Photo Academy
 
+**Live hosting:** production and staging run on `188.245.178.173`; SSH uses
+`prophoto-admin` on port `58222`. See [current hosting and deployment](docs/HOSTING.md)
+for the pinned SSH profile, environment branches and manual release procedure.
+
 The UI follows Atomic Design with owned component folders, colocated `types.tsx` and `hooks.tsx`, semantic HTML, KISS and SOLID. Read [ARCHITECTURE.md](ARCHITECTURE.md) and [AGENTS.md](AGENTS.md) before development. Run `pnpm architecture:check`, `pnpm typecheck`, `pnpm test` and `pnpm format:check` for verification.
 
 The connected ecosystem is implemented here. Review Academy at `/` and Hub at `/hub`; production keeps both domains. Hub has direct room booking, first-screen rates and separate contacts. Guided practice starts as an inquiry offer. The private team view is `/operations`. See [ECOSYSTEM.md](ECOSYSTEM.md) for deployment, shared Sanity content, customer records and attribution.
