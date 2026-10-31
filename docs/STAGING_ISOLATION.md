@@ -1,6 +1,12 @@
 # Separate staging and production
 
-## Live topology — 23 October 2026 (Europe/Kyiv)
+> Current server, access, releases and worker status as of 31 October 2026:
+> [Hosting and deployment](HOSTING.md). Both environments are live and isolated
+> on `188.245.178.173`. The dated provisioning and deployment records below
+> describe earlier states; use the hosting page for the current target and
+> build-capacity requirements.
+
+## Historical topology snapshot — 23 October 2026 (Europe/Kyiv)
 
 Both apps run on OVH 54.39.230.141 (SSH 58222), with separate Linux accounts,
 processes, release directories, configuration, databases, authentication, private

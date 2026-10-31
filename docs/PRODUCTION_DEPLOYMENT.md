@@ -1,6 +1,6 @@
 # Academy production deployment
 
-> Current topology and deployment commands: [Staging and production isolation](STAGING_ISOLATION.md). The historical provisioning notes below predate the OVH migration and domain split.
+> Current server and SSH access: [Hosting and deployment](HOSTING.md). Environment-specific procedures: [Staging and production isolation](STAGING_ISOLATION.md). The historical provisioning notes below predate the domain split and the 31 October 2026 migration to `188.245.178.173`; their host addresses are not deployment targets.
 
 
 The selected host is the existing Hetzner server at `46.224.208.120`, SSH port `58222`. The owner approved this change from Vercel on 11 October 2026. Academy runs as a separate service and OS account, alongside ps-booking. Its initial origin is `https://staging.prophotoacademy.com.ua`; the existing public marketing domain is not cut over by this setup.
