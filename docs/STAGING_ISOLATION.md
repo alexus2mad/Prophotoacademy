@@ -408,3 +408,46 @@ retains `5ae3eca80dbb9e8eb1bb1203343be16d99ba591a` and its existing process
 (PID 120275). Runtime settings, databases, CMS content and payment modes were
 unchanged; booking and GitHub Pages were not deployed. Screenshots, checks and
 activation/retention logs are under ignored `.data/navigation-journey/`.
+
+## Stage 2 offer presentation deployment — 31 October 2026
+
+Staging now runs `d5c3fb87216758f57dc9dd8f98801a2c82cea33b`, including the homepage
+explanation, program positioning, shared schedule presentation and package
+comparison criteria described in [Stage 2](STAGE2_OFFERS.md). The clean Git archive
+matched SHA-256
+`a1f72c6e16aff9e69d1713db2ea36150f8b512b9f48ce1082de121b31a47798a` before the
+isolated Linux Webpack build. Compilation, TypeScript and generation of all 61
+pages passed. Staging still uses `CONTENT_MODE=fixture`; the reviewed marketing
+metadata arrived in this archive and required no remote CMS publication.
+
+Pre-deployment checks passed architecture (538 modules), TypeScript, formatting,
+content validation and the existing 53-page review export validator. The 331-test
+suite initially passed 330 cases; the remaining test could not connect to its
+local sandbox server because of the execution environment's network restriction.
+All four tests in that file passed when rerun with localhost access. No code or
+test assertions were changed for deployment.
+
+Guarded activation verified database health and retains
+`d4cdd895a3f52dedac7b2614e8c47a825a3dd296` for rollback. Live browser checks at
+1440px, 390px and 360px confirmed the homepage explanation and first-screen CTA,
+three filtered courses after refresh, recorded Visual Content status, explicit
+unconfirmed Instagram intake, the 6 November commercial start, the new comparison
+criteria and mobile package switching. Escape restores comparison-button focus;
+the mobile menu dismisses after navigation. Visual GOLD checkout preserves its
+25,500 UAH price and recorded-course explanation. The Instagram inquiry keeps
+its program context and both consent checkboxes unchecked. No horizontal page
+overflow or browser errors were observed in the checked views. Screenshots are
+under ignored `.data/stage2-offers/staging-*.jpg`.
+
+Both public health endpoints returned success. Anonymous staging admin access
+returns 401, account access redirects to login, and staging retains its noindex
+header and passes the isolation guard. No inquiry, order, email, entitlement or
+student-progress mutation was submitted during verification. Existing unresolved
+offer facts remain explicit; deployment does not invent package inclusions or
+change purchase eligibility.
+
+After inspecting the retention plan, the staging-only helper removed obsolete
+`46d0865bc34a5a098f7626f9b710b0839efde19a`; exactly active and rollback releases
+remain. Production retains `5ae3eca80dbb9e8eb1bb1203343be16d99ba591a` and PID
+120275. Both runtime-file checksums are unchanged, and staging payments remain
+mock. Production, booking and GitHub Pages were not deployed.

@@ -2,7 +2,7 @@
 
 ## Delivery and verification
 
-Implemented locally on 30 October 2026. No staging, production or GitHub Pages deployment and no remote CMS mutation were performed. The local production preview uses fixture content and mock checkout. A Sanity-backed deployment must publish the reviewed metadata to its own marketing dataset; absent facts remain unconfirmed rather than being inferred from old source notes or package names.
+Implemented locally on 30 October 2026 and deployed to staging on 31 October 2026 as `d5c3fb87216758f57dc9dd8f98801a2c82cea33b`. Staging uses fixture content and mock checkout, so the reviewed metadata ships with the application archive; no remote CMS mutation was needed. Production and GitHub Pages were not deployed. See [the staging deployment record](STAGING_ISOLATION.md#stage-2-offer-presentation-deployment--31-october-2026). A future Sanity-backed deployment must publish the reviewed metadata to its own marketing dataset; absent facts remain unconfirmed rather than being inferred from old source notes or package names.
 
 Validation: 331 tests in 47 files passed; architecture checked 538 modules; TypeScript, repository formatting, content validation, production build and synthetic Pages build passed. The Pages validator checked 53 pages for prefixed assets, noindex, review notices and excluded private endpoints. The built static review correctly filters three courses after hydration and prevents checkout.
 
