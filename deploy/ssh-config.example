@@ -1,0 +1,16 @@
+# Run from the repository root: ssh -F deploy/ssh-config.example prophoto-new
+Host prophoto-new
+    HostName 188.245.178.173
+    Port 58222
+    User prophoto-admin
+    IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly yes
+    UserKnownHostsFile deploy/known_hosts
+    GlobalKnownHostsFile none
+    StrictHostKeyChecking yes
+    HostKeyAlgorithms ssh-ed25519
+    PasswordAuthentication no
+    KbdInteractiveAuthentication no
+    ForwardAgent no
+    ServerAliveInterval 30
+    ServerAliveCountMax 3
