@@ -9,6 +9,8 @@ Production and staging run on the Hetzner Ubuntu server **188.245.178.173**.
 Connect as **prophoto-admin**, using an authorized SSH key on port **58222**.
 Password authentication and direct root SSH are disabled. The administrator has
 owner-approved passwordless sudo; application accounts cannot log in by SSH.
+The separate `backup-export` account accepts only the backup server's key and
+can run only its fixed read-only exporter; see [backup operations](BACKUPS.md).
 
 From the repository root, the checked-in profile uses the pinned public host key:
 
@@ -102,7 +104,7 @@ curl --fail https://prophotoacademy.com.ua/api/health
 curl --fail https://staging.prophotoacademy.com.ua/api/health
 ```
 
-## DNS, certificates and migration rollback
+## DNS, certificates and backups
 
 The apex, `www` and `staging` A records all point to `188.245.178.173`, with a
 one-hour TTL. `www` redirects to the apex. Existing mail MX/TXT/CNAME records
@@ -114,22 +116,19 @@ Certbot renewal configurations. HTTP ACME challenges must remain reachable on
 port 80. `deploy/nginx-environments.conf` describes the current domain routing;
 the original single-environment HTTP/HTTPS templates are historical setup aids.
 
-Old origin **54.39.230.141** is retained temporarily as an HTTPS forwarding
-server for cached DNS clients and as a rollback copy. Its application services,
-email timers and certificate timer are stopped and disabled. Do not deploy to
-it or start duplicate workers. The new nginx trusts forwarded client addresses
-only from this old origin through
-`/etc/nginx/conf.d/prophoto-migration-realip.conf`.
+Old origin **54.39.230.141** now stores encrypted backups. Its nginx, application
+services, email timers and certificate timer are stopped and disabled, and its
+firewall permits only SSH on TCP 58222. The temporary forwarding configuration
+is no longer active, and its real-IP trust entry was removed from the new server.
+Do not deploy applications or start duplicate workers on the backup host.
 
-The old nginx configuration is backed up on the old host at
-`/root/prophoto-migration-20261031/prophotoacademy.conf.before-forwarding`.
-For a full infrastructure rollback, first stop the new scheduled workers, then
-restore and validate the old nginx configuration, start and health-check the old
-applications and workers, and deliberately move the three A records back.
-External databases are shared with the preserved old builds: do not restore a
-database snapshot or run schema changes as part of a host rollback.
+The backup host pulls both environments nightly at 04:00 Europe/Kyiv, including
+their Supabase application databases, Auth user exports, private Storage objects
+and Sanity content. Retention is 14 daily, 8 weekly and 12 monthly snapshots, with
+weekly integrity and database restore checks. Scope, provider limitations,
+access controls and recovery instructions are in [backup operations](BACKUPS.md).
 
-After the DNS transition and an agreed observation period, the old host can be
-retired and its real-IP trust entry removed from the new host. Do not delete the
-rollback host as an incidental release-cleanup operation. Booking remains on
-`46.224.208.120`; its domain-based Academy integration was preserved.
+Use the previous verified release on the new server for application rollback.
+A host recovery requires an explicit restore and health checks before DNS is
+changed; the old web services are no longer a live migration fallback. Booking
+remains on `46.224.208.120`; its domain-based Academy integration was preserved.
