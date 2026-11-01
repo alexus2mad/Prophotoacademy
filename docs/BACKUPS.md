@@ -88,6 +88,17 @@ if unattended failure notifications are required.
 
 ## Recovery
 
+Choose the recovery scope before making changes:
+
+- **Bad deployment:** use the previous verified application release on the web
+  server, following `HOSTING.md`. Keep the current external data.
+- **Lost web server:** rebuild a replacement Ubuntu host and restore server files
+  and configuration. Keep the existing Supabase and Sanity projects when they
+  are healthy. Test production and staging before changing DNS.
+- **Deleted or damaged data:** choose a snapshot taken before the incident,
+  restore into a separate recovery location, verify it, then recover the affected
+  records or objects. Preserve the current state before replacing live data.
+
 An independent recovery kit is encrypted to the operator's existing Ed25519 SSH
 key and saved on their Windows machine at:
 
@@ -110,6 +121,22 @@ restic snapshots --host prophoto-new --tag server-external
 restic check --read-data
 ```
 
+To recover the complete archive into a separate private directory, substitute a
+chosen snapshot ID from that list:
+
+```sh
+umask 077
+mkdir -p /root/prophoto-restore
+restic restore SNAPSHOT_ID --target /root/prophoto-restore
+tar -tf /root/prophoto-restore/prophoto-server.tar
+```
+
+This produces the server archive for inspection and selective extraction. Allow
+at least 4 GiB free for the archive at the initial project size, plus space for
+any extracted files. Application database dumps and provider exports are under
+`var/lib/prophoto-backup/export/prophotoacademy/` and
+`var/lib/prophoto-backup/export/prophotoacademy-staging/` inside the archive.
+
 Use an explicit verified snapshot ID when restoring. For example, extract one
 configuration file into a private recovery directory without overwriting live data:
 
@@ -126,6 +153,9 @@ application and configuration paths with their ownership and permissions, adapt
 network and SSH settings to the replacement host, and test both applications
 before changing DNS. Recreate the runtime database role and restore the matching
 `academy.dump` with `pg_restore`; do this against a recovery database first.
+The dumps omit database role ownership and grants. Recreate roles and apply the
+project's deployment grants before connecting the application to a replacement
+database; copying a dump alone does not configure a new Supabase project.
 Restore Storage objects using their manifests and the Storage API, and import
 Sanity NDJSON/assets using the Sanity tooling. Preserve Auth user IDs when
 reconstructing identities so existing application profiles retain their links.
