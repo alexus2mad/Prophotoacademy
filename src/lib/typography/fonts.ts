@@ -28,3 +28,34 @@ export const readingFont = localFont({
   preload: false,
   fallback: ['Arial', 'sans-serif'],
 });
+
+export const studioSansFont = localFont({
+  src: [
+    { path: '../../app/fonts/studio-kyivtype-300.woff2', weight: '200 300', style: 'normal' },
+    { path: '../../app/fonts/studio-kyivtype-400.woff2', weight: '350 400', style: 'normal' },
+    { path: '../../app/fonts/studio-kyivtype-500.woff2', weight: '500', style: 'normal' },
+    { path: '../../app/fonts/studio-kyivtype-700.woff2', weight: '700', style: 'normal' },
+    { path: '../../app/fonts/studio-kyivtype-900.woff2', weight: '900 1000', style: 'normal' },
+  ],
+  variable: '--font-studio-sans',
+  display: 'swap',
+  adjustFontFallback: false,
+});
+
+export const studioCondensedFont = localFont({
+  src: '../../app/fonts/studio-roboto-condensed.ttf',
+  variable: '--font-studio-condensed',
+  weight: '100 900',
+  display: 'swap',
+  adjustFontFallback: false,
+});
+
+export const studioHandFont = localFont({
+  src: '../../app/fonts/studio-marck-script.ttf',
+  variable: '--font-studio-hand',
+  weight: '400',
+  display: 'swap',
+  adjustFontFallback: false,
+});
+
+export const studioThemeClassName = `academy-studio ${studioSansFont.variable} ${studioCondensedFont.variable} ${studioHandFont.variable}`;

@@ -1,0 +1,2442 @@
+{
+  "source": "Figma PROPHOTO STUDIO",
+  "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+  "assets": [
+    {
+      "src": "/design/studio/academy-logo-mark-e60e2070c3.svg",
+      "width": 1360,
+      "height": 167.114,
+      "sha256": "e60e2070c3f91a00ca3fe54d1158ae79931f6a51cdb5b4957e95e288b6f24357",
+      "bytes": 5312,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "853:190",
+          "design": "academy",
+          "constant": "imgLogoMark"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "849:2",
+          "design": "components",
+          "constant": "imgLogoMark"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "854:630",
+          "design": "contacts",
+          "constant": "imgLogoMark"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "854:539",
+          "design": "shop",
+          "constant": "imgLogoMark1"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "854:417",
+          "design": "studio",
+          "constant": "imgLogoMark1"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/academy-img-dir-gold-98c008ab94.png",
+      "width": 986,
+      "height": 1454,
+      "sha256": "98c008ab942f6f1413ef16765a8b80c5ff7449c5d9ff2d4a162f03b524663328",
+      "bytes": 276578,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "853:190",
+          "design": "academy",
+          "constant": "imgImgDirGold"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/academy-img-snow-f813b5a484.png",
+      "width": 638,
+      "height": 795,
+      "sha256": "f813b5a484ded3a264cedf03d50916a976e30c9661af0138ea67994a920395da",
+      "bytes": 224754,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "853:190",
+          "design": "academy",
+          "constant": "imgImgSnow"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/academy-img-content2-a2e3aeec91.png",
+      "width": 808,
+      "height": 1197,
+      "sha256": "a2e3aeec91daf68f1d5c5ba2a664121855390edb2968a057c181a1c95f4ee1ba",
+      "bytes": 63167,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "853:190",
+          "design": "academy",
+          "constant": "imgImgContent2"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/academy-img-olena-e27e2388bc.png",
+      "width": 1100,
+      "height": 1472,
+      "sha256": "e27e2388bc37c6cca588aebe0225fd581d4baafd3bbd1cf0e628be2b6d1b0c09",
+      "bytes": 130759,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "853:190",
+          "design": "academy",
+          "constant": "imgImgOlena"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/academy-img-oleksandra-aab81a0d5a.png",
+      "width": 742,
+      "height": 997,
+      "sha256": "aab81a0d5acc362c96d0085b9cfa885be1322f1e9e6323678b7b291d86b543c3",
+      "bytes": 83368,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "853:190",
+          "design": "academy",
+          "constant": "imgImgOleksandra"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/academy-logo-mark1-e6b4604329.svg",
+      "width": 132,
+      "height": 16.2199,
+      "sha256": "e6b4604329a5204d36b193c77a5d79d6acc129b8439605cfe9badecba438f1c8",
+      "bytes": 5520,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "853:190",
+          "design": "academy",
+          "constant": "imgLogoMark1"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/aiArtworkMobile-img-ws39001-34ec27310a.png",
+      "width": 780,
+      "height": 1318,
+      "sha256": "34ec27310a1a5a58ceb52bef97dfce2878242ad15f118b6757879470bcee89a6",
+      "bytes": 137356,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "893:401",
+          "design": "aiArtworkMobile",
+          "constant": "imgImgWs39001"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/aiArtworkMobile-img-ws39002-6b0ce3bfd3.png",
+      "width": 671,
+      "height": 999,
+      "sha256": "6b0ce3bfd38688394debb96b041ea16e5b9ba9bf26e914a7ac7dfd0d4fb111a5",
+      "bytes": 150237,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "893:401",
+          "design": "aiArtworkMobile",
+          "constant": "imgImgWs39002"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/aiArtworkMobile-img-ws39003-c1cf104be3.png",
+      "width": 41,
+      "height": 1009,
+      "sha256": "c1cf104be393f59bbb6031b34cb3380847be80e00ab4b5e8a0f196202e338967",
+      "bytes": 7291,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "893:401",
+          "design": "aiArtworkMobile",
+          "constant": "imgImgWs39003"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/aiArtworkMobile-svg-288fc10d1e.svg",
+      "width": 15.6,
+      "height": 15.6,
+      "sha256": "288fc10d1e241b9b2594fea2b0afb81ca634f7d554465dc4ad89359eec888724",
+      "bytes": 855,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "893:401",
+          "design": "aiArtworkMobile",
+          "constant": "imgSvg"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "892:397",
+          "design": "aiArtwork",
+          "constant": "imgSvg"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/aiArtworkMobile-svg1-4e781a1666.svg",
+      "width": 26,
+      "height": 26,
+      "sha256": "4e781a16664fc086d1855481edc413d34d8097f4c49fff679f0c910c1800818f",
+      "bytes": 946,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "893:401",
+          "design": "aiArtworkMobile",
+          "constant": "imgSvg1"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "884:854",
+          "design": "homeMobile",
+          "constant": "imgSvg"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "898:424",
+          "design": "homeShopMobile",
+          "constant": "imgSvg"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "897:405",
+          "design": "homeStudioMobile",
+          "constant": "imgSvg"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/aiArtworkMobile-svg2-76eec25ba9.svg",
+      "width": 26,
+      "height": 26,
+      "sha256": "76eec25ba9bee6e9b616d23b7ff9c1b29040a3058551320a47eeeaf05aacb6f6",
+      "bytes": 585,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "893:401",
+          "design": "aiArtworkMobile",
+          "constant": "imgSvg2"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "884:854",
+          "design": "homeMobile",
+          "constant": "imgSvg1"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "898:424",
+          "design": "homeShopMobile",
+          "constant": "imgSvg1"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "897:405",
+          "design": "homeStudioMobile",
+          "constant": "imgSvg1"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/aiArtworkMobile-svg3-a8cfabf5d5.svg",
+      "width": 26,
+      "height": 26,
+      "sha256": "a8cfabf5d5a3d08a2d24f818a4ea7d75e6b7c8ae819d8327176b7b9f8abde99f",
+      "bytes": 556,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "893:401",
+          "design": "aiArtworkMobile",
+          "constant": "imgSvg3"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "884:854",
+          "design": "homeMobile",
+          "constant": "imgSvg2"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "898:424",
+          "design": "homeShopMobile",
+          "constant": "imgSvg2"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "897:405",
+          "design": "homeStudioMobile",
+          "constant": "imgSvg2"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/aiArtworkMobile-svg4-26bfa4b17b.svg",
+      "width": 26,
+      "height": 26,
+      "sha256": "26bfa4b17b3ed5a464195f3c0c61d6d0facb0acce22a4ae1bc11c05e4cb35942",
+      "bytes": 470,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "893:401",
+          "design": "aiArtworkMobile",
+          "constant": "imgSvg4"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "884:854",
+          "design": "homeMobile",
+          "constant": "imgSvg3"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "898:424",
+          "design": "homeShopMobile",
+          "constant": "imgSvg3"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "897:405",
+          "design": "homeStudioMobile",
+          "constant": "imgSvg3"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/aiArtworkMobile-logo-mark-be01568989.svg",
+      "width": 390,
+      "height": 47.9224,
+      "sha256": "be01568989139d405c1976875bb8ea07c25e32e62916d897418636cb45675226",
+      "bytes": 5482,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "893:401",
+          "design": "aiArtworkMobile",
+          "constant": "imgLogoMark"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/aiArtworkMobile-svg5-29ba39af46.svg",
+      "width": 21,
+      "height": 19,
+      "sha256": "29ba39af46986f39f9170365f6bf47e6daf424790f63b4799352b072bcbb4743",
+      "bytes": 587,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "893:401",
+          "design": "aiArtworkMobile",
+          "constant": "imgSvg5"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/aiArtworkMobile-logo-mark1-f0d2e08eea.svg",
+      "width": 132,
+      "height": 16.2199,
+      "sha256": "f0d2e08eea32dc25a7f742b1aa098ef5f63f4aaf4717c7f8437c4ea784952121",
+      "bytes": 5518,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "893:401",
+          "design": "aiArtworkMobile",
+          "constant": "imgLogoMark1"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/aiArtwork-img-ws144001-f825c76228.png",
+      "width": 1500,
+      "height": 731,
+      "sha256": "f825c76228fc3aa913b8fdab01e7a12cbe09fdc31916a2c93eb3208365d73f26",
+      "bytes": 106063,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "892:397",
+          "design": "aiArtwork",
+          "constant": "imgImgWs144001"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/aiArtwork-img-ws144002-2659068f21.png",
+      "width": 1050,
+      "height": 1400,
+      "sha256": "2659068f218e2a8df949d506ac9bf0e878564a14a4ce6fe5374d69c25e7dcbf7",
+      "bytes": 280317,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "892:397",
+          "design": "aiArtwork",
+          "constant": "imgImgWs144002"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/aiArtwork-img-ws144003-83d1227796.png",
+      "width": 959,
+      "height": 1280,
+      "sha256": "83d12277968aeb524ef6379ce1fa97367ff2639af18dcef133e6b39d5bdd84f4",
+      "bytes": 174150,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "892:397",
+          "design": "aiArtwork",
+          "constant": "imgImgWs144003"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/aiArtwork-img-ws144004-50359ac272.png",
+      "width": 323,
+      "height": 1280,
+      "sha256": "50359ac27231316f6b62ecad66ca88de80968a1db663d2a90f78b2bab85e4914",
+      "bytes": 65345,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "892:397",
+          "design": "aiArtwork",
+          "constant": "imgImgWs144004"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/aiArtwork-logo-mark-f26da1bc93.svg",
+      "width": 1440,
+      "height": 176.944,
+      "sha256": "f26da1bc9340a6e227be7d8f1cddec52eff213f65277dd83658347bcc6638938",
+      "bytes": 5505,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "892:397",
+          "design": "aiArtwork",
+          "constant": "imgLogoMark"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/aiArtwork-logo-mark1-1d931ee2c4.svg",
+      "width": 132,
+      "height": 16.2199,
+      "sha256": "1d931ee2c4ec6bd94d58420ec425650dd384a0d87acb4a25572f11f7e4ceea56",
+      "bytes": 5518,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "892:397",
+          "design": "aiArtwork",
+          "constant": "imgLogoMark1"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/components-logo-mark1-16e2f5b4bc.svg",
+      "width": 132,
+      "height": 16.2199,
+      "sha256": "16e2f5b4bc0d100d71bdaa655775886d0467548a761ccb79d1b16fc21842b4e3",
+      "bytes": 5516,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "849:2",
+          "design": "components",
+          "constant": "imgLogoMark1"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/components-logo-mark2-500f08b68e.svg",
+      "width": 132,
+      "height": 16.2199,
+      "sha256": "500f08b68e214a747aeadae9037e8e18d9294bdd6c82d2c9a9531749748ffefa",
+      "bytes": 5518,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "849:2",
+          "design": "components",
+          "constant": "imgLogoMark2"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/components-logo-shop-41aaeadcfd.svg",
+      "width": 220,
+      "height": 18.0464,
+      "sha256": "41aaeadcfdeeeedfcc0260ac31d923e6270ca15300fe0cf4458cd5ebee5e9e15",
+      "bytes": 8997,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "849:2",
+          "design": "components",
+          "constant": "imgLogoShop"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/components-logo-academy-41f1d5b9e2.svg",
+      "width": 277,
+      "height": 18.024,
+      "sha256": "41f1d5b9e2f58b47aef6cd95de4a16e43f6d8be447cd2161968d2583ea543ccd",
+      "bytes": 8004,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "849:2",
+          "design": "components",
+          "constant": "imgLogoAcademy"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/components-logo-studio-70330e24ac.svg",
+      "width": 246,
+      "height": 18.0116,
+      "sha256": "70330e24acee439b3fcc9134e7a51e10da9d78ac8394a3bcdc4b352104cfd7c1",
+      "bytes": 9847,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "849:2",
+          "design": "components",
+          "constant": "imgLogoStudio"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/contacts-logo-mark1-6c7d6b290c.svg",
+      "width": 132,
+      "height": 16.2199,
+      "sha256": "6c7d6b290c9b9828978561b7403cf41f9a423f9a20503ce4b5bf2ad02684778c",
+      "bytes": 5518,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "854:630",
+          "design": "contacts",
+          "constant": "imgLogoMark1"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeMobile-img-home39001-092f633093.png",
+      "width": 672,
+      "height": 1454,
+      "sha256": "092f633093243fd3bb75ad1d9cb27d307ad551a0d78d85b7573ec2e3d8f207d3",
+      "bytes": 75840,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "884:854",
+          "design": "homeMobile",
+          "constant": "imgImgHome39001"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeMobile-img-home39002-7f77c4f08f.png",
+      "width": 343,
+      "height": 401,
+      "sha256": "7f77c4f08f634b0215a027f89e8c313f25205fb8bd76adcb95b0444c1c5f5540",
+      "bytes": 34727,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "884:854",
+          "design": "homeMobile",
+          "constant": "imgImgHome39002"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "898:424",
+          "design": "homeShopMobile",
+          "constant": "imgImgHome390Shop02"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeMobile-img-home39003-ccfd60556c.png",
+      "width": 343,
+      "height": 400,
+      "sha256": "ccfd60556c0882abc7a2aa99ec6ff6add5826d566d4ee18335c1e43bbc1f71a6",
+      "bytes": 29572,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "884:854",
+          "design": "homeMobile",
+          "constant": "imgImgHome39003"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "898:424",
+          "design": "homeShopMobile",
+          "constant": "imgImgHome390Shop03"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeMobile-img-home39004-5b6a46fbcb.png",
+      "width": 343,
+      "height": 400,
+      "sha256": "5b6a46fbcbd93182a6de5a831484ca778d8f00e01887144399f12c7d04e3337e",
+      "bytes": 16958,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "884:854",
+          "design": "homeMobile",
+          "constant": "imgImgHome39004"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "898:424",
+          "design": "homeShopMobile",
+          "constant": "imgImgHome390Shop04"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeMobile-img-home39005-bd83ebcdc1.png",
+      "width": 343,
+      "height": 401,
+      "sha256": "bd83ebcdc1203d8fd284bbab61a44e62441eef62c722fea0abd2311f6aebc928",
+      "bytes": 37080,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "884:854",
+          "design": "homeMobile",
+          "constant": "imgImgHome39005"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "898:424",
+          "design": "homeShopMobile",
+          "constant": "imgImgHome390Shop05"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeMobile-img-home39006-81e7e9fc35.png",
+      "width": 86,
+      "height": 404,
+      "sha256": "81e7e9fc357fef44f38584899ee9883b8d1c71586d4cf9e58bb24c9f47228c80",
+      "bytes": 7935,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "884:854",
+          "design": "homeMobile",
+          "constant": "imgImgHome39006"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "898:424",
+          "design": "homeShopMobile",
+          "constant": "imgImgHome390Shop06"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeMobile-img-home39007-0e2a2f1fc4.png",
+      "width": 86,
+      "height": 403,
+      "sha256": "0e2a2f1fc4c3521dca933071dabede4b3077f14ee95460b1278830dae82f365f",
+      "bytes": 7115,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "884:854",
+          "design": "homeMobile",
+          "constant": "imgImgHome39007"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "898:424",
+          "design": "homeShopMobile",
+          "constant": "imgImgHome390Shop07"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeMobile-img-home39008-60b0c1af6c.png",
+      "width": 780,
+      "height": 819,
+      "sha256": "60b0c1af6cf92670e8df710d239ac2250f1b1106c58a11cc6d480b486b1a25c3",
+      "bytes": 39825,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "884:854",
+          "design": "homeMobile",
+          "constant": "imgImgHome39008"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "898:424",
+          "design": "homeShopMobile",
+          "constant": "imgImgHome390Shop08"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "897:405",
+          "design": "homeStudioMobile",
+          "constant": "imgImgHome390Studio04"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeMobile-img-home39009-2b44ecbfa9.png",
+      "width": 780,
+      "height": 129,
+      "sha256": "2b44ecbfa9c17e427111b4754fd18323cd41a96477049a49be2571402f90d2b8",
+      "bytes": 8832,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "884:854",
+          "design": "homeMobile",
+          "constant": "imgImgHome39009"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "898:424",
+          "design": "homeShopMobile",
+          "constant": "imgImgHome390Shop09"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "897:405",
+          "design": "homeStudioMobile",
+          "constant": "imgImgHome390Studio05"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeMobile-img-home39010-631958caeb.png",
+      "width": 371,
+      "height": 465,
+      "sha256": "631958caeb6416212d3654e08164151d578d8b5cf9b1b93e2cc87af17e4a8e3a",
+      "bytes": 36580,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "884:854",
+          "design": "homeMobile",
+          "constant": "imgImgHome39010"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "898:424",
+          "design": "homeShopMobile",
+          "constant": "imgImgHome390Shop10"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "897:405",
+          "design": "homeStudioMobile",
+          "constant": "imgImgHome390Studio06"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeMobile-img-home39011-14e269abd8.png",
+      "width": 371,
+      "height": 464,
+      "sha256": "14e269abd8c34000b5422cc684a3d2a1ce433d3623b57f4979a9b9ab09c4d1a6",
+      "bytes": 45980,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "884:854",
+          "design": "homeMobile",
+          "constant": "imgImgHome39011"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "898:424",
+          "design": "homeShopMobile",
+          "constant": "imgImgHome390Shop11"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "897:405",
+          "design": "homeStudioMobile",
+          "constant": "imgImgHome390Studio07"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeMobile-img-home39012-95ba8b84ed.png",
+      "width": 371,
+      "height": 464,
+      "sha256": "95ba8b84edfa62da6b567f4bdbc6ee614d95a5c7157e5803e9ae1e9de4424eab",
+      "bytes": 43546,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "884:854",
+          "design": "homeMobile",
+          "constant": "imgImgHome39012"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "898:424",
+          "design": "homeShopMobile",
+          "constant": "imgImgHome390Shop12"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "897:405",
+          "design": "homeStudioMobile",
+          "constant": "imgImgHome390Studio08"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeMobile-img-home39013-11e4134c63.png",
+      "width": 371,
+      "height": 464,
+      "sha256": "11e4134c6303d1db0de48aa6c5d1080fbab150d27733598a40c1bec2c9dd6a31",
+      "bytes": 48986,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "884:854",
+          "design": "homeMobile",
+          "constant": "imgImgHome39013"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "898:424",
+          "design": "homeShopMobile",
+          "constant": "imgImgHome390Shop13"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "897:405",
+          "design": "homeStudioMobile",
+          "constant": "imgImgHome390Studio09"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeMobile-img-home39014-72eb20126c.png",
+      "width": 780,
+      "height": 226,
+      "sha256": "72eb20126c2189427d5e92cd9e22da827ad34a65922a064538337faf0d242aea",
+      "bytes": 13666,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "884:854",
+          "design": "homeMobile",
+          "constant": "imgImgHome39014"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeMobile-img-home39015-07faf22fac.png",
+      "width": 780,
+      "height": 226,
+      "sha256": "07faf22facbcb90a2b20a271db1a682f6c9a6fe83a96d4bb3bc05ed2d80f2dd4",
+      "bytes": 17725,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "884:854",
+          "design": "homeMobile",
+          "constant": "imgImgHome39015"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeMobile-logo-studio-9f55448388.svg",
+      "width": 191.184,
+      "height": 13.9981,
+      "sha256": "9f554483887ffc4423bf7a06e80513673ddb4c831eaf2410ba1752c38272673e",
+      "bytes": 9926,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "884:854",
+          "design": "homeMobile",
+          "constant": "imgLogoStudio"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeMobile-logo-academy-6162226b25.svg",
+      "width": 215.135,
+      "height": 13.9985,
+      "sha256": "6162226b2575ef987f89a67f17b15f7345d28092aac9c8edcc8a1edae25d8235",
+      "bytes": 8087,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "884:854",
+          "design": "homeMobile",
+          "constant": "imgLogoAcademy"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeMobile-logo-shop-af5d86da81.svg",
+      "width": 170.761,
+      "height": 14.0073,
+      "sha256": "af5d86da81b7307497c60503b99fffccdf12f66beffe46615fbf128eda4ce06a",
+      "bytes": 9126,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "884:854",
+          "design": "homeMobile",
+          "constant": "imgLogoShop"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "898:424",
+          "design": "homeShopMobile",
+          "constant": "imgLogoShop"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeMobile-logo-shop1-6851c1a7b8.svg",
+      "width": 219.4,
+      "height": 17.9972,
+      "sha256": "6851c1a7b80a8989a8fbe49be53b1d3af9aefae259cadd399b94e4171f783768",
+      "bytes": 9096,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "884:854",
+          "design": "homeMobile",
+          "constant": "imgLogoShop1"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeMobile-logo-studio1-319cd77c04.svg",
+      "width": 245.8,
+      "height": 17.9969,
+      "sha256": "319cd77c0435263540d63a030a00eacd92300a1f17497b157ef5bd19c69b917b",
+      "bytes": 9974,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "884:854",
+          "design": "homeMobile",
+          "constant": "imgLogoStudio1"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "897:405",
+          "design": "homeStudioMobile",
+          "constant": "imgLogoStudio1"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeMobile-logo-mark-e0d2ba4ccf.svg",
+      "width": 390,
+      "height": 47.9224,
+      "sha256": "e0d2ba4ccf39d5374c92d458e2b83000ecc9e82981ece68fdf5041b3629cd34b",
+      "bytes": 5482,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "884:854",
+          "design": "homeMobile",
+          "constant": "imgLogoMark"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeMobile-svg4-30ec96bf96.svg",
+      "width": 21,
+      "height": 19,
+      "sha256": "30ec96bf96acfec7ba2200944200213450d517dab8dcab83522eebab89a43515",
+      "bytes": 587,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "884:854",
+          "design": "homeMobile",
+          "constant": "imgSvg4"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeMobile-logo-mark1-c17bb89fd1.svg",
+      "width": 132,
+      "height": 16.2199,
+      "sha256": "c17bb89fd179ac32a0590241e29456e22ac7fe9e36544d93f6533a37493ff856",
+      "bytes": 5518,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "884:854",
+          "design": "homeMobile",
+          "constant": "imgLogoMark1"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeMobile-select-arrow-2a91909d21.svg",
+      "width": 10,
+      "height": 6,
+      "sha256": "2a91909d2192fb2cfdfef55e5093215e3d38a883b2cc9289709675f1557d50bf",
+      "bytes": 380,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "884:854",
+          "design": "homeMobile",
+          "constant": "imgSelectArrow"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeShopMobile-img-home390-shop01-0b37f3e862.png",
+      "width": 780,
+      "height": 1688,
+      "sha256": "0b37f3e862d84d90c39b3d307f89721a3aba5d03c5fa1134fa6974cea022249f",
+      "bytes": 205516,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "898:424",
+          "design": "homeShopMobile",
+          "constant": "imgImgHome390Shop01"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeShopMobile-img-home390-shop14-5c777f373d.png",
+      "width": 780,
+      "height": 152,
+      "sha256": "5c777f373d2cd0e99af2ac3fe70a7d2b92b0b1cccee5ca864c5de6514cafd93f",
+      "bytes": 9229,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "898:424",
+          "design": "homeShopMobile",
+          "constant": "imgImgHome390Shop14"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "897:405",
+          "design": "homeStudioMobile",
+          "constant": "imgImgHome390Studio10"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeShopMobile-img-home390-shop15-25ca6e23ee.png",
+      "width": 780,
+      "height": 152,
+      "sha256": "25ca6e23ee3bb3af586945283563d0c83cd8f291edcd43586c75440760506e34",
+      "bytes": 12160,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "898:424",
+          "design": "homeShopMobile",
+          "constant": "imgImgHome390Shop15"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "897:405",
+          "design": "homeStudioMobile",
+          "constant": "imgImgHome390Studio11"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeShopMobile-logo-studio-a25f89de07.svg",
+      "width": 191.184,
+      "height": 13.9981,
+      "sha256": "a25f89de07147bf9adf4def0972db376b093026a598494041315432ed26150bb",
+      "bytes": 9926,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "898:424",
+          "design": "homeShopMobile",
+          "constant": "imgLogoStudio"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeShopMobile-logo-academy-5a42b93918.svg",
+      "width": 215.135,
+      "height": 13.9985,
+      "sha256": "5a42b9391899195fa840248816b1c8356498c5f85b8c0569a034d139eed21798",
+      "bytes": 8087,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "898:424",
+          "design": "homeShopMobile",
+          "constant": "imgLogoAcademy"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeShopMobile-logo-shop1-596ce68dcd.svg",
+      "width": 219.4,
+      "height": 17.9972,
+      "sha256": "596ce68dcd705da97b20851479992fa2c44f3da676a262a6122796f5521c3fb9",
+      "bytes": 9096,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "898:424",
+          "design": "homeShopMobile",
+          "constant": "imgLogoShop1"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeShopMobile-logo-studio1-87aca21aa7.svg",
+      "width": 245.8,
+      "height": 17.9969,
+      "sha256": "87aca21aa76302272a34c5988c98511880d6cca40e4baff5dd426fb76013f844",
+      "bytes": 9974,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "898:424",
+          "design": "homeShopMobile",
+          "constant": "imgLogoStudio1"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeShopMobile-logo-mark-d38902becc.svg",
+      "width": 390,
+      "height": 47.9224,
+      "sha256": "d38902beccc01d224af351aa112d1206c6fda6925858b607619616dc1e1303bc",
+      "bytes": 5482,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "898:424",
+          "design": "homeShopMobile",
+          "constant": "imgLogoMark"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeShopMobile-svg4-b8ef5a7bb8.svg",
+      "width": 21,
+      "height": 19,
+      "sha256": "b8ef5a7bb8d5dc1c977b60b2ed9486afbe91c9cac9012fd6ecaffeb03fbee70e",
+      "bytes": 587,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "898:424",
+          "design": "homeShopMobile",
+          "constant": "imgSvg4"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeShopMobile-logo-mark1-07cd2b72ce.svg",
+      "width": 132,
+      "height": 16.2199,
+      "sha256": "07cd2b72ce54fc84ef849ee5a46621f2885a00095c9748d5c19854a5ae88df57",
+      "bytes": 5518,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "898:424",
+          "design": "homeShopMobile",
+          "constant": "imgLogoMark1"
+        },
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "897:405",
+          "design": "homeStudioMobile",
+          "constant": "imgLogoMark1"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeStudioMobile-img-home390-studio01-c65d597363.png",
+      "width": 710,
+      "height": 1537,
+      "sha256": "c65d597363691260c3ee49ca0e670094aef1eb007e3c27f3901b10a906fa042d",
+      "bytes": 137408,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "897:405",
+          "design": "homeStudioMobile",
+          "constant": "imgImgHome390Studio01"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeStudioMobile-img-home390-studio02-887148e72b.png",
+      "width": 562,
+      "height": 449,
+      "sha256": "887148e72b6152927a920ef914d64d7bd9d7278071f0278fde3cc60e7639e422",
+      "bytes": 37230,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "897:405",
+          "design": "homeStudioMobile",
+          "constant": "imgImgHome390Studio02"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeStudioMobile-img-home390-studio03-755a5befeb.png",
+      "width": 214,
+      "height": 449,
+      "sha256": "755a5befeb835071bb31639663e10bfe6ac199fc0bcebc457e1aea4af08ae565",
+      "bytes": 10966,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "897:405",
+          "design": "homeStudioMobile",
+          "constant": "imgImgHome390Studio03"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeStudioMobile-logo-studio-3e65b794e0.svg",
+      "width": 191.184,
+      "height": 13.9981,
+      "sha256": "3e65b794e015b649a042d751ef3e25969848562dc929926c769e4bf8785c1b24",
+      "bytes": 9926,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "897:405",
+          "design": "homeStudioMobile",
+          "constant": "imgLogoStudio"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeStudioMobile-logo-academy-8049efaf4f.svg",
+      "width": 215.135,
+      "height": 13.9985,
+      "sha256": "8049efaf4f009195308b7b8399852df37bd28bec3faeef0e16929997606eecf9",
+      "bytes": 8087,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "897:405",
+          "design": "homeStudioMobile",
+          "constant": "imgLogoAcademy"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeStudioMobile-logo-shop-7533e7a1d3.svg",
+      "width": 170.761,
+      "height": 14.0073,
+      "sha256": "7533e7a1d36a898c219287c3f8b1dc475ce09b1ab933b5a27091b260e63b25c3",
+      "bytes": 9126,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "897:405",
+          "design": "homeStudioMobile",
+          "constant": "imgLogoShop"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeStudioMobile-logo-shop1-575dbaf1af.svg",
+      "width": 219.4,
+      "height": 17.9972,
+      "sha256": "575dbaf1afb4cb731fb2ebb85b397bd9c70911f5005c468495ce9758266aa0f0",
+      "bytes": 9096,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "897:405",
+          "design": "homeStudioMobile",
+          "constant": "imgLogoShop1"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeStudioMobile-logo-mark-5cf27865a2.svg",
+      "width": 390,
+      "height": 47.9224,
+      "sha256": "5cf27865a2be6557dc678b8722d977a613a868118b516774ab5a8a7d00ec5e16",
+      "bytes": 5482,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "897:405",
+          "design": "homeStudioMobile",
+          "constant": "imgLogoMark"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/homeStudioMobile-svg4-c4e520b8cb.svg",
+      "width": 21,
+      "height": 19,
+      "sha256": "c4e520b8cb5790074215a8410d63406e94943e2c7476ebd6c447e17b73b1fdad",
+      "bytes": 587,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "897:405",
+          "design": "homeStudioMobile",
+          "constant": "imgSvg4"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/home-img-home144001-9ddf423067.png",
+      "width": 2200,
+      "height": 1332,
+      "sha256": "9ddf423067af9d5e6ccbcbcbd757c038cd61f11a26436a52f9f18c98ce7ce002",
+      "bytes": 128028,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "886:873",
+          "design": "home",
+          "constant": "imgImgHome144001"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/home-img-home144002-bb19d4f459.png",
+      "width": 2200,
+      "height": 1375,
+      "sha256": "bb19d4f4598c4fa3f5f8a4269484ade80c6ae694dc8dd56035d25b2159a7cf15",
+      "bytes": 707467,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "886:873",
+          "design": "home",
+          "constant": "imgImgHome144002"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/home-img-home144003-daa2141c33.png",
+      "width": 957,
+      "height": 1180,
+      "sha256": "daa2141c3321da4db3910bbceb41b75ccc19000d7de9b324e478aa4993f613a3",
+      "bytes": 157939,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "886:873",
+          "design": "home",
+          "constant": "imgImgHome144003"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/home-img-home144004-6d77332dc8.png",
+      "width": 957,
+      "height": 1181,
+      "sha256": "6d77332dc81650e832ae7278d42534f4be90af7f605bd4d777910f864a3eee8e",
+      "bytes": 134206,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "886:873",
+          "design": "home",
+          "constant": "imgImgHome144004"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/home-img-home144005-bb4eba5276.png",
+      "width": 957,
+      "height": 1181,
+      "sha256": "bb4eba5276edf88fe01272a661bf13dab3f91b9fe780a6d2fd384202a3d7c192",
+      "bytes": 73276,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "886:873",
+          "design": "home",
+          "constant": "imgImgHome144005"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/home-img-home144006-60957a1de1.png",
+      "width": 656,
+      "height": 810,
+      "sha256": "60957a1de13d3e3faeb65d965c0b9a351562e19862a0a580e20485a5c5b159be",
+      "bytes": 97701,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "886:873",
+          "design": "home",
+          "constant": "imgImgHome144006"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/home-img-home144007-a0568503f0.png",
+      "width": 674,
+      "height": 832,
+      "sha256": "a0568503f0a700db9c99bbb5229f9e40026d42180efdefd406c23eca017c18a4",
+      "bytes": 72946,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "886:873",
+          "design": "home",
+          "constant": "imgImgHome144007"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/home-img-home144008-a03a0d809c.png",
+      "width": 646,
+      "height": 796,
+      "sha256": "a03a0d809c2141129aeff7ca960379ccadca6cdcdc8b00f3bb1dec10eaa7a0e8",
+      "bytes": 80239,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "886:873",
+          "design": "home",
+          "constant": "imgImgHome144008"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/home-img-home144009-5f6a936d1d.png",
+      "width": 1100,
+      "height": 1472,
+      "sha256": "5f6a936d1dfcb21d49ad6395aa6755724e7d448cf71cbbee021f5cd212d77872",
+      "bytes": 85297,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "886:873",
+          "design": "home",
+          "constant": "imgImgHome144009"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/home-img-home144010-0b45ca59ca.png",
+      "width": 2880,
+      "height": 209,
+      "sha256": "0b45ca59cade203e36a113dc20264c14394c03c303757768c70fd895bd46d896",
+      "bytes": 40785,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "886:873",
+          "design": "home",
+          "constant": "imgImgHome144010"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/home-img-home144011-6be189dcfe.png",
+      "width": 646,
+      "height": 808,
+      "sha256": "6be189dcfe931ed26d1a435f98560e5eada35e887fba12c6cc78fa44a0d6c5fb",
+      "bytes": 80509,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "886:873",
+          "design": "home",
+          "constant": "imgImgHome144011"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/home-img-home144012-f49f77e39b.png",
+      "width": 654,
+      "height": 818,
+      "sha256": "f49f77e39b30450a3f48b1c9c02cdc40100055a1db5340fd7da1fee37da2785a",
+      "bytes": 107100,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "886:873",
+          "design": "home",
+          "constant": "imgImgHome144012"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/home-img-home144013-ca8ffd3c8a.png",
+      "width": 654,
+      "height": 818,
+      "sha256": "ca8ffd3c8a3b99e468b6afb623ad44b40d88dcda43f9263c86d2455de3dd8070",
+      "bytes": 101228,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "886:873",
+          "design": "home",
+          "constant": "imgImgHome144013"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/home-img-home144014-631987355d.png",
+      "width": 654,
+      "height": 818,
+      "sha256": "631987355d33ad67498c9f84556cf046ce4a840128aa4844c2e2c3676c77e1e1",
+      "bytes": 112299,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "886:873",
+          "design": "home",
+          "constant": "imgImgHome144014"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/home-img-home144015-1fc80d4dfc.png",
+      "width": 898,
+      "height": 467,
+      "sha256": "1fc80d4dfcdabdb442a8a5eb5c51abb6bf412749eecbe43e268bb96d092906d0",
+      "bytes": 27621,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "886:873",
+          "design": "home",
+          "constant": "imgImgHome144015"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/home-logo-studio-0406bd2bb1.svg",
+      "width": 177.546,
+      "height": 12.9995,
+      "sha256": "0406bd2bb12ae6015b6732abd0f0a23c8b5c846b661eb119dbb2f40a52b62399",
+      "bytes": 9932,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "886:873",
+          "design": "home",
+          "constant": "imgLogoStudio"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/home-logo-academy-4253a3b19c.svg",
+      "width": 199.676,
+      "height": 12.9926,
+      "sha256": "4253a3b19c0389980c8657895eed6dfb13395edda0eb94ca0191dd7479818b2c",
+      "bytes": 8122,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "886:873",
+          "design": "home",
+          "constant": "imgLogoAcademy"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/home-logo-shop-5e389e1d02.svg",
+      "width": 158.387,
+      "height": 12.9923,
+      "sha256": "5e389e1d02042c564773918b2d975fa906672c9f7065a901208723aaf46d244d",
+      "bytes": 9177,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "886:873",
+          "design": "home",
+          "constant": "imgLogoShop"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/home-logo-shop1-dea2c291da.svg",
+      "width": 317,
+      "height": 26.0032,
+      "sha256": "dea2c291da9128e68d42d546b67662b5b3cc73fed75dac7f7305c8cd962f20fe",
+      "bytes": 8953,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "886:873",
+          "design": "home",
+          "constant": "imgLogoShop1"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/home-logo-mark-a15c6babb6.svg",
+      "width": 1440,
+      "height": 176.944,
+      "sha256": "a15c6babb6e63912d017efd3f5d441f08969af60e9769dc7dc9e1953858e3dc1",
+      "bytes": 5505,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "886:873",
+          "design": "home",
+          "constant": "imgLogoMark"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/home-logo-mark1-ab26946b04.svg",
+      "width": 132,
+      "height": 16.2199,
+      "sha256": "ab26946b04cd6f91dcf3ceeabc2f0dafe58e75074bd373e6d02869684f3856c1",
+      "bytes": 5518,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "886:873",
+          "design": "home",
+          "constant": "imgLogoMark1"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/home-select-arrow-fe18d6ebe9.svg",
+      "width": 10,
+      "height": 6,
+      "sha256": "fe18d6ebe9d29d729a07aabdc27b823487101b1d4414f47397162f6a6e053df3",
+      "bytes": 380,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "886:873",
+          "design": "home",
+          "constant": "imgSelectArrow"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/menuMobile-logo-studio-8bd133815a.svg",
+      "width": 300.5,
+      "height": 22.0019,
+      "sha256": "8bd133815aa2d5efb27b6d781bbc0ac0ad801d5c671183c7a1e93c37983caf86",
+      "bytes": 9952,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "882:836",
+          "design": "menuMobile",
+          "constant": "imgLogoStudio"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/menuMobile-logo-academy-689e0b0b90.svg",
+      "width": 338.1,
+      "height": 21.9997,
+      "sha256": "689e0b0b90cf45d6ecb8012d197afcb57b0681eea681aeb5f6b1c0c1275b18be",
+      "bytes": 8075,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "882:836",
+          "design": "menuMobile",
+          "constant": "imgLogoAcademy"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/menuMobile-logo-shop-96783f58bd.svg",
+      "width": 268.2,
+      "height": 22.0002,
+      "sha256": "96783f58bd1ac080c9c9ee340db6caf26ea2c0469dfeac02fda48ca84af884c8",
+      "bytes": 9151,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "882:836",
+          "design": "menuMobile",
+          "constant": "imgLogoShop"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/menuMobile-svg-687aca2df7.svg",
+      "width": 18,
+      "height": 18,
+      "sha256": "687aca2df7b8e87ebcc7a1fe53ec92d43577c9eea656442b23df7b72971309d8",
+      "bytes": 800,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "882:836",
+          "design": "menuMobile",
+          "constant": "imgSvg"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/menuMobile-svg1-057423b59d.svg",
+      "width": 18,
+      "height": 18,
+      "sha256": "057423b59d64a88a9df727d7fa5058b8b849a8d14b26849859f668eb586f0356",
+      "bytes": 509,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "882:836",
+          "design": "menuMobile",
+          "constant": "imgSvg1"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/menuMobile-svg2-22d5838edc.svg",
+      "width": 18,
+      "height": 18,
+      "sha256": "22d5838edc1c213924f822ea74ad11536167c6e5d7ca7eb4af66f7a092b6e959",
+      "bytes": 522,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "882:836",
+          "design": "menuMobile",
+          "constant": "imgSvg2"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/menuMobile-svg3-3b5010f501.svg",
+      "width": 18,
+      "height": 18,
+      "sha256": "3b5010f501f5ec43f74bb2c4d80040a17da7f3d255ae6b832f0e636176e27bbf",
+      "bytes": 421,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "882:836",
+          "design": "menuMobile",
+          "constant": "imgSvg3"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/menu-logo-studio-df4bfa2fc7.svg",
+      "width": 239.9,
+      "height": 17.5649,
+      "sha256": "df4bfa2fc7084cc7acfaaa570da16a67692e2a706c9baf3b85a1189554cbdae1",
+      "bytes": 9977,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "883:845",
+          "design": "menu",
+          "constant": "imgLogoStudio"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/menu-logo-academy-2f60459324.svg",
+      "width": 269.9,
+      "height": 17.562,
+      "sha256": "2f60459324e0b2df53cf3bae104563c9c587a6d5fcae454b190ad44eed1710d5",
+      "bytes": 8144,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "883:845",
+          "design": "menu",
+          "constant": "imgLogoAcademy"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/menu-logo-shop-37513a2072.svg",
+      "width": 214.1,
+      "height": 17.5624,
+      "sha256": "37513a20728022a7343efaabd0c416d72d05118f3ef0fbc1525df306bdcb65aa",
+      "bytes": 9137,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "883:845",
+          "design": "menu",
+          "constant": "imgLogoShop"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/menu-svg-a811ef9372.svg",
+      "width": 11,
+      "height": 11,
+      "sha256": "a811ef9372375de35eee26bbb931c39da5bb7aab5628524424a4f86eb6788189",
+      "bytes": 961,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "883:845",
+          "design": "menu",
+          "constant": "imgSvg"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/menu-svg1-41c662bb23.svg",
+      "width": 11,
+      "height": 11,
+      "sha256": "41c662bb23ee5920b5a5cd19ddd2d73db35770e98e6932569f0101900cfb3233",
+      "bytes": 588,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "883:845",
+          "design": "menu",
+          "constant": "imgSvg1"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/menu-svg2-b2c4417cef.svg",
+      "width": 11,
+      "height": 11,
+      "sha256": "b2c4417cef34b36dc13a982d0089dbac4fa6134d0bf3faaea82bb8d0081ee456",
+      "bytes": 564,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "883:845",
+          "design": "menu",
+          "constant": "imgSvg2"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/menu-svg3-920f2a0b9f.svg",
+      "width": 11,
+      "height": 11,
+      "sha256": "920f2a0b9ffce3dac849e8ff73ef06bfaaf4d677c4b43093bfcef0e843fe7e74",
+      "bytes": 474,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "883:845",
+          "design": "menu",
+          "constant": "imgSvg3"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/shop-logo-mark-96a5b3f0f7.svg",
+      "width": 132,
+      "height": 16.2199,
+      "sha256": "96a5b3f0f7123d167a81222a487088e6f21fb1957621ac11dc0ae4c3e2526a02",
+      "bytes": 5516,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "854:539",
+          "design": "shop",
+          "constant": "imgLogoMark"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/shop-hero-d82363024a.png",
+      "width": 2200,
+      "height": 1352,
+      "sha256": "d82363024a54910084df0226921d7daf65e3e28c59f5178b9a9564a24b73e82c",
+      "bytes": 580582,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "854:539",
+          "design": "shop",
+          "constant": "imgHero"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/studio-logo-mark-cdc324443e.svg",
+      "width": 132,
+      "height": 16.2199,
+      "sha256": "cdc324443e39f7f55579d4eac6e1a97a2cffe84c30f54a738dd99dacad92f93a",
+      "bytes": 5516,
+      "format": "svg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "854:417",
+          "design": "studio",
+          "constant": "imgLogoMark"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/studio-hero-66ab29f201.png",
+      "width": 2200,
+      "height": 1467,
+      "sha256": "66ab29f201518e7186718a41ace2e922b51bacde110f83b716217486876f3ba8",
+      "bytes": 1017733,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "854:417",
+          "design": "studio",
+          "constant": "imgHero"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/studio-img-cyclo1-5cd753f103.png",
+      "width": 1500,
+      "height": 832,
+      "sha256": "5cd753f103126d044b9b5998868ab4ca31ffb248706016609f79ff82d9137c4e",
+      "bytes": 204077,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "854:417",
+          "design": "studio",
+          "constant": "imgImgCyclo1"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/studio-img-cyclo2-b42e6e8185.png",
+      "width": 1500,
+      "height": 1000,
+      "sha256": "b42e6e8185b854d52da4441c73a74d5124c9a1781b3d4f5b19d899dd84ad318f",
+      "bytes": 237581,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "854:417",
+          "design": "studio",
+          "constant": "imgImgCyclo2"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/studio-img-content1-8293d19de9.png",
+      "width": 1500,
+      "height": 1009,
+      "sha256": "8293d19de94c9092ceb22a9b8f31acb8027c164c29ca4f8dbab5dd469eafb01b",
+      "bytes": 105859,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "854:417",
+          "design": "studio",
+          "constant": "imgImgContent1"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/studio-img-content3-d96c394744.png",
+      "width": 1000,
+      "height": 1112,
+      "sha256": "d96c39474456d0c24fa923d201c862d1b071151dd8e4c6eb605ed4829528f978",
+      "bytes": 63907,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "854:417",
+          "design": "studio",
+          "constant": "imgImgContent3"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/studio-img-makeup1-26dddac586.png",
+      "width": 1000,
+      "height": 983,
+      "sha256": "26dddac58640e61a5c52078f347bcf163eb424343e96ebb72ac985c40508c377",
+      "bytes": 163576,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "854:417",
+          "design": "studio",
+          "constant": "imgImgMakeup1"
+        }
+      ]
+    },
+    {
+      "src": "/design/studio/studio-img-makeup3-81e214aecd.png",
+      "width": 1000,
+      "height": 1204,
+      "sha256": "81e214aecd80b25a04b619eaeb90b0a028e3cde1f555f6b9ce8d298ff3d22bb0",
+      "bytes": 187058,
+      "format": "jpeg",
+      "sources": [
+        {
+          "fileKey": "CvY4dgmOevd9ehxk9Xsaqd",
+          "nodeId": "854:417",
+          "design": "studio",
+          "constant": "imgImgMakeup3"
+        }
+      ]
+    }
+  ],
+  "artifactAssets": [
+    {
+      "src": "/design/studio/artifact/hero_space-7156c7ca70.webp",
+      "width": 2600,
+      "height": 1537,
+      "sha256": "7156c7ca70d4f49c3e0c163e81361c9f83a1baec69cfd0a4a7e8ba0dae53a856",
+      "bytes": 236238,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "hero_space.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    },
+    {
+      "src": "/design/studio/artifact/hero_academy-2664dadc4c.webp",
+      "width": 2200,
+      "height": 1454,
+      "sha256": "2664dadc4cd8e98b8426d25a3bdbe97134f48f05646505f27da4114aac3a3259",
+      "bytes": 49826,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "hero_academy.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    },
+    {
+      "src": "/design/studio/artifact/hero_studio-216d11e3d6.webp",
+      "width": 2200,
+      "height": 1467,
+      "sha256": "216d11e3d6d29f9944a938c2cb28de8c78f32e5368260b95a39c4aa739883bde",
+      "bytes": 467560,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "hero_studio.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    },
+    {
+      "src": "/design/studio/artifact/hero_shop-af4c45f4dd.webp",
+      "width": 2200,
+      "height": 1352,
+      "sha256": "af4c45f4ddd02e5edfef71c493e8c989b62b0dc6a55a767628a649ac05633a74",
+      "bytes": 219106,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "hero_shop.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    },
+    {
+      "src": "/design/studio/artifact/dir_gold-e8266eb8d7.webp",
+      "width": 986,
+      "height": 1454,
+      "sha256": "e8266eb8d7a601c6bf634d36d6ec72eed64e7c831919c47cb5f97b45ef16a61f",
+      "bytes": 80310,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "dir_gold.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    },
+    {
+      "src": "/design/studio/artifact/hero_tech-a34ebaa457.webp",
+      "width": 2600,
+      "height": 1733,
+      "sha256": "a34ebaa457fa72c9ce743e8db9e458456446fc1e685e74fafd2379ff0bd627d6",
+      "bytes": 359912,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "hero_tech.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    },
+    {
+      "src": "/design/studio/artifact/dir_curly-259092f114.webp",
+      "width": 982,
+      "height": 1454,
+      "sha256": "259092f114eaa0e6c058363be8d2d35a93327454dc68148ba483ae7655e3d9d7",
+      "bytes": 65776,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "dir_curly.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    },
+    {
+      "src": "/design/studio/artifact/dir_suit-83b0430908.webp",
+      "width": 984,
+      "height": 1454,
+      "sha256": "83b04309081915d9c197303b9da3d9be91366e534ea842f8c8c02da37cc903c0",
+      "bytes": 25334,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "dir_suit.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    },
+    {
+      "src": "/design/studio/artifact/work1-56f9c96922.webp",
+      "width": 646,
+      "height": 818,
+      "sha256": "56f9c96922b90f838d8216968f659d86f47eae8dbc8ff674593779841f36583f",
+      "bytes": 37722,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "work1.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    },
+    {
+      "src": "/design/studio/artifact/work2-fdabede088.webp",
+      "width": 658,
+      "height": 818,
+      "sha256": "fdabede0886572476d588fc25bf8fdec2afda8a93fd517d62109d5ee85d8e805",
+      "bytes": 54414,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "work2.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    },
+    {
+      "src": "/design/studio/artifact/work4-560b73409c.webp",
+      "width": 658,
+      "height": 818,
+      "sha256": "560b73409c398e61b5014067ed3bbb58807ac3502d274f4ec7d48490e105e6db",
+      "bytes": 51332,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "work4.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    },
+    {
+      "src": "/design/studio/artifact/work3-e87826845b.webp",
+      "width": 656,
+      "height": 818,
+      "sha256": "e87826845be829acc729b6a4e2df90ce6d3929ee1fb49da39cc0884e1581906b",
+      "bytes": 47376,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "work3.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    },
+    {
+      "src": "/design/studio/artifact/gw2-9c24889514.webp",
+      "width": 352,
+      "height": 440,
+      "sha256": "9c2488951401e6549184cf49d4e9955ad4a1c2312a0d108ec1ab27f30bf8eef7",
+      "bytes": 21520,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "gw2.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    },
+    {
+      "src": "/design/studio/artifact/gw1-3b04af3243.webp",
+      "width": 700,
+      "height": 828,
+      "sha256": "3b04af32436032f80155be591fb16f024ea234db86ede61ca1a1646dee1f941f",
+      "bytes": 18026,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "gw1.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    },
+    {
+      "src": "/design/studio/artifact/gw3-fb7ded8476.webp",
+      "width": 896,
+      "height": 1200,
+      "sha256": "fb7ded84760c1b505d9b62ba1407ea77395fe8438f10284aa650bc1cb7931f58",
+      "bytes": 99546,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "gw3.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    },
+    {
+      "src": "/design/studio/artifact/gw4-fd5be6fd16.webp",
+      "width": 786,
+      "height": 933,
+      "sha256": "fd5be6fd165cd3642dd97df4048afe27ec30161fcdc492cebd2f0fe272b73462",
+      "bytes": 89442,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "gw4.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    },
+    {
+      "src": "/design/studio/artifact/gw5-c7559147e4.webp",
+      "width": 404,
+      "height": 538,
+      "sha256": "c7559147e438c13aea0e3b4efb7da6aac65cab5ec86ab219b6f92c8b495b0e6c",
+      "bytes": 20262,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "gw5.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    },
+    {
+      "src": "/design/studio/artifact/gw7-28d45d0063.webp",
+      "width": 896,
+      "height": 1068,
+      "sha256": "28d45d0063d8620ff97b2926f07d3d0b118a165049918d0537dccd0e925c2b9e",
+      "bytes": 91728,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "gw7.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    },
+    {
+      "src": "/design/studio/artifact/gw6-ecb6491806.webp",
+      "width": 899,
+      "height": 1200,
+      "sha256": "ecb649180664685d95530629cba9066c0c6a4c04ec915ccd1ebbf28909545f6a",
+      "bytes": 66726,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "gw6.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    },
+    {
+      "src": "/design/studio/artifact/cyclo1-12d38b9a5a.webp",
+      "width": 1500,
+      "height": 832,
+      "sha256": "12d38b9a5ae4092835dff334a5c209444052b9f4a9870de3da800b38856423f3",
+      "bytes": 65402,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "cyclo1.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    },
+    {
+      "src": "/design/studio/artifact/olena-2c1e6855d1.webp",
+      "width": 1100,
+      "height": 1472,
+      "sha256": "2c1e6855d1a4107b283c0cb523451df49d19c2c5a77ce1e92275d4554563538f",
+      "bytes": 26074,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "olena.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    },
+    {
+      "src": "/design/studio/artifact/logos-457c311d11.webp",
+      "width": 3954,
+      "height": 276,
+      "sha256": "457c311d11e96d030a577b31ab806dd0bc409558fa36b8c7c38fe2fd09ba8cfe",
+      "bytes": 35458,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "logos.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    },
+    {
+      "src": "/design/studio/artifact/studio_band-93718ea239.webp",
+      "width": 1400,
+      "height": 467,
+      "sha256": "93718ea239d4d69ca7559e01569b17ffab1a55185ec964f617f434b1ba454374",
+      "bytes": 22830,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "studio_band.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    },
+    {
+      "src": "/design/studio/artifact/softbox-7d9dca071a.webp",
+      "width": 1400,
+      "height": 467,
+      "sha256": "7d9dca071a5b867073d5038adffa1cfa5734b0d21214308a6c638ef7ba137623",
+      "bytes": 11504,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "softbox.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    },
+    {
+      "src": "/design/studio/artifact/ws_art2-48d022cc07.webp",
+      "width": 959,
+      "height": 1280,
+      "sha256": "48d022cc076ad354cf7a284d8872cd9ff5327aa67f08df71c0bd5d841000ac4e",
+      "bytes": 93986,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "ws_art2.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    },
+    {
+      "src": "/design/studio/artifact/ws_art3-4654f0f38d.webp",
+      "width": 960,
+      "height": 1280,
+      "sha256": "4654f0f38d4d9ec8bb0f71e38329b12afb1e0d1e0a069bb60873fd9cc3eb5b83",
+      "bytes": 111212,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "ws_art3.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    },
+    {
+      "src": "/design/studio/artifact/ws_art1-a1fd278615.webp",
+      "width": 1050,
+      "height": 1400,
+      "sha256": "a1fd278615bfc6119c010caf396df50c25c5ca691de29f11a8a90634ee15820e",
+      "bytes": 159278,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "ws_art1.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    },
+    {
+      "src": "/design/studio/artifact/ws_hero-063001a44a.webp",
+      "width": 1500,
+      "height": 2000,
+      "sha256": "063001a44aad27e19cef8657878d055e1c3df39967faadadd0faf0b7fea5d400",
+      "bytes": 145754,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "ws_hero.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    },
+    {
+      "src": "/design/studio/artifact/ws_art4-2088d9b52d.webp",
+      "width": 1400,
+      "height": 1050,
+      "sha256": "2088d9b52dd5420ca32b9a8ab7cdd22b871f9b9b92bc136237b669b699cf8edc",
+      "bytes": 192766,
+      "source": "FwrroMxpu7ApuHRefQRW3t",
+      "originalFilename": "ws_art4.webp",
+      "designPriority": "Supplemental only; Figma remains authoritative"
+    }
+  ]
+}

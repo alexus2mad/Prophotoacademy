@@ -1,0 +1,971 @@
+{
+  "academy": {
+    "imgLogoMark": {
+      "src": "/design/studio/academy-logo-mark-e60e2070c3.svg",
+      "width": 1360,
+      "height": 167.114
+    },
+    "imgImgDirGold": {
+      "src": "/design/studio/academy-img-dir-gold-98c008ab94.png",
+      "width": 986,
+      "height": 1454
+    },
+    "imgImgSnow": {
+      "src": "/design/studio/academy-img-snow-f813b5a484.png",
+      "width": 638,
+      "height": 795
+    },
+    "imgImgContent2": {
+      "src": "/design/studio/academy-img-content2-a2e3aeec91.png",
+      "width": 808,
+      "height": 1197
+    },
+    "imgImgOlena": {
+      "src": "/design/studio/academy-img-olena-e27e2388bc.png",
+      "width": 1100,
+      "height": 1472
+    },
+    "imgImgOleksandra": {
+      "src": "/design/studio/academy-img-oleksandra-aab81a0d5a.png",
+      "width": 742,
+      "height": 997
+    },
+    "imgLogoMark1": {
+      "src": "/design/studio/academy-logo-mark1-e6b4604329.svg",
+      "width": 132,
+      "height": 16.2199
+    }
+  },
+  "aiArtworkMobile": {
+    "imgImgWs39001": {
+      "src": "/design/studio/aiArtworkMobile-img-ws39001-34ec27310a.png",
+      "width": 780,
+      "height": 1318
+    },
+    "imgImgWs39002": {
+      "src": "/design/studio/aiArtworkMobile-img-ws39002-6b0ce3bfd3.png",
+      "width": 671,
+      "height": 999
+    },
+    "imgImgWs39003": {
+      "src": "/design/studio/aiArtworkMobile-img-ws39003-c1cf104be3.png",
+      "width": 41,
+      "height": 1009
+    },
+    "imgSvg": {
+      "src": "/design/studio/aiArtworkMobile-svg-288fc10d1e.svg",
+      "width": 15.6,
+      "height": 15.6
+    },
+    "imgSvg1": {
+      "src": "/design/studio/aiArtworkMobile-svg1-4e781a1666.svg",
+      "width": 26,
+      "height": 26
+    },
+    "imgSvg2": {
+      "src": "/design/studio/aiArtworkMobile-svg2-76eec25ba9.svg",
+      "width": 26,
+      "height": 26
+    },
+    "imgSvg3": {
+      "src": "/design/studio/aiArtworkMobile-svg3-a8cfabf5d5.svg",
+      "width": 26,
+      "height": 26
+    },
+    "imgSvg4": {
+      "src": "/design/studio/aiArtworkMobile-svg4-26bfa4b17b.svg",
+      "width": 26,
+      "height": 26
+    },
+    "imgLogoMark": {
+      "src": "/design/studio/aiArtworkMobile-logo-mark-be01568989.svg",
+      "width": 390,
+      "height": 47.9224
+    },
+    "imgSvg5": {
+      "src": "/design/studio/aiArtworkMobile-svg5-29ba39af46.svg",
+      "width": 21,
+      "height": 19
+    },
+    "imgLogoMark1": {
+      "src": "/design/studio/aiArtworkMobile-logo-mark1-f0d2e08eea.svg",
+      "width": 132,
+      "height": 16.2199
+    }
+  },
+  "aiArtwork": {
+    "imgImgWs144001": {
+      "src": "/design/studio/aiArtwork-img-ws144001-f825c76228.png",
+      "width": 1500,
+      "height": 731
+    },
+    "imgImgWs144002": {
+      "src": "/design/studio/aiArtwork-img-ws144002-2659068f21.png",
+      "width": 1050,
+      "height": 1400
+    },
+    "imgImgWs144003": {
+      "src": "/design/studio/aiArtwork-img-ws144003-83d1227796.png",
+      "width": 959,
+      "height": 1280
+    },
+    "imgImgWs144004": {
+      "src": "/design/studio/aiArtwork-img-ws144004-50359ac272.png",
+      "width": 323,
+      "height": 1280
+    },
+    "imgSvg": {
+      "src": "/design/studio/aiArtworkMobile-svg-288fc10d1e.svg",
+      "width": 15.6,
+      "height": 15.6
+    },
+    "imgLogoMark": {
+      "src": "/design/studio/aiArtwork-logo-mark-f26da1bc93.svg",
+      "width": 1440,
+      "height": 176.944
+    },
+    "imgLogoMark1": {
+      "src": "/design/studio/aiArtwork-logo-mark1-1d931ee2c4.svg",
+      "width": 132,
+      "height": 16.2199
+    }
+  },
+  "components": {
+    "imgLogoMark": {
+      "src": "/design/studio/academy-logo-mark-e60e2070c3.svg",
+      "width": 1360,
+      "height": 167.114
+    },
+    "imgLogoMark1": {
+      "src": "/design/studio/components-logo-mark1-16e2f5b4bc.svg",
+      "width": 132,
+      "height": 16.2199
+    },
+    "imgLogoMark2": {
+      "src": "/design/studio/components-logo-mark2-500f08b68e.svg",
+      "width": 132,
+      "height": 16.2199
+    },
+    "imgLogoShop": {
+      "src": "/design/studio/components-logo-shop-41aaeadcfd.svg",
+      "width": 220,
+      "height": 18.0464
+    },
+    "imgLogoAcademy": {
+      "src": "/design/studio/components-logo-academy-41f1d5b9e2.svg",
+      "width": 277,
+      "height": 18.024
+    },
+    "imgLogoStudio": {
+      "src": "/design/studio/components-logo-studio-70330e24ac.svg",
+      "width": 246,
+      "height": 18.0116
+    }
+  },
+  "contacts": {
+    "imgLogoMark": {
+      "src": "/design/studio/academy-logo-mark-e60e2070c3.svg",
+      "width": 1360,
+      "height": 167.114
+    },
+    "imgLogoMark1": {
+      "src": "/design/studio/contacts-logo-mark1-6c7d6b290c.svg",
+      "width": 132,
+      "height": 16.2199
+    }
+  },
+  "homeMobile": {
+    "imgImgHome39001": {
+      "src": "/design/studio/homeMobile-img-home39001-092f633093.png",
+      "width": 672,
+      "height": 1454
+    },
+    "imgImgHome39002": {
+      "src": "/design/studio/homeMobile-img-home39002-7f77c4f08f.png",
+      "width": 343,
+      "height": 401
+    },
+    "imgImgHome39003": {
+      "src": "/design/studio/homeMobile-img-home39003-ccfd60556c.png",
+      "width": 343,
+      "height": 400
+    },
+    "imgImgHome39004": {
+      "src": "/design/studio/homeMobile-img-home39004-5b6a46fbcb.png",
+      "width": 343,
+      "height": 400
+    },
+    "imgImgHome39005": {
+      "src": "/design/studio/homeMobile-img-home39005-bd83ebcdc1.png",
+      "width": 343,
+      "height": 401
+    },
+    "imgImgHome39006": {
+      "src": "/design/studio/homeMobile-img-home39006-81e7e9fc35.png",
+      "width": 86,
+      "height": 404
+    },
+    "imgImgHome39007": {
+      "src": "/design/studio/homeMobile-img-home39007-0e2a2f1fc4.png",
+      "width": 86,
+      "height": 403
+    },
+    "imgImgHome39008": {
+      "src": "/design/studio/homeMobile-img-home39008-60b0c1af6c.png",
+      "width": 780,
+      "height": 819
+    },
+    "imgImgHome39009": {
+      "src": "/design/studio/homeMobile-img-home39009-2b44ecbfa9.png",
+      "width": 780,
+      "height": 129
+    },
+    "imgImgHome39010": {
+      "src": "/design/studio/homeMobile-img-home39010-631958caeb.png",
+      "width": 371,
+      "height": 465
+    },
+    "imgImgHome39011": {
+      "src": "/design/studio/homeMobile-img-home39011-14e269abd8.png",
+      "width": 371,
+      "height": 464
+    },
+    "imgImgHome39012": {
+      "src": "/design/studio/homeMobile-img-home39012-95ba8b84ed.png",
+      "width": 371,
+      "height": 464
+    },
+    "imgImgHome39013": {
+      "src": "/design/studio/homeMobile-img-home39013-11e4134c63.png",
+      "width": 371,
+      "height": 464
+    },
+    "imgImgHome39014": {
+      "src": "/design/studio/homeMobile-img-home39014-72eb20126c.png",
+      "width": 780,
+      "height": 226
+    },
+    "imgImgHome39015": {
+      "src": "/design/studio/homeMobile-img-home39015-07faf22fac.png",
+      "width": 780,
+      "height": 226
+    },
+    "imgLogoStudio": {
+      "src": "/design/studio/homeMobile-logo-studio-9f55448388.svg",
+      "width": 191.184,
+      "height": 13.9981
+    },
+    "imgLogoAcademy": {
+      "src": "/design/studio/homeMobile-logo-academy-6162226b25.svg",
+      "width": 215.135,
+      "height": 13.9985
+    },
+    "imgLogoShop": {
+      "src": "/design/studio/homeMobile-logo-shop-af5d86da81.svg",
+      "width": 170.761,
+      "height": 14.0073
+    },
+    "imgLogoShop1": {
+      "src": "/design/studio/homeMobile-logo-shop1-6851c1a7b8.svg",
+      "width": 219.4,
+      "height": 17.9972
+    },
+    "imgLogoStudio1": {
+      "src": "/design/studio/homeMobile-logo-studio1-319cd77c04.svg",
+      "width": 245.8,
+      "height": 17.9969
+    },
+    "imgSvg": {
+      "src": "/design/studio/aiArtworkMobile-svg1-4e781a1666.svg",
+      "width": 26,
+      "height": 26
+    },
+    "imgSvg1": {
+      "src": "/design/studio/aiArtworkMobile-svg2-76eec25ba9.svg",
+      "width": 26,
+      "height": 26
+    },
+    "imgSvg2": {
+      "src": "/design/studio/aiArtworkMobile-svg3-a8cfabf5d5.svg",
+      "width": 26,
+      "height": 26
+    },
+    "imgSvg3": {
+      "src": "/design/studio/aiArtworkMobile-svg4-26bfa4b17b.svg",
+      "width": 26,
+      "height": 26
+    },
+    "imgLogoMark": {
+      "src": "/design/studio/homeMobile-logo-mark-e0d2ba4ccf.svg",
+      "width": 390,
+      "height": 47.9224
+    },
+    "imgSvg4": {
+      "src": "/design/studio/homeMobile-svg4-30ec96bf96.svg",
+      "width": 21,
+      "height": 19
+    },
+    "imgLogoMark1": {
+      "src": "/design/studio/homeMobile-logo-mark1-c17bb89fd1.svg",
+      "width": 132,
+      "height": 16.2199
+    },
+    "imgSelectArrow": {
+      "src": "/design/studio/homeMobile-select-arrow-2a91909d21.svg",
+      "width": 10,
+      "height": 6
+    }
+  },
+  "homeShopMobile": {
+    "imgImgHome390Shop01": {
+      "src": "/design/studio/homeShopMobile-img-home390-shop01-0b37f3e862.png",
+      "width": 780,
+      "height": 1688
+    },
+    "imgImgHome390Shop02": {
+      "src": "/design/studio/homeMobile-img-home39002-7f77c4f08f.png",
+      "width": 343,
+      "height": 401
+    },
+    "imgImgHome390Shop03": {
+      "src": "/design/studio/homeMobile-img-home39003-ccfd60556c.png",
+      "width": 343,
+      "height": 400
+    },
+    "imgImgHome390Shop04": {
+      "src": "/design/studio/homeMobile-img-home39004-5b6a46fbcb.png",
+      "width": 343,
+      "height": 400
+    },
+    "imgImgHome390Shop05": {
+      "src": "/design/studio/homeMobile-img-home39005-bd83ebcdc1.png",
+      "width": 343,
+      "height": 401
+    },
+    "imgImgHome390Shop06": {
+      "src": "/design/studio/homeMobile-img-home39006-81e7e9fc35.png",
+      "width": 86,
+      "height": 404
+    },
+    "imgImgHome390Shop07": {
+      "src": "/design/studio/homeMobile-img-home39007-0e2a2f1fc4.png",
+      "width": 86,
+      "height": 403
+    },
+    "imgImgHome390Shop08": {
+      "src": "/design/studio/homeMobile-img-home39008-60b0c1af6c.png",
+      "width": 780,
+      "height": 819
+    },
+    "imgImgHome390Shop09": {
+      "src": "/design/studio/homeMobile-img-home39009-2b44ecbfa9.png",
+      "width": 780,
+      "height": 129
+    },
+    "imgImgHome390Shop10": {
+      "src": "/design/studio/homeMobile-img-home39010-631958caeb.png",
+      "width": 371,
+      "height": 465
+    },
+    "imgImgHome390Shop11": {
+      "src": "/design/studio/homeMobile-img-home39011-14e269abd8.png",
+      "width": 371,
+      "height": 464
+    },
+    "imgImgHome390Shop12": {
+      "src": "/design/studio/homeMobile-img-home39012-95ba8b84ed.png",
+      "width": 371,
+      "height": 464
+    },
+    "imgImgHome390Shop13": {
+      "src": "/design/studio/homeMobile-img-home39013-11e4134c63.png",
+      "width": 371,
+      "height": 464
+    },
+    "imgImgHome390Shop14": {
+      "src": "/design/studio/homeShopMobile-img-home390-shop14-5c777f373d.png",
+      "width": 780,
+      "height": 152
+    },
+    "imgImgHome390Shop15": {
+      "src": "/design/studio/homeShopMobile-img-home390-shop15-25ca6e23ee.png",
+      "width": 780,
+      "height": 152
+    },
+    "imgLogoStudio": {
+      "src": "/design/studio/homeShopMobile-logo-studio-a25f89de07.svg",
+      "width": 191.184,
+      "height": 13.9981
+    },
+    "imgLogoAcademy": {
+      "src": "/design/studio/homeShopMobile-logo-academy-5a42b93918.svg",
+      "width": 215.135,
+      "height": 13.9985
+    },
+    "imgLogoShop": {
+      "src": "/design/studio/homeMobile-logo-shop-af5d86da81.svg",
+      "width": 170.761,
+      "height": 14.0073
+    },
+    "imgLogoShop1": {
+      "src": "/design/studio/homeShopMobile-logo-shop1-596ce68dcd.svg",
+      "width": 219.4,
+      "height": 17.9972
+    },
+    "imgLogoStudio1": {
+      "src": "/design/studio/homeShopMobile-logo-studio1-87aca21aa7.svg",
+      "width": 245.8,
+      "height": 17.9969
+    },
+    "imgSvg": {
+      "src": "/design/studio/aiArtworkMobile-svg1-4e781a1666.svg",
+      "width": 26,
+      "height": 26
+    },
+    "imgSvg1": {
+      "src": "/design/studio/aiArtworkMobile-svg2-76eec25ba9.svg",
+      "width": 26,
+      "height": 26
+    },
+    "imgSvg2": {
+      "src": "/design/studio/aiArtworkMobile-svg3-a8cfabf5d5.svg",
+      "width": 26,
+      "height": 26
+    },
+    "imgSvg3": {
+      "src": "/design/studio/aiArtworkMobile-svg4-26bfa4b17b.svg",
+      "width": 26,
+      "height": 26
+    },
+    "imgLogoMark": {
+      "src": "/design/studio/homeShopMobile-logo-mark-d38902becc.svg",
+      "width": 390,
+      "height": 47.9224
+    },
+    "imgSvg4": {
+      "src": "/design/studio/homeShopMobile-svg4-b8ef5a7bb8.svg",
+      "width": 21,
+      "height": 19
+    },
+    "imgLogoMark1": {
+      "src": "/design/studio/homeShopMobile-logo-mark1-07cd2b72ce.svg",
+      "width": 132,
+      "height": 16.2199
+    }
+  },
+  "homeStudioMobile": {
+    "imgImgHome390Studio01": {
+      "src": "/design/studio/homeStudioMobile-img-home390-studio01-c65d597363.png",
+      "width": 710,
+      "height": 1537
+    },
+    "imgImgHome390Studio02": {
+      "src": "/design/studio/homeStudioMobile-img-home390-studio02-887148e72b.png",
+      "width": 562,
+      "height": 449
+    },
+    "imgImgHome390Studio03": {
+      "src": "/design/studio/homeStudioMobile-img-home390-studio03-755a5befeb.png",
+      "width": 214,
+      "height": 449
+    },
+    "imgImgHome390Studio04": {
+      "src": "/design/studio/homeMobile-img-home39008-60b0c1af6c.png",
+      "width": 780,
+      "height": 819
+    },
+    "imgImgHome390Studio05": {
+      "src": "/design/studio/homeMobile-img-home39009-2b44ecbfa9.png",
+      "width": 780,
+      "height": 129
+    },
+    "imgImgHome390Studio06": {
+      "src": "/design/studio/homeMobile-img-home39010-631958caeb.png",
+      "width": 371,
+      "height": 465
+    },
+    "imgImgHome390Studio07": {
+      "src": "/design/studio/homeMobile-img-home39011-14e269abd8.png",
+      "width": 371,
+      "height": 464
+    },
+    "imgImgHome390Studio08": {
+      "src": "/design/studio/homeMobile-img-home39012-95ba8b84ed.png",
+      "width": 371,
+      "height": 464
+    },
+    "imgImgHome390Studio09": {
+      "src": "/design/studio/homeMobile-img-home39013-11e4134c63.png",
+      "width": 371,
+      "height": 464
+    },
+    "imgImgHome390Studio10": {
+      "src": "/design/studio/homeShopMobile-img-home390-shop14-5c777f373d.png",
+      "width": 780,
+      "height": 152
+    },
+    "imgImgHome390Studio11": {
+      "src": "/design/studio/homeShopMobile-img-home390-shop15-25ca6e23ee.png",
+      "width": 780,
+      "height": 152
+    },
+    "imgLogoStudio": {
+      "src": "/design/studio/homeStudioMobile-logo-studio-3e65b794e0.svg",
+      "width": 191.184,
+      "height": 13.9981
+    },
+    "imgLogoAcademy": {
+      "src": "/design/studio/homeStudioMobile-logo-academy-8049efaf4f.svg",
+      "width": 215.135,
+      "height": 13.9985
+    },
+    "imgLogoShop": {
+      "src": "/design/studio/homeStudioMobile-logo-shop-7533e7a1d3.svg",
+      "width": 170.761,
+      "height": 14.0073
+    },
+    "imgLogoShop1": {
+      "src": "/design/studio/homeStudioMobile-logo-shop1-575dbaf1af.svg",
+      "width": 219.4,
+      "height": 17.9972
+    },
+    "imgLogoStudio1": {
+      "src": "/design/studio/homeMobile-logo-studio1-319cd77c04.svg",
+      "width": 245.8,
+      "height": 17.9969
+    },
+    "imgSvg": {
+      "src": "/design/studio/aiArtworkMobile-svg1-4e781a1666.svg",
+      "width": 26,
+      "height": 26
+    },
+    "imgSvg1": {
+      "src": "/design/studio/aiArtworkMobile-svg2-76eec25ba9.svg",
+      "width": 26,
+      "height": 26
+    },
+    "imgSvg2": {
+      "src": "/design/studio/aiArtworkMobile-svg3-a8cfabf5d5.svg",
+      "width": 26,
+      "height": 26
+    },
+    "imgSvg3": {
+      "src": "/design/studio/aiArtworkMobile-svg4-26bfa4b17b.svg",
+      "width": 26,
+      "height": 26
+    },
+    "imgLogoMark": {
+      "src": "/design/studio/homeStudioMobile-logo-mark-5cf27865a2.svg",
+      "width": 390,
+      "height": 47.9224
+    },
+    "imgSvg4": {
+      "src": "/design/studio/homeStudioMobile-svg4-c4e520b8cb.svg",
+      "width": 21,
+      "height": 19
+    },
+    "imgLogoMark1": {
+      "src": "/design/studio/homeShopMobile-logo-mark1-07cd2b72ce.svg",
+      "width": 132,
+      "height": 16.2199
+    }
+  },
+  "home": {
+    "imgImgHome144001": {
+      "src": "/design/studio/home-img-home144001-9ddf423067.png",
+      "width": 2200,
+      "height": 1332
+    },
+    "imgImgHome144002": {
+      "src": "/design/studio/home-img-home144002-bb19d4f459.png",
+      "width": 2200,
+      "height": 1375
+    },
+    "imgImgHome144003": {
+      "src": "/design/studio/home-img-home144003-daa2141c33.png",
+      "width": 957,
+      "height": 1180
+    },
+    "imgImgHome144004": {
+      "src": "/design/studio/home-img-home144004-6d77332dc8.png",
+      "width": 957,
+      "height": 1181
+    },
+    "imgImgHome144005": {
+      "src": "/design/studio/home-img-home144005-bb4eba5276.png",
+      "width": 957,
+      "height": 1181
+    },
+    "imgImgHome144006": {
+      "src": "/design/studio/home-img-home144006-60957a1de1.png",
+      "width": 656,
+      "height": 810
+    },
+    "imgImgHome144007": {
+      "src": "/design/studio/home-img-home144007-a0568503f0.png",
+      "width": 674,
+      "height": 832
+    },
+    "imgImgHome144008": {
+      "src": "/design/studio/home-img-home144008-a03a0d809c.png",
+      "width": 646,
+      "height": 796
+    },
+    "imgImgHome144009": {
+      "src": "/design/studio/home-img-home144009-5f6a936d1d.png",
+      "width": 1100,
+      "height": 1472
+    },
+    "imgImgHome144010": {
+      "src": "/design/studio/home-img-home144010-0b45ca59ca.png",
+      "width": 2880,
+      "height": 209
+    },
+    "imgImgHome144011": {
+      "src": "/design/studio/home-img-home144011-6be189dcfe.png",
+      "width": 646,
+      "height": 808
+    },
+    "imgImgHome144012": {
+      "src": "/design/studio/home-img-home144012-f49f77e39b.png",
+      "width": 654,
+      "height": 818
+    },
+    "imgImgHome144013": {
+      "src": "/design/studio/home-img-home144013-ca8ffd3c8a.png",
+      "width": 654,
+      "height": 818
+    },
+    "imgImgHome144014": {
+      "src": "/design/studio/home-img-home144014-631987355d.png",
+      "width": 654,
+      "height": 818
+    },
+    "imgImgHome144015": {
+      "src": "/design/studio/home-img-home144015-1fc80d4dfc.png",
+      "width": 898,
+      "height": 467
+    },
+    "imgLogoStudio": {
+      "src": "/design/studio/home-logo-studio-0406bd2bb1.svg",
+      "width": 177.546,
+      "height": 12.9995
+    },
+    "imgLogoAcademy": {
+      "src": "/design/studio/home-logo-academy-4253a3b19c.svg",
+      "width": 199.676,
+      "height": 12.9926
+    },
+    "imgLogoShop": {
+      "src": "/design/studio/home-logo-shop-5e389e1d02.svg",
+      "width": 158.387,
+      "height": 12.9923
+    },
+    "imgLogoShop1": {
+      "src": "/design/studio/home-logo-shop1-dea2c291da.svg",
+      "width": 317,
+      "height": 26.0032
+    },
+    "imgLogoMark": {
+      "src": "/design/studio/home-logo-mark-a15c6babb6.svg",
+      "width": 1440,
+      "height": 176.944
+    },
+    "imgLogoMark1": {
+      "src": "/design/studio/home-logo-mark1-ab26946b04.svg",
+      "width": 132,
+      "height": 16.2199
+    },
+    "imgSelectArrow": {
+      "src": "/design/studio/home-select-arrow-fe18d6ebe9.svg",
+      "width": 10,
+      "height": 6
+    }
+  },
+  "inquiry": {},
+  "menuMobile": {
+    "imgLogoStudio": {
+      "src": "/design/studio/menuMobile-logo-studio-8bd133815a.svg",
+      "width": 300.5,
+      "height": 22.0019
+    },
+    "imgLogoAcademy": {
+      "src": "/design/studio/menuMobile-logo-academy-689e0b0b90.svg",
+      "width": 338.1,
+      "height": 21.9997
+    },
+    "imgLogoShop": {
+      "src": "/design/studio/menuMobile-logo-shop-96783f58bd.svg",
+      "width": 268.2,
+      "height": 22.0002
+    },
+    "imgSvg": {
+      "src": "/design/studio/menuMobile-svg-687aca2df7.svg",
+      "width": 18,
+      "height": 18
+    },
+    "imgSvg1": {
+      "src": "/design/studio/menuMobile-svg1-057423b59d.svg",
+      "width": 18,
+      "height": 18
+    },
+    "imgSvg2": {
+      "src": "/design/studio/menuMobile-svg2-22d5838edc.svg",
+      "width": 18,
+      "height": 18
+    },
+    "imgSvg3": {
+      "src": "/design/studio/menuMobile-svg3-3b5010f501.svg",
+      "width": 18,
+      "height": 18
+    }
+  },
+  "menu": {
+    "imgLogoStudio": {
+      "src": "/design/studio/menu-logo-studio-df4bfa2fc7.svg",
+      "width": 239.9,
+      "height": 17.5649
+    },
+    "imgLogoAcademy": {
+      "src": "/design/studio/menu-logo-academy-2f60459324.svg",
+      "width": 269.9,
+      "height": 17.562
+    },
+    "imgLogoShop": {
+      "src": "/design/studio/menu-logo-shop-37513a2072.svg",
+      "width": 214.1,
+      "height": 17.5624
+    },
+    "imgSvg": {
+      "src": "/design/studio/menu-svg-a811ef9372.svg",
+      "width": 11,
+      "height": 11
+    },
+    "imgSvg1": {
+      "src": "/design/studio/menu-svg1-41c662bb23.svg",
+      "width": 11,
+      "height": 11
+    },
+    "imgSvg2": {
+      "src": "/design/studio/menu-svg2-b2c4417cef.svg",
+      "width": 11,
+      "height": 11
+    },
+    "imgSvg3": {
+      "src": "/design/studio/menu-svg3-920f2a0b9f.svg",
+      "width": 11,
+      "height": 11
+    }
+  },
+  "shop": {
+    "imgLogoMark": {
+      "src": "/design/studio/shop-logo-mark-96a5b3f0f7.svg",
+      "width": 132,
+      "height": 16.2199
+    },
+    "imgLogoMark1": {
+      "src": "/design/studio/academy-logo-mark-e60e2070c3.svg",
+      "width": 1360,
+      "height": 167.114
+    },
+    "imgHero": {
+      "src": "/design/studio/shop-hero-d82363024a.png",
+      "width": 2200,
+      "height": 1352
+    }
+  },
+  "studio": {
+    "imgLogoMark": {
+      "src": "/design/studio/studio-logo-mark-cdc324443e.svg",
+      "width": 132,
+      "height": 16.2199
+    },
+    "imgLogoMark1": {
+      "src": "/design/studio/academy-logo-mark-e60e2070c3.svg",
+      "width": 1360,
+      "height": 167.114
+    },
+    "imgHero": {
+      "src": "/design/studio/studio-hero-66ab29f201.png",
+      "width": 2200,
+      "height": 1467
+    },
+    "imgImgCyclo1": {
+      "src": "/design/studio/studio-img-cyclo1-5cd753f103.png",
+      "width": 1500,
+      "height": 832
+    },
+    "imgImgCyclo2": {
+      "src": "/design/studio/studio-img-cyclo2-b42e6e8185.png",
+      "width": 1500,
+      "height": 1000
+    },
+    "imgImgContent1": {
+      "src": "/design/studio/studio-img-content1-8293d19de9.png",
+      "width": 1500,
+      "height": 1009
+    },
+    "imgImgContent3": {
+      "src": "/design/studio/studio-img-content3-d96c394744.png",
+      "width": 1000,
+      "height": 1112
+    },
+    "imgImgMakeup1": {
+      "src": "/design/studio/studio-img-makeup1-26dddac586.png",
+      "width": 1000,
+      "height": 983
+    },
+    "imgImgMakeup3": {
+      "src": "/design/studio/studio-img-makeup3-81e214aecd.png",
+      "width": 1000,
+      "height": 1204
+    }
+  },
+  "artifact": {
+    "hero_space": {
+      "src": "/design/studio/artifact/hero_space-7156c7ca70.webp",
+      "width": 2600,
+      "height": 1537
+    },
+    "hero_academy": {
+      "src": "/design/studio/artifact/hero_academy-2664dadc4c.webp",
+      "width": 2200,
+      "height": 1454
+    },
+    "hero_studio": {
+      "src": "/design/studio/artifact/hero_studio-216d11e3d6.webp",
+      "width": 2200,
+      "height": 1467
+    },
+    "hero_shop": {
+      "src": "/design/studio/artifact/hero_shop-af4c45f4dd.webp",
+      "width": 2200,
+      "height": 1352
+    },
+    "dir_gold": {
+      "src": "/design/studio/artifact/dir_gold-e8266eb8d7.webp",
+      "width": 986,
+      "height": 1454
+    },
+    "hero_tech": {
+      "src": "/design/studio/artifact/hero_tech-a34ebaa457.webp",
+      "width": 2600,
+      "height": 1733
+    },
+    "dir_curly": {
+      "src": "/design/studio/artifact/dir_curly-259092f114.webp",
+      "width": 982,
+      "height": 1454
+    },
+    "dir_suit": {
+      "src": "/design/studio/artifact/dir_suit-83b0430908.webp",
+      "width": 984,
+      "height": 1454
+    },
+    "work1": {
+      "src": "/design/studio/artifact/work1-56f9c96922.webp",
+      "width": 646,
+      "height": 818
+    },
+    "work2": {
+      "src": "/design/studio/artifact/work2-fdabede088.webp",
+      "width": 658,
+      "height": 818
+    },
+    "work4": {
+      "src": "/design/studio/artifact/work4-560b73409c.webp",
+      "width": 658,
+      "height": 818
+    },
+    "work3": {
+      "src": "/design/studio/artifact/work3-e87826845b.webp",
+      "width": 656,
+      "height": 818
+    },
+    "gw2": {
+      "src": "/design/studio/artifact/gw2-9c24889514.webp",
+      "width": 352,
+      "height": 440
+    },
+    "gw1": {
+      "src": "/design/studio/artifact/gw1-3b04af3243.webp",
+      "width": 700,
+      "height": 828
+    },
+    "gw3": {
+      "src": "/design/studio/artifact/gw3-fb7ded8476.webp",
+      "width": 896,
+      "height": 1200
+    },
+    "gw4": {
+      "src": "/design/studio/artifact/gw4-fd5be6fd16.webp",
+      "width": 786,
+      "height": 933
+    },
+    "gw5": {
+      "src": "/design/studio/artifact/gw5-c7559147e4.webp",
+      "width": 404,
+      "height": 538
+    },
+    "gw7": {
+      "src": "/design/studio/artifact/gw7-28d45d0063.webp",
+      "width": 896,
+      "height": 1068
+    },
+    "gw6": {
+      "src": "/design/studio/artifact/gw6-ecb6491806.webp",
+      "width": 899,
+      "height": 1200
+    },
+    "cyclo1": {
+      "src": "/design/studio/artifact/cyclo1-12d38b9a5a.webp",
+      "width": 1500,
+      "height": 832
+    },
+    "olena": {
+      "src": "/design/studio/artifact/olena-2c1e6855d1.webp",
+      "width": 1100,
+      "height": 1472
+    },
+    "logos": {
+      "src": "/design/studio/artifact/logos-457c311d11.webp",
+      "width": 3954,
+      "height": 276
+    },
+    "studio_band": {
+      "src": "/design/studio/artifact/studio_band-93718ea239.webp",
+      "width": 1400,
+      "height": 467
+    },
+    "softbox": {
+      "src": "/design/studio/artifact/softbox-7d9dca071a.webp",
+      "width": 1400,
+      "height": 467
+    },
+    "ws_art2": {
+      "src": "/design/studio/artifact/ws_art2-48d022cc07.webp",
+      "width": 959,
+      "height": 1280
+    },
+    "ws_art3": {
+      "src": "/design/studio/artifact/ws_art3-4654f0f38d.webp",
+      "width": 960,
+      "height": 1280
+    },
+    "ws_art1": {
+      "src": "/design/studio/artifact/ws_art1-a1fd278615.webp",
+      "width": 1050,
+      "height": 1400
+    },
+    "ws_hero": {
+      "src": "/design/studio/artifact/ws_hero-063001a44a.webp",
+      "width": 1500,
+      "height": 2000
+    },
+    "ws_art4": {
+      "src": "/design/studio/artifact/ws_art4-2088d9b52d.webp",
+      "width": 1400,
+      "height": 1050
+    }
+  }
+}

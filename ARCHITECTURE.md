@@ -48,6 +48,23 @@ KISS means clear names, readable control flow and the smallest implementation th
 
 ## Academy visual identity
 
+The public route group selects an explicit presentation with `academyDesign()`
+(`NEXT_PUBLIC_ACADEMY_DESIGN=legacy|studio`, default `legacy`). Both remain
+executable; they share content, metadata, inquiries, checkout and enrollment
+services. Studio components and `.academy-studio` styles are isolated from the
+legacy shell, Hub, learning workspaces and Sanity. No visitor assignment or
+runtime cookie experiment is enabled. Changing the public environment value
+requires rebuilding. See [final design implementation](docs/FINAL_DESIGN_IMPLEMENTATION.md)
+and [source difference register](docs/FIGMA_ARTIFACT_DIFFERENCES.md).
+
+The Studio shell uses Figma's KyivType Sans, Roboto Condensed and Marck Script.
+Its original assets are local, deduplicated and mapped by source frame in
+`src/lib/studio-design/assets.json`; provenance has no temporary download URLs.
+The source-backed destinations `/academy`, `/photo-studio`, `/shop` and
+`/ai-artwork` never replace `/studio` (the Sanity editor). Studio inquiry forms
+and the legacy dialog compose one `useInquirySubmission` workflow, preserving
+server validation, attribution, consent and review-mode restrictions.
+
 Academy public and workspace shells explicitly apply the shared `academyThemeClassName` from `src/lib/typography/fonts.ts`. `academy-theme.css` owns neutral brand tokens, shared controls and opt-in card motion; public, lesson and authoring styles own their respective layouts. Do not apply the Academy palette or font aliases globally: Hub and Sanity Studio are excluded. Preserve the homepage composition and Source Sans 3 instructional typography. See [Academy design system](docs/ACADEMY_DESIGN_SYSTEM.md) for dimensions, motion, feedback colors and verification.
 
 ## Next.js and the two build modes

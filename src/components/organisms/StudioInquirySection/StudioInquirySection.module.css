@@ -1,0 +1,23 @@
+.section {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(32px, 6vw, 96px);
+  align-items: end;
+}
+.balanced {
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 6.6667vw, 96px);
+}
+.copy {
+  display: grid;
+  gap: 32px;
+  min-width: 0;
+}
+.copy p {
+  max-width: 40ch;
+}
+@media (max-width: 1040px) {
+  .section {
+    grid-template-columns: 1fr;
+  }
+}

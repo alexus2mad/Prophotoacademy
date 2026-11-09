@@ -1,0 +1,104 @@
+.form {
+  display: grid;
+  gap: 14px;
+  width: 100%;
+  min-width: 0;
+}
+.field {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+.field > span {
+  font:
+    700 11px/1.3 var(--font-studio-sans),
+    sans-serif;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  min-width: 0;
+  min-height: 50px;
+  padding: 12px 0;
+  border: 0;
+  border-bottom: 1.5px solid currentColor;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font:
+    350 16px/1.55 var(--font-studio-sans),
+    sans-serif;
+  box-shadow: none;
+}
+.field select {
+  cursor: pointer;
+  padding-right: 20px;
+}
+.field select option {
+  background: var(--studio-paper, #fbfbfb);
+  color: var(--studio-warm, #150b08);
+}
+.field textarea {
+  min-height: 76px;
+  resize: vertical;
+}
+.form[data-compact] textarea {
+  min-height: 50px;
+}
+.field input::placeholder {
+  color: var(--studio-mute, #a9a5a2);
+  opacity: 1;
+}
+.consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.consent input {
+  width: 16px;
+  height: 16px;
+  margin: 1px 0 0;
+  accent-color: var(--studio-red, #eb423b);
+  flex-shrink: 0;
+}
+.consent a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.notice {
+  font-size: 14px;
+  line-height: 1.5;
+}
+.error {
+  color: #cb2929;
+  font-size: 14px;
+  line-height: 1.5;
+}
+:global(.studio-dark) .error {
+  color: #ffb8b4;
+}
+.success {
+  display: grid;
+  gap: 20px;
+  padding-block: 32px;
+}
+.success h3 {
+  font:
+    700 clamp(32px, 3.4vw, 46px) / 1 var(--font-studio-condensed),
+    sans-serif;
+  text-transform: uppercase;
+}
+.honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
