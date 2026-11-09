@@ -92,7 +92,7 @@ with tarfile.open(base / 'incoming' / (sha + '.tar.gz'), 'r:gz') as archive:
         if member.name in names:
             reject(f'Duplicate archive member: {member.name}')
         names.add(member.name)
-    if not {'package.json', 'pnpm-lock.yaml', 'next.config.ts', 'content/academy.json'} <= names:
+    if not {'package.json', 'pnpm-lock.yaml', 'next.config.ts', 'content/academy.json', 'deploy/deliver-email.mjs'} <= names:
         reject('Archive is missing required application files')
 PY
 
@@ -131,13 +131,15 @@ systemd-run --quiet --wait --pipe --collect --unit="academy-candidate-$sha" \
      npm exec --yes --package=pnpm@11.25.0 -- pnpm build --webpack'
 
 [[ -s "$candidate/.next/BUILD_ID" ]] || fail 'Build produced no Next.js BUILD_ID'
+[[ -f "$candidate/deploy/deliver-email.mjs" && -s "$candidate/deploy/deliver-email.mjs" && ! -L "$candidate/deploy/deliver-email.mjs" ]] \
+    || fail 'Release is missing the email timer worker'
 install -d -m 750 -o root -g root "$base/output"
 temporary="$(mktemp "$base/output/$sha.tar.gz.XXXXXX")"
 trap 'rm -f -- "$temporary"' EXIT
 # No dereference: pnpm links must survive transport to the Linux application host.
 tar -czf "$temporary" -C "$candidate" --exclude='.next/cache' --exclude='.next/dev' \
     --exclude='.git' --exclude='.data' --exclude='.cache' --exclude='.env*' \
-    .next public node_modules package.json pnpm-lock.yaml next.config.ts content/academy.json
+    .next public node_modules package.json pnpm-lock.yaml next.config.ts content/academy.json deploy/deliver-email.mjs
 mv -T -- "$temporary" "$artifact"
 trap - EXIT
 sha256sum "$archive" "$public_env" "$artifact" > "$artifact.sha256"
