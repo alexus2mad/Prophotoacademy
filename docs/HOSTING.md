@@ -1,6 +1,6 @@
 # Academy hosting and deployment
 
-Current infrastructure as of 31 October 2026 (Europe/Kyiv). This page supersedes
+Current infrastructure as of 10 November 2026 (Europe/Kyiv). This page supersedes
 the host addresses and provisioning status in older deployment notes.
 
 ## Server and access
@@ -39,8 +39,8 @@ are enabled. Automatic reboots are disabled; schedule them for kernel updates.
 | Loopback port | 3140 | 3141 |
 | Release root | `/srv/prophotoacademy` | `/srv/prophotoacademy-staging` |
 | Runtime configuration | `/etc/prophotoacademy/runtime.env` | `/etc/prophotoacademy-staging/runtime.env` |
-| Active application SHA at migration | `5ae3eca80dbb9e8eb1bb1203343be16d99ba591a` | `d5c3fb87216758f57dc9dd8f98801a2c82cea33b` |
-| Previous verified release | `aa6f6aa4630be415d02d120732e5df795da6b5dd` | `d4cdd895a3f52dedac7b2614e8c47a825a3dd296` |
+| Active application SHA | `5ae3eca80dbb9e8eb1bb1203343be16d99ba591a` | `73c97ffca507291a6c381c040a169bb718403401` |
+| Previous verified release | `aa6f6aa4630be415d02d120732e5df795da6b5dd` | `d5c3fb87216758f57dc9dd8f98801a2c82cea33b` |
 | Supabase project | `bydmqmrbfjufsyhlayku` | `jxfyofiqhjmiguujrtdd` |
 | Sanity project / learning dataset | `sfzp6094` / `learning` | `p0dn7nmp` / `learning-staging` |
 | Payment mode | `wayforpay` | `mock` |
@@ -49,6 +49,8 @@ are enabled. Automatic reboots are disabled; schedule them for kernel updates.
 build and one previous verified build are retained per environment. A later
 documentation commit on a branch does not change the running application SHA.
 The default `main` branch is not an automatic production deployment source.
+Staging's final Figma design activation and build provenance are recorded in
+[the final design release](FINAL_DESIGN_RELEASE.md).
 
 Supabase databases, authentication, private storage and Sanity remain in their
 existing external projects. Production and staging data and credentials remain

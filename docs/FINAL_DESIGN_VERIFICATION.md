@@ -47,8 +47,8 @@ were not exercised; reduced-motion rules and responsive wrapping were reviewed.
 
 ## Automated checks
 
-Architecture and TypeScript pass. The existing 331 tests and five new design
-selector/asset-prefix tests pass. The local production Webpack build succeeds;
+Architecture and TypeScript pass. The complete suite passes all 336 tests across
+49 files, including the new design selector/asset-prefix tests. The local production Webpack build succeeds;
 the synthetic review export validates 57 pages, prefixed assets, noindex notices
 and exclusion of private routes.
 
@@ -56,6 +56,5 @@ The repository-wide formatting check reports pre-existing style differences in
 untouched files. Changed source files are formatted; the legacy implementation
 is not broadly reformatted as part of this design variant.
 
-Staging candidate build, activation, health checks and release retention are
-recorded separately when completed. This document does not itself certify a
-deployment.
+Staging activation, health checks and release retention are recorded in
+[the final design release](FINAL_DESIGN_RELEASE.md). Production is unchanged.
