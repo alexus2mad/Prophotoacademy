@@ -1,0 +1,147 @@
+.head {
+  display: grid;
+  gap: 7px;
+  margin-bottom: 84px;
+}
+.blocks {
+  display: grid;
+  gap: 2px;
+}
+.block {
+  background: #0a0807;
+  color: #fbfbfb;
+  border: 0;
+}
+.block summary {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 26px 34px;
+  min-height: 89.3px;
+  cursor: pointer;
+  list-style: none;
+}
+.block summary::-webkit-details-marker {
+  display: none;
+}
+.block[open] summary,
+.block:not([open]) summary {
+  color: #fbfbfb;
+}
+.block[open] summary::after,
+.block:not([open]) summary::after {
+  content: none;
+  display: none;
+}
+.block h3 {
+  flex: 1;
+  font: 700 clamp(22px, 2.2vw, 31.7px) / 1.05 var(--font-studio-condensed);
+  text-transform: uppercase;
+  margin: 0;
+}
+.number {
+  background: #eb423b;
+  color: #fff;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 11px;
+  letter-spacing: 1.54px;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  white-space: nowrap;
+}
+.duration {
+  border: 1px solid rgb(255 255 255 / 30%);
+  border-radius: 20px;
+  font-size: 12px;
+  line-height: 12px;
+  letter-spacing: 0.48px;
+  padding: 6px 12px;
+  white-space: nowrap;
+}
+.toggle {
+  flex: 0 0 22px;
+  height: 22px;
+  position: relative;
+}
+.toggle::before,
+.toggle::after {
+  content: '';
+  background: currentColor;
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 22px;
+  height: 1.5px;
+}
+.toggle::after {
+  transform: rotate(90deg);
+}
+.block[open] .toggle::after {
+  display: none;
+}
+.body {
+  padding: 0 34px 34px;
+  max-width: 985px;
+  color: #b9b4b1;
+  font-size: 15px;
+  line-height: 23.25px;
+}
+.body p {
+  margin: 0 0 23.25px;
+}
+.body p:last-child {
+  margin-bottom: 0;
+}
+.body strong {
+  color: #fbfbfb;
+  font-weight: 500;
+}
+.block summary:focus-visible {
+  outline: 2px solid #eb423b;
+  outline-offset: -4px;
+}
+@media (max-width: 700px) {
+  .head {
+    gap: 13px;
+    margin-bottom: 40px;
+  }
+  .head :global(.studio-hand) {
+    display: block;
+  }
+  .block summary {
+    display: grid;
+    grid-template-columns: auto 1fr 22px;
+    gap: 14px 12px;
+    min-height: 105.2px;
+    padding: 20px 22px;
+  }
+  .number {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+  }
+  .duration {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: start;
+  }
+  .toggle {
+    grid-column: 3;
+    grid-row: 1;
+  }
+  .block h3 {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    font-size: 24px;
+  }
+  .block:nth-child(4) h3 {
+    font-size: 22px;
+  }
+  .body {
+    padding: 0 22px 22px;
+    font-size: 15px;
+    line-height: 23.25px;
+  }
+}

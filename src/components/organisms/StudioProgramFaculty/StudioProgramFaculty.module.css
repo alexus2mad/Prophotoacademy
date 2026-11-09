@@ -1,0 +1,45 @@
+.heading {
+  margin-bottom: clamp(28px, 4vw, 58px);
+}
+.heading > p {
+  margin-bottom: 18px;
+}
+.people {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(24px, 3vw, 44px);
+}
+.person {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: clamp(14px, 2vw, 24px);
+  align-items: start;
+}
+.person > img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+}
+.person h3 {
+  font:
+    700 clamp(26px, 2.6vw, 36px) / 1 var(--font-studio-condensed),
+    sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+.person p {
+  margin-top: 8px;
+  color: #333;
+  font-size: 15px;
+}
+.person .role {
+  color: #a19c99;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+@media (max-width: 760px) {
+  .people {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

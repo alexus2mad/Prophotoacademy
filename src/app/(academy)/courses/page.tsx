@@ -4,6 +4,8 @@ import { connection } from 'next/server';
 import { getContent } from '@/lib/content';
 import { prioritizePrograms } from '@/lib/program-priority';
 import { CatalogTemplate } from '@/components/templates/CatalogTemplate/CatalogTemplate';
+import { StudioCatalogTemplate } from '@/components/templates/StudioCatalogTemplate/StudioCatalogTemplate';
+import { academyDesign } from '@/lib/studio-design/variant';
 export const metadata: Metadata = {
   title: 'Усі програми',
   description:
@@ -20,8 +22,9 @@ export default async function Courses({ searchParams }: CoursesPageProps) {
     }
   }
   const content = await getContent();
+  const Template = academyDesign() === 'studio' ? StudioCatalogTemplate : CatalogTemplate;
   return (
-    <CatalogTemplate
+    <Template
       content={content}
       programs={prioritizePrograms(content.programs, content.settings.primaryProgramId)}
       query={query.toString()}

@@ -1,6 +1,6 @@
 # Final ProPhoto design implementation
 
-Status: inspection complete; implementation in progress. Updated 9 November 2026.
+Status: implementation and local production build complete; staging release verification in progress. Updated 10 November 2026.
 
 ## Source authority
 

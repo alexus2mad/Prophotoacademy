@@ -1,0 +1,59 @@
+.home {
+  container-type: inline-size;
+  background: #0a0807;
+  color: #fbfbfb;
+}
+.home.home :global(.studio-title) {
+  font-size: clamp(44px, 7.4cqw, 108px);
+}
+.home.home :global(.studio-hand) {
+  font-size: 1.16em;
+  word-spacing: -0.12em;
+}
+.home.home :is(:global(.studio-button), :global(.studio-button-outline)) {
+  gap: 12px;
+  line-height: 1;
+}
+@media (max-width: 760px) {
+  .home {
+    display: flex;
+    flex-direction: column;
+  }
+  .home > [data-home-section='hero'] {
+    order: 1;
+  }
+  .home > [data-home-section='exposure'] {
+    order: 2;
+  }
+  .home > [data-home-section='directions'] {
+    order: 3;
+  }
+  .home > [data-home-section='shop'] {
+    order: 4;
+  }
+  .home > [data-home-section='founder'] {
+    order: 5;
+  }
+  .home > [data-home-section='proof'] {
+    order: 6;
+  }
+  .home > [data-home-section='works'] {
+    order: 7;
+  }
+  .home > [data-home-section='studio'] {
+    order: 8;
+  }
+  .home > [data-home-section='reviews'] {
+    order: 9;
+  }
+  .home > [data-home-section='inquiry'] {
+    order: 10;
+  }
+  .home.home
+    > :not([data-home-section='inquiry'])
+    :is(:global(.studio-button), :global(.studio-button-outline)) {
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    gap: 6px;
+  }
+}

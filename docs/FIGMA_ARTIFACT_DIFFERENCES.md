@@ -84,4 +84,36 @@ The full page metadata also contains four non-reference frames: `Зображе�
 
 This is a source-conflict audit, not pixel-diff certification of an implementation. Decimal rounding such as 106.6 vs 106.56, 129.6 vs 130, or mobile H1 40.587/40.7 vs formula 40.6818 is within 2 px. Font substitution, content omissions, form color/columns, footer ratios and the explicit anomalies above are not.
 
-With Figma priority confirmed, record the font-family/weight interpretation and disposition of each suspected malformed layer during implementation; use responsive structure with semantic controls; compare at 1440 desktop and 390 mobile plus interaction states. Do not transplant Figma's absolute page geometry into the application or infer unavailable responsive designs from the long frame sizes. This audit has not implemented or deployed any of those changes.
+## Implementation findings — AI faculty typography and live offers
+
+The AI mobile frame names `Roboto_Condensed:Bold` at 30 px for the lecturer's client chips, but several text widths closely match the artifact's **HeliosCond**, not Roboto Condensed. FontTools measurements of the official current Roboto Condensed (v3.008, instantiated at weight 700) and official historic Roboto Condensed Bold (v2.001047) differ by less than 0.06 px at this size. Changing to the historic font would not resolve the discrepancy.
+
+| Uppercase client text | Figma text width (chip width minus 46 px padding/border) | Roboto Condensed v3 unkerned advance | Artifact HeliosCond unkerned advance |
+| --- | ---: | ---: | ---: |
+| МАША КОНДРАТЕНКО | 261.8 px | 282.95 px | 265.11 px |
+| БРИКУЛЕЦЬ | 145.3 px | 154.70 px | 146.46 px |
+| GO_A | 65.0 px | 65.58 px | 64.97 px |
+| MOLODI | 93.0 px | 98.36 px | 92.96 px |
+| РОКСОЛАНА | 147.9 px | 159.95 px | 148.39 px |
+| МАЙОРОВА | 136.5 px | 146.84 px | 136.52 px |
+| ШМАЛЬГАУЗЕН | 185.9 px | 199.01 px | 188.38 px |
+| АЗІЗА | 71.0 px | 76.41 px | 70.97 px |
+
+These are unkerned font advances, so small residual differences from Figma are expected. Browser-kerning reduced the first Roboto example to 278.55 px, still substantially wider than the source. The official historic comparison came from `googlefonts/roboto-2/src/hinted/RobotoCondensed-Bold.ttf`; the current font is the pinned Google Fonts binary documented in the asset provenance. Temporary font inputs remain in the ignored private audit directory.
+
+**Disposition:** honor Figma's named Roboto Condensed family; do not substitute HeliosCond, horizontally stretch text, scale individual names, or clip the faculty section. At a 390 px content width, MOLODI and РОКСОЛАНА therefore occupy separate rows. Faculty is about 1391 px tall versus the source's 1318 px. The remaining difference is explicitly not a 2 px conformity claim. The source's 36 px heading gap and 124/146.5 px experience-row rhythm are preserved with inset rules that do not add layout height.
+
+The supplied KyivType subset has an empty star glyph. Academy review stars use Arial for the five rating symbols only; the names and body text retain the specified families.
+
+The AI artwork frame's dated `22.11` / `11:00–16:00` offer does not correspond to a currently mapped CMS offering. The page therefore says **Дату уточнюємо**, uses **Залишити заявку** CTAs, and explains **Умови участі підтвердимо після заявки**. Source reference prices (3,900 UAH offline / 3,000 UAH online) remain in the inquiry presentation. If an `ai-artwork` program and offering are supplied, its schedule and package prices replace these references. No checkout or confirmed-availability promise is invented.
+
+## Additional implementation dispositions
+
+- Homepage exposure: Figma has a 900 px in-flow section at the desktop reference viewport. The artifact's 150vh sticky runway would shift every following section by 450 px. Keep Figma geometry and its scroll-driven meter; reduced motion keeps a stable state.
+- Real inquiry forms retain the existing required privacy-consent checkbox, validation, retry and review-mode states absent from the visual mockups. The consent row adds approximately 32–40 px to a form; it is a functional adaptation, not a claimed spacing normalization within 2 px.
+- Desktop header follows Figma's Academy / Studio / Shop / Contacts links. The existing account destination remains in the menu and the source mobile account icon. A fourth secondary menu link preserves access to the student area.
+- Social links use verified application settings. Facebook is omitted because the current content has no verified destination, rather than publishing an invented URL.
+- Existing course detail pages use the artifact's image-first mobile composition. This supersedes the earlier pre-design request to put pricing on the first mobile screen. Their package prices, eligibility and checkout links still come from the application, not the artifact's sample packages.
+- Contact information, course titles, schedules, package prices and Academy-authored student stories remain accurately attributed to their existing content records. Differences from reference copy are not represented as pixel-matched text.
+
+Figma remains authoritative. Layouts use semantic responsive structure rather than absolute exported page positions. Verification at 1440 and 390 content pixels is recorded separately; source font inconsistencies and functional adaptations above prevent an unconditional all-elements-within-2-px certification.

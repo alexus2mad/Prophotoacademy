@@ -1,5 +1,10 @@
 # Academy design system
 
+This document describes the retained `legacy` marketing design and the unchanged
+workspace/lesson identity. The `studio` public variant follows the final Figma
+reference and its [implementation guide](FINAL_DESIGN_IMPLEMENTATION.md).
+See the [difference register](FIGMA_ARTIFACT_DIFFERENCES.md) for source conflicts.
+
 The October 2026 homepage is the visual reference for the Academy. Public pages, login, checkout, accounts, lessons and administration share its identity, with quieter composition for tasks and reading. Hub, ps-booking and the embedded Sanity Studio retain their own presentation.
 
 ## Ownership and boundaries

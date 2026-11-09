@@ -1,0 +1,42 @@
+import Link from 'next/link';
+import { StudioHomeDirectionCard } from '@/components/molecules/StudioHomeDirectionCard/StudioHomeDirectionCard';
+import { studioHomeRooms } from '@/lib/studio-home/selectors';
+import type { StudioHomeDirectionsProps } from './types';
+import styles from './StudioHomeDirections.module.css';
+
+export function StudioHomeDirections({ mode, directions }: StudioHomeDirectionsProps) {
+  const isStudio = mode === 'studio';
+  return (
+    <section
+      data-home-section="directions"
+      className={`${styles.section} studio-light`}
+      aria-labelledby="home-directions-title"
+    >
+      <div className={`${styles.heading} studio-wrap`}>
+        <div>
+          <p className="studio-label">{isStudio ? 'Студія' : 'Академія'}</p>
+          <h2 className="studio-title" id="home-directions-title">
+            {isStudio ? 'Оберіть' : 'Оберіть, як'}{' '}
+            <span className={`studio-hand ${!isStudio ? styles.learning : ''}`}>
+              *{isStudio ? 'зал' : 'вчитися'}
+            </span>
+          </h2>
+        </div>
+        <Link className="studio-button-outline" href={isStudio ? '/photo-studio' : '/academy'}>
+          {isStudio ? 'Уся студія' : 'Вся академія'}
+          <span aria-hidden="true">→</span>
+        </Link>
+      </div>
+      <div
+        className={`${styles.grid} ${isStudio ? styles.rooms : ''}`}
+        tabIndex={0}
+        role="region"
+        aria-label={isStudio ? 'Зали студії' : 'Напрями навчання'}
+      >
+        {(isStudio ? studioHomeRooms : directions).map((direction) => (
+          <StudioHomeDirectionCard key={direction.title} direction={direction} />
+        ))}
+      </div>
+    </section>
+  );
+}

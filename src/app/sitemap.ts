@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { getContent } from '@/lib/content';
+import { academyDesign } from '@/lib/studio-design/variant';
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const content = await getContent();
   const base = process.env.NEXT_PUBLIC_SITE_URL || 'http://127.0.0.1:3000';
@@ -10,6 +11,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'about-us',
     'contacts',
     'reviews',
+    ...(academyDesign() === 'studio' ? ['academy', 'photo-studio', 'shop', 'ai-artwork'] : []),
     ...content.programs.map((p) => p.slug),
     ...content.pages.map((p) => p.slug),
   ].map((slug) => ({

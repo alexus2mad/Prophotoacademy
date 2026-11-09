@@ -1,0 +1,81 @@
+.section {
+  padding-top: clamp(64px, 9cqw, 136px);
+}
+.heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px 40px;
+  margin-bottom: clamp(32px, 4.5cqw, 65.5px);
+}
+.heading h2 {
+  margin-top: 20px;
+}
+.heading > a {
+  flex-shrink: 0;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2px;
+  background: #0a0807;
+}
+.rooms > article {
+  aspect-ratio: 4/3;
+}
+@media (max-width: 760px) {
+  .section {
+    padding-top: 72px;
+  }
+  .heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 19px;
+    margin-bottom: 12px;
+  }
+  .heading h2 {
+    margin-top: 18px;
+  }
+  .heading > a {
+    width: 100%;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    gap: 6px;
+  }
+  .learning {
+    display: block;
+  }
+  .grid {
+    grid-template-columns: repeat(3, 44cqw);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  .grid::-webkit-scrollbar {
+    display: none;
+  }
+  .grid > :nth-child(1) {
+    order: 1;
+  }
+  .grid > :nth-child(2) {
+    order: 2;
+  }
+  .grid > :nth-child(5) {
+    order: 3;
+  }
+  .grid > :nth-child(3) {
+    order: 4;
+  }
+  .grid > :nth-child(4) {
+    order: 5;
+  }
+  .grid > :nth-child(6) {
+    order: 6;
+  }
+  .rooms {
+    grid-template-columns: repeat(3, 72cqw);
+  }
+  .rooms > article {
+    aspect-ratio: 4/3.2;
+  }
+}

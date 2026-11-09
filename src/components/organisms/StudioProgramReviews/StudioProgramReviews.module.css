@@ -1,0 +1,94 @@
+.heading {
+  display: grid;
+  gap: 18px;
+  margin-bottom: clamp(32px, 4.5vw, 64px);
+}
+.rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: clamp(280px, 31vw, 440px);
+  gap: 2px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-inline: contain;
+}
+.rail::-webkit-scrollbar {
+  display: none;
+}
+.review {
+  scroll-snap-align: start;
+  background: #0a0807;
+  color: #fbfbfb;
+  padding: clamp(20px, 2vw, 30px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+.review h3 {
+  font:
+    700 24px/1.1 var(--font-studio-condensed),
+    sans-serif;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 12px;
+  letter-spacing: 0;
+}
+.review blockquote {
+  font-size: 16px;
+  line-height: 1.55;
+}
+.review .kind {
+  color: #a9a5a2;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.source {
+  align-self: flex-start;
+  margin-top: auto;
+  padding-top: 12px;
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: center;
+  margin-top: 18px;
+}
+.controls > div {
+  display: flex;
+  gap: 8px;
+}
+.controls button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid currentColor;
+  background: transparent;
+  border-radius: 50%;
+}
+.controls button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.controls a {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 4px;
+}
+@media (max-width: 760px) {
+  .rail {
+    grid-auto-columns: 84vw;
+  }
+}

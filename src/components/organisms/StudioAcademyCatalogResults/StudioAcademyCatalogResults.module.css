@@ -1,0 +1,14 @@
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 42px;
+}
+.empty {
+  padding-block: 48px;
+}
+.empty h2 {
+  font: 700 44px/1 var(--font-studio-condensed);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}

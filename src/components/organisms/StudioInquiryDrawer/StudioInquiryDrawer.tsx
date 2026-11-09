@@ -18,7 +18,7 @@ export function StudioInquiryDrawer() {
     >
       <p className="studio-label">ProPhoto</p>
       <h2 id="studio-inquiry-title">{context.title || 'Залишити заявку'}</h2>
-      <p className={styles.description}>Передзвонимо й допоможемо з вибором</p>
+      <p className={styles.description}>Передзвонимо й допоможемо з вибором.</p>
       <StudioInquiryForm key={revision} context={context} id="studio-drawer" compact />
     </Dialog>
   );

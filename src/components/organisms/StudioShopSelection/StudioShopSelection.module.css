@@ -1,0 +1,78 @@
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 560px;
+  gap: 96px;
+  align-items: start;
+}
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: flex-start;
+}
+.copy p,
+.copy h2 {
+  margin: 0;
+}
+.copy h2 {
+  white-space: nowrap;
+}
+.copy :global(.studio-hand) {
+  font-size: 123px;
+}
+.copy fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.copy legend {
+  margin-bottom: 18px;
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chips button {
+  border: 1.5px solid #150b08;
+  background: transparent;
+  color: #150b08;
+  border-radius: 30px;
+  padding: 8px 18px;
+  min-height: 44px;
+  font: 350 15px/1.4 var(--font-studio-sans);
+  cursor: pointer;
+}
+.chips button[aria-pressed='true'] {
+  background: #150b08;
+  color: #fbfbfb;
+}
+.chips button:focus-visible {
+  outline: 2px solid #eb423b;
+  outline-offset: 3px;
+}
+.shopLink {
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+  .copy h2 {
+    white-space: normal;
+  }
+  .copy :global(.studio-hand) {
+    font-size: inherit;
+  }
+}
+@media (max-width: 700px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .copy :global(.studio-hand) {
+    font-size: 51px;
+  }
+}

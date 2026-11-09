@@ -1,0 +1,61 @@
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding-block: 28px 40px;
+}
+.arrow {
+  width: 52px;
+  height: 52px;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  background: none;
+  color: inherit;
+  font: 400 18px/1 var(--font-studio-sans);
+  cursor: pointer;
+}
+.arrow:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.dots {
+  display: flex;
+  justify-content: center;
+}
+.dots button {
+  display: grid;
+  place-items: center;
+  width: 14px;
+  height: 28px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #333;
+}
+.dots button[aria-current='true'] span {
+  background: #d9d9d9;
+}
+@media (max-width: 760px) {
+  .controls {
+    display: block;
+    padding: 8px 0 22px;
+  }
+  .arrow {
+    display: none;
+  }
+  .dots button {
+    width: 12px;
+    height: 27px;
+  }
+  .dots span {
+    width: 7px;
+    height: 7px;
+  }
+}

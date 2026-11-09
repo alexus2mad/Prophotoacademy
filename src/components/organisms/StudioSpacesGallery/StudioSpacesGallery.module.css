@@ -1,0 +1,72 @@
+.gallery {
+  min-width: 0;
+}
+.track {
+  display: flex;
+  gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+}
+.track::-webkit-scrollbar {
+  display: none;
+}
+.image {
+  flex: 0 0 auto;
+  min-width: 0;
+  scroll-snap-align: start;
+}
+.room .image {
+  width: 60%;
+  height: 440px;
+}
+.room .image + .image {
+  width: calc(40% - 2px);
+}
+.artworks .image {
+  width: 42.69%;
+  height: 774px;
+}
+.controls {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  margin-top: 14px;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+.controls button {
+  width: 44px;
+  height: 44px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+.controls button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+.room .controls {
+  display: none;
+}
+.track:focus-visible,
+.controls button:focus-visible {
+  outline: 2px solid #eb423b;
+  outline-offset: 4px;
+}
+@media (max-width: 700px) {
+  .room .image,
+  .room .image + .image {
+    width: 94%;
+    height: 340px;
+  }
+  .artworks .image {
+    width: 93.69%;
+    height: 499.2px;
+  }
+  .room .controls {
+    display: flex;
+  }
+}

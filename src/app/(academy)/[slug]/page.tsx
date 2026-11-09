@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation';
 import { PortableText } from '@portabletext/react';
 import { getContent } from '@/lib/content';
 import { ProgramTemplate } from '@/components/templates/ProgramTemplate/ProgramTemplate';
+import { StudioProgramTemplate } from '@/components/templates/StudioProgramTemplate/StudioProgramTemplate';
+import { academyDesign } from '@/lib/studio-design/variant';
 import { connection } from 'next/server';
 import { enrollmentOptions } from '@/lib/commerce/catalog';
 import { findOffering } from '@/lib/content/selectors';
@@ -26,6 +28,7 @@ export default async function Detail({ params }: SlugPageProps) {
   const content = await getContent();
   const program = content.programs.find((p) => p.slug === slug);
   if (program) {
+    const Template = academyDesign() === 'studio' ? StudioProgramTemplate : ProgramTemplate;
     const base = process.env.NEXT_PUBLIC_SITE_URL || 'http://127.0.0.1:3000';
     const schema = {
       '@context': 'https://schema.org',
@@ -41,7 +44,7 @@ export default async function Detail({ params }: SlugPageProps) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }}
         />
-        <ProgramTemplate
+        <Template
           program={program}
           content={content}
           enrollment={await enrollmentOptions(findOffering(content, program.id))}
