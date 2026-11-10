@@ -31,19 +31,19 @@ are enabled. Automatic reboots are disabled; schedule them for kernel updates.
 
 ## Live environments
 
-| Setting | Production | Staging |
-| --- | --- | --- |
-| Origin | https://prophotoacademy.com.ua | https://staging.prophotoacademy.com.ua |
-| Source branch | `codex/student-production` | `codex/photographic-editorial` |
-| Account / service | `prophotoacademy` | `prophotoacademy-staging` |
-| Loopback port | 3140 | 3141 |
-| Release root | `/srv/prophotoacademy` | `/srv/prophotoacademy-staging` |
-| Runtime configuration | `/etc/prophotoacademy/runtime.env` | `/etc/prophotoacademy-staging/runtime.env` |
-| Active application SHA | `5ae3eca80dbb9e8eb1bb1203343be16d99ba591a` | `93e645be8bca8d1eff196b388e5c7131b53d0608` |
-| Previous verified release | `aa6f6aa4630be415d02d120732e5df795da6b5dd` | `37b574059e023ede22f0b596feee97464435421e` |
-| Supabase project | `bydmqmrbfjufsyhlayku` | `jxfyofiqhjmiguujrtdd` |
-| Sanity project / learning dataset | `sfzp6094` / `learning` | `p0dn7nmp` / `learning-staging` |
-| Payment mode | `wayforpay` | `mock` |
+| Setting                           | Production                                 | Staging                                    |
+| --------------------------------- | ------------------------------------------ | ------------------------------------------ |
+| Origin                            | https://prophotoacademy.com.ua             | https://staging.prophotoacademy.com.ua     |
+| Source branch                     | `codex/student-production`                 | `codex/photographic-editorial`             |
+| Account / service                 | `prophotoacademy`                          | `prophotoacademy-staging`                  |
+| Loopback port                     | 3140                                       | 3141                                       |
+| Release root                      | `/srv/prophotoacademy`                     | `/srv/prophotoacademy-staging`             |
+| Runtime configuration             | `/etc/prophotoacademy/runtime.env`         | `/etc/prophotoacademy-staging/runtime.env` |
+| Active application SHA            | `5ae3eca80dbb9e8eb1bb1203343be16d99ba591a` | `3ffb7b2efad946e7e7669f3e8377931a7664c4c7` |
+| Previous verified release         | `aa6f6aa4630be415d02d120732e5df795da6b5dd` | `93e645be8bca8d1eff196b388e5c7131b53d0608` |
+| Supabase project                  | `bydmqmrbfjufsyhlayku`                     | `jxfyofiqhjmiguujrtdd`                     |
+| Sanity project / learning dataset | `sfzp6094` / `learning`                    | `p0dn7nmp` / `learning-staging`            |
+| Payment mode                      | `wayforpay`                                | `mock`                                     |
 
 `current` selects the active release under each release root. Exactly the active
 build and one previous verified build are retained per environment. A later

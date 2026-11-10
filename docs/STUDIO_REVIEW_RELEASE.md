@@ -1,10 +1,34 @@
 # Studio review fixes — release record
 
+## Current staging release — mobile exposure correction
+
+Active application: `3ffb7b2efad946e7e7669f3e8377931a7664c4c7`. Previous verified rollback: `93e645be8bca8d1eff196b388e5c7131b53d0608`. Released on 10 November 2026 to [staging](https://staging.prophotoacademy.com.ua/).
+
+Restored the mobile exposure photograph, unified its scroll/title/meter timeline with desktop, removed header-dependent mobile tone switching, preserved fractional motion precision and shifted the second/third Academy hero portraits left on phones. This supersedes the compact mobile presentation in the historical release below.
+
+- Architecture: 675 modules; TypeScript and scoped formatting passed.
+- All 395 tests passed: 394 in the restricted full run, with the loopback-denied sandbox test passing in a focused rerun with local networking. Twenty-two exposure tests were also independently reviewed and run.
+- Linux production build: successful compilation, TypeScript and 65 generated pages. Synthetic review: 58 pages validated; GitHub Pages was not republished.
+- Responsive native-scroll checks: 104 phase samples at 360, 390, 768 and 1440px, with no word-line-box collisions, overflow or moving meter/stage. Browser screenshots confirm the portrait crops and restored photo. Physical mobile hardware and 200% system text enlargement are not claimed.
+- Staging HTTPS smoke: **376/376 passed**. Live mobile verification confirmed the loaded photo, final phrase, reverse restoration, correct header contrast over the next section, deployed portrait crops and no browser console errors.
+- Both runtime configuration fingerprints and the production release/process stayed unchanged. The scheduled email worker reports success; no manual email job was triggered.
+- Cleanup retained exactly the active release and rollback above, removing `37b5740`. The isolated temporary build and transfer artifacts were removed; the builder's backup service remains successful.
+
+| Input/output                  | SHA-256                                                            |
+| ----------------------------- | ------------------------------------------------------------------ |
+| Committed source archive      | `fec346851f7b2ae53a78a69df21ddf85ef98307c3cdf8433a86084362b696935` |
+| Public staging build settings | `7a4c41c23c8cfa8e5c6034a954f37afea24fbb524236d5547ae245bfaefe4605` |
+| Linux runtime artifact        | `a94ef265981a803c780adf5d4b3cea00a84f280cf3da91d2c149bf26e4d3f828` |
+
+Private evidence is under `.data/design-review/`: `mobile-scene-measurements.json`, `staging-mobile-exposure-final.png`, `mobile-hero-*.png`, `staging-activation-mobile.log` and `staging-mobile-smoke.log`. The later documentation commit does not change the running application SHA.
+
+## Historical release — initial motion review
+
 Deployed to [staging](https://staging.prophotoacademy.com.ua/) on 10 November 2026. The release implements the [independent UI/UX review](STUDIO_DESIGN_REVIEW.md), recovered exposure script, the approved card choreography and the user's subsequent hero/exposure refinements. Production is unchanged.
 
 Deployed application: `93e645be8bca8d1eff196b388e5c7131b53d0608`. Card trigger correction is independently committed as `ffe7238`; hero continuity and exposure pacing are committed as `e3d12c4`; the final word morph is committed as `93e645b`. The earlier `5eeef8f` build was stopped before producing an artifact. `e3d12c4` built successfully but was superseded by the user's word-morph refinement. Neither intermediate build was activated.
 
-## Verification
+### Previous verification
 
 - Architecture: 675 modules passed.
 - TypeScript passed.
@@ -15,7 +39,7 @@ Deployed application: `93e645be8bca8d1eff196b388e5c7131b53d0608`. Card trigger c
 
 Real local-browser checks verified exclusive desktop hover, keyboard handoff, horizontal and vertical mobile card selection, stationary frame geometry, outgoing hero pose retention and rapid tab returns. Sixteen native 90px scroll steps cover the new 1440px desktop exposure journey at a 900px viewport. The final title keeps the full sentence through halfway, fades only the unwanted words, then aligns and brings the survivors into two centered lines. All original text returns on reverse scrolling. Forty-one desktop and 21 mobile phase samples found no word collisions; the desktop meter stayed fixed. Source/copy glyph alignment measured zero drift, and final centering was within 0.008px at 360, 768, 1024 and 1920px. Mobile retains its compact exposure section without document overflow.
 
-## Deployed release
+### Previous deployment
 
 - Active application: `93e645be8bca8d1eff196b388e5c7131b53d0608`.
 - Previous verified release: `37b574059e023ede22f0b596feee97464435421e`.
@@ -27,10 +51,10 @@ Real local-browser checks verified exclusive desktop hover, keyboard handoff, ho
 
 Build provenance:
 
-| Input/output | SHA-256 |
-| --- | --- |
-| Committed source archive | `65968ab5ce1e31423f18bb45bcb3145ba9af0abdceea7edf83c2c1d4c50e8d21` |
+| Input/output                  | SHA-256                                                            |
+| ----------------------------- | ------------------------------------------------------------------ |
+| Committed source archive      | `65968ab5ce1e31423f18bb45bcb3145ba9af0abdceea7edf83c2c1d4c50e8d21` |
 | Public staging build settings | `7a4c41c23c8cfa8e5c6034a954f37afea24fbb524236d5547ae245bfaefe4605` |
-| Linux runtime artifact | `faf48262044d35a629dc5bd69af0c0a8820b52d642dcc56b683bbfc10bf579fb` |
+| Linux runtime artifact        | `faf48262044d35a629dc5bd69af0c0a8820b52d642dcc56b683bbfc10bf579fb` |
 
 Private evidence remains under `.data/design-review/`, including `staging-smoke.json`, `staging-activation-word-morph.log`, `staging-exposure-wheel.json` and the `staging-title-morph-*.png` screenshots. A subsequent documentation commit does not change the running application identity.
