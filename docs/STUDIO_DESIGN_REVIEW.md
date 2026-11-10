@@ -2,13 +2,13 @@
 
 The review uses the [Figma file](https://www.figma.com/design/CvY4dgmOevd9ehxk9Xsaqd/PROPHOTO-STUDIO), the [interactive artifact](https://claude.ai/artifact/FwrroMxpu7ApuHRefQRW3t), and the [designer's comparison](https://claude.ai/artifact/DfJf443box4s3MAgJpPaWg). Explicit decisions are recorded in [the source register](FIGMA_ARTIFACT_DIFFERENCES.md). Separate UI and UX reviewers inspected the implementation and played the reference interactions. The verification section distinguishes completed checks from remaining work; a source comparison alone does not certify the resulting user interaction.
 
-The user's latest clarification makes the previously approved, polished image zoom and title movement authoritative for cards. Keep useful behavior recovered from the artifact, including synchronized exposure, while correcting broken triggers and accessibility problems. Matching the artifact does not require reproducing its bugs or replacing an explicitly approved interaction with its simpler version.
+The user's clarifications make the previously approved, polished image zoom and title movement authoritative for cards, and add the exposure word morph described below. Keep useful behavior recovered from the artifact, including synchronized exposure, while correcting broken triggers and accessibility problems. Matching the artifact does not require reproducing its bugs or replacing an explicitly approved interaction with its simpler version.
 
 ## Corrected behavior
 
 | Area | Correction |
 | --- | --- |
-| Exposure | Recovered the actual iframe script for synchronized brightness, 33 bars and −3→0 EV. The subsequent user override extends the desktop section to 300vh, giving four times the original effective exposure distance, and keeps the heading visible through the first half before fading it. Mobile retains its compact black-to-paper transition, white/red phases and 0→+3 EV. Forward and reverse scrolling use the same calculation. |
+| Exposure | Recovered the actual iframe script for synchronized brightness, 33 bars and −3→0 EV. User overrides extend the desktop section to 300vh, giving four times the original effective exposure distance, and transform the full heading into the centered two-line phrase «важливо, / як ви це робите». The heading itself never fades out. Mobile retains its compact black-to-paper transition, white/red phases and 0→+3 EV. All phases reverse with scrolling. |
 | Hero | Retains 900ms crossfades, 3s Academy portraits, 12s Studio panorama and 12/9/7s mode dwell. Outgoing photographs keep their current crop and pose throughout the fade; rapid returns resume that pose. The requested Academy/Shop drift uses restrained ease-in-out motion. Manual selection stops mode changes while photography continues; hidden/offscreen and reduced-motion states suspend animation. |
 | Course navigation | Tracks the current section, exposes `aria-current`, and centers the active mobile anchor without scrolling the document. |
 | Gallery | Uses actual image offsets instead of the first image's width; observes image resizing and reports the final count at the track boundary. |
@@ -43,9 +43,27 @@ Actual browser checks confirmed an outgoing Studio image remained 1638.75px wide
 
 The requested Academy/Shop motion is a separate user override: a 1.015→1.045 scale with a small two-axis drift, easing in and out over 6s for Academy and 8s for Shop, alternating smoothly. The drift remains within the image's overscan. Browser samples confirmed both animated transforms; the existing 3s Academy photograph changes remain in place. Studio remains stationary on the narrow layout, and reduced motion disables these photographic animations.
 
-The user also requested slower exposure travel and a later title fade. Desktop now uses a 300vh section around its 100svh stage. With the existing `.8` progress factor, full exposure requires 160vh of travel instead of 40vh: 1440px instead of 360px at a 900px viewport. The heading stays fully visible through progress 0.5, then fades linearly to zero at progress 1; the earlier blur is removed. Mobile keeps its compact section and applies the same title curve to its existing transition value. A readiness flag keeps the heading visible before measurement or without JavaScript; reduced motion leaves it visible. Seventeen exposure tests pass.
+The user also requested slower exposure travel. Desktop now uses a 300vh section around its 100svh stage. With the existing `.8` progress factor, full exposure requires 160vh of travel instead of 40vh: 1440px instead of 360px at a 900px viewport. Mobile keeps its compact section. The initially requested whole-title fade has been superseded by the later word morph below; neither that whole-title fade nor the artifact's earlier blur remains active.
 
-Actual native-wheel input at 1440×900 verified the new pacing. Four, eight, twelve and sixteen 90px steps produced progress 0.246, 0.496, 0.746 and 0.996 with title opacity 1, 1, 0.508 and 0.008 respectively. The initial section offset was 6px; a final 9px movement reached progress 1, image brightness 1 and title opacity 0. Reversing 360px restored progress 0.752 and opacity 0.496. Evidence is saved as `.data/design-review/exposure-wheel-samples.json` and `local-exposure-title-fade.png`. At 390px, the exposure section remained compact at approximately 283.36px with no document overflow; Shop's ease-in-out transform was also observed. These checks supersede the earlier source-timing verification for the changed pacing.
+Actual native-wheel input at 1440×900 verified the new pacing. Four, eight, twelve and sixteen 90px steps produced progress 0.246, 0.496, 0.746 and 0.996. The initial section offset was 6px; a final 9px movement reached progress 1 and image brightness 1. Reversing 360px restored progress 0.752. `.data/design-review/exposure-wheel-samples.json` preserves that pacing evidence. The accompanying `local-exposure-title-fade.png` belongs to the superseded whole-title fade and is not evidence of the final title behavior. At 390px, the exposure section remained compact at approximately 283.36px with no document overflow; Shop's ease-in-out transform was also observed.
+
+### Exposure word morph
+
+The final user direction preserves the initial natural heading flow and its 200/1000 weights, then keeps the first «важливо,» and the ending «як ви це робите». The requested full sentence includes a second comma after the central «важливо,»; this punctuation change is intentional. The whole `h2` stays opaque. Its original height remains reserved, so the meter and document do not move as words disappear.
+
+- Progress 0–0.5: show the complete sentence in its original position.
+- Progress 0.5–0.68: fade only «не» and the central bold phrase. Keep the first comma with the surviving «важливо,».
+- Progress 0.68–0.82: align the surviving words horizontally while holding their original vertical positions.
+- Progress 0.82–0.96: close the cleared vertical gap and center the two lines in the usable photo stage between the original top inset and the meter.
+- Progress 0.96–1: hold the final phrase. Reverse scrolling retraces the same phases; there are no independent playback timers.
+
+Measured, decorative copies of the five surviving words preserve the source's actual glyph positions and wrapping before movement. Horizontal alignment finishes before vertical convergence so words originally on different mobile lines cannot cross. Target centering uses the actual stage width, including screens wider than the source heading's 1360px maximum. Geometry is refreshed after resize, font loading and page restoration, rather than measured on every scroll.
+
+The original semantic heading remains available to assistive technology; copies and measurement targets are hidden from it. Before measurement, without JavaScript, with reduced motion, or when enlarged text produces unsafe wrapped/oversized targets, the full source sentence stays visible. Mobile text switches to ink at transition 0.45 to stay legible as the background turns to paper; continuous gray-on-gray interpolation is avoided.
+
+Actual browser verification passed: at 1440px and progress 0.55, all five copied glyph positions differed from their source by 0px. Forty-one samples from 0.5 through 1 found no word intersections, while the meter's vertical position stayed at 767.703px. A fresh 390px run covered twenty-one samples from 0.489 to 0.989, including twenty active morph states, without intersections or document overflow. Final centering matched the stage within 0.008px at 360, 768, 1024 and 1920px. Reversing to 0.457 restored every source word to opacity 1 and hid the copies. Eight focused phase, eligibility and semantic-fallback tests passed independently; physical browser testing at 200% text enlargement is not claimed.
+
+Evidence is saved in `.data/design-review/title-morph-desktop-samples.json`, `title-morph-mobile-samples.json`, `title-morph-responsive.json`, `title-morph-final-desktop.png` and `title-morph-final-mobile.png`. This verification supersedes all earlier whole-heading fade checks.
 
 ### Card trigger verification correction
 

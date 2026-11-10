@@ -39,8 +39,8 @@ are enabled. Automatic reboots are disabled; schedule them for kernel updates.
 | Loopback port | 3140 | 3141 |
 | Release root | `/srv/prophotoacademy` | `/srv/prophotoacademy-staging` |
 | Runtime configuration | `/etc/prophotoacademy/runtime.env` | `/etc/prophotoacademy-staging/runtime.env` |
-| Active application SHA | `5ae3eca80dbb9e8eb1bb1203343be16d99ba591a` | `9730d095c15e6493588773719599b6dac8b8cbf4` |
-| Previous verified release | `aa6f6aa4630be415d02d120732e5df795da6b5dd` | `73c97ffca507291a6c381c040a169bb718403401` |
+| Active application SHA | `5ae3eca80dbb9e8eb1bb1203343be16d99ba591a` | `93e645be8bca8d1eff196b388e5c7131b53d0608` |
+| Previous verified release | `aa6f6aa4630be415d02d120732e5df795da6b5dd` | `37b574059e023ede22f0b596feee97464435421e` |
 | Supabase project | `bydmqmrbfjufsyhlayku` | `jxfyofiqhjmiguujrtdd` |
 | Sanity project / learning dataset | `sfzp6094` / `learning` | `p0dn7nmp` / `learning-staging` |
 | Payment mode | `wayforpay` | `mock` |
@@ -50,7 +50,7 @@ build and one previous verified build are retained per environment. A later
 documentation commit on a branch does not change the running application SHA.
 The default `main` branch is not an automatic production deployment source.
 Staging's latest designer decisions and build provenance are recorded in
-[the designer-resolution release](DESIGNER_RESOLUTIONS_RELEASE.md). The
+[the reviewed motion release](STUDIO_REVIEW_RELEASE.md). The
 [initial final-design release](FINAL_DESIGN_RELEASE.md) remains historical.
 
 Supabase databases, authentication, private storage and Sanity remain in their
