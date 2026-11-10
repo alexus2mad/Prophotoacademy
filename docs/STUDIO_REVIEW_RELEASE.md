@@ -34,4 +34,3 @@ Build provenance:
 | Linux runtime artifact | `faf48262044d35a629dc5bd69af0c0a8820b52d642dcc56b683bbfc10bf579fb` |
 
 Private evidence remains under `.data/design-review/`, including `staging-smoke.json`, `staging-activation-word-morph.log`, `staging-exposure-wheel.json` and the `staging-title-morph-*.png` screenshots. A subsequent documentation commit does not change the running application identity.
-
