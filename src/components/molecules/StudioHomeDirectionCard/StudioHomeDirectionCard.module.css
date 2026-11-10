@@ -38,8 +38,7 @@
   );
   pointer-events: none;
 }
-.copy,
-.action {
+.copy {
   z-index: 2;
 }
 .copy {
@@ -56,7 +55,25 @@
   margin-top: 10px;
 }
 .action {
-  align-self: flex-end;
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  width: 100%;
+  height: 100%;
+  padding: inherit;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font: 700 11px/1 var(--font-studio-sans);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+}
+.actionLabel {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -65,18 +82,7 @@
   padding: 0 18px;
   border: 1px solid #fff;
   border-radius: 999px;
-  background: none;
-  color: #fff;
-  font: 700 11px/1 var(--font-studio-sans);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  text-decoration: none;
-  cursor: pointer;
-}
-.action::after {
-  content: '';
-  position: absolute;
-  inset: 0;
+  background: transparent;
 }
 .card:focus-within {
   outline: 2px solid #eb423b;
@@ -122,21 +128,23 @@
     max-width: 15ch;
   }
   .action {
-    position: absolute;
-    inset: 0;
     display: block;
-    border: 0;
-    border-radius: 0;
-    min-height: 0;
     padding: 0;
     font-size: 13px;
     font-weight: 400;
     letter-spacing: 0;
   }
-  .action > span:first-child {
+  .actionLabel {
+    display: block;
+    border: 0;
+    border-radius: 0;
+    min-height: 0;
+    padding: 0;
+  }
+  .actionLabel > span:first-child {
     display: none;
   }
-  .action > span:last-child {
+  .actionLabel > span:last-child {
     position: absolute;
     right: 10px;
     bottom: 12px;

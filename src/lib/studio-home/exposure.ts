@@ -15,6 +15,11 @@ export function studioExposureState({
 }: StudioExposureGeometry): StudioExposureState {
   const runway = height - stageHeight;
   const progress = reducedMotion ? 1 : clamp((stickyOffset - top) / Math.max(1, runway * 0.8));
+  return studioExposureAtProgress(progress);
+}
+
+export function studioExposureAtProgress(value: number): StudioExposureState {
+  const progress = clamp(value);
   const activeBars = Math.round(progress * exposureBarCount);
   return {
     // Keep subpixel scroll precision for word transforms; only the EV label rounds.
@@ -24,4 +29,12 @@ export function studioExposureState({
     redStart: exposureBarCount - 6,
     value: formatValue(-3 * (1 - progress)),
   };
+}
+
+/** A shared, frame-rate-independent response keeps the photograph, words and meter together. */
+export function smoothExposureProgress(current: number, target: number, elapsedMs: number) {
+  const destination = clamp(target);
+  const next =
+    destination + (clamp(current) - destination) * Math.exp(-Math.max(0, elapsedMs) / 120);
+  return Math.abs(destination - next) <= 0.0001 ? destination : next;
 }

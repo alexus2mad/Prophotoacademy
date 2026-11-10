@@ -22,22 +22,22 @@ never appear in the running application.
 
 ## Inspected surfaces
 
-| Surface | Figma node | Reference width | Implementation responsibility |
-| --- | --- | --- | --- |
-| Homepage | `886:873` | 1440 | Ecosystem hero, exposure sequence, learning directions, founder, proof, reviews, work, connected offers, inquiry |
-| Homepage | `884:854` | 390 | Mobile composition and section order |
-| Homepage, Studio tab | `897:405` | 390 | Alternate hero and direction state |
-| Homepage, Shop tab | `898:424` | 390 | Alternate hero and direction state |
-| Academy | `853:190` | 1440 | Program index, workshops, individual/corporate/camp, audience, proof, faculty, reviews |
-| Studio | `854:417` | 1440 | Studio introduction, room galleries and booking destination |
-| Shop | `854:539` | 1440 | Equipment introduction and selection inquiry |
-| Contacts | `854:630` | 1440 | Contact details and inline inquiry |
-| Inquiry | `854:755` | 480 | Right-side form and interaction states |
-| Menu | `883:845` | 1440 | Three destinations and secondary navigation |
-| Menu | `882:836` | 390 | Stacked mobile navigation |
-| AI artwork | `892:397` | 1440 | Intensive, formats, program, instructor, work, inquiry |
-| AI artwork | `893:401` | 390 | Mobile intensive and sticky enrollment action |
-| Components | `849:2` | 1536 | Buttons, logos, headers, fields, cards and footer |
+| Surface              | Figma node | Reference width | Implementation responsibility                                                                                    |
+| -------------------- | ---------- | --------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Homepage             | `886:873`  | 1440            | Ecosystem hero, exposure sequence, learning directions, founder, proof, reviews, work, connected offers, inquiry |
+| Homepage             | `884:854`  | 390             | Mobile composition and section order                                                                             |
+| Homepage, Studio tab | `897:405`  | 390             | Alternate hero and direction state                                                                               |
+| Homepage, Shop tab   | `898:424`  | 390             | Alternate hero and direction state                                                                               |
+| Academy              | `853:190`  | 1440            | Program index, workshops, individual/corporate/camp, audience, proof, faculty, reviews                           |
+| Studio               | `854:417`  | 1440            | Studio introduction, room galleries and booking destination                                                      |
+| Shop                 | `854:539`  | 1440            | Equipment introduction and selection inquiry                                                                     |
+| Contacts             | `854:630`  | 1440            | Contact details and inline inquiry                                                                               |
+| Inquiry              | `854:755`  | 480             | Right-side form and interaction states                                                                           |
+| Menu                 | `883:845`  | 1440            | Three destinations and secondary navigation                                                                      |
+| Menu                 | `882:836`  | 390             | Stacked mobile navigation                                                                                        |
+| AI artwork           | `892:397`  | 1440            | Intensive, formats, program, instructor, work, inquiry                                                           |
+| AI artwork           | `893:401`  | 390             | Mobile intensive and sticky enrollment action                                                                    |
+| Components           | `849:2`    | 1536            | Buttons, logos, headers, fields, cards and footer                                                                |
 
 The artifact's four course detail states (camera, creator, Instagram and food)
 were opened and captured individually, including package inquiry behavior.
@@ -90,6 +90,18 @@ mobile menu and homepage tab behavior were also inspected.
   forms. No additional endpoint or simulated live success.
 - Galleries/reviews: keyboard-operable, touch-scrollable, correct disabled
   states, stable focus, and no unnecessary automatic navigation.
+- Single-destination browsing cards expose one native link or inquiry button
+  across the full card, including its photograph, title and empty space. Keep
+  gallery and pricing controls independent. Horizontal card rails retain native
+  scrolling, and inquiry dialogs return focus to the invoking card.
+- Red primary CTAs share white label colors in default, hover and pressed
+  states. Outline variants remain separate; do not combine primary and outline
+  classes on the same action.
+- Exposure uses one displayed progress value for the image, title and meter.
+  A 120ms exponential response smooths wheel steps; quintic phase easing brings
+  word movement to rest at each boundary. Keep the approved phase order and
+  scroll distance. Reduced motion, restored scroll and actual layout changes
+  synchronize immediately; mobile toolbar changes must not cause snapping.
 - Account, lesson and administration business workflows stay intact. No new
   design is invented for screens absent from these sources.
 

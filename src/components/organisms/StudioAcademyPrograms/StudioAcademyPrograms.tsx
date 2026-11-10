@@ -48,7 +48,8 @@ export function StudioAcademyPrograms({ programs, offerings, images }: StudioAca
                   title={`Дізнатися про воркшоп «${title}»`}
                   subject="workshops"
                   source="consultation"
-                  className={styles.archiveLink}
+                  className={`${styles.archiveLink} ${styles.cardAction}`}
+                  aria-label={`${title}: як це було`}
                 >
                   Як це було →
                 </InquiryButton>
@@ -74,7 +75,8 @@ export function StudioAcademyPrograms({ programs, offerings, images }: StudioAca
             programId={programs.find((program) => program.category === 'individual')?.id}
             title="Індивідуальне навчання"
             subject="individual-training"
-            className="studio-button"
+            className={`studio-button ${styles.cardAction}`}
+            aria-label="Індивідуальне навчання: залишити заявку"
           >
             Залишити заявку →
           </InquiryButton>
@@ -90,7 +92,8 @@ export function StudioAcademyPrograms({ programs, offerings, images }: StudioAca
             programId={programs.find((program) => program.category === 'corporate')?.id}
             title="Корпоративне навчання"
             subject="corporate-training"
-            className="studio-button"
+            className={`studio-button ${styles.cardAction}`}
+            aria-label="Корпоративне навчання: обговорити формат"
           >
             Обговорити формат →
           </InquiryButton>
@@ -102,7 +105,8 @@ export function StudioAcademyPrograms({ programs, offerings, images }: StudioAca
           <InquiryButton
             subject="camp"
             title="Наступний ProPhoto Кемп"
-            className="studio-button-outline"
+            className={`studio-button-outline ${styles.cardAction}`}
+            aria-label="ProPhoto Кемп: дізнатись дати"
           >
             Дізнатись дати →
           </InquiryButton>

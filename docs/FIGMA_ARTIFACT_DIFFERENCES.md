@@ -199,3 +199,22 @@ Browser verification found 0px initial glyph displacement at 1440px, no intersec
 The subsequent user report explicitly rejects the image-less mobile exposure section. This supersedes the compact mobile, black-to-paper, 0→+3 EV and title-ink-switch decisions above. All widths now use the same photograph, −3→0 EV meter and reversible word morph, with a 300svh section and 100svh sticky stage. Progress uses the rendered stable stage height rather than changing browser-toolbar or header dimensions. The stage pins at zero; safe-area spacing belongs inside its content. A restrained mobile scrim protects white text over the portrait. The following directions section stays independently paper-colored, with dark header controls.
 
 Reduced motion keeps the full original sentence, fully exposed photograph and natural content height. The user also requested shifting the second and third Academy hero portraits left on phones: their mobile object positions are 70% and 77%, respectively. Desktop crops and the retained hero animation lifecycle are unchanged. These are explicit user overrides, not discrepancies silently attributed to Figma or the artifact.
+
+## Full-card actions and eased exposure — 11 November 2026
+
+The user's latest instruction makes single-destination browsing cards clickable
+across their entire area. Homepage direction/room cards and Academy workshop/
+format cards now use one native action covering the card, with a distinct
+accessible name. Multi-action galleries and package controls remain independent.
+The existing photographic zoom, title motion and mobile activation policy stay
+unchanged. Red primary CTAs consistently use white labels, including hover and
+pressed states; outline actions retain their separate treatment.
+
+The requested smoother text effect supersedes the earlier direct-scroll timing.
+One 120ms exponential response now drives photograph brightness, the title and
+the exposure meter together. Quintic easing replaces cubic interpolation within
+the existing fade, horizontal and vertical phases. Their boundaries, sequence,
+final positions and scroll travel are unchanged. Reduced motion and restored
+scroll still synchronize immediately; mobile browser-toolbar changes do not
+interrupt an in-flight transition. This is an explicit user motion override,
+not a change attributed to Figma or the artifact.

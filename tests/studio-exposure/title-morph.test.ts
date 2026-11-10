@@ -14,6 +14,28 @@ it('preserves the complete title through the first half, then removes only the u
   expect(exposureTitlePhase(0.68)).toEqual({ removedOpacity: 0, horizontal: 0, vertical: 0 });
 });
 
+it('eases velocity and acceleration into and out of each phase without overshoot', () => {
+  for (const [start, end, read] of [
+    [0.5, 0.68, (progress: number) => 1 - exposureTitlePhase(progress).removedOpacity],
+    [0.68, 0.82, (progress: number) => exposureTitlePhase(progress).horizontal],
+    [0.82, 0.96, (progress: number) => exposureTitlePhase(progress).vertical],
+  ] as const) {
+    const sample = (fraction: number) => read(start + (end - start) * fraction);
+    expect(sample(0)).toBe(0);
+    expect(sample(1)).toBe(1);
+    expect(sample(0.5)).toBeCloseTo(0.5);
+    expect(sample(0.01)).toBeLessThan(0.00002);
+    expect(1 - sample(0.99)).toBeLessThan(0.00002);
+    let previous = 0;
+    for (let step = 1; step <= 100; step++) {
+      const current = sample(step / 100);
+      expect(current).toBeGreaterThanOrEqual(previous);
+      expect(current).toBeLessThanOrEqual(1);
+      previous = current;
+    }
+  }
+});
+
 it('retains the readable source when enlarged text wraps the target or shares unsafe source tracks', () => {
   const source = [
     { left: 40, top: 0, width: 160 },

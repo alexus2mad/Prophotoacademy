@@ -2,7 +2,8 @@ import type { ExposureWordBounds, ExposureWordPosition } from './types';
 
 const ease = (value: number, start: number, end: number) => {
   const progress = Math.max(0, Math.min(1, (value - start) / (end - start)));
-  return progress * progress * (3 - 2 * progress);
+  // Quintic easing also brings acceleration to zero at each phase boundary.
+  return progress * progress * progress * (progress * (progress * 6 - 15) + 10);
 };
 
 export function exposureTitlePhase(progress: number) {

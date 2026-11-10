@@ -25,6 +25,8 @@
   color: #eb423b;
 }
 .workshop {
+  position: relative;
+  isolation: isolate;
   display: flex;
   gap: 32px;
   align-items: center;
@@ -62,6 +64,8 @@
   background: #0a0807;
 }
 .formats article {
+  position: relative;
+  isolation: isolate;
   background: #17130f;
   min-width: 0;
   padding: clamp(22px, 3vw, 44px);
@@ -84,6 +88,22 @@
 }
 .camp {
   grid-column: 1 / -1;
+}
+.workshop .cardAction,
+.formats .cardAction {
+  position: static;
+}
+.cardAction::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  cursor: pointer;
+}
+.workshop:focus-within,
+.formats article:focus-within {
+  outline: 2px solid #eb423b;
+  outline-offset: -4px;
 }
 @media (max-width: 760px) {
   .head {

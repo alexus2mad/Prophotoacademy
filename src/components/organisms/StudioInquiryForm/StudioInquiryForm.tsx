@@ -28,7 +28,7 @@ export function StudioInquiryForm(props: StudioInquiryFormProps) {
             ? 'Демонстраційний режим. Заявку збережено локально; команді вона ще не надсилається.'
             : 'Команда ProPhoto зв’яжеться з вами за вказаним контактом.'}
         </p>
-        <Button className="studio-button studio-button-outline" onClick={reset}>
+        <Button className="studio-button-outline" onClick={reset}>
           Нова заявка
         </Button>
       </div>

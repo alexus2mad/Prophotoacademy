@@ -5,6 +5,12 @@ import type { StudioHomeDirectionCardProps } from './types';
 import styles from './StudioHomeDirectionCard.module.css';
 
 export function StudioHomeDirectionCard({ direction }: StudioHomeDirectionCardProps) {
+  const actionLabel = (
+    <span className={styles.actionLabel}>
+      <span>{direction.action}</span>
+      <span aria-hidden="true">→</span>
+    </span>
+  );
   return (
     <article className={styles.card} data-header-tone="dark" data-card-motion>
       <StudioHomePicture
@@ -24,8 +30,7 @@ export function StudioHomeDirectionCard({ direction }: StudioHomeDirectionCardPr
           href={direction.href}
           aria-label={`${direction.title}: ${direction.action}`}
         >
-          <span>{direction.action}</span>
-          <span aria-hidden="true">→</span>
+          {actionLabel}
         </Link>
       ) : (
         <InquiryButton
@@ -33,8 +38,7 @@ export function StudioHomeDirectionCard({ direction }: StudioHomeDirectionCardPr
           className={styles.action}
           aria-label={`${direction.title}: ${direction.action}`}
         >
-          <span>{direction.action}</span>
-          <span aria-hidden="true">→</span>
+          {actionLabel}
         </InquiryButton>
       )}
     </article>
