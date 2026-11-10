@@ -1,4 +1,6 @@
 import { StudioContactDetail } from '@/components/molecules/StudioContactDetail/StudioContactDetail';
+import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
+import { StudioMobileAction } from '@/components/molecules/StudioMobileAction/StudioMobileAction';
 import { StudioInquiryForm } from '@/components/organisms/StudioInquiryForm/StudioInquiryForm';
 import { phoneLabel } from '@/lib/format';
 import type { StudioContactsTemplateProps } from './types';
@@ -40,6 +42,9 @@ export function StudioContactsTemplate({ settings }: StudioContactsTemplateProps
           <StudioInquiryForm id="studio-contacts" compact />
         </div>
       </div>
+      <StudioMobileAction>
+        <InquiryButton className="studio-button">Залишити заявку →</InquiryButton>
+      </StudioMobileAction>
     </section>
   );
 }

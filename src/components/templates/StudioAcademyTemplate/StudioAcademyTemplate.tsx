@@ -1,4 +1,5 @@
 import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
+import { StudioMobileAction } from '@/components/molecules/StudioMobileAction/StudioMobileAction';
 import { StudioAcademyPrograms } from '@/components/organisms/StudioAcademyPrograms/StudioAcademyPrograms';
 import { StudioAcademyCommunity } from '@/components/organisms/StudioAcademyCommunity/StudioAcademyCommunity';
 import { StudioInquirySection } from '@/components/organisms/StudioInquirySection/StudioInquirySection';
@@ -49,6 +50,11 @@ export function StudioAcademyTemplate({ content }: StudioAcademyTemplateProps) {
         description="Заповніть форму та отримайте безкоштовну консультацію з нашим спеціалістом."
         layout="balanced"
       />
+      <StudioMobileAction>
+        <a className="studio-button" href="#courses">
+          Обрати курс →
+        </a>
+      </StudioMobileAction>
     </>
   );
 }
