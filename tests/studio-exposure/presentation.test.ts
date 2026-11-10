@@ -65,7 +65,7 @@ it('keeps server-rendered directions readable without an animation override befo
   expect($('a').first().attr('href')).toBe('/photo-studio');
 });
 
-it('only enables the title fade after an exposure measurement is ready', () => {
+it('keeps the original semantic title visible until word geometry is ready', () => {
   const exposure = studioExposureState({
     top: 0,
     height: 1,
@@ -81,5 +81,9 @@ it('only enables the title fade after an exposure measurement is ready', () => {
     );
   expect(render()('section').attr('data-exposure-ready')).toBe('false');
   expect(render(true)('section').attr('data-exposure-ready')).toBe('true');
-  expect(render()('h2').text()).toContain('як ви це робите');
+  expect(render()('h2').text()).toBe('неважливо, на що ви знімаєте, важливо, як ви це робите');
+  expect(render(true)('[data-title-morphing]').attr('data-title-morphing')).toBe('false');
+  expect(render()('[data-title-source-word]')).toHaveLength(5);
+  expect(render()('[data-title-copy-word]').closest('[aria-hidden=true]')).toHaveLength(1);
+  expect(render()('[data-title-target]').attr('aria-hidden')).toBe('true');
 });

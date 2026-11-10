@@ -1,5 +1,6 @@
 'use client';
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
+import { StudioExposureTitle } from '@/components/molecules/StudioExposureTitle/StudioExposureTitle';
 import { studioAssets } from '@/lib/studio-design/assets';
 import { exposureBarCount } from '@/lib/studio-home/exposure';
 import type { StudioExposureStyle, StudioHomeExposureProps } from './types';
@@ -19,7 +20,7 @@ export function StudioHomeExposure({ section, exposure, ready = false }: StudioH
       style={style}
       aria-labelledby="exposure-title"
     >
-      <div className={styles.stage}>
+      <div className={styles.stage} data-exposure-stage>
         <StudioImage
           asset={studioAssets.home.imgImgHome144002}
           alt=""
@@ -28,10 +29,12 @@ export function StudioHomeExposure({ section, exposure, ready = false }: StudioH
           sizes="100vw"
         />
         <div className={`${styles.inner} studio-wrap`}>
-          <h2 id="exposure-title">
-            неважливо, <strong>на що ви знімаєте, важливо</strong> як ви це робите
-          </h2>
-          <div className={styles.meter} aria-hidden="true">
+          <StudioExposureTitle
+            progress={exposure.progress}
+            transition={exposure.transition}
+            ready={ready}
+          />
+          <div className={styles.meter} data-exposure-meter aria-hidden="true">
             <div className={styles.meterLabel}>
               <span>Експозиція</span>
               <span>{exposure.value}</span>
