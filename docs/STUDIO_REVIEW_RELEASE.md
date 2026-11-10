@@ -1,6 +1,37 @@
 # Studio review fixes — release record
 
-## Current staging release — mobile exposure correction
+## Current staging release — card actions and eased exposure
+
+Active application: `9eb70673e3b7e1217113d83e0d17fdb66e455739`. Previous verified rollback: `3ffb7b2efad946e7e7669f3e8377931a7664c4c7`. Released on 11 November 2026 (Europe/Kyiv) to [staging](https://staging.prophotoacademy.com.ua/).
+
+Single-destination homepage and Academy cards now expose their native action
+across the entire card. Red primary CTAs share white labels in default, hover
+and pressed states, without overriding outline variants. Exposure now has one
+120ms smoothed progress value for the photograph, text and meter, with quintic
+easing inside the existing word-morph phases. Mobile toolbar resizing no longer
+snaps an in-flight transition. The approved card zoom and title motion remain.
+
+- Architecture: 677 modules; TypeScript, scoped formatting and whitespace checks passed.
+- All 408 tests across 61 files passed, including 32 exposure tests. The restricted full run passed 407 tests; the loopback-denied sandbox case passed in the permitted rerun of its four-test suite.
+- Linux production build: compilation, TypeScript and all 65 generated pages passed. The synthetic export validated 58 review pages. Its initial restricted Turbopack process stalled; the unchanged normal build passed with permitted worker processes. GitHub Pages was not republished.
+- Browser verification covered desktop title/photo/corner click targets, inquiry context, keyboard activation and focus return, and mobile rail scrolling without unintended navigation. All 48 red CTAs sampled across eight public page types had white labels, including their text spans. Live desktop/mobile checks confirmed the final and reversed exposure states, no document overflow and no console errors. Physical touch hardware and 200% system text enlargement are not claimed.
+- Staging HTTPS smoke: **378/378 passed**. The private smoke helper's old exact CSS-selector assertion was updated to the new shared primary selector, with additional hover and pressed checks.
+- Both runtime fingerprints, the production application release and its process identity remained unchanged. The scheduled staging email worker and builder backup service report success; no manual email job was triggered.
+- Retention kept exactly the active and rollback releases above, removing `93e645b`. Temporary remote build directories, artifacts and transfer helpers were removed.
+
+| Input/output                  | SHA-256                                                            |
+| ----------------------------- | ------------------------------------------------------------------ |
+| Committed source archive      | `0cbd383fbdd736a96325a1b46c427aa24645e77adb998e5f8b00c74de3c2cd2c` |
+| Public staging build settings | `7a4c41c23c8cfa8e5c6034a954f37afea24fbb524236d5547ae245bfaefe4605` |
+| Linux runtime artifact        | `a349953dd98018a5e96f596985de8114a0b709dc2be823816438d36c10d937ef` |
+
+Private evidence is under `.data/design-review/`: `card-motion-linux-build.log`,
+`card-motion-pages-elevated.log`, `staging-activation-card-motion.log`,
+`staging-card-motion-smoke.log`, `staging-smoke.json` and
+`staging-card-motion-{exposure,inquiry,mobile}.png`. The later documentation
+commit does not change the running application SHA.
+
+## Historical release — mobile exposure correction
 
 Active application: `3ffb7b2efad946e7e7669f3e8377931a7664c4c7`. Previous verified rollback: `93e645be8bca8d1eff196b388e5c7131b53d0608`. Released on 10 November 2026 to [staging](https://staging.prophotoacademy.com.ua/).
 
