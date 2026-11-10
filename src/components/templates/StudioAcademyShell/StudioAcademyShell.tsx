@@ -12,7 +12,7 @@ export function StudioAcademyShell({ children, settings }: StudioAcademyShellPro
       <EcosystemMeasurement site="academy" />
       <StudioHeader settings={settings} />
       <main id="main">{children}</main>
-      <CardMotion />
+      <CardMotion mode="studio" />
       <StudioFooter settings={settings} />
       <StudioInquiryDrawer />
     </div>

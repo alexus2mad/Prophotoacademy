@@ -93,14 +93,7 @@
   .copy h3 {
     transform: translateY(var(--card-title-y, 0px));
   }
-  .card:is([data-scroll-active], :focus-within) {
-    --card-scale: 1.065;
-    --card-title-y: -6px;
-    --card-duration: 1800ms;
-  }
-}
-@media (prefers-reduced-motion: no-preference) and (min-width: 900px) and (hover: hover) and (pointer: fine) {
-  .card:hover {
+  .card[data-card-active] {
     --card-scale: 1.065;
     --card-title-y: -6px;
     --card-duration: 1800ms;

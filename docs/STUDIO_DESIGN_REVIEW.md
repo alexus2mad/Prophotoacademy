@@ -1,6 +1,8 @@
 # Studio design and interaction review — 10 November 2026
 
-The review uses the [Figma file](https://www.figma.com/design/CvY4dgmOevd9ehxk9Xsaqd/PROPHOTO-STUDIO), the [interactive artifact](https://claude.ai/artifact/FwrroMxpu7ApuHRefQRW3t), and the [designer's comparison](https://claude.ai/artifact/DfJf443box4s3MAgJpPaWg). Explicit decisions are recorded in [the source register](FIGMA_ARTIFACT_DIFFERENCES.md). Separate UI and UX reviewers inspected the final implementation and played the reference interactions; findings were corrected before release.
+The review uses the [Figma file](https://www.figma.com/design/CvY4dgmOevd9ehxk9Xsaqd/PROPHOTO-STUDIO), the [interactive artifact](https://claude.ai/artifact/FwrroMxpu7ApuHRefQRW3t), and the [designer's comparison](https://claude.ai/artifact/DfJf443box4s3MAgJpPaWg). Explicit decisions are recorded in [the source register](FIGMA_ARTIFACT_DIFFERENCES.md). Separate UI and UX reviewers inspected the implementation and played the reference interactions. The verification section distinguishes completed checks from remaining work; a source comparison alone does not certify the resulting user interaction.
+
+The user's latest clarification makes the previously approved, polished image zoom and title movement authoritative for cards. Keep useful behavior recovered from the artifact, including synchronized exposure, while correcting broken triggers and accessibility problems. Matching the artifact does not require reproducing its bugs or replacing an explicitly approved interaction with its simpler version.
 
 ## Corrected behavior
 
@@ -15,7 +17,7 @@ The review uses the [Figma file](https://www.figma.com/design/CvY4dgmOevd9ehxk9X
 | Header | Restored transparent blur and contrast for each control over the actual section beneath it, including mixed course heroes and the mobile exposure transition. |
 | Mobile actions | Shared compact 68px and spacious 84px bottom actions on destination pages, including safe-area spacing. Homepage does not gain a competing fixed action. |
 | Disclosures and feedback | Mobile audience details open explicitly; desktop descriptions remain visible. AI indicators rotate, summaries respond on hover, and copy confirmation resets after 1.5s. |
-| Card zoom | At the user's request, restored the earlier approved 1.065 image scale and −6px title motion, 1800ms entry/1400ms exit. Reused the opt-in mobile scroll controller; stationary frames and a separate paint-contained image layer keep edges stable. |
+| Card zoom | Retains the approved 1.065 image scale and −6px title motion, 1800ms entry/1400ms exit. Studio now elects one active card from actual pointer, keyboard or scroll input; it no longer activates an entire row. Stationary frames and a separate paint-contained image layer keep edges stable. |
 
 ## Corrected layout
 
@@ -31,14 +33,29 @@ The review uses the [Figma file](https://www.figma.com/design/CvY4dgmOevd9ehxk9X
 
 Private local evidence is in `.data/design-review/`: independent UI/UX reports, captured source scripts, measurements and screenshots. It is deliberately excluded from Git and the review export.
 
-Browser checks covered 1440px desktop, 768px tablet and 360/390px phones across homepage, Academy, Studio, Shop, Contacts, AI and course pages. Verified exposure forward/reverse, manually selected hero animations, 8→11→8 reviews, gallery forward/back, sticky mobile actions and active course sections. Dedicated motion checks confirmed stationary frames and mobile row handoffs. Source checks distinguish classic scrollbar width from actual layout overflow.
+Browser checks covered 1440px desktop, 768px tablet and 360/390px phones across homepage, Academy, Studio, Shop, Contacts, AI and course pages. Verified exposure forward/reverse, manually selected hero animations, 8→11→8 reviews, gallery forward/back, sticky mobile actions and active course sections. Source checks distinguish classic scrollbar width from actual layout overflow.
 
-Pure exposure and gallery tests cover boundary/reverse states, reduced motion and unequal image offsets. Package presentation tests retain checkout/inquiry/unavailable/disabled behavior in both layout orders. Shared motion tests retain the legacy opt-in boundary and reduced-motion behavior.
+### Card trigger verification correction
+
+The earlier card checks confirmed transform values and stationary frame geometry, but missed the input failure reported by the user: a viewport-center observer activated every intersecting card in a row, while desktop hover depended on media queries that the in-app browser reported as `hover: none`. Those geometry checks are superseded as evidence of correct interaction. Multiple cards moving together was a defect, not an approved effect.
+
+Studio has an explicit single-card policy, separate from the inactive legacy design's preserved row observer:
+
+- Real mouse or hovering-pen input targets the card under the pointer, independently of the `hover` media query. Moving to another card transfers activation; moving to blank space clears it. Desktop scrolling alone does not activate a row, and scrolling under a stationary mouse rechecks the actual hit target.
+- Keyboard-visible focus selects its card. A subsequent real pointer movement can take over; ordinary click focus must not pin an old card.
+- Mobile scrolling selects one sufficiently visible card, accounting for both axes and clipping by horizontal rails. Leaving the card area clears activation. Horizontal travel must produce a meaningful handoff between visible columns, not remain on the same column at both ends of the rail.
+- Reduced motion, a hidden document or a blurred window clears motion. The controller stays opt-in; lessons, exposure and arbitrary images do not acquire card zoom.
+
+Actual desktop browser input passed card 1 → card 2 → blank space, stationary-pointer wheel retargeting and keyboard Tab selection. The selected image settled at scale 1.065 with a −6px title offset; inactive images returned to their identity transform and card frames stayed fixed. Mobile vertical scrolling passed row handoff and clearing after the grid leaves view.
+
+The first horizontal selection formula still chose the second column nearest the viewport center at both rail ends. That defect was caught in the browser and corrected: the focal point now travels across the visible rail with horizontal scroll progress, while clipping and hysteresis prevent offscreen selection and unstable switching. A fresh 390px browser check passed native horizontal travel at 0, about 59px and 124px: **Курси → Воркшопи → Корпоративне навчання**, followed by a vertical handoff to **ProPhoto Кемп**. Exactly one card was active at each stop, with no document overflow. Independent continuous forward/reverse geometry checks also reached all three columns; they supplement this actual-input evidence.
+
+Pure exposure and gallery tests cover boundary/reverse states, reduced motion and unequal image offsets. Package presentation tests retain checkout/inquiry/unavailable/disabled behavior in both layout orders. Studio motion tests exercise exclusive pointer selection, input changes, clipping, focus, lifecycle and reduced motion; legacy tests preserve the separate inactive variant. These tests supplement actual input checks rather than replacing them.
 
 The repository-wide formatter reports existing style drift in unrelated files; changed files pass scoped formatting. Do not reformat the preserved legacy implementation merely to hide this baseline. Release results and build identities belong in [the release record](STUDIO_REVIEW_RELEASE.md).
 
 ## Deliberate differences
 
-Real forms retain consent, validation, failure and retry states. Real bookings and purchases never use the artifact's fake success handlers. Academy/program all-review links continue to the existing `/reviews` route; homepage expansion follows the artifact. Unknown schedules and inquiry-only programs remain truthful. The user-approved legacy card zoom overrides the artifact's simpler hover effect.
+Real forms retain consent, validation, failure and retry states. Real bookings and purchases never use the artifact's fake success handlers. Academy/program all-review links continue to the existing `/reviews` route; homepage expansion follows the artifact. Unknown schedules and inquiry-only programs remain truthful. The user-approved earlier card choreography overrides the artifact's simpler hover effect; preserving that choreography does not require retaining the legacy row activation policy in Studio.
 
 Figma remains authoritative for static typography and geometry where the designer did not choose the artifact. Existing documented font inconsistencies and real content differences mean this is not an unconditional 2px certification. No learning content, authentication, payment, entitlement or completion policy was changed.

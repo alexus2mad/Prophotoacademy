@@ -1,13 +1,18 @@
 'use client';
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import { observeStudioCards } from './studio-controller';
+import type { CardMotionProps } from './types';
 
-export function useCardMotion() {
+export function useCardMotion(mode: CardMotionProps['mode'] = 'legacy') {
   const path = usePathname();
   useEffect(() => {
-    if (!('IntersectionObserver' in window)) return;
-    const root = document.querySelector('.academy-editorial, .academy-studio');
+    const root = document.querySelector(
+      mode === 'studio' ? '.academy-studio' : '.academy-editorial',
+    );
     if (!root) return;
+    if (mode === 'studio') return observeStudioCards(root);
+    if (!('IntersectionObserver' in window)) return;
     const mobile = window.matchMedia('(max-width: 899px), (hover: none)');
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const cards = new Set<Element>();
@@ -88,5 +93,5 @@ export function useCardMotion() {
       window.removeEventListener('resize', schedule);
       for (const card of cards) card.removeAttribute('data-scroll-active');
     };
-  }, [path]);
+  }, [path, mode]);
 }
