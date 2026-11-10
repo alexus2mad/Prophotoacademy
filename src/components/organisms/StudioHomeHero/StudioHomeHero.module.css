@@ -27,13 +27,30 @@
   height: 100%;
   object-fit: cover;
 }
-.panorama[data-active='true'] img {
+.image[data-motion-ready='true'] img {
+  animation: photograph 6s ease-in-out infinite alternate;
+}
+.image[data-hero-visual='shop'][data-motion-ready='true'] img {
+  animation-duration: 8s;
+}
+.panorama img {
   width: max(calc(var(--hero-height, 100svh) * 1.6916), calc(var(--hero-width, 100vw) * 1.15));
   max-width: none;
+}
+.panorama[data-motion-ready='true'] img {
   animation: panorama 12s linear forwards;
 }
-.hero[data-motion-playing='false'] .panorama img {
+.image[data-active='false'] img,
+.hero[data-motion-playing='false'] .image img {
   animation-play-state: paused;
+}
+@keyframes photograph {
+  from {
+    transform: scale(1.015) translate(-0.3%, 0.2%);
+  }
+  to {
+    transform: scale(1.045) translate(0.3%, -0.2%);
+  }
 }
 @keyframes panorama {
   from {
@@ -170,8 +187,10 @@
   white-space: nowrap;
 }
 @media (max-width: 760px) {
-  .panorama[data-active='true'] img {
+  .panorama img {
     width: 100%;
+  }
+  .panorama[data-motion-ready='true'] img {
     animation: none;
   }
   .hero {
@@ -245,8 +264,10 @@
   .image {
     transition: none;
   }
-  .panorama[data-active='true'] img {
+  .panorama img {
     width: 100%;
+  }
+  .image[data-motion-ready='true'] img {
     animation: none;
   }
 }

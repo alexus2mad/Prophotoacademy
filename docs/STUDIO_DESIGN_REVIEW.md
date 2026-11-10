@@ -8,8 +8,8 @@ The user's latest clarification makes the previously approved, polished image zo
 
 | Area | Correction |
 | --- | --- |
-| Exposure | Recovered the actual iframe script. Restored the desktop 150vh runway, sticky stage, brightness, 33 bars and −3→0 EV. Mobile uses the source black-to-paper transition, white/red phases and 0→+3 EV. Forward and reverse scrolling use the same calculation. |
-| Hero | Restored 900ms crossfades, 3s Academy portraits, 12s Studio panorama and 12/9/7s mode dwell. Manual selection stops mode changes while the selected photography continues. Hidden/offscreen and reduced-motion states suspend animation. |
+| Exposure | Recovered the actual iframe script for synchronized brightness, 33 bars and −3→0 EV. The subsequent user override extends the desktop section to 300vh, giving four times the original effective exposure distance, and keeps the heading visible through the first half before fading it. Mobile retains its compact black-to-paper transition, white/red phases and 0→+3 EV. Forward and reverse scrolling use the same calculation. |
+| Hero | Retains 900ms crossfades, 3s Academy portraits, 12s Studio panorama and 12/9/7s mode dwell. Outgoing photographs keep their current crop and pose throughout the fade; rapid returns resume that pose. The requested Academy/Shop drift uses restrained ease-in-out motion. Manual selection stops mode changes while photography continues; hidden/offscreen and reduced-motion states suspend animation. |
 | Course navigation | Tracks the current section, exposes `aria-current`, and centers the active mobile anchor without scrolling the document. |
 | Gallery | Uses actual image offsets instead of the first image's width; observes image resizing and reports the final count at the track boundary. |
 | Homepage reviews | Eight initially; all eleven after expansion; eight after collapse. Expanded layout hides carousel controls. Quote/story attribution and source links remain explicit. |
@@ -34,6 +34,18 @@ The user's latest clarification makes the previously approved, polished image zo
 Private local evidence is in `.data/design-review/`: independent UI/UX reports, captured source scripts, measurements and screenshots. It is deliberately excluded from Git and the review export.
 
 Browser checks covered 1440px desktop, 768px tablet and 360/390px phones across homepage, Academy, Studio, Shop, Contacts, AI and course pages. Verified exposure forward/reverse, manually selected hero animations, 8→11→8 reviews, gallery forward/back, sticky mobile actions and active course sections. Source checks distinguish classic scrollbar width from actual layout overflow.
+
+### Hero transition correction and exposure pacing override
+
+The user reported a Studio panorama snap before its outgoing fade. The active-only CSS selector removed both the oversized image width and its animation immediately: the image shrank from 1638.75px to 1425px while still visible. Studio geometry now remains constant, and each outgoing image pauses at its current animation position until its wrapper is fully transparent. Cleanup accepts only that wrapper's completed opacity transition while it remains inactive at opacity zero. Returning before the fade completes resumes the retained pose; returning after a completed fade starts a fresh cycle.
+
+Actual browser checks confirmed an outgoing Studio image remained 1638.75px wide at opacity 0.646, holding its −213.75px translation. Fully hidden, it reached opacity zero and released its animation; the next visit began near −3.5px. A rapid Studio → Academy → Studio sequence retained the trajectory (approximately −3.129px, −5.18px, then −9.928px) rather than jumping to zero. These checks exercise the transition itself, not only its settled endpoints. Six independently run lifecycle tests cover retention, interrupted fades, stale/descendant events and reduced motion.
+
+The requested Academy/Shop motion is a separate user override: a 1.015→1.045 scale with a small two-axis drift, easing in and out over 6s for Academy and 8s for Shop, alternating smoothly. The drift remains within the image's overscan. Browser samples confirmed both animated transforms; the existing 3s Academy photograph changes remain in place. Studio remains stationary on the narrow layout, and reduced motion disables these photographic animations.
+
+The user also requested slower exposure travel and a later title fade. Desktop now uses a 300vh section around its 100svh stage. With the existing `.8` progress factor, full exposure requires 160vh of travel instead of 40vh: 1440px instead of 360px at a 900px viewport. The heading stays fully visible through progress 0.5, then fades linearly to zero at progress 1; the earlier blur is removed. Mobile keeps its compact section and applies the same title curve to its existing transition value. A readiness flag keeps the heading visible before measurement or without JavaScript; reduced motion leaves it visible. Seventeen exposure tests pass.
+
+Actual native-wheel input at 1440×900 verified the new pacing. Four, eight, twelve and sixteen 90px steps produced progress 0.246, 0.496, 0.746 and 0.996 with title opacity 1, 1, 0.508 and 0.008 respectively. The initial section offset was 6px; a final 9px movement reached progress 1, image brightness 1 and title opacity 0. Reversing 360px restored progress 0.752 and opacity 0.496. Evidence is saved as `.data/design-review/exposure-wheel-samples.json` and `local-exposure-title-fade.png`. At 390px, the exposure section remained compact at approximately 283.36px with no document overflow; Shop's ease-in-out transform was also observed. These checks supersede the earlier source-timing verification for the changed pacing.
 
 ### Card trigger verification correction
 

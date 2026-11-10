@@ -12,10 +12,12 @@ export function StudioHomeHero({ mode, onModeChange }: StudioHomeHeroProps) {
     hero,
     tabs,
     visibleImage,
+    retainedImages,
     playing,
     stop,
     select,
     onImageLoad,
+    onImageTransitionEnd,
     onTouchStart,
     onTouchEnd,
     onTabKeyDown,
@@ -85,6 +87,8 @@ export function StudioHomeHero({ mode, onModeChange }: StudioHomeHeroProps) {
           className={`${styles.image} ${visual.id === 'studio' ? styles.panorama : ''}`}
           data-hero-visual={visual.id}
           data-active={visibleImage === visual.id}
+          data-motion-ready={visibleImage === visual.id || retainedImages.includes(visual.id)}
+          onTransitionEnd={onImageTransitionEnd}
           aria-hidden="true"
         >
           <StudioHomePicture

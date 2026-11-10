@@ -1,5 +1,6 @@
 .exposure {
-  height: 150vh;
+  /* A 100vh stage plus 200vh runway makes the original 50vh runway four times slower. */
+  height: 300vh;
   position: relative;
   background: #000;
 }
@@ -39,6 +40,10 @@
   letter-spacing: -0.01em;
   text-transform: uppercase;
   max-width: 1360px;
+  opacity: 1;
+}
+.exposure[data-exposure-ready='true'] .inner h2 {
+  opacity: clamp(0, 2 - 2 * var(--exposure-progress, 0), 1);
 }
 .inner strong {
   font-weight: 1000;
@@ -94,8 +99,9 @@
     font-size: 32px;
     line-height: 1.04;
     color: #efefef;
-    opacity: calc(1 - var(--exposure-transition, 0) * 1.25);
-    filter: blur(calc(var(--exposure-transition, 0) * 4px));
+  }
+  .exposure[data-exposure-ready='true'] .inner h2 {
+    opacity: clamp(0, 2 - 2 * var(--exposure-transition, 0), 1);
   }
   .meter {
     display: flex;
@@ -125,7 +131,7 @@
     position: relative;
     top: 0;
   }
-  .inner h2 {
+  .exposure[data-exposure-ready] .inner h2 {
     opacity: 1;
     filter: none;
   }

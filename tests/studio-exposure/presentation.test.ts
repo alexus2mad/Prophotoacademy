@@ -64,3 +64,22 @@ it('keeps server-rendered directions readable without an animation override befo
   expect($('h2').text()).toContain('зал');
   expect($('a').first().attr('href')).toBe('/photo-studio');
 });
+
+it('only enables the title fade after an exposure measurement is ready', () => {
+  const exposure = studioExposureState({
+    top: 0,
+    height: 1,
+    viewportHeight: 1,
+    mobile: false,
+    reducedMotion: true,
+  });
+  const render = (ready?: boolean) =>
+    load(
+      renderToStaticMarkup(
+        createElement(StudioHomeExposure, { section: { current: null }, exposure, ready }),
+      ),
+    );
+  expect(render()('section').attr('data-exposure-ready')).toBe('false');
+  expect(render(true)('section').attr('data-exposure-ready')).toBe('true');
+  expect(render()('h2').text()).toContain('як ви це робите');
+});

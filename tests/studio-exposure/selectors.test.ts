@@ -16,6 +16,22 @@ const mobileAt = (transition: number) => ({
 });
 
 describe('artifact exposure choreography', () => {
+  it('slows the desktop scene by four through its runway without changing the exposure curve', () => {
+    const slower = { ...desktop, height: desktop.viewportHeight * 3 };
+    expect(studioExposureState({ ...desktop, top: -180 }).progress).toBe(0.5);
+    expect(studioExposureState({ ...slower, top: -180 }).progress).toBe(0.125);
+    expect(studioExposureState({ ...desktop, top: -360 }).progress).toBe(1);
+    expect(studioExposureState({ ...slower, top: -360 }).progress).toBe(0.25);
+    expect(studioExposureState({ ...slower, top: -720 })).toMatchObject({
+      progress: 0.5,
+      activeBars: 17,
+      value: '−1.5 EV',
+    });
+    expect(studioExposureState({ ...slower, top: -1440 }).progress).toBe(1);
+    expect(
+      [-1440, -1080, -720, 0].map((top) => studioExposureState({ ...slower, top }).progress),
+    ).toEqual([1, 0.75, 0.5, 0]);
+  });
   it('stays dark on entry and fills over 80% of the desktop sticky runway', () => {
     expect(studioExposureState({ ...desktop, top: 600 })).toMatchObject({
       progress: 0,

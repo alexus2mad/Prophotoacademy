@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import type { KeyboardEvent, SyntheticEvent, TouchEvent } from 'react';
+import type { KeyboardEvent, SyntheticEvent, TouchEvent, TransitionEvent } from 'react';
 import type { StudioHomeMode } from '@/lib/studio-home/types';
 import type { HeroTouchOrigin, StudioHomeHeroProps } from './types';
 
@@ -18,6 +18,10 @@ export function useStudioHomeHero({ mode, onModeChange }: StudioHomeHeroProps) {
   const [documentVisible, setDocumentVisible] = useState(true);
   const [portrait, setPortrait] = useState(0);
   const [visibleImage, setVisibleImage] = useState('academy-0');
+  const { retainedImages, onImageTransitionEnd } = useHeroImageRetention(
+    visibleImage,
+    reducedMotion,
+  );
   const requestedImage = mode === 'academy' ? `academy-${portrait}` : mode;
   const requested = useRef(requestedImage);
   const playing = !reducedMotion && visible && documentVisible;
@@ -135,12 +139,39 @@ export function useStudioHomeHero({ mode, onModeChange }: StudioHomeHeroProps) {
     hero,
     tabs,
     visibleImage,
+    retainedImages,
     playing,
     stop,
     select,
     onImageLoad,
+    onImageTransitionEnd,
     onTouchStart,
     onTouchEnd,
     onTabKeyDown,
   };
+}
+
+/** Reset a photograph only after it has completely faded, never while it is still visible. */
+export function useHeroImageRetention(visibleImage: string, reducedMotion: boolean) {
+  const [retainedImages, setRetainedImages] = useState<string[]>([visibleImage]);
+  useEffect(() => {
+    setRetainedImages((current) =>
+      reducedMotion ? [visibleImage] : [...new Set([...current, visibleImage])],
+    );
+  }, [visibleImage, reducedMotion]);
+
+  function onImageTransitionEnd(event: TransitionEvent<HTMLDivElement>) {
+    const layer = event.currentTarget;
+    if (
+      event.target !== layer ||
+      event.propertyName !== 'opacity' ||
+      layer.dataset.active !== 'false' ||
+      getComputedStyle(layer).opacity !== '0'
+    )
+      return;
+    const key = layer.dataset.heroVisual;
+    setRetainedImages((current) => current.filter((image) => image !== key));
+  }
+
+  return { retainedImages, onImageTransitionEnd };
 }

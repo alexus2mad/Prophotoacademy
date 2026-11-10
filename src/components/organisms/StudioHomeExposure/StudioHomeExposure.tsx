@@ -5,7 +5,7 @@ import { exposureBarCount } from '@/lib/studio-home/exposure';
 import type { StudioExposureStyle, StudioHomeExposureProps } from './types';
 import styles from './StudioHomeExposure.module.css';
 
-export function StudioHomeExposure({ section, exposure }: StudioHomeExposureProps) {
+export function StudioHomeExposure({ section, exposure, ready = false }: StudioHomeExposureProps) {
   const style: StudioExposureStyle = {
     '--exposure-progress': exposure.progress,
     '--exposure-transition': exposure.transition,
@@ -14,6 +14,7 @@ export function StudioHomeExposure({ section, exposure }: StudioHomeExposureProp
     <section
       className={styles.exposure}
       data-home-section="exposure"
+      data-exposure-ready={ready}
       ref={section}
       style={style}
       aria-labelledby="exposure-title"
