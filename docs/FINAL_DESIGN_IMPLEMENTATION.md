@@ -1,6 +1,6 @@
 # Final ProPhoto design implementation
 
-Status: initial design deployed; designer-directed source resolutions are being applied. Updated 10 November 2026.
+Status: designer-directed source resolutions deployed to staging as `9730d09`. Updated 10 November 2026. See [release verification](DESIGNER_RESOLUTIONS_RELEASE.md).
 
 ## Source authority
 

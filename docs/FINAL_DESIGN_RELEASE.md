@@ -1,5 +1,8 @@
 # Final design staging release — 10 November 2026
 
+Historical initial release. The subsequent [designer-resolution release](DESIGNER_RESOLUTIONS_RELEASE.md)
+is now active; consult [hosting](HOSTING.md) for current and rollback identities.
+
 Staging runs application commit `73c97ffca507291a6c381c040a169bb718403401`
 at <https://staging.prophotoacademy.com.ua>, with
 `NEXT_PUBLIC_ACADEMY_DESIGN=studio`. The previous verified release is
