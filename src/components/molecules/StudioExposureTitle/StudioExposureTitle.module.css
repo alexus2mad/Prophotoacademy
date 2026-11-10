@@ -48,9 +48,6 @@
     line-height: 1.04;
     color: #efefef;
   }
-  .title[data-title-ink='true'] {
-    color: #0a0807;
-  }
 }
 @media (prefers-reduced-motion: reduce) {
   .title[data-title-morphing] .copies {

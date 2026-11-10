@@ -11,18 +11,18 @@ The owner supplied the designer's decisions alongside the
 These explicit decisions supersede the initial blanket Figma priority where
 listed below. The original measurements remain below as historical evidence.
 
-| Item | Designer decision | Implementation rule |
-| --- | --- | --- |
-| 1 — condensed font | Figma, Roboto | Keep Roboto Condensed Bold; do not substitute HeliosCond |
-| 2 — KyivType weights | Figma | Keep 200/350/500/700/1000 mappings and the inspected font binaries |
-| 3 — secondary-page hero size/spacing | Artifact preferred | Use artifact desktop hero formulas with the Figma font families/weights: at 1440 px, 138.24 px heading, 77.76 px handwriting, Academy 136/64 px top/bottom padding |
-| 4 — form section backgrounds | White everywhere instead of red | Use paper `#fbfbfb`, dark text and red handwriting; primary CTA backgrounds stay red with white text |
-| 5 — final form columns | No preference | Preserve current responsive columns and existing mobile collapse |
-| 6 — contacts details/copy controls | Figma | Keep Roboto Condensed 32 px details and 44 px copy controls |
-| 7 — inquiry drawer | No preference | Preserve the working accessible drawer, labels, focus restoration and consent |
-| 8 — footer columns | No preference | Preserve current desktop/mobile composition |
-| 9 — Academy section rhythm | Figma | Keep 14 px header gaps, 56 px lower spacing and 32 px speaker names |
-| 10 — no corresponding numbered entry in the comparison | Figma | Retain Figma as the default for remaining unspecified visual details |
+| Item                                                   | Designer decision               | Implementation rule                                                                                                                                                |
+| ------------------------------------------------------ | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1 — condensed font                                     | Figma, Roboto                   | Keep Roboto Condensed Bold; do not substitute HeliosCond                                                                                                           |
+| 2 — KyivType weights                                   | Figma                           | Keep 200/350/500/700/1000 mappings and the inspected font binaries                                                                                                 |
+| 3 — secondary-page hero size/spacing                   | Artifact preferred              | Use artifact desktop hero formulas with the Figma font families/weights: at 1440 px, 138.24 px heading, 77.76 px handwriting, Academy 136/64 px top/bottom padding |
+| 4 — form section backgrounds                           | White everywhere instead of red | Use paper `#fbfbfb`, dark text and red handwriting; primary CTA backgrounds stay red with white text                                                               |
+| 5 — final form columns                                 | No preference                   | Preserve current responsive columns and existing mobile collapse                                                                                                   |
+| 6 — contacts details/copy controls                     | Figma                           | Keep Roboto Condensed 32 px details and 44 px copy controls                                                                                                        |
+| 7 — inquiry drawer                                     | No preference                   | Preserve the working accessible drawer, labels, focus restoration and consent                                                                                      |
+| 8 — footer columns                                     | No preference                   | Preserve current desktop/mobile composition                                                                                                                        |
+| 9 — Academy section rhythm                             | Figma                           | Keep 14 px header gaps, 56 px lower spacing and 32 px speaker names                                                                                                |
+| 10 — no corresponding numbered entry in the comparison | Figma                           | Retain Figma as the default for remaining unspecified visual details                                                                                               |
 
 Additional explicit content and image decisions:
 
@@ -73,13 +73,13 @@ The explicit user rule **white text on red primary CTAs** overrides both sources
 
 These are suspected errors within Figma/export evidence, not permission to substitute the artifact's whole layout. The table records the proposed interpretation; no layer repair or application change has been made by this audit.
 
-| Evidence | Problem | Actionable interpretation |
-| --- | --- | --- |
-| Home desktop 886:1102 `Консультація` and 886:1103 `Коментар (необов’язково)` | Both x=416.191986; surrounding form labels, inputs and underline nodes 886:1101/1104 are x=858.700012. Displacement **442.508026 px** left. Screenshot shows these text fragments detached into the left heading column. | Treat as an obvious damaged/misplaced layer, not an intentional split form. Keep controls/labels associated and aligned within the same form column; record this proposed exception to Figma geometry. |
-| Home mobile 884:855 background rectangle | y=-278, h=6162.600098 inside a 6163 px frame; equivalent background rectangles on other home variants start at y=0. It ends at y=5884.6, leaving ~278.4 px of nominal frame uncovered, masked by the identical root fill. | Do not copy the negative offset into a web layout. This is a background-layer anomaly with no intentional content positioning benefit. |
-| Home mobile heading 884:1010 asterisk vs 884:1011 `студентів` | Same 51 px Marck Script / 40.8 px line height, but asterisk y=3372 and word y=3364 (**8 px baseline displacement**). Shop-tab equivalents 898:580/581 both y=3294. | Likely accidental asterisk drift. Implement the handwriting phrase as one typographic run or align to the intended baseline, rather than copying the isolated offset. |
-| Generated Studio 854:427 and Shop 854:547 script labels | JSX says `leading-[0]`, but metadata reports each text layer h=81 and the next H1 starts y=81; the screenshot preserves a real line box. | This is a code-generation trap, not evidence the design intends a zero-height text line. Prefer actual layer geometry and screenshot. Similar rich-text parent wrappers use `text-[0px]`/`leading-[0]` while spans provide real sizes. |
-| Absolute frame exports | Carousel off-screen images/text may extend beyond visible frame bounds, and centered text can use `-translate-x-1/2`. | Do not classify overflow or midpoint `left` values alone as malformed. The three anomalies above were checked against metadata or neighboring same-purpose layers. |
+| Evidence                                                                     | Problem                                                                                                                                                                                                                   | Actionable interpretation                                                                                                                                                                                                              |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Home desktop 886:1102 `Консультація` and 886:1103 `Коментар (необов’язково)` | Both x=416.191986; surrounding form labels, inputs and underline nodes 886:1101/1104 are x=858.700012. Displacement **442.508026 px** left. Screenshot shows these text fragments detached into the left heading column.  | Treat as an obvious damaged/misplaced layer, not an intentional split form. Keep controls/labels associated and aligned within the same form column; record this proposed exception to Figma geometry.                                 |
+| Home mobile 884:855 background rectangle                                     | y=-278, h=6162.600098 inside a 6163 px frame; equivalent background rectangles on other home variants start at y=0. It ends at y=5884.6, leaving ~278.4 px of nominal frame uncovered, masked by the identical root fill. | Do not copy the negative offset into a web layout. This is a background-layer anomaly with no intentional content positioning benefit.                                                                                                 |
+| Home mobile heading 884:1010 asterisk vs 884:1011 `студентів`                | Same 51 px Marck Script / 40.8 px line height, but asterisk y=3372 and word y=3364 (**8 px baseline displacement**). Shop-tab equivalents 898:580/581 both y=3294.                                                        | Likely accidental asterisk drift. Implement the handwriting phrase as one typographic run or align to the intended baseline, rather than copying the isolated offset.                                                                  |
+| Generated Studio 854:427 and Shop 854:547 script labels                      | JSX says `leading-[0]`, but metadata reports each text layer h=81 and the next H1 starts y=81; the screenshot preserves a real line box.                                                                                  | This is a code-generation trap, not evidence the design intends a zero-height text line. Prefer actual layer geometry and screenshot. Similar rich-text parent wrappers use `text-[0px]`/`leading-[0]` while spans provide real sizes. |
+| Absolute frame exports                                                       | Carousel off-screen images/text may extend beyond visible frame bounds, and centered text can use `-translate-x-1/2`.                                                                                                     | Do not classify overflow or midpoint `left` values alone as malformed. The three anomalies above were checked against metadata or neighboring same-purpose layers.                                                                     |
 
 ## Content and scope conflicts that change layout substantially
 
@@ -104,22 +104,22 @@ Font tokens below preserve exact Figma exported family/style names. Underscores 
 
 Dimensions below are the actual metadata frame dimensions, not screenshot pixel sizes. Font lists include shared component definitions/instances used by the page export; logos remain vector assets rather than text fonts.
 
-| Frame / node | Saved reference prefix | Exact W × H | Exact font/style tokens present |
-| --- | --- | --- | --- |
-| Компоненти — 849:2 | `figma-components` | 1536 × 2440.114013671875 | K-R, K-B, K-X, R-B |
-| Академія — 1440 — 853:190 | `figma-academy` | 1440 × 7515.11376953125 | K-R, K-B, K-X, R-B, M-R |
-| Студія — 1440 — 854:417 | `figma-studio` | 1440 × 3905.614013671875 | K-R, K-B, K-X, R-B, M-R |
-| Shop — 1440 — 854:539 | `figma-shop` | 1440 × 1827.114013671875 | K-R, K-B, K-X, R-B, M-R |
-| Контакти — 1440 — 854:630 | `figma-contacts` | 1440 × 1435.114013671875 | K-R, K-B, K-X, R-B, M-R |
-| Форма заявки — 480 — 854:755 | `figma-inquiry` | 480 × 900 | K-R, K-B, R-B |
-| Меню — 390 — 882:836 | `figma-menu-mobile` | 390 × 907 | K-R |
-| Меню — 1440 — 883:845 | `figma-menu` | 1440 × 900 | K-R, K-L |
-| Головна — 390 — 884:854 | `figma-home-mobile` | 390 × 6163 | K-R, K-L, K-M, K-B, K-X, R-B, M-R |
-| Головна — 1440 — 886:873 | `figma-home` | 1440 × 8075 | K-R, K-L, K-M, K-B, K-X, R-B, M-R |
-| Інтенсив AI artwork — 1440 — 892:397 | `figma-ai-artwork` | 1440 × 6263 | K-R, K-L, K-M, K-B, K-X, R-B, M-R |
-| Інтенсив AI artwork — 390 — 893:401 | `figma-ai-artwork-mobile` | 390 × 5931 | K-R, K-L, K-M, K-B, K-X, R-B, M-R |
-| Головна — 390 · вкладка Studio — 897:405 | `figma-home-studio-mobile` | 390 × 5786 | K-R, K-L, K-M, K-B, K-X, R-B, M-R |
-| Головна — 390 · вкладка Shop — 898:424 | `figma-home-shop-mobile` | 390 × 6007 | K-R, K-L, K-M, K-B, K-X, R-B, M-R |
+| Frame / node                             | Saved reference prefix     | Exact W × H              | Exact font/style tokens present   |
+| ---------------------------------------- | -------------------------- | ------------------------ | --------------------------------- |
+| Компоненти — 849:2                       | `figma-components`         | 1536 × 2440.114013671875 | K-R, K-B, K-X, R-B                |
+| Академія — 1440 — 853:190                | `figma-academy`            | 1440 × 7515.11376953125  | K-R, K-B, K-X, R-B, M-R           |
+| Студія — 1440 — 854:417                  | `figma-studio`             | 1440 × 3905.614013671875 | K-R, K-B, K-X, R-B, M-R           |
+| Shop — 1440 — 854:539                    | `figma-shop`               | 1440 × 1827.114013671875 | K-R, K-B, K-X, R-B, M-R           |
+| Контакти — 1440 — 854:630                | `figma-contacts`           | 1440 × 1435.114013671875 | K-R, K-B, K-X, R-B, M-R           |
+| Форма заявки — 480 — 854:755             | `figma-inquiry`            | 480 × 900                | K-R, K-B, R-B                     |
+| Меню — 390 — 882:836                     | `figma-menu-mobile`        | 390 × 907                | K-R                               |
+| Меню — 1440 — 883:845                    | `figma-menu`               | 1440 × 900               | K-R, K-L                          |
+| Головна — 390 — 884:854                  | `figma-home-mobile`        | 390 × 6163               | K-R, K-L, K-M, K-B, K-X, R-B, M-R |
+| Головна — 1440 — 886:873                 | `figma-home`               | 1440 × 8075              | K-R, K-L, K-M, K-B, K-X, R-B, M-R |
+| Інтенсив AI artwork — 1440 — 892:397     | `figma-ai-artwork`         | 1440 × 6263              | K-R, K-L, K-M, K-B, K-X, R-B, M-R |
+| Інтенсив AI artwork — 390 — 893:401      | `figma-ai-artwork-mobile`  | 390 × 5931               | K-R, K-L, K-M, K-B, K-X, R-B, M-R |
+| Головна — 390 · вкладка Studio — 897:405 | `figma-home-studio-mobile` | 390 × 5786               | K-R, K-L, K-M, K-B, K-X, R-B, M-R |
+| Головна — 390 · вкладка Shop — 898:424   | `figma-home-shop-mobile`   | 390 × 6007               | K-R, K-L, K-M, K-B, K-X, R-B, M-R |
 
 The full page metadata also contains four non-reference frames: `Зображення` 849:89 and logo groups 872:784, 872:829, 872:874. These are deliberately excluded from the 14 UI-reference inventory.
 
@@ -132,15 +132,15 @@ This is a source-conflict audit, not pixel-diff certification of an implementati
 The AI mobile frame names `Roboto_Condensed:Bold` at 30 px for the lecturer's client chips, but several text widths closely match the artifact's **HeliosCond**, not Roboto Condensed. FontTools measurements of the official current Roboto Condensed (v3.008, instantiated at weight 700) and official historic Roboto Condensed Bold (v2.001047) differ by less than 0.06 px at this size. Changing to the historic font would not resolve the discrepancy.
 
 | Uppercase client text | Figma text width (chip width minus 46 px padding/border) | Roboto Condensed v3 unkerned advance | Artifact HeliosCond unkerned advance |
-| --- | ---: | ---: | ---: |
-| МАША КОНДРАТЕНКО | 261.8 px | 282.95 px | 265.11 px |
-| БРИКУЛЕЦЬ | 145.3 px | 154.70 px | 146.46 px |
-| GO_A | 65.0 px | 65.58 px | 64.97 px |
-| MOLODI | 93.0 px | 98.36 px | 92.96 px |
-| РОКСОЛАНА | 147.9 px | 159.95 px | 148.39 px |
-| МАЙОРОВА | 136.5 px | 146.84 px | 136.52 px |
-| ШМАЛЬГАУЗЕН | 185.9 px | 199.01 px | 188.38 px |
-| АЗІЗА | 71.0 px | 76.41 px | 70.97 px |
+| --------------------- | -------------------------------------------------------: | -----------------------------------: | -----------------------------------: |
+| МАША КОНДРАТЕНКО      |                                                 261.8 px |                            282.95 px |                            265.11 px |
+| БРИКУЛЕЦЬ             |                                                 145.3 px |                            154.70 px |                            146.46 px |
+| GO_A                  |                                                  65.0 px |                             65.58 px |                             64.97 px |
+| MOLODI                |                                                  93.0 px |                             98.36 px |                             92.96 px |
+| РОКСОЛАНА             |                                                 147.9 px |                            159.95 px |                            148.39 px |
+| МАЙОРОВА              |                                                 136.5 px |                            146.84 px |                            136.52 px |
+| ШМАЛЬГАУЗЕН           |                                                 185.9 px |                            199.01 px |                            188.38 px |
+| АЗІЗА                 |                                                  71.0 px |                             76.41 px |                             70.97 px |
 
 These are unkerned font advances, so small residual differences from Figma are expected. Browser-kerning reduced the first Roboto example to 278.55 px, still substantially wider than the source. The official historic comparison came from `googlefonts/roboto-2/src/hinted/RobotoCondensed-Bold.ttf`; the current font is the pinned Google Fonts binary documented in the asset provenance. Temporary font inputs remain in the ignored private audit directory.
 
@@ -193,3 +193,9 @@ The final user instruction supersedes both the artifact's title blur/fade and th
 Measured decorative word copies preserve initial glyph positions and mobile wrapping. The final target is centered against the actual stage rather than the source's capped text width. A single semantic heading remains accessible; copies and hidden measurement targets are excluded from assistive technology. Before measurement, without JavaScript, with reduced motion or unsafe enlarged/wrapped text, retain the full static sentence. Mobile uses its transition value for the morph and switches the remaining text to ink at 0.45 for contrast.
 
 Browser verification found 0px initial glyph displacement at 1440px, no intersections in forty-one desktop and twenty-one fresh mobile samples, a stationary desktop meter, and final stage-centering error below 0.008px at 360/768/1024/1920px. Reverse scrolling restored the complete source. Eight focused phase, eligibility and semantic-fallback tests passed; physical 200% text-enlargement testing is not claimed. Exact evidence is listed in the consolidated review. This explicit user choreography overrides earlier source-title behavior while retaining synchronized exposure and its longer desktop travel.
+
+## Mobile photographic exposure correction
+
+The subsequent user report explicitly rejects the image-less mobile exposure section. This supersedes the compact mobile, black-to-paper, 0→+3 EV and title-ink-switch decisions above. All widths now use the same photograph, −3→0 EV meter and reversible word morph, with a 300svh section and 100svh sticky stage. Progress uses the rendered stable stage height rather than changing browser-toolbar or header dimensions. The stage pins at zero; safe-area spacing belongs inside its content. A restrained mobile scrim protects white text over the portrait. The following directions section stays independently paper-colored, with dark header controls.
+
+Reduced motion keeps the full original sentence, fully exposed photograph and natural content height. The user also requested shifting the second and third Academy hero portraits left on phones: their mobile object positions are 70% and 77%, respectively. Desktop crops and the retained hero animation lifecycle are unchanged. These are explicit user overrides, not discrepancies silently attributed to Figma or the artifact.

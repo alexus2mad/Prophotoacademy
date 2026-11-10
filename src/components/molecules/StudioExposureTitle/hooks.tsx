@@ -14,7 +14,6 @@ export function useStudioExposureTitle() {
     const meter = stage?.querySelector<HTMLElement>('[data-exposure-meter]');
     const target = element.querySelector<HTMLElement>('[data-title-target]');
     if (!stage || !meter || !target) return;
-    const mobile = window.matchMedia('(max-width: 760px)');
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let frame = 0;
     let disposed = false;
@@ -58,7 +57,7 @@ export function useStudioExposureTitle() {
           },
         };
       });
-      setLayout({ words, mobile: mobile.matches, reducedMotion: motion.matches, eligible });
+      setLayout({ words, reducedMotion: motion.matches, eligible });
     };
     const schedule = () => {
       if (!disposed && !frame) frame = window.requestAnimationFrame(measure);
@@ -68,7 +67,6 @@ export function useStudioExposureTitle() {
     window.addEventListener('resize', schedule);
     window.addEventListener('pageshow', schedule);
     document.addEventListener('visibilitychange', schedule);
-    mobile.addEventListener('change', schedule);
     motion.addEventListener('change', schedule);
     document.fonts?.addEventListener('loadingdone', schedule);
     void document.fonts?.ready.then(schedule);
@@ -80,7 +78,6 @@ export function useStudioExposureTitle() {
       window.removeEventListener('resize', schedule);
       window.removeEventListener('pageshow', schedule);
       document.removeEventListener('visibilitychange', schedule);
-      mobile.removeEventListener('change', schedule);
       motion.removeEventListener('change', schedule);
       document.fonts?.removeEventListener('loadingdone', schedule);
     };

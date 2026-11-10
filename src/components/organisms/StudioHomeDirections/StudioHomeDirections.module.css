@@ -26,15 +26,12 @@
 @media (max-width: 760px) {
   .section.section:global(.studio-light) {
     padding-top: 72px;
-    background: color-mix(in srgb, #fbfbfb calc(var(--exposure-transition, 1) * 100%), #000);
   }
   .heading {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     gap: 19px;
     margin-bottom: 12px;
-    opacity: clamp(0, (var(--exposure-transition, 1) - 0.5) * 3.34, 1);
-    filter: blur(calc((1 - var(--exposure-transition, 1)) * 3px));
   }
   .heading h2 {
     margin-top: 18px;
@@ -80,23 +77,5 @@
   }
   .rooms > article {
     aspect-ratio: 4/3.2;
-  }
-  .heading:focus-within {
-    opacity: 1;
-    filter: none;
-  }
-  .section.section:focus-within {
-    background: #fbfbfb;
-  }
-}
-@media (prefers-reduced-motion: reduce) and (max-width: 760px) {
-  .section.section:global(.studio-light) {
-    background: #fbfbfb;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .heading {
-    opacity: 1;
-    filter: none;
   }
 }

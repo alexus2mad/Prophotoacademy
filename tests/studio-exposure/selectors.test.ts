@@ -2,25 +2,25 @@ import { describe, expect, it } from 'vitest';
 import { studioExposureState } from '../../src/lib/studio-home/exposure';
 import type { StudioExposureGeometry } from '../../src/lib/studio-home/types';
 
-const desktop: StudioExposureGeometry = {
+const original: StudioExposureGeometry = {
   top: 0,
   height: 1350,
-  viewportHeight: 900,
-  mobile: false,
+  stageHeight: 900,
   reducedMotion: false,
 };
-const mobile = { ...desktop, height: 286, viewportHeight: 844, mobile: true };
-const mobileAt = (transition: number) => ({
-  ...mobile,
-  top: mobile.viewportHeight * 0.55 - transition * (mobile.height + mobile.viewportHeight * 0.2),
-});
 
-describe('artifact exposure choreography', () => {
-  it('slows the desktop scene by four through its runway without changing the exposure curve', () => {
-    const slower = { ...desktop, height: desktop.viewportHeight * 3 };
-    expect(studioExposureState({ ...desktop, top: -180 }).progress).toBe(0.5);
-    expect(studioExposureState({ ...slower, top: -180 }).progress).toBe(0.125);
-    expect(studioExposureState({ ...desktop, top: -360 }).progress).toBe(1);
+describe('shared cinematic exposure choreography', () => {
+  it('preserves fractional scroll motion instead of quantizing the short title phases', () => {
+    const geometry = { ...original, stageHeight: 844, height: 2532 };
+    const first = studioExposureState({ ...geometry, top: -1200 }).progress;
+    const next = studioExposureState({ ...geometry, top: -1200.1 }).progress;
+    expect(next - first).toBeGreaterThan(0);
+    expect(next - first).toBeLessThan(0.0001);
+  });
+
+  it('retains the four-times-slower runway and holds the original title through the midpoint', () => {
+    const slower = { ...original, height: original.stageHeight * 3 };
+    expect(studioExposureState({ ...original, top: -360 }).progress).toBe(1);
     expect(studioExposureState({ ...slower, top: -360 }).progress).toBe(0.25);
     expect(studioExposureState({ ...slower, top: -720 })).toMatchObject({
       progress: 0.5,
@@ -28,96 +28,56 @@ describe('artifact exposure choreography', () => {
       value: '−1.5 EV',
     });
     expect(studioExposureState({ ...slower, top: -1440 }).progress).toBe(1);
-    expect(
-      [-1440, -1080, -720, 0].map((top) => studioExposureState({ ...slower, top }).progress),
-    ).toEqual([1, 0.75, 0.5, 0]);
-  });
-  it('stays dark on entry and fills over 80% of the desktop sticky runway', () => {
-    expect(studioExposureState({ ...desktop, top: 600 })).toMatchObject({
-      progress: 0,
-      activeBars: 0,
-      redBars: 0,
-      value: '−3.0 EV',
-    });
-    expect(studioExposureState({ ...desktop, top: -180 })).toMatchObject({
-      progress: 0.5,
-      activeBars: 17,
-      redBars: 0,
-      value: '−1.5 EV',
-    });
-    expect(studioExposureState({ ...desktop, top: -360 })).toMatchObject({
-      progress: 1,
-      activeBars: 33,
-      redStart: 27,
-      redBars: 6,
-      value: '0.0 EV',
-    });
-    expect(studioExposureState({ ...desktop, top: -900 }).progress).toBe(1);
   });
 
-  it('reverses with scrolling rather than retaining the highest exposure', () => {
-    const values = [-360, -180, 0].map((top) => studioExposureState({ ...desktop, top }).progress);
-    expect(values).toEqual([1, 0.5, 0]);
-  });
-
-  it('reproduces the observed mobile white fill and then red fill with one EV reading', () => {
-    expect(studioExposureState(mobileAt(0))).toMatchObject({
-      transition: 0,
-      activeBars: 0,
-      redBars: 0,
-      value: '0.0 EV',
-    });
-    expect(studioExposureState(mobileAt(0.331))).toMatchObject({
-      transition: 0.331,
-      activeBars: 24,
-      redBars: 0,
-      value: '+1.1 EV',
-    });
-    expect(studioExposureState(mobileAt(0.625))).toMatchObject({
-      transition: 0.625,
-      activeBars: 33,
-      redBars: 17,
-      redStart: 0,
-      value: '+2.3 EV',
-    });
-    expect(studioExposureState(mobileAt(1))).toMatchObject({
-      transition: 1,
-      activeBars: 33,
-      redBars: 33,
-      value: '+3.0 EV',
-    });
-    expect(studioExposureState(mobileAt(0)).redBars).toBe(0);
-  });
-
-  it('uses stable desktop exposure and a discrete mobile transition for reduced motion', () => {
-    expect(studioExposureState({ ...desktop, top: 900, reducedMotion: true })).toMatchObject({
-      progress: 1,
-      value: '0.0 EV',
-    });
-    expect(studioExposureState({ ...mobile, top: 500, reducedMotion: true })).toMatchObject({
-      transition: 0,
-      activeBars: 33,
-      redBars: 0,
-      value: '+1.5 EV',
-    });
-    expect(studioExposureState({ ...mobile, top: 100, reducedMotion: true })).toMatchObject({
-      transition: 1,
-      redBars: 33,
-      value: '+3.0 EV',
-    });
-  });
-
-  it('keeps values finite during zero-size layout and breakpoint changes', () => {
-    for (const isMobile of [false, true]) {
-      const result = studioExposureState({
-        ...desktop,
-        height: 0,
-        viewportHeight: 0,
-        mobile: isMobile,
+  it('uses the same photo, meter and title progress at phone and desktop stage sizes', () => {
+    for (const stageHeight of [640, 844, 900]) {
+      const geometry = { ...original, height: stageHeight * 3, stageHeight };
+      expect(studioExposureState({ ...geometry, top: 200 })).toMatchObject({
+        progress: 0,
+        activeBars: 0,
+        redBars: 0,
+        value: '−3.0 EV',
       });
-      expect(Number.isFinite(result.progress)).toBe(true);
-      expect(Number.isFinite(result.transition)).toBe(true);
-      expect(result.value).not.toContain('NaN');
+      expect(studioExposureState({ ...geometry, top: -stageHeight * 0.8 })).toMatchObject({
+        progress: 0.5,
+        activeBars: 17,
+        redBars: 0,
+        value: '−1.5 EV',
+      });
+      expect(studioExposureState({ ...geometry, top: -stageHeight * 1.6 })).toMatchObject({
+        progress: 1,
+        activeBars: 33,
+        redStart: 27,
+        redBars: 6,
+        value: '0.0 EV',
+      });
     }
+  });
+
+  it('starts when the section reaches its safe-area sticky offset and reverses exactly', () => {
+    const geometry = { ...original, height: 2700, stickyOffset: 24 };
+    expect(studioExposureState({ ...geometry, top: 24 }).progress).toBe(0);
+    expect(studioExposureState({ ...geometry, top: 24 - 720 }).progress).toBe(0.5);
+    expect(
+      [24 - 1440, 24 - 720, 24].map((top) => studioExposureState({ ...geometry, top }).progress),
+    ).toEqual([1, 0.5, 0]);
+  });
+
+  it('renders a fully exposed static scene with reduced motion regardless of scroll position', () => {
+    for (const top of [900, 0, -720, -1800]) {
+      expect(studioExposureState({ ...original, top, reducedMotion: true })).toMatchObject({
+        progress: 1,
+        activeBars: 33,
+        redBars: 6,
+        value: '0.0 EV',
+      });
+    }
+  });
+
+  it('keeps progress finite before layout is measurable', () => {
+    const result = studioExposureState({ ...original, height: 0, stageHeight: 0 });
+    expect(Number.isFinite(result.progress)).toBe(true);
+    expect(result.value).not.toContain('NaN');
   });
 });

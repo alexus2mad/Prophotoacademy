@@ -6,20 +6,13 @@ import styles from './StudioExposureTitle.module.css';
 
 const words = ['важливо,', 'як', 'ви', 'це', 'робите'];
 
-export function StudioExposureTitle({ progress, transition, ready }: StudioExposureTitleProps) {
+export function StudioExposureTitle({ progress, ready }: StudioExposureTitleProps) {
   const { root, layout } = useStudioExposureTitle();
-  const position = layout?.mobile ? transition : progress;
-  const morphing = ready && !!layout?.eligible && !layout.reducedMotion && position > 0.5;
-  const phase = exposureTitlePhase(morphing ? position : 0);
+  const morphing = ready && !!layout?.eligible && !layout.reducedMotion && progress > 0.5;
+  const phase = exposureTitlePhase(morphing ? progress : 0);
   const style: ExposureTitleStyle = { '--removed-opacity': phase.removedOpacity };
   return (
-    <div
-      className={styles.title}
-      ref={root}
-      style={style}
-      data-title-morphing={morphing}
-      data-title-ink={ready && transition >= 0.45}
-    >
+    <div className={styles.title} ref={root} style={style} data-title-morphing={morphing}>
       <h2 id="exposure-title" className={styles.source}>
         <span className={styles.removed}>не</span>
         <span data-title-source-word>{words[0]}</span>{' '}
@@ -34,7 +27,7 @@ export function StudioExposureTitle({ progress, transition, ready }: StudioExpos
       <div className={styles.copies} aria-hidden="true">
         {words.map((word, index) => {
           const translation = layout
-            ? exposureWordTranslation(layout.words[index], position)
+            ? exposureWordTranslation(layout.words[index], progress)
             : { x: 0, y: 0 };
           return (
             <span

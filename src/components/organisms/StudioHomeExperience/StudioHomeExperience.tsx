@@ -12,11 +12,7 @@ export function StudioHomeExperience({ directions, children }: StudioHomeExperie
     <div className={styles.home} data-home-mode={mode}>
       <StudioHomeHero mode={mode} onModeChange={setMode} />
       <StudioHomeExposure section={section} exposure={exposure} ready={ready} />
-      <StudioHomeDirections
-        mode={mode}
-        directions={directions}
-        transition={ready ? exposure.transition : undefined}
-      />
+      <StudioHomeDirections mode={mode} directions={directions} />
       {children}
     </div>
   );

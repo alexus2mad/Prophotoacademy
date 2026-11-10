@@ -187,6 +187,13 @@
   white-space: nowrap;
 }
 @media (max-width: 760px) {
+  /* Keep both eyes in view when the landscape portraits fill a narrow screen. */
+  .image[data-hero-visual='academy-1'] img {
+    object-position: 70% 50%;
+  }
+  .image[data-hero-visual='academy-2'] img {
+    object-position: 77% 50%;
+  }
   .panorama img {
     width: 100%;
   }

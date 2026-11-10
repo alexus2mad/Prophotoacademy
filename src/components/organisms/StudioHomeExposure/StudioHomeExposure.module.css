@@ -1,12 +1,13 @@
 .exposure {
-  /* A 100vh stage plus 200vh runway makes the original 50vh runway four times slower. */
+  /* A stable stage plus 200svh runway keeps the four-times-slower exposure pace. */
   height: 300vh;
+  height: 300svh;
   position: relative;
   background: #000;
 }
 .stage {
   position: sticky;
-  top: env(safe-area-inset-top, 0px);
+  top: 0;
   height: 100vh;
   height: 100svh;
   overflow: hidden;
@@ -65,41 +66,24 @@
   background: #eb423b;
 }
 @media (max-width: 760px) {
-  .exposure {
-    height: auto;
-    background: color-mix(in srgb, #fbfbfb calc(var(--exposure-transition, 0) * 100%), #000);
-  }
-  .stage {
-    position: relative;
-    top: 0;
-    height: auto;
-    overflow: visible;
-  }
-  .image,
   .stage::before {
-    display: none;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.32),
+      rgba(0, 0, 0, 0.45) 50%,
+      rgba(0, 0, 0, 0.2) 72%,
+      rgba(0, 0, 0, 0.4)
+    );
   }
   .inner {
-    padding-top: 40px;
+    padding-top: calc(96px + env(safe-area-inset-top, 0px));
   }
   .meter {
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 0;
-  }
-  .meterLabel {
-    order: 2;
-    margin: 10px 0 0;
-    color: color-mix(
-      in srgb,
-      #0a0807 calc(var(--exposure-transition, 0) * 100%),
-      rgba(251, 251, 251, 0.72)
-    );
+    padding-bottom: max(24px, env(safe-area-inset-bottom, 0px));
   }
   .bars {
     height: 64px;
     gap: 2px;
-    margin-top: 22px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -109,5 +93,14 @@
   .stage {
     position: relative;
     top: 0;
+    height: auto;
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+  .inner {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100svh;
+    gap: 48px;
   }
 }

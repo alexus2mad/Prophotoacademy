@@ -9,12 +9,12 @@ import styles from './StudioHomeExposure.module.css';
 export function StudioHomeExposure({ section, exposure, ready = false }: StudioHomeExposureProps) {
   const style: StudioExposureStyle = {
     '--exposure-progress': exposure.progress,
-    '--exposure-transition': exposure.transition,
   };
   return (
     <section
       className={styles.exposure}
       data-home-section="exposure"
+      data-header-tone="dark"
       data-exposure-ready={ready}
       ref={section}
       style={style}
@@ -29,11 +29,7 @@ export function StudioHomeExposure({ section, exposure, ready = false }: StudioH
           sizes="100vw"
         />
         <div className={`${styles.inner} studio-wrap`}>
-          <StudioExposureTitle
-            progress={exposure.progress}
-            transition={exposure.transition}
-            ready={ready}
-          />
+          <StudioExposureTitle progress={exposure.progress} ready={ready} />
           <div className={styles.meter} data-exposure-meter aria-hidden="true">
             <div className={styles.meterLabel}>
               <span>Експозиція</span>

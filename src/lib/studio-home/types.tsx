@@ -5,13 +5,12 @@ export type StudioHomeMode = 'studio' | 'academy' | 'shop';
 export type StudioExposureGeometry = {
   top: number;
   height: number;
-  viewportHeight: number;
-  mobile: boolean;
+  stageHeight: number;
+  stickyOffset?: number;
   reducedMotion: boolean;
 };
 export type StudioExposureState = {
   progress: number;
-  transition: number;
   activeBars: number;
   redBars: number;
   redStart: number;

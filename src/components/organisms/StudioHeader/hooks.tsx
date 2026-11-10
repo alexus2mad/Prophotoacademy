@@ -33,11 +33,7 @@ export function useStudioHeader() {
         const surface = underneath?.closest(
           '[data-header-tone], [data-home-section], .studio-dark, .studio-light, .studio-form-section, .studio-footer',
         );
-        next[control.dataset.headerControl!] = headerUsesInk(
-          surface ?? undefined,
-          window.innerWidth <= 760,
-          !darkHero,
-        );
+        next[control.dataset.headerControl!] = headerUsesInk(surface ?? undefined, !darkHero);
       }
       setControlTones((current) =>
         Object.keys(next).every((key) => current[key] === next[key]) ? current : next,

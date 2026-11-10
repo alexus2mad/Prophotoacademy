@@ -8,5 +8,4 @@ export type StudioHomeExposureProps = {
 };
 export type StudioExposureStyle = CSSProperties & {
   '--exposure-progress': number;
-  '--exposure-transition': number;
 };

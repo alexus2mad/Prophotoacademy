@@ -1,17 +1,16 @@
 import Link from 'next/link';
 import { StudioHomeDirectionCard } from '@/components/molecules/StudioHomeDirectionCard/StudioHomeDirectionCard';
 import { studioHomeRooms } from '@/lib/studio-home/selectors';
-import type { StudioDirectionsStyle, StudioHomeDirectionsProps } from './types';
+import type { StudioHomeDirectionsProps } from './types';
 import styles from './StudioHomeDirections.module.css';
 
-export function StudioHomeDirections({ mode, directions, transition }: StudioHomeDirectionsProps) {
+export function StudioHomeDirections({ mode, directions }: StudioHomeDirectionsProps) {
   const isStudio = mode === 'studio';
-  const style: StudioDirectionsStyle = { '--exposure-transition': transition };
   return (
     <section
       data-home-section="directions"
+      data-header-tone="light"
       className={`${styles.section} studio-light`}
-      style={style}
       aria-labelledby="home-directions-title"
     >
       <div className={`${styles.heading} studio-wrap`}>

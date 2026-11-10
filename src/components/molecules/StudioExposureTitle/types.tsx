@@ -2,7 +2,6 @@ import type { CSSProperties } from 'react';
 
 export type StudioExposureTitleProps = {
   progress: number;
-  transition: number;
   ready: boolean;
 };
 export type ExposureWordPoint = { x: number; y: number };
@@ -12,7 +11,6 @@ export type ExposureWordPosition = {
 };
 export type ExposureTitleLayout = {
   words: ExposureWordPosition[];
-  mobile: boolean;
   reducedMotion: boolean;
   eligible: boolean;
 };

@@ -10,8 +10,7 @@ it('connects the photo stage and meter to the same desktop exposure', () => {
   const exposure = studioExposureState({
     top: -180,
     height: 1350,
-    viewportHeight: 900,
-    mobile: false,
+    stageHeight: 900,
     reducedMotion: false,
   });
   const $ = load(
@@ -28,12 +27,11 @@ it('connects the photo stage and meter to the same desktop exposure', () => {
   expect($('h2').attr('id')).toBe($('section').attr('aria-labelledby'));
 });
 
-it('shares the mobile transition with directions while coloring all 33 bars at completion', () => {
+it('keeps the mobile photo stage dark-toned and leaves following directions on readable paper', () => {
   const exposure = studioExposureState({
-    top: -100,
-    height: 286,
-    viewportHeight: 844,
-    mobile: true,
+    top: -1350.4,
+    height: 2532,
+    stageHeight: 844,
     reducedMotion: false,
   });
   const $ = load(
@@ -46,13 +44,15 @@ it('shares the mobile transition with directions while coloring all 33 bars at c
       createElement(StudioHomeDirections, {
         mode: 'academy',
         directions: [],
-        transition: exposure.transition,
       }),
     ),
   );
-  expect($('i[class*=hot]')).toHaveLength(33);
-  expect($('[aria-hidden=true]').text()).toContain('+3.0 EV');
-  expect(directions('section').attr('style')).toBe('--exposure-transition:1');
+  expect($('i[class*=hot]')).toHaveLength(6);
+  expect($('[aria-hidden=true]').text()).toContain('0.0 EV');
+  expect($('section').attr('data-header-tone')).toBe('dark');
+  expect($('[data-exposure-stage] img')).toHaveLength(1);
+  expect(directions('section').attr('style')).toBeUndefined();
+  expect(directions('section').attr('data-header-tone')).toBe('light');
   expect(directions('a').attr('href')).toBe('/academy');
 });
 
@@ -69,8 +69,7 @@ it('keeps the original semantic title visible until word geometry is ready', () 
   const exposure = studioExposureState({
     top: 0,
     height: 1,
-    viewportHeight: 1,
-    mobile: false,
+    stageHeight: 1,
     reducedMotion: true,
   });
   const render = (ready?: boolean) =>

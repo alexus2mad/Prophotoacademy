@@ -9,8 +9,7 @@ export function useStudioHomeExposure(mode: StudioHomeMode) {
     studioExposureState({
       top: 0,
       height: 1,
-      viewportHeight: 1,
-      mobile: false,
+      stageHeight: 1,
       reducedMotion: true,
     }),
   );
@@ -18,8 +17,9 @@ export function useStudioHomeExposure(mode: StudioHomeMode) {
   useEffect(() => {
     const element = section.current;
     if (!element) return;
+    const stage = element.querySelector<HTMLElement>('[data-exposure-stage]');
+    if (!stage) return;
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const mobile = window.matchMedia('(max-width: 760px)');
     let frame = 0;
     let disposed = false;
     const measure = () => {
@@ -29,13 +29,14 @@ export function useStudioHomeExposure(mode: StudioHomeMode) {
       const next = studioExposureState({
         top: bounds.top,
         height: bounds.height,
-        viewportHeight: window.innerHeight,
-        mobile: mobile.matches,
+        // svh fixes the runway while mobile browser chrome expands or retracts.
+        // Neither a changing visual viewport nor the floating header defines it.
+        stageHeight: stage.getBoundingClientRect().height,
+        stickyOffset: Number.parseFloat(window.getComputedStyle(stage).top) || 0,
         reducedMotion: motion.matches,
       });
       setExposure((previous) =>
         previous.progress === next.progress &&
-        previous.transition === next.transition &&
         previous.activeBars === next.activeBars &&
         previous.redBars === next.redBars &&
         previous.redStart === next.redStart &&
@@ -58,9 +59,9 @@ export function useStudioHomeExposure(mode: StudioHomeMode) {
     window.addEventListener('pageshow', synchronize);
     document.addEventListener('visibilitychange', synchronize);
     motion.addEventListener('change', synchronize);
-    mobile.addEventListener('change', synchronize);
     const observer = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(update);
     observer?.observe(element);
+    observer?.observe(stage);
     measure();
     return () => {
       disposed = true;
@@ -69,7 +70,6 @@ export function useStudioHomeExposure(mode: StudioHomeMode) {
       window.removeEventListener('pageshow', synchronize);
       document.removeEventListener('visibilitychange', synchronize);
       motion.removeEventListener('change', synchronize);
-      mobile.removeEventListener('change', synchronize);
       observer?.disconnect();
       window.cancelAnimationFrame(frame);
     };

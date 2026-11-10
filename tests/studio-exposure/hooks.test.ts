@@ -10,7 +10,7 @@ const lifecycle = vi.hoisted(() => ({
   states: [] as unknown[],
   effects: [] as ExposureEffect[],
   pending: [] as PendingExposureEffect[],
-  section: { current: { getBoundingClientRect: vi.fn() } },
+  section: { current: { getBoundingClientRect: vi.fn(), querySelector: vi.fn() } },
 }));
 vi.mock('react', () => ({
   useRef: () => lifecycle.section,
@@ -50,10 +50,13 @@ class Observer {
     Observer.instances.push(this);
   }
 }
-let reduced: Preference, mobile: Preference;
+let reduced: Preference;
 let browser = Object.assign(new EventTarget(), { innerHeight: 900 });
 let documentState = Object.assign(new EventTarget(), { hidden: false });
 let bounds = { top: 0, height: 1350 };
+let stageHeight = 900;
+let stickyOffset = 0;
+const stage = { getBoundingClientRect: () => ({ height: stageHeight }) };
 const frames = new Map<number, FrameRequestCallback>();
 const render = (mode: StudioHomeMode = 'academy') => {
   lifecycle.stateIndex = 0;
@@ -80,18 +83,21 @@ beforeEach(() => {
   lifecycle.effects = [];
   lifecycle.pending = [];
   reduced = new Preference();
-  mobile = new Preference();
   browser = Object.assign(new EventTarget(), { innerHeight: 900 });
   documentState = Object.assign(new EventTarget(), { hidden: false });
   bounds = { top: 0, height: 1350 };
+  stageHeight = 900;
+  stickyOffset = 0;
   lifecycle.section.current.getBoundingClientRect.mockReset().mockImplementation(() => bounds);
+  lifecycle.section.current.querySelector.mockReset().mockReturnValue(stage);
   Observer.instances = [];
   frames.clear();
   let nextFrame = 0;
   vi.stubGlobal(
     'window',
     Object.assign(browser, {
-      matchMedia: (query: string) => (query.includes('reduce') ? reduced : mobile),
+      matchMedia: () => reduced,
+      getComputedStyle: () => ({ top: `${stickyOffset}px` }),
       requestAnimationFrame: (callback: FrameRequestCallback) => {
         frames.set(++nextFrame, callback);
         return nextFrame;
@@ -146,17 +152,38 @@ it('cancels queued animation before applying reduced motion and recalculates whe
   expect(render().exposure.progress).toBe(0.5);
 });
 
-it('recalculates the mobile choreography on a breakpoint change and a measured content resize', () => {
+it('ignores mobile toolbar height changes and recalculates only from the rendered stage geometry', () => {
+  bounds = { top: -675.2, height: 2532 };
+  stageHeight = 844;
   render();
+  const before = render().exposure;
+  expect(before.progress).toBe(0.5);
+  browser.innerHeight = 744;
+  browser.dispatchEvent(new Event('resize'));
+  flush();
+  expect(render().exposure).toBe(before);
   browser.innerHeight = 844;
-  bounds = { top: -100, height: 286 };
-  mobile.set(true);
-  expect(render().exposure).toMatchObject({ transition: 1, redBars: 33, value: '+3.0 EV' });
-  bounds = { top: 400, height: 300 };
+  browser.dispatchEvent(new Event('resize'));
+  flush();
+  expect(render().exposure).toBe(before);
+  // A real orientation/layout change updates both the CSS stage and section.
+  bounds = { top: -512, height: 1920 };
+  stageHeight = 640;
   Observer.instances[0].notify();
   flush();
-  expect(render().exposure.transition).toBeCloseTo(0.137);
-  expect(render().exposure.redBars).toBe(0);
+  expect(render().exposure.progress).toBe(0.5);
+  expect(Observer.instances[0].observe).toHaveBeenCalledWith(stage);
+});
+
+it('accounts for a fixed safe-area offset without depending on header dimensions', () => {
+  stickyOffset = 24;
+  bounds.top = 24 - 180;
+  render();
+  expect(render().exposure.progress).toBe(0.5);
+  stickyOffset = 0;
+  browser.dispatchEvent(new Event('resize'));
+  flush();
+  expect(render().exposure.progress).toBeCloseTo(0.433);
 });
 
 it('resynchronizes on browser-tab return and back-forward restoration', () => {
