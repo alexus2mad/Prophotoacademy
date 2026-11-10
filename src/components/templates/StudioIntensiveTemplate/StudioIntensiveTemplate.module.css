@@ -107,45 +107,14 @@
   gap: 12px;
   max-width: 737.2px;
   margin: 0 auto;
+  scroll-margin-top: 88px;
 }
-.prices > div {
-  border-radius: 32px;
-  border: 1px solid rgb(255 255 255 / 28%);
-  padding: 16px 24px 30px;
-  min-height: 145.4px;
-}
-.prices > div:first-child {
-  border-color: #1c1816;
-  background: #1c1816;
-}
-.prices span {
-  display: block;
-  font-size: 11px;
-  line-height: 11px;
-  font-weight: 700;
-  letter-spacing: 1.76px;
-  text-transform: uppercase;
+.purchaseNotice {
+  margin: 16px auto 0;
+  max-width: 737.2px;
   color: #a9a5a2;
-}
-.prices p {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin: 0;
-}
-.prices strong {
-  font-size: 86.4px;
-  font-weight: 1000;
-  line-height: 1;
-  letter-spacing: -0.02em;
-}
-.prices sup {
-  margin-top: 15px;
   font-size: 14px;
-  line-height: 1;
-  font-weight: 700;
-  letter-spacing: 1.12px;
-  text-transform: uppercase;
+  line-height: 1.5;
 }
 .practice {
   color: #a9a5a2;
@@ -155,7 +124,7 @@
   text-transform: uppercase;
   margin: 15px 0 38px;
 }
-.announcement h3 {
+.requirementsTitle {
   font-size: 28px;
   font-weight: 200;
   line-height: 1.2;
@@ -343,26 +312,10 @@
   .prices {
     gap: 10px;
   }
-  .prices > div {
-    min-height: 93px;
-    border-radius: 24px;
-    padding: 14px 8px 24px;
-  }
-  .prices strong {
-    font-size: 38px;
-  }
-  .prices p {
-    gap: 6px;
-    margin-top: 5px;
-  }
-  .prices sup {
-    font-size: 11px;
-    margin-top: 6px;
-  }
   .practice {
     margin-bottom: 38px;
   }
-  .announcement h3 {
+  .requirementsTitle {
     font-size: 20px;
     letter-spacing: 1.2px;
   }

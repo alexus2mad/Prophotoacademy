@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { guardMutation, jsonBody, errorResponse, HttpError } from '@/lib/http';
-import { orderByToken, updateOrder } from '@/lib/ledger';
+import { orderByToken, updateOrder } from '@/lib/commerce/orders';
 export const runtime = 'nodejs';
 export async function POST(request: Request) {
   try {
@@ -14,9 +14,9 @@ export async function POST(request: Request) {
       .strict()
       .safeParse(await jsonBody(request));
     if (!input.success) throw new HttpError(400, 'Invalid mock request');
-    const order = orderByToken(input.data.token);
+    const order = await orderByToken(input.data.token);
     if (!order || order.mode !== 'mock') throw new HttpError(404, 'Order not found');
-    const result = updateOrder(order.id, input.data.status);
+    const result = await updateOrder(order.id, input.data.status);
     return Response.json({ status: result.status }, { headers: { 'Cache-Control': 'no-store' } });
   } catch (error) {
     return errorResponse(error);

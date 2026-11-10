@@ -4,11 +4,11 @@ The owner requested payment-disabled enrollment on 12 October 2026. This is an e
 
 ## Modes
 
-| Server setting | Result |
-| --- | --- |
-| `PAYMENT_MODE=mock` (default) | Checkout demonstration only, no learning access |
-| `PAYMENT_MODE=disabled` | Real test enrollment with zero amount due and no financial transaction |
-| `PAYMENT_MODE=wayforpay` | Provider checkout; only verified callbacks grant access |
+| Server setting                | Result                                                                 |
+| ----------------------------- | ---------------------------------------------------------------------- |
+| `PAYMENT_MODE=mock` (default) | Checkout demonstration only, no learning access                        |
+| `PAYMENT_MODE=disabled`       | Real test enrollment with zero amount due and no financial transaction |
+| `PAYMENT_MODE=wayforpay`      | Provider checkout; only verified callbacks grant access                |
 
 Never infer free access from missing provider keys. Unknown modes fail closed. Browser input cannot choose a mode, price, course rights or access duration. Existing orders retain their original mode.
 
@@ -35,11 +35,15 @@ Exact submission retries return the same order. A new submission for the same em
 
 These follow the original Webflow site's payment flow, with prices and discounts decided by the server.
 
-**Product packages.** A package with `kind: "product"` is a paid item without lessons: an event ticket such as Pro Photo Lab, or a service. It needs no package rule in course authoring and never creates a grant. Its verified payment is recorded as a transaction and payment event like any order; the buyer receives an “Оплату підтверджено” email and status page instead of a course link. Products are sold only in `wayforpay` mode, under the ordinary paid-mode checks: confirmed intake (`verificationRequired: false`), `open`/`limited` availability and a start date that has not passed. To sell tickets for the next event, add an offering with those values and product packages to the content; the finished 26 September 2026 event stays archived.
+**Product packages.** A package with `kind: "product"` is a paid item without lessons: an event ticket such as Pro Photo Lab, or a service. It needs no package rule in course authoring and never creates a grant. Its verified payment is recorded as a transaction and payment event like any order; the buyer receives an “Оплату підтверджено” email and status page instead of a course link. Real product sales use `wayforpay` mode, under the ordinary paid-mode checks: confirmed intake (`verificationRequired: false`), `open`/`limited` availability and a start date that has not passed. `mock` exposes the same eligible packages for a clearly labeled checkout demonstration, without charging, issuing tickets, sending receipts or granting access. `disabled` continues to exclude products. To sell tickets for the next event, add an offering with those values and product packages to the content; the finished 26 September 2026 event stays archived.
 
-**Courses with team-granted access.** In `wayforpay` mode a course package without a package rule is still sold, as on the original site: the verified payment is recorded and announced (Make.com/Telegram), and the buyer's email and status page say the team will open access. Managers then grant it through the ps-booking student management. Packages with a rule (currently Visual BASE) keep granting their lessons automatically. Zero-charge test enrollment still requires published, mapped lessons.
+**Courses with team-granted access.** In `wayforpay` mode a course package without a package rule is still sold, as on the original site: the verified payment is recorded and announced (Make.com/Telegram), and the buyer's email and status page say the team will open access. Managers then grant it through Academy admin → Студенти. Packages with a rule keep granting their assigned lessons automatically. Zero-charge test enrollment still requires published, mapped lessons.
 
-**Selling after the start date.** Live cohorts close on their start date. An offering marked `openAfterStart: true` (recorded or self-paced intakes; Sanity: "Keep selling after the start date") stays purchasable afterwards; its start date still shows. On 17 October 2026 the catalog was aligned with the original site: Visual (BASE open, PLATINUM limited, open after start), Food (BASE open, PLATINUM limited) and SMM BASE (open after start) are sold; every GOLD and SMM PLATINUM EXPERT is sold out; the finished Pro Photo Lab event sells no tickets.
+**Selling after the start date.** Live cohorts stop accepting purchases after their start date. An offering marked `openAfterStart: true` (Sanity: "Keep selling after the start date") stays purchasable afterwards; its start date still shows. This flag alone does not establish whether delivery is recorded, self-paced or an ongoing cohort. Confirm late enrollment before enabling it. Package prices and availability come from the active environment's content, not a historical release or another environment.
+
+**Studio-designed product pages.** Existing course pages reuse `ProgramPackages` and the production checkout service. AI Artwork resolves its real program by `slug: "ai-artwork"`, selects its offering and reads runtime `enrollmentOptions`. Eligible formats have distinct links to `/checkout?offering=...&package=...`; hero/mobile actions lead to the format selector without choosing a package. Missing or unavailable offers retain the inquiry flow. Design-reference prices never create orders on their own. Studio reservations continue through ps-booking, and equipment purchases remain with the equipment shop.
+
+**Staging boundary.** Staging remains explicitly `mock` unless a separate rollout is approved and configured. Its mock controls use the same PostgreSQL/SQLite adapter as checkout; they cannot alter a stored real-payment order. Local status jobs are suppressed by the notification worker and never create financial records. Do not copy production merchant secrets or redirect checkout blindly: product prices/statuses may differ, and the historical staging WayForPay callback currently routes to production. See [staging isolation](STAGING_ISOLATION.md).
 
 **Test payment.** `/checkout?offering=test-payment&package=test-1uah` charges a real 1 UAH for an end-to-end check of the merchant, callback, receipt email and cashbox. It is defined in code, linked from nowhere, never indexed, grants nothing, and exists only in `wayforpay` mode. Refund test payments from the WayForPay merchant cabinet.
 

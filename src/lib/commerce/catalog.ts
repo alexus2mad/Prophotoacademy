@@ -12,7 +12,7 @@ export async function enrollmentOptions(offering?: Offering): Promise<Enrollment
     return {
       mode,
       packageIds: offering.packages
-        .filter((pack) => !isProduct(pack) && canEnroll(offering, pack))
+        .filter((pack) => canEnroll(offering, pack))
         .map((pack) => pack.id),
     };
   if (!managedDatabase()) return { mode, packageIds: [] };

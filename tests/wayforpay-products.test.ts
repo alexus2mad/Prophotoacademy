@@ -7,10 +7,12 @@ import { POST as checkout } from '../src/app/api/checkout/route';
 import { POST as promoPreview } from '../src/app/api/checkout/promo/route';
 import { POST as widgetEvent } from '../src/app/api/checkout/events/route';
 import { POST as callback } from '../src/app/api/payments/wayforpay/callback/route';
+import { POST as simulatePayment } from '../src/app/api/payments/mock/route';
 import { GET as orderStatus } from '../src/app/api/orders/status/route';
 import { savePromoCode, discountedAmount, deletePromoCode } from '../src/lib/commerce/promo';
 import { resolvePurchase, testProduct } from '../src/lib/checkout';
 import { enrollmentOptions } from '../src/lib/commerce/catalog';
+import { deliverNotifications } from '../src/lib/notifications/delivery';
 import { canEnroll } from '../src/lib/format';
 import { sign } from '../src/lib/wayforpay';
 import type { SqlConnection } from '../src/lib/database/types';
@@ -162,6 +164,76 @@ afterAll(async () => {
 });
 
 describe('ticket and service products', () => {
+  it('previews eligible tickets in mock mode without payments, receipts or learning access', async () => {
+    vi.stubEnv('PAYMENT_MODE', 'mock');
+    const offering = content.offerings.find((item) => item.id === 'offering-lab-next')!;
+    expect(await enrollmentOptions(offering)).toEqual({
+      mode: 'mock',
+      packageIds: ['ticket-online'],
+    });
+    const input = payload();
+    const response = await checkout(post('/api/checkout', input));
+    const result = await response.json();
+    expect(response.status).toBe(200);
+    expect(result).toMatchObject({ mode: 'mock', url: `/thanks?token=${input.token}` });
+    expect(result.fields).toBeUndefined();
+    expect((await checkout(post('/api/checkout', input))).status).toBe(200);
+    expect((await pg.query('SELECT id FROM academy.orders')).rows).toHaveLength(1);
+    const simulated = await simulatePayment(
+      post('/api/payments/mock', { token: input.token, status: 'approved' }),
+    );
+    expect(simulated.status).toBe(200);
+    expect((await order()).status).toBe('approved');
+    for (const table of ['grants', 'transactions', 'payment_events']) {
+      expect((await pg.query(`SELECT * FROM academy.${table}`)).rows).toHaveLength(0);
+    }
+    expect(await events()).toHaveLength(0);
+    expect(await deliverNotifications()).toEqual({ delivered: 0 });
+    expect((await pg.query('SELECT state FROM academy.outbox')).rows).toEqual([{ state: 'local' }]);
+    const status = await orderStatus(
+      new Request(origin + '/api/orders/status?token=' + input.token),
+    );
+    expect(await status.json()).toMatchObject({
+      mode: 'mock',
+      productKind: 'product',
+      learningAccess: false,
+    });
+  });
+  it('keeps unavailable tickets out of mock checkout', async () => {
+    vi.stubEnv('PAYMENT_MODE', 'mock');
+    const offering = structuredClone(
+      content.offerings.find((item) => item.id === 'offering-lab-next')!,
+    );
+    offering.packages[0].availability = 'soldOut';
+    expect((await enrollmentOptions(offering)).packageIds).toEqual([]);
+    offering.packages[0].availability = 'open';
+    offering.verificationRequired = true;
+    expect((await enrollmentOptions(offering)).packageIds).toEqual([]);
+    offering.verificationRequired = false;
+    offering.startDate = '2000-01-01';
+    expect((await enrollmentOptions(offering)).packageIds).toEqual([]);
+  });
+  it('never lets mock controls alter a real payment order', async () => {
+    const input = payload();
+    expect((await checkout(post('/api/checkout', input))).status).toBe(200);
+    expect(
+      (
+        await simulatePayment(
+          post('/api/payments/mock', { token: input.token, status: 'approved' }),
+        )
+      ).status,
+    ).toBe(404);
+    vi.stubEnv('PAYMENT_MODE', 'mock');
+    expect(
+      (
+        await simulatePayment(
+          post('/api/payments/mock', { token: input.token, status: 'approved' }),
+        )
+      ).status,
+    ).toBe(404);
+    expect((await order()).status).toBe('pending');
+    expect((await pg.query('SELECT * FROM academy.transactions')).rows).toHaveLength(0);
+  });
   it('sells a ticket without a curriculum mapping and never grants learning access', async () => {
     const input = payload();
     const response = await checkout(post('/api/checkout', input));

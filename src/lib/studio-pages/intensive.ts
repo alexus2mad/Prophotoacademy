@@ -2,7 +2,8 @@ import type { InquiryContext } from '@/lib/inquiries/types';
 import type { AcademyContent } from '@/lib/content/types';
 import { findOffering } from '@/lib/content/selectors';
 import { programSchedule } from '@/lib/program-schedule';
-import type { StudioIntensiveBlock, StudioPoint } from './types';
+import type { EnrollmentOptions } from '@/lib/commerce/types';
+import type { StudioIntensiveBlock, StudioIntensivePrice, StudioPoint } from './types';
 
 export const studioIntensiveInquiry: InquiryContext = {
   title: 'Інтенсив «Від кадрів до AI artwork»',
@@ -10,20 +11,43 @@ export const studioIntensiveInquiry: InquiryContext = {
   source: 'consultation',
 };
 
-export function studioIntensiveOffer(content: AcademyContent) {
+export function studioIntensiveOffer(content: AcademyContent, enrollment?: EnrollmentOptions) {
   const program = content.programs.find((entry) => entry.slug === 'ai-artwork');
   const offering = program ? findOffering(content, program.id) : undefined;
   const schedule = program && offering ? programSchedule(program, offering) : undefined;
+  const prices: StudioIntensivePrice[] = offering?.packages.length
+    ? offering.packages.map((pack) => ({
+        id: pack.id,
+        label: pack.name,
+        price: pack.price,
+        purchaseUrl:
+          !pack.inquiryOnly && enrollment?.packageIds.includes(pack.id)
+            ? `/checkout?offering=${encodeURIComponent(offering.id)}&package=${encodeURIComponent(pack.id)}`
+            : undefined,
+        status:
+          pack.availability === 'soldOut'
+            ? 'Місць немає'
+            : pack.availability === 'archived' || offering.availability === 'archived'
+              ? 'Продаж завершено'
+              : undefined,
+      }))
+    : [
+        { id: 'reference-offline', label: 'Офлайн', price: 3900 },
+        { id: 'reference-online', label: 'Онлайн', price: 3000 },
+      ];
+  const purchaseAvailable = prices.some((price) => Boolean(price.purchaseUrl));
   return {
     inquiry: { ...studioIntensiveInquiry, programId: program?.id, offeringId: offering?.id },
     date: schedule ? `${schedule.label}: ${schedule.value}` : 'Дату уточнюємо',
-    prices: offering?.packages.length
-      ? offering.packages.map((pack) => ({ label: pack.name, price: pack.price }))
-      : [
-          { label: 'Офлайн', price: 3900 },
-          { label: 'Онлайн', price: 3000 },
-        ],
-    note: 'Умови участі підтвердимо після заявки',
+    prices,
+    purchaseAvailable,
+    purchaseNotice:
+      purchaseAvailable && enrollment?.mode === 'mock'
+        ? 'Тестове оформлення — без оплати й підтвердження участі'
+        : undefined,
+    note: purchaseAvailable
+      ? 'Маєте запитання про формат участі? Залиште контакт — допоможемо обрати.'
+      : 'Умови участі підтвердимо після заявки',
   };
 }
 

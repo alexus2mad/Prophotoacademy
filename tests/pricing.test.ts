@@ -161,7 +161,7 @@ describe('mock catalog enrollment', () => {
     },
   );
 
-  it('excludes closed, inquiry-only and non-course packages from mock checkout', async () => {
+  it('includes eligible tickets while excluding closed and inquiry-only packages from mock checkout', async () => {
     vi.stubEnv('PAYMENT_MODE', 'mock');
     vi.stubEnv('DATABASE_URL', '');
     const intake: Offering = {
@@ -177,7 +177,7 @@ describe('mock catalog enrollment', () => {
         { ...platinum, id: 'ticket', kind: 'product' },
       ],
     };
-    expect((await enrollmentOptions(intake)).packageIds).toEqual([platinum.id]);
+    expect((await enrollmentOptions(intake)).packageIds).toEqual([platinum.id, 'ticket']);
   });
 
   it('honors intake availability and verification in mock mode', async () => {

@@ -1,32 +1,7 @@
 'use client';
 import { useCallback, useEffect, useState } from 'react';
 import type { OrderStatusProps, Status } from './types';
-const labels = {
-  enrolled: [
-    'Тестовий запис збережено',
-    'Кошти не списувалися. Для перевірки поточного доступу увійдіть до кабінету або зверніться до академії',
-  ],
-  pending: [
-    'Очікуємо підтвердження',
-    'Щойно платіжна система підтвердить оплату, статус замовлення оновиться.',
-  ],
-  approved: [
-    'Ваше навчання починається',
-    'Оплату підтверджено. Команда академії зв’яжеться з вами для надання доступу та організаційних деталей.',
-  ],
-  declined: [
-    'Оплату не підтверджено',
-    'Платіж відхилено. Повторіть оформлення або зверніться до академії.',
-  ],
-  canceled: [
-    'Оплату скасовано',
-    'Кошти за цим замовленням не підтверджені. Ви можете обрати програму знову.',
-  ],
-  refunded: [
-    'Оплату повернено',
-    'Повернення підтверджено платіжною системою. За деталями зверніться до академії.',
-  ],
-};
+import { orderStatusLabel } from './selectors';
 export function useOrderStatus({ token }: OrderStatusProps) {
   const [order, setOrder] = useState<Status>();
   const [error, setError] = useState('');
@@ -71,20 +46,6 @@ export function useOrderStatus({ token }: OrderStatusProps) {
       setBusy(false);
     }
   }
-  const label = order?.learningAccess
-    ? [
-        'Ваш курс уже в кабінеті',
-        order.mode === 'disabled'
-          ? 'Доступ надано без оплати. Увійдіть за email, який ви вказали під час оформлення, і починайте навчання'
-          : 'Оплату підтверджено. Увійдіть за email, який ви вказали під час оформлення, і починайте навчання',
-      ]
-    : order?.productKind === 'product' && order.status === 'approved'
-      ? [
-          'Оплату підтверджено',
-          'Дякуємо! Підтвердження надіслано на ваш email, команда академії зв’яжеться з вами щодо деталей.',
-        ]
-      : order
-        ? labels[order.status]
-        : ['Перевіряємо замовлення', 'Зачекайте кілька секунд.'];
+  const label = orderStatusLabel(order);
   return { order, error, busy, refresh, simulate, label };
 }

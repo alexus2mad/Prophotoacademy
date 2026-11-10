@@ -1,5 +1,6 @@
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
-import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
+import { StudioIntensiveAction } from '@/components/molecules/StudioIntensiveAction/StudioIntensiveAction';
+import { StudioIntensivePackage } from '@/components/molecules/StudioIntensivePackage/StudioIntensivePackage';
 import { StudioMobileAction } from '@/components/molecules/StudioMobileAction/StudioMobileAction';
 import { StudioIntensiveProgram } from '@/components/organisms/StudioIntensiveProgram/StudioIntensiveProgram';
 import { StudioSpacesGallery } from '@/components/organisms/StudioSpacesGallery/StudioSpacesGallery';
@@ -13,8 +14,11 @@ import {
 import type { StudioIntensiveTemplateProps } from './types';
 import styles from './StudioIntensiveTemplate.module.css';
 
-export function StudioIntensiveTemplate({ content }: StudioIntensiveTemplateProps) {
-  const { inquiry, date, prices, note } = studioIntensiveOffer(content);
+export function StudioIntensiveTemplate({ content, enrollment }: StudioIntensiveTemplateProps) {
+  const { inquiry, date, prices, purchaseAvailable, purchaseNotice, note } = studioIntensiveOffer(
+    content,
+    enrollment,
+  );
   return (
     <>
       <section className={`${styles.hero} studio-dark`}>
@@ -43,9 +47,7 @@ export function StudioIntensiveTemplate({ content }: StudioIntensiveTemplateProp
             <span>{date}</span>
           </p>
           <div className={`${styles.heroActions} studio-actions`}>
-            <InquiryButton {...inquiry} className="studio-button">
-              Залишити заявку →
-            </InquiryButton>
+            <StudioIntensiveAction inquiry={inquiry} purchaseAvailable={purchaseAvailable} />
             <a href="#intensive-program" className="studio-button-outline">
               Програма
             </a>
@@ -60,28 +62,23 @@ export function StudioIntensiveTemplate({ content }: StudioIntensiveTemplateProp
           <p className={styles.when}>
             <span>{date}</span>
           </p>
-          <div className={styles.prices}>
-            {prices.map(({ label, price }) => (
-              <div key={label}>
-                <span>{label}</span>
-                <p>
-                  <strong>{price}</strong>
-                  <sup>грн</sup>
-                </p>
-              </div>
+          <div id="intensive-offers" className={styles.prices} aria-label="Формати участі">
+            {prices.map((option) => (
+              <StudioIntensivePackage key={option.id} option={option} />
             ))}
           </div>
+          {purchaseNotice && <p className={styles.purchaseNotice}>{purchaseNotice}</p>}
           <p className={styles.practice}>4–5 годин практики</p>
-          <h3>Photoshop + Firefly</h3>
+          <h3 className={styles.requirementsTitle}>Photoshop + Firefly</h3>
           <p className={styles.requirements}>
             Потрібен ноутбук із встановленим Adobe Photoshop та активними генеративними кредитами
             або підпискою Cloud Pro для роботи з Adobe Firefly.
           </p>
-          <div className={styles.announcementAction}>
-            <InquiryButton {...inquiry} className="studio-button">
-              Залишити заявку →
-            </InquiryButton>
-          </div>
+          {!purchaseAvailable && (
+            <div className={styles.announcementAction}>
+              <StudioIntensiveAction inquiry={inquiry} purchaseAvailable={false} />
+            </div>
+          )}
         </div>
       </section>
       <StudioIntensiveProgram />
@@ -150,12 +147,15 @@ export function StudioIntensiveTemplate({ content }: StudioIntensiveTemplateProp
         </div>
       </section>
       <div id="intensive-inquiry">
-        <StudioInquirySection title="Залиште" hand="заявку" description={note} context={inquiry} />
+        <StudioInquirySection
+          title={purchaseAvailable ? 'Маєте' : 'Залиште'}
+          hand={purchaseAvailable ? 'запитання' : 'заявку'}
+          description={note}
+          context={inquiry}
+        />
       </div>
       <StudioMobileAction spacing="spacious">
-        <InquiryButton {...inquiry} className="studio-button">
-          Залишити заявку →
-        </InquiryButton>
+        <StudioIntensiveAction inquiry={inquiry} purchaseAvailable={purchaseAvailable} />
       </StudioMobileAction>
     </>
   );
