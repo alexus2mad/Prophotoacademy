@@ -49,22 +49,26 @@
     flex-direction: column;
   }
 }
-@media (max-width: 700px) {
+@media (max-width: 760px) {
   .hero {
-    padding-top: 100px;
-    padding-bottom: 40px;
+    padding-top: 88px;
+    padding-bottom: 36px;
+  }
+  .label,
+  .intro .actions {
+    display: none;
+  }
+  .hero h1 {
+    margin-top: 0;
   }
   .intro p {
     font-size: 17px;
   }
   .jump {
-    gap: 18px;
-    font-size: 10px;
-  }
-  .hero h1 {
-    font-size: clamp(36px, 10.4vw, 70px);
-  }
-  .hero h1 span {
-    font-size: 48px;
+    justify-content: center;
+    gap: 6px 22px;
+    padding-block: 16px;
+    font-size: 11px;
+    line-height: 1.3;
   }
 }

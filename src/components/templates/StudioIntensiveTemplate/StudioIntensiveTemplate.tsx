@@ -1,5 +1,6 @@
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
 import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
+import { StudioMobileAction } from '@/components/molecules/StudioMobileAction/StudioMobileAction';
 import { StudioIntensiveProgram } from '@/components/organisms/StudioIntensiveProgram/StudioIntensiveProgram';
 import { StudioSpacesGallery } from '@/components/organisms/StudioSpacesGallery/StudioSpacesGallery';
 import { StudioInquirySection } from '@/components/organisms/StudioInquirySection/StudioInquirySection';
@@ -53,7 +54,7 @@ export function StudioIntensiveTemplate({ content }: StudioIntensiveTemplateProp
       </section>
       <section className={`${styles.announcement} studio-band studio-dark`}>
         <div className="studio-wrap">
-          <p className="studio-label">Анонс</p>
+          <p className="studio-label studio-eyebrow">Анонс</p>
           <h2>Практичний інтенсив</h2>
           <p className={styles.subtitle}>студійна зйомка + генеративна обробка</p>
           <p className={styles.when}>
@@ -88,7 +89,7 @@ export function StudioIntensiveTemplate({ content }: StudioIntensiveTemplateProp
         <div className="studio-wrap">
           <header>
             <div className={styles.lecturerLabel}>
-              <p className="studio-label">Ваша лекторка</p>
+              <p className="studio-label studio-eyebrow">Ваша лекторка</p>
               <a
                 href="https://www.instagram.com/photosone44ko/"
                 target="_blank"
@@ -109,7 +110,7 @@ export function StudioIntensiveTemplate({ content }: StudioIntensiveTemplateProp
               </li>
             ))}
           </ul>
-          <p className={`${styles.clientsLabel} studio-label`}>Створювала арт для</p>
+          <p className={`${styles.clientsLabel} studio-label studio-eyebrow`}>Створювала арт для</p>
           <ul className={styles.clients}>
             {studioIntensiveClients.map((client) => (
               <li key={client}>{client}</li>
@@ -151,11 +152,11 @@ export function StudioIntensiveTemplate({ content }: StudioIntensiveTemplateProp
       <div id="intensive-inquiry">
         <StudioInquirySection title="Залиште" hand="заявку" description={note} context={inquiry} />
       </div>
-      <div className={styles.mobileEnrollment}>
+      <StudioMobileAction spacing="spacious">
         <InquiryButton {...inquiry} className="studio-button">
           Залишити заявку →
         </InquiryButton>
-      </div>
+      </StudioMobileAction>
     </>
   );
 }

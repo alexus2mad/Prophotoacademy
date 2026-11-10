@@ -15,7 +15,7 @@ export function StudioProgramHero({
   const schedule = programSchedule(program, offering);
   return (
     <section className={`${styles.hero} studio-light`} aria-labelledby="program-title">
-      <div className={`${styles.copy} studio-wrap`}>
+      <div className={`${styles.copy} studio-wrap`} data-header-tone="light">
         <Link className={styles.back} href="/courses">
           ← Усі курси
         </Link>
@@ -78,7 +78,7 @@ export function StudioProgramHero({
           </InquiryButton>
         </div>
       </div>
-      <div className={styles.image}>
+      <div className={styles.image} data-header-tone="dark">
         <StudioImage
           asset={hero.asset}
           alt={hero.alt}

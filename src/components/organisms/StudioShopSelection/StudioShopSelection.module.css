@@ -67,11 +67,13 @@
     font-size: inherit;
   }
 }
-@media (max-width: 700px) {
+@media (max-width: 1040px) {
   .grid {
     grid-template-columns: 1fr;
     gap: 36px;
   }
+}
+@media (max-width: 760px) {
   .copy :global(.studio-hand) {
     font-size: 51px;
   }

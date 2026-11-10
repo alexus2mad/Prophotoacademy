@@ -68,11 +68,14 @@
 .controls button {
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
-  border: 1px solid currentColor;
+  width: 52px;
+  height: 52px;
+  border: 1.5px solid currentColor;
   background: transparent;
   border-radius: 50%;
+  color: inherit;
+  font: 400 18px/1 var(--font-studio-sans);
+  cursor: pointer;
 }
 .controls button:disabled {
   opacity: 0.35;

@@ -1,6 +1,7 @@
 .course {
-  display: flex;
-  gap: 32px;
+  display: grid;
+  grid-template-columns: clamp(72px, 9vw, 128px) minmax(0, 1fr) auto;
+  gap: clamp(14px, 2.4vw, 32px);
   align-items: center;
   padding: 14px 0;
   border-bottom: 1px solid rgb(255 255 255 / 40%);
@@ -8,9 +9,12 @@
   text-decoration: none;
 }
 .photo {
-  flex: 0 0 128px;
-  width: 128px;
-  height: 128px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+}
+.course:not(:has(.photo)) {
+  grid-template-columns: minmax(0, 1fr) auto;
 }
 .copy {
   flex: 1;
@@ -42,6 +46,11 @@
   text-transform: uppercase;
   max-width: 180px;
 }
+.action {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
 .arrow {
   font-size: 22px;
 }
@@ -49,17 +58,9 @@
 .course:hover h3 {
   color: #eb423b;
 }
-@media (max-width: 700px) {
+@media (max-width: 760px) {
   .course {
-    display: grid;
-    grid-template-columns: 72px 1fr;
-    gap: 12px;
-    align-items: start;
-    padding: 20px 0;
-  }
-  .photo {
-    width: 72px;
-    height: 88px;
+    grid-template-columns: 64px minmax(0, 1fr);
   }
   .copy h2,
   .copy h3 {
@@ -68,12 +69,11 @@
   .copy p {
     font-size: 13px;
   }
+  .action {
+    grid-column: 1 / -1;
+  }
   .status {
-    grid-column: 2;
     width: fit-content;
     max-width: none;
-  }
-  .arrow {
-    display: none;
   }
 }

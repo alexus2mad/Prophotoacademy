@@ -29,7 +29,7 @@
   margin: 8px 0 0;
   font-size: 16px;
   line-height: 1.55;
-  opacity: 0.7;
+  color: #a9a5a2;
 }
 .people {
   display: grid;
@@ -64,7 +64,7 @@
     height: 300px;
   }
 }
-@media (max-width: 700px) {
+@media (max-width: 760px) {
   .head {
     padding-bottom: 32px;
   }
@@ -73,6 +73,9 @@
   .people {
     grid-template-columns: 1fr;
     gap: 28px;
+  }
+  .audience {
+    gap: 0;
   }
   .point h3 {
     font-size: 26px;
@@ -83,7 +86,8 @@
   .portrait {
     flex-basis: 38%;
     width: 38%;
-    height: 230px;
+    height: auto;
+    aspect-ratio: 3 / 4;
   }
   .person {
     gap: 16px;
@@ -92,7 +96,7 @@
     font-size: 28px;
   }
   .person p {
-    font-size: 12px;
+    font-size: 15px;
   }
   .person :global(.studio-label) {
     font-size: 9px;

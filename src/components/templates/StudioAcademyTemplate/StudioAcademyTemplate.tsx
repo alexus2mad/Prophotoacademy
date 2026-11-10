@@ -10,7 +10,7 @@ export function StudioAcademyTemplate({ content }: StudioAcademyTemplateProps) {
     <>
       <section className={`${styles.hero} studio-light`}>
         <div className="studio-wrap">
-          <p className="studio-label">ProPhoto Academy</p>
+          <p className={`${styles.label} studio-label studio-eyebrow`}>ProPhoto Academy</p>
           <h1>
             <span>*вчимо</span>Бачити більше
           </h1>
@@ -20,7 +20,7 @@ export function StudioAcademyTemplate({ content }: StudioAcademyTemplateProps) {
               зйомках з відомими брендами. Навчаємо створювати візуал, що працює на ваш бренд,
               продажі та впізнаваність.
             </p>
-            <div className="studio-actions">
+            <div className={`${styles.actions} studio-actions`}>
               <a className="studio-button" href="#courses">
                 Обрати курс →
               </a>

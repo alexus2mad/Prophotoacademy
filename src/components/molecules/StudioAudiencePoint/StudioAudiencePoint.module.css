@@ -1,0 +1,105 @@
+.point {
+  padding-top: 12px;
+  border-top: 1px solid currentColor;
+}
+
+.point:last-child {
+  border-bottom: 0;
+}
+
+.point summary {
+  display: block;
+  padding: 0;
+  list-style: none;
+  cursor: default;
+}
+
+.point[open] summary,
+.point:not([open]) summary {
+  color: inherit;
+}
+
+.point[open] summary::after,
+.point:not([open]) summary::after {
+  display: none;
+  content: none;
+}
+
+.point summary::-webkit-details-marker {
+  display: none;
+}
+
+.point h3 {
+  margin: 0;
+  font: 700 32px/1.02 var(--font-studio-condensed);
+  text-transform: uppercase;
+}
+
+.point p {
+  margin: 8px 0 0;
+  padding-bottom: 0;
+  max-width: none;
+  color: #5c5552;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.toggle {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .point {
+    padding-block: 20px;
+  }
+
+  .point summary {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-height: 44px;
+    cursor: pointer;
+  }
+
+  .point h3 {
+    flex: 1;
+    font-size: 22px;
+    line-height: 1.08;
+  }
+
+  .point p {
+    margin-top: 12px;
+    line-height: 1.5;
+  }
+
+  .toggle {
+    display: block;
+    flex: 0 0 18px;
+    height: 18px;
+    position: relative;
+  }
+
+  .toggle::before,
+  .toggle::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 0;
+    width: 18px;
+    height: 1.5px;
+    background: currentColor;
+  }
+
+  .toggle::after {
+    transform: rotate(90deg);
+  }
+
+  .point[open] .toggle::after {
+    display: none;
+  }
+
+  .point summary:focus-visible {
+    outline: 2px solid #eb423b;
+    outline-offset: 4px;
+  }
+}

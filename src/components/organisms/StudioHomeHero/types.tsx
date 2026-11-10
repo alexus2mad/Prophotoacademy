@@ -4,3 +4,5 @@ export type StudioHomeHeroProps = {
   mode: StudioHomeMode;
   onModeChange: (mode: StudioHomeMode) => void;
 };
+
+export type HeroTouchOrigin = { x: number; y: number };

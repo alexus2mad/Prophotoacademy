@@ -1,4 +1,4 @@
-import { StudioHomePicture } from '@/components/molecules/StudioHomePicture/StudioHomePicture';
+import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
 import { studioAssets } from '@/lib/studio-design/assets';
 import styles from './StudioHomeProof.module.css';
 
@@ -10,14 +10,26 @@ export function StudioHomeProof() {
       aria-label="Досвід ProPhoto Academy"
     >
       <p className={`${styles.label} studio-label studio-wrap`}>Знімали та навчали для</p>
-      <div className={styles.brands}>
-        <StudioHomePicture
-          image={studioAssets.home.imgImgHome144010}
-          mobileImage={studioAssets.homeMobile.imgImgHome39009}
-          alt="Lay’s, Bang & Olufsen, Сільпо, iSpace, Динамо Київ, AllyProof, McDonald’s, Institutum, Pepsi, Novus"
-          className={styles.logos}
-          sizes="100vw"
-        />
+      <div
+        className={styles.brands}
+        tabIndex={0}
+        role="group"
+        aria-label="Бренди, для яких ми знімали та навчали"
+      >
+        <div className={styles.track}>
+          <StudioImage
+            asset={studioAssets.artifact.logos}
+            alt="Lay’s, Bang & Olufsen, Сільпо, iSpace, Динамо Київ, AllyProof, McDonald’s, Institutum, Pepsi, Novus"
+            className={styles.logos}
+            sizes="(max-width: 760px) 860px, 1440px"
+          />
+          <StudioImage
+            asset={studioAssets.artifact.logos}
+            alt=""
+            className={styles.logos}
+            sizes="(max-width: 760px) 860px, 1440px"
+          />
+        </div>
       </div>
       <div className="studio-wrap">
         <dl className={styles.stats}>

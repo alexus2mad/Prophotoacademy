@@ -106,7 +106,7 @@ it('leaves cards usable without IntersectionObserver support', () => {
 it('does not observe Hub or learning content outside the public Academy shell', () => {
   vi.stubGlobal('document', { querySelector: vi.fn(() => null) });
   useCardMotion();
-  expect(document.querySelector).toHaveBeenCalledWith('.academy-editorial');
+  expect(document.querySelector).toHaveBeenCalledWith('.academy-editorial, .academy-studio');
   expect(Observer.instances).toHaveLength(0);
   expect(MutationObserverStub.instances).toHaveLength(0);
 });

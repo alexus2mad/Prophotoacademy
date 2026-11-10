@@ -6,7 +6,7 @@ import styles from './StudioHomeDirectionCard.module.css';
 
 export function StudioHomeDirectionCard({ direction }: StudioHomeDirectionCardProps) {
   return (
-    <article className={styles.card}>
+    <article className={styles.card} data-header-tone="dark" data-card-motion>
       <StudioHomePicture
         image={direction.image}
         mobileImage={direction.mobileImage}

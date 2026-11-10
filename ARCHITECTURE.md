@@ -64,7 +64,8 @@ artifact; inquiry sections use paper backgrounds and white-on-red primary CTAs.
 `studioAcademyCourses` orders the four source-backed main courses without
 changing offering eligibility. Courses without configured offers remain
 inquiry-only. Academy and homepage reviews share attributed records, with
-eleven on Academy and the original eight on the homepage.
+eleven on Academy, with eight initially on the homepage and all eleven after
+expanding “Усі відгуки”.
 Its original assets are local, deduplicated and mapped by source frame in
 `src/lib/studio-design/assets.json`; provenance has no temporary download URLs.
 The source-backed destinations `/academy`, `/photo-studio`, `/shop` and

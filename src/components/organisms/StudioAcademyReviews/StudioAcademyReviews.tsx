@@ -12,7 +12,7 @@ export function StudioAcademyReviews() {
     <section className="studio-band studio-dark" aria-labelledby="academy-reviews-title">
       <div className="studio-wrap">
         <header className={styles.heading}>
-          <p className="studio-label">Відгуки учнів</p>
+          <p className="studio-label studio-eyebrow">Відгуки учнів</p>
           <h2 className="studio-title" id="academy-reviews-title">
             Що кажуть випускники
           </h2>

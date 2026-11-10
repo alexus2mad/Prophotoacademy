@@ -56,11 +56,12 @@
   outline: 2px solid #eb423b;
   outline-offset: 4px;
 }
-@media (max-width: 700px) {
+@media (max-width: 760px) {
   .room .image,
   .room .image + .image {
-    width: 94%;
-    height: 340px;
+    width: auto;
+    max-width: 86vw;
+    height: min(68vw, 320px);
   }
   .artworks .image {
     width: 93.69%;

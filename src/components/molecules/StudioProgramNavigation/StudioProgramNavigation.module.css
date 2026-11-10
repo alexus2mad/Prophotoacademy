@@ -1,0 +1,50 @@
+.navigation {
+  position: sticky;
+  top: 64px;
+  z-index: 35;
+  background: #0a0807;
+  color: #fbfbfb;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+.navigation > div {
+  display: flex;
+  gap: 4px 24px;
+  overflow-x: auto;
+  align-items: center;
+  min-height: 48px;
+  scrollbar-width: none;
+}
+.navigation > div::-webkit-scrollbar {
+  display: none;
+}
+.navigation a:not(:global(.studio-button)) {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #a9a5a2;
+}
+.navigation a:hover,
+.navigation a[aria-current='location'] {
+  color: #fff;
+}
+.navigation :global(.studio-button) {
+  flex: none;
+  margin-left: auto;
+  min-height: 36px;
+  padding: 10px 16px;
+  font-size: 11px;
+}
+@media (max-width: 760px) {
+  .navigation {
+    top: 56px;
+  }
+  .navigation :global(.studio-button) {
+    display: none;
+  }
+}

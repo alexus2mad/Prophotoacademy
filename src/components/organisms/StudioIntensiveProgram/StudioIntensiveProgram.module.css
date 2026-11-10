@@ -38,6 +38,12 @@
   font: 700 clamp(22px, 2.2vw, 31.7px) / 1.05 var(--font-studio-condensed);
   text-transform: uppercase;
   margin: 0;
+  transition: color 160ms ease;
+}
+@media (hover: hover) {
+  .block summary:hover h3 {
+    color: #eb423b;
+  }
 }
 .number {
   background: #eb423b;
@@ -77,9 +83,10 @@
 }
 .toggle::after {
   transform: rotate(90deg);
+  transition: transform 250ms ease;
 }
 .block[open] .toggle::after {
-  display: none;
+  transform: rotate(0);
 }
 .body {
   padding: 0 34px 34px;
@@ -101,6 +108,12 @@
 .block summary:focus-visible {
   outline: 2px solid #eb423b;
   outline-offset: -4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .block h3,
+  .toggle::after {
+    transition: none;
+  }
 }
 @media (max-width: 700px) {
   .head {

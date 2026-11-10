@@ -13,6 +13,9 @@
   gap: 32px;
   min-width: 0;
 }
+.balanced .copy {
+  gap: 18px;
+}
 .copy p {
   max-width: 40ch;
 }

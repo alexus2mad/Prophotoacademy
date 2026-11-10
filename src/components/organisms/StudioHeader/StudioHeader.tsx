@@ -8,8 +8,19 @@ import { useStudioHeader } from './hooks';
 import type { StudioHeaderProps } from './types';
 
 export function StudioHeader({ settings }: StudioHeaderProps) {
-  const { path, dialog, open, scrolled, focused, darkHero, openMenu, closeMenu } =
-    useStudioHeader();
+  const {
+    path,
+    header,
+    dialog,
+    open,
+    scrolled,
+    focused,
+    darkHero,
+    secondary,
+    usesInk,
+    openMenu,
+    closeMenu,
+  } = useStudioHeader();
   const accountHref =
     process.env.NEXT_PUBLIC_REVIEW_MODE === 'pages' ? '/demo/account' : '/account';
   const destinations = [
@@ -52,15 +63,28 @@ export function StudioHeader({ settings }: StudioHeaderProps) {
 
   return (
     <header
-      className={`studio-header ${darkHero ? 'studio-header-dark' : 'studio-header-light'} ${scrolled ? 'is-scrolled' : ''} ${focused ? 'studio-header-focused' : ''}`}
+      ref={header}
+      className={`studio-header ${darkHero ? 'studio-header-dark' : 'studio-header-light'} ${secondary ? 'studio-header-secondary' : ''} ${scrolled ? 'is-scrolled' : ''} ${focused ? 'studio-header-focused' : ''}`}
     >
       <div className="studio-header-inner studio-wrap">
         {!focused && (
-          <Link href={accountHref} className="studio-header-account" aria-label="Кабінет студента">
+          <Link
+            href={accountHref}
+            className="studio-header-account"
+            aria-label="Кабінет студента"
+            data-header-control="account"
+            data-header-ink={usesInk('account')}
+          >
             <StudioImage asset={studioAssets.homeMobile.imgSvg4} alt="" sizes="21px" />
           </Link>
         )}
-        <Link href="/" className="studio-header-brand" aria-label="ProPhoto — головна">
+        <Link
+          href="/"
+          className="studio-header-brand"
+          aria-label="ProPhoto — головна"
+          data-header-control="brand"
+          data-header-ink={usesInk('brand')}
+        >
           <StudioImage
             asset={darkHero ? studioAssets.home.imgLogoMark1 : studioAssets.contacts.imgLogoMark1}
             alt="ProPhoto"
@@ -81,7 +105,13 @@ export function StudioHeader({ settings }: StudioHeaderProps) {
                 ['/shop', 'Shop'],
                 ['/contacts', 'Контакти'],
               ].map(([href, label]) => (
-                <Link key={href} href={href} aria-current={path === href ? 'page' : undefined}>
+                <Link
+                  key={href}
+                  href={href}
+                  aria-current={path === href ? 'page' : undefined}
+                  data-header-control={href}
+                  data-header-ink={usesInk(href)}
+                >
                   {label}
                 </Link>
               ))}
@@ -89,6 +119,8 @@ export function StudioHeader({ settings }: StudioHeaderProps) {
             <button
               type="button"
               className="studio-menu-toggle"
+              data-header-control="menu"
+              data-header-ink={usesInk('menu')}
               aria-label="Відкрити меню"
               aria-haspopup="dialog"
               aria-controls="studio-menu"

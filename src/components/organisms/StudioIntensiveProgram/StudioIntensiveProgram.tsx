@@ -6,7 +6,7 @@ export function StudioIntensiveProgram() {
     <section id="intensive-program" className="studio-band studio-light">
       <div className="studio-wrap">
         <header className={styles.head}>
-          <p className="studio-label">Програма · 4–5 годин</p>
+          <p className="studio-label studio-eyebrow">Програма · 4–5 годин</p>
           <h2 className="studio-title">
             Як проходить <span className="studio-hand">*інтенсив</span>
           </h2>

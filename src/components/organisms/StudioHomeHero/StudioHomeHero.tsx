@@ -3,12 +3,23 @@ import Link from 'next/link';
 import { StudioHomePicture } from '@/components/molecules/StudioHomePicture/StudioHomePicture';
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
 import { studioAssets } from '@/lib/studio-design/assets';
-import { useStudioHomeTabs } from './hooks';
+import { useStudioHomeHero } from './hooks';
 import type { StudioHomeHeroProps } from './types';
 import styles from './StudioHomeHero.module.css';
 
 export function StudioHomeHero({ mode, onModeChange }: StudioHomeHeroProps) {
-  const { tabs, onTabKeyDown } = useStudioHomeTabs();
+  const {
+    hero,
+    tabs,
+    visibleImage,
+    playing,
+    stop,
+    select,
+    onImageLoad,
+    onTouchStart,
+    onTouchEnd,
+    onTabKeyDown,
+  } = useStudioHomeHero({ mode, onModeChange });
   const states = {
     studio: {
       image: studioAssets.artifact.hero_space,
@@ -48,16 +59,43 @@ export function StudioHomeHero({ mode, onModeChange }: StudioHomeHeroProps) {
     },
   };
   const selected = states[mode];
+  const visuals = [
+    { id: 'academy-0', image: states.academy.image, mobileImage: states.academy.mobileImage },
+    { id: 'academy-1', image: studioAssets.artifact.hero_studio, mobileImage: undefined },
+    { id: 'academy-2', image: studioAssets.artifact.hero_shop, mobileImage: undefined },
+    { id: 'studio', image: states.studio.image, mobileImage: states.studio.mobileImage },
+    { id: 'shop', image: states.shop.image, mobileImage: states.shop.mobileImage },
+  ];
   return (
-    <section className={styles.hero} data-home-section="hero" aria-label="Екосистема ProPhoto">
-      <StudioHomePicture
-        image={selected.image}
-        mobileImage={selected.mobileImage}
-        alt=""
-        className={styles.image}
-        eager
-        sizes="100vw"
-      />
+    <section
+      className={styles.hero}
+      data-home-section="hero"
+      aria-label="Екосистема ProPhoto"
+      ref={hero}
+      onMouseEnter={stop}
+      onFocusCapture={stop}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+      onLoadCapture={onImageLoad}
+      data-motion-playing={playing}
+    >
+      {visuals.map((visual) => (
+        <div
+          key={visual.id}
+          className={`${styles.image} ${visual.id === 'studio' ? styles.panorama : ''}`}
+          data-hero-visual={visual.id}
+          data-active={visibleImage === visual.id}
+          aria-hidden="true"
+        >
+          <StudioHomePicture
+            image={visual.image}
+            mobileImage={visual.mobileImage}
+            alt=""
+            eager
+            sizes="100vw"
+          />
+        </div>
+      ))}
       <div className={`${styles.body} studio-wrap`}>
         <div
           id="home-hero-panel"
@@ -90,7 +128,7 @@ export function StudioHomeHero({ mode, onModeChange }: StudioHomeHeroProps) {
               aria-controls="home-hero-panel"
               aria-selected={mode === key}
               tabIndex={mode === key ? 0 : -1}
-              onClick={() => onModeChange(key)}
+              onClick={() => select(key)}
               onKeyDown={onTabKeyDown}
               className={styles.tab}
               data-brand={key}

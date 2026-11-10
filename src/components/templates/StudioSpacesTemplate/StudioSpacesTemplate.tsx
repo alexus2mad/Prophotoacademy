@@ -1,4 +1,5 @@
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
+import { StudioMobileAction } from '@/components/molecules/StudioMobileAction/StudioMobileAction';
 import { StudioSpacesGallery } from '@/components/organisms/StudioSpacesGallery/StudioSpacesGallery';
 import { studioAssets } from '@/lib/studio-design/assets';
 import type { StudioSpacesTemplateProps } from './types';
@@ -56,14 +57,14 @@ export function StudioSpacesTemplate({ content }: StudioSpacesTemplateProps) {
           preload
         />
         <div className="studio-wrap">
-          <p className="studio-label">ProPhoto Studio</p>
+          <p className={`${styles.heroLabel} studio-label`}>ProPhoto Studio</p>
           <h1>
             <span>
               <i>*</i>простір, щоб
             </span>
             Бачити більше
           </h1>
-          <div className="studio-actions">
+          <div className={`${styles.heroActions} studio-actions`}>
             <a className="studio-button" href={bookingUrl}>
               Забронювати студію →
             </a>
@@ -82,7 +83,7 @@ export function StudioSpacesTemplate({ content }: StudioSpacesTemplateProps) {
                 <div className={styles.roomCopy}>
                   <h3>{room.title}</h3>
                   <p>{room.description}</p>
-                  <a className="studio-button" href={bookingUrl}>
+                  <a className={`${styles.roomAction} studio-button`} href={bookingUrl}>
                     Забронювати →
                   </a>
                 </div>
@@ -105,7 +106,7 @@ export function StudioSpacesTemplate({ content }: StudioSpacesTemplateProps) {
             </p>
           </div>
           <div className={styles.bookingDestination}>
-            <p className="studio-label">Зал</p>
+            <p className="studio-label studio-eyebrow">Зал</p>
             <ul>
               {rooms.map((room) => (
                 <li key={room.id}>
@@ -121,6 +122,11 @@ export function StudioSpacesTemplate({ content }: StudioSpacesTemplateProps) {
           </div>
         </div>
       </section>
+      <StudioMobileAction>
+        <a className="studio-button" href={bookingUrl}>
+          Забронювати студію →
+        </a>
+      </StudioMobileAction>
     </>
   );
 }

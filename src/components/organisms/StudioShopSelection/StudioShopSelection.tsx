@@ -11,7 +11,7 @@ export function StudioShopSelection({ shopUrl }: StudioShopSelectionProps) {
     <section id="equipment-selection" className="studio-band studio-light">
       <div className={`${styles.grid} studio-wrap`}>
         <div className={styles.copy}>
-          <p className="studio-label">Обладнання</p>
+          <p className="studio-label studio-eyebrow">Обладнання</p>
           <h2 className="studio-title">
             Що <span className="studio-hand">*підібрати?</span>
           </h2>
@@ -20,7 +20,7 @@ export function StudioShopSelection({ shopUrl }: StudioShopSelectionProps) {
             задачі й бюджет.
           </p>
           <fieldset>
-            <legend className="studio-label">Оберіть, що потрібно</legend>
+            <legend className="studio-label studio-eyebrow">Оберіть, що потрібно</legend>
             <div className={styles.chips}>
               {['Камера', 'Обʼєктив', 'Світло', 'Мікрофон', 'Штатив', 'Комплект під ключ'].map(
                 (item) => (

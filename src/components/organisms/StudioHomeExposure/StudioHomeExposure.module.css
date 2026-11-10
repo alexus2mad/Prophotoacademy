@@ -1,8 +1,15 @@
 .exposure {
-  min-height: 100svh;
+  height: 150vh;
   position: relative;
-  isolation: isolate;
   background: #000;
+}
+.stage {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
 }
 .image {
   position: absolute;
@@ -11,8 +18,9 @@
   height: 100%;
   z-index: -2;
   object-position: 70% 30%;
+  filter: brightness(calc(0.1 + 0.9 * var(--exposure-progress, 1)));
 }
-.exposure::before {
+.stage::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -20,20 +28,20 @@
   background: linear-gradient(90deg, rgba(0, 0, 0, 0.66), rgba(0, 0, 0, 0.34) 52%, transparent 78%);
 }
 .inner {
-  min-height: 100svh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding-top: clamp(64px, 7.4cqw, 110px);
 }
 .inner h2 {
-  font: 300 clamp(36px, 6.6cqw, 108px) / 1.02 var(--font-studio-sans);
+  font: 200 clamp(36px, 6.6cqw, 108px) / 1.02 var(--font-studio-sans);
   letter-spacing: -0.01em;
   text-transform: uppercase;
   max-width: 1360px;
 }
 .inner strong {
-  font-weight: 900;
+  font-weight: 1000;
 }
 .meter {
   padding-bottom: 18px;
@@ -45,9 +53,7 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   margin-bottom: 10px;
-}
-.mobileValue {
-  display: none;
+  font-variant-numeric: tabular-nums;
 }
 .bars {
   height: clamp(48px, 10vh, 104px);
@@ -57,18 +63,28 @@
 }
 .bars i {
   flex: 1;
+  min-width: 0;
+  background: rgba(255, 255, 255, 0.2);
+}
+.bars .on {
   background: #fbfbfb;
 }
-.bars i:nth-child(n + 28) {
+.bars .hot {
   background: #eb423b;
 }
 @media (max-width: 760px) {
-  .exposure,
-  .inner {
-    min-height: 0;
+  .exposure {
+    height: auto;
+    background: color-mix(in srgb, #fbfbfb calc(var(--exposure-transition, 0) * 100%), #000);
+  }
+  .stage {
+    position: relative;
+    top: 0;
+    height: auto;
+    overflow: visible;
   }
   .image,
-  .exposure::before {
+  .stage::before {
     display: none;
   }
   .inner {
@@ -78,6 +94,8 @@
     font-size: 32px;
     line-height: 1.04;
     color: #efefef;
+    opacity: calc(1 - var(--exposure-transition, 0) * 1.25);
+    filter: blur(calc(var(--exposure-transition, 0) * 4px));
   }
   .meter {
     display: flex;
@@ -87,20 +105,33 @@
   .meterLabel {
     order: 2;
     margin: 10px 0 0;
-    color: rgba(251, 251, 251, 0.72);
-  }
-  .desktopValue {
-    display: none;
-  }
-  .mobileValue {
-    display: inline;
+    color: color-mix(
+      in srgb,
+      #0a0807 calc(var(--exposure-transition, 0) * 100%),
+      rgba(251, 251, 251, 0.72)
+    );
   }
   .bars {
     height: 64px;
     gap: 2px;
     margin-top: 22px;
   }
-  .bars i:nth-child(n + 28) {
-    background: #fbfbfb;
+}
+@media (prefers-reduced-motion: reduce) {
+  .exposure {
+    height: auto;
+  }
+  .stage {
+    position: relative;
+    top: 0;
+  }
+  .inner h2 {
+    opacity: 1;
+    filter: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) and (max-width: 760px) {
+  .inner h2 {
+    color: color-mix(in srgb, #0a0807 calc(var(--exposure-transition, 0) * 100%), #efefef);
   }
 }

@@ -81,6 +81,17 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
+.academy-studio .studio-eyebrow {
+  color: var(--studio-mute);
+}
+@media (max-width: 760px) {
+  .academy-studio:has([data-studio-mobile-action]) {
+    padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px));
+  }
+  .academy-studio:has([data-studio-mobile-action='spacious']) {
+    padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px));
+  }
+}
 .academy-studio .studio-title {
   font:
     700 clamp(44px, 7.4vw, 108px) / 0.96 var(--font-studio-condensed),
@@ -163,12 +174,27 @@
   color: var(--studio-paper);
   background: transparent;
 }
-.academy-studio .studio-header-dark.is-scrolled {
-  background: var(--studio-ink);
+.academy-studio .studio-header.is-scrolled {
+  backdrop-filter: blur(14px);
 }
 .academy-studio .studio-header-light {
   color: var(--studio-warm);
+  background: transparent;
+}
+.academy-studio .studio-header-focused {
   background: var(--studio-paper);
+}
+.academy-studio [data-header-control][data-header-ink='true'] {
+  color: var(--studio-warm);
+}
+.academy-studio [data-header-control][data-header-ink='false'] {
+  color: var(--studio-paper);
+}
+.academy-studio [data-header-control][data-header-ink='true'] img {
+  filter: brightness(0);
+}
+.academy-studio [data-header-control][data-header-ink='false'] img {
+  filter: brightness(0) invert(1);
 }
 .academy-studio .studio-header-inner {
   position: relative;
@@ -202,6 +228,11 @@
 }
 .academy-studio .studio-header-nav a {
   padding-block: 16px;
+}
+.academy-studio .studio-header-secondary .studio-header-nav {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.2px;
 }
 .academy-studio .studio-header-nav a:hover,
 .academy-studio .studio-header-nav a[aria-current] {
@@ -544,9 +575,6 @@
   .academy-studio .studio-header-account img {
     width: 21px;
     height: 19px;
-  }
-  .academy-studio .studio-header-light .studio-header-account img {
-    filter: brightness(0);
   }
   .academy-studio .studio-header:not(.studio-header-focused) .studio-header-brand {
     position: absolute;

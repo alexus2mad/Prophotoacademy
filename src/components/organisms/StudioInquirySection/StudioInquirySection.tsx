@@ -27,7 +27,7 @@ export function StudioInquirySection({
         <p className="studio-lead">{description}</p>
         {children}
       </div>
-      <StudioInquiryForm context={context} />
+      <StudioInquiryForm context={context} compact={layout === 'balanced'} />
     </section>
   );
 }

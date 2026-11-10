@@ -58,14 +58,11 @@
 }
 @media (max-width: 760px) {
   .page {
-    padding-top: 100px;
+    padding-top: 88px;
     padding-bottom: 64px;
   }
-  .page h1 {
-    font-size: clamp(40px, 9.444vw, 64px);
-  }
-  .page h1 > span {
-    font-size: clamp(32px, 8.3vw, 48px);
+  .page > :global(.studio-label) {
+    display: none;
   }
   .columns {
     padding-top: 20px;

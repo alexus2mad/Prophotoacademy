@@ -1,6 +1,8 @@
 import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
+import { StudioMobileAction } from '@/components/molecules/StudioMobileAction/StudioMobileAction';
+import { StudioProgramNavigation } from '@/components/molecules/StudioProgramNavigation/StudioProgramNavigation';
+import type { StudioProgramNavigationLink } from '@/components/molecules/StudioProgramNavigation/types';
 import { Gallery } from '@/components/organisms/Gallery/Gallery';
-import { MobileEnrollment } from '@/components/organisms/MobileEnrollment/MobileEnrollment';
 import { PracticePreview } from '@/components/organisms/PracticePreview/PracticePreview';
 import { ProgramPackages } from '@/components/organisms/ProgramPackages/ProgramPackages';
 import { StudioInquirySection } from '@/components/organisms/StudioInquirySection/StudioInquirySection';
@@ -22,14 +24,14 @@ export function StudioProgramTemplate({
     enrollment,
   );
   const hasPackages = Boolean(offering?.packages.length);
-  const links = [
-    ...(program.outcomes.length ? [['#program-about', 'Про курс']] : []),
-    ...(program.audience.length ? [['#program-audience', 'Кому']] : []),
-    ...(hasPackages ? [['#packages', 'Пакети']] : []),
-    ...(program.modules.length ? [['#program-curriculum', 'Програма']] : []),
-    ...(instructors.length ? [['#program-lecturers', 'Лектори']] : []),
-    ...(works.length ? [['#student-works', 'Роботи студентів']] : []),
-    ...(reviews.length ? [['#program-reviews', 'Відгуки']] : []),
+  const links: StudioProgramNavigationLink[] = [
+    ...(program.outcomes.length ? [['#program-about', 'Про курс'] as const] : []),
+    ...(program.audience.length ? [['#program-audience', 'Кому'] as const] : []),
+    ...(hasPackages ? [['#packages', 'Пакети'] as const] : []),
+    ...(program.modules.length ? [['#program-curriculum', 'Програма'] as const] : []),
+    ...(instructors.length ? [['#program-lecturers', 'Лектори'] as const] : []),
+    ...(works.length ? [['#student-works', 'Роботи студентів'] as const] : []),
+    ...(reviews.length ? [['#program-reviews', 'Відгуки'] as const] : []),
   ];
 
   return (
@@ -40,29 +42,22 @@ export function StudioProgramTemplate({
         presentation={presentation}
         hero={hero}
       />
-      <nav className={styles.navigation} aria-label="Розділи курсу">
-        <div className="studio-wrap">
-          {links.map(([href, label]) => (
-            <a key={href} href={href}>
-              {label}
-            </a>
-          ))}
-          {presentation.open && hasPackages ? (
-            <a className="studio-button" href="#packages">
-              Обрати пакет
-            </a>
-          ) : (
-            <InquiryButton
-              className="studio-button"
-              programId={program.id}
-              offeringId={offering?.id}
-              title={presentation.inquiryTitle}
-            >
-              {presentation.buttonLabel}
-            </InquiryButton>
-          )}
-        </div>
-      </nav>
+      <StudioProgramNavigation links={links}>
+        {presentation.open && hasPackages ? (
+          <a className="studio-button" href="#packages">
+            Обрати пакет
+          </a>
+        ) : (
+          <InquiryButton
+            className="studio-button"
+            programId={program.id}
+            offeringId={offering?.id}
+            title={presentation.inquiryTitle}
+          >
+            {presentation.buttonLabel}
+          </InquiryButton>
+        )}
+      </StudioProgramNavigation>
       {!!program.outcomes.length && (
         <section
           id="program-about"
@@ -107,7 +102,12 @@ export function StudioProgramTemplate({
       )}
       {hasPackages && offering && (
         <div className={`${styles.packages} studio-light studio-wrap`}>
-          <ProgramPackages program={program} offering={offering} enrollment={enrollment} />
+          <ProgramPackages
+            program={program}
+            offering={offering}
+            enrollment={enrollment}
+            packageLayout="benefits-first"
+          />
         </div>
       )}
       {!!program.modules.length && (
@@ -187,24 +187,22 @@ export function StudioProgramTemplate({
           source: 'consultation',
         }}
       />
-      <div className={styles.enrollment}>
-        <MobileEnrollment price={presentation.price}>
-          {presentation.open && hasPackages ? (
-            <a href="#packages" className="studio-button">
-              Обрати пакет
-            </a>
-          ) : (
-            <InquiryButton
-              className="studio-button"
-              programId={program.id}
-              offeringId={offering?.id}
-              title={presentation.inquiryTitle}
-            >
-              {presentation.buttonLabel}
-            </InquiryButton>
-          )}
-        </MobileEnrollment>
-      </div>
+      <StudioMobileAction>
+        {presentation.open && hasPackages ? (
+          <a href="#packages" className="studio-button">
+            Хочу на курс
+          </a>
+        ) : (
+          <InquiryButton
+            className="studio-button"
+            programId={program.id}
+            offeringId={offering?.id}
+            title={presentation.inquiryTitle}
+          >
+            {presentation.buttonLabel}
+          </InquiryButton>
+        )}
+      </StudioMobileAction>
     </div>
   );
 }

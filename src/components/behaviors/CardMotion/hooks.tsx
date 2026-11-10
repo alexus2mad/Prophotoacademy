@@ -6,7 +6,7 @@ export function useCardMotion() {
   const path = usePathname();
   useEffect(() => {
     if (!('IntersectionObserver' in window)) return;
-    const root = document.querySelector('.academy-editorial');
+    const root = document.querySelector('.academy-editorial, .academy-studio');
     if (!root) return;
     const mobile = window.matchMedia('(max-width: 899px), (hover: none)');
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');

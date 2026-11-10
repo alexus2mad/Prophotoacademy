@@ -1,4 +1,5 @@
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
+import { StudioAudiencePoint } from '@/components/molecules/StudioAudiencePoint/StudioAudiencePoint';
 import { StudioAcademyReviews } from '@/components/organisms/StudioAcademyReviews/StudioAcademyReviews';
 import { studioAssets } from '@/lib/studio-design/assets';
 import { studioAcademyAudience, studioAcademyTrust } from '@/lib/studio-pages/academy';
@@ -10,7 +11,7 @@ export function StudioAcademyCommunity() {
       <section id="about" className="studio-band studio-light">
         <div className="studio-wrap">
           <header className={styles.head}>
-            <p className="studio-label">Кому підійде</p>
+            <p className="studio-label studio-eyebrow">Кому підійде</p>
             <h2 className="studio-title">
               Для тих, хто <span className="studio-hand">*хоче</span> свій стиль
             </h2>
@@ -22,10 +23,7 @@ export function StudioAcademyCommunity() {
           </header>
           <div className={styles.audience}>
             {studioAcademyAudience.map((point) => (
-              <article className={styles.point} key={point.title}>
-                <h3>{point.title}</h3>
-                <p>{point.text}</p>
-              </article>
+              <StudioAudiencePoint key={point.title} {...point} />
             ))}
           </div>
         </div>
@@ -48,7 +46,7 @@ export function StudioAcademyCommunity() {
       <section id="lecturers" className="studio-band studio-light">
         <div className="studio-wrap">
           <header className={styles.head}>
-            <p className="studio-label">Засновниці</p>
+            <p className="studio-label studio-eyebrow">Засновниці</p>
             <h2 className="studio-title">Хто вчить</h2>
           </header>
           <div className={styles.people}>

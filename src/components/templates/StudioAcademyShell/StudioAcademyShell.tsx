@@ -1,4 +1,5 @@
 import { EcosystemMeasurement } from '@/components/behaviors/EcosystemMeasurement/EcosystemMeasurement';
+import { CardMotion } from '@/components/behaviors/CardMotion/CardMotion';
 import { StudioHeader } from '@/components/organisms/StudioHeader/StudioHeader';
 import { StudioFooter } from '@/components/organisms/StudioFooter/StudioFooter';
 import { StudioInquiryDrawer } from '@/components/organisms/StudioInquiryDrawer/StudioInquiryDrawer';
@@ -11,6 +12,7 @@ export function StudioAcademyShell({ children, settings }: StudioAcademyShellPro
       <EcosystemMeasurement site="academy" />
       <StudioHeader settings={settings} />
       <main id="main">{children}</main>
+      <CardMotion />
       <StudioFooter settings={settings} />
       <StudioInquiryDrawer />
     </div>

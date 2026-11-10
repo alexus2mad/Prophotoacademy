@@ -3,7 +3,12 @@ import { PackageComparison } from '@/components/organisms/PackageComparison/Pack
 import { canEnroll } from '@/lib/format';
 import { OfferingSummary } from '@/components/molecules/OfferingSummary/OfferingSummary';
 import type { ProgramPackagesProps } from './types';
-export function ProgramPackages({ offering, program, enrollment }: ProgramPackagesProps) {
+export function ProgramPackages({
+  offering,
+  program,
+  enrollment,
+  packageLayout,
+}: ProgramPackagesProps) {
   const available = (id: string) => {
     const pack = offering.packages.find((p) => p.id === id);
     if (!pack || pack.inquiryOnly) return false;
@@ -60,6 +65,7 @@ export function ProgramPackages({ offering, program, enrollment }: ProgramPackag
             enrollable={available(pack.id)}
             paymentDisabled={enrollment?.mode === 'disabled'}
             availableLessons={enrollment?.lessonTitles?.[pack.id]}
+            layout={packageLayout}
           />
         ))}
       </div>

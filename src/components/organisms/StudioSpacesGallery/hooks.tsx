@@ -2,6 +2,15 @@
 
 import { useEffect, useRef, useState } from 'react';
 import type { KeyboardEvent } from 'react';
+import { galleryImageTarget, nearestGalleryImage } from './position';
+
+function imageOffsets(element: HTMLDivElement) {
+  const left = element.getBoundingClientRect().left;
+  return Array.from(
+    element.children,
+    (image) => image.getBoundingClientRect().left - left + element.scrollLeft,
+  );
+}
 
 export function useStudioGallery(length: number) {
   const track = useRef<HTMLDivElement>(null);
@@ -10,18 +19,18 @@ export function useStudioGallery(length: number) {
     const element = track.current;
     if (!element) return;
     const update = () => {
-      const first = element.firstElementChild;
-      const width = first?.getBoundingClientRect().width || element.clientWidth;
+      const end = element.scrollLeft + element.clientWidth >= element.scrollWidth - 4;
       setPosition({
-        index: Math.min(length, Math.round(element.scrollLeft / (width + 2)) + 1),
-        start: element.scrollLeft < 2,
-        end: element.scrollLeft + element.clientWidth >= element.scrollWidth - 2,
+        index: end ? length : nearestGalleryImage(imageOffsets(element), element.scrollLeft) + 1,
+        start: element.scrollLeft < 4,
+        end,
       });
     };
     update();
     element.addEventListener('scroll', update, { passive: true });
     const resize = new ResizeObserver(update);
     resize.observe(element);
+    for (const image of element.children) resize.observe(image);
     return () => {
       element.removeEventListener('scroll', update);
       resize.disconnect();
@@ -30,9 +39,8 @@ export function useStudioGallery(length: number) {
   const move = (direction: number) => {
     const element = track.current;
     if (!element) return;
-    const width = element.firstElementChild?.getBoundingClientRect().width || element.clientWidth;
-    element.scrollBy({
-      left: direction * (width + 2),
+    element.scrollTo({
+      left: galleryImageTarget(imageOffsets(element), element.scrollLeft, direction),
       behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
         ? 'instant'
         : 'smooth',

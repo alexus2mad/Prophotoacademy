@@ -19,7 +19,7 @@ export function StudioAcademyPrograms({ programs, offerings, images }: StudioAca
       <section id="courses" className="studio-band studio-dark">
         <div className="studio-wrap">
           <header className={styles.head}>
-            <p className="studio-label">Онлайн з практикою в Києві</p>
+            <p className="studio-label studio-eyebrow">Онлайн з практикою в Києві</p>
             <h2 className="studio-title">Головні курси</h2>
           </header>
           <div className={styles.rows}>
@@ -37,7 +37,7 @@ export function StudioAcademyPrograms({ programs, offerings, images }: StudioAca
       <section id="workshops" className="studio-band studio-light">
         <div className="studio-wrap">
           <header className={styles.head}>
-            <p className="studio-label">Практика в студії та на виїзді</p>
+            <p className="studio-label studio-eyebrow">Практика в студії та на виїзді</p>
             <h2 className="studio-title">Воркшопи</h2>
           </header>
           <div className={styles.rows}>

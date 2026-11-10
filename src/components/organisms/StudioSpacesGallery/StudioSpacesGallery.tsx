@@ -25,7 +25,7 @@ export function StudioSpacesGallery({ images, label, variant = 'room' }: StudioS
             fit="cover"
             className={styles.image}
             sizes={
-              variant === 'room' ? '(max-width: 700px) 90vw, 40vw' : '(max-width: 700px) 86vw, 41vw'
+              variant === 'room' ? '(max-width: 760px) 86vw, 40vw' : '(max-width: 760px) 86vw, 41vw'
             }
           />
         ))}

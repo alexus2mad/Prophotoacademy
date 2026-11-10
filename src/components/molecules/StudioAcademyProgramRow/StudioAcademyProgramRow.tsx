@@ -27,9 +27,11 @@ export function StudioAcademyProgramRow({
           {price !== undefined && <> · від {money(price)}</>}
         </p>
       </div>
-      <span className={styles.status}>{schedule.status}</span>
-      <span className={styles.arrow} aria-hidden="true">
-        →
+      <span className={styles.action}>
+        <span className={styles.status}>{schedule.status}</span>
+        <span className={styles.arrow} aria-hidden="true">
+          →
+        </span>
       </span>
     </Link>
   );

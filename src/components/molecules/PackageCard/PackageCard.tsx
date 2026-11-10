@@ -12,7 +12,29 @@ export function PackageCard({
   enrollable,
   paymentDisabled,
   availableLessons,
+  layout = 'summary-first',
 }: PackageCardProps) {
+  const benefits = (
+    <>
+      <p>{pack.description}</p>
+      {!pack.includes.length && !isProduct(pack) && (
+        <p className="package-conditions-note">
+          Уточніть обсяг навчання, підтримку, практику й строк доступу до вибору пакета.
+        </p>
+      )}
+      {!!pack.includes.length && (
+        <div className="package-includes-desktop">
+          <PackageIncludes pack={pack} />
+        </div>
+      )}
+      {!!pack.includes.length && (
+        <details className="package-includes-mobile">
+          <summary>Що входить у пакет</summary>
+          <PackageIncludes pack={pack} />
+        </details>
+      )}
+    </>
+  );
   return (
     <article
       key={pack.id}
@@ -24,6 +46,7 @@ export function PackageCard({
         <h3>{pack.name}</h3>
         {pack.featured && <span className="package-popularity">Найпопулярніший</span>}
       </div>
+      {layout === 'benefits-first' && benefits}
       <div className="price">
         {money(pack.price)}
         {pack.previousPrice !== undefined && pack.previousPrice > pack.price && (
@@ -59,23 +82,7 @@ export function PackageCard({
           <EnrollmentScope lessons={availableLessons} />
         )}
       </div>
-      <p>{pack.description}</p>
-      {!pack.includes.length && !isProduct(pack) && (
-        <p className="package-conditions-note">
-          Уточніть обсяг навчання, підтримку, практику й строк доступу до вибору пакета.
-        </p>
-      )}
-      {!!pack.includes.length && (
-        <div className="package-includes-desktop">
-          <PackageIncludes pack={pack} />
-        </div>
-      )}
-      {!!pack.includes.length && (
-        <details className="package-includes-mobile">
-          <summary>Що входить у пакет</summary>
-          <PackageIncludes pack={pack} />
-        </details>
-      )}
+      {layout === 'summary-first' && benefits}
     </article>
   );
 }
