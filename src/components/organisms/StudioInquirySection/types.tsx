@@ -6,6 +6,6 @@ export type StudioInquirySectionProps = {
   hand?: string;
   description?: string;
   context?: InquiryContext;
-  tone?: 'light' | 'red';
+  layout?: 'editorial' | 'balanced';
   children?: ReactNode;
 };

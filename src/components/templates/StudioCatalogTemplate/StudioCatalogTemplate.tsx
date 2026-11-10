@@ -42,7 +42,7 @@ export function StudioCatalogTemplate({
           <StudioAcademyCatalog content={catalogContent} programs={programs} asOf={asOf} />
         </Suspense>
       </section>
-      <StudioInquirySection title="Допоможемо" hand="обрати" tone="red" />
+      <StudioInquirySection title="Допоможемо" hand="обрати" layout="balanced" />
     </>
   );
 }

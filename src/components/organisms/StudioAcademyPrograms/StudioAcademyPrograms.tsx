@@ -2,12 +2,12 @@ import Link from 'next/link';
 import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
 import { StudioAcademyProgramRow } from '@/components/molecules/StudioAcademyProgramRow/StudioAcademyProgramRow';
 import { findOffering } from '@/lib/content/selectors';
-import { studioProgramImage } from '@/lib/studio-pages/selectors';
+import { studioAcademyCourses, studioProgramImage } from '@/lib/studio-pages/selectors';
 import type { StudioAcademyProgramsProps } from './types';
 import styles from './StudioAcademyPrograms.module.css';
 
 export function StudioAcademyPrograms({ programs, offerings, images }: StudioAcademyProgramsProps) {
-  const courses = programs.filter((program) => program.category === 'course');
+  const courses = studioAcademyCourses(programs);
   const workshops = [
     'Комерційний чоловічий портрет',
     'Ню та в білизні: каталожна та арт зйомка',

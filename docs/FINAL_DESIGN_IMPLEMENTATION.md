@@ -1,11 +1,14 @@
 # Final ProPhoto design implementation
 
-Status: implementation and local production build complete; staging release verification in progress. Updated 10 November 2026.
+Status: initial design deployed; designer-directed source resolutions are being applied. Updated 10 November 2026.
 
 ## Source authority
 
-The owner confirmed that **Figma takes priority**. The Claude artifact supplies
-layouts absent from Figma and interaction behavior. Primary CTA text is white on
+The owner confirmed that **Figma takes priority**, except for the explicit
+10 November designer resolutions in the difference register: artifact secondary
+hero metrics, actual studio photography, four main courses, eleven Academy
+reviews and the artifact address. All form section backgrounds are white.
+The Claude artifact supplies layouts absent from Figma and interaction behavior. Primary CTA text is white on
 red, including hover, focus and touch states. Record every observed source
 conflict in [the difference register](FIGMA_ARTIFACT_DIFFERENCES.md).
 

@@ -57,53 +57,6 @@
   font-size: 11px;
   line-height: 1.3;
 }
-.reviews {
-  display: flex;
-  overflow-x: auto;
-  scrollbar-width: none;
-  scroll-snap-type: x mandatory;
-  gap: 2px;
-}
-.reviews::-webkit-scrollbar {
-  display: none;
-}
-.review {
-  flex: 0 0 440px;
-  min-height: 300px;
-  padding: 30px;
-  background: #17130f;
-  scroll-snap-align: start;
-}
-.review header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 12px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid rgb(255 255 255 / 40%);
-}
-.review h3 {
-  margin: 0;
-  font: 700 22px/1.1 var(--font-studio-condensed);
-  text-transform: uppercase;
-}
-.review header span {
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-}
-.review p {
-  margin: 12px 0;
-  color: #a9a5a2;
-}
-.review blockquote {
-  margin: 0;
-  font-size: 16px;
-  line-height: 1.55;
-}
-.reviews:focus-visible {
-  outline: 2px solid #eb423b;
-  outline-offset: 5px;
-}
 @media (max-width: 1100px) {
   .portrait {
     flex-basis: 38%;
@@ -143,9 +96,5 @@
   }
   .person :global(.studio-label) {
     font-size: 9px;
-  }
-  .review {
-    flex-basis: 92%;
-    padding: 24px;
   }
 }

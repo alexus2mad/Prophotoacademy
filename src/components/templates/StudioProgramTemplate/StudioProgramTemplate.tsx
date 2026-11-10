@@ -179,7 +179,7 @@ export function StudioProgramTemplate({
       <StudioInquirySection
         title="Є питання про"
         hand="курс?"
-        tone="red"
+        layout="balanced"
         context={{
           programId: program.id,
           offeringId: offering?.id,

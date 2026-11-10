@@ -48,8 +48,8 @@ export function StudioSpacesTemplate({ content }: StudioSpacesTemplateProps) {
     <>
       <section className={`${styles.hero} studio-dark`}>
         <StudioImage
-          asset={studioAssets.studio.imgHero}
-          alt="Портрет рудоволосої моделі у студійному світлі"
+          asset={studioAssets.artifact.hero_space}
+          alt="Студія ProPhoto: циклорама, рожевий фон, світло і зона візажу"
           className={styles.heroImage}
           fit="cover"
           sizes="100vw"
@@ -92,7 +92,7 @@ export function StudioSpacesTemplate({ content }: StudioSpacesTemplateProps) {
           </div>
         </div>
       </section>
-      <section id="studio-booking" className={`${styles.booking} studio-band studio-form-red`}>
+      <section id="studio-booking" className={`${styles.booking} studio-band studio-light`}>
         <div className={`${styles.bookingGrid} studio-wrap`}>
           <div>
             <h2 className="studio-title">
@@ -114,7 +114,7 @@ export function StudioSpacesTemplate({ content }: StudioSpacesTemplateProps) {
               ))}
             </ul>
             <p>Вільний час, тривалість і вартість оренди доступні в нашому сервісі бронювання.</p>
-            <a href={bookingUrl} className="studio-button-inverse">
+            <a href={bookingUrl} className="studio-button">
               Обрати час і забронювати →
             </a>
             <p className={styles.address}>{content.hub.address}</p>

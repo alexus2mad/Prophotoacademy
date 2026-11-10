@@ -26,7 +26,8 @@ describe('catalog before client navigation is ready', () => {
       ),
     );
     expect($('[data-catalog-category]').attr('data-catalog-category')).toBe('course');
-    expect($('.course-card')).toHaveLength(3);
+    expect($('.course-card')).toHaveLength(4);
+    expect($('.course-card a[href="/food-photography"]').length).toBeGreaterThan(0);
     expect($('nav[aria-label="Категорії програм"] a').first().attr('href')).toBe(
       '/courses?utm_source=stage2-check&tag=one&tag=two',
     );

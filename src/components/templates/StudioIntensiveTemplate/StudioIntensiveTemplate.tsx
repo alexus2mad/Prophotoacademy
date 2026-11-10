@@ -149,13 +149,7 @@ export function StudioIntensiveTemplate({ content }: StudioIntensiveTemplateProp
         </div>
       </section>
       <div id="intensive-inquiry">
-        <StudioInquirySection
-          title="Залиште"
-          hand="заявку"
-          description={note}
-          context={inquiry}
-          tone="light"
-        />
+        <StudioInquirySection title="Залиште" hand="заявку" description={note} context={inquiry} />
       </div>
       <div className={styles.mobileEnrollment}>
         <InquiryButton {...inquiry} className="studio-button">

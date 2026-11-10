@@ -4,9 +4,50 @@ Read-only audit, 9 November 2026. Inspected all 14 `figma-*.json.0.txt` design-c
 
 Sources: [Figma website design](https://www.figma.com/design/CvY4dgmOevd9ehxk9Xsaqd?node-id=848-2) and [Claude artifact](https://claude.ai/artifact/FwrroMxpu7ApuHRefQRW3t).
 
+## Designer resolutions — 10 November 2026
+
+The owner supplied the designer's decisions alongside the
+[illustrated comparison artifact](https://claude.ai/artifact/DfJf443box4s3MAgJpPaWg).
+These explicit decisions supersede the initial blanket Figma priority where
+listed below. The original measurements remain below as historical evidence.
+
+| Item | Designer decision | Implementation rule |
+| --- | --- | --- |
+| 1 — condensed font | Figma, Roboto | Keep Roboto Condensed Bold; do not substitute HeliosCond |
+| 2 — KyivType weights | Figma | Keep 200/350/500/700/1000 mappings and the inspected font binaries |
+| 3 — secondary-page hero size/spacing | Artifact preferred | Use artifact desktop hero formulas with the Figma font families/weights: at 1440 px, 138.24 px heading, 77.76 px handwriting, Academy 136/64 px top/bottom padding |
+| 4 — form section backgrounds | White everywhere instead of red | Use paper `#fbfbfb`, dark text and red handwriting; primary CTA backgrounds stay red with white text |
+| 5 — final form columns | No preference | Preserve current responsive columns and existing mobile collapse |
+| 6 — contacts details/copy controls | Figma | Keep Roboto Condensed 32 px details and 44 px copy controls |
+| 7 — inquiry drawer | No preference | Preserve the working accessible drawer, labels, focus restoration and consent |
+| 8 — footer columns | No preference | Preserve current desktop/mobile composition |
+| 9 — Academy section rhythm | Figma | Keep 14 px header gaps, 56 px lower spacing and 32 px speaker names |
+| 10 — no corresponding numbered entry in the comparison | Figma | Retain Figma as the default for remaining unspecified visual details |
+
+Additional explicit content and image decisions:
+
+- Studio's hero uses the artifact's actual studio photograph (`hero_space`),
+  replacing the portrait. The desktop homepage Studio state uses the same studio
+  photograph; its mobile Figma state already depicts studio equipment.
+- Academy has four distinct primary courses in artifact order: commercial
+  content creator, camera/phone photography, Instagram, and food/product
+  photography. The existing commercial route and package mappings remain
+  unchanged. The distinct food course has an inquiry path until its offer is
+  configured; no price, start date or access mapping is invented.
+- Academy has eleven artifact reviews. Quote/story attribution and existing
+  source links are preserved. The homepage retains its eight source reviews.
+- The confirmed public address is **Київ, вул. Саксаганського, 24/25**. Update the
+  public content record so display, copy controls and footer share that value.
+- Homepage cards belong to the active tab: six learning directions under
+  Academy, three rooms under Studio. These are alternative states of the same
+  section, not nine simultaneous cards. Existing tab behavior already matches.
+- Course details and mobile Academy/Contacts/Studio/Shop destination layouts
+  use the artifact's responsive guidance. Studio/Shop mobile Figma frames remain
+  homepage tab states, not destination page designs.
+
 ## Approved source decision
 
-The user confirmed **Figma takes visual priority; the artifact fills missing layouts and interactions only**. For the cross-source visual conflicts below, implement the relevant Figma page/frame value, rather than averaging it with the artifact or assuming a reusable Figma component overrides a page-specific instance. The user's separate requirement for **white text on red primary CTAs** remains an explicit exception to dark-text examples in either source.
+The initial decision was **Figma takes visual priority; the artifact fills missing layouts and interactions only**. Apply the designer resolutions above first; otherwise use the relevant Figma page/frame value, rather than averaging it with the artifact or assuming a reusable Figma component overrides a page-specific instance. The user's separate requirement for **white text on red primary CTAs** remains an explicit exception to dark-text examples in either source.
 
 Keep authoritative content and server rules: current program/package identities, prices and availability, inquiry validation and consent, payment modes, checkout authorization and access grants stay in the existing domains. Design screenshots are not authority to change business data or bypass these boundaries. Missing layouts or interaction states can use the artifact while retaining these rules.
 

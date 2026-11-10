@@ -47,7 +47,7 @@ export function StudioAcademyTemplate({ content }: StudioAcademyTemplateProps) {
         title="Допоможемо"
         hand="обрати"
         description="Заповніть форму та отримайте безкоштовну консультацію з нашим спеціалістом."
-        tone="red"
+        layout="balanced"
       />
     </>
   );

@@ -11,7 +11,7 @@ export function StudioHomeHero({ mode, onModeChange }: StudioHomeHeroProps) {
   const { tabs, onTabKeyDown } = useStudioHomeTabs();
   const states = {
     studio: {
-      image: studioAssets.studio.imgHero,
+      image: studioAssets.artifact.hero_space,
       mobileImage: studioAssets.homeStudioMobile.imgImgHome390Studio01,
       kick: 'простір, щоб',
       mobileKick: 'простір, щоб',

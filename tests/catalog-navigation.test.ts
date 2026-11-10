@@ -11,6 +11,7 @@ describe('URL-addressable course selection', () => {
     const programs = [...content.programs].reverse();
     const selected = catalogPrograms(programs, catalogCategory('course'));
     expect(selected.map((program) => program.id)).toEqual([
+      'program-food',
       'program-instagram',
       'program-commercial',
       'program-visual',
@@ -31,6 +32,7 @@ describe('URL-addressable course selection', () => {
       'program-instagram',
       'program-visual',
       'program-commercial',
+      'program-food',
     ]);
   });
 

@@ -58,6 +58,42 @@ afterEach(() => {
 });
 
 describe('customer API flow', () => {
+  it('accepts a food-course inquiry without creating an order or borrowing another course package', async () => {
+    const payload = {
+      name: 'Local QA',
+      contact: 'qa@example.com',
+      consent: true,
+      programId: 'program-food',
+    };
+    expect((await inquiry(request('/api/inquiries', payload))).status).toBe(200);
+    const data = JSON.parse(
+      (database().prepare('SELECT data FROM inquiries').get() as SerializedRow).data,
+    );
+    expect(data.programTitle).toBe('Фуд фото і предметна зйомка');
+    expect(data).not.toHaveProperty('offeringId');
+    expect(data).not.toHaveProperty('packageId');
+    expect(
+      (
+        await inquiry(
+          request('/api/inquiries', { ...payload, offeringId: content.offerings[0].id }),
+        )
+      ).status,
+    ).toBe(400);
+    expect(
+      (
+        await checkout(
+          request('/api/checkout', {
+            ...input(),
+            offeringId: 'food-photography',
+            packageId: 'food-base',
+          }),
+        )
+      ).status,
+    ).toBe(404);
+    expect(
+      (database().prepare('SELECT COUNT(*) AS count FROM orders').get() as CountRow).count,
+    ).toBe(0);
+  });
   it('retains the guided practice and business context without creating an order', async () => {
     const payload = {
       name: 'Local QA',

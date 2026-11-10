@@ -58,6 +58,13 @@ requires rebuilding. See [final design implementation](docs/FINAL_DESIGN_IMPLEME
 and [source difference register](docs/FIGMA_ARTIFACT_DIFFERENCES.md).
 
 The Studio shell uses Figma's KyivType Sans, Roboto Condensed and Marck Script.
+The explicit 10 November designer resolutions in the source difference register
+override the general Figma-first rule. Shared secondary hero metrics follow the
+artifact; inquiry sections use paper backgrounds and white-on-red primary CTAs.
+`studioAcademyCourses` orders the four source-backed main courses without
+changing offering eligibility. Courses without configured offers remain
+inquiry-only. Academy and homepage reviews share attributed records, with
+eleven on Academy and the original eight on the homepage.
 Its original assets are local, deduplicated and mapped by source frame in
 `src/lib/studio-design/assets.json`; provenance has no temporary download URLs.
 The source-backed destinations `/academy`, `/photo-studio`, `/shop` and

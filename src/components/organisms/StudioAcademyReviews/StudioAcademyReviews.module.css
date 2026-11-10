@@ -1,0 +1,113 @@
+.heading {
+  display: grid;
+  gap: 14px;
+  padding-bottom: 56px;
+}
+.rail {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-inline: contain;
+  gap: 2px;
+}
+.rail::-webkit-scrollbar {
+  display: none;
+}
+.rail:focus-visible {
+  outline: 2px solid #eb423b;
+  outline-offset: 5px;
+}
+.review {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 0 0 440px;
+  min-width: 0;
+  min-height: 300px;
+  padding: 30px;
+  background: #17130f;
+  scroll-snap-align: start;
+}
+.review header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgb(255 255 255 / 40%);
+}
+.review h3 {
+  margin: 0;
+  font: 700 22px/1.1 var(--font-studio-condensed);
+  text-transform: uppercase;
+}
+.review header span {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.review .title {
+  color: #a9a5a2;
+}
+.body {
+  font-size: 16px;
+  line-height: 1.55;
+}
+.body .kind {
+  margin-bottom: 8px;
+  color: #a9a5a2;
+  font-size: 12px;
+}
+.source {
+  align-self: flex-start;
+  margin-top: auto;
+  padding-top: 8px;
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: center;
+  margin-top: 18px;
+}
+.controls > div {
+  display: flex;
+  gap: 8px;
+}
+.controls button {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: 1.5px solid currentColor;
+  background: transparent;
+  border-radius: 50%;
+  color: inherit;
+  cursor: pointer;
+}
+.controls button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.controls a {
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-bottom: 1.5px solid currentColor;
+  padding-bottom: 3px;
+}
+@media (max-width: 700px) {
+  .heading {
+    padding-bottom: 32px;
+  }
+  .review {
+    flex-basis: 92%;
+    padding: 24px;
+  }
+}

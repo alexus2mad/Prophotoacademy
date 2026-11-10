@@ -7,12 +7,12 @@ export function StudioInquirySection({
   hand,
   description = 'Заповніть форму та отримайте безкоштовну консультацію з нашим спеціалістом.',
   context,
-  tone = 'light',
+  layout = 'editorial',
   children,
 }: StudioInquirySectionProps) {
   return (
     <section
-      className={`studio-band studio-wrap ${tone === 'red' ? `studio-form-red ${styles.balanced}` : 'studio-light'} ${styles.section}`}
+      className={`studio-band studio-wrap studio-light ${styles.section} ${layout === 'balanced' ? styles.balanced : ''}`}
     >
       <div className={styles.copy}>
         <h2 className="studio-title">

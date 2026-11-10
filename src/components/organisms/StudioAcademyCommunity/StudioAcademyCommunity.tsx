@@ -1,10 +1,7 @@
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
+import { StudioAcademyReviews } from '@/components/organisms/StudioAcademyReviews/StudioAcademyReviews';
 import { studioAssets } from '@/lib/studio-design/assets';
-import {
-  studioAcademyAudience,
-  studioAcademyTrust,
-  studioAcademyReviews,
-} from '@/lib/studio-pages/academy';
+import { studioAcademyAudience, studioAcademyTrust } from '@/lib/studio-pages/academy';
 import styles from './StudioAcademyCommunity.module.css';
 
 export function StudioAcademyCommunity() {
@@ -94,31 +91,7 @@ export function StudioAcademyCommunity() {
           </div>
         </div>
       </section>
-      <section className="studio-band studio-dark">
-        <div className="studio-wrap">
-          <header className={styles.head}>
-            <p className="studio-label">Відгуки учнів</p>
-            <h2 className="studio-title">Що кажуть випускники</h2>
-          </header>
-          <div
-            className={styles.reviews}
-            tabIndex={0}
-            role="region"
-            aria-label="Відгуки випускників, прокрутіть для перегляду"
-          >
-            {studioAcademyReviews.map((review) => (
-              <article className={styles.review} key={review.name}>
-                <header>
-                  <h3>{review.name}</h3>
-                  <span aria-label="5 із 5">★★★★★</span>
-                </header>
-                <p>{review.title}</p>
-                <blockquote>{review.quote}</blockquote>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <StudioAcademyReviews />
     </>
   );
 }

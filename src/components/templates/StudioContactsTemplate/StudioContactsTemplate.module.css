@@ -1,12 +1,12 @@
 .page {
-  padding-top: 128px;
+  padding-top: var(--studio-page-hero-top);
   padding-bottom: 130px;
   display: grid;
   gap: 22px;
 }
 .page h1 {
   font:
-    1000 clamp(52px, 9.4444vw, 136px) / 0.92 var(--font-studio-sans),
+    1000 var(--studio-page-hero-title) / 0.92 var(--font-studio-sans),
     sans-serif;
   text-transform: uppercase;
   letter-spacing: -0.012em;
@@ -14,10 +14,12 @@
 .page h1 > span {
   display: block;
   font:
-    400 clamp(42px, 5.625vw, 81px) / 1 var(--font-studio-hand),
+    400 var(--studio-page-hero-hand) / 1 var(--font-studio-hand),
     cursive;
   color: #eb423b;
   letter-spacing: -0.06em;
+  word-spacing: -0.12em;
+  margin-bottom: 0.06em;
   text-transform: none;
 }
 .columns {

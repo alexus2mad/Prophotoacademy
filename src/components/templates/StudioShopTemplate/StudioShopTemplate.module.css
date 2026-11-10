@@ -1,10 +1,10 @@
 .hero {
   position: relative;
   isolation: isolate;
-  min-height: 720px;
+  min-height: var(--studio-photo-hero-height);
   display: flex;
   align-items: flex-end;
-  padding-bottom: 36px;
+  padding-block: 32px 36px;
 }
 .image {
   position: absolute;
@@ -31,14 +31,16 @@
 }
 .hero h1 {
   margin: 16px 0;
-  font: 1000 clamp(40px, 9.445vw, 136px) / 0.92 var(--font-studio-sans);
+  font: 1000 var(--studio-page-hero-title) / 0.92 var(--font-studio-sans);
   letter-spacing: -0.012em;
   text-transform: uppercase;
 }
 .hero h1 span {
   display: block;
-  font: 400 clamp(44px, 5.625vw, 81px) / 1 var(--font-studio-hand);
+  font: 400 var(--studio-page-hero-hand) / 1 var(--font-studio-hand);
   letter-spacing: -0.06em;
+  word-spacing: -0.12em;
+  margin-bottom: 0.06em;
   text-transform: none;
 }
 .hero h1 i {

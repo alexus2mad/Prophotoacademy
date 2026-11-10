@@ -15,6 +15,12 @@ export function studioProgramArtwork(
   if (program.id === 'program-commercial') {
     return { asset: studioAssets.artifact.hero_academy, alt: 'Жінка у вечірній сукні під водою' };
   }
+  if (program.id === 'program-food') {
+    return {
+      asset: studioAssets.academy.imgImgContent2,
+      alt: 'Стіл із ноутбуком та мікрофонами у студії',
+    };
+  }
   if (program.id === 'program-instagram') {
     return {
       asset: studioAssets.academy.imgImgSnow,
