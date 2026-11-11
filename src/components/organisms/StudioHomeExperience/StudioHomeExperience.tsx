@@ -7,16 +7,12 @@ import type { StudioHomeExperienceProps } from './types';
 import styles from './StudioHomeExperience.module.css';
 
 export function StudioHomeExperience({ directions, children }: StudioHomeExperienceProps) {
-  const { mode, setMode, section, exposure, ready, compact } = useStudioHomeExperience();
+  const { mode, setMode, directionsRef } = useStudioHomeExperience();
   return (
     <div className={styles.home} data-home-mode={mode}>
       <StudioHomeHero mode={mode} onModeChange={setMode} />
-      <StudioHomeExposure section={section} exposure={exposure} ready={ready} compact={compact} />
-      <StudioHomeDirections
-        mode={mode}
-        directions={directions}
-        transitionProgress={compact && ready ? exposure.progress : undefined}
-      />
+      <StudioHomeExposure mode={mode} directionsRef={directionsRef} />
+      <StudioHomeDirections mode={mode} directions={directions} sectionRef={directionsRef} />
       {children}
     </div>
   );

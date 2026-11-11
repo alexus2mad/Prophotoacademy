@@ -4,14 +4,11 @@ import { StudioExposureTitle } from '@/components/molecules/StudioExposureTitle/
 import { studioAssets } from '@/lib/studio-design/assets';
 import { exposureBarCount } from '@/lib/studio-home/exposure';
 import type { StudioExposureStyle, StudioHomeExposureProps } from './types';
+import { useStudioHomeExposure } from './hooks';
 import styles from './StudioHomeExposure.module.css';
 
-export function StudioHomeExposure({
-  section,
-  exposure,
-  ready = false,
-  compact = false,
-}: StudioHomeExposureProps) {
+export function StudioHomeExposure({ mode, directionsRef }: StudioHomeExposureProps) {
+  const { section, exposure, ready, compact } = useStudioHomeExposure(mode, directionsRef);
   const style: StudioExposureStyle = {
     '--exposure-progress': exposure.progress,
     '--mobile-exposure': compact && ready ? exposure.progress : 0,

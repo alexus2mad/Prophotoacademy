@@ -1,5 +1,5 @@
 import { horizontalScrollFocus, selectScrollCard, visibleCardBounds } from './selection';
-import type { CardClip, CardInput, CardPointerPosition } from './types';
+import type { CardAncestorGeometry, CardClip, CardInput, CardPointerPosition } from './types';
 
 /** One presentation target, whether the visitor is pointing, scrolling or using a keyboard. */
 export function observeStudioCards(root: Element) {
@@ -50,23 +50,35 @@ export function observeStudioCards(root: Element) {
       return;
     }
     const viewport = { width: document.documentElement.clientWidth, height: window.innerHeight };
+    // Siblings share clipping ancestors. Read each ancestor once, before any DOM writes.
+    const ancestors = new Map<HTMLElement, CardAncestorGeometry>();
     const candidates = cards.map((card) => {
+      const rectangle = card.getBoundingClientRect();
+      if (!visibleCardBounds(rectangle, [], viewport))
+        return { bounds: null, focusX: viewport.width / 2 };
       const clips: CardClip[] = [];
       let rail: HTMLElement | null = null;
       for (let parent = card.parentElement; parent; parent = parent.parentElement) {
-        const style = getComputedStyle(parent);
-        const horizontal = /^(auto|scroll|hidden|clip)$/.test(style.overflowX);
-        const vertical = /^(auto|scroll|hidden|clip)$/.test(style.overflowY);
-        if (horizontal || vertical)
-          clips.push({ bounds: parent.getBoundingClientRect(), horizontal, vertical });
-        if (
-          !rail &&
-          /^(auto|scroll)$/.test(style.overflowX) &&
-          parent.scrollWidth > parent.clientWidth + 1
-        )
-          rail = parent;
+        let geometry = ancestors.get(parent);
+        if (!geometry) {
+          const style = getComputedStyle(parent);
+          const horizontal = /^(auto|scroll|hidden|clip)$/.test(style.overflowX);
+          const vertical = /^(auto|scroll|hidden|clip)$/.test(style.overflowY);
+          geometry = {
+            clip:
+              horizontal || vertical
+                ? { bounds: parent.getBoundingClientRect(), horizontal, vertical }
+                : null,
+            rail:
+              /^(auto|scroll)$/.test(style.overflowX) && parent.scrollWidth > parent.clientWidth + 1
+                ? parent
+                : null,
+          };
+          ancestors.set(parent, geometry);
+        }
+        if (geometry.clip) clips.push(geometry.clip);
+        rail ??= geometry.rail;
       }
-      const rectangle = card.getBoundingClientRect();
       const horizontalClips = clips.filter((clip) => clip.horizontal);
       return {
         bounds: visibleCardBounds(rectangle, clips, viewport),
@@ -156,11 +168,16 @@ export function observeStudioCards(root: Element) {
     hovered = null;
     schedule();
   };
-  const scroll = () => {
-    hovered =
-      !compact.matches && input === 'mouse' && pointerPosition
-        ? findCard(document.elementFromPoint(pointerPosition.x, pointerPosition.y))
-        : null;
+  const scroll = (event: Event) => {
+    const scroller = event.target;
+    // A marquee or unrelated inner rail must not wake every card on the page.
+    if (
+      event.type === 'scroll' &&
+      scroller instanceof Element &&
+      !cards.some((card) => scroller.contains(card))
+    )
+      return;
+    hovered = null;
     if (compact.matches && input === 'mouse') input = null;
     schedule();
   };

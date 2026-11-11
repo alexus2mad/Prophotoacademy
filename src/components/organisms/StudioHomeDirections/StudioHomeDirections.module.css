@@ -35,8 +35,21 @@
 }
 @media (max-width: 760px) {
   .section.section:global(.studio-light) {
+    position: relative;
+    isolation: isolate;
     padding-top: 72px;
-    background: color-mix(in srgb, #fbfbfb calc(var(--mobile-exposure, 1) * 100%), #000);
+    background: #000;
+  }
+  /* Keep the scroll-driven light surface separate from the heading and card rail. */
+  .section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: #fbfbfb;
+    opacity: var(--mobile-exposure, 1);
+    pointer-events: none;
+    will-change: opacity;
   }
   .heading {
     display: grid;

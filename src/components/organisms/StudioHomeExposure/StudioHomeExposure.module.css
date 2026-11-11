@@ -68,7 +68,19 @@
 @media (max-width: 760px) {
   .exposure {
     height: auto;
-    background: color-mix(in srgb, #fbfbfb calc(var(--mobile-exposure, 0) * 100%), #000);
+    isolation: isolate;
+    background: #000;
+  }
+  /* Composite the light surface without repainting the section on every scroll frame. */
+  .exposure::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: #fbfbfb;
+    opacity: var(--mobile-exposure, 0);
+    pointer-events: none;
+    will-change: opacity;
   }
   .stage {
     position: relative;

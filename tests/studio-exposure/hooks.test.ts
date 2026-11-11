@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 import type { DependencyList, EffectCallback } from 'react';
 import type { StudioHomeMode } from '../../src/lib/studio-home/types';
+import type { StudioHomeExposureProps } from '../../src/components/organisms/StudioHomeExposure/types';
 import type { ExposureEffect, PendingExposureEffect } from './types';
 import { useStudioHomeExposure } from '../../src/components/organisms/StudioHomeExposure/hooks';
 
@@ -52,19 +53,23 @@ class Observer {
 }
 let reduced: Preference;
 let compactLayout: Preference;
-let browser = Object.assign(new EventTarget(), { innerHeight: 900 });
+let browser = Object.assign(new EventTarget(), { innerHeight: 900, innerWidth: 1440 });
 let documentState = Object.assign(new EventTarget(), { hidden: false });
 let bounds = { top: 0, height: 1350 };
 let stageHeight = 900;
 let stageWidth = 1440;
 let stickyOffset = 0;
 let now = 0;
-const stage = { getBoundingClientRect: () => ({ height: stageHeight, width: stageWidth }) };
+const stage = { getBoundingClientRect: vi.fn(() => ({ height: stageHeight, width: stageWidth })) };
+const computedStyle = vi.fn(() => ({ top: `${stickyOffset}px` }));
 const frames = new Map<number, FrameRequestCallback>();
-const render = (mode: StudioHomeMode = 'academy') => {
+const render = (
+  mode: StudioHomeMode = 'academy',
+  directionsRef?: StudioHomeExposureProps['directionsRef'],
+) => {
   lifecycle.stateIndex = 0;
   lifecycle.effectIndex = 0;
-  const result = useStudioHomeExposure(mode);
+  const result = useStudioHomeExposure(mode, directionsRef);
   for (const { index, callback, dependencies } of lifecycle.pending.splice(0)) {
     lifecycle.effects[index]?.cleanup?.();
     lifecycle.effects[index] = { dependencies, cleanup: callback() };
@@ -92,12 +97,14 @@ beforeEach(() => {
   lifecycle.pending = [];
   reduced = new Preference();
   compactLayout = new Preference();
-  browser = Object.assign(new EventTarget(), { innerHeight: 900 });
+  browser = Object.assign(new EventTarget(), { innerHeight: 900, innerWidth: 1440 });
   documentState = Object.assign(new EventTarget(), { hidden: false });
   bounds = { top: 0, height: 1350 };
   stageHeight = 900;
   stageWidth = 1440;
   stickyOffset = 0;
+  stage.getBoundingClientRect.mockClear();
+  computedStyle.mockClear();
   now = 0;
   lifecycle.section.current.getBoundingClientRect
     .mockReset()
@@ -110,7 +117,7 @@ beforeEach(() => {
     'window',
     Object.assign(browser, {
       matchMedia: (query: string) => (query.includes('max-width') ? compactLayout : reduced),
-      getComputedStyle: () => ({ top: `${stickyOffset}px` }),
+      getComputedStyle: computedStyle,
       requestAnimationFrame: (callback: FrameRequestCallback) => {
         frames.set(++nextFrame, callback);
         return nextFrame;
@@ -366,7 +373,7 @@ it('follows compact scrolling directly in one frame and reverses without catch-u
   expect(frames.size).toBe(0);
 });
 
-it('recalculates compact progress from actual viewport height and restored scroll', () => {
+it('keeps compact progress stable during browser chrome resizing and refreshes after restoration', () => {
   compactLayout.set(true);
   browser.innerHeight = 800;
   bounds = { top: 242, height: 280 };
@@ -375,11 +382,76 @@ it('recalculates compact progress from actual viewport height and restored scrol
   expect(render().exposure.progress).toBeCloseTo(0.45);
   browser.innerHeight = 700;
   browser.dispatchEvent(new Event('resize'));
+  expect(frames.size).toBe(0);
   flush();
-  expect(render().exposure.progress).toBeCloseTo((385 - 242) / 420);
+  expect(render().exposure.progress).toBeCloseTo(0.45);
+  browser.dispatchEvent(new Event('scroll'));
+  flush();
+  expect(render().exposure.progress).toBeCloseTo(0.45);
   bounds.top = 0;
   browser.dispatchEvent(new Event('pageshow'));
   expect(render().exposure.progress).toBeCloseTo(385 / 420);
+  expect(frames.size).toBe(0);
+});
+
+it('refreshes compact viewport geometry after a real width or orientation change', () => {
+  compactLayout.set(true);
+  browser.innerWidth = 390;
+  browser.innerHeight = 800;
+  bounds = { top: 242, height: 280 };
+  render();
+  expect(render().exposure.progress).toBeCloseTo(0.45);
+  browser.innerWidth = 700;
+  browser.innerHeight = 390;
+  browser.dispatchEvent(new Event('resize'));
+  flush();
+  expect(render().exposure.progress).toBe(0);
+  browser.innerHeight = 700;
+  browser.dispatchEvent(new Event('orientationchange'));
+  expect(render().exposure.progress).toBeCloseTo((385 - 242) / 420);
+});
+
+it('does not read desktop stage geometry or computed styles while compact scrolling', () => {
+  compactLayout.set(true);
+  browser.innerHeight = 800;
+  bounds = { top: 440, height: 280 };
+  render();
+  bounds.top = 242;
+  browser.dispatchEvent(new Event('scroll'));
+  flush();
+  expect(render().exposure.progress).toBeCloseTo(0.45);
+  expect(stage.getBoundingClientRect).not.toHaveBeenCalled();
+  expect(computedStyle).not.toHaveBeenCalled();
+});
+
+it('hands compact presentation to the directions element without React progress props', () => {
+  compactLayout.set(true);
+  browser.innerHeight = 800;
+  bounds = { top: 440, height: 280 };
+  const attributes = new Map([['data-header-tone', 'light']]);
+  const directions = {
+    style: { setProperty: vi.fn(), removeProperty: vi.fn() },
+    getAttribute: (name: string) => attributes.get(name),
+    setAttribute: vi.fn((name: string, value: string) => attributes.set(name, value)),
+  };
+  const ref = { current: directions as unknown as HTMLElement };
+  render('academy', ref);
+  expect(directions.style.setProperty.mock.lastCall?.[0]).toBe('--mobile-exposure');
+  expect(Number(directions.style.setProperty.mock.lastCall?.[1])).toBeCloseTo(0);
+  expect(directions.setAttribute).toHaveBeenCalledWith('data-header-tone', 'dark');
+  directions.setAttribute.mockClear();
+  bounds.top = 242;
+  browser.dispatchEvent(new Event('scroll'));
+  flush();
+  expect(Number(directions.style.setProperty.mock.lastCall?.[1])).toBeCloseTo(0.45);
+  expect(directions.setAttribute).not.toHaveBeenCalled();
+  bounds.top = 0;
+  browser.dispatchEvent(new Event('scroll'));
+  flush();
+  expect(directions.setAttribute).toHaveBeenCalledWith('data-header-tone', 'light');
+  compactLayout.set(false);
+  expect(directions.style.removeProperty).toHaveBeenCalledWith('--mobile-exposure');
+  unmount();
   expect(frames.size).toBe(0);
 });
 

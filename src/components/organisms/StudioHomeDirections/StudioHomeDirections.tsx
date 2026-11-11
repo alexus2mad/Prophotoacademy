@@ -4,26 +4,18 @@ import Link from 'next/link';
 import { StudioHomeDirectionCard } from '@/components/molecules/StudioHomeDirectionCard/StudioHomeDirectionCard';
 import { studioHomeRooms } from '@/lib/studio-home/selectors';
 import { ecosystemDestinations } from '@/lib/ecosystem';
-import type { StudioDirectionTransitionStyle, StudioHomeDirectionsProps } from './types';
+import type { StudioHomeDirectionsProps } from './types';
 import { useDirectionRail } from './hooks';
 import styles from './StudioHomeDirections.module.css';
 
-export function StudioHomeDirections({
-  mode,
-  directions,
-  transitionProgress,
-}: StudioHomeDirectionsProps) {
+export function StudioHomeDirections({ mode, directions, sectionRef }: StudioHomeDirectionsProps) {
   const isStudio = mode === 'studio';
   const railRef = useDirectionRail(mode);
-  const transitionStyle: StudioDirectionTransitionStyle | undefined =
-    transitionProgress === undefined ? undefined : { '--mobile-exposure': transitionProgress };
   return (
     <section
       data-home-section="directions"
-      data-header-tone={
-        transitionProgress === undefined || transitionProgress >= 0.5 ? 'light' : 'dark'
-      }
-      style={transitionStyle}
+      ref={sectionRef}
+      data-header-tone="light"
       className={`${styles.section} studio-light`}
       aria-labelledby="home-directions-title"
     >

@@ -19,6 +19,11 @@ class ElementStub extends EventTarget {
   getBoundingClientRect() {
     return this.bounds;
   }
+  contains(element: ElementStub): boolean {
+    return (
+      element === this || Boolean(element.parentElement && this.contains(element.parentElement))
+    );
+  }
   closest(selector: string) {
     return selector === '[data-card-motion-pending]' ? (this.pending ? this : null) : this;
   }
@@ -134,6 +139,47 @@ afterEach(() => {
 });
 
 describe('Studio input policy', () => {
+  it('ignores captured scrolling from an unrelated marquee', () => {
+    start(true);
+    const measurements = cards.map((card) => vi.spyOn(card, 'getBoundingClientRect'));
+    const marquee = new ElementStub({ left: 0, right: 390, top: 900, bottom: 980 });
+    const event = new Event('scroll');
+    Object.defineProperty(event, 'target', { value: marquee });
+    browser.dispatchEvent(event);
+    expect(frames.size).toBe(0);
+    expect(measurements.every((spy) => spy.mock.calls.length === 0)).toBe(true);
+    expect(active()).toEqual([1]);
+  });
+  it('still measures a captured scroll from a rail containing cards', () => {
+    const rail = new ElementStub({ left: 0, right: 390, top: 300, bottom: 550 });
+    cards.forEach((card) => {
+      card.parentElement = rail;
+    });
+    start(true);
+    const event = new Event('scroll');
+    Object.defineProperty(event, 'target', { value: rail });
+    browser.dispatchEvent(event);
+    expect(frames.size).toBe(1);
+    flush();
+    expect(active()).toEqual([1]);
+  });
+  it('reads shared clipping ancestors once and skips offscreen ancestor reads', () => {
+    const rail = new ElementStub({ left: 0, right: 390, top: 300, bottom: 550 });
+    rail.overflowX = 'hidden';
+    cards[0].parentElement = rail;
+    cards[1].parentElement = rail;
+    const offscreenParent = new ElementStub({ left: 0, right: 390, top: 1000, bottom: 1300 });
+    cards[2].parentElement = offscreenParent;
+    cards[2].bounds = { left: 0, right: 170, top: 1000, bottom: 1200 };
+    const styles = vi.fn((element: ElementStub) => element);
+    const railBounds = vi.spyOn(rail, 'getBoundingClientRect');
+    vi.stubGlobal('getComputedStyle', styles);
+    start(true);
+    expect(styles).toHaveBeenCalledTimes(1);
+    expect(styles).toHaveBeenCalledWith(rail);
+    expect(railBounds).toHaveBeenCalledTimes(1);
+    expect(active()).toEqual([1]);
+  });
   it('never activates a desktop row merely because scroll occurred', () => {
     start();
     browser.dispatchEvent(new Event('scroll'));

@@ -57,7 +57,7 @@ export function useStudioHeader() {
         childList: true,
         subtree: true,
         attributes: true,
-        attributeFilter: ['style'],
+        attributeFilter: ['data-header-tone'],
       });
     return () => {
       window.removeEventListener('scroll', update);
