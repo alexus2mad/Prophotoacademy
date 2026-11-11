@@ -1,6 +1,30 @@
 # Studio review fixes — release record
 
-## Current staging release — card actions and eased exposure
+## Current staging release — confirmed offers and shared checkout
+
+Active application: `554eafdded8225100434fc130c195b9cd3ede50e`. Previous verified rollback: `9eb70673e3b7e1217113d83e0d17fdb66e455739`. Released on 11 November 2026 (Europe/Kyiv) to [staging](https://staging.prophotoacademy.com.ua/).
+
+AI Artwork now offers separate offline (3,900 UAH) and online (3,000 UAH) tickets for 22 November 2026, 11:00–16:00 Kyiv time. Both use the existing checkout and verified WayForPay payment flow, without course entitlements. Shared event scheduling closes sales at the published local end time. Commercial Content's 6 November cohort remains open across all three packages and is explicitly labeled as ongoing. Separate Food Photography remains inquiry-only.
+
+The owner explicitly selected test-only staging, preparing real checkout for the later production release. Staging stays `PAYMENT_MODE=mock`: no charge, ticket confirmation, learning grant or financial record. The production release, process, credentials and historical callback routing remain unchanged. Mock order status uses the shared database adapter and rejects real-payment orders. The focused checkout header also retains its dark logo when entered from a dark hero. Both Academy design variants retain their own AI page, and the sitemap/export resolve that route only once.
+
+- Architecture: **688 modules**; TypeScript, content validation and scoped formatting passed.
+- Full suite: **467/467 tests** across 66 files, including product payment/no-grant behavior, mock isolation, event cutoff/DST, exact prices, ongoing cohort and dedicated-route behavior.
+- Local and isolated Linux production builds passed; Linux generated 65 pages. Synthetic Pages export validated **58 review pages** and was not republished.
+- Desktop 1440px and mobile 390px checks verified ticket selection, exact checkout prices, schedule, ticket terms, Commercial GOLD, white-on-red actions, light-header contrast and no horizontal overflow. Staging browser navigation back to the format selector worked; console inspection returned no warnings/errors. No real payments or invitation emails were initiated.
+- Read-only staging HTTPS smoke: **428/428 passed**, including all Commercial tiers, both tickets, event schedule, protected-route boundaries and assets.
+- Both runtime fingerprints, production release `5ae3eca` and PID `1047` remained unchanged. The scheduled staging email worker reported success; no manual job was triggered.
+- Release retention keeps only the active application and rollback above, removing `3ffb7b2`. Temporary remote build and transfer artifacts were removed after verification.
+
+| Input/output | SHA-256 |
+| --- | --- |
+| Committed source archive | `c9f84e490dc78ab1bc2cc36cb259467421bcd984cbb7f222f6386fd2b9776635` |
+| Public staging build settings | `7a4c41c23c8cfa8e5c6034a954f37afea24fbb524236d5547ae245bfaefe4605` |
+| Linux runtime artifact | `3d34f77bc7f9f77c0b147a5552c092a0c050739c0df214a1f7f7201a8f1c5973` |
+
+Private evidence lives under `.data/design-review/`: `confirmed-offers-tests.log`, `confirmed-offers-build.log`, `confirmed-offers-pages.log`, `staging-confirmed-offers-linux-build.log`, `staging-activation-confirmed-offers.log`, `staging-confirmed-offers-smoke.log`, `staging-smoke.json`, `staging-ai-ticket-selection.png`, `staging-ai-ticket-selection-mobile.png` and `staging-ai-checkout-mobile.png`. The later documentation commit does not change the running application SHA. See [checkout operations](COURSE_CHECKOUT.md) for confirmed offer identities and the production activation boundary.
+
+## Historical release — card actions and eased exposure
 
 Active application: `9eb70673e3b7e1217113d83e0d17fdb66e455739`. Previous verified rollback: `3ffb7b2efad946e7e7669f3e8377931a7664c4c7`. Released on 11 November 2026 (Europe/Kyiv) to [staging](https://staging.prophotoacademy.com.ua/).
 
