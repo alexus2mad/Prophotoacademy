@@ -4,13 +4,13 @@ ProPhoto uses Atomic Design for its presentation layer. Business rules, content 
 
 ## Composition
 
-| Layer | Responsibility | Examples |
-| --- | --- | --- |
-| Atoms | A useful primitive with a stable semantic contract | Button, IconButton, Input, FieldError, Photo, BrandLogo |
-| Molecules | A small functional group | FormField, Dialog, Disclosure, CourseCard, PackageCard, WorkCard, RoomCard |
-| Organisms | A complete section or interaction | Header, InquiryDialog, ProgramPackages, Gallery, AcademyHero, HubSpaces |
-| Templates | Arrange sections into a layout | SiteShell, AcademyHomeTemplate, ProgramTemplate, CatalogTemplate, RoomTemplate |
-| Pages | Resolve route input, fetch content, metadata, availability and not-found behavior | Next.js `src/app/**/page.tsx` and layouts |
+| Layer     | Responsibility                                                                    | Examples                                                                       |
+| --------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| Atoms     | A useful primitive with a stable semantic contract                                | Button, IconButton, Input, FieldError, Photo, BrandLogo                        |
+| Molecules | A small functional group                                                          | FormField, Dialog, Disclosure, CourseCard, PackageCard, WorkCard, RoomCard     |
+| Organisms | A complete section or interaction                                                 | Header, InquiryDialog, ProgramPackages, Gallery, AcademyHero, HubSpaces        |
+| Templates | Arrange sections into a layout                                                    | SiteShell, AcademyHomeTemplate, ProgramTemplate, CatalogTemplate, RoomTemplate |
+| Pages     | Resolve route input, fetch content, metadata, availability and not-found behavior | Next.js `src/app/**/page.tsx` and layouts                                      |
 
 An organism may compose another organism. Dependencies may point to the same or a lower UI layer; they must not point upward or form runtime cycles. A lower component must not borrow an upper component's props type. Use a domain contract or move the shared contract to the lowest appropriate owner.
 
