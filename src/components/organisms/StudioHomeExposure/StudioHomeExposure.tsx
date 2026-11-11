@@ -6,15 +6,21 @@ import { exposureBarCount } from '@/lib/studio-home/exposure';
 import type { StudioExposureStyle, StudioHomeExposureProps } from './types';
 import styles from './StudioHomeExposure.module.css';
 
-export function StudioHomeExposure({ section, exposure, ready = false }: StudioHomeExposureProps) {
+export function StudioHomeExposure({
+  section,
+  exposure,
+  ready = false,
+  compact = false,
+}: StudioHomeExposureProps) {
   const style: StudioExposureStyle = {
     '--exposure-progress': exposure.progress,
+    '--mobile-exposure': compact && ready ? exposure.progress : 0,
   };
   return (
     <section
       className={styles.exposure}
       data-home-section="exposure"
-      data-header-tone="dark"
+      data-header-tone={compact && exposure.progress >= 0.5 ? 'light' : 'dark'}
       data-exposure-ready={ready}
       ref={section}
       style={style}
@@ -29,7 +35,7 @@ export function StudioHomeExposure({ section, exposure, ready = false }: StudioH
           sizes="100vw"
         />
         <div className={`${styles.inner} studio-wrap`}>
-          <StudioExposureTitle progress={exposure.progress} ready={ready} />
+          <StudioExposureTitle progress={exposure.progress} ready={ready} compact={compact} />
           <div className={styles.meter} data-exposure-meter aria-hidden="true">
             <div className={styles.meterLabel}>
               <span>Експозиція</span>

@@ -44,12 +44,28 @@
 }
 @media (max-width: 760px) {
   .title {
+    font-weight: 300;
     font-size: 32px;
     line-height: 1.04;
     color: #efefef;
+    opacity: calc(1 - var(--mobile-exposure, 0) * 1.25);
+    filter: blur(calc(var(--mobile-exposure, 0) * 4px));
+    text-wrap: balance;
+  }
+  .source strong {
+    font-weight: 900;
+  }
+  .copies,
+  .target,
+  .desktopComma {
+    display: none;
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  .title {
+    opacity: 1;
+    filter: none;
+  }
   .title[data-title-morphing] .copies {
     opacity: 0;
   }

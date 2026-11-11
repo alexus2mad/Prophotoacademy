@@ -97,11 +97,22 @@ mobile menu and homepage tab behavior were also inspected.
 - Red primary CTAs share white label colors in default, hover and pressed
   states. Outline variants remain separate; do not combine primary and outline
   classes on the same action.
-- Exposure uses one displayed progress value for the image, title and meter.
-  A 120ms exponential response smooths wheel steps; quintic phase easing brings
-  word movement to rest at each boundary. Keep the approved phase order and
-  scroll distance. Reduced motion, restored scroll and actual layout changes
-  synchronize immediately; mobile toolbar changes must not cause snapping.
+- Desktop exposure uses one displayed progress value for the image, title and
+  meter. A 120ms exponential response smooths wheel steps; quintic phase easing
+  brings word movement to rest at each boundary. Keep the approved 300svh section,
+  100svh sticky stage, phase order and scroll distance. Reduced motion, restored
+  scroll and actual layout changes synchronize immediately.
+- **Explicit mobile change request, 11 November 2026:** at widths up to 760px,
+  restore the artifact's compact, photo-free exposure section in normal flow.
+  Direct scroll progress changes its background and the following directions
+  background from black to paper, fades/blurs the whole 300/900-weight heading,
+  fills the meter white then red from left to right, and reveals the following
+  heading. The meter runs from 0 to +3 EV, with its labels below the bars. Do not
+  apply the desktop sticky runway, smoothing or word morph on mobile. Reduced
+  motion uses the artifact's discrete background states without heading fades
+  or blur. Keep unused desktop word copies and measurement targets hidden on
+  mobile so they cannot create overflow after a viewport change. See the current
+  [source decision](FIGMA_ARTIFACT_DIFFERENCES.md#mobile-artifact-exposure-restoration--11-november-2026).
 - Account, lesson and administration business workflows stay intact. No new
   design is invented for screens absent from these sources.
 

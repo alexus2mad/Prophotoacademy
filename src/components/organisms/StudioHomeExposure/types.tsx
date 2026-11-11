@@ -5,7 +5,9 @@ export type StudioHomeExposureProps = {
   section: RefObject<HTMLElement | null>;
   exposure: StudioExposureState;
   ready?: boolean;
+  compact?: boolean;
 };
 export type StudioExposureStyle = CSSProperties & {
   '--exposure-progress': number;
+  '--mobile-exposure': number;
 };

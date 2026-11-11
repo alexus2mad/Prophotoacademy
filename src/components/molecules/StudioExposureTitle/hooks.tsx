@@ -3,13 +3,13 @@ import { useEffect, useRef, useState } from 'react';
 import { canMorphExposureWords } from './selectors';
 import type { ExposureTitleLayout } from './types';
 
-export function useStudioExposureTitle() {
+export function useStudioExposureTitle(enabled = true) {
   const root = useRef<HTMLDivElement>(null);
   const [layout, setLayout] = useState<ExposureTitleLayout | null>(null);
 
   useEffect(() => {
     const element = root.current;
-    if (!element) return;
+    if (!element || !enabled) return;
     const stage = element.closest<HTMLElement>('[data-exposure-stage]');
     const meter = stage?.querySelector<HTMLElement>('[data-exposure-meter]');
     const target = element.querySelector<HTMLElement>('[data-title-target]');
@@ -81,6 +81,6 @@ export function useStudioExposureTitle() {
       motion.removeEventListener('change', schedule);
       document.fonts?.removeEventListener('loadingdone', schedule);
     };
-  }, []);
+  }, [enabled]);
   return { root, layout };
 }

@@ -3,17 +3,26 @@
 import Link from 'next/link';
 import { StudioHomeDirectionCard } from '@/components/molecules/StudioHomeDirectionCard/StudioHomeDirectionCard';
 import { studioHomeRooms } from '@/lib/studio-home/selectors';
-import type { StudioHomeDirectionsProps } from './types';
+import type { StudioDirectionTransitionStyle, StudioHomeDirectionsProps } from './types';
 import { useDirectionRail } from './hooks';
 import styles from './StudioHomeDirections.module.css';
 
-export function StudioHomeDirections({ mode, directions }: StudioHomeDirectionsProps) {
+export function StudioHomeDirections({
+  mode,
+  directions,
+  transitionProgress,
+}: StudioHomeDirectionsProps) {
   const isStudio = mode === 'studio';
   const railRef = useDirectionRail(mode);
+  const transitionStyle: StudioDirectionTransitionStyle | undefined =
+    transitionProgress === undefined ? undefined : { '--mobile-exposure': transitionProgress };
   return (
     <section
       data-home-section="directions"
-      data-header-tone="light"
+      data-header-tone={
+        transitionProgress === undefined || transitionProgress >= 0.5 ? 'light' : 'dark'
+      }
+      style={transitionStyle}
       className={`${styles.section} studio-light`}
       aria-labelledby="home-directions-title"
     >

@@ -5,6 +5,6 @@ import { useStudioHomeExposure } from '@/components/organisms/StudioHomeExposure
 
 export function useStudioHomeExperience() {
   const [mode, setMode] = useState<StudioHomeMode>('academy');
-  const { section, exposure, ready } = useStudioHomeExposure(mode);
-  return { mode, setMode, section, exposure, ready };
+  const { section, exposure, ready, compact } = useStudioHomeExposure(mode);
+  return { mode, setMode, section, exposure, ready, compact };
 }

@@ -51,6 +51,7 @@ class Observer {
   }
 }
 let reduced: Preference;
+let compactLayout: Preference;
 let browser = Object.assign(new EventTarget(), { innerHeight: 900 });
 let documentState = Object.assign(new EventTarget(), { hidden: false });
 let bounds = { top: 0, height: 1350 };
@@ -90,6 +91,7 @@ beforeEach(() => {
   lifecycle.effects = [];
   lifecycle.pending = [];
   reduced = new Preference();
+  compactLayout = new Preference();
   browser = Object.assign(new EventTarget(), { innerHeight: 900 });
   documentState = Object.assign(new EventTarget(), { hidden: false });
   bounds = { top: 0, height: 1350 };
@@ -107,7 +109,7 @@ beforeEach(() => {
   vi.stubGlobal(
     'window',
     Object.assign(browser, {
-      matchMedia: () => reduced,
+      matchMedia: (query: string) => (query.includes('max-width') ? compactLayout : reduced),
       getComputedStyle: () => ({ top: `${stickyOffset}px` }),
       requestAnimationFrame: (callback: FrameRequestCallback) => {
         frames.set(++nextFrame, callback);
@@ -209,7 +211,7 @@ it('cancels queued animation before applying reduced motion and recalculates whe
   expect(render().exposure.progress).toBe(0.5);
 });
 
-it('ignores mobile toolbar height changes and recalculates only from the rendered stage geometry', () => {
+it('keeps the desktop timeline tied to rendered stage geometry rather than viewport height', () => {
   bounds = { top: -675.2, height: 2532 };
   stageHeight = 844;
   render();
@@ -232,7 +234,7 @@ it('ignores mobile toolbar height changes and recalculates only from the rendere
   expect(Observer.instances[0].observe).toHaveBeenCalledWith(stage);
 });
 
-it('keeps catch-up smooth during mobile browser-chrome resizing', () => {
+it('keeps desktop catch-up smooth when the viewport changes without a layout change', () => {
   bounds = { top: 0, height: 2532 };
   stageHeight = 844;
   stageWidth = 390;
@@ -330,6 +332,92 @@ it('removes listeners and observer work on unmount', () => {
   expect(frames.size).toBe(0);
   browser.dispatchEvent(new Event('scroll'));
   reduced.set(true);
+  compactLayout.set(true);
   observer.notify();
+  expect(frames.size).toBe(0);
+});
+
+it('follows compact scrolling directly in one frame and reverses without catch-up frames', () => {
+  compactLayout.set(true);
+  browser.innerHeight = 800;
+  bounds = { top: 440, height: 280 };
+  stageHeight = 280;
+  stageWidth = 390;
+  render();
+  expect(render().compact).toBe(true);
+  expect(render().exposure.progress).toBeCloseTo(0);
+  expect(render().exposure.value).toBe('0.0 EV');
+  bounds.top = 242;
+  browser.dispatchEvent(new Event('scroll'));
+  browser.dispatchEvent(new Event('scroll'));
+  expect(frames.size).toBe(1);
+  flush();
+  expect(render().exposure).toMatchObject({
+    activeBars: 33,
+    redBars: 0,
+    value: '+1.5 EV',
+  });
+  expect(render().exposure.progress).toBeCloseTo(0.45);
+  expect(frames.size).toBe(0);
+  bounds.top = 440;
+  browser.dispatchEvent(new Event('scroll'));
+  flush();
+  expect(render().exposure.progress).toBeCloseTo(0);
+  expect(frames.size).toBe(0);
+});
+
+it('recalculates compact progress from actual viewport height and restored scroll', () => {
+  compactLayout.set(true);
+  browser.innerHeight = 800;
+  bounds = { top: 242, height: 280 };
+  stageHeight = 280;
+  render();
+  expect(render().exposure.progress).toBeCloseTo(0.45);
+  browser.innerHeight = 700;
+  browser.dispatchEvent(new Event('resize'));
+  flush();
+  expect(render().exposure.progress).toBeCloseTo((385 - 242) / 420);
+  bounds.top = 0;
+  browser.dispatchEvent(new Event('pageshow'));
+  expect(render().exposure.progress).toBeCloseTo(385 / 420);
+  expect(frames.size).toBe(0);
+});
+
+it('switches between compact and cinematic timelines without retaining stale progress', () => {
+  bounds.top = -180;
+  render();
+  expect(render().compact).toBe(false);
+  expect(render().exposure.progress).toBe(0.5);
+  browser.innerHeight = 800;
+  bounds = { top: 440, height: 280 };
+  stageHeight = 280;
+  stageWidth = 390;
+  compactLayout.set(true);
+  expect(render().compact).toBe(true);
+  expect(render().exposure.progress).toBeCloseTo(0);
+  expect(render().exposure.value).toBe('0.0 EV');
+  bounds = { top: -360, height: 1350 };
+  stageHeight = 900;
+  stageWidth = 1440;
+  compactLayout.set(false);
+  expect(render().compact).toBe(false);
+  expect(render().exposure).toMatchObject({ progress: 1, redBars: 6, value: '0.0 EV' });
+  expect(frames.size).toBe(0);
+});
+
+it('uses the artifact static compact states with reduced motion and resumes native progress', () => {
+  compactLayout.set(true);
+  browser.innerHeight = 800;
+  bounds = { top: 242, height: 280 };
+  stageHeight = 280;
+  render();
+  reduced.set(true);
+  expect(render().exposure).toMatchObject({ progress: 0, activeBars: 33, redBars: 0 });
+  bounds.top = 100;
+  browser.dispatchEvent(new Event('scroll'));
+  flush();
+  expect(render().exposure).toMatchObject({ progress: 1, activeBars: 33, redBars: 33 });
+  reduced.set(false);
+  expect(render().exposure.progress).toBeCloseTo(340 / 440);
   expect(frames.size).toBe(0);
 });

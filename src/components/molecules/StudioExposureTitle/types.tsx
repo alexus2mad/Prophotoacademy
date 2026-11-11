@@ -3,6 +3,7 @@ import type { CSSProperties } from 'react';
 export type StudioExposureTitleProps = {
   progress: number;
   ready: boolean;
+  compact?: boolean;
 };
 export type ExposureWordPoint = { x: number; y: number };
 export type ExposureWordPosition = {

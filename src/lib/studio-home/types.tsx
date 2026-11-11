@@ -9,6 +9,12 @@ export type StudioExposureGeometry = {
   stickyOffset?: number;
   reducedMotion: boolean;
 };
+export type StudioCompactExposureGeometry = {
+  top: number;
+  height: number;
+  viewportHeight: number;
+  reducedMotion: boolean;
+};
 export type StudioExposureState = {
   progress: number;
   activeBars: number;

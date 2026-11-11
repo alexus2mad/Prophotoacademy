@@ -163,6 +163,10 @@ Figma remains authoritative. Layouts use semantic responsive structure rather th
 
 ## Homepage exposure interaction correction — 10 November 2026
 
+This section records the initial correction. Later decisions below supersede its
+desktop timing and intermediate mobile adaptations; the 11 November mobile
+artifact restoration is the current mobile contract.
+
 The original wrapper DOM capture was truncated before the artifact's markup and interaction scripts. The actual iframe's `ownerDocument` scripts are now saved privately in `.data/design-review/artifact-frame-scripts.json`; `drawExpo` is the behavioral source. `.data/design-review/reference-interaction.json` records forward/reverse playback of that reference. No easing is added: animation follows scroll position directly, with one update per animation frame.
 
 - Desktop: `p = clamp(-top / ((height - viewportHeight) * .8))`; photo brightness is `.1 + .9p`, EV goes from −3 to 0, and only the last six lit bars turn red. The image, value and meter now share that state. The previous implementation animated only meter opacity, began filling before the stage arrived, and never changed image brightness.
@@ -194,7 +198,11 @@ Measured decorative word copies preserve initial glyph positions and mobile wrap
 
 Browser verification found 0px initial glyph displacement at 1440px, no intersections in forty-one desktop and twenty-one fresh mobile samples, a stationary desktop meter, and final stage-centering error below 0.008px at 360/768/1024/1920px. Reverse scrolling restored the complete source. Eight focused phase, eligibility and semantic-fallback tests passed; physical 200% text-enlargement testing is not claimed. Exact evidence is listed in the consolidated review. This explicit user choreography overrides earlier source-title behavior while retaining synchronized exposure and its longer desktop travel.
 
-## Mobile photographic exposure correction
+## Mobile photographic exposure correction — superseded on mobile
+
+Historical decision: the 11 November explicit mobile artifact restoration below
+replaces this exposure treatment at widths up to 760px. The separate hero crop
+changes remain applicable.
 
 The subsequent user report explicitly rejects the image-less mobile exposure section. This supersedes the compact mobile, black-to-paper, 0→+3 EV and title-ink-switch decisions above. All widths now use the same photograph, −3→0 EV meter and reversible word morph, with a 300svh section and 100svh sticky stage. Progress uses the rendered stable stage height rather than changing browser-toolbar or header dimensions. The stage pins at zero; safe-area spacing belongs inside its content. A restrained mobile scrim protects white text over the portrait. The following directions section stays independently paper-colored, with dark header controls.
 
@@ -210,7 +218,7 @@ The existing photographic zoom, title motion and mobile activation policy stay
 unchanged. Red primary CTAs consistently use white labels, including hover and
 pressed states; outline actions retain their separate treatment.
 
-The requested smoother text effect supersedes the earlier direct-scroll timing.
+On desktop, the requested smoother text effect supersedes the earlier direct-scroll timing.
 One 120ms exponential response now drives photograph brightness, the title and
 the exposure meter together. Quintic easing replaces cubic interpolation within
 the existing fade, horizontal and vertical phases. Their boundaries, sequence,
@@ -218,3 +226,40 @@ final positions and scroll travel are unchanged. Reduced motion and restored
 scroll still synchronize immediately; mobile browser-toolbar changes do not
 interrupt an in-flight transition. This is an explicit user motion override,
 not a change attributed to Figma or the artifact.
+
+## Mobile artifact exposure restoration — 11 November 2026
+
+**Explicit change request:** restore the artifact's exact mobile exposure
+treatment. This overrides the earlier photographic mobile section and mobile
+word morph; it does not alter the overall Figma/designer source hierarchy or the
+approved desktop animation. The reference is the artifact's `drawExpo` mobile
+branch and its `max-width:760px` rules, saved in
+`.data/design-review/artifact-scripts.json` and
+`.data/final-design/artifact-dom.json`, and rechecked against the live artifact.
+
+- At widths up to 760px, hide the photograph and gradient. Use an auto-height,
+  non-sticky section with 40px top padding and the shared responsive gutters.
+  Keep the 32px/1.04 KyivType Sans heading at weights 300/900. Hide the extra
+  central comma and the unused desktop word-copy/measurement layers on mobile.
+- Follow scroll directly, without the desktop catch-up easing:
+  `x = clamp((.55 * viewportHeight - top) / (height + .2 * viewportHeight))`.
+  The exposure and following directions section share this value for their
+  black-to-`#fbfbfb` backgrounds. Header controls switch to ink at `x >= .5`.
+- Fade the complete exposure heading with `opacity = 1 - 1.25x` and
+  `blur = 4x px`; do not run the desktop word morph. Reveal the following heading
+  with `opacity = clamp((x - .5) * 3.34)` and `blur = 3(1 - x) px`.
+- Keep 33 bars at 64px high with 2px gaps and 22px above them. Place the labels
+  below the bars with a 10px margin. White fills left to right over `x = 0… .45`,
+  then red fills all bars left to right over `.45… .8`. The displayed value is
+  `3 * (whiteProgress + redProgress) / 2`, from 0 to +3 EV. The source script's
+  executable formula takes priority over its contradictory comment about a
+  negative initial value.
+- Reduced motion follows the artifact's discrete background transition and
+  restores both headings without opacity animation or blur. Before hydration,
+  keep directions readable; do not reintroduce mobile viewport-height minimums.
+- Above 760px, retain the approved 300svh section, 100svh sticky photograph,
+  −3 to 0 EV meter, 120ms displayed-progress response and eased word morph.
+  Existing card zoom, hero transitions and hero crops are unchanged.
+
+These are implementation requirements, not a staging deployment or verification
+claim. Release evidence is recorded separately.

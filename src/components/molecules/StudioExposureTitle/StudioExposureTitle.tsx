@@ -6,9 +6,14 @@ import styles from './StudioExposureTitle.module.css';
 
 const words = ['важливо,', 'як', 'ви', 'це', 'робите'];
 
-export function StudioExposureTitle({ progress, ready }: StudioExposureTitleProps) {
-  const { root, layout } = useStudioExposureTitle();
-  const morphing = ready && !!layout?.eligible && !layout.reducedMotion && progress > 0.5;
+export function StudioExposureTitle({
+  progress,
+  ready,
+  compact = false,
+}: StudioExposureTitleProps) {
+  const { root, layout } = useStudioExposureTitle(!compact);
+  const morphing =
+    !compact && ready && !!layout?.eligible && !layout.reducedMotion && progress > 0.5;
   const phase = exposureTitlePhase(morphing ? progress : 0);
   const style: ExposureTitleStyle = { '--removed-opacity': phase.removedOpacity };
   return (
@@ -16,7 +21,9 @@ export function StudioExposureTitle({ progress, ready }: StudioExposureTitleProp
       <h2 id="exposure-title" className={styles.source}>
         <span className={styles.removed}>не</span>
         <span data-title-source-word>{words[0]}</span>{' '}
-        <strong className={styles.removed}>на що ви знімаєте, важливо,</strong>{' '}
+        <strong className={styles.removed}>
+          на що ви знімаєте, важливо<span className={styles.desktopComma}>,</span>
+        </strong>{' '}
         {words.slice(1).map((word, index) => (
           <span key={word}>
             {index > 0 ? ' ' : null}
