@@ -61,9 +61,6 @@
     letter-spacing: 0.02em;
     gap: 6px;
   }
-  .rail {
-    margin-left: 17px;
-  }
   .page {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

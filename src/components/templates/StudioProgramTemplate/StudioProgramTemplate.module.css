@@ -464,13 +464,12 @@
   }
   .gallery :global(.work-grid) {
     grid-template-columns: none;
-    grid-auto-columns: calc((100vw - 19px) / 2);
+    grid-auto-columns: calc((100% - 2px) / 2);
     grid-template-rows: repeat(2, auto);
     grid-auto-flow: row;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
-    margin-left: 17px;
   }
   .gallery :global(.work-grid::-webkit-scrollbar) {
     display: none;
