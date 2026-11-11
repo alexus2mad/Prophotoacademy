@@ -20,10 +20,10 @@ describe('enrollment integrity', () => {
     expect(canEnroll({ ...base, availability: 'archived' }, base.packages[0], day)).toBe(false);
     expect(canEnroll(base, soldOut, day)).toBe(false);
     expect(canEnroll({ ...base, packages: [soldOut] }, undefined, day)).toBe(false);
-    const unverified = {
+    const unverified: AcademyContent = {
       ...content,
       offerings: content.offerings.map((o) =>
-        o.id === base.id ? { ...o, verificationRequired: true } : o,
+        o.id === base.id ? { ...o, availability: 'open', verificationRequired: true } : o,
       ),
     };
     expect(() => resolvePurchase(unverified, base.id, 'commercial-base')).toThrow(

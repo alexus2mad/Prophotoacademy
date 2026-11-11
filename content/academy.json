@@ -565,7 +565,7 @@
       "duration": "8–11 тижнів",
       "format": "hybrid",
       "location": "Київ",
-      "availability": "open",
+      "availability": "closed",
       "verificationRequired": false,
       "openAfterStart": true,
       "packages": [
@@ -692,7 +692,7 @@
       "duration": "7–13 тижнів",
       "format": "hybrid",
       "location": "Київ",
-      "availability": "open",
+      "availability": "closed",
       "verificationRequired": false,
       "packages": [
         {
@@ -816,7 +816,7 @@
       ],
       "openAfterStart": true,
       "learningState": "ongoing",
-      "joiningOpen": true
+      "joiningOpen": false
     },
     {
       "id": "offering-instagram-2026-10",
@@ -824,7 +824,7 @@
       "startDate": "2026-10-02",
       "duration": "5 тижнів",
       "format": "online",
-      "availability": "open",
+      "availability": "closed",
       "verificationRequired": false,
       "openAfterStart": true,
       "packages": [

@@ -1,6 +1,6 @@
 import type { Offering, Program } from './content/types';
 import type { ProgramSchedule } from './program-schedule/types';
-import { canEnroll, dateLabel } from './format';
+import { canEnroll, dateLabel, isEnrollmentClosed } from './format';
 import { offeringTimeLabel } from './program-schedule/offering-time';
 
 export function kyivDate(now = new Date()) {
@@ -38,6 +38,15 @@ export function programSchedule(
       value: 'За домовленістю',
       status: 'За вашим запитом',
       inquirySuggested: false,
+    };
+
+  if (isEnrollmentClosed(offering))
+    return {
+      label: dated && dated.date < kyivDate(now) ? 'Попередня дата старту' : 'Наступний набір',
+      ...(dated || { value: 'Дату оголосимо згодом' }),
+      status: 'Набір закрито',
+      explanation: 'Продаж тимчасово закрито. Залиште заявку, щоб дізнатися про наступний набір.',
+      inquirySuggested: true,
     };
 
   if (offering?.learningState === 'recorded' || offering?.learningState === 'selfPaced')

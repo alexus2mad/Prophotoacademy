@@ -14,7 +14,15 @@ import { PackageCard } from '../src/components/molecules/PackageCard/PackageCard
 import { PackageComparisonTable } from '../src/components/molecules/PackageComparisonTable/PackageComparisonTable';
 import { ProgramPackages } from '../src/components/organisms/ProgramPackages/ProgramPackages';
 
-const content = seed as AcademyContent;
+// Pricing and eligibility mechanics use explicitly reopened synthetic intakes.
+// The live sales-closure contract is verified in course-sales-closure.test.ts.
+const content: AcademyContent = {
+  ...(seed as AcademyContent),
+  offerings: (seed as AcademyContent).offerings.map((item) => ({
+    ...item,
+    availability: item.availability === 'closed' ? 'open' : item.availability,
+  })),
+};
 const purchaseDate = new Date('2026-10-27T12:00:00Z');
 const render = (element: ReactElement) => load(renderToStaticMarkup(element));
 const offering = (id: string) => {

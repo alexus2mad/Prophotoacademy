@@ -1,6 +1,6 @@
 import { PackageCard } from '@/components/molecules/PackageCard/PackageCard';
 import { PackageComparison } from '@/components/organisms/PackageComparison/PackageComparison';
-import { canEnroll } from '@/lib/format';
+import { canEnroll, isEnrollmentClosed } from '@/lib/format';
 import { OfferingSummary } from '@/components/molecules/OfferingSummary/OfferingSummary';
 import type { ProgramPackagesProps } from './types';
 export function ProgramPackages({
@@ -11,14 +11,15 @@ export function ProgramPackages({
 }: ProgramPackagesProps) {
   const available = (id: string) => {
     const pack = offering.packages.find((p) => p.id === id);
-    if (!pack || pack.inquiryOnly) return false;
+    if (!pack || pack.inquiryOnly || isEnrollmentClosed(offering, pack)) return false;
     return enrollment ? enrollment.packageIds.includes(id) : canEnroll(offering, pack);
   };
   const open = offering.packages.some((p) => available(p.id));
   const compared = offering.packages.map((pack) => ({
     ...pack,
-    statusLabel:
-      pack.availability === 'soldOut'
+    statusLabel: isEnrollmentClosed(offering, pack)
+      ? 'Набір закрито'
+      : pack.availability === 'soldOut'
         ? 'Місць немає'
         : pack.inquiryOnly
           ? 'За запитом'
@@ -44,7 +45,7 @@ export function ProgramPackages({
         )}
       </div>
       <OfferingSummary program={program} offering={offering} />
-      {!open && (
+      {!open && !isEnrollmentClosed(offering) && (
         <p className="package-source-note">
           Актуальну вартість і місця підтвердить команда перед записом.
         </p>

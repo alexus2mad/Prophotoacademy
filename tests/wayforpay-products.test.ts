@@ -1,4 +1,4 @@
-import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
 import { readFile } from 'node:fs/promises';
 import { randomUUID } from 'node:crypto';
@@ -143,6 +143,9 @@ beforeAll(async () => {
     await pg.exec(await readFile('supabase/migrations/' + file, 'utf8'));
 });
 beforeEach(async () => {
+  // Payment mechanics remain independent of the live course-sales closure.
+  for (const offering of content.offerings)
+    if (offering.availability === 'closed') offering.availability = 'open';
   vi.stubEnv('DATABASE_URL', 'postgresql://test.invalid');
   vi.stubEnv('NEXT_PUBLIC_SITE_URL', origin);
   vi.stubEnv('PAYMENT_MODE', 'wayforpay');
@@ -160,6 +163,10 @@ beforeEach(async () => {
 });
 afterAll(async () => {
   await pg.close();
+  vi.unstubAllEnvs();
+});
+afterEach(() => {
+  vi.unstubAllGlobals();
   vi.unstubAllEnvs();
 });
 
@@ -308,6 +315,84 @@ describe('ticket and service products', () => {
       productData: { id: 'ticket-online', type: 'ticket', price: '900 грн' },
     });
   });
+  it.each([
+    ['offering-ai-artwork-2026-11-22', 'ai-artwork-offline', 'ticket', 3900],
+    ['offering-ai-artwork-2026-11-22', 'ai-artwork-online', 'ticket', 3000],
+    ['offering-visual-2026-03', 'visual-base', 'course', 7500],
+  ] as const)(
+    'delivers %s / %s through the existing Make notification contract with stable retries',
+    async (offeringId, packageId, type, amount) => {
+      // Synthetic timing keeps this provider-contract test independent of event expiry.
+      if (type === 'ticket')
+        content.offerings.find((offering) => offering.id === offeringId)!.startDate = '2099-11-22';
+      vi.stubEnv('MAKE_WEBHOOK_URL', 'https://make.example.test/payment-notices');
+      vi.stubEnv('RESEND_API_KEY', 'synthetic-email-key');
+      vi.stubEnv('EMAIL_FROM', 'Academy <test@example.test>');
+      let successAttempts = 0;
+      const send = vi.fn(async (url: string | URL | Request, init?: RequestInit) => {
+        const data = JSON.parse(String(init?.body));
+        if (String(url) === process.env.MAKE_WEBHOOK_URL && data.event === 'payment_success') {
+          successAttempts++;
+          if (successAttempts === 1) return Response.json({}, { status: 503 });
+        }
+        return Response.json({ id: 'synthetic-delivery' });
+      });
+      vi.stubGlobal('fetch', send);
+      const input = payload({ offeringId, packageId });
+      const first = await checkout(post('/api/checkout', input));
+      const { orderId } = await first.json();
+      expect(first.status).toBe(200);
+      expect((await checkout(post('/api/checkout', input))).status).toBe(200);
+      for (let attempt = 0; attempt < 2; attempt++)
+        expect(
+          (
+            await callback(
+              post('/api/payments/wayforpay/callback', providerCallback(orderId, amount)),
+            )
+          ).status,
+        ).toBe(200);
+      expect((await events()).map((event) => event.data.event)).toEqual([
+        'payment_start',
+        'payment_success',
+      ]);
+
+      await deliverNotifications();
+      expect(
+        (
+          await pg.query('SELECT state,attempts FROM academy.outbox WHERE id=$1', [
+            `${orderId}:payment_success`,
+          ])
+        ).rows,
+      ).toEqual([{ state: 'pending', attempts: 1 }]);
+      await pg.query(
+        "UPDATE academy.outbox SET next_attempt=now()-interval '1 second' WHERE id=$1",
+        [`${orderId}:payment_success`],
+      );
+      expect(await deliverNotifications()).toEqual({ delivered: 1 });
+      expect(await deliverNotifications()).toEqual({ delivered: 0 });
+      const notifications = send.mock.calls.filter(
+        ([url]) => String(url) === process.env.MAKE_WEBHOOK_URL,
+      );
+      expect(notifications).toHaveLength(3);
+      for (const [, init] of notifications) {
+        const data = JSON.parse(String(init?.body));
+        expect(init?.headers).toMatchObject({ 'Idempotency-Key': `${orderId}:${data.event}` });
+        expect(data).toMatchObject({
+          eventId: `${orderId}:${data.event}`,
+          type: 'payment-event',
+          mode: 'wayforpay',
+          orderReference: orderId,
+          amount,
+          currency: 'UAH',
+          formData: { email: 'buyer@example.test', telegram: 'buyer_tg', instagram: 'buyer.ig' },
+          productData: { id: packageId, type, amount: String(amount), price: `${amount} грн` },
+        });
+      }
+      expect(
+        (await pg.query("SELECT state FROM academy.outbox WHERE kind='payment-event'")).rows,
+      ).toEqual([{ state: 'delivered' }, { state: 'delivered' }]);
+    },
+  );
   it('records widget outcomes for Make.com without changing the order', async () => {
     const input = payload();
     await checkout(post('/api/checkout', input));
@@ -346,6 +431,42 @@ describe('ticket and service products', () => {
 
 describe('courses sold like the original site', () => {
   const visual = () => content.offerings.find((o) => o.id === 'offering-visual-2026-03')!;
+  it('rejects new checkout and promo attempts after closure but honors an already issued payment', async () => {
+    const input = payload({ offeringId: visual().id, packageId: 'visual-base' });
+    const response = await checkout(post('/api/checkout', input));
+    expect(response.status).toBe(200);
+    const { orderId, amount } = await response.json();
+    visual().availability = 'closed';
+    expect(
+      (
+        await checkout(
+          post(
+            '/api/checkout',
+            payload({
+              offeringId: visual().id,
+              packageId: 'visual-base',
+            }),
+          ),
+        )
+      ).status,
+    ).toBe(409);
+    const quote = await promoPreview(
+      post('/api/checkout/promo', {
+        offeringId: visual().id,
+        packageId: 'visual-base',
+        promoCode: 'VALID10',
+      }),
+    );
+    expect(quote.status).toBe(409);
+    expect(JSON.stringify(await quote.json())).toContain('Набір закрито');
+    const confirmation = await callback(
+      post('/api/payments/wayforpay/callback', providerCallback(orderId, amount)),
+    );
+    expect(confirmation.status).toBe(200);
+    expect((await order()).status).toBe('approved');
+    expect((await pg.query('SELECT * FROM academy.orders')).rows).toHaveLength(1);
+    expect((await pg.query('SELECT * FROM academy.transactions')).rows).toHaveLength(1);
+  });
   it('keeps recorded intakes on sale after their start date only when marked', () => {
     const after = new Date('2027-01-15T12:00:00Z');
     expect(canEnroll(visual(), visual().packages[0], after)).toBe(true);

@@ -3,13 +3,16 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { load } from 'cheerio';
 import { describe, expect, it } from 'vitest';
 import fixture from '../content/academy.json';
-import type { AcademyContent } from '../src/lib/content/types';
+import type { AcademyContent, Offering } from '../src/lib/content/types';
 import { PackageCard } from '../src/components/molecules/PackageCard/PackageCard';
 import type { PackageCardLayout } from '../src/components/molecules/PackageCard/types';
 
 const content = fixture as AcademyContent;
 const program = content.programs.find((item) => item.id === 'program-visual')!;
-const offering = content.offerings.find((item) => item.programId === program.id)!;
+const offering: Offering = {
+  ...content.offerings.find((item) => item.programId === program.id)!,
+  availability: 'open',
+};
 const pack = offering.packages[0];
 
 describe('Studio package presentation preserves purchasing boundaries', () => {

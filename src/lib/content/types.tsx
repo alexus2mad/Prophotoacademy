@@ -1,4 +1,4 @@
-export type Availability = 'open' | 'limited' | 'soldOut' | 'waitlist' | 'archived';
+export type Availability = 'open' | 'limited' | 'closed' | 'soldOut' | 'waitlist' | 'archived';
 export type ImageAsset = {
   id: string;
   src: string;

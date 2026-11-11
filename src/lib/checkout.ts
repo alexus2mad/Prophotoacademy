@@ -1,7 +1,7 @@
 import { acquisitionSchema } from './acquisition-schema';
 import { z } from 'zod';
 import type { AcademyContent, Offering, Package, Program } from './content/types';
-import { canEnroll } from './format';
+import { canEnroll, isEnrollmentClosed } from './format';
 import { HttpError } from './http';
 import { paymentMode } from './commerce/payment-mode';
 import { canTestEnroll } from './commerce/selectors';
@@ -104,6 +104,8 @@ export function resolvePurchase(
   const pack = offering?.packages.find((p) => p.id === packageId);
   const program = content.programs.find((p) => p.id === offering?.programId);
   if (!offering || !pack || !program) throw new HttpError(404, 'Пакет не знайдено.');
+  if (isEnrollmentClosed(offering, pack))
+    throw new HttpError(409, 'Набір закрито. Залиште заявку, щоб дізнатися про наступний набір.');
   if (
     !(paymentMode() === 'disabled' ? canTestEnroll(offering, pack) : canEnroll(offering, pack, now))
   )

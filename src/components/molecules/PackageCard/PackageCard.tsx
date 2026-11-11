@@ -1,7 +1,7 @@
 import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
 import { PackageIncludes } from '@/components/molecules/PackageIncludes/PackageIncludes';
 import { EnrollmentScope } from '@/components/molecules/EnrollmentScope/EnrollmentScope';
-import { canEnroll, money } from '@/lib/format';
+import { canEnroll, isEnrollmentClosed, money } from '@/lib/format';
 import { isProduct } from '@/lib/commerce/selectors';
 import Link from 'next/link';
 import type { PackageCardProps } from './types';
@@ -14,6 +14,7 @@ export function PackageCard({
   availableLessons,
   layout = 'summary-first',
 }: PackageCardProps) {
+  const closed = isEnrollmentClosed(offering, pack);
   const benefits = (
     <>
       <p>{pack.description}</p>
@@ -54,7 +55,7 @@ export function PackageCard({
         )}
       </div>
       <div className="package-action">
-        {!pack.inquiryOnly && (enrollable ?? canEnroll(offering, pack)) ? (
+        {!closed && !pack.inquiryOnly && (enrollable ?? canEnroll(offering, pack)) ? (
           <Link
             href={`/checkout?offering=${encodeURIComponent(offering.id)}&package=${encodeURIComponent(pack.id)}`}
             className={`button button-wide${pack.featured ? '' : ' button-secondary'}`}
@@ -72,13 +73,17 @@ export function PackageCard({
             programId={program.id}
             offeringId={offering.id}
             packageId={pack.id}
-            title={`${program.shortTitle}: ${pack.name}`}
+            title={
+              closed
+                ? `${program.shortTitle}: наступний набір, ${pack.name}`
+                : `${program.shortTitle}: ${pack.name}`
+            }
             className={`button button-wide${pack.featured ? '' : ' button-secondary'}`}
           >
-            Уточнити пакет
+            {closed ? 'Наступний набір' : 'Уточнити пакет'}
           </InquiryButton>
         )}
-        {!pack.inquiryOnly && paymentDisabled && enrollable && availableLessons && (
+        {!closed && !pack.inquiryOnly && paymentDisabled && enrollable && availableLessons && (
           <EnrollmentScope lessons={availableLessons} />
         )}
       </div>

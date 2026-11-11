@@ -139,6 +139,7 @@ describe('Academy presentation boundaries', () => {
 
 describe('program purchase decisions', () => {
   const offering = structuredClone(content.offerings[0]);
+  offering.availability = 'open';
   offering.packages.forEach((pack, index) => {
     pack.availability = index === 2 ? 'soldOut' : 'open';
   });

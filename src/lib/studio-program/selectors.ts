@@ -1,6 +1,7 @@
 import { findImage, findOffering } from '@/lib/content/selectors';
 import type { AcademyContent, Program } from '@/lib/content/types';
 import type { EnrollmentOptions } from '@/lib/commerce/types';
+import { isEnrollmentClosed } from '@/lib/format';
 import { programPresentation } from '@/lib/programs/selectors';
 import { studioAssets } from '@/lib/studio-design/assets';
 import type { StudioProgramArtwork, StudioProgramInstructor } from './types';
@@ -41,8 +42,11 @@ export function studioProgramPage(
   const presentation = enrollment
     ? {
         ...original,
-        open: enrollment.packageIds.length > 0,
-        testEnrollment: enrollment.packageIds.length > 0 && enrollment.mode === 'disabled',
+        open: !isEnrollmentClosed(offering) && enrollment.packageIds.length > 0,
+        testEnrollment:
+          !isEnrollmentClosed(offering) &&
+          enrollment.packageIds.length > 0 &&
+          enrollment.mode === 'disabled',
       }
     : original;
   const works = program.workIds.flatMap((id) => {

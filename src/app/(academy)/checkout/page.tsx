@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getContent, findImage } from '@/lib/content';
 import { resolvePurchase } from '@/lib/checkout';
-import { money } from '@/lib/format';
+import { isEnrollmentClosed, money } from '@/lib/format';
 import { CheckoutForm } from '@/components/organisms/CheckoutForm/CheckoutForm';
 import { Photo } from '@/components/atoms/Photo/Photo';
 import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
@@ -39,12 +39,16 @@ export default async function Checkout({ searchParams }: CheckoutPageProps) {
         }),
       );
   } catch {
+    const offering = content.offerings.find((item) => item.id === query.offering);
+    const pack = offering?.packages.find((item) => item.id === query.package);
+    const closed = isEnrollmentClosed(offering, pack);
     return (
       <div className="container status-panel">
-        <h1>Уточнімо ваш набір</h1>
+        <h1>{closed ? 'Набір закрито' : 'Уточнімо ваш набір'}</h1>
         <p>
-          Цей пакет ще готується до запису. Команда підтвердить доступність навчальних матеріалів і
-          деталі набору.
+          {closed
+            ? 'Продаж цього пакета тимчасово закрито. Залиште заявку, щоб дізнатися про наступний набір.'
+            : 'Цей пакет ще готується до запису. Команда підтвердить доступність навчальних матеріалів і деталі набору.'}
         </p>
         <InquiryButton className="button">Зв’язатися з академією</InquiryButton>
         <Link href="/courses" className="text-link">

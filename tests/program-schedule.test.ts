@@ -10,6 +10,7 @@ const commercial = content.programs.find((program) => program.id === 'program-co
 // Keep the schedule-policy baseline independent of the current intake's delivery state.
 const offering: Offering = {
   ...content.offerings.find((item) => item.programId === commercial.id)!,
+  availability: 'open',
   learningState: undefined,
   joiningOpen: undefined,
   openAfterStart: undefined,
@@ -61,7 +62,10 @@ describe('shared offering schedule presentation', () => {
   });
 
   it('does not infer recorded or ongoing learning from permission to sell after a past start', () => {
-    const current = content.offerings.find((item) => item.programId === 'program-instagram')!;
+    const current: Offering = {
+      ...content.offerings.find((item) => item.programId === 'program-instagram')!,
+      availability: 'open',
+    };
     expect(current.openAfterStart).toBe(true);
     expect(canEnroll(current, current.packages[0], now)).toBe(true);
     const schedule = programSchedule(commercial, current, now);

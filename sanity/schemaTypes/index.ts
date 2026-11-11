@@ -64,6 +64,7 @@ const availability = defineField({
     list: [
       { title: 'Open', value: 'open' },
       { title: 'Limited places', value: 'limited' },
+      { title: 'Sales closed', value: 'closed' },
       { title: 'Sold out', value: 'soldOut' },
       { title: 'Waitlist / inquiry', value: 'waitlist' },
       { title: 'Archived', value: 'archived' },

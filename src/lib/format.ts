@@ -18,6 +18,7 @@ export const formatLabel = { online: 'Онлайн', offline: 'У Києві', h
 export const availabilityLabel: Record<Availability, string> = {
   open: 'Набір відкрито',
   limited: 'Місця обмежені',
+  closed: 'Набір закрито',
   soldOut: 'Місць немає',
   waitlist: 'Уточнюємо набір',
   archived: 'Подія завершена',
@@ -39,6 +40,9 @@ export function programStatusLabel(program: Program, offering?: Offering) {
 }
 export function phoneLabel(phone: string) {
   return phone.replace(/^\+380(\d{2})(\d{3})(\d{2})(\d{2})$/, '+380 $1 $2 $3 $4');
+}
+export function isEnrollmentClosed(offering?: Offering, pack?: Package) {
+  return offering?.availability === 'closed' || pack?.availability === 'closed';
 }
 export function canEnroll(offering: Offering, pack?: Package, now = new Date()) {
   const today = new Intl.DateTimeFormat('en-CA', {
@@ -62,7 +66,7 @@ export function canEnroll(offering: Offering, pack?: Package, now = new Date()) 
   );
 }
 export function offeringStatus(offering: Offering): Availability {
-  if (offering.availability === 'archived') return 'archived';
+  if (['archived', 'closed'].includes(offering.availability)) return offering.availability;
   return canEnroll(offering) ? offering.availability : 'waitlist';
 }
 export function startingPrice(offering?: Offering) {

@@ -12,6 +12,38 @@ The owner requested payment-disabled enrollment on 12 October 2026. This is an e
 
 Never infer free access from missing provider keys. Unknown modes fail closed. Browser input cannot choose a mode, price, course rights or access duration. Existing orders retain their original mode.
 
+## Temporary course-sales closure — 11 November 2026
+
+The production design release closes all currently configured course intakes:
+Visual Content, Commercial Content and Instagram use `availability: closed`.
+Food Photography remains inquiry-only with no configured offering. Prices,
+package IDs and learning content remain intact. Public pages show «Набір закрито»
+and offer an inquiry about the next intake; they do not link to checkout.
+
+`closed` is an explicit offering/package state in the shared content model and
+Sanity editor. Both paid checkout and zero-charge test enrollment reject it.
+Direct checkout URLs, checkout API requests and promo previews cannot bypass the
+closure. `openAfterStart`, curriculum mappings or stale client enrollment props
+cannot reopen an intake. To resume sales, an administrator must explicitly set
+the intended offering to `open` or `limited` in the active content source and
+review its dates, package availability and `joiningOpen` for an ongoing cohort.
+
+This closure does not modify existing student access, progress or orders. A
+verified callback for a payment already issued before closure still completes
+normally. AI Artwork's two event tickets remain open and use production's
+existing `wayforpay` configuration. Staging stays `mock`; no merchant credentials
+or real-payment mode are copied to it.
+
+Purchase notifications keep the existing production Make.com → Telegram flow.
+Every real order queues `payment_start`; a verified successful provider callback
+queues `payment_success`. AI Artwork tickets use the same stored-order contact,
+package, amount and event payload as existing products. Each order/event has a
+stable outbox ID and `Idempotency-Key`; delivery failures retry that same job.
+Do not replace this integration with browser-triggered Telegram messages or
+count a widget's approval event as a verified purchase. Verify the existing
+production `MAKE_WEBHOOK_URL` and notification worker during release without
+copying their configuration to staging.
+
 ## Manager workflow
 
 1. In Academy course authoring, supply lessons and required materials, then choose the completed lessons in the publishing dialog. Unselected outlines remain in the draft; empty modules are excluded from the immutable release. Selected lessons still undergo all text, quiz and media validation
@@ -52,7 +84,7 @@ The owner confirmed these offers and explicitly chose to keep staging test-only,
 | Offer | Confirmed terms | Purchase behavior |
 | --- | --- | --- |
 | AI Artwork (`offering-ai-artwork-2026-11-22`) | 22 November 2026, 11:00–16:00 Europe/Kyiv; offline 3,900 UAH, online 3,000 UAH | Two `kind: product` tickets; no automatic course access. Sales close at the published event end |
-| Commercial Content (`offering-commercial-2026-11`) | Cohort began 6 November; late joining remains open | Existing BASE/GOLD/PLATINUM IDs, amounts and rights preserved; `openAfterStart`, `learningState: ongoing` and `joiningOpen` are explicit |
+| Commercial Content (`offering-commercial-2026-11`) | Cohort began 6 November; new sales are now temporarily closed | Existing BASE/GOLD/PLATINUM IDs, amounts and rights preserved; `availability: closed` takes precedence over `openAfterStart`, and `joiningOpen` is false |
 | Separate Food Photography (`food-photography`) | No new commercial terms approved | Inquiry-only, unchanged |
 
 Event local times and IANA timezone are content fields shared by the intensive page and checkout. AI Artwork is a class, preserving the four main courses. Do not promise course access or recordings with its tickets. The existing verified-payment callback, purchase snapshots, idempotency and cashbox boundary remain authoritative. A mock approval is not a real payment or confirmation of event participation.

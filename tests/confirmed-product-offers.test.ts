@@ -69,7 +69,7 @@ describe('owner-confirmed November offers', () => {
     ]);
   });
 
-  it('closes the dated event after its day while allowing the confirmed ongoing cohort', () => {
+  it('closes the dated event after its day and preserves the temporary course-sales closure', () => {
     vi.stubEnv('PAYMENT_MODE', 'wayforpay');
     const later = new Date('2026-11-23T10:00:00Z');
     for (const pack of eventOffering.packages) {
@@ -78,14 +78,15 @@ describe('owner-confirmed November offers', () => {
     }
     expect(commercialOffering.startDate).toBe('2026-11-06');
     for (const pack of commercialOffering.packages) {
-      expect(canEnroll(commercialOffering, pack, now)).toBe(true);
-      expect(resolvePurchase(content, commercialOffering.id, pack.id, now).pack.id).toBe(pack.id);
+      expect(canEnroll(commercialOffering, pack, now)).toBe(false);
+      expect(() => resolvePurchase(content, commercialOffering.id, pack.id, now)).toThrow(
+        'Набір закрито',
+      );
     }
     expect(programSchedule(commercial, commercialOffering, now)).toMatchObject({
-      status: 'Навчання триває',
+      status: 'Набір закрито',
       date: '2026-11-06',
-      explanation: 'Долучення відкрите для доступних пакетів.',
-      inquirySuggested: false,
+      inquirySuggested: true,
     });
   });
 

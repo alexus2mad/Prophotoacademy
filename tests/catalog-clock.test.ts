@@ -17,6 +17,7 @@ const content: AcademyContent = {
   ...(fixture as AcademyContent),
   offerings: (fixture as AcademyContent).offerings.map((item) => ({
     ...item,
+    availability: 'open',
     learningState: undefined,
     joiningOpen: undefined,
     openAfterStart: undefined,

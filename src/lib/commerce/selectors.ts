@@ -1,4 +1,5 @@
 import type { Offering, Package } from '../content/types';
+import { isEnrollmentClosed } from '../format';
 
 export const isProduct = (pack: Package) => pack.kind === 'product';
 
@@ -7,6 +8,7 @@ export const isProduct = (pack: Package) => pack.kind === 'product';
 export function canTestEnroll(offering: Offering, pack: Package) {
   return (
     !isProduct(pack) &&
+    !isEnrollmentClosed(offering, pack) &&
     !pack.inquiryOnly &&
     !['soldOut', 'archived'].includes(offering.availability) &&
     !['soldOut', 'archived'].includes(pack.availability)

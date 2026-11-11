@@ -3,7 +3,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { load } from 'cheerio';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import fixture from '../content/academy.json';
-import type { AcademyContent } from '../src/lib/content/types';
+import type { AcademyContent, Offering } from '../src/lib/content/types';
 import { programSchedule } from '../src/lib/program-schedule';
 import { programPresentation } from '../src/lib/programs/selectors';
 import { CourseCard } from '../src/components/molecules/CourseCard/CourseCard';
@@ -56,7 +56,10 @@ describe('one schedule across buyer decision surfaces', () => {
 
   it('offers clarification without removing authorized purchasing for an unresolved intake', () => {
     const program = content.programs.find((item) => item.id === 'program-instagram')!;
-    const offering = content.offerings.find((item) => item.programId === program.id)!;
+    const offering: Offering = {
+      ...content.offerings.find((item) => item.programId === program.id)!,
+      availability: 'open',
+    };
     const $ = load(renderToStaticMarkup(createElement(ProgramPackages, { program, offering })));
     expect($('.package-card a[href^="/checkout?"]').length).toBe(3);
     expect($('button[aria-controls="inquiry-dialog"]').text()).toContain('Уточнити умови навчання');

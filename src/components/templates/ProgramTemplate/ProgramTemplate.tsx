@@ -8,6 +8,7 @@ import { ProgramInstructors } from '@/components/organisms/ProgramInstructors/Pr
 import { ProgramOverview } from '@/components/organisms/ProgramOverview/ProgramOverview';
 import { ProgramPackages } from '@/components/organisms/ProgramPackages/ProgramPackages';
 import { findOffering } from '@/lib/content/selectors';
+import { isEnrollmentClosed } from '@/lib/format';
 import { programHeroImages, programPresentation } from '@/lib/programs/selectors';
 import type { ProgramTemplateProps } from './types';
 export function ProgramTemplate({ program, content, enrollment }: ProgramTemplateProps) {
@@ -16,7 +17,7 @@ export function ProgramTemplate({ program, content, enrollment }: ProgramTemplat
   const offering = findOffering(content, program.id);
   const presentation = programPresentation(program, offering);
   if (enrollment) {
-    presentation.open = enrollment.packageIds.length > 0;
+    presentation.open = !isEnrollmentClosed(offering) && enrollment.packageIds.length > 0;
     presentation.testEnrollment = presentation.open && enrollment.mode === 'disabled';
   }
   const { price, inquiryTitle, buttonLabel } = presentation;

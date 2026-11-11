@@ -1,7 +1,7 @@
 import type { Program, Offering } from '../content/types';
 import type { ProgramGalleryContent, ProgramPresentation } from './types';
 import { findImage } from '../content/selectors';
-import { canEnroll, startingPrice } from '../format';
+import { canEnroll, isEnrollmentClosed, startingPrice } from '../format';
 import { kyivDate } from '../program-schedule';
 
 export function programHeroImages(program: Program, content: ProgramGalleryContent) {
@@ -35,8 +35,10 @@ export function programPresentation(
   const price = startingPrice(offering);
   const open = Boolean(offering && canEnroll(offering, undefined, now));
   const isCustom = ['individual', 'corporate'].includes(program.category);
-  const status =
-    offering?.availability === 'archived'
+  const closed = isEnrollmentClosed(offering);
+  const status = closed
+    ? 'closed'
+    : offering?.availability === 'archived'
       ? 'archived'
       : open && offering
         ? offering.availability
@@ -44,15 +46,19 @@ export function programPresentation(
   const hasFutureStart = Boolean(offering?.startDate && offering.startDate >= kyivDate(now));
   const inquiryTitle = isCustom
     ? program.title
-    : status === 'archived'
-      ? 'Повідомити про наступну подію'
-      : 'Дізнатися про найближчий набір';
+    : closed
+      ? 'Повідомити про наступний набір'
+      : status === 'archived'
+        ? 'Повідомити про наступну подію'
+        : 'Дізнатися про найближчий набір';
   const buttonLabel = isCustom
     ? 'Обговорити програму'
-    : status === 'archived'
-      ? 'Наступна подія'
-      : hasFutureStart
-        ? 'Уточнити набір'
-        : 'Дізнатися про набір';
+    : closed
+      ? 'Наступний набір'
+      : status === 'archived'
+        ? 'Наступна подія'
+        : hasFutureStart
+          ? 'Уточнити набір'
+          : 'Дізнатися про набір';
   return { price, open, isCustom, status, inquiryTitle, buttonLabel, hasFutureStart };
 }

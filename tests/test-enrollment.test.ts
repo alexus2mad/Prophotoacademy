@@ -67,6 +67,8 @@ beforeAll(async () => {
     INSERT INTO academy.releases(id,course_id,version,manifest) VALUES('release','course',1,'{"modules":[{"lessons":[{"id":"lesson"}]}]}');`);
 });
 beforeEach(async () => {
+  // Enrollment mechanics are tested with an explicitly open synthetic intake.
+  offering.availability = 'open';
   vi.stubEnv('DATABASE_URL', 'postgresql://test.invalid');
   vi.stubEnv('NEXT_PUBLIC_SITE_URL', origin);
   vi.stubEnv('PAYMENT_MODE', 'disabled');
@@ -86,6 +88,18 @@ afterAll(async () => {
 });
 
 describe('explicit payment-disabled checkout', () => {
+  it.each(['disabled', 'mock', 'wayforpay'])(
+    'rejects direct API attempts at a closed intake in %s mode before creating any record',
+    async (mode) => {
+      vi.stubEnv('PAYMENT_MODE', mode);
+      offering.availability = 'closed';
+      const response = await checkout(request(payload()));
+      expect(response.status).toBe(409);
+      expect(JSON.stringify(await response.json())).toContain('Набір закрито');
+      for (const table of ['orders', 'grants', 'transactions', 'payment_events', 'outbox'])
+        expect(await count(table)).toBe(0);
+    },
+  );
   it('grants a guest access atomically once, normalizes email and creates no financial records', async () => {
     const input = { ...payload(), email: '  GUEST@example.test  ' };
     const results = await Promise.all([checkout(request(input)), checkout(request(input))]);

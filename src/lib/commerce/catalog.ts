@@ -1,13 +1,13 @@
 import { databasePool, managedDatabase } from '../database/client';
 import { paymentMode } from './payment-mode';
 import { canTestEnroll, isProduct } from './selectors';
-import { canEnroll } from '../format';
+import { canEnroll, isEnrollmentClosed } from '../format';
 import type { Offering } from '../content/types';
 import type { EnrollmentOptions, PackageIdRow } from './types';
 
 export async function enrollmentOptions(offering?: Offering): Promise<EnrollmentOptions> {
   const mode = paymentMode();
-  if (!offering) return { mode, packageIds: [] };
+  if (!offering || isEnrollmentClosed(offering)) return { mode, packageIds: [] };
   if (mode === 'mock')
     return {
       mode,
