@@ -1,11 +1,15 @@
+'use client';
+
 import Link from 'next/link';
 import { StudioHomeDirectionCard } from '@/components/molecules/StudioHomeDirectionCard/StudioHomeDirectionCard';
 import { studioHomeRooms } from '@/lib/studio-home/selectors';
 import type { StudioHomeDirectionsProps } from './types';
+import { useDirectionRail } from './hooks';
 import styles from './StudioHomeDirections.module.css';
 
 export function StudioHomeDirections({ mode, directions }: StudioHomeDirectionsProps) {
   const isStudio = mode === 'studio';
+  const railRef = useDirectionRail(mode);
   return (
     <section
       data-home-section="directions"
@@ -29,6 +33,7 @@ export function StudioHomeDirections({ mode, directions }: StudioHomeDirectionsP
         </Link>
       </div>
       <div
+        ref={railRef}
         className={`${styles.grid} ${isStudio ? styles.rooms : ''}`}
         tabIndex={0}
         role="region"

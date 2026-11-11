@@ -16,9 +16,19 @@
 }
 .grid {
   display: grid;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 2px;
   background: #0a0807;
+}
+.grid[data-dragging] {
+  scroll-snap-type: none;
+  user-select: none;
+}
+.grid[data-dragging] * {
+  cursor: grabbing;
 }
 .rooms > article {
   aspect-ratio: 4/3;
@@ -48,7 +58,8 @@
   .grid {
     grid-template-columns: repeat(3, 44cqw);
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x proximity;
+    overscroll-behavior-x: contain;
     scrollbar-width: none;
   }
   .grid::-webkit-scrollbar {
