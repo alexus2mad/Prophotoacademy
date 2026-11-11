@@ -69,9 +69,6 @@ export function StudioAcademyPrograms({ programs, offerings, images }: StudioAca
               </article>
             ))}
           </div>
-          <nav className={styles.more} aria-label="Інші навчальні події">
-            <Link href="/courses">Усі програми →</Link>
-          </nav>
         </div>
       </section>
       <section className={styles.formats} aria-label="Інші формати навчання">

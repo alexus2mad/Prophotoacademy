@@ -93,6 +93,14 @@ share this policy. Closing sales never changes existing student access or reject
 verified callbacks for already-issued orders. Product tickets retain the existing
 WayForPay and Make/Telegram outbox flow.
 
+Studio has one learning index at `/academy`, matching Figma's Academy frame.
+Use `studioAcademyDestinations` for its overview and course-section links.
+The old `/courses` URL temporarily redirects there in Studio, preserving query
+parameters and mapping `category=course` to `#courses`; legacy still owns its
+original catalog. The synthetic Pages export renders the same Academy template
+at the compatibility URL, with Academy metadata and header state. Do not
+reintroduce the generic Studio catalog as a competing navigation destination.
+
 Academy public and workspace shells explicitly apply the shared `academyThemeClassName` from `src/lib/typography/fonts.ts`. `academy-theme.css` owns neutral brand tokens, shared controls and opt-in card motion; public, lesson and authoring styles own their respective layouts. Do not apply the Academy palette or font aliases globally: Hub and Sanity Studio are excluded. Preserve the homepage composition and Source Sans 3 instructional typography. See [Academy design system](docs/ACADEMY_DESIGN_SYSTEM.md) for dimensions, motion, feedback colors and verification.
 
 ## Next.js and the two build modes

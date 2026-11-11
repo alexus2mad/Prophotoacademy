@@ -1,3 +1,4 @@
+import { studioAcademyDestinations } from '@/lib/studio-pages/navigation';
 import Link from 'next/link';
 import { StudioHomePicture } from '@/components/molecules/StudioHomePicture/StudioHomePicture';
 import { studioAssets } from '@/lib/studio-design/assets';
@@ -32,7 +33,7 @@ export function StudioHomeFounder() {
           Києво-Могилянській академії, ГО Право на захист і багатьох інших брендів та компаній.
         </p>
         <div className={`${styles.actions} studio-actions`}>
-          <Link href="/courses" className="studio-button">
+          <Link href={studioAcademyDestinations.courses} className="studio-button">
             Обрати курс<span aria-hidden="true">→</span>
           </Link>
           <Link className={styles.lecturers} href="/academy#lecturers">

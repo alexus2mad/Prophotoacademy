@@ -4,10 +4,12 @@ import { useDialog } from '@/components/molecules/Dialog/hooks';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { headerUsesInk } from './presentation';
+import { studioAcademyDestinations } from '@/lib/studio-pages/navigation';
 import type { HeaderControlTones } from './types';
 
 export function useStudioHeader() {
-  const path = usePathname().replace(/\/+$/, '') || '/';
+  const pathname = usePathname().replace(/\/+$/, '') || '/';
+  const path = pathname === '/courses' ? studioAcademyDestinations.overview : pathname;
   const { dialog } = useDialog();
   const header = useRef<HTMLElement>(null);
   const [controlTones, setControlTones] = useState<HeaderControlTones>({});

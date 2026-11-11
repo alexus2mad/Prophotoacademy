@@ -34,7 +34,7 @@ it('takes header, menu and footer visitors to the Studio website and Shop Instag
 it.each([
   ['studio', 'https://prophotohub.com.ua/booking'],
   ['shop', 'https://www.instagram.com/prophoto.shop?mdxt=ZnIwcnUzdHp2eGh2'],
-  ['academy', '/courses'],
+  ['academy', '/academy'],
 ] as const)('keeps the %s hero action on its intended customer journey', (mode, href) => {
   const $ = load(
     renderToStaticMarkup(createElement(StudioHomeHero, { mode, onModeChange: vi.fn() })),

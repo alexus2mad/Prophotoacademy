@@ -1,4 +1,5 @@
 'use client';
+import { studioAcademyDestinations } from '@/lib/studio-pages/navigation';
 import Link from 'next/link';
 import { StudioHomePicture } from '@/components/molecules/StudioHomePicture/StudioHomePicture';
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
@@ -42,7 +43,7 @@ export function StudioHomeHero({ mode, onModeChange }: StudioHomeHeroProps) {
       kick: 'вчимо',
       mobileKick: 'вчимо, як',
       label: 'Обрати курс',
-      href: '/courses',
+      href: studioAcademyDestinations.overview,
       logo: studioAssets.home.imgLogoAcademy,
       mobileLogo: studioAssets.homeMobile.imgLogoAcademy,
       caption: 'курси і воркшопи',

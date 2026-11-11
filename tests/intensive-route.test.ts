@@ -96,7 +96,7 @@ describe('AI Artwork route ownership', () => {
       expect(new Set(entries.map((entry) => entry.url)).size).toBe(entries.length);
       expect(entries.some((entry) => /\/(?:shop|photo-studio)$/.test(entry.url))).toBe(false);
       expect(entries).toContainEqual({
-        url: 'https://academy.example/courses',
+        url: `https://academy.example/${design === 'studio' ? 'academy' : 'courses'}`,
         changeFrequency: 'weekly',
         priority: 0.9,
       });

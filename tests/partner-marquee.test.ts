@@ -50,6 +50,16 @@ class Rail extends EventTarget {
   ownerDocument = document;
   clientWidth = 390;
   scrollWidth = 1846;
+  private attributes = new Map<string, string>();
+  setAttribute(name: string, value: string) {
+    this.attributes.set(name, value);
+  }
+  removeAttribute(name: string) {
+    this.attributes.delete(name);
+  }
+  hasAttribute(name: string) {
+    return this.attributes.has(name);
+  }
   private offset = 0;
   get scrollLeft() {
     return this.offset;
@@ -114,6 +124,38 @@ describe('partner logo native-scroll autoplay', () => {
     expect(rail.scrollLeft).toBe(400);
     tick(60_080);
     expect(rail.scrollLeft).toBe(401);
+  });
+
+  it('marks pointer focus before pausing so touch does not inherit a keyboard outline', () => {
+    start();
+    const focusedWithPointer = vi.fn();
+    vi.spyOn(rail, 'focus').mockImplementation(() => {
+      focusedWithPointer(rail.hasAttribute('data-pointer-focus'));
+      rail.dispatchEvent(new Event('focusin'));
+    });
+    rail.dispatchEvent(Object.assign(new Event('pointerdown'), { pointerType: 'touch' }));
+    expect(focusedWithPointer).toHaveBeenCalledWith(true);
+    expect(frames.size).toBe(0);
+  });
+
+  it('restores keyboard focus styling without resuming autoplay or canceling native keys', () => {
+    start();
+    rail.dispatchEvent(new Event('pointerdown'));
+    const key = Object.assign(new Event('keydown', { cancelable: true }), { key: 'ArrowRight' });
+    rail.dispatchEvent(key);
+    expect(rail.hasAttribute('data-pointer-focus')).toBe(false);
+    expect(key.defaultPrevented).toBe(false);
+    expect(frames.size).toBe(0);
+  });
+
+  it('clears pointer focus styling when focus leaves or the marquee is removed', () => {
+    start();
+    rail.dispatchEvent(new Event('pointerdown'));
+    rail.dispatchEvent(new Event('focusout'));
+    expect(rail.hasAttribute('data-pointer-focus')).toBe(false);
+    rail.dispatchEvent(new Event('pointerdown'));
+    dispose?.();
+    expect(rail.hasAttribute('data-pointer-focus')).toBe(false);
   });
 
   it('wraps at the identical copy without exposing an empty track', () => {

@@ -36,6 +36,10 @@
   outline: 2px solid #eb423b;
   outline-offset: -2px;
 }
+.brands[data-pointer-focus] {
+  outline: none;
+  border-radius: 0;
+}
 @media (prefers-reduced-motion: reduce) {
   .logos + .logos {
     display: none;

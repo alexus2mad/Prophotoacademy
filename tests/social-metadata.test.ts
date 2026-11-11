@@ -115,7 +115,7 @@ describe('social image URL boundaries', () => {
 describe('page coverage and integration', () => {
   it('provides a distinct authored preview for every current indexable Academy URL', async () => {
     const routes = (await sitemap()).map((entry) => new URL(entry.url).pathname);
-    expect(routes).toHaveLength(17);
+    expect(routes).toHaveLength(16);
     const primaryImages = routes.map((route) => {
       expect(Object.hasOwn(catalog, route), route).toBe(true);
       const entry = catalog[route];

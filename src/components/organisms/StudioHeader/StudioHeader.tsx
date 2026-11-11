@@ -1,4 +1,5 @@
 'use client';
+import { studioAcademyDestinations } from '@/lib/studio-pages/navigation';
 
 import Link from 'next/link';
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
@@ -42,7 +43,7 @@ export function StudioHeader({ settings }: StudioHeaderProps) {
       alt: 'ProPhoto Academy',
       logo: studioAssets.menu.imgLogoAcademy,
       links: [
-        ['/courses?category=course', 'Курси'],
+        [studioAcademyDestinations.courses, 'Курси'],
         ['/academy#workshops', 'Воркшопи'],
         ['/academy#individual', 'Індивідуальне навчання'],
         ['/academy#corporate', 'Корпоративне навчання'],
@@ -94,7 +95,7 @@ export function StudioHeader({ settings }: StudioHeaderProps) {
           />
         </Link>
         {focused ? (
-          <Link href="/courses" className="studio-header-back">
+          <Link href={studioAcademyDestinations.overview} className="studio-header-back">
             До програм
           </Link>
         ) : (

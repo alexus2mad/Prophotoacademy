@@ -1,3 +1,4 @@
+import { studioAcademyDestinations } from '@/lib/studio-pages/navigation';
 import { studioReviews } from '@/lib/studio-reviews/reviews';
 import { studioAssets } from '@/lib/studio-design/assets';
 import { ecosystemDestinations } from '@/lib/ecosystem';
@@ -14,7 +15,7 @@ export function studioHomeDirections(content: AcademyContent): StudioHomeDirecti
       action: 'Усі курси',
       image: studioAssets.home.imgImgHome144003,
       mobileImage: studioAssets.homeMobile.imgImgHome39002,
-      href: '/courses?category=course',
+      href: studioAcademyDestinations.courses,
     },
     {
       title: 'Воркшопи',

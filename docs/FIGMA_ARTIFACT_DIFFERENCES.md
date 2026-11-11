@@ -1,5 +1,23 @@
 # Figma / Claude artifact source conflicts
 
+## Academy destination correction — 12 November 2026
+
+The designer identified screenshots of two competing learning indexes. A fresh
+Figma context and screenshot review of `853:190` confirms the Academy hero
+“\*вчимо Бачити більше”, main courses, workshops and individual/corporate formats.
+This matches the artifact's Academy page and the existing `/academy` template.
+The generic “Програми навчання” catalog at `/courses` is not another approved
+destination. Reuse the Academy template and point Studio navigation there;
+course-specific links target `#courses`. Keep old catalog URLs compatible through
+a temporary Studio-only redirect, preserving campaign parameters and legacy
+behavior. The static review uses the same Academy template at the old URL.
+The agreed four-course order, real enrollment states and typography stay intact.
+
+The partner rail's red outline after a tap/swipe is a browser focus state, not
+a design border. Suppress it for pointer interaction while retaining visible
+keyboard focus and native rail scrolling. These corrections apply to both
+staging and production from the same source revision.
+
 The initial read-only audit on 9 November 2026 inspected all 14 `figma-*.json.0.txt` design-context files, the page metadata in `figma-website-page.json`, `artifact-audit.md`, original artifact stylesheet/inventory, and saved Figma screenshots for home, mobile home, Academy, contacts and mobile AI artwork. Local evidence is under `.data/final-design/`. Later sections record explicit designer/user decisions and implementation dispositions; historical source measurements are not deployment or verification claims.
 
 Sources: [Figma website design](https://www.figma.com/design/CvY4dgmOevd9ehxk9Xsaqd?node-id=848-2) and [Claude artifact](https://claude.ai/artifact/FwrroMxpu7ApuHRefQRW3t).

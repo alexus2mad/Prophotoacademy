@@ -1,3 +1,4 @@
+import { studioAcademyDestinations } from '@/lib/studio-pages/navigation';
 import Link from 'next/link';
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
 import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
@@ -16,7 +17,7 @@ export function StudioProgramHero({
   return (
     <section className={`${styles.hero} studio-light`} aria-labelledby="program-title">
       <div className={`${styles.copy} studio-wrap`} data-header-tone="light">
-        <Link className={styles.back} href="/courses">
+        <Link className={styles.back} href={studioAcademyDestinations.courses}>
           ← Усі курси
         </Link>
         <p className={`${styles.status} ${presentation.open ? styles.open : ''}`}>

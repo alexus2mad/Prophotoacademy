@@ -1,4 +1,5 @@
 'use client';
+import { studioAcademyDestinations } from '@/lib/studio-pages/navigation';
 import Link from 'next/link';
 import { StudioHomePicture } from '@/components/molecules/StudioHomePicture/StudioHomePicture';
 import { StudioHomeCarousel } from '@/components/molecules/StudioHomeCarousel/StudioHomeCarousel';
@@ -17,7 +18,7 @@ export function StudioHomeWorks({ works }: StudioHomeWorksProps) {
         <h2 className="studio-title" id="home-works-title">
           Роботи <span className="studio-hand">*студентів</span>
         </h2>
-        <Link href="/courses" className="studio-button-outline">
+        <Link href={studioAcademyDestinations.courses} className="studio-button-outline">
           Хочу так само<span aria-hidden="true">→</span>
         </Link>
       </div>

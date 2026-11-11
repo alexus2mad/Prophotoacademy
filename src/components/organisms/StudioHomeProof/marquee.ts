@@ -75,13 +75,17 @@ export function enablePartnerMarquee(rail: HTMLElement, firstCopy: HTMLElement) 
   };
   const blur = () => {
     focused = false;
+    rail.removeAttribute('data-pointer-focus');
     refresh();
   };
   const hold = () => {
     // Retain tap-to-pause through native touch inertia, until focus leaves the rail.
+    // Safari may treat this programmatic focus as keyboard-visible after a touch.
+    rail.setAttribute('data-pointer-focus', '');
     rail.focus({ preventScroll: true });
     focus();
   };
+  const keyboard = () => rail.removeAttribute('data-pointer-focus');
   const wheel = (event: WheelEvent) => {
     if (event.deltaX || (event.shiftKey && event.deltaY)) hold();
   };
@@ -102,6 +106,7 @@ export function enablePartnerMarquee(rail: HTMLElement, firstCopy: HTMLElement) 
   rail.addEventListener('pointerleave', leave);
   rail.addEventListener('pointerdown', hold, { passive: true });
   rail.addEventListener('wheel', wheel, { passive: true });
+  rail.addEventListener('keydown', keyboard);
   rail.addEventListener('focusin', focus);
   rail.addEventListener('focusout', blur);
   reducedMotion.addEventListener('change', measure);
@@ -117,6 +122,8 @@ export function enablePartnerMarquee(rail: HTMLElement, firstCopy: HTMLElement) 
     rail.removeEventListener('pointerleave', leave);
     rail.removeEventListener('pointerdown', hold);
     rail.removeEventListener('wheel', wheel);
+    rail.removeEventListener('keydown', keyboard);
+    rail.removeAttribute('data-pointer-focus');
     rail.removeEventListener('focusin', focus);
     rail.removeEventListener('focusout', blur);
     reducedMotion.removeEventListener('change', measure);

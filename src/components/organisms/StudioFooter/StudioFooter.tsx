@@ -1,4 +1,5 @@
 'use client';
+import { studioAcademyDestinations } from '@/lib/studio-pages/navigation';
 
 import Link from 'next/link';
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
@@ -50,7 +51,7 @@ export function StudioFooter({ settings }: StudioFooterProps) {
         </nav>
         <nav className="studio-footer-links" aria-label="Навчання">
           <h2 className="studio-label">Навчання</h2>
-          <Link href="/courses?category=course">Головні курси</Link>
+          <Link href={studioAcademyDestinations.courses}>Головні курси</Link>
           <Link href="/academy#workshops">Воркшопи</Link>
           <Link href="/academy#individual">Індивідуальне</Link>
           <Link href="/academy#corporate">Корпоративне</Link>

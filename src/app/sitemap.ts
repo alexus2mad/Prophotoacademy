@@ -6,18 +6,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = process.env.NEXT_PUBLIC_SITE_URL || 'http://127.0.0.1:3000';
   const slugs = [
     '',
-    'courses',
+    ...(academyDesign() === 'studio' ? ['academy', 'ai-artwork'] : ['courses']),
     'student-work',
     'about-us',
     'contacts',
     'reviews',
-    ...(academyDesign() === 'studio' ? ['academy', 'ai-artwork'] : []),
     ...content.programs.map((p) => p.slug),
     ...content.pages.map((p) => p.slug),
   ];
   return [...new Set(slugs)].map((slug) => ({
     url: `${base}/${slug}`,
     changeFrequency: slug.includes('policy') || slug.includes('terms') ? 'yearly' : 'weekly',
-    priority: slug === '' ? 1 : slug === 'courses' ? 0.9 : 0.7,
+    priority: slug === '' ? 1 : ['courses', 'academy'].includes(slug) ? 0.9 : 0.7,
   }));
 }
