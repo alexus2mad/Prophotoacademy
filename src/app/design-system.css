@@ -320,10 +320,55 @@ input[aria-invalid=true],textarea[aria-invalid=true] { border-color: var(--error
 .menu-dialog { padding: 72px 24px 32px; }
 .menu-dialog nav { display: grid; gap: 4px; }
 .menu-dialog a { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-display),sans-serif; font-size: 28px; padding: 16px 0; border-bottom: 1px solid var(--border); }
-.gallery-dialog { width: min(1100px,calc(100% - 32px)); padding: 32px 24px 16px; }
-.lightbox-image { max-height: 74dvh; object-fit: contain; width: 100%; height: auto; }
-.lightbox-caption { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 16px; }
-.lightbox-caption p { text-align: center; font-size: 14px; }
+.gallery-dialog {
+  /* Photo proportions and caption length must not move the navigation controls. */
+  width: min(1100px, calc(100% - 32px));
+  max-width: calc(100% - 32px);
+  height: min(900px, calc(100svh - 32px));
+  max-height: calc(100svh - 32px);
+  padding: 64px 24px 16px;
+  overflow: hidden;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) 80px;
+  gap: 12px;
+}
+.gallery-dialog[open] {
+  display: grid;
+}
+.gallery-dialog .icon-button {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  transform: none;
+}
+.gallery-dialog .icon-button:hover,
+.gallery-dialog .icon-button:active {
+  transform: none;
+}
+.lightbox-image {
+  min-height: 0;
+  max-height: 100%;
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+.lightbox-caption {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
+  align-items: center;
+  gap: 16px;
+  min-height: 0;
+}
+.lightbox-caption p {
+  min-width: 0;
+  max-height: 100%;
+  overflow: auto;
+  overflow-wrap: anywhere;
+  text-align: center;
+  font-size: 14px;
+}
 .lightbox-caption p span { display: block; font-size: 10px; color: var(--secondary); margin-top: 4px; }
 .checkout-grid { display: grid; grid-template-columns: minmax(0,1fr) 380px; gap: 80px; max-width: 1020px; margin-bottom: 96px; }
 .checkout-summary { border: 1px solid var(--border); border-radius: 12px; background: var(--surface); padding: 28px; align-self: start; position: sticky; top: 112px; }
@@ -660,7 +705,7 @@ input:focus,textarea:focus,select:focus { box-shadow: 0 0 0 3px #d5e4b913; }
   .dialog { padding: 40px 24px 24px; }
   .inquiry-dialog h2 { font-size: 30px; line-height: 34px; }
   .form-stack { gap: 20px; }
-  .gallery-dialog { padding: 56px 16px 16px; }
+  .gallery-dialog { padding: 64px 16px 16px; }
   .lightbox-caption { gap: 12px; }
   .lightbox-caption p { font-size: 12px; }
   .lightbox-caption p span { font-size: 9px; }

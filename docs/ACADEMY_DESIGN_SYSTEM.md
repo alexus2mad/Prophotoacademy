@@ -53,6 +53,8 @@ Partner logos use their original Webflow brand assets at full opacity, without g
 
 ## Photographic motion
 
+The shared student-work gallery reserves a viewport-bounded popup (up to 1100px wide and 900px tall, with 16px outer clearance), an uncropped image area and an 80px caption row. Photo proportions must never resize the popup or move its navigation. Close, previous and next controls stay 44px square without hover/press transforms. Long captions scroll in their keyboard-focusable center column. Use stable viewport height on mobile and preserve the native dialog's closed state, Escape dismissal and focus return.
+
 `CardMotion` is mounted once by the public Academy shell. Only cards marked `data-card-motion` participate; `data-card-photo` identifies the clipped photo frame and `data-card-title` identifies an inner text span. Do not transform a full-card link's containing block or its focus outline.
 
 Photographs scale to 1.065 and titles rise 6px over 1.8 seconds, returning over 1.4 seconds. Fine-pointer hover and visible keyboard focus activate the effect; below 900px or without hover, the viewport center activates cards or a tablet row. Reduced motion disables movement. The observer handles route changes and filtered card lists, disconnects on cleanup, and ignores stale callbacks. Legacy photographic panning skips Academy surfaces so effects do not stack.

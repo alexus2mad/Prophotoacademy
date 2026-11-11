@@ -1,6 +1,7 @@
 'use client';
 import { Dialog } from '@/components/molecules/Dialog/Dialog';
 import { WorkCard } from '@/components/molecules/WorkCard/WorkCard';
+import { IconButton } from '@/components/atoms/IconButton/IconButton';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { useGallery } from './hooks';
@@ -38,26 +39,24 @@ export function Gallery({ works, images }: GalleryProps) {
           />
         )}
         <div className="lightbox-caption">
-          <button
-            className="icon-button"
+          <IconButton
             aria-label="Попереднє фото"
             onClick={() => setIndex((i) => (i - 1 + works.length) % works.length)}
           >
             <ArrowLeft />
-          </button>
-          <p>
+          </IconButton>
+          <p tabIndex={0}>
             {current?.title}
             <span>
               {image?.credit} · {index + 1}/{works.length}
             </span>
           </p>
-          <button
-            className="icon-button"
+          <IconButton
             aria-label="Наступне фото"
             onClick={() => setIndex((i) => (i + 1) % works.length)}
           >
             <ArrowRight />
-          </button>
+          </IconButton>
         </div>
       </Dialog>
     </>
