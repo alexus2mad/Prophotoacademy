@@ -55,11 +55,12 @@
 }
 .date {
   display: flex;
+  flex-wrap: wrap;
   gap: 23px;
   align-items: center;
   font-size: 37.4px;
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.2;
   letter-spacing: 1.5px;
   margin: 34px 0 20px;
 }
@@ -279,14 +280,16 @@
     white-space: nowrap;
   }
   .date {
+    flex-direction: column;
     justify-content: center;
     font-size: 24px;
     letter-spacing: 0.96px;
-    gap: 22px;
+    gap: 12px;
     margin: 35px 0 0;
   }
   .date span + span {
-    padding-left: 22px;
+    border-left: 0;
+    padding-left: 0;
   }
   .heroActions {
     display: none !important;
@@ -301,13 +304,15 @@
     letter-spacing: 0.26px;
   }
   .when {
+    flex-direction: column;
     font-size: 12px;
     letter-spacing: 0.72px;
-    gap: 14px;
+    gap: 8px;
     padding-inline: 16px;
   }
   .when span + span {
-    padding-left: 14px;
+    border-left: 0;
+    padding-left: 0;
   }
   .prices {
     gap: 10px;

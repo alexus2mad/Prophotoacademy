@@ -1,4 +1,5 @@
-import type { PackageIdentity } from './types';
+import type { OfferingScheduleDocument, PackageIdentity } from './types';
+import { validateOfferingTime } from '../../src/lib/program-schedule/offering-time';
 import { defineArrayMember, defineField, defineType } from 'sanity';
 const text = (name: string, title: string, required = false) =>
   defineField({
@@ -342,10 +343,26 @@ export const schemaTypes = [
     name: 'offering',
     title: 'Intakes & packages',
     type: 'document',
+    validation: (rule) => rule.custom<OfferingScheduleDocument>(validateOfferingTime),
     fields: [
       legacyId,
       reference('program', 'Program', 'program'),
       defineField({ name: 'startDate', title: 'Start date', type: 'date' }),
+      defineField({
+        name: 'startTime',
+        type: 'string',
+        description: 'Optional event start in local 24-hour time, for example 11:00.',
+      }),
+      defineField({
+        name: 'endTime',
+        type: 'string',
+        description: 'End on the same day, in local 24-hour time, for example 16:00.',
+      }),
+      defineField({
+        name: 'timeZone',
+        type: 'string',
+        description: 'IANA time zone for both times, for example Europe/Kyiv. No UTC conversion.',
+      }),
       text('duration', 'Duration', true),
       defineField({
         name: 'format',

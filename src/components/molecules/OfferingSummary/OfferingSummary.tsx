@@ -17,6 +17,7 @@ export function OfferingSummary({
         {' · '}
         {schedule.label}:{' '}
         {schedule.date ? <time dateTime={schedule.date}>{schedule.value}</time> : schedule.value}
+        {schedule.time && <> · {schedule.time}</>}
       </p>
       {schedule.explanation && <p>{schedule.explanation}</p>}
       {schedule.inquirySuggested && (

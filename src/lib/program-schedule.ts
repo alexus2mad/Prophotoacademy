@@ -1,6 +1,7 @@
 import type { Offering, Program } from './content/types';
 import type { ProgramSchedule } from './program-schedule/types';
 import { canEnroll, dateLabel } from './format';
+import { offeringTimeLabel } from './program-schedule/offering-time';
 
 export function kyivDate(now = new Date()) {
   return new Intl.DateTimeFormat('en-CA', {
@@ -17,7 +18,10 @@ export function programSchedule(
   now = new Date(),
 ): ProgramSchedule {
   const date = offering?.startDate;
-  const dated = date ? { value: dateLabel(date).replace(/\s*р\.$/u, ''), date } : undefined;
+  const time = offeringTimeLabel(offering);
+  const dated = date
+    ? { value: dateLabel(date).replace(/\s*р\.$/u, ''), date, ...(time ? { time } : {}) }
+    : undefined;
 
   if (offering?.availability === 'archived')
     return {
@@ -68,9 +72,11 @@ export function programSchedule(
       label:
         offering?.verificationRequired !== false
           ? 'Дата потребує підтвердження'
-          : date === today
-            ? 'Старт сьогодні'
-            : 'Старт навчання',
+          : program.category === 'class'
+            ? 'Дата події'
+            : date === today
+              ? 'Старт сьогодні'
+              : 'Старт навчання',
       ...dated,
       status: purchasable
         ? offering?.availability === 'limited'

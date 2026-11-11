@@ -7,7 +7,13 @@ import { programSchedule } from '../src/lib/program-schedule';
 
 const content = fixture as AcademyContent;
 const commercial = content.programs.find((program) => program.id === 'program-commercial')!;
-const offering = content.offerings.find((item) => item.programId === commercial.id)!;
+// Keep the schedule-policy baseline independent of the current intake's delivery state.
+const offering: Offering = {
+  ...content.offerings.find((item) => item.programId === commercial.id)!,
+  learningState: undefined,
+  joiningOpen: undefined,
+  openAfterStart: undefined,
+};
 const now = new Date('2026-10-28T10:00:00Z');
 
 describe('shared offering schedule presentation', () => {

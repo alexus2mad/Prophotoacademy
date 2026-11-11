@@ -94,7 +94,8 @@ export function useStudioHeader() {
     setOpen(false);
   };
 
-  const usesInk = (control: string) => controlTones[control] ?? !darkHero;
+  // Focused checkout/status headers have a fixed light surface and skip scroll sampling.
+  const usesInk = (control: string) => focused || (controlTones[control] ?? !darkHero);
   return {
     path,
     header,

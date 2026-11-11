@@ -483,6 +483,78 @@
       "faqs": [],
       "sourceUrl": "https://claude.ai/artifact/FwrroMxpu7ApuHRefQRW3t#course-food",
       "featured": false
+    },
+    {
+      "id": "program-ai-artwork",
+      "slug": "ai-artwork",
+      "title": "Від кадрів до AI artwork",
+      "shortTitle": "AI Artwork",
+      "category": "class",
+      "level": "all",
+      "eyebrow": "Від зйомки до авторського AI-візуалу",
+      "description": "Практичний інтенсив зі студійної зйомки, роботи з концепцією, промптами та генеративними інструментами Adobe Photoshop.",
+      "audience": [
+        "Фотографам, які хочуть поєднати зйомку та AI",
+        "Кріейторам, які створюють авторський візуальний контент"
+      ],
+      "outcomes": [
+        "Підготувати вихідний кадр для AI-трансформації",
+        "Побудувати концепцію та мудборд",
+        "Сформулювати промпти для Adobe Firefly",
+        "Поєднати фотографію та генеративні елементи у Photoshop"
+      ],
+      "imageId": "ai-artwork",
+      "instructorIds": [],
+      "workIds": [],
+      "modules": [
+        {
+          "title": "Практична зйомка",
+          "topics": [
+            "Вихідний кадр, світлова схема та робота з моделлю"
+          ]
+        },
+        {
+          "title": "Візуальне бачення та концептуалізація",
+          "topics": [
+            "Референси, мудборд, атмосфера й колірна палітра"
+          ]
+        },
+        {
+          "title": "Штучний інтелект і промптинг",
+          "topics": [
+            "AI як творчий інструмент",
+            "Принципи побудови промптів для Adobe Firefly"
+          ]
+        },
+        {
+          "title": "Практика в Adobe Photoshop",
+          "topics": [
+            "Generative Fill: фон, предмети та текстури",
+            "Природне поєднання елементів зі світлом кадру"
+          ]
+        },
+        {
+          "title": "Підсумки та запитання",
+          "topics": [
+            "Розбір результатів і відповіді на запитання"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Які формати участі доступні?",
+          "answer": "Можна обрати офлайн-участь у Києві або участь онлайн. Дата й час однакові для обох форматів."
+        },
+        {
+          "question": "Чи відкриває квиток доступ до курсів?",
+          "answer": "Ні. Це квиток на інтенсив, який не надає автоматичного доступу до курсів Академії."
+        }
+      ],
+      "sourceUrl": "https://www.figma.com/design/CvY4dgmOevd9ehxk9Xsaqd/PROPHOTO-STUDIO?node-id=886-873",
+      "featured": false,
+      "audienceLabel": "Для фотографів і кріейторів",
+      "homepageDescription": "Від студійного кадру та концепції до авторського візуалу з AI й Photoshop.",
+      "deliveryDescription": "Участь офлайн у Києві або онлайн за обраним квитком."
     }
   ],
   "offerings": [
@@ -739,8 +811,12 @@
       "sourceNotes": [
         "Головна: 26.09.2026 та від 6000 грн. Детальна сторінка: 06.11.2026 та BASE 9600 грн.",
         "Тривалість 7–13 тижнів у загальному описі; 8/12 тижнів у пакетах. Потрібна редакторська перевірка.",
-        "BASE, GOLD та PLATINUM відкриті для придбання за рішенням власника від 27.10.2026."
-      ]
+        "BASE, GOLD та PLATINUM відкриті для придбання за рішенням власника від 27.10.2026.",
+        "Власник підтвердив 11.11.2026: потік від 06.11.2026 триває, долучення й продаж усіх відкритих пакетів залишаються доступними."
+      ],
+      "openAfterStart": true,
+      "learningState": "ongoing",
+      "joiningOpen": true
     },
     {
       "id": "offering-instagram-2026-10",
@@ -893,6 +969,50 @@
       "availability": "waitlist",
       "verificationRequired": false,
       "packages": []
+    },
+    {
+      "id": "offering-ai-artwork-2026-11-22",
+      "programId": "program-ai-artwork",
+      "startDate": "2026-11-22",
+      "startTime": "11:00",
+      "endTime": "16:00",
+      "timeZone": "Europe/Kyiv",
+      "duration": "5 годин",
+      "format": "hybrid",
+      "availability": "open",
+      "verificationRequired": false,
+      "packages": [
+        {
+          "id": "ai-artwork-offline",
+          "name": "Офлайн",
+          "kind": "product",
+          "price": 3900,
+          "availability": "open",
+          "description": "Квиток на інтенсив у Києві",
+          "includes": [
+            "Офлайн-участь в інтенсиві 22 листопада",
+            "11:00–16:00 за київським часом",
+            "Без автоматичного доступу до курсів Академії"
+          ]
+        },
+        {
+          "id": "ai-artwork-online",
+          "name": "Онлайн",
+          "kind": "product",
+          "price": 3000,
+          "availability": "open",
+          "description": "Квиток на онлайн-участь в інтенсиві",
+          "includes": [
+            "Онлайн-участь в інтенсиві 22 листопада",
+            "11:00–16:00 за київським часом",
+            "Без автоматичного доступу до курсів Академії"
+          ]
+        }
+      ],
+      "sourceNotes": [
+        "Дата, час, ціни та продаж квитків без автоматичного доступу до курсів підтверджені власником 11.11.2026.",
+        "Програма й зображення — з погодженого дизайну AI Artwork. Умови запису та додаткових матеріалів не підтверджені й не включені до пропозиції."
+      ]
     }
   ],
   "images": [
@@ -1473,6 +1593,17 @@
       "driveId": "1RwOgwNJ-1VMEmuqtX6_IHn2mDY3kPjVD",
       "width": 964,
       "height": 1205
+    },
+    {
+      "id": "ai-artwork",
+      "driveId": "",
+      "sourceUrl": "https://www.figma.com/design/CvY4dgmOevd9ehxk9Xsaqd/PROPHOTO-STUDIO?node-id=886-873",
+      "alt": "Модель серед білих троянд фарбує пелюстки червоним пензлем",
+      "credit": "ProPhoto Academy · зображення інтенсиву AI Artwork",
+      "src": "/design/studio/aiArtwork-img-ws144001-f825c76228.png",
+      "width": 1500,
+      "height": 731,
+      "bytes": 106063
     }
   ],
   "instructors": [

@@ -41,6 +41,9 @@ export type Offering = {
   id: string;
   programId: string;
   startDate?: string;
+  startTime?: string;
+  endTime?: string;
+  timeZone?: string;
   duration: string;
   format: 'online' | 'offline' | 'hybrid';
   location?: string;

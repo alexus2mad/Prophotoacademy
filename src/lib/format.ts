@@ -1,4 +1,5 @@
 import type { Availability, Offering, Package, Program } from './content/types';
+import { offeringEventSalesOpen } from './program-schedule/offering-time';
 // Keep the currency mark identical across browser and Node ICU versions.
 export const money = (amount: number) =>
   `${Math.round(amount)
@@ -46,10 +47,13 @@ export function canEnroll(offering: Offering, pack?: Package, now = new Date()) 
     month: '2-digit',
     day: '2-digit',
   }).format(now);
+  const withinSalesWindow =
+    offeringEventSalesOpen(offering, now) ??
+    (!offering.startDate || offering.openAfterStart || offering.startDate >= today);
   return (
     offering.verificationRequired === false &&
     ['open', 'limited'].includes(offering.availability) &&
-    (!offering.startDate || offering.openAfterStart || offering.startDate >= today) &&
+    withinSalesWindow &&
     (pack
       ? !pack.inquiryOnly && ['open', 'limited'].includes(pack.availability)
       : offering.packages.some(

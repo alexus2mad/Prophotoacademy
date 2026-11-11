@@ -12,7 +12,16 @@ vi.mock('next/navigation', () => ({ useSearchParams: () => new URLSearchParams()
 
 const enableTimers = vi.useFakeTimers.bind(vi);
 const restoreTimers = vi.useRealTimers.bind(vi);
-const content = fixture as AcademyContent;
+// Exercise an ordinary dated intake regardless of the current commercial cohort's state.
+const content: AcademyContent = {
+  ...(fixture as AcademyContent),
+  offerings: (fixture as AcademyContent).offerings.map((item) => ({
+    ...item,
+    learningState: undefined,
+    joiningOpen: undefined,
+    openAfterStart: undefined,
+  })),
+};
 const program = content.programs.find((item) => item.id === 'program-commercial')!;
 const offering = content.offerings.find((item) => item.programId === program.id)!;
 const beforeMidnight = '2026-11-06T21:59:59Z';

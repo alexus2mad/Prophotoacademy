@@ -45,6 +45,18 @@ These follow the original Webflow site's payment flow, with prices and discounts
 
 **Staging boundary.** Staging remains explicitly `mock` unless a separate rollout is approved and configured. Its mock controls use the same PostgreSQL/SQLite adapter as checkout; they cannot alter a stored real-payment order. Local status jobs are suppressed by the notification worker and never create financial records. Do not copy production merchant secrets or redirect checkout blindly: product prices/statuses may differ, and the historical staging WayForPay callback currently routes to production. See [staging isolation](STAGING_ISOLATION.md).
 
+### Confirmed offers — 11 November 2026
+
+The owner confirmed these offers and explicitly chose to keep staging test-only, preparing real WayForPay purchases for the production release. Both environments currently use the fixture content source; the committed offering data must ship with that release. This change does not activate production payments on staging or change either environment's credentials/callback routing.
+
+| Offer | Confirmed terms | Purchase behavior |
+| --- | --- | --- |
+| AI Artwork (`offering-ai-artwork-2026-11-22`) | 22 November 2026, 11:00–16:00 Europe/Kyiv; offline 3,900 UAH, online 3,000 UAH | Two `kind: product` tickets; no automatic course access. Sales close at the published event end |
+| Commercial Content (`offering-commercial-2026-11`) | Cohort began 6 November; late joining remains open | Existing BASE/GOLD/PLATINUM IDs, amounts and rights preserved; `openAfterStart`, `learningState: ongoing` and `joiningOpen` are explicit |
+| Separate Food Photography (`food-photography`) | No new commercial terms approved | Inquiry-only, unchanged |
+
+Event local times and IANA timezone are content fields shared by the intensive page and checkout. AI Artwork is a class, preserving the four main courses. Do not promise course access or recordings with its tickets. The existing verified-payment callback, purchase snapshots, idempotency and cashbox boundary remain authoritative. A mock approval is not a real payment or confirmation of event participation.
+
 **Test payment.** `/checkout?offering=test-payment&package=test-1uah` charges a real 1 UAH for an end-to-end check of the merchant, callback, receipt email and cashbox. It is defined in code, linked from nowhere, never indexed, grants nothing, and exists only in `wayforpay` mode. Refund test payments from the WayForPay merchant cabinet.
 
 **Checkout form.** Name, email and phone are required; Telegram and Instagram nicknames are optional and stored with the order for the academy's follow-up. Paying opens WayForPay's on-page widget (`pay-widget.js`), loaded only when the buyer submits. If the widget cannot load, the browser falls back to WayForPay's hosted page with the same signed fields. Closing or declining in the widget lets the buyer try again with a new order reference, because WayForPay does not accept a second payment for one reference.
