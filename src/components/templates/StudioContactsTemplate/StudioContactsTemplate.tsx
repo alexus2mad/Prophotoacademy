@@ -9,7 +9,7 @@ import styles from './StudioContactsTemplate.module.css';
 export function StudioContactsTemplate({ settings }: StudioContactsTemplateProps) {
   return (
     <section className={`studio-light studio-wrap ${styles.page}`}>
-      <p className="studio-label studio-eyebrow">Контакти</p>
+      <p className="studio-label studio-eyebrow">Контакти ProPhoto Academy</p>
       <h1>
         <span>*пишіть, телефонуйте</span>Будемо раді
       </h1>

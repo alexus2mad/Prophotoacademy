@@ -94,7 +94,7 @@ describe('Academy presentation boundaries', () => {
       }),
     );
     expect($('.site-header .desktop-nav, .site-header .header-account-link').length).toBe(0);
-    expect($('.header-actions a[href="/courses"]').text()).toBe('До програм');
+    expect($('.header-actions a[href="/academy"]').text()).toBe('До програм');
     expect($('.footer-focused a[href="/terms-of-service"]').length).toBe(1);
     expect($('.footer-focused a[href="/privacy-policy"]').length).toBe(1);
   });
@@ -291,7 +291,7 @@ describe('student dashboard decisions', () => {
 
   it('gives an unenrolled student a catalog path without promising a payment state', () => {
     const $ = render(createElement(StudentOverview, { name: '', courses: [] }));
-    expect($('.workspace-empty a').attr('href')).toBe('/courses');
+    expect($('.workspace-empty a').attr('href')).toBe('/academy');
     expect($('.workspace-empty').text()).not.toMatch(/підтвердження оплати/i);
     expect($('article, progress, aside').length).toBe(0);
   });

@@ -133,7 +133,7 @@ describe('page coverage and integration', () => {
       const metadata = await programMetadata({ params: Promise.resolve({ slug }) });
       const title = ('seo' in page ? page.seo?.title : undefined) || page.title;
       expect(metadata.title).toBe(title);
-      expect(metadata.alternates?.canonical).toBe('/' + slug);
+      expect(metadata.alternates?.canonical).toBe(production + '/' + slug);
       expect(metadata.openGraph).toMatchObject({
         title,
         url: production + '/' + slug,

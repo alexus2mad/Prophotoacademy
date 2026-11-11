@@ -98,6 +98,7 @@ export function StudioHomeHero({ mode, onModeChange }: StudioHomeHeroProps) {
             mobileImage={visual.mobileImage}
             alt=""
             eager
+            fetchPriority={visual.id === 'academy-0' ? 'high' : undefined}
             sizes="100vw"
           />
         </div>

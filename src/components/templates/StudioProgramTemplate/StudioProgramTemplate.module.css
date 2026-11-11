@@ -377,6 +377,17 @@
 .gallery {
   padding-bottom: 0;
 }
+.galleryHeading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.galleryLink {
+  padding-block: 8px;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
 .gallery :global(.work-grid) {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));

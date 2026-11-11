@@ -1,4 +1,5 @@
 import type { Program } from '@/lib/content/types';
+import { academyIndexPath } from '@/lib/navigation/academy';
 import type { CatalogCategory } from './types';
 
 export function catalogCategory(value?: string | null): CatalogCategory {
@@ -16,5 +17,5 @@ export function catalogHref(category: CatalogCategory, query = '') {
   if (category === 'all') params.delete('category');
   else params.set('category', category);
   const search = params.toString();
-  return '/courses' + (search ? '?' + search : '');
+  return academyIndexPath + (search ? '?' + search : '');
 }

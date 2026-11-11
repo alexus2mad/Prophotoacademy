@@ -29,7 +29,7 @@ describe('catalog before client navigation is ready', () => {
     expect($('.course-card')).toHaveLength(4);
     expect($('.course-card a[href="/food-photography"]').length).toBeGreaterThan(0);
     expect($('nav[aria-label="Категорії програм"] a').first().attr('href')).toBe(
-      '/courses?utm_source=stage2-check&tag=one&tag=two',
+      '/academy?utm_source=stage2-check&tag=one&tag=two',
     );
     expect($('nav[aria-label="Категорії програм"] a[aria-current="page"]').text()).toBe('Курси');
   });
@@ -40,6 +40,6 @@ describe('catalog before client navigation is ready', () => {
     );
     expect($('[data-catalog-category]').attr('data-catalog-category')).toBe('all');
     expect($('.course-card')).toHaveLength(content.programs.length);
-    expect($('nav[aria-label="Категорії програм"] a').first().attr('href')).toBe('/courses');
+    expect($('nav[aria-label="Категорії програм"] a').first().attr('href')).toBe('/academy');
   });
 });

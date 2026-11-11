@@ -1,0 +1,65 @@
+{
+  "date": "2026-11-12",
+  "evidence": {
+    "webflow": "Webflow list_pages returned 15 current paths. The October 7 archive contains 12 captured pages and records zero CMS collections. Webflow's redirect API was unavailable for the account.",
+    "google": "A public Google site:prophotoacademy.com.ua search surfaced five URLs. The site: operator provides a sample rather than a complete index inventory. Search Console was unavailable.",
+    "googlePaths": [
+      "/",
+      "/contacts",
+      "/reviews",
+      "/individual-training",
+      "/food-product-photography"
+    ]
+  },
+  "retained": [
+    "/",
+    "/about-us",
+    "/contacts",
+    "/course-smm-instagram",
+    "/food-product-photography",
+    "/individual-training",
+    "/privacy-policy",
+    "/pro-photo-lab",
+    "/reviews",
+    "/terms-of-service",
+    "/visual-content"
+  ],
+  "redirects": [
+    {
+      "from": "/courses",
+      "to": "/academy",
+      "status": 301,
+      "reason": "Saved catalog URL. The current public Academy page contains the course directory."
+    },
+    {
+      "from": "/page-in-progress",
+      "to": "/academy",
+      "status": 301,
+      "reason": "The Webflow placeholder previously led to the Academy via the old course directory. Use the final destination directly."
+    },
+    {
+      "from": "/401",
+      "to": "/",
+      "status": 308,
+      "reason": "The legacy Webflow password utility already redirects permanently to the home page. None of the observed Google results used this URL."
+    }
+  ],
+  "excluded": [
+    {
+      "path": "/thanks",
+      "status": 200,
+      "noindex": true,
+      "reason": "Checkout confirmation route."
+    },
+    {
+      "path": "/404",
+      "status": 404,
+      "reason": "Webflow error page. The new app returns a real 404."
+    },
+    {
+      "path": "/a11y-demo",
+      "status": 404,
+      "reason": "The Webflow page was an accessibility demonstration and has no equivalent Academy content."
+    }
+  ]
+}

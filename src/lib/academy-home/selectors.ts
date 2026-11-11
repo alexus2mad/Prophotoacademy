@@ -1,6 +1,7 @@
 import type { AcademyContent } from '@/lib/content/types';
 import type { AcademyDirection } from './types';
 import { academyHomePhoto } from '@/lib/photography/academy-home';
+import { academyIndexPath } from '@/lib/navigation/academy';
 export function academyDirections(content: AcademyContent): AcademyDirection[] {
   const individual = content.programs.find((p) => p.category === 'individual');
   const corporate = content.programs.find((p) => p.category === 'corporate');
@@ -9,7 +10,7 @@ export function academyDirections(content: AcademyContent): AcademyDirection[] {
       title: 'Курси',
       subtitle: 'Навчання онлайн з практикою в Києві',
       image: academyHomePhoto('courses'),
-      href: '/courses?category=course',
+      href: `${academyIndexPath}?category=course`,
     },
     {
       title: 'Воркшопи',
@@ -22,7 +23,7 @@ export function academyDirections(content: AcademyContent): AcademyDirection[] {
       title: 'Усі програми',
       subtitle: 'Знайдіть свій формат навчання',
       image: academyHomePhoto('offline'),
-      href: '/courses',
+      href: academyIndexPath,
     },
     {
       title: 'Індивідуальне навчання',

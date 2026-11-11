@@ -2,12 +2,15 @@ import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { load } from 'cheerio';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { connection } from 'next/server';
-import { redirect } from 'next/navigation';
+import { connection, NextRequest } from 'next/server';
+import { proxy } from '../src/proxy';
 import fixture from '../content/academy.json';
 import type { AcademyContent } from '../src/lib/content/types';
 import { getContent } from '../src/lib/content';
-import Courses, { generateMetadata } from '../src/app/(academy)/courses/page';
+import Courses, {
+  generateMetadata as reviewAliasMetadata,
+} from '../src/app/(academy)/courses/page';
+import Academy, { generateMetadata } from '../src/app/(academy)/academy/page';
 import sitemap from '../src/app/sitemap';
 import { CatalogTemplate } from '../src/components/templates/CatalogTemplate/CatalogTemplate';
 import { StudioAcademyTemplate } from '../src/components/templates/StudioAcademyTemplate/StudioAcademyTemplate';
@@ -20,10 +23,13 @@ import { StudioHomeWorks } from '../src/components/organisms/StudioHomeWorks/Stu
 import { studioHomeDirections } from '../src/lib/studio-home/selectors';
 import { studioCatalogDestination } from '../src/lib/studio-pages/navigation';
 
-vi.mock('next/server', () => ({ connection: vi.fn(async () => undefined) }));
+vi.mock('next/server', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('next/server')>()),
+  connection: vi.fn(async () => undefined),
+}));
 vi.mock('next/navigation', async (importOriginal) => {
   const navigation = await importOriginal<typeof import('next/navigation')>();
-  return { ...navigation, redirect: vi.fn(navigation.redirect), usePathname: () => '/academy' };
+  return { ...navigation, usePathname: () => '/academy' };
 });
 vi.mock('../src/lib/content', () => ({ getContent: vi.fn() }));
 vi.mock('../src/components/templates/CatalogTemplate/CatalogTemplate', () => ({
@@ -41,28 +47,38 @@ beforeEach(() => {
   vi.stubEnv('NEXT_PUBLIC_ACADEMY_DESIGN', 'studio');
   vi.stubEnv('NEXT_PUBLIC_REVIEW_MODE', '');
   vi.stubEnv('NEXT_PUBLIC_SITE_URL', production);
+  vi.stubEnv('PROPHOTO_SITE', 'academy');
   vi.mocked(getContent).mockResolvedValue(content);
 });
 afterEach(() => vi.unstubAllEnvs());
 
 describe('one approved Studio Academy destination', () => {
-  it('temporarily redirects the saved catalog URL before rendering or fetching its duplicate page', async () => {
-    await expect(Courses({ searchParams: Promise.resolve({}) })).rejects.toMatchObject({
-      digest: 'NEXT_REDIRECT;replace;/academy;307;',
-    });
-    expect(connection).toHaveBeenCalledOnce();
-    expect(getContent).not.toHaveBeenCalled();
-  });
+  it.each(['studio', 'legacy'] as const)(
+    'permanently moves the saved catalog without a redirect loop in %s',
+    async (design) => {
+      vi.stubEnv('NEXT_PUBLIC_ACADEMY_DESIGN', design);
+      for (const path of ['/courses', '/page-in-progress']) {
+        const response = await proxy(new NextRequest(production + path));
+        expect(response.status).toBe(301);
+        expect(new URL(response.headers.get('location')!, production).pathname).toBe('/academy');
+      }
+      const destination = await proxy(new NextRequest(production + '/academy'));
+      expect(destination.headers.has('location')).toBe(false);
+    },
+  );
 
   it('keeps repeated campaign parameters and anchors course-filter links at the main courses', async () => {
-    const query = { category: 'course', utm_source: ['instagram', 'newsletter'], empty: undefined };
-    const destination =
-      '/academy?category=course&utm_source=instagram&utm_source=newsletter#courses';
-    await expect(Courses({ searchParams: Promise.resolve(query) })).rejects.toMatchObject({
-      digest: `NEXT_REDIRECT;replace;${destination};307;`,
-    });
-    expect(redirect).toHaveBeenCalledWith(destination);
-    expect(getContent).not.toHaveBeenCalled();
+    const response = await proxy(
+      new NextRequest(
+        production + '/courses?category=course&utm_source=instagram&utm_source=newsletter',
+      ),
+    );
+    expect(response.status).toBe(301);
+    const destination = new URL(response.headers.get('location')!, production);
+    expect(destination.pathname).toBe('/academy');
+    expect(destination.hash).toBe('#courses');
+    expect(destination.searchParams.get('category')).toBe('course');
+    expect(destination.searchParams.getAll('utm_source')).toEqual(['instagram', 'newsletter']);
   });
 
   it('encodes arbitrary query data while keeping the destination on the Academy origin', () => {
@@ -104,26 +120,26 @@ describe('one approved Studio Academy destination', () => {
     expect(page.type).toBe(StudioAcademyTemplate);
     expect(page.props.content).toBe(content);
     expect(connection).not.toHaveBeenCalled();
-    expect(redirect).not.toHaveBeenCalled();
     expect(getContent).toHaveBeenCalledOnce();
+    expect(reviewAliasMetadata()).toMatchObject({
+      alternates: { canonical: production + '/academy' },
+      robots: { index: false, follow: false },
+    });
   });
 
-  it('preserves the legacy catalog, its query and original metadata for future design tests', async () => {
+  it('preserves the filterable legacy catalog and its query at the shared Academy URL', async () => {
     vi.stubEnv('NEXT_PUBLIC_ACADEMY_DESIGN', 'legacy');
-    const page = await Courses({
+    const page = await Academy({
       searchParams: Promise.resolve({ category: 'course', utm_source: ['first', 'second'] }),
     });
     expect(page.type).toBe(CatalogTemplate);
     expect(page.props.content).toBe(content);
     expect(page.props.programs).toHaveLength(content.programs.length);
     expect(page.props.query).toBe('category=course&utm_source=first&utm_source=second');
-    expect(redirect).not.toHaveBeenCalled();
     expect(generateMetadata()).toMatchObject({
-      title: 'Усі програми',
-      description:
-        'Оберіть курс фотографії, комерційного контенту чи Instagram. Класи, індивідуальне та корпоративне навчання.',
-      alternates: { canonical: '/courses' },
-      openGraph: { url: `${production}/courses` },
+      title: 'Курси фотографії, відео та створення контенту',
+      alternates: { canonical: production + '/academy' },
+      openGraph: { url: production + '/academy' },
     });
   });
 
@@ -131,15 +147,14 @@ describe('one approved Studio Academy destination', () => {
     'publishes one canonical catalog in the %s sitemap',
     async (design) => {
       vi.stubEnv('NEXT_PUBLIC_ACADEMY_DESIGN', design);
-      const canonical = design === 'studio' ? '/academy' : '/courses';
-      const duplicate = design === 'studio' ? '/courses' : '/academy';
+      const canonical = production + '/academy';
       expect(generateMetadata()).toMatchObject({
         alternates: { canonical },
-        openGraph: { url: production + canonical },
+        openGraph: { url: canonical },
       });
       const entries = await sitemap();
-      expect(entries.filter((entry) => entry.url === production + canonical)).toHaveLength(1);
-      expect(entries.some((entry) => entry.url === production + duplicate)).toBe(false);
+      expect(entries.filter((entry) => entry.url === canonical)).toHaveLength(1);
+      expect(entries.some((entry) => entry.url === production + '/courses')).toBe(false);
     },
   );
 });
@@ -164,6 +179,8 @@ describe('direct Studio learning navigation', () => {
     );
     expect(hero('a')).toHaveLength(1);
     expect(hero('a').attr('href')).toBe('/academy');
+    expect(hero('[data-hero-visual] img[fetchpriority="high"]')).toHaveLength(1);
+    expect(hero('[data-hero-visual="academy-0"] img').attr('fetchpriority')).toBe('high');
     const directions = load(
       renderToStaticMarkup(
         createElement(StudioHomeDirections, {

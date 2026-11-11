@@ -1,22 +1,23 @@
-import { academyDesign } from '@/lib/studio-design/variant';
-import { studioAcademyDestinations, studioCatalogDestination } from '@/lib/studio-pages/navigation';
+import { academyDesign } from '../studio-design/variant';
+import { studioAcademyDestinations, studioCatalogDestination } from '../studio-pages/navigation';
+
+export const academyIndexPath = studioAcademyDestinations.overview;
+export const legacyAcademyIndexPaths = new Set(['/courses', '/page-in-progress']);
 
 /** Shared account, checkout and utility links follow the selected Academy presentation. */
 export function academyProgramsHref(query?: URLSearchParams) {
-  if (academyDesign() === 'studio') {
-    return query ? studioCatalogDestination(query) : studioAcademyDestinations.overview;
-  }
+  if (query && academyDesign() === 'studio') return studioCatalogDestination(query);
   const search = query?.toString();
-  return `/courses${search ? `?${search}` : ''}`;
+  return `${academyIndexPath}${search ? `?${search}` : ''}`;
 }
 
 export const academyNavigation = [
-  ['/courses', 'Програми'],
+  [academyIndexPath, 'Програми'],
   ['/student-work', 'Роботи студентів'],
   ['/about-us', 'Академія'],
   ['/contacts', 'Контакти'],
 ] as const;
 
 export const academySupportingNavigation = academyNavigation.filter(
-  ([href]) => href !== '/courses',
+  ([href]) => href !== academyIndexPath,
 );

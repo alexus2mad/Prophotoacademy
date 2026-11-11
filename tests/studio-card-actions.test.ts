@@ -33,10 +33,10 @@ it('keeps each full-area homepage card to one named native action and preserves 
   }
 });
 
-it('gives workshop and format cards one named action, linking AI Artwork directly to its page', () => {
+it('gives workshop and camp cards one named action, linking AI Artwork directly to its page', () => {
   const $ = load(renderToStaticMarkup(createElement(StudioAcademyPrograms, content)));
-  const cards = $('#workshops article, #individual, #corporate, #camp');
-  expect(cards).toHaveLength(8);
+  const cards = $('#workshops article, #camp');
+  expect(cards).toHaveLength(6);
   expect($('#workshops article').first().find('a').attr('href')).toBe('/ai-artwork');
   expect($('#workshops a[href="/ai-artwork"]')).toHaveLength(1);
   const names = new Set<string>();
@@ -54,6 +54,26 @@ it('gives workshop and format cards one named action, linking AI Artwork directl
     names.add(action.attr('aria-label')!);
   });
   expect(names.size).toBe(cards.length);
+});
+
+it.each([
+  ['individual', '/individual-training'],
+  ['corporate', '/corporate-training'],
+])('gives the %s card a direct detail link and one separate inquiry action', (id, href) => {
+  const $ = load(renderToStaticMarkup(createElement(StudioAcademyPrograms, content)));
+  const card = $('article#' + id);
+  const detail = card.children('h2').children('a');
+  const inquiry = card.children('button');
+  expect(card.find('a, button')).toHaveLength(2);
+  expect(detail).toHaveLength(1);
+  expect(detail.attr('href')).toBe(href);
+  expect(detail.text().trim()).toBeTruthy();
+  expect(inquiry).toHaveLength(1);
+  expect(inquiry.attr('type')).toBe('button');
+  expect(inquiry.attr('aria-label')).toContain(detail.text());
+  expect(inquiry.attr('aria-haspopup')).toBe('dialog');
+  expect(inquiry.attr('aria-controls')).toBe('inquiry-dialog');
+  expect(card.find('a a, a button, button a, button button')).toHaveLength(0);
 });
 
 it('preserves one link around the entire existing course row', () => {

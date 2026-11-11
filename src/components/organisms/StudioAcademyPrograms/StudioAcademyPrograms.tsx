@@ -9,6 +9,8 @@ import styles from './StudioAcademyPrograms.module.css';
 export function StudioAcademyPrograms({ programs, offerings, images }: StudioAcademyProgramsProps) {
   const courses = studioAcademyCourses(programs);
   const intensive = programs.find((program) => program.slug === 'ai-artwork');
+  const individual = programs.find((program) => program.category === 'individual');
+  const corporate = programs.find((program) => program.category === 'corporate');
   const workshops = [
     'Комерційний чоловічий портрет',
     'Ню та в білизні: каталожна та арт зйомка',
@@ -20,7 +22,7 @@ export function StudioAcademyPrograms({ programs, offerings, images }: StudioAca
       <section id="courses" className="studio-band studio-dark">
         <div className="studio-wrap">
           <header className={styles.head}>
-            <p className="studio-label studio-eyebrow">Онлайн з практикою в Києві</p>
+            <p className="studio-label studio-eyebrow">Фотографія, відео та контент</p>
             <h2 className="studio-title">Головні курси</h2>
           </header>
           <div className={styles.rows}>
@@ -74,14 +76,22 @@ export function StudioAcademyPrograms({ programs, offerings, images }: StudioAca
       <section className={styles.formats} aria-label="Інші формати навчання">
         <article id="individual">
           <span className={styles.badge}>Під ваш рівень</span>
-          <h2>Індивідуальне навчання</h2>
+          <h2>
+            {individual ? (
+              <Link href={`/${individual.slug}`} className={styles.formatLink}>
+                Індивідуальне навчання
+              </Link>
+            ) : (
+              'Індивідуальне навчання'
+            )}
+          </h2>
           <p>
             Індивідуальне навчання з фокусом на ваш рівень і цілі: персональний підхід, глибока
             робота з технікою, світлом і стилем, розвиток авторського бачення та впевненості у
             зйомці.
           </p>
           <InquiryButton
-            programId={programs.find((program) => program.category === 'individual')?.id}
+            programId={individual?.id}
             title="Індивідуальне навчання"
             subject="individual-training"
             className={`studio-button ${styles.cardAction}`}
@@ -92,13 +102,21 @@ export function StudioAcademyPrograms({ programs, offerings, images }: StudioAca
         </article>
         <article id="corporate">
           <span className={styles.badge}>Для команд</span>
-          <h2>Корпоративне навчання</h2>
+          <h2>
+            {corporate ? (
+              <Link href={`/${corporate.slug}`} className={styles.formatLink}>
+                Корпоративне навчання
+              </Link>
+            ) : (
+              'Корпоративне навчання'
+            )}
+          </h2>
           <p>
             Корпоративне навчання для команд і бізнесу: практичні формати, адаптація під задачі
             бренду, розвиток візуального мислення та створення контенту, що працює на результат.
           </p>
           <InquiryButton
-            programId={programs.find((program) => program.category === 'corporate')?.id}
+            programId={corporate?.id}
             title="Корпоративне навчання"
             subject="corporate-training"
             className={`studio-button ${styles.cardAction}`}

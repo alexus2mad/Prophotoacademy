@@ -1,13 +1,18 @@
 'use client';
 import { useDialog } from '@/components/molecules/Dialog/hooks';
 import { siteHref } from '@/lib/ecosystem';
-import { academyNavigation, academySupportingNavigation } from '@/lib/navigation/academy';
+import {
+  academyIndexPath,
+  academyNavigation,
+  academySupportingNavigation,
+} from '@/lib/navigation/academy';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import type { HeaderProps } from './types';
 
 export function useHeader({ site = 'academy' }: HeaderProps) {
-  const path = usePathname().replace(/\/+$/, '') || '/';
+  const pathname = usePathname().replace(/\/+$/, '') || '/';
+  const path = pathname === '/courses' ? academyIndexPath : pathname;
   const [scrolled, setScrolled] = useState(false);
   const { dialog } = useDialog();
   const focused =
@@ -19,7 +24,7 @@ export function useHeader({ site = 'academy' }: HeaderProps) {
           [siteHref('hub', '#spaces'), 'Зали'],
           [siteHref('hub', 'contact'), 'Контакти'],
         ]
-      : path === '/courses'
+      : path === academyIndexPath
         ? academyNavigation
         : academySupportingNavigation;
   const mobileLinks =

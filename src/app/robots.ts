@@ -1,12 +1,14 @@
 import type { MetadataRoute } from 'next';
+import { indexingDisabled } from '@/lib/seo/crawl';
+import { academyCanonical } from '@/lib/seo/urls';
+
 export default function robots(): MetadataRoute.Robots {
-  const base = process.env.NEXT_PUBLIC_SITE_URL || 'http://127.0.0.1:3000';
   return {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/studio', '/api/', '/operations', '/checkout', '/thanks'],
+      disallow: ['/studio', '/api/', '/operations'],
     },
-    sitemap: `${base}/sitemap.xml`,
+    ...(indexingDisabled() ? {} : { sitemap: academyCanonical('/sitemap.xml') }),
   };
 }

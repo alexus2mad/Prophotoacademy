@@ -2,6 +2,7 @@ import { PhotoStack } from '@/components/molecules/PhotoStack/PhotoStack';
 import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
 import { formatLabel, money } from '@/lib/format';
 import { programSchedule } from '@/lib/program-schedule';
+import { academyIndexPath } from '@/lib/navigation/academy';
 import Link from 'next/link';
 import type { ProgramHeroProps } from './types';
 export function ProgramHero({ program, offering, images, presentation }: ProgramHeroProps) {
@@ -10,7 +11,7 @@ export function ProgramHero({ program, offering, images, presentation }: Program
   return (
     <section className="program-hero">
       <nav className="breadcrumb" aria-label="Шлях до сторінки">
-        <Link href="/courses">Усі програми</Link>
+        <Link href={academyIndexPath}>Усі програми</Link>
       </nav>
       <div className="program-hero-copy">
         <h1>{program.shortTitle}</h1>

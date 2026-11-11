@@ -1,17 +1,14 @@
-import type { Metadata } from 'next';
 import { getContent, findImage } from '@/lib/content';
 import { Photo } from '@/components/atoms/Photo/Photo';
 import { PreparedPhoto } from '@/components/atoms/PreparedPhoto/PreparedPhoto';
 import { Consultation } from '@/components/organisms/Consultation/Consultation';
 import { academyHomePhoto } from '@/lib/photography/academy-home';
-import { socialMetadata } from '@/lib/social-images/metadata';
-export const metadata: Metadata = {
-  title: 'Про академію',
+import { academyMetadata } from '@/lib/seo/metadata';
+export const metadata = academyMetadata('/about-us', {
+  title: 'Про фотошколу та викладачів',
   description:
     'Pro Photo Academy. Олена Попова, Олександра Куліняк і навчання фотографії, відео та візуального контенту.',
-  alternates: { canonical: '/about-us' },
-  ...socialMetadata('/about-us'),
-};
+});
 export default async function About() {
   const content = await getContent();
   return (

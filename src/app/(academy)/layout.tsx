@@ -4,14 +4,13 @@ import { academyDesign } from '@/lib/studio-design/variant';
 import type { LayoutProps } from '@/app/types';
 import type { Metadata } from 'next';
 import { getContent } from '@/lib/content';
+import { academyName } from '@/lib/seo/metadata';
 import { socialMetadata } from '@/lib/social-images/metadata';
 export const metadata: Metadata = {
   title: {
-    default: 'Pro Photo Academy — створюйте кадри, які працюють',
-    template: '%s · Pro Photo Academy',
+    default: academyName,
+    template: `%s · ${academyName}`,
   },
-  description:
-    'Курси фотографії, відео та створення контенту на телефон і камеру. Онлайн і в Києві.',
   ...socialMetadata('/'),
 };
 export default async function AcademyLayout({ children }: LayoutProps) {

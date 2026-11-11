@@ -2,6 +2,7 @@ import { PreparedPhoto } from '@/components/atoms/PreparedPhoto/PreparedPhoto';
 import { EcosystemWordmark } from '@/components/atoms/EcosystemWordmark/EcosystemWordmark';
 import { academyHomePhoto } from '@/lib/photography/academy-home';
 import { siteHref } from '@/lib/ecosystem';
+import { academyIndexPath } from '@/lib/navigation/academy';
 import Link from 'next/link';
 import type { AcademyDesignHeroProps } from './types';
 export function AcademyDesignHero({ shopUrl }: AcademyDesignHeroProps) {
@@ -28,7 +29,7 @@ export function AcademyDesignHero({ shopUrl }: AcademyDesignHeroProps) {
             <EcosystemWordmark name="STUDIO" />
           </a>
           <Link
-            href="/courses"
+            href={academyIndexPath}
             className="academy-design-current"
             aria-label="Академія — програми навчання"
           >
@@ -42,7 +43,7 @@ export function AcademyDesignHero({ shopUrl }: AcademyDesignHeroProps) {
           Курси фотографії, відео та створення контенту на телефон або камеру. Онлайн-навчання та
           практика в Києві — залежно від програми й пакета.
         </p>
-        <Link className="button academy-hero-action" href="/courses">
+        <Link className="button academy-hero-action" href={academyIndexPath}>
           Обрати програму
         </Link>
       </div>

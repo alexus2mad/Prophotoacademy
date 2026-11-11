@@ -12,6 +12,12 @@ import type { StudioFooterProps } from './types';
 
 export function StudioFooter({ settings }: StudioFooterProps) {
   const { focused, home } = useStudioFooter();
+  const legalNavigation = (
+    <nav className="studio-footer-legal" aria-label="Правова інформація">
+      <Link href="/terms-of-service">Публічна оферта</Link>
+      <Link href="/privacy-policy">Конфіденційність</Link>
+    </nav>
+  );
   const socials = [
     { href: settings.instagram, label: 'Instagram', asset: studioAssets.homeMobile.imgSvg },
     { href: settings.telegram, label: 'Telegram', asset: studioAssets.homeMobile.imgSvg1 },
@@ -22,10 +28,7 @@ export function StudioFooter({ settings }: StudioFooterProps) {
     return (
       <footer className="studio-footer-focused studio-wrap">
         <span>© {new Date().getFullYear()} ProPhoto Academy</span>
-        <nav aria-label="Правова інформація">
-          <Link href="/terms-of-service">Публічна оферта</Link>
-          <Link href="/privacy-policy">Конфіденційність</Link>
-        </nav>
+        {legalNavigation}
       </footer>
     );
   }
@@ -61,6 +64,9 @@ export function StudioFooter({ settings }: StudioFooterProps) {
           <a href={`tel:${settings.phone}`}>{phoneLabel(settings.phone)}</a>
           <a href={`mailto:${settings.email}`}>{settings.email}</a>
           <p>{settings.address}</p>
+          <Link className="studio-footer-about" href="/about-us">
+            Про академію
+          </Link>
           {!home && (
             <Link className="studio-footer-all-contacts" href="/contacts">
               Усі контакти
@@ -83,6 +89,7 @@ export function StudioFooter({ settings }: StudioFooterProps) {
             </a>
           ))}
       </div>
+      <div className="studio-footer-legal-strip studio-wrap">{legalNavigation}</div>
       <Link href="/" className="studio-footer-mark" aria-label="ProPhoto — головна">
         <StudioImage
           asset={home ? studioAssets.home.imgLogoMark : studioAssets.components.imgLogoMark}

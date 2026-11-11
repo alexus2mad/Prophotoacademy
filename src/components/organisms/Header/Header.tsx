@@ -4,6 +4,7 @@ import { Dialog } from '@/components/molecules/Dialog/Dialog';
 import { EcosystemNav } from '@/components/molecules/EcosystemNav/EcosystemNav';
 import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
 import { siteHref } from '@/lib/ecosystem';
+import { academyIndexPath } from '@/lib/navigation/academy';
 import { Menu } from 'lucide-react';
 import Link from 'next/link';
 import { useHeader } from './hooks';
@@ -35,7 +36,10 @@ export function Header({ site = 'academy' }: HeaderProps) {
         )}
         <div className="header-actions">
           {focused ? (
-            <Link href={siteHref(site, site === 'hub' ? '' : 'courses')} className="text-link">
+            <Link
+              href={siteHref(site, site === 'hub' ? '' : academyIndexPath)}
+              className="text-link"
+            >
               {site === 'hub' ? 'До студії' : 'До програм'}
             </Link>
           ) : (
@@ -50,7 +54,7 @@ export function Header({ site = 'academy' }: HeaderProps) {
               >
                 Кабінет
               </Link>
-              {site === 'academy' && path === '/courses' ? (
+              {site === 'academy' && path === academyIndexPath ? (
                 <InquiryButton
                   className="button button-small"
                   subject="program-selection"
@@ -58,7 +62,7 @@ export function Header({ site = 'academy' }: HeaderProps) {
                 />
               ) : (
                 <Link
-                  href={siteHref(site, site === 'hub' ? 'booking' : 'courses')}
+                  href={siteHref(site, site === 'hub' ? 'booking' : academyIndexPath)}
                   className={`button button-small ${site === 'academy' && home ? 'button-secondary' : ''}`}
                 >
                   {site === 'hub' ? 'Забронювати' : 'Обрати програму'}

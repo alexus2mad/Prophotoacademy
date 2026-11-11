@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
-import { money, startingPrice } from '@/lib/format';
+import { formatLabel, money, startingPrice } from '@/lib/format';
 import { programSchedule } from '@/lib/program-schedule';
 import type { StudioAcademyProgramRowProps } from './types';
 import styles from './StudioAcademyProgramRow.module.css';
@@ -23,6 +23,7 @@ export function StudioAcademyProgramRow({
         <Heading>{program.title}</Heading>
         <p>{program.homepageDescription || program.description}</p>
         <p className={styles.schedule}>
+          {offering && <>{formatLabel[offering.format]} · </>}
           {schedule.value}
           {price !== undefined && <> · від {money(price)}</>}
         </p>

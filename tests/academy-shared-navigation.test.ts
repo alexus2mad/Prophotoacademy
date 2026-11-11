@@ -51,7 +51,7 @@ afterEach(() => vi.unstubAllEnvs());
 
 describe.each([
   ['studio', '/academy'],
-  ['legacy', '/courses'],
+  ['legacy', '/academy'],
 ] as const)('%s shared Academy destinations', (design, destination) => {
   beforeEach(() => vi.stubEnv('NEXT_PUBLIC_ACADEMY_DESIGN', design));
 
@@ -81,7 +81,7 @@ describe.each([
     for (const surface of surfaces) {
       const $ = load(renderToStaticMarkup(surface));
       expect($(`a[href="${destination}"]`)).toHaveLength(1);
-      if (design === 'studio') expect($('a[href^="/courses"]')).toHaveLength(0);
+      expect($('a[href^="/courses"]')).toHaveLength(0);
     }
   });
 
@@ -95,7 +95,7 @@ describe.each([
     for (const surface of surfaces) {
       const $ = load(renderToStaticMarkup(surface));
       expect($(`a[href="${destination}"]`)).toHaveLength(1);
-      if (design === 'studio') expect($('a[href^="/courses"]')).toHaveLength(0);
+      expect($('a[href^="/courses"]')).toHaveLength(0);
     }
   });
 
@@ -110,13 +110,23 @@ describe.each([
     const $ = load(
       renderToStaticMarkup(await Detail({ params: Promise.resolve({ slug: program.slug }) })),
     );
-    const back = design === 'studio' ? '/academy#courses' : '/courses';
+    const back = design === 'studio' ? '/academy#courses' : '/academy';
     expect($(`a[href="${back}"]`).length).toBeGreaterThan(0);
-    if (design === 'studio') expect($('a[href^="/courses"]')).toHaveLength(0);
-    const schema = JSON.parse($('script[type="application/ld+json"]').text());
+    expect($('a[href^="/courses"]')).toHaveLength(0);
+    const markup = $('script[type="application/ld+json"]')
+      .map((_, element) => JSON.parse($(element).text()))
+      .get();
+    const schema = markup.find((node) => node['@type'] === 'Course');
     expect(schema['@type']).toBe('Course');
     expect(schema.url).toBe('https://prophotoacademy.com.ua/visual-content');
-    expect(schema.provider.url).toBe('https://prophotoacademy.com.ua');
-    expect(JSON.stringify(schema)).not.toContain('/courses');
+    expect(schema.provider.url).toBe('https://prophotoacademy.com.ua/');
+    const breadcrumbs = markup.find((node) => node['@type'] === 'BreadcrumbList');
+    expect(breadcrumbs).toMatchObject({
+      itemListElement: [
+        { item: 'https://prophotoacademy.com.ua/' },
+        { item: 'https://prophotoacademy.com.ua/academy' },
+        { item: schema.url },
+      ],
+    });
   });
 });

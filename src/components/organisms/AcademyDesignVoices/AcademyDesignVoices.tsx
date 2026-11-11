@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { PreparedPhoto } from '@/components/atoms/PreparedPhoto/PreparedPhoto';
 import { academyHomePhoto } from '@/lib/photography/academy-home';
+import { academyIndexPath } from '@/lib/navigation/academy';
 import type { AcademyDesignVoicesProps } from './types';
 export function AcademyDesignVoices({ testimonials }: AcademyDesignVoicesProps) {
   return (
@@ -28,7 +29,7 @@ export function AcademyDesignVoices({ testimonials }: AcademyDesignVoicesProps) 
         <Link href="/reviews" className="academy-inline-link">
           Усі відгуки
         </Link>
-        <Link href="/courses" className="academy-inline-link">
+        <Link href={academyIndexPath} className="academy-inline-link">
           Обрати програму
         </Link>
       </div>

@@ -1,7 +1,9 @@
 import type { MetadataRoute } from 'next';
 import { getContent } from '@/lib/content';
 import { canonicalUrl } from '@/lib/ecosystem';
+import { indexingDisabled } from '@/lib/seo/crawl';
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  if (indexingDisabled()) return [];
   const content = await getContent();
   return [
     '',

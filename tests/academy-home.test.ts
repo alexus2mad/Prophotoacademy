@@ -19,7 +19,7 @@ describe('Academy homepage destinations and photography', () => {
     for (const direction of academyDirections(content)) {
       if (!direction.href) continue;
       const url = new URL(direction.href, 'https://academy.example');
-      if (url.pathname === '/courses') {
+      if (url.pathname === '/academy') {
         expect(['', '?category=course']).toContain(url.search);
         expect(content.programs.length).toBeGreaterThan(0);
         if (url.search)
@@ -33,10 +33,10 @@ describe('Academy homepage destinations and photography', () => {
     const directions = academyDirections(content);
     expect(directions).toHaveLength(6);
     expect(directions.find((direction) => direction.title === 'Курси')?.href).toBe(
-      '/courses?category=course',
+      '/academy?category=course',
     );
     expect(directions.find((direction) => direction.title === 'Усі програми')?.href).toBe(
-      '/courses',
+      '/academy',
     );
     expect(directions.find((direction) => direction.title === 'Воркшопи')).toMatchObject({
       subtitle: 'Дізнатися про наступні воркшопи',

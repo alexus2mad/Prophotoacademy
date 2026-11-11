@@ -1,16 +1,14 @@
-import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { getContent } from '@/lib/content';
 import { academyDesign } from '@/lib/studio-design/variant';
 import { StudioSpacesTemplate } from '@/components/templates/StudioSpacesTemplate/StudioSpacesTemplate';
-import { socialMetadata } from '@/lib/social-images/metadata';
+import { academyMetadata } from '@/lib/seo/metadata';
 
-export const metadata: Metadata = {
+export const metadata = academyMetadata('/photo-studio', {
   title: 'Фотостудія',
-  alternates: { canonical: '/photo-studio' },
-  robots: { index: false, follow: false },
-  ...socialMetadata('/photo-studio'),
-};
+  description: 'Огляд просторів для фото та відеозйомок у Києві.',
+  noindex: true,
+});
 export default async function PhotoStudio() {
   if (academyDesign() === 'legacy') redirect('/hub');
   return <StudioSpacesTemplate content={await getContent()} />;

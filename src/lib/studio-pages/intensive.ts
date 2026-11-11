@@ -38,6 +38,7 @@ export function studioIntensiveOffer(content: AcademyContent, enrollment?: Enrol
   const purchaseAvailable = prices.some((price) => Boolean(price.purchaseUrl));
   return {
     inquiry: { ...studioIntensiveInquiry, programId: program?.id, offeringId: offering?.id },
+    deliveryDescription: program?.deliveryDescription,
     date: schedule
       ? offering?.verificationRequired === false && schedule.date
         ? schedule.value

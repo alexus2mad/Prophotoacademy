@@ -59,7 +59,7 @@ describe('shared private customer records', () => {
         { activity: [activity], interests: [], locality: 'other' },
         seed as AcademyContent,
       )?.href,
-    ).toBe('/courses?format=online');
+    ).toBe('/academy?format=online');
   });
   it('requires configured server authorization to read or ingest records', async () => {
     expect((await GET()).status).toBe(410);

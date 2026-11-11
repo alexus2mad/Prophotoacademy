@@ -15,8 +15,17 @@ import type { StudioIntensiveTemplateProps } from './types';
 import styles from './StudioIntensiveTemplate.module.css';
 
 export function StudioIntensiveTemplate({ content, enrollment }: StudioIntensiveTemplateProps) {
-  const { inquiry, date, dateTime, time, prices, purchaseAvailable, purchaseNotice, note } =
-    studioIntensiveOffer(content, enrollment);
+  const {
+    inquiry,
+    deliveryDescription,
+    date,
+    dateTime,
+    time,
+    prices,
+    purchaseAvailable,
+    purchaseNotice,
+    note,
+  } = studioIntensiveOffer(content, enrollment);
   return (
     <>
       <section className={`${styles.hero} studio-dark`}>
@@ -57,7 +66,9 @@ export function StudioIntensiveTemplate({ content, enrollment }: StudioIntensive
         <div className="studio-wrap">
           <p className="studio-label studio-eyebrow">Анонс</p>
           <h2>Практичний інтенсив</h2>
-          <p className={styles.subtitle}>студійна зйомка + генеративна обробка</p>
+          <p className={styles.subtitle}>
+            {deliveryDescription || 'студійна зйомка + генеративна обробка'}
+          </p>
           <p className={styles.when}>
             <span>{dateTime ? <time dateTime={dateTime}>{date}</time> : date}</span>
             {time && <span>{time}</span>}

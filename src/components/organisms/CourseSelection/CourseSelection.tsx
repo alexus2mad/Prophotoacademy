@@ -1,5 +1,6 @@
 import { CoursePreview } from '@/components/molecules/CoursePreview/CoursePreview';
 import { findImage, findOffering } from '@/lib/content/selectors';
+import { academyIndexPath } from '@/lib/navigation/academy';
 import Link from 'next/link';
 import type { CourseSelectionProps } from './types';
 export function CourseSelection({ primary, courses, content }: CourseSelectionProps) {
@@ -15,7 +16,7 @@ export function CourseSelection({ primary, courses, content }: CourseSelectionPr
             до «це знято мною»
           </h2>
         </div>
-        <Link href="/courses" className="text-link">
+        <Link href={academyIndexPath} className="text-link">
           Усі програми
         </Link>
       </div>
@@ -31,7 +32,7 @@ export function CourseSelection({ primary, courses, content }: CourseSelectionPr
       </div>
       <div className="other-programs">
         <span>Шукаєш інший формат?</span>
-        <Link href="/courses">Класи та події</Link>
+        <Link href={academyIndexPath}>Класи та події</Link>
         <Link href="/individual-training">Індивідуально</Link>
         <Link href="/corporate-training">Для команд</Link>
       </div>

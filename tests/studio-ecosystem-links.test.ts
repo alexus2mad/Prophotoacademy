@@ -31,6 +31,18 @@ it('takes header, menu and footer visitors to the Studio website and Shop Instag
   ).toBe(1);
 });
 
+it('links public footer visitors to Academy information and legal pages', () => {
+  const $ = load(renderToStaticMarkup(createElement(StudioFooter, { settings: content.settings })));
+  expect($('footer a[href="/about-us"]').text()).toBe('Про академію');
+  const legal = $('footer nav[aria-label="Правова інформація"]');
+  expect(
+    legal
+      .find('a')
+      .map((_, link) => $(link).attr('href'))
+      .get(),
+  ).toEqual(['/terms-of-service', '/privacy-policy']);
+});
+
 it.each([
   ['studio', 'https://prophotohub.com.ua/booking'],
   ['shop', 'https://www.instagram.com/prophoto.shop?mdxt=ZnIwcnUzdHp2eGh2'],

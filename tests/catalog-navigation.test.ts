@@ -46,15 +46,15 @@ describe('URL-addressable course selection', () => {
 
   it('allows clearing the category without losing attribution or unrelated query parameters', () => {
     expect(catalogHref('all', 'category=course&utm_campaign=autumn&from_site=hub')).toBe(
-      '/courses?utm_campaign=autumn&from_site=hub',
+      '/academy?utm_campaign=autumn&from_site=hub',
     );
-    expect(catalogHref('all', 'category=course')).toBe('/courses');
-    expect(catalogHref('all')).toBe('/courses');
+    expect(catalogHref('all', 'category=course')).toBe('/academy');
+    expect(catalogHref('all')).toBe('/academy');
   });
 
   it('replaces duplicate category values and uses stable navigable URLs', () => {
     const href = catalogHref('course', 'category=offline&category=class&utm_source=homepage');
-    expect(href).toBe('/courses?category=course&utm_source=homepage');
+    expect(href).toBe('/academy?category=course&utm_source=homepage');
     const query = new URL(href, 'https://example.com').searchParams;
     expect(query.getAll('category')).toEqual(['course']);
     expect(catalogCategory(query.get('category'))).toBe('course');

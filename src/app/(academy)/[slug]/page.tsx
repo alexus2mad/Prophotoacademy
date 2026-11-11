@@ -9,21 +9,37 @@ import { academyDesign } from '@/lib/studio-design/variant';
 import { connection } from 'next/server';
 import { enrollmentOptions } from '@/lib/commerce/catalog';
 import { findOffering } from '@/lib/content/selectors';
-import { socialMetadata } from '@/lib/social-images/metadata';
+import { JsonLd } from '@/components/atoms/JsonLd/JsonLd';
+import { academyMetadata, academyName } from '@/lib/seo/metadata';
+import { academyBreadcrumbSchema, academyCourseSchema } from '@/lib/seo/structured-data';
+
+const legalDescriptions = new Map([
+  [
+    'privacy-policy',
+    'Політика конфіденційності ProPhoto Academy: як академія використовує персональні дані та захищає приватність користувачів сайту.',
+  ],
+  [
+    'terms-of-service',
+    'Публічна оферта ProPhoto Academy: умови надання освітніх послуг, оплати та участі в програмах академії.',
+  ],
+]);
+
 export async function generateMetadata({ params }: SlugPageProps): Promise<Metadata> {
   const { slug } = await params;
   const content = await getContent();
-  const page =
-    content.programs.find((p) => p.slug === slug) || content.pages.find((p) => p.slug === slug);
+  const program = content.programs.find((p) => p.slug === slug);
+  if (program) {
+    const title = program.seo?.title?.trim() || program.title;
+    const description = program.seo?.description?.trim() || program.description;
+    return academyMetadata(`/${slug}`, { title, description, socialTitle: title });
+  }
+  const page = content.pages.find((p) => p.slug === slug);
   if (!page) return {};
-  const title = ('seo' in page ? page.seo?.title : undefined) || page.title;
-  const description = 'description' in page ? page.seo?.description || page.description : undefined;
-  return {
-    title,
-    description,
-    alternates: { canonical: `/${slug}` },
-    ...socialMetadata(`/${slug}`, { title, description }),
-  };
+  return academyMetadata(`/${slug}`, {
+    title: page.title,
+    description: legalDescriptions.get(slug),
+    socialTitle: page.title,
+  });
 }
 export default async function Detail({ params }: SlugPageProps) {
   if (process.env.NEXT_PUBLIC_REVIEW_MODE !== 'pages') await connection();
@@ -32,21 +48,15 @@ export default async function Detail({ params }: SlugPageProps) {
   const program = content.programs.find((p) => p.slug === slug);
   if (program) {
     const Template = academyDesign() === 'studio' ? StudioProgramTemplate : ProgramTemplate;
-    const base = process.env.NEXT_PUBLIC_SITE_URL || 'http://127.0.0.1:3000';
-    const schema = {
-      '@context': 'https://schema.org',
-      '@type': program.category === 'course' ? 'Course' : 'CreativeWork',
-      name: program.title,
-      description: program.description,
-      url: `${base}/${program.slug}`,
-      provider: { '@type': 'EducationalOrganization', name: content.settings.name, url: base },
-    };
+    const breadcrumb = academyBreadcrumbSchema([
+      { name: academyName, path: '/' },
+      { name: 'Програми академії', path: '/academy' },
+      { name: program.title, path: `/${program.slug}` },
+    ]);
     return (
       <>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }}
-        />
+        {program.category === 'course' && <JsonLd data={academyCourseSchema(program)} />}
+        <JsonLd data={breadcrumb} />
         <Template
           program={program}
           content={content}

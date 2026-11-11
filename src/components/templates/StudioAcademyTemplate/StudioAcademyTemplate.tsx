@@ -17,9 +17,8 @@ export function StudioAcademyTemplate({ content }: StudioAcademyTemplateProps) {
           </h1>
           <div className={styles.intro}>
             <p>
-              Школа, яка об’єднує online + offline навчання і практику на реальних комерційних
-              зйомках з відомими брендами. Навчаємо створювати візуал, що працює на ваш бренд,
-              продажі та впізнаваність.
+              Фотошкола в Києві з онлайн-курсами з фотографії, відео й створення контенту. Поєднуємо
+              навчання з практикою на реальних комерційних зйомках з відомими брендами.
             </p>
             <div className={`${styles.actions} studio-actions`}>
               <a className="studio-button" href="#courses">

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
 import { StudioMobileAction } from '@/components/molecules/StudioMobileAction/StudioMobileAction';
 import { StudioProgramNavigation } from '@/components/molecules/StudioProgramNavigation/StudioProgramNavigation';
@@ -146,10 +147,13 @@ export function StudioProgramTemplate({
           className={`${styles.gallery} studio-dark studio-band`}
           aria-labelledby="program-works-title"
         >
-          <header className={`${styles.heading} studio-wrap`}>
+          <header className={`${styles.heading} ${styles.galleryHeading} studio-wrap`}>
             <h2 id="program-works-title" className="studio-title">
               Роботи <span className="studio-hand">*студентів</span>
             </h2>
+            <Link href="/student-work" className={`${styles.galleryLink} studio-label`}>
+              Усі роботи студентів
+            </Link>
           </header>
           <Gallery works={works} images={content.images} />
         </section>

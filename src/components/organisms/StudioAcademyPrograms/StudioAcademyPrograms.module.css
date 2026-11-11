@@ -71,6 +71,13 @@
   text-wrap: balance;
   text-transform: uppercase;
 }
+.formatLink {
+  position: relative;
+  z-index: 2;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.14em;
+}
 .formats p {
   margin: 0;
   color: #a9a5a2;

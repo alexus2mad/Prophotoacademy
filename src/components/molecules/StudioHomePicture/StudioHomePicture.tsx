@@ -8,6 +8,7 @@ export function StudioHomePicture({
   alt,
   className,
   eager,
+  fetchPriority,
   sizes,
 }: StudioHomePictureProps) {
   return (
@@ -20,7 +21,14 @@ export function StudioHomePicture({
           height={mobileImage.height}
         />
       )}
-      <StudioImage asset={image} alt={alt} eager={eager} sizes={sizes} fit="cover" />
+      <StudioImage
+        asset={image}
+        alt={alt}
+        eager={eager}
+        fetchPriority={fetchPriority}
+        sizes={sizes}
+        fit="cover"
+      />
     </picture>
   );
 }

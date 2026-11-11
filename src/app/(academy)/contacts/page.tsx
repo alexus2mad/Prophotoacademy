@@ -1,15 +1,14 @@
 import { phoneLabel } from '@/lib/format';
-import type { Metadata } from 'next';
 import { getContent } from '@/lib/content';
 import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
 import { StudioContactsTemplate } from '@/components/templates/StudioContactsTemplate/StudioContactsTemplate';
 import { academyDesign } from '@/lib/studio-design/variant';
-import { socialMetadata } from '@/lib/social-images/metadata';
-export const metadata: Metadata = {
-  title: 'Контакти',
-  alternates: { canonical: '/contacts' },
-  ...socialMetadata('/contacts'),
-};
+import { academyMetadata } from '@/lib/seo/metadata';
+export const metadata = academyMetadata('/contacts', {
+  title: 'Контакти фотошколи в Києві',
+  description:
+    'Телефон, email та адреса ProPhoto Academy у Києві. Зв’яжіться з академією, щоб обрати курс фотографії або уточнити формат навчання.',
+});
 export default async function Contacts() {
   const { settings } = await getContent();
   if (academyDesign() === 'studio') return <StudioContactsTemplate settings={settings} />;

@@ -5,6 +5,7 @@ import { draftMode } from 'next/headers';
 import { PreviewBanner } from '@/components/organisms/PreviewBanner/PreviewBanner';
 import { PhotographyMotion } from '@/components/behaviors/PhotographyMotion/PhotographyMotion';
 import { socialMetadata } from '@/lib/social-images/metadata';
+import { siteUrl } from '@/lib/seo/urls';
 import './design-system.css';
 import './academy-theme.css';
 import './ecosystem.css';
@@ -35,7 +36,7 @@ const kyiv = localFont({
   display: 'swap',
 });
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://127.0.0.1:3000'),
+  metadataBase: new URL(siteUrl('/')),
   title: 'ProPhoto',
   icons: {
     icon: [

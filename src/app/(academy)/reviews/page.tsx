@@ -1,13 +1,12 @@
-import type { Metadata } from 'next';
 import Image from 'next/image';
 import { getContent } from '@/lib/content';
 import { Consultation } from '@/components/organisms/Consultation/Consultation';
-import { socialMetadata } from '@/lib/social-images/metadata';
-export const metadata: Metadata = {
+import { academyMetadata } from '@/lib/seo/metadata';
+export const metadata = academyMetadata('/reviews', {
   title: 'Відгуки студентів',
-  alternates: { canonical: '/reviews' },
-  ...socialMetadata('/reviews'),
-};
+  description:
+    'Читайте відгуки про навчання в ProPhoto Academy: досвід студентів курсів фотографії та візуального контенту, історії та посилання на оригінали.',
+});
 export default async function Reviews() {
   const content = await getContent();
   return (

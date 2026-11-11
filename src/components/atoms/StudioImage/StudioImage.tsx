@@ -9,6 +9,7 @@ export function StudioImage({
   sizes = '(max-width: 767px) 100vw, 50vw',
   preload = false,
   eager = false,
+  fetchPriority,
   fit,
   position,
   style,
@@ -23,6 +24,7 @@ export function StudioImage({
       sizes={sizes}
       preload={preload}
       loading={!preload && eager ? 'eager' : undefined}
+      fetchPriority={fetchPriority}
       style={{ objectFit: fit, objectPosition: position, ...style }}
     />
   );

@@ -79,11 +79,11 @@
 }
 .subtitle {
   margin: 0 0 26px;
+  color: var(--studio-mute);
   font-size: 15px;
   font-weight: 200;
   line-height: 1.55;
   letter-spacing: 0.3px;
-  opacity: 0.42;
 }
 .when {
   display: inline-flex;

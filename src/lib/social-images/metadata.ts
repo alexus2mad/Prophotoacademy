@@ -1,15 +1,10 @@
 import type { Metadata } from 'next';
+import { cleanPathname, siteUrl } from '@/lib/seo/urls';
 import images from './images.json';
 import type { SocialImageEntry, SocialMetadataOptions } from './types';
 
 const catalog: Record<string, SocialImageEntry> = images;
 const privateFamilies = ['/account', '/admin', '/learn', '/login', '/checkout', '/thanks'];
-
-function cleanPathname(value: string) {
-  const pathname = value.split(/[?#]/, 1)[0];
-  if (!pathname.startsWith('/') || pathname.startsWith('//') || pathname.includes('\\')) return '/';
-  return pathname.replace(/\/{2,}/g, '/').replace(/\/+$/, '') || '/';
-}
 
 function privateFamily(pathname: string) {
   const matches = (prefix: string) => pathname === prefix || pathname.startsWith(prefix + '/');
@@ -20,18 +15,7 @@ function privateFamily(pathname: string) {
 }
 
 /** Preserve the Pages repository prefix exactly once and never retain query credentials. */
-export function socialUrl(pathname: string) {
-  const url = new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://127.0.0.1:3000');
-  if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password)
-    throw new Error('Social previews require an HTTP(S) site URL without credentials');
-  const prefix = url.pathname.replace(/\/+$/, '');
-  const clean = cleanPathname(pathname);
-  url.pathname =
-    prefix && (clean === prefix || clean.startsWith(prefix + '/')) ? clean : prefix + clean;
-  url.search = '';
-  url.hash = '';
-  return url.href;
-}
+export const socialUrl = siteUrl;
 
 function canonicalUrl(pathname: string, fallback: string) {
   if (/^https?:\/\//.test(pathname)) {

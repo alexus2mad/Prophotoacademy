@@ -87,6 +87,10 @@ Pushing any application branch does not deploy the server.
 3. Use a clean Git archive of the selected full SHA and Linux-compatible build
    dependencies. Preserve each environment's build-time public configuration;
    a staging build cannot be activated as production unchanged.
+   Set `SEO_INDEXABLE=false` in both staging build and runtime configuration so
+   it does not advertise a sitemap. Keep `SEO_INDEXABLE=true` on production.
+   The staging nginx `X-Robots-Tag` remains in force, including on the separately
+   served social-preview gallery.
 4. Build and verify a candidate separately from the active release. Activate only
    the intended service, check its database health and affected HTTPS journeys,
    then retain exactly the active and previous verified release. Follow the

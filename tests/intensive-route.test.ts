@@ -82,7 +82,7 @@ describe('AI Artwork route ownership', () => {
       programs: content.programs.filter((item) => item.slug !== 'ai-artwork'),
     });
     await expect(Intensive()).rejects.toThrow('redirect');
-    expect(redirect).toHaveBeenCalledWith('/courses');
+    expect(redirect).toHaveBeenCalledWith('/academy');
   });
 
   it.each(['studio', 'legacy'] as const)(
@@ -95,11 +95,7 @@ describe('AI Artwork route ownership', () => {
       ).toHaveLength(1);
       expect(new Set(entries.map((entry) => entry.url)).size).toBe(entries.length);
       expect(entries.some((entry) => /\/(?:shop|photo-studio)$/.test(entry.url))).toBe(false);
-      expect(entries).toContainEqual({
-        url: `https://academy.example/${design === 'studio' ? 'academy' : 'courses'}`,
-        changeFrequency: 'weekly',
-        priority: 0.9,
-      });
+      expect(entries).toContainEqual({ url: 'https://academy.example/academy' });
     },
   );
 });

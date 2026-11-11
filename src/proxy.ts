@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from 'next/server';
 import { hubRewritePath, isHubHost } from './lib/ecosystem';
 import { refreshSession } from './lib/auth/proxy';
 import { isAccountPage, needsSessionRefresh } from './lib/auth/session';
+import { academyProgramsHref, legacyAcademyIndexPaths } from './lib/navigation/academy';
 export async function proxy(request: NextRequest) {
   const accountRoute = isAccountPage(request.nextUrl.pathname);
   if (
@@ -17,6 +18,11 @@ export async function proxy(request: NextRequest) {
   }
   if (needsSessionRefresh(request.nextUrl.pathname)) return refreshSession(request);
   if (!isHubHost(request.headers.get('host') || '')) {
+    if (legacyAcademyIndexPaths.has(request.nextUrl.pathname)) {
+      // Next expects an absolute URL here and emits a relative same-origin Location.
+      const target = new URL(academyProgramsHref(request.nextUrl.searchParams), request.url);
+      return NextResponse.redirect(target, 301);
+    }
     const base = process.env.NEXT_PUBLIC_HUB_URL;
     if (
       base?.startsWith('https://') &&
