@@ -16,6 +16,8 @@ An organism may compose another organism. Dependencies may point to the same or 
 
 `src/components/behaviors` contains cross-cutting, nonvisual controllers for photography motion, editorial reveals and consented measurement. They are deliberately outside the visual hierarchy. They return no visual markup and keep React behavior in their own hooks.
 
+Horizontal browsing rails retain native touch, trackpad and keyboard scrolling. The opt-in `HorizontalRail` controller adds primary-mouse dragging only when content overflows, distinguishes dragging from clicking and preserves card actions. The partner strip drives autoplay through that same native scroll position; do not combine a transformed marquee with manual scrolling. Pause autoplay during interaction, offscreen/hidden states and reduced motion, and resume from the visitor's position.
+
 Atomic Design is a mental model, not a requirement to wrap every HTML element. Use native elements directly when extraction adds no stable responsibility. A small unique route may compose molecules directly; major layouts use templates. Classification follows the component's purpose and dependencies rather than its size.
 
 ## Component ownership

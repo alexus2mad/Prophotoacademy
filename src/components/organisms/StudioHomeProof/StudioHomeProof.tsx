@@ -1,8 +1,12 @@
+'use client';
+
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
 import { studioAssets } from '@/lib/studio-design/assets';
 import styles from './StudioHomeProof.module.css';
+import { usePartnerRail } from './hooks';
 
 export function StudioHomeProof() {
+  const railRef = usePartnerRail();
   return (
     <section
       className={styles.proof}
@@ -11,6 +15,7 @@ export function StudioHomeProof() {
     >
       <p className={`${styles.label} studio-label studio-wrap`}>Знімали та навчали для</p>
       <div
+        ref={railRef}
         className={styles.brands}
         tabIndex={0}
         role="group"

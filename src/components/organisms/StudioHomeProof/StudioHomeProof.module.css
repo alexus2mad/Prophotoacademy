@@ -8,42 +8,37 @@
 .brands {
   padding-block: 20px;
   border-block: 1px solid rgba(255, 255, 255, 0.22);
-  overflow: hidden;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  cursor: grab;
+}
+.brands::-webkit-scrollbar {
+  display: none;
+}
+.brands[data-dragging] {
+  cursor: grabbing;
+  user-select: none;
 }
 .track {
   display: flex;
   width: max-content;
-  animation: partner-loop 42s linear infinite;
 }
 .logos {
+  flex-shrink: 0;
   height: clamp(60px, 7vw, 100px);
   width: auto;
   max-width: none;
   padding-right: 64px;
   mix-blend-mode: screen;
 }
-.brands:hover .track,
-.brands:focus-within .track {
-  animation-play-state: paused;
-}
 .brands:focus-visible {
   outline: 2px solid #eb423b;
   outline-offset: -2px;
 }
-@keyframes partner-loop {
-  to {
-    transform: translateX(-50%);
-  }
-}
 @media (prefers-reduced-motion: reduce) {
-  .track {
-    animation: none;
-  }
   .logos + .logos {
     display: none;
-  }
-  .brands {
-    overflow-x: auto;
   }
 }
 .stats {

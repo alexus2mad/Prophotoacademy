@@ -1,12 +1,12 @@
-import type { DirectionRailDrag } from './types';
+import type { HorizontalRailDrag } from './types';
 
 const DRAG_THRESHOLD = 8;
 
 /** Add mouse dragging to the native rail; touch, trackpad and keyboard stay native. */
-export function enableDirectionRailDrag(rail: HTMLElement) {
+export function enableHorizontalRailDrag(rail: HTMLElement) {
   const browser = rail.ownerDocument.defaultView;
   if (!browser) return;
-  let gesture: DirectionRailDrag | undefined;
+  let gesture: HorizontalRailDrag | undefined;
   let suppressClick = false;
 
   const finish = () => {

@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { enableDirectionRailDrag } from '../src/components/organisms/StudioHomeDirections/rail-drag';
+import { enableHorizontalRailDrag } from '../src/components/behaviors/HorizontalRail/drag';
 
 class RailStub extends EventTarget {
   ownerDocument = { defaultView: new EventTarget() };
@@ -68,7 +68,7 @@ function drag(clientX = 150) {
 
 beforeEach(() => {
   rail = new RailStub();
-  cleanup = enableDirectionRailDrag(rail as unknown as HTMLElement);
+  cleanup = enableHorizontalRailDrag(rail as unknown as HTMLElement);
 });
 
 afterEach(() => cleanup?.());
