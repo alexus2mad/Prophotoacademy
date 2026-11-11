@@ -34,7 +34,7 @@ export function AcademyDesignHero({ shopUrl }: AcademyDesignHeroProps) {
           >
             <EcosystemWordmark name="ACADEMY" />
           </Link>
-          <a href={shopUrl} aria-label="Магазин — окремий сайт ProPhoto">
+          <a href={shopUrl} aria-label="Магазин ProPhoto в Instagram">
             <EcosystemWordmark name="SHOP" />
           </a>
         </nav>

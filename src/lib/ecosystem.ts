@@ -3,7 +3,7 @@ import type { PracticeSession, SiteBrand } from './content/types';
 export const ecosystemDestinations = {
   studio: 'https://prophotohub.com.ua',
   studioBooking: 'https://prophotohub.com.ua/booking',
-  shop: 'https://prophotoshop.com.ua',
+  shop: 'https://www.instagram.com/prophoto.shop?mdxt=ZnIwcnUzdHp2eGh2',
 } as const;
 
 export const academyOrigin = process.env.NEXT_PUBLIC_ACADEMY_URL || '';

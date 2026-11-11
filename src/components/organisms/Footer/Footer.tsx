@@ -79,7 +79,7 @@ export function Footer({ settings }: FooterProps) {
                 href={settings.shop}
                 target="_blank"
                 rel="noreferrer"
-                aria-label="Магазин ProPhoto — окремий сайт, нова вкладка"
+                aria-label="Магазин ProPhoto в Instagram — нова вкладка"
               >
                 Магазин
               </a>
