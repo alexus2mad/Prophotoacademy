@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { LearningCourseCard } from '@/components/molecules/LearningCourseCard/LearningCourseCard';
 import { displayDate, lessonHref } from '@/lib/learning/selectors';
+import { academyProgramsHref } from '@/lib/navigation/academy';
 import type { StudentOverviewProps } from './types';
 export function StudentOverview({
   name,
@@ -50,7 +51,7 @@ export function StudentOverview({
         <section className="workspace-empty">
           <h2>Ваш перший курс попереду</h2>
           <p>Курси, до яких ви отримаєте доступ, з’являться тут</p>
-          <Link href="/courses" className="button">
+          <Link href={academyProgramsHref()} className="button">
             Обрати курс
           </Link>
         </section>

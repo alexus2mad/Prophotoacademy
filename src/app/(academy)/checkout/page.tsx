@@ -15,6 +15,7 @@ import { enrollmentOptions } from '@/lib/commerce/catalog';
 import { EnrollmentScope } from '@/components/molecules/EnrollmentScope/EnrollmentScope';
 import { OfferingSummary } from '@/components/molecules/OfferingSummary/OfferingSummary';
 import { socialMetadata } from '@/lib/social-images/metadata';
+import { academyProgramsHref } from '@/lib/navigation/academy';
 export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: 'Оформлення замовлення',
@@ -53,7 +54,7 @@ export default async function Checkout({ searchParams }: CheckoutPageProps) {
             : 'Цей пакет ще готується до запису. Команда підтвердить доступність навчальних матеріалів і деталі набору.'}
         </p>
         <InquiryButton className="button">Зв’язатися з академією</InquiryButton>
-        <Link href="/courses" className="text-link">
+        <Link href={academyProgramsHref()} className="text-link">
           Повернутися до програм
         </Link>
       </div>

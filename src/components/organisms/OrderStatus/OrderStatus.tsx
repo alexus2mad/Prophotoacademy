@@ -3,6 +3,7 @@ import { Button } from '@/components/atoms/Button/Button';
 import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
 import { Check, Clock, X } from 'lucide-react';
 import Link from 'next/link';
+import { academyProgramsHref } from '@/lib/navigation/academy';
 import { useOrderStatus } from './hooks';
 import type { OrderStatusProps } from './types';
 
@@ -71,7 +72,7 @@ export function OrderStatus({ token }: OrderStatusProps) {
         </Link>
       )}
       <InquiryButton className="text-link">Потрібна допомога</InquiryButton>
-      <Link href="/courses" className="text-link">
+      <Link href={academyProgramsHref()} className="text-link">
         До програм
       </Link>
     </div>

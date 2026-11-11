@@ -3,6 +3,7 @@ import { Button } from '@/components/atoms/Button/Button';
 import { Dialog } from '@/components/molecules/Dialog/Dialog';
 import { FormField } from '@/components/molecules/FormField/FormField';
 import { siteHref } from '@/lib/ecosystem';
+import { academyProgramsHref } from '@/lib/navigation/academy';
 import { inquiryCopy } from '@/lib/inquiries/presentation';
 import { Check } from 'lucide-react';
 import { useInquiryDialog } from './hooks';
@@ -53,7 +54,7 @@ export function InquiryDialog({
           {context.practiceSessionId && (
             <p className="practice-online-alternative">
               Навчаєтеся поза Києвом?{' '}
-              <a href={siteHref('academy', 'courses')}>Переглянути програми</a>
+              <a href={siteHref('academy', academyProgramsHref())}>Переглянути програми</a>
             </p>
           )}
           <form onSubmit={submit} className="form-stack" aria-busy={state === 'sending'}>

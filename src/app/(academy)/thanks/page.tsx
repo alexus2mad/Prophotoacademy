@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { OrderStatus } from '@/components/organisms/OrderStatus/OrderStatus';
 import Link from 'next/link';
 import { socialMetadata } from '@/lib/social-images/metadata';
+import { academyProgramsHref } from '@/lib/navigation/academy';
 export const metadata: Metadata = {
   title: 'Статус замовлення',
   robots: { index: false, follow: false },
@@ -16,7 +17,7 @@ export default async function Thanks({ searchParams }: ThanksPageProps) {
       <div className="container status-panel">
         <h1>Дякуємо за інтерес до академії</h1>
         <p>Перегляньте програми або зв’яжіться з нами, щоб обрати навчання.</p>
-        <Link href="/courses" className="button">
+        <Link href={academyProgramsHref()} className="button">
           До програм
         </Link>
       </div>

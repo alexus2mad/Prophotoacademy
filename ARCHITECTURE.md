@@ -95,6 +95,8 @@ WayForPay and Make/Telegram outbox flow.
 
 Studio has one learning index at `/academy`, matching Figma's Academy frame.
 Use `studioAcademyDestinations` for its overview and course-section links.
+Shared account, checkout, inquiry and utility surfaces use `academyProgramsHref()`
+so Studio links go directly to Academy while the retained legacy catalog remains valid.
 The old `/courses` URL temporarily redirects there in Studio, preserving query
 parameters and mapping `category=course` to `#courses`; legacy still owns its
 original catalog. The synthetic Pages export renders the same Academy template

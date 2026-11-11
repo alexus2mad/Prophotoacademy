@@ -10,6 +10,7 @@ import { HttpError } from './http';
 import { acquisitionSchema } from './acquisition-schema';
 import type { AcademyContent } from './content/types';
 import { siteHref } from './ecosystem';
+import { academyProgramsHref } from './navigation/academy';
 export function authorizeOperations(request: Request, variable = 'OPERATIONS_TOKEN') {
   const secret = process.env[variable];
   if (!secret || secret.length < 32) throw new HttpError(503, 'Доступ команди ще не налаштовано.');
@@ -96,7 +97,10 @@ export function recommendNextStep(
   content: AcademyContent,
 ) {
   if (customer.locality === 'other')
-    return { label: 'Онлайн-навчання', href: siteHref('academy', 'courses?format=online') };
+    return {
+      label: 'Онлайн-навчання',
+      href: siteHref('academy', academyProgramsHref(new URLSearchParams({ format: 'online' }))),
+    };
   const practice = customer.activity
     .filter((a) => a.kind === 'practice-completed' && a.status === 'completed')
     .sort((a, b) => b.occurredAt.localeCompare(a.occurredAt))[0];
