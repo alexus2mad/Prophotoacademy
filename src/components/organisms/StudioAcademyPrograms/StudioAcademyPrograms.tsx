@@ -8,6 +8,7 @@ import styles from './StudioAcademyPrograms.module.css';
 
 export function StudioAcademyPrograms({ programs, offerings, images }: StudioAcademyProgramsProps) {
   const courses = studioAcademyCourses(programs);
+  const intensive = programs.find((program) => program.slug === 'ai-artwork');
   const workshops = [
     'Комерційний чоловічий портрет',
     'Ню та в білизні: каталожна та арт зйомка',
@@ -41,6 +42,18 @@ export function StudioAcademyPrograms({ programs, offerings, images }: StudioAca
             <h2 className="studio-title">Воркшопи</h2>
           </header>
           <div className={styles.rows}>
+            {intensive && (
+              <article className={styles.workshop}>
+                <h3>{intensive.shortTitle}</h3>
+                <Link
+                  href={`/${intensive.slug}`}
+                  className={`${styles.archiveLink} ${styles.cardAction}`}
+                  aria-label={`${intensive.shortTitle}: детальніше`}
+                >
+                  Детальніше →
+                </Link>
+              </article>
+            )}
             {workshops.map((title) => (
               <article className={styles.workshop} key={title}>
                 <h3>{title}</h3>
@@ -57,7 +70,6 @@ export function StudioAcademyPrograms({ programs, offerings, images }: StudioAca
             ))}
           </div>
           <nav className={styles.more} aria-label="Інші навчальні події">
-            <Link href="/ai-artwork">Інтенсив AI artwork →</Link>
             <Link href="/courses">Усі програми →</Link>
           </nav>
         </div>

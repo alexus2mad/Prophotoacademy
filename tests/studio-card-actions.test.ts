@@ -33,17 +33,24 @@ it('keeps each full-area homepage card to one named native action and preserves 
   }
 });
 
-it('gives every workshop and format card one distinguishable inquiry action without nested controls', () => {
+it('gives workshop and format cards one named action, linking AI Artwork directly to its page', () => {
   const $ = load(renderToStaticMarkup(createElement(StudioAcademyPrograms, content)));
   const cards = $('#workshops article, #individual, #corporate, #camp');
-  expect(cards).toHaveLength(7);
+  expect(cards).toHaveLength(8);
+  expect($('#workshops article').first().find('a').attr('href')).toBe('/ai-artwork');
+  expect($('#workshops a[href="/ai-artwork"]')).toHaveLength(1);
   const names = new Set<string>();
   cards.each((_, card) => {
-    const action = $(card).find('button');
+    const action = $(card).find('a, button');
     expect(action).toHaveLength(1);
     expect(action.find('a, button')).toHaveLength(0);
     expect(action.attr('aria-label')).toContain($(card).find('h2, h3').text());
-    expect(action.attr('aria-haspopup')).toBe('dialog');
+    if (action.is('a')) {
+      expect(action.attr('href')).toBe('/ai-artwork');
+      expect(action.text()).toContain('Детальніше');
+    } else {
+      expect(action.attr('aria-haspopup')).toBe('dialog');
+    }
     names.add(action.attr('aria-label')!);
   });
   expect(names.size).toBe(cards.length);
