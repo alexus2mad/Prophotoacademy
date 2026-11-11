@@ -263,3 +263,12 @@ branch and its `max-width:760px` rules, saved in
 
 These are implementation requirements, not a staging deployment or verification
 claim. Release evidence is recorded separately.
+
+## AI Artwork workshop placement — 11 November 2026
+
+The owner explicitly requested AI Artwork inside the Workshops list. It is the
+first full row in `/academy#workshops`, linking directly to `/ai-artwork` with
+“Детальніше”. This resolves the earlier four-versus-five workshop-row difference
+in favor of the artifact's fifth entry. The duplicate small footer link is
+removed; the four existing archive inquiries, four main courses and ticket
+conditions remain unchanged.

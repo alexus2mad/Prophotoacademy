@@ -1,6 +1,18 @@
 # Studio review fixes — release record
 
-## Current staging release — stable student-work gallery
+## Current staging release — AI Artwork in Workshops
+
+Active application: `2bf9515a1667e40bdadf95caea2dc0ec60b28072`. Previous verified rollback: `cd34ab020b9797f9c98e4091c3f19dd66aa87f87`. Released on 11 November 2026 to staging.
+
+AI Artwork is the first full row in `/academy#workshops`, with one whole-row details link. The duplicate footer link is removed. Four existing archive inquiries, four main courses and ticket conditions remain unchanged.
+
+Architecture (695 modules), TypeScript, scoped formatting and 13 focused tests across three files passed. The Linux build generated 65 pages; the synthetic review export validated 58 pages. The first isolated build exhausted its memory allowance; the same committed source passed with temporary 3000 MB RAM and 3072 MB swap limits. No live service resources changed.
+
+Local and live mobile/desktop checks verified the homepage Workshops card, the five workshop rows and the AI Artwork destination. HTTPS smoke passed 428/428. Production release/process and both runtime configuration fingerprints remained unchanged; staging remains mock-only. Retention keeps the active release and `cd34ab0`; obsolete `dc09413` and disposable remote build/transfer files were removed.
+
+Runtime artifact SHA-256: `23a3fb9e4f17e472b23640bd000296e7714a662ff045544dadbe7609cd822fff`. Private logs and mobile/desktop screenshots use the `workshop-placement-` prefix under `.data/design-review/`. Documentation commits do not change the active application SHA.
+
+## Historical release — stable student-work gallery
 
 Active application: `cd34ab020b9797f9c98e4091c3f19dd66aa87f87`. Previous verified rollback: `dc094139404298bc65e5c4c2f8efc1447d568b4f`. Released on 11 November 2026 (Europe/Kyiv) to [staging](https://staging.prophotoacademy.com.ua/).
 
