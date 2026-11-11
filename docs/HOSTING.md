@@ -34,13 +34,13 @@ are enabled. Automatic reboots are disabled; schedule them for kernel updates.
 | Setting                           | Production                                 | Staging                                    |
 | --------------------------------- | ------------------------------------------ | ------------------------------------------ |
 | Origin                            | https://prophotoacademy.com.ua             | https://staging.prophotoacademy.com.ua     |
-| Source branch                     | `codex/student-production`                 | `codex/photographic-editorial`             |
+| Source branch                     | `codex/photographic-editorial`             | `codex/photographic-editorial`             |
 | Account / service                 | `prophotoacademy`                          | `prophotoacademy-staging`                  |
 | Loopback port                     | 3140                                       | 3141                                       |
 | Release root                      | `/srv/prophotoacademy`                     | `/srv/prophotoacademy-staging`             |
 | Runtime configuration             | `/etc/prophotoacademy/runtime.env`         | `/etc/prophotoacademy-staging/runtime.env` |
-| Active application SHA            | `5ae3eca80dbb9e8eb1bb1203343be16d99ba591a` | `2bf9515a1667e40bdadf95caea2dc0ec60b28072` |
-| Previous verified release         | `aa6f6aa4630be415d02d120732e5df795da6b5dd` | `cd34ab020b9797f9c98e4091c3f19dd66aa87f87` |
+| Active application SHA            | `c2331bd743e609e48caff40d6a527faadb0ef59d` | `2bf9515a1667e40bdadf95caea2dc0ec60b28072` |
+| Previous verified release         | `5ae3eca80dbb9e8eb1bb1203343be16d99ba591a` | `cd34ab020b9797f9c98e4091c3f19dd66aa87f87` |
 | Supabase project                  | `bydmqmrbfjufsyhlayku`                     | `jxfyofiqhjmiguujrtdd`                     |
 | Sanity project / learning dataset | `sfzp6094` / `learning`                    | `p0dn7nmp` / `learning-staging`            |
 | Payment mode                      | `wayforpay`                                | `mock`                                     |
@@ -49,6 +49,9 @@ are enabled. Automatic reboots are disabled; schedule them for kernel updates.
 build and one previous verified build are retained per environment. A later
 documentation commit on a branch does not change the running application SHA.
 The default `main` branch is not an automatic production deployment source.
+The Studio identity is active on both environments. Production's promotion,
+closed course sales, live workshop payments and rollback are recorded in
+[the production Studio release](PRODUCTION_STUDIO_RELEASE.md).
 Staging's latest designer decisions and build provenance are recorded in
 [the reviewed staging release](STUDIO_REVIEW_RELEASE.md). The
 [initial final-design release](FINAL_DESIGN_RELEASE.md) remains historical.

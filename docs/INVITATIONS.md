@@ -41,10 +41,12 @@ recipient's first successful OTP login is the only activation step.
 - Application mutations schedule delivery after commit. The isolated
   `prophotoacademy-staging-email.timer` retries every five minutes through port 3141
   using staging's cron credential. It cannot read production configuration.
-- Production purchase-email behavior is unchanged. Its current runtime uses
-  `NOTIFICATION_MODE=local` with existing general email credentials, so a future
-  production invitation release needs explicit invitation credentials configured
-  before activation. Do not change payment/email modes merely to enable invitations.
+- Production uses `NOTIFICATION_MODE=local` with its existing general email
+  credentials and Make webhook. The 11 November Studio release explicitly set
+  `INVITATION_RESEND_API_KEY` and `INVITATION_EMAIL_FROM` to the existing production
+  credential and sender. No staging credential was copied and no invitation
+  backfill was queued. Keep these explicit settings when rotating the production
+  sender; do not change payment/email modes merely to enable invitations.
 
 Check provider events when investigating actual delivery. Never tell the manager
 that a pending account proves a message was sent. Never send historical invitations

@@ -75,6 +75,14 @@ The source-backed destinations `/academy`, `/photo-studio`, `/shop` and
 and the legacy dialog compose one `useInquirySubmission` workflow, preserving
 server validation, attribution, consent and review-mode restrictions.
 
+Production navigation uses `ecosystemDestinations` for the existing Hub and Shop
+domains. The `/photo-studio` and `/shop` designs remain directly previewable but
+unlinked, excluded from the sitemap and marked noindex. Course sales can be
+explicitly `closed` in the offering model; presentation and all checkout modes
+share this policy. Closing sales never changes existing student access or rejects
+verified callbacks for already-issued orders. Product tickets retain the existing
+WayForPay and Make/Telegram outbox flow.
+
 Academy public and workspace shells explicitly apply the shared `academyThemeClassName` from `src/lib/typography/fonts.ts`. `academy-theme.css` owns neutral brand tokens, shared controls and opt-in card motion; public, lesson and authoring styles own their respective layouts. Do not apply the Academy palette or font aliases globally: Hub and Sanity Studio are excluded. Preserve the homepage composition and Source Sans 3 instructional typography. See [Academy design system](docs/ACADEMY_DESIGN_SYSTEM.md) for dimensions, motion, feedback colors and verification.
 
 ## Next.js and the two build modes
