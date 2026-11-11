@@ -1,6 +1,30 @@
 # Studio review fixes — release record
 
-## Current staging release — confirmed offers and shared checkout
+## Current staging release — browsing rails and mobile media alignment
+
+Active application: `bcb65104790b8ce7a228ab94d1dcdc736540ef65`. Previous verified rollback: `554eafdded8225100434fc130c195b9cd3ede50e`. Released on 11 November 2026 (Europe/Kyiv) to [staging](https://staging.prophotoacademy.com.ua/).
+
+Homepage direction cards keep their two-row mobile layout and photographic motion, with bounded native overflow, proximity snapping and opt-in mouse dragging. Dragging suppresses accidental card activation; normal clicks, inquiry dialogs, keyboard access and native touch/trackpad scrolling remain available. The same mouse controller serves partner logos. Their 42-second autoplay now uses native scrolling instead of a separate transformed track, pauses for interaction, focus, visibility and reduced motion, and resumes from the visitor's position. Disposal prevents queued observer callbacks from restarting an old animation loop.
+
+Removed the asymmetric 17px mobile inset from homepage and program student-work grids. Their photographs now meet both media edges while headings retain their text gutters; program columns use the actual rail width and retain the 2px gap.
+
+- Changes committed independently: direction cards `0fa3262`, partner strip `b18da96`, student-work alignment `bcb6510`.
+- Architecture: **695 modules**; TypeScript and scoped formatting passed. Full regression suite: **494/494 tests** across 68 files, including 18 drag and 9 marquee tests.
+- Production builds passed; the exact Linux release generated 65 pages. Final synthetic Pages export validated **58 review pages**, without republishing GitHub Pages.
+- Browser checks at 360, 390 and 1440px covered native horizontal scrolling, mouse dragging in both directions, final Academy/Studio cards, drag-click suppression, subsequent inquiry activation, keyboard access, preserved card zoom and desktop card navigation. Mobile-sized Chromium was used; a physical touch device was not available.
+- On staging, the direction rail reached its 124px end position; the paused partner strip moved from 0 to 375px with native horizontal scrolling and then to 605px by dragging. Homepage and course photographs align at x=0 and the viewport's content edge, with no page overflow.
+- Read-only HTTPS smoke: **428/428 passed**. Production release/process and both runtime configuration fingerprints remained unchanged; staging remains mock-only.
+- Retention leaves only the active release and `554eafd`; obsolete `9eb7067` and disposable remote build/transfer files were removed after verification.
+
+| Input/output | SHA-256 |
+| --- | --- |
+| Committed source archive | `741d897848a9e737faa1905c821513af9e6f67418e7997407e4da3f3da4fef4e` |
+| Public staging build settings | `7a4c41c23c8cfa8e5c6034a954f37afea24fbb524236d5547ae245bfaefe4605` |
+| Linux runtime artifact | `56afcac65717fc38339ca488c515b1e2964f2252b6c1780e0d7dbeffdff3994c` |
+
+Private evidence: `.data/design-review/rails-final-tests.log`, `rails-final-pages.log`, `rails-linux-build.log`, `rails-staging-activation.log`, `rails-staging-smoke.log`, `staging-rails-cards-mobile.png`, `staging-rails-partners-mobile.png`, `staging-student-work-mobile-aligned.png` and `staging-course-work-mobile-aligned.png`. The later documentation commit does not change the running application SHA.
+
+## Historical release — confirmed offers and shared checkout
 
 Active application: `554eafdded8225100434fc130c195b9cd3ede50e`. Previous verified rollback: `9eb70673e3b7e1217113d83e0d17fdb66e455739`. Released on 11 November 2026 (Europe/Kyiv) to [staging](https://staging.prophotoacademy.com.ua/).
 

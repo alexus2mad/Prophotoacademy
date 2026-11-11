@@ -39,8 +39,8 @@ are enabled. Automatic reboots are disabled; schedule them for kernel updates.
 | Loopback port                     | 3140                                       | 3141                                       |
 | Release root                      | `/srv/prophotoacademy`                     | `/srv/prophotoacademy-staging`             |
 | Runtime configuration             | `/etc/prophotoacademy/runtime.env`         | `/etc/prophotoacademy-staging/runtime.env` |
-| Active application SHA            | `5ae3eca80dbb9e8eb1bb1203343be16d99ba591a` | `554eafdded8225100434fc130c195b9cd3ede50e` |
-| Previous verified release         | `aa6f6aa4630be415d02d120732e5df795da6b5dd` | `9eb70673e3b7e1217113d83e0d17fdb66e455739` |
+| Active application SHA            | `5ae3eca80dbb9e8eb1bb1203343be16d99ba591a` | `bcb65104790b8ce7a228ab94d1dcdc736540ef65` |
+| Previous verified release         | `aa6f6aa4630be415d02d120732e5df795da6b5dd` | `554eafdded8225100434fc130c195b9cd3ede50e` |
 | Supabase project                  | `bydmqmrbfjufsyhlayku`                     | `jxfyofiqhjmiguujrtdd`                     |
 | Sanity project / learning dataset | `sfzp6094` / `learning`                    | `p0dn7nmp` / `learning-staging`            |
 | Payment mode                      | `wayforpay`                                | `mock`                                     |
