@@ -1,6 +1,26 @@
 # Studio review fixes — release record
 
-## Current staging release — artifact mobile exposure restoration
+## Current staging release — stable student-work gallery
+
+Active application: `cd34ab020b9797f9c98e4091c3f19dd66aa87f87`. Previous verified rollback: `dc094139404298bc65e5c4c2f8efc1447d568b4f`. Released on 11 November 2026 (Europe/Kyiv) to [staging](https://staging.prophotoacademy.com.ua/).
+
+Student-work popups now reserve their frame from the viewport instead of each photograph's aspect ratio. Images remain uncropped inside the available area; a fixed 80px caption row keeps navigation stationary. Close, previous and next actions share `IconButton` and remain 44px square, including hover and pressed states. Long captions have an independently scrollable, keyboard-focusable center column. Native closed dialogs remain hidden.
+
+- Architecture: **695 modules**; TypeScript, scoped formatting and whitespace checks passed. Full suite: **504/504 tests** across 68 files. Linux production build generated **65 pages**; synthetic Pages export validated **58 pages**, without republishing GitHub Pages.
+- Local checks covered 360×800, 390×844, 844×390 landscape and 1440×900. Fifteen consecutive photos preserved frame and button geometry. The shared `/student-work` gallery also preserved geometry. Caption keyboard focus, arrow navigation, Escape dismissal and focus return passed.
+- On staging at 390×844, “Біла фактура” (17/24) and “Шоколад і спеції” (18/24) both measured **343×812px at x=16, y=16**; all three controls had identical positions and **44×44px** dimensions. Desktop switching also produced zero geometry changes. No dialog overflow or browser console errors were observed. Physical touch, OS text enlargement and Safari were not tested.
+- Read-only HTTPS smoke: **428/428 passed**. Production release/process, both runtime configuration fingerprints and staging mock-payment mode remained unchanged. The scheduled email worker reports success.
+- Retention keeps only this release and `dc09413`; obsolete `bcb6510` and disposable remote build/transfer files were removed after verification.
+
+| Input/output | SHA-256 |
+| --- | --- |
+| Committed source archive | `b437e19bda531125643f8a48e53d5a31ce853462ded8d8acbd18b2868ec72711` |
+| Public staging build settings | `7a4c41c23c8cfa8e5c6034a954f37afea24fbb524236d5547ae245bfaefe4605` |
+| Linux runtime artifact | `eb9e46de0a3ab30bb5920061f788baba4be8298a9b01fb44fc97b94641e3cd5d` |
+
+Private evidence under `.data/design-review/`: `gallery-stable-tests.log`, `gallery-stable-pages.log`, `gallery-stable-linux-build.log`, `gallery-stable-staging-activation.log`, `gallery-stable-staging-smoke.log`, `gallery-fixed-responsive.json`, `staging-gallery-stable-measurements.json`, `staging-gallery-stable-portrait.png`, `staging-gallery-stable-square.png` and `staging-gallery-stable-desktop.png`. The later documentation commit does not change the running application SHA.
+
+## Historical release — artifact mobile exposure restoration
 
 Active application: `dc094139404298bc65e5c4c2f8efc1447d568b4f`. Previous verified rollback: `bcb65104790b8ce7a228ab94d1dcdc736540ef65`. Released on 11 November 2026 (Europe/Kyiv) to [staging](https://staging.prophotoacademy.com.ua/).
 
