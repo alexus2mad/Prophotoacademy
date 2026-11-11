@@ -10,6 +10,7 @@ export function WorkCard({ work, image: img, onOpen }: WorkCardProps) {
         className="work-image"
         data-card-photo
         aria-label={`Відкрити роботу: ${work.title}`}
+        aria-haspopup="dialog"
       >
         <Photo
           image={img}

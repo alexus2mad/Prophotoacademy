@@ -3,12 +3,14 @@ import { studioAcademyDestinations } from '@/lib/studio-pages/navigation';
 import Link from 'next/link';
 import { StudioHomePicture } from '@/components/molecules/StudioHomePicture/StudioHomePicture';
 import { StudioHomeCarousel } from '@/components/molecules/StudioHomeCarousel/StudioHomeCarousel';
-import { useStudioHomeCarousel } from '@/components/molecules/StudioHomeCarousel/hooks';
+import { ImageGalleryDialog } from '@/components/molecules/ImageGalleryDialog/ImageGalleryDialog';
+import { useStudioHomeWorks } from './hooks';
 import type { StudioHomeWorksProps } from './types';
 import styles from './StudioHomeWorks.module.css';
 
 export function StudioHomeWorks({ works }: StudioHomeWorksProps) {
-  const { rail, active, maximum, select, onKeyDown } = useStudioHomeCarousel();
+  const { carousel, gallery, images } = useStudioHomeWorks({ works });
+  const { rail, active, maximum, select, onKeyDown } = carousel;
   const pages = Array.from({ length: Math.ceil(works.length / 4) }, (_, index) =>
     works.slice(index * 4, index * 4 + 4),
   );
@@ -38,15 +40,22 @@ export function StudioHomeWorks({ works }: StudioHomeWorksProps) {
             role="group"
             aria-label={`${index + 1} з ${pages.length}`}
           >
-            {page.map((work) => (
-              <StudioHomePicture
+            {page.map((work, photoIndex) => (
+              <button
+                type="button"
                 key={work.id}
-                image={work.image}
-                mobileImage={work.mobileImage}
-                alt={work.alt}
                 className={styles.image}
-                sizes="(max-width: 760px) 48vw, 25vw"
-              />
+                aria-label={`Відкрити роботу: ${work.alt}`}
+                aria-haspopup="dialog"
+                onClick={() => gallery.open(index * 4 + photoIndex)}
+              >
+                <StudioHomePicture
+                  image={work.image}
+                  mobileImage={work.mobileImage}
+                  alt={work.alt}
+                  sizes="(max-width: 760px) 48vw, 25vw"
+                />
+              </button>
             ))}
           </div>
         ))}
@@ -58,6 +67,12 @@ export function StudioHomeWorks({ works }: StudioHomeWorksProps) {
         nextDisabled={active >= maximum}
         onSelect={select}
         label="Роботи студентів"
+      />
+      <ImageGalleryDialog
+        images={images}
+        dialogRef={gallery.dialog}
+        index={gallery.index}
+        onNavigate={gallery.move}
       />
     </section>
   );

@@ -24,6 +24,13 @@
 .rail::-webkit-scrollbar {
   display: none;
 }
+.rail[data-dragging] {
+  scroll-snap-type: none;
+  user-select: none;
+}
+.rail[data-dragging] * {
+  cursor: grabbing;
+}
 .page {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -32,8 +39,24 @@
 }
 .image {
   display: block;
+  min-width: 0;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  cursor: zoom-in;
   aspect-ratio: 4/5;
   overflow: hidden;
+}
+.image:focus-visible {
+  outline: 2px solid #eb423b;
+  outline-offset: -4px;
+}
+.image picture {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 .image img {
   width: 100%;

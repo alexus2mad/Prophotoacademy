@@ -1,0 +1,8 @@
+.viewport {
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+  touch-action: pan-y pinch-zoom;
+  user-select: none;
+}

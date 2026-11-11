@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { KeyboardEvent } from 'react';
 import { galleryImageTarget, nearestGalleryImage } from './position';
+import { enableHorizontalRailDrag } from '@/components/behaviors/HorizontalRail/drag';
 
 function imageOffsets(element: HTMLDivElement) {
   const left = element.getBoundingClientRect().left;
@@ -12,9 +13,12 @@ function imageOffsets(element: HTMLDivElement) {
   );
 }
 
-export function useStudioGallery(length: number) {
+export function useStudioGallery(length: number, draggable = false) {
   const track = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ index: 1, start: true, end: length < 2 });
+  useEffect(() => {
+    if (draggable && track.current) return enableHorizontalRailDrag(track.current);
+  }, [draggable]);
   useEffect(() => {
     const element = track.current;
     if (!element) return;

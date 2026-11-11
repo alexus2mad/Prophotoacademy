@@ -1,16 +1,11 @@
 'use client';
-import { useDialog } from '@/components/molecules/Dialog/hooks';
-import { useState } from 'react';
+import { useImageGallery } from '@/components/molecules/ImageGalleryDialog/hooks';
 import type { GalleryProps } from './types';
 
 export function useGallery({ works, images }: GalleryProps) {
-  const [index, setIndex] = useState(0);
-  const { dialog } = useDialog();
-  const current = works[index];
-  const image = images.find((i) => i.id === current?.imageId);
-  function open(i: number) {
-    setIndex(i);
-    dialog.current?.showModal();
-  }
-  return { index, setIndex, dialog, current, image, open };
+  const entries = works.flatMap((work) => {
+    const image = images.find((item) => item.id === work.imageId);
+    return image ? [{ ...image, id: work.id, title: work.title }] : [];
+  });
+  return { ...useImageGallery(entries.length), entries };
 }

@@ -1,64 +1,20 @@
 'use client';
-import { Dialog } from '@/components/molecules/Dialog/Dialog';
 import { WorkCard } from '@/components/molecules/WorkCard/WorkCard';
-import { IconButton } from '@/components/atoms/IconButton/IconButton';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
-import Image from 'next/image';
+import { ImageGalleryDialog } from '@/components/molecules/ImageGalleryDialog/ImageGalleryDialog';
 import { useGallery } from './hooks';
 import type { GalleryProps } from './types';
 
 export function Gallery({ works, images }: GalleryProps) {
-  const { index, setIndex, dialog, current, image, open } = useGallery({ works, images });
+  const { index, dialog, entries, open, move } = useGallery({ works, images });
   return (
     <>
       <div className="work-grid">
-        {works.map((work, i) => {
-          const img = images.find((image) => image.id === work.imageId)!;
-          return <WorkCard key={work.id} work={work} image={img} onOpen={() => open(i)} />;
+        {entries.map((image, i) => {
+          const work = works.find((item) => item.id === image.id)!;
+          return <WorkCard key={work.id} work={work} image={image} onOpen={() => open(i)} />;
         })}
       </div>
-      <Dialog
-        dialogRef={dialog}
-        className="gallery-dialog"
-        aria-label="Перегляд роботи студента"
-        onKeyDown={(e) => {
-          if (e.key === 'ArrowRight') setIndex((i) => (i + 1) % works.length);
-          if (e.key === 'ArrowLeft') setIndex((i) => (i - 1 + works.length) % works.length);
-        }}
-        closeLabel="Закрити фото"
-      >
-        {image && (
-          <Image
-            key={image.id}
-            src={image.src}
-            alt={image.alt}
-            width={image.width}
-            height={image.height}
-            sizes="90vw"
-            className="lightbox-image"
-          />
-        )}
-        <div className="lightbox-caption">
-          <IconButton
-            aria-label="Попереднє фото"
-            onClick={() => setIndex((i) => (i - 1 + works.length) % works.length)}
-          >
-            <ArrowLeft />
-          </IconButton>
-          <p tabIndex={0}>
-            {current?.title}
-            <span>
-              {image?.credit} · {index + 1}/{works.length}
-            </span>
-          </p>
-          <IconButton
-            aria-label="Наступне фото"
-            onClick={() => setIndex((i) => (i + 1) % works.length)}
-          >
-            <ArrowRight />
-          </IconButton>
-        </div>
-      </Dialog>
+      <ImageGalleryDialog dialogRef={dialog} images={entries} index={index} onNavigate={move} />
     </>
   );
 }
