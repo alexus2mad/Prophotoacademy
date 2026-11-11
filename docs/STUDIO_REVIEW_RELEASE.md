@@ -1,6 +1,27 @@
 # Studio review fixes — release record
 
-## Current staging release — browsing rails and mobile media alignment
+## Current staging release — artifact mobile exposure restoration
+
+Active application: `dc094139404298bc65e5c4c2f8efc1447d568b4f`. Previous verified rollback: `bcb65104790b8ce7a228ab94d1dcdc736540ef65`. Released on 11 November 2026 (Europe/Kyiv) to [staging](https://staging.prophotoacademy.com.ua/).
+
+The explicit mobile change request restores the live artifact's compact, photo-free exposure treatment at widths up to 760px. Direct scroll changes the section and following directions background from black to paper, fades and blurs the complete title, fills the meter white then red from left to right, and reveals the next heading. Labels sit beneath the bars; the value rises from 0 to +3 EV. Desktop keeps its sticky photograph, slower scroll runway and eased word morph. Unused desktop word layers are hidden on mobile to prevent overflow after resizing.
+
+- Architecture: **695 modules**; TypeScript, scoped formatting and whitespace checks passed. Full suite: **504/504 tests** across 68 files, including **42 exposure tests**.
+- Linux production build passed and generated **65 pages**. Synthetic Pages export validated **58 review pages**, without republishing GitHub Pages.
+- Browser checks covered 360, 390, 760, 768 and 1440px, forward/reverse mobile scrolling and breakpoint changes. At 390px the compact section measures **283.359375px**, matching the artifact, with 40px top/16px side padding and 32px/1.04 heading text. The page has no horizontal overflow. Desktop photo and final word morph remain functional after resizing from mobile.
+- Live staging checks confirmed the photo is hidden on mobile, the meter reaches +3 EV, both backgrounds reach `#fbfbfb`, the following heading is fully visible, and desktop restores the 300svh section and sticky photograph. Browser console inspection returned no warnings or errors. Reduced motion is covered by geometry/hook tests and CSS review; physical touch and OS-level reduced-motion checks are not claimed.
+- Read-only HTTPS smoke: **428/428 passed**. Both runtime configuration fingerprints, production release and production process remained unchanged. Staging remains mock-only; the scheduled email worker reports success.
+- Retention keeps exactly the active release and `bcb6510`. Obsolete `554eafd` and this task's remote build/transfer artifacts were removed after verification.
+
+| Input/output | SHA-256 |
+| --- | --- |
+| Committed source archive | `7a96093817c1ec92b8f43b9b08e8916adc5f9a39cdfce3f582d964ef12dbbf6b` |
+| Public staging build settings | `7a4c41c23c8cfa8e5c6034a954f37afea24fbb524236d5547ae245bfaefe4605` |
+| Linux runtime artifact | `a3db23190897033816c41485a0ca442cb9c6b37c8eb5da649a6c17864be1fb16` |
+
+Private evidence under `.data/design-review/`: `artifact-compact-exposure-mobile.png`, `compact-exposure-local-mobile-start.png`, `compact-exposure-local-mobile-middle.png`, `compact-exposure-desktop-morph.png`, `compact-exposure-pages.log`, `compact-exposure-linux-build.log`, `compact-exposure-staging-activation.log`, `compact-exposure-staging-smoke.log`, `staging-compact-exposure-mobile.png` and `staging-compact-exposure-end.png`. The later documentation commit does not change the running application SHA.
+
+## Historical release — browsing rails and mobile media alignment
 
 Active application: `bcb65104790b8ce7a228ab94d1dcdc736540ef65`. Previous verified rollback: `554eafdded8225100434fc130c195b9cd3ede50e`. Released on 11 November 2026 (Europe/Kyiv) to [staging](https://staging.prophotoacademy.com.ua/).
 
