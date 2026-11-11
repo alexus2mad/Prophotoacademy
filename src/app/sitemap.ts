@@ -11,7 +11,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'about-us',
     'contacts',
     'reviews',
-    ...(academyDesign() === 'studio' ? ['academy', 'photo-studio', 'shop', 'ai-artwork'] : []),
+    ...(academyDesign() === 'studio' ? ['academy', 'ai-artwork'] : []),
     ...content.programs.map((p) => p.slug),
     ...content.pages.map((p) => p.slug),
   ];

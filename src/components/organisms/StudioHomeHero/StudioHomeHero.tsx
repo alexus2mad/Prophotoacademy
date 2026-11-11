@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { StudioHomePicture } from '@/components/molecules/StudioHomePicture/StudioHomePicture';
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
 import { studioAssets } from '@/lib/studio-design/assets';
+import { ecosystemDestinations } from '@/lib/ecosystem';
 import { useStudioHomeHero } from './hooks';
 import type { StudioHomeHeroProps } from './types';
 import styles from './StudioHomeHero.module.css';
@@ -29,7 +30,7 @@ export function StudioHomeHero({ mode, onModeChange }: StudioHomeHeroProps) {
       kick: 'простір, щоб',
       mobileKick: 'простір, щоб',
       label: 'Забронювати студію',
-      href: '/photo-studio#studio-booking',
+      href: ecosystemDestinations.studioBooking,
       logo: studioAssets.home.imgLogoStudio,
       mobileLogo: studioAssets.homeMobile.imgLogoStudio,
       caption: 'оренда залів',
@@ -53,7 +54,7 @@ export function StudioHomeHero({ mode, onModeChange }: StudioHomeHeroProps) {
       kick: 'техніка, щоб',
       mobileKick: 'техніка, щоб',
       label: 'Підібрати техніку',
-      href: '/shop#equipment-selection',
+      href: ecosystemDestinations.shop,
       logo: studioAssets.home.imgLogoShop,
       mobileLogo: studioAssets.homeMobile.imgLogoShop,
       caption: 'техніка для зйомки',

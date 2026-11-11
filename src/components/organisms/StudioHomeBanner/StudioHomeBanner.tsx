@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
 import { StudioHomePicture } from '@/components/molecules/StudioHomePicture/StudioHomePicture';
 import { studioAssets } from '@/lib/studio-design/assets';
+import { ecosystemDestinations } from '@/lib/ecosystem';
 import type { StudioHomeBannerProps } from './types';
 import styles from './StudioHomeBanner.module.css';
 
@@ -35,7 +36,7 @@ export function StudioHomeBanner({ destination }: StudioHomeBannerProps) {
           </p>
         )}
         <Link
-          href={isShop ? '/shop' : '/photo-studio#studio-booking'}
+          href={isShop ? ecosystemDestinations.shop : ecosystemDestinations.studioBooking}
           className={`studio-button-outline ${styles.action}`}
         >
           {isShop ? 'До магазину' : 'Забронювати зал'}

@@ -1,5 +1,6 @@
 import { studioReviews } from '@/lib/studio-reviews/reviews';
 import { studioAssets } from '@/lib/studio-design/assets';
+import { ecosystemDestinations } from '@/lib/ecosystem';
 import type { AcademyContent } from '@/lib/content/types';
 import type { StudioHomeDirection, StudioHomeReview, StudioHomeWork } from './types';
 
@@ -66,19 +67,19 @@ export const studioHomeRooms: StudioHomeDirection[] = [
     action: 'Детальніше',
     image: studioAssets.studio.imgImgCyclo2,
     mobileImage: studioAssets.homeStudioMobile.imgImgHome390Studio02,
-    href: '/photo-studio#cyclorama',
+    href: ecosystemDestinations.studio,
   },
   {
     title: 'Контент зал',
     action: 'Детальніше',
     image: studioAssets.studio.imgImgContent1,
-    href: '/photo-studio#content-room',
+    href: ecosystemDestinations.studio,
   },
   {
     title: 'Гримерна',
     action: 'Детальніше',
     image: studioAssets.studio.imgImgMakeup1,
-    href: '/photo-studio#makeup',
+    href: ecosystemDestinations.studio,
   },
 ];
 

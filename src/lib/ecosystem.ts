@@ -1,5 +1,11 @@
 import type { PracticeSession, SiteBrand } from './content/types';
 
+export const ecosystemDestinations = {
+  studio: 'https://prophotohub.com.ua',
+  studioBooking: 'https://prophotohub.com.ua/booking',
+  shop: 'https://prophotoshop.com.ua',
+} as const;
+
 export const academyOrigin = process.env.NEXT_PUBLIC_ACADEMY_URL || '';
 export const hubOrigin = process.env.NEXT_PUBLIC_HUB_URL || '/hub';
 export function siteHref(site: SiteBrand, path = '') {

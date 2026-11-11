@@ -7,6 +7,7 @@ import { StudioSpacesTemplate } from '@/components/templates/StudioSpacesTemplat
 export const metadata: Metadata = {
   title: 'Фотостудія',
   alternates: { canonical: '/photo-studio' },
+  robots: { index: false, follow: false },
 };
 export default async function PhotoStudio() {
   if (academyDesign() === 'legacy') redirect('/hub');

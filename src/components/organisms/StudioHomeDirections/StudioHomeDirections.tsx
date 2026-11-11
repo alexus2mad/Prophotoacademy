@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { StudioHomeDirectionCard } from '@/components/molecules/StudioHomeDirectionCard/StudioHomeDirectionCard';
 import { studioHomeRooms } from '@/lib/studio-home/selectors';
+import { ecosystemDestinations } from '@/lib/ecosystem';
 import type { StudioDirectionTransitionStyle, StudioHomeDirectionsProps } from './types';
 import { useDirectionRail } from './hooks';
 import styles from './StudioHomeDirections.module.css';
@@ -36,7 +37,10 @@ export function StudioHomeDirections({
             </span>
           </h2>
         </div>
-        <Link className="studio-button-outline" href={isStudio ? '/photo-studio' : '/academy'}>
+        <Link
+          className="studio-button-outline"
+          href={isStudio ? ecosystemDestinations.studio : '/academy'}
+        >
           {isStudio ? 'Уся студія' : 'Вся академія'}
           <span aria-hidden="true">→</span>
         </Link>

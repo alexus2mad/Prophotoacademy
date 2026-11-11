@@ -94,6 +94,7 @@ describe('AI Artwork route ownership', () => {
         entries.filter((entry) => entry.url === 'https://academy.example/ai-artwork'),
       ).toHaveLength(1);
       expect(new Set(entries.map((entry) => entry.url)).size).toBe(entries.length);
+      expect(entries.some((entry) => /\/(?:shop|photo-studio)$/.test(entry.url))).toBe(false);
       expect(entries).toContainEqual({
         url: 'https://academy.example/courses',
         changeFrequency: 'weekly',
