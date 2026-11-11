@@ -2,9 +2,11 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import { getContent } from '@/lib/content';
 import { Consultation } from '@/components/organisms/Consultation/Consultation';
+import { socialMetadata } from '@/lib/social-images/metadata';
 export const metadata: Metadata = {
   title: 'Відгуки студентів',
   alternates: { canonical: '/reviews' },
+  ...socialMetadata('/reviews'),
 };
 export default async function Reviews() {
   const content = await getContent();

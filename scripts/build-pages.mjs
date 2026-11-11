@@ -50,22 +50,22 @@ for (const [route, destination] of [
   await mkdir(path.join(stage, 'src/app', route), { recursive: true });
   await writeFile(
     path.join(stage, 'src/app', route, 'page.tsx'),
-    `import Link from 'next/link';export default function ReviewEntry(){return <main className="workspace-empty"><h1>Демонстрація кабінету</h1><p>У GitHub-огляді використовуються лише приклади даних</p><Link className="button" href="${destination}">Відкрити демонстрацію</Link></main>;}`,
+    `import Link from 'next/link';import {socialMetadata} from '@/lib/social-images/metadata';export const metadata={robots:{index:false,follow:false},...socialMetadata('/${route}')};export default function ReviewEntry(){return <main className="workspace-empty"><h1>Демонстрація кабінету</h1><p>У GitHub-огляді використовуються лише приклади даних</p><Link className="button" href="${destination}">Відкрити демонстрацію</Link></main>;}`,
   );
 }
 const layout = prepareReviewLayout(await readFile(path.join(stage, 'src/app/layout.tsx'), 'utf8'));
 await writeFile(path.join(stage, 'src/app/layout.tsx'), layout);
 await writeFile(
   path.join(stage, 'src/app/(academy)/checkout/page.tsx'),
-  `import {ReviewUnavailableTemplate} from '@/components/templates/ReviewUnavailableTemplate/ReviewUnavailableTemplate';export default function CheckoutReview(){return <ReviewUnavailableTemplate title="Оформлення навчання" description="У GitHub-огляді заявки й оплата недоступні. Тут можна переглянути програми, пакети та дизайн сайту."/>;}`,
+  `import {ReviewUnavailableTemplate} from '@/components/templates/ReviewUnavailableTemplate/ReviewUnavailableTemplate';import {socialMetadata} from '@/lib/social-images/metadata';export const metadata={robots:{index:false,follow:false},...socialMetadata('/checkout')};export default function CheckoutReview(){return <ReviewUnavailableTemplate title="Оформлення навчання" description="У GitHub-огляді заявки й оплата недоступні. Тут можна переглянути програми, пакети та дизайн сайту."/>;}`,
 );
 await writeFile(
   path.join(stage, 'src/app/(academy)/thanks/page.tsx'),
-  `import {ReviewUnavailableTemplate} from '@/components/templates/ReviewUnavailableTemplate/ReviewUnavailableTemplate';export default function ThanksReview(){return <ReviewUnavailableTemplate title="Статус замовлення" description="Оглядова версія не створює замовлень і не приймає платежів."/>;}`,
+  `import {ReviewUnavailableTemplate} from '@/components/templates/ReviewUnavailableTemplate/ReviewUnavailableTemplate';import {socialMetadata} from '@/lib/social-images/metadata';export const metadata={robots:{index:false,follow:false},...socialMetadata('/thanks')};export default function ThanksReview(){return <ReviewUnavailableTemplate title="Статус замовлення" description="Оглядова версія не створює замовлень і не приймає платежів."/>;}`,
 );
 await writeFile(
   path.join(stage, 'src/app/hub/booking/page.tsx'),
-  `import {getContent} from '@/lib/content';import {ReviewBooking} from '@/components/organisms/ReviewBooking/ReviewBooking';
+  `import {getContent} from '@/lib/content';import {ReviewBooking} from '@/components/organisms/ReviewBooking/ReviewBooking';import {socialMetadata} from '@/lib/social-images/metadata';export const metadata={robots:{index:false,follow:false},...socialMetadata('/hub/booking')};
 export default async function Booking(){const content=await getContent();return <div className="booking-page container"><ReviewBooking rooms={content.rooms} providerUrl={content.hub.bookingUrl} phone={content.hub.phone}/></div>;}
 `,
 );

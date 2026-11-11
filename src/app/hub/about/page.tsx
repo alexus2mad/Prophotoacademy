@@ -2,9 +2,11 @@ import type { Metadata } from 'next';
 import { getContent, findImage } from '@/lib/content';
 import { canonicalUrl, siteHref } from '@/lib/ecosystem';
 import { Photo } from '@/components/atoms/Photo/Photo';
+import { socialMetadata } from '@/lib/social-images/metadata';
 export const metadata: Metadata = {
   title: 'Про ProPhoto',
   alternates: { canonical: canonicalUrl('hub', 'about') },
+  ...socialMetadata('/hub/about', { path: canonicalUrl('hub', 'about') }),
 };
 export default async function AboutProPhoto() {
   const content = await getContent();

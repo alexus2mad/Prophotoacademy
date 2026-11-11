@@ -9,18 +9,21 @@ import { academyDesign } from '@/lib/studio-design/variant';
 import { connection } from 'next/server';
 import { enrollmentOptions } from '@/lib/commerce/catalog';
 import { findOffering } from '@/lib/content/selectors';
+import { socialMetadata } from '@/lib/social-images/metadata';
 export async function generateMetadata({ params }: SlugPageProps): Promise<Metadata> {
   const { slug } = await params;
   const content = await getContent();
   const page =
     content.programs.find((p) => p.slug === slug) || content.pages.find((p) => p.slug === slug);
-  return page
-    ? {
-        title: ('seo' in page ? page.seo?.title : undefined) || page.title,
-        description: 'description' in page ? page.seo?.description || page.description : undefined,
-        alternates: { canonical: `/${slug}` },
-      }
-    : {};
+  if (!page) return {};
+  const title = ('seo' in page ? page.seo?.title : undefined) || page.title;
+  const description = 'description' in page ? page.seo?.description || page.description : undefined;
+  return {
+    title,
+    description,
+    alternates: { canonical: `/${slug}` },
+    ...socialMetadata(`/${slug}`, { title, description }),
+  };
 }
 export default async function Detail({ params }: SlugPageProps) {
   if (process.env.NEXT_PUBLIC_REVIEW_MODE !== 'pages') await connection();

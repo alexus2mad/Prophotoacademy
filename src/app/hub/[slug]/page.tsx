@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getContent } from '@/lib/content';
 import { canonicalUrl, readyPractice } from '@/lib/ecosystem';
+import { socialMetadata } from '@/lib/social-images/metadata';
 export async function generateStaticParams() {
   const content = await getContent();
   return [...content.rooms, ...content.practiceSessions].map((item) => ({ slug: item.slug }));
@@ -17,6 +18,11 @@ export async function generateMetadata({ params }: SlugPageProps): Promise<Metad
     title: item?.title,
     description: item?.description,
     alternates: { canonical: canonicalUrl('hub', slug) },
+    ...socialMetadata(`/hub/${slug}`, {
+      title: item?.title,
+      description: item?.description,
+      path: canonicalUrl('hub', slug),
+    }),
   };
 }
 export default async function HubDetail({ params }: SlugPageProps) {

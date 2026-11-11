@@ -35,4 +35,4 @@ export async function proxy(request: NextRequest) {
   url.pathname = path;
   return NextResponse.rewrite(url);
 }
-export const config = { matcher: ['/((?!_next/static|_next/image|images/|brand/).*)'] };
+export const config = { matcher: ['/((?!_next/static|_next/image|images/|brand/|social/).*)'] };

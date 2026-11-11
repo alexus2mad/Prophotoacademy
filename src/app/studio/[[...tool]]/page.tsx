@@ -1,8 +1,13 @@
 import { NextStudio } from 'next-sanity/studio';
 import config from '../../../../sanity.config';
 import Link from 'next/link';
+import { socialMetadata } from '@/lib/social-images/metadata';
 export const dynamic = 'force-dynamic';
-export const metadata = { title: 'Content Studio', robots: { index: false, follow: false } };
+export const metadata = {
+  title: 'Content Studio',
+  robots: { index: false, follow: false },
+  ...socialMetadata('/admin'),
+};
 export default function Studio() {
   if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID)
     return (

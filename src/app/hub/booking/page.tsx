@@ -3,10 +3,12 @@ import type { Metadata } from 'next';
 import { getContent } from '@/lib/content';
 import { canonicalUrl } from '@/lib/ecosystem';
 import { StudioBooking } from '@/components/organisms/StudioBooking/StudioBooking';
+import { socialMetadata } from '@/lib/social-images/metadata';
 export const metadata: Metadata = {
   title: 'Бронювання студії',
   robots: { index: false, follow: true },
   alternates: { canonical: canonicalUrl('hub', 'booking') },
+  ...socialMetadata('/hub/booking', { path: canonicalUrl('hub', 'booking') }),
 };
 export default async function Booking({ searchParams }: BookingPageProps) {
   const { room } = await searchParams;

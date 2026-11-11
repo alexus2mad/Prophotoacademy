@@ -87,6 +87,16 @@ Academy public and workspace shells explicitly apply the shared `academyThemeCla
 
 ## Next.js and the two build modes
 
+Public sharing metadata is owned by `src/lib/social-images`, with page-specific
+static JPEGs under `public/social`. The offline generator and authored artwork
+plan live in `scripts/social-images`; no rendering library enters the client
+bundle. Private route families use constant, non-personal previews. All public
+pages share the same metadata helper in both presentation variants. Production
+and review prebuilds validate artwork provenance, dimensions and size; the
+review validator checks actual social asset URLs. See
+[social previews](docs/SOCIAL_PREVIEWS.md). Preserve the default crawler list
+when extending blocking metadata for messaging apps.
+
 Root metadata owns the shared ProPhoto favicon. The SVG preserves the two symbol paths from `public/brand/prophoto-study-trimmed.svg`, rendered white on black; the ICO contains 16, 32 and 48px variants, and the Apple icon is 180px. Explicit icon URLs stay under `/brand/` so the review exporter prefixes them correctly. `public/favicon.ico` also serves browsers' conventional fallback request. The review validator checks icon links and their exported files.
 
 Read the applicable bundled Next.js documentation before changing framework behavior. Server Components remain the default. Put `use client` at the real interactive boundary; do not mark whole templates client merely because they contain an interactive child. Serializable props cross server/client boundaries.

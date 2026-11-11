@@ -4,7 +4,12 @@ import { getContent } from '@/lib/content';
 import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
 import { StudioContactsTemplate } from '@/components/templates/StudioContactsTemplate/StudioContactsTemplate';
 import { academyDesign } from '@/lib/studio-design/variant';
-export const metadata: Metadata = { title: 'Контакти', alternates: { canonical: '/contacts' } };
+import { socialMetadata } from '@/lib/social-images/metadata';
+export const metadata: Metadata = {
+  title: 'Контакти',
+  alternates: { canonical: '/contacts' },
+  ...socialMetadata('/contacts'),
+};
 export default async function Contacts() {
   const { settings } = await getContent();
   if (academyDesign() === 'studio') return <StudioContactsTemplate settings={settings} />;

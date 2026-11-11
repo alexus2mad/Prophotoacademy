@@ -6,11 +6,13 @@ import { prioritizePrograms } from '@/lib/program-priority';
 import { CatalogTemplate } from '@/components/templates/CatalogTemplate/CatalogTemplate';
 import { StudioCatalogTemplate } from '@/components/templates/StudioCatalogTemplate/StudioCatalogTemplate';
 import { academyDesign } from '@/lib/studio-design/variant';
+import { socialMetadata } from '@/lib/social-images/metadata';
 export const metadata: Metadata = {
   title: 'Усі програми',
   description:
     'Оберіть курс фотографії, комерційного контенту чи Instagram. Класи, індивідуальне та корпоративне навчання.',
   alternates: { canonical: '/courses' },
+  ...socialMetadata('/courses'),
 };
 export default async function Courses({ searchParams }: CoursesPageProps) {
   const query = new URLSearchParams();

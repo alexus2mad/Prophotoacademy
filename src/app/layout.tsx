@@ -4,6 +4,7 @@ import localFont from 'next/font/local';
 import { draftMode } from 'next/headers';
 import { PreviewBanner } from '@/components/organisms/PreviewBanner/PreviewBanner';
 import { PhotographyMotion } from '@/components/behaviors/PhotographyMotion/PhotographyMotion';
+import { socialMetadata } from '@/lib/social-images/metadata';
 import './design-system.css';
 import './academy-theme.css';
 import './ecosystem.css';
@@ -43,8 +44,7 @@ export const metadata: Metadata = {
     ],
     apple: { url: '/brand/prophoto-apple-icon.png', sizes: '180x180', type: 'image/png' },
   },
-  openGraph: { type: 'website', locale: 'uk_UA' },
-  twitter: { card: 'summary_large_image' },
+  ...socialMetadata('/'),
 };
 export default async function RootLayout({ children }: LayoutProps) {
   const preview = (await draftMode()).isEnabled;

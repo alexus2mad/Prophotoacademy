@@ -14,10 +14,12 @@ import { currentMember } from '@/lib/auth/server';
 import { enrollmentOptions } from '@/lib/commerce/catalog';
 import { EnrollmentScope } from '@/components/molecules/EnrollmentScope/EnrollmentScope';
 import { OfferingSummary } from '@/components/molecules/OfferingSummary/OfferingSummary';
+import { socialMetadata } from '@/lib/social-images/metadata';
 export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: 'Оформлення замовлення',
   robots: { index: false, follow: false },
+  ...socialMetadata('/checkout'),
 };
 export default async function Checkout({ searchParams }: CheckoutPageProps) {
   const query = await searchParams;

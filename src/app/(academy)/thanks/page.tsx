@@ -2,10 +2,12 @@ import type { ThanksPageProps } from '@/app/types';
 import type { Metadata } from 'next';
 import { OrderStatus } from '@/components/organisms/OrderStatus/OrderStatus';
 import Link from 'next/link';
+import { socialMetadata } from '@/lib/social-images/metadata';
 export const metadata: Metadata = {
   title: 'Статус замовлення',
   robots: { index: false, follow: false },
   referrer: 'no-referrer',
+  ...socialMetadata('/thanks'),
 };
 export default async function Thanks({ searchParams }: ThanksPageProps) {
   const { token } = await searchParams;

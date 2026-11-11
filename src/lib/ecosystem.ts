@@ -29,7 +29,9 @@ export function isHubHost(host: string) {
 }
 export function hubRewritePath(path: string) {
   if (
-    /^\/(api|_next|images|brand|studio|operations|account|login|learn|admin|demo)(\/|$)/.test(path)
+    /^\/(api|_next|images|brand|social|studio|operations|account|login|learn|admin|demo)(\/|$)/.test(
+      path,
+    )
   )
     return undefined;
   if (path.startsWith('/hub/') || path === '/hub') return undefined;

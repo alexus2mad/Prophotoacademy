@@ -2,9 +2,11 @@ import type { Metadata } from 'next';
 import { getContent } from '@/lib/content';
 import { canonicalUrl } from '@/lib/ecosystem';
 import { phoneLabel } from '@/lib/format';
+import { socialMetadata } from '@/lib/social-images/metadata';
 export const metadata: Metadata = {
   title: 'Контакти студії',
   alternates: { canonical: canonicalUrl('hub', 'contact') },
+  ...socialMetadata('/hub/contact', { path: canonicalUrl('hub', 'contact') }),
 };
 export default async function HubContact() {
   const { hub } = await getContent();

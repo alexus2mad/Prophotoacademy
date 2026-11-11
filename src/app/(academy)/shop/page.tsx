@@ -3,11 +3,13 @@ import { redirect } from 'next/navigation';
 import { getContent } from '@/lib/content';
 import { academyDesign } from '@/lib/studio-design/variant';
 import { StudioShopTemplate } from '@/components/templates/StudioShopTemplate/StudioShopTemplate';
+import { socialMetadata } from '@/lib/social-images/metadata';
 
 export const metadata: Metadata = {
   title: 'Магазин',
   alternates: { canonical: '/shop' },
   robots: { index: false, follow: false },
+  ...socialMetadata('/shop'),
 };
 export default async function Shop() {
   if (academyDesign() === 'legacy') redirect('/contacts');

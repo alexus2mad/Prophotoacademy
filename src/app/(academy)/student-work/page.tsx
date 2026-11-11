@@ -2,11 +2,13 @@ import type { Metadata } from 'next';
 import { getContent } from '@/lib/content';
 import { Gallery } from '@/components/organisms/Gallery/Gallery';
 import { Consultation } from '@/components/organisms/Consultation/Consultation';
+import { socialMetadata } from '@/lib/social-images/metadata';
 export const metadata: Metadata = {
   title: 'Роботи студентів',
   description:
     'Фотографія на телефон і камеру. Предметні, фуд-зйомки та портрети студентів Pro Photo Academy.',
   alternates: { canonical: '/student-work' },
+  ...socialMetadata('/student-work'),
 };
 export default async function Work() {
   const content = await getContent();
