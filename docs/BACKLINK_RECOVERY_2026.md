@@ -23,3 +23,23 @@ The 12 local Webflow captures and five Academy URLs in the sampled April 2026 Wa
 - The reviewed founder references confirm Olena Popova's photography and teaching work. The Inweb interview links the school name to Instagram. Kyiv-Mohyla credits both Academy educators. Vseosvita links to a live ProPhotoStudy webinar through its outbound interstitial. All 50 URLs in the Study sitemap returned 200, and the owner confirmed that Study should stay active. [Inweb interview](https://theinweb.media/intervyu-olena-popova/) · [Kyiv-Mohyla training](https://pro.ukma.edu.ua/trainings/training-visual-content) · [Vseosvita reference](https://vseosvita.ua/library/fotohrafiya-yak-instrument-zberezhennya-istorychnoi-spadshchyny-v-ivent-industrii-976465.html) · [Study sitemap](https://prophotostudy.com.ua/sitemap.xml)
 
 The link inventory, archive records, HTTP chains and browser evidence are stored locally under `.data/backlinks-2026-11-12/`.
+
+The repair is live on staging and production from commit `8425340`. Both environments passed their read-only checks with unchanged runtime configuration. [Deployment and verification record](releases/2026-11-12-legacy-course-links.md)
+
+## Verified public referral inventory
+
+| Exact Academy destination                                 | Links | Public source                                                                                  |
+| --------------------------------------------------------- | ----: | ---------------------------------------------------------------------------------------------- |
+| `https://prophotoacademy.com.ua/visual-content`           |     1 | [t.me/prophotoclub/283](https://t.me/prophotoclub/283)                                         |
+| `https://prophotoacademy.com.ua/visual-content`           |     1 | [t.me/prophotoclub/293](https://t.me/prophotoclub/293)                                         |
+| `https://prophotoacademy.com.ua/visual-content`           |     1 | [t.me/prophotoclub/303](https://t.me/prophotoclub/303)                                         |
+| `https://prophotoacademy.com.ua/visual-content`           |     2 | [t.me/prophotoclub/313](https://t.me/prophotoclub/313)                                         |
+| `https://prophotoacademy.com.ua/visual-content`           |     1 | [t.me/prophotoclub/320](https://t.me/prophotoclub/320)                                         |
+| `https://prophotoacademy.com.ua/#education-id`            |     1 | [t.me/prophotoclub/321](https://t.me/prophotoclub/321)                                         |
+| `https://prophotoacademy.com.ua/visual-content`           |     1 | [t.me/prophotoclub/322](https://t.me/prophotoclub/322)                                         |
+| `https://prophotoacademy.com.ua/visual-content`           |     1 | [t.me/prophotoclub/333](https://t.me/prophotoclub/333)                                         |
+| `https://prophotoacademy.com.ua/course-smm-instagram`     |     1 | [t.me/prophotoclub/367](https://t.me/prophotoclub/367)                                         |
+| `https://www.prophotoacademy.com.ua/course-smm-instagram` |     1 | [t.me/prophotoclub/383](https://t.me/prophotoclub/383)                                         |
+| `https://www.prophotoacademy.com.ua/course-smm-instagram` |     1 | [t.me/prophotoclub/384](https://t.me/prophotoclub/384)                                         |
+| `https://www.prophotoacademy.com.ua/course-smm-instagram` |     1 | [t.me/prophotoclub/395](https://t.me/prophotoclub/395)                                         |
+| `https://prophotoacademy.com.ua/`                         |     1 | [youtube.com/@olenapopova-prophoto/about](https://www.youtube.com/@olenapopova-prophoto/about) |
