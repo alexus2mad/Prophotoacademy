@@ -189,6 +189,13 @@ describe('direct Studio learning navigation', () => {
         }),
       ),
     );
+    expect(directions('#education-id')).toHaveLength(1);
+    expect(
+      directions(
+        'section#education-id[aria-labelledby="home-directions-title"] h2#home-directions-title',
+      ),
+    ).toHaveLength(1);
+    expect(directions('#education-id a[href="/academy#courses"]')).toHaveLength(1);
     expect(directions('a[aria-label="Курси: Усі курси"]').attr('href')).toBe('/academy#courses');
     expect(directions('a[aria-label="Воркшопи: Усі воркшопи"]').attr('href')).toBe(
       '/academy#workshops',

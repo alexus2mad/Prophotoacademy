@@ -9,12 +9,24 @@ import fixture from '../content/academy.json';
 import type { AcademyContent } from '../src/lib/content/types';
 import { academyDirections } from '../src/lib/academy-home/selectors';
 import { AcademyDirectionCard } from '../src/components/molecules/AcademyDirectionCard/AcademyDirectionCard';
+import { AcademyDirections } from '../src/components/organisms/AcademyDirections/AcademyDirections';
 import homeImages from '../src/lib/photography/home-images.json';
 import manifest from '../src/lib/photography/prepared-home-images.json';
 import { preparedPhoto } from '../src/lib/photography/prepared';
 
 const content = fixture as AcademyContent;
 describe('Academy homepage destinations and photography', () => {
+  it('renders the old education fragment inside the existing named courses section', () => {
+    const $ = load(
+      renderToStaticMarkup(
+        createElement(AcademyDirections, { directions: academyDirections(content) }),
+      ),
+    );
+    expect($('#education-id')).toHaveLength(1);
+    expect($('section#courses[aria-labelledby="education-id"] > h2#education-id')).toHaveLength(1);
+    expect($('#courses a[href="/academy?category=course"]')).toHaveLength(1);
+  });
+
   it('opens real program routes, a metadata-filtered course catalog or all programs', () => {
     for (const direction of academyDirections(content)) {
       if (!direction.href) continue;

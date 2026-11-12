@@ -13,6 +13,7 @@ export function StudioHomeDirections({ mode, directions, sectionRef }: StudioHom
   const railRef = useDirectionRail(mode);
   return (
     <section
+      id="education-id"
       data-home-section="directions"
       ref={sectionRef}
       data-header-tone="light"

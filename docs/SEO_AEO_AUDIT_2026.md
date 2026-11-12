@@ -54,6 +54,8 @@ Retain permanent redirects for at least one year, preferably indefinitely while 
 
 When Search Console finishes processing, reconcile Page Indexing, performance landing pages and external links with the reviewed manifest. Add only evidence-backed old paths. Compare the previous 28 days with the following full 28-day period, accounting for closed course sales and event dates.
 
+The follow-up public link audit verified five exact Academy destinations and identified the obsolete homepage education fragment. [Backlink recovery report](BACKLINK_RECOVERY_2026.md)
+
 ## Audience and landing-page ownership
 
 The queries below express intent, not measured search volumes or guaranteed rankings.
