@@ -167,15 +167,14 @@ describe('partner logo native-scroll autoplay', () => {
     expect(rail.scrollLeft).toBe(1);
   });
 
-  it('pauses on hover and resumes after leaving without counting paused time', () => {
+  it('keeps desktop autoplay running until the visitor interacts', () => {
     start();
     rail.dispatchEvent(Object.assign(new Event('pointerenter'), { pointerType: 'mouse' }));
-    expect(frames.size).toBe(0);
-    rail.dispatchEvent(Object.assign(new Event('pointerleave'), { pointerType: 'mouse' }));
-    tick(80_000);
-    expect(rail.scrollLeft).toBe(0);
-    tick(80_064);
+    expect(frames.size).toBe(1);
+    tick(64);
     expect(rail.scrollLeft).toBe(1);
+    rail.dispatchEvent(Object.assign(new Event('pointerdown'), { pointerType: 'mouse' }));
+    expect(frames.size).toBe(0);
   });
 
   it('leaves native horizontal wheel scrolling paused without canceling the event', () => {
@@ -216,7 +215,15 @@ describe('partner logo native-scroll autoplay', () => {
     expect(rail.scrollLeft).toBe(0);
   });
 
-  it('stays still when all logos already fit in a wide viewport', () => {
+  it('autoplays a wide viewport when the bounded copies cover one full loop', () => {
+    rail.clientWidth = 1500;
+    rail.scrollWidth = 2769;
+    start();
+    tick(64);
+    expect(rail.scrollLeft).toBe(1);
+  });
+
+  it('waits for enough copies to cover the viewport without a gap', () => {
     rail.clientWidth = 1500;
     start();
     expect(frames.size).toBe(0);

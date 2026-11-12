@@ -32,7 +32,7 @@ export function StudioHomeExposure({ mode, directionsRef }: StudioHomeExposurePr
           sizes="100vw"
         />
         <div className={`${styles.inner} studio-wrap`}>
-          <StudioExposureTitle progress={exposure.progress} ready={ready} compact={compact} />
+          <StudioExposureTitle />
           <div className={styles.meter} data-exposure-meter aria-hidden="true">
             <div className={styles.meterLabel}>
               <span>Експозиція</span>

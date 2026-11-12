@@ -1,66 +1,13 @@
-'use client';
-import { useStudioExposureTitle } from './hooks';
-import { exposureTitlePhase, exposureWordTranslation } from './selectors';
-import type { ExposureTitleStyle, StudioExposureTitleProps } from './types';
 import styles from './StudioExposureTitle.module.css';
 
-const words = ['важливо,', 'як', 'ви', 'це', 'робите'];
-
-export function StudioExposureTitle({
-  progress,
-  ready,
-  compact = false,
-}: StudioExposureTitleProps) {
-  const { root, layout } = useStudioExposureTitle(!compact);
-  const morphing =
-    !compact && ready && !!layout?.eligible && !layout.reducedMotion && progress > 0.5;
-  const phase = exposureTitlePhase(morphing ? progress : 0);
-  const style: ExposureTitleStyle = { '--removed-opacity': phase.removedOpacity };
+export function StudioExposureTitle() {
   return (
-    <div className={styles.title} ref={root} style={style} data-title-morphing={morphing}>
-      <h2 id="exposure-title" className={styles.source}>
-        <span className={styles.removed}>не</span>
-        <span data-title-source-word>{words[0]}</span>{' '}
-        <strong className={styles.removed}>
-          на що ви знімаєте, важливо<span className={styles.desktopComma}>,</span>
-        </strong>{' '}
-        {words.slice(1).map((word, index) => (
-          <span key={word}>
-            {index > 0 ? ' ' : null}
-            <span data-title-source-word>{word}</span>
-          </span>
-        ))}
-      </h2>
-      <div className={styles.copies} aria-hidden="true">
-        {words.map((word, index) => {
-          const translation = layout
-            ? exposureWordTranslation(layout.words[index], progress)
-            : { x: 0, y: 0 };
-          return (
-            <span
-              className={styles.word}
-              data-title-copy-word
-              key={word}
-              style={{ transform: `translate(${translation.x}px, ${translation.y}px)` }}
-            >
-              <span>{word}</span>
-            </span>
-          );
-        })}
-      </div>
-      <div className={styles.target} data-title-target aria-hidden="true">
-        <div>
-          <span data-title-target-word>{words[0]}</span>
-        </div>
-        <div>
-          {words.slice(1).map((word, index) => (
-            <span key={word}>
-              {index > 0 ? ' ' : null}
-              <span data-title-target-word>{word}</span>
-            </span>
-          ))}
-        </div>
-      </div>
-    </div>
+    <h2 id="exposure-title" className={styles.title}>
+      неважливо,{' '}
+      <strong>
+        на що ви знімаєте, важливо<span className={styles.desktopComma}>,</span>
+      </strong>{' '}
+      як ви це робите
+    </h2>
   );
 }

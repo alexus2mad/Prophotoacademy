@@ -24,8 +24,11 @@
   display: flex;
   width: max-content;
 }
+.copy {
+  flex: 0 0 auto;
+}
 .logos {
-  flex-shrink: 0;
+  display: block;
   height: clamp(60px, 7vw, 100px);
   width: auto;
   max-width: none;
@@ -41,7 +44,7 @@
   border-radius: 0;
 }
 @media (prefers-reduced-motion: reduce) {
-  .logos + .logos {
+  .copy + .copy {
     display: none;
   }
 }

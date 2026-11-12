@@ -18,6 +18,14 @@ An organism may compose another organism. Dependencies may point to the same or 
 
 Horizontal browsing rails retain native touch, trackpad and keyboard scrolling. The opt-in `HorizontalRail` controller adds primary-mouse dragging only when content overflows, distinguishes dragging from clicking and preserves card actions. The partner strip drives autoplay through that same native scroll position; do not combine a transformed marquee with manual scrolling. Pause autoplay during interaction, offscreen/hidden states and reduced motion, and resume from the visitor's position.
 
+The partner strip renders only enough identical copies to cover its viewport plus
+one repeat, recalculated on resize. Never append copies as time passes. Desktop
+and mobile autoplay share the same loop; pointer presses, horizontal scrolling
+and keyboard focus pause it, while passive desktop hover does not. Duplicate
+strips are hidden from assistive technology. The exposure title remains intact
+and fades as one heading after the exposure midpoint; do not restore word morphs
+or geometry-measuring text layers.
+
 Scroll animation state stays inside its owning section, not the homepage composition.
 Share continuous visual progress through explicit element references and CSS properties;
 avoid re-rendering unrelated heroes or card grids on each frame. Batch geometry reads,

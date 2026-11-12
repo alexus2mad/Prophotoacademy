@@ -8,7 +8,6 @@ export function enablePartnerMarquee(rail: HTMLElement, firstCopy: HTMLElement) 
   const reducedMotion = browser.matchMedia('(prefers-reduced-motion: reduce)');
   let visible = typeof IntersectionObserver === 'undefined';
   let disposed = false;
-  let hovered = browser.matchMedia('(hover: hover)').matches && rail.matches(':hover');
   let focused = rail.contains(document.activeElement);
   let loopWidth = 0;
   let frame = 0;
@@ -20,10 +19,8 @@ export function enablePartnerMarquee(rail: HTMLElement, firstCopy: HTMLElement) 
     visible &&
     !document.hidden &&
     !reducedMotion.matches &&
-    !hovered &&
     !focused &&
     loopWidth > 0 &&
-    loopWidth >= rail.clientWidth &&
     rail.scrollWidth - rail.clientWidth >= loopWidth - 1;
 
   const tick = (time: number) => {
@@ -56,18 +53,6 @@ export function enablePartnerMarquee(rail: HTMLElement, firstCopy: HTMLElement) 
     position = rail.scrollLeft;
     previousTime = undefined;
     refresh();
-  };
-  const enter = (event: PointerEvent) => {
-    if (event.pointerType === 'mouse') {
-      hovered = true;
-      refresh();
-    }
-  };
-  const leave = (event: PointerEvent) => {
-    if (event.pointerType === 'mouse') {
-      hovered = false;
-      refresh();
-    }
   };
   const focus = () => {
     focused = true;
@@ -102,8 +87,6 @@ export function enablePartnerMarquee(rail: HTMLElement, firstCopy: HTMLElement) 
   visibilityObserver?.observe(rail);
   sizeObserver?.observe(rail);
   sizeObserver?.observe(firstCopy);
-  rail.addEventListener('pointerenter', enter);
-  rail.addEventListener('pointerleave', leave);
   rail.addEventListener('pointerdown', hold, { passive: true });
   rail.addEventListener('wheel', wheel, { passive: true });
   rail.addEventListener('keydown', keyboard);
@@ -118,8 +101,6 @@ export function enablePartnerMarquee(rail: HTMLElement, firstCopy: HTMLElement) 
     browser.cancelAnimationFrame(frame);
     visibilityObserver?.disconnect();
     sizeObserver?.disconnect();
-    rail.removeEventListener('pointerenter', enter);
-    rail.removeEventListener('pointerleave', leave);
     rail.removeEventListener('pointerdown', hold);
     rail.removeEventListener('wheel', wheel);
     rail.removeEventListener('keydown', keyboard);

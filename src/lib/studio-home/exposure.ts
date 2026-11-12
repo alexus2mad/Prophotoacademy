@@ -26,7 +26,7 @@ export function studioExposureAtProgress(value: number): StudioExposureState {
   const progress = clamp(value);
   const activeBars = Math.round(progress * exposureBarCount);
   return {
-    // Keep subpixel scroll precision for word transforms; only the EV label rounds.
+    // Keep subpixel precision for the exposure transition; only the EV label rounds.
     progress,
     activeBars,
     redBars: Math.max(0, activeBars - (exposureBarCount - 6)),

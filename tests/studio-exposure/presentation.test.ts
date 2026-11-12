@@ -57,7 +57,7 @@ it('renders compact exposure locally and leaves the directions cards outside its
   expect($('[aria-hidden=true]').text()).toContain('+3.0 EV');
   expect($('section').attr('data-header-tone')).toBe('light');
   expect($('section').attr('style')).toContain('--mobile-exposure:1');
-  expect($('[data-title-morphing]').attr('data-title-morphing')).toBe('false');
+  expect($('#exposure-title')).toHaveLength(1);
   expect(directions('section').attr('style')).toBeUndefined();
   expect(directions('section').attr('data-header-tone')).toBe('light');
   expect(directions('a').attr('href')).toBe('/academy');
@@ -67,7 +67,7 @@ it('keeps header controls light over the dark beginning of the compact transitio
   const exposure = studioCompactExposureAtProgress(0.2);
   const $ = renderScene(exposure, true, true);
   expect($('section').attr('data-header-tone')).toBe('dark');
-  expect($('[data-title-morphing]').attr('data-title-morphing')).toBe('false');
+  expect($('#exposure-title')).toHaveLength(1);
 });
 
 it('keeps server-rendered directions readable without an animation override before hydration', () => {
@@ -79,7 +79,7 @@ it('keeps server-rendered directions readable without an animation override befo
   expect($('a').first().attr('href')).toBe('https://prophotohub.com.ua');
 });
 
-it('keeps the original semantic title visible until word geometry is ready', () => {
+it('renders one complete semantic title without duplicated or repositioned words', () => {
   const exposure = studioExposureState({
     top: 0,
     height: 1,
@@ -90,8 +90,6 @@ it('keeps the original semantic title visible until word geometry is ready', () 
   expect(render()('section').attr('data-exposure-ready')).toBe('false');
   expect(render(true)('section').attr('data-exposure-ready')).toBe('true');
   expect(render()('h2').text()).toBe('неважливо, на що ви знімаєте, важливо, як ви це робите');
-  expect(render(true)('[data-title-morphing]').attr('data-title-morphing')).toBe('false');
-  expect(render()('[data-title-source-word]')).toHaveLength(5);
-  expect(render()('[data-title-copy-word]').closest('[aria-hidden=true]')).toHaveLength(1);
-  expect(render()('[data-title-target]').attr('aria-hidden')).toBe('true');
+  expect(render(true)('h2').text()).toBe(render()('h2').text());
+  expect(render()('[data-title-copy-word], [data-title-target]')).toHaveLength(0);
 });
