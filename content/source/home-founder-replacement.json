@@ -1,0 +1,26 @@
+{
+  "source": "IMG_5902.JPG",
+  "sourceSha256": "545b17a0e1261d91cd09268db6910cfad7c85f0ae9dadff4bcd40cff8b999397",
+  "sourceWidth": 4480,
+  "sourceHeight": 5952,
+  "variants": {
+    "desktop": {
+      "src": "/images/hero/olena-popova-home-desktop-0b99e13145d8-1920.webp",
+      "width": 1920,
+      "height": 2551
+    },
+    "mobile": {
+      "src": "/images/hero/olena-popova-home-mobile-2b88b2c84b6b-1280.webp",
+      "width": 1280,
+      "height": 1344
+    }
+  },
+  "mobileCrop": {
+    "left": 0,
+    "top": 250,
+    "width": 4480,
+    "height": 4704
+  },
+  "encoding": "WebP quality 88; sRGB; metadata stripped; no enlargement",
+  "approvedBy": "User-supplied homepage portrait replacement, 12 November 2026"
+}
