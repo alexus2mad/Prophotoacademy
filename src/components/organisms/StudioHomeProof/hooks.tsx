@@ -36,6 +36,6 @@ export function usePartnerRail() {
       stopMarquee?.();
       stopDragging?.();
     };
-  }, [copyCount]);
+  }, []);
   return { railRef, copyCount };
 }

@@ -20,11 +20,19 @@ Horizontal browsing rails retain native touch, trackpad and keyboard scrolling. 
 
 The partner strip renders only enough identical copies to cover its viewport plus
 one repeat, recalculated on resize. Never append copies as time passes. Desktop
-and mobile autoplay share the same loop; pointer presses, horizontal scrolling
-and keyboard focus pause it, while passive desktop hover does not. Duplicate
-strips are hidden from assistive technology. The exposure title remains intact
+and mobile autoplay share the same loop. Pointer presses and horizontal scrolling
+pause it until three seconds after the gesture and native momentum settle, then
+speed eases back in over one second. Autoplay scroll events must not restart that
+idle timer. Deliberate keyboard focus stays paused; passive desktop hover does
+not. Duplicate strips are hidden from assistive technology. The exposure title remains intact
 and fades as one heading after the exposure midpoint; do not restore word morphs
 or geometry-measuring text layers.
+
+Student-work browsing rails explicitly opt into cancellable mouse inertia and
+free desktop scrolling. Keep native touch scrolling and mobile snap behavior.
+Arrows, keyboard navigation and a new gesture cancel momentum immediately.
+Dragging must not open an image dialog, while ordinary clicks still do. Do not
+enable inertia globally on logos, navigation rails, or static image grids.
 
 Scroll animation state stays inside its owning section, not the homepage composition.
 Share continuous visual progress through explicit element references and CSS properties;

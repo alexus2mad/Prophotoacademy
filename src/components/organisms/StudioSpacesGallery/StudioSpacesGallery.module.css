@@ -11,12 +11,22 @@
 .track::-webkit-scrollbar {
   display: none;
 }
-.track[data-dragging] {
+.track[data-dragging],
+.track[data-coasting] {
   scroll-snap-type: none;
   user-select: none;
 }
-.track[data-dragging] * {
+.track[data-dragging] .trigger {
   cursor: grabbing;
+}
+@media (hover: hover) and (pointer: fine) {
+  .artworks .track {
+    scroll-snap-type: none;
+    cursor: grab;
+  }
+  .artworks .trigger {
+    cursor: grab;
+  }
 }
 .image {
   flex: 0 0 auto;

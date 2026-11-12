@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import type { KeyboardEvent } from 'react';
 import { galleryImageTarget, nearestGalleryImage } from './position';
-import { enableHorizontalRailDrag } from '@/components/behaviors/HorizontalRail/drag';
+import { createHorizontalRailDrag } from '@/components/behaviors/HorizontalRail/drag';
+import type { HorizontalRailController } from '@/components/behaviors/HorizontalRail/types';
 
 function imageOffsets(element: HTMLDivElement) {
   const left = element.getBoundingClientRect().left;
@@ -15,9 +16,16 @@ function imageOffsets(element: HTMLDivElement) {
 
 export function useStudioGallery(length: number, draggable = false) {
   const track = useRef<HTMLDivElement>(null);
+  const drag = useRef<HorizontalRailController | undefined>(undefined);
   const [position, setPosition] = useState({ index: 1, start: true, end: length < 2 });
   useEffect(() => {
-    if (draggable && track.current) return enableHorizontalRailDrag(track.current);
+    if (!draggable || !track.current) return;
+    const controller = createHorizontalRailDrag(track.current, { inertia: true });
+    drag.current = controller;
+    return () => {
+      controller?.destroy();
+      drag.current = undefined;
+    };
   }, [draggable]);
   useEffect(() => {
     const element = track.current;
@@ -41,6 +49,7 @@ export function useStudioGallery(length: number, draggable = false) {
     };
   }, [length]);
   const move = (direction: number) => {
+    drag.current?.cancelMomentum();
     const element = track.current;
     if (!element) return;
     element.scrollTo({

@@ -24,12 +24,22 @@
 .rail::-webkit-scrollbar {
   display: none;
 }
-.rail[data-dragging] {
+.rail[data-dragging],
+.rail[data-coasting] {
   scroll-snap-type: none;
   user-select: none;
 }
-.rail[data-dragging] * {
+.rail[data-dragging] .image {
   cursor: grabbing;
+}
+@media (hover: hover) and (pointer: fine) {
+  .rail {
+    scroll-snap-type: none;
+    cursor: grab;
+  }
+  .rail .image {
+    cursor: grab;
+  }
 }
 .page {
   display: grid;

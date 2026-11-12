@@ -1,6 +1,9 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { enablePartnerMarquee } from '../src/components/organisms/StudioHomeProof/marquee';
 
+const enableTimers = vi.useFakeTimers.bind(vi);
+const restoreTimers = vi.useRealTimers.bind(vi);
+
 class Preference extends EventTarget {
   matches = false;
   set(value: boolean) {
@@ -34,6 +37,9 @@ const frames = new Map<number, FrameRequestCallback>();
 let nextFrame = 0;
 const reduced = new Preference();
 const browser = Object.assign(new EventTarget(), {
+  performance: { now: () => Date.now() },
+  setTimeout: (callback: VoidFunction, delay: number) => setTimeout(callback, delay),
+  clearTimeout: (timer: ReturnType<typeof setTimeout>) => clearTimeout(timer),
   matchMedia: (query: string) => (query.includes('reduced-motion') ? reduced : { matches: true }),
   requestAnimationFrame: (callback: FrameRequestCallback) => {
     frames.set(++nextFrame, callback);
@@ -91,7 +97,17 @@ function start() {
   VisibilityObserver.current.show(true);
   tick(0);
 }
+function advanceFrames(duration: number) {
+  for (let elapsed = 0; elapsed < duration; elapsed += 16) {
+    vi.advanceTimersByTime(16);
+    tick(Date.now());
+    // Browsers dispatch scroll asynchronously after the autoplay write.
+    rail.dispatchEvent(new Event('scroll'));
+  }
+}
 beforeEach(() => {
+  enableTimers();
+  vi.setSystemTime(0);
   frames.clear();
   reduced.matches = false;
   document.hidden = false;
@@ -101,29 +117,85 @@ beforeEach(() => {
 });
 afterEach(() => {
   dispose?.();
+  restoreTimers();
   vi.unstubAllGlobals();
 });
 
 describe('partner logo native-scroll autoplay', () => {
   it('accumulates subpixel travel rather than freezing on integer scroll positions', () => {
     start();
-    for (let time = 16; time <= 160; time += 16) tick(time);
-    expect(rail.scrollLeft).toBe(3);
+    advanceFrames(1200);
+    expect(rail.scrollLeft).toBeGreaterThan(10);
+    expect(frames.size).toBe(1);
+    expect(vi.getTimerCount()).toBe(0);
   });
 
-  it('holds touch interaction through inertia and resumes from the manually chosen position', () => {
+  it('waits three seconds after native momentum stops and resumes from that position', () => {
     start();
     rail.dispatchEvent(new Event('pointerdown'));
     expect(frames.size).toBe(0);
     rail.scrollLeft = 400;
-    rail.dispatchEvent(new Event('pointerup'));
-    tick(60_000);
+    browser.dispatchEvent(new Event('pointerup'));
+    vi.advanceTimersByTime(2000);
+    rail.scrollLeft = 450;
+    rail.dispatchEvent(new Event('scroll'));
+    vi.advanceTimersByTime(2999);
+    expect(frames.size).toBe(0);
+    expect(rail.scrollLeft).toBe(450);
+    vi.advanceTimersByTime(1);
+    tick(Date.now());
+    expect(rail.scrollLeft).toBe(450);
+    advanceFrames(1200);
+    expect(rail.scrollLeft).toBeGreaterThan(460);
+    expect(frames.size).toBe(1);
+    expect(vi.getTimerCount()).toBe(0);
+  });
+
+  it('eases into movement instead of jumping to full speed after the idle delay', () => {
+    start();
+    rail.dispatchEvent(new Event('pointerdown'));
+    rail.scrollLeft = 400;
+    browser.dispatchEvent(new Event('pointerup'));
+    vi.advanceTimersByTime(3000);
+    tick(Date.now());
+    advanceFrames(192);
+    const beginning = rail.scrollLeft - 400;
+    advanceFrames(816);
+    const beforeFullSpeed = rail.scrollLeft;
+    advanceFrames(192);
+    expect(rail.scrollLeft - beforeFullSpeed).toBeGreaterThan(beginning);
+  });
+
+  it('does not resume during a held pointer or a native touch gesture after pointercancel', () => {
+    start();
+    rail.dispatchEvent(new Event('pointerdown'));
+    rail.dispatchEvent(new Event('touchstart'));
+    vi.advanceTimersByTime(5000);
+    expect(frames.size).toBe(0);
+    browser.dispatchEvent(new Event('pointercancel'));
+    vi.advanceTimersByTime(5000);
+    expect(frames.size).toBe(0);
+    expect(vi.getTimerCount()).toBe(0);
+    browser.dispatchEvent(Object.assign(new Event('touchend'), { touches: [] }));
+    vi.advanceTimersByTime(2999);
+    expect(frames.size).toBe(0);
+    vi.advanceTimersByTime(1);
+    expect(frames.size).toBe(1);
+  });
+
+  it('keeps keyboard focus paused until the visitor leaves the rail', () => {
+    start();
+    rail.focus();
+    rail.scrollLeft = 400;
+    vi.advanceTimersByTime(20_000);
+    expect(frames.size).toBe(0);
     expect(rail.scrollLeft).toBe(400);
     rail.dispatchEvent(new Event('focusout'));
-    tick(60_016);
+    vi.advanceTimersByTime(3000);
+    tick(Date.now());
     expect(rail.scrollLeft).toBe(400);
-    tick(60_080);
-    expect(rail.scrollLeft).toBe(401);
+    advanceFrames(1200);
+    expect(rail.scrollLeft).toBeGreaterThan(410);
   });
 
   it('marks pointer focus before pausing so touch does not inherit a keyboard outline', () => {
@@ -161,18 +233,19 @@ describe('partner logo native-scroll autoplay', () => {
   it('wraps at the identical copy without exposing an empty track', () => {
     rail.scrollLeft = 922;
     start();
-    tick(64);
-    expect(rail.scrollLeft).toBe(0);
-    tick(128);
-    expect(rail.scrollLeft).toBe(1);
+    advanceFrames(1200);
+    expect(rail.scrollLeft).toBeLessThan(20);
+    const wrapped = rail.scrollLeft;
+    advanceFrames(160);
+    expect(rail.scrollLeft).toBeGreaterThan(wrapped);
   });
 
   it('keeps desktop autoplay running until the visitor interacts', () => {
     start();
     rail.dispatchEvent(Object.assign(new Event('pointerenter'), { pointerType: 'mouse' }));
     expect(frames.size).toBe(1);
-    tick(64);
-    expect(rail.scrollLeft).toBe(1);
+    advanceFrames(1200);
+    expect(rail.scrollLeft).toBeGreaterThan(10);
     rail.dispatchEvent(Object.assign(new Event('pointerdown'), { pointerType: 'mouse' }));
     expect(frames.size).toBe(0);
   });
@@ -219,8 +292,8 @@ describe('partner logo native-scroll autoplay', () => {
     rail.clientWidth = 1500;
     rail.scrollWidth = 2769;
     start();
-    tick(64);
-    expect(rail.scrollLeft).toBe(1);
+    advanceFrames(1200);
+    expect(rail.scrollLeft).toBeGreaterThan(10);
   });
 
   it('waits for enough copies to cover the viewport without a gap', () => {
@@ -231,8 +304,11 @@ describe('partner logo native-scroll autoplay', () => {
 
   it('removes listeners and cancels animation when disposed', () => {
     start();
+    rail.dispatchEvent(Object.assign(new Event('wheel'), { deltaX: 30 }));
+    expect(vi.getTimerCount()).toBe(1);
     dispose?.();
     expect(frames.size).toBe(0);
+    expect(vi.getTimerCount()).toBe(0);
     reduced.set(true);
     reduced.set(false);
     rail.dispatchEvent(new Event('focusout'));
