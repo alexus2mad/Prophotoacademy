@@ -5,6 +5,9 @@ import { studioAssets } from '@/lib/studio-design/assets';
 import { studioAcademyAudience, studioAcademyTrust } from '@/lib/studio-pages/academy';
 import styles from './StudioAcademyCommunity.module.css';
 
+// The 300px-high tablet crop needs 225px of a 3:4 source to cover the frame.
+const portraitSizes = '(max-width: 760px) 36vw, (max-width: 1100px) 225px, 250px';
+
 export function StudioAcademyCommunity() {
   return (
     <>
@@ -56,7 +59,7 @@ export function StudioAcademyCommunity() {
                 alt="Олена Попова"
                 fit="cover"
                 className={styles.portrait}
-                sizes="250px"
+                sizes={portraitSizes}
               />
               <div>
                 <h3>Олена Попова</h3>
@@ -74,7 +77,7 @@ export function StudioAcademyCommunity() {
                 alt="Олександра Куліняк"
                 fit="cover"
                 className={styles.portrait}
-                sizes="250px"
+                sizes={portraitSizes}
               />
               <div>
                 <h3>Олександра Куліняк</h3>

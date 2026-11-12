@@ -1,0 +1,3072 @@
+{
+  "description": "Studio raster audit against public Drive and Webflow originals and existing local derivatives.",
+  "cropCoordinates": "Left, top, right, bottom in pixels after EXIF orientation. Negative coordinates indicate explicit dark padding.",
+  "quality": "WebP quality 86. Original metadata is omitted. Replacements are limited to native crop width.",
+  "assets": [
+    {
+      "keys": [
+        "academy.imgImgDirGold"
+      ],
+      "oldSrc": "/design/studio/academy-img-dir-gold-98c008ab94.png",
+      "oldSize": [
+        986,
+        1454
+      ],
+      "oldBytes": 276578,
+      "original": {
+        "name": "562871AD-B896-486D-8BAF-4A692358114D.jpg",
+        "size": [
+          2268,
+          2808
+        ],
+        "sha256": "aa06b531b103f2d3edac1b2733df64a312551cb3fb1423ca5a43df0a8cefc2d9",
+        "driveId": "1pI6wLpDYGGYyC82Eczf2tzqRUSCQLL5A"
+      },
+      "match": {
+        "inliers": 531,
+        "colorMae": 16.93,
+        "normalizedCrop": [
+          0.12881,
+          0.02307,
+          0.84354,
+          0.87489
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        291.89,
+        65.16,
+        1913.4,
+        2456.32
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          1.0117,
+          -18.757
+        ],
+        [
+          0.9603,
+          -9.2182
+        ],
+        [
+          0.9242,
+          -1.751
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-academy-img-dir-gold-039cf78b5087-1600.webp",
+        "width": 1600,
+        "height": 2359,
+        "bytes": 463242,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "academy.imgImgSnow"
+      ],
+      "oldSrc": "/design/studio/academy-img-snow-f813b5a484.png",
+      "oldSize": [
+        638,
+        795
+      ],
+      "oldBytes": 224754,
+      "status": "restored",
+      "original": {
+        "name": "IMG_4979 1.webp",
+        "sourceUrl": "https://s3.amazonaws.com/webflow-prod-assets/694a5cc146bb9192fcdbb5ac/69cea4dc5d9d33768a861af8_IMG_4979%201.webp",
+        "size": [
+          1648,
+          2200
+        ],
+        "sha256": "197a40549156af42f7d2ac2bff2e3965824d9df0a28231e270d9822e30da5399"
+      },
+      "match": {
+        "inliers": 630,
+        "colorMae": 10.28,
+        "normalizedCrop": [
+          0.08555,
+          0.03157,
+          0.982,
+          0.86845
+        ]
+      },
+      "crop": [
+        140.94,
+        69.51,
+        1618.38,
+        1910.53
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          0.9439,
+          -3.0405
+        ],
+        [
+          0.9379,
+          -3.2059
+        ],
+        [
+          0.9296,
+          -2.0412
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-academy-img-snow-ada6bb5f0aa1-1400.webp",
+        "width": 1400,
+        "height": 1745,
+        "bytes": 709752,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "academy.imgImgContent2"
+      ],
+      "oldSrc": "/design/studio/academy-img-content2-a2e3aeec91.png",
+      "oldSize": [
+        808,
+        1197
+      ],
+      "oldBytes": 63167,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "academy.imgImgOlena",
+        "home.imgImgHome144009"
+      ],
+      "oldSrc": "/images/hero/olena-popova-home-desktop-0b99e13145d8-1920.webp",
+      "oldSize": [
+        1920,
+        2551
+      ],
+      "oldBytes": 563368,
+      "original": {
+        "name": "IMG_5902.JPG",
+        "size": [
+          4480,
+          5952
+        ],
+        "sha256": "545b17a0e1261d91cd09268db6910cfad7c85f0ae9dadff4bcd40cff8b999397",
+        "driveId": "1Mu-7CxmgVE7jVKeJqaqjQDlCGsofa_yF"
+      },
+      "match": {
+        "inliers": 680,
+        "colorMae": 0.82,
+        "normalizedCrop": [
+          0.0,
+          -6e-05,
+          0.99995,
+          1.00005
+        ]
+      },
+      "status": "retained",
+      "reason": "Already uses the sharp 1920px IMG_5902 export."
+    },
+    {
+      "keys": [
+        "academy.imgImgOleksandra"
+      ],
+      "oldSrc": "/design/studio/academy-img-oleksandra-aab81a0d5a.png",
+      "oldSize": [
+        742,
+        997
+      ],
+      "oldBytes": 83368,
+      "original": {
+        "name": "IMG_2453.JPG",
+        "size": [
+          1736,
+          3088
+        ],
+        "sha256": "fd703bc8c813e5f638968f859f4e602ebb66fa9657cba15b513dd1348cec5175",
+        "driveId": "15KNEh9p4GARXQtqqQMgBqmZVPwBzt8wv"
+      },
+      "match": {
+        "inliers": 43,
+        "colorMae": 10.84,
+        "normalizedCrop": [
+          -0.06528,
+          -0.00084,
+          1.06192,
+          0.85119
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        -113.65,
+        -2.15,
+        1843.82,
+        2628.04
+      ],
+      "padded": true,
+      "colorScaleOffset": [
+        [
+          0.9327,
+          2.7517
+        ],
+        [
+          0.8937,
+          3.586
+        ],
+        [
+          0.867,
+          3.8306
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-academy-img-oleksandra-c9d2f436bc89-1440.webp",
+        "width": 1440,
+        "height": 1935,
+        "bytes": 359110,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "aiArtworkMobile.imgImgWs39001"
+      ],
+      "oldSrc": "/design/studio/aiArtworkMobile-img-ws39001-34ec27310a.png",
+      "oldSize": [
+        780,
+        1318
+      ],
+      "oldBytes": 137356,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "aiArtworkMobile.imgImgWs39002"
+      ],
+      "oldSrc": "/design/studio/aiArtworkMobile-img-ws39002-6b0ce3bfd3.png",
+      "oldSize": [
+        671,
+        999
+      ],
+      "oldBytes": 150237,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "aiArtworkMobile.imgImgWs39003"
+      ],
+      "oldSrc": "/design/studio/aiArtworkMobile-img-ws39003-c1cf104be3.png",
+      "oldSize": [
+        41,
+        1009
+      ],
+      "oldBytes": 7291,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "aiArtwork.imgImgWs144001"
+      ],
+      "oldSrc": "/design/studio/aiArtwork-img-ws144001-f825c76228.png",
+      "oldSize": [
+        1500,
+        731
+      ],
+      "oldBytes": 106063,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "aiArtwork.imgImgWs144002"
+      ],
+      "oldSrc": "/design/studio/aiArtwork-img-ws144002-2659068f21.png",
+      "oldSize": [
+        1050,
+        1400
+      ],
+      "oldBytes": 280317,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "aiArtwork.imgImgWs144003"
+      ],
+      "oldSrc": "/design/studio/aiArtwork-img-ws144003-83d1227796.png",
+      "oldSize": [
+        959,
+        1280
+      ],
+      "oldBytes": 174150,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "aiArtwork.imgImgWs144004"
+      ],
+      "oldSrc": "/design/studio/aiArtwork-img-ws144004-50359ac272.png",
+      "oldSize": [
+        323,
+        1280
+      ],
+      "oldBytes": 65345,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "homeMobile.imgImgHome39001"
+      ],
+      "oldSrc": "/design/studio/homeMobile-img-home39001-092f633093.png",
+      "oldSize": [
+        672,
+        1454
+      ],
+      "oldBytes": 75840,
+      "original": {
+        "name": "IMG_0283.JPG",
+        "size": [
+          5760,
+          3840
+        ],
+        "sha256": "77d1ffe9b21a969b60605311f7c36517385ba830a67f9b34d0f171b3b9cea541",
+        "driveId": "18umR5CgY2x4r4JOjS2zl3b4iPP1EopW7"
+      },
+      "match": {
+        "inliers": 499,
+        "colorMae": 6.29,
+        "normalizedCrop": [
+          0.34717,
+          -0.00025,
+          0.6526,
+          0.99164
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        1999.43,
+        0.0,
+        3759.24,
+        3807.69
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-homemobile-img-home39001-de349f4cada0-1280.webp",
+        "width": 1280,
+        "height": 2770,
+        "bytes": 410672,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "homeMobile.imgImgHome39002",
+        "homeShopMobile.imgImgHome390Shop02"
+      ],
+      "oldSrc": "/design/studio/homeMobile-img-home39002-7f77c4f08f.png",
+      "oldSize": [
+        343,
+        401
+      ],
+      "oldBytes": 34727,
+      "original": {
+        "name": "562871AD-B896-486D-8BAF-4A692358114D.jpg",
+        "size": [
+          2268,
+          2808
+        ],
+        "sha256": "aa06b531b103f2d3edac1b2733df64a312551cb3fb1423ca5a43df0a8cefc2d9",
+        "driveId": "1pI6wLpDYGGYyC82Eczf2tzqRUSCQLL5A"
+      },
+      "match": {
+        "inliers": 267,
+        "colorMae": 14.57,
+        "normalizedCrop": [
+          0.12926,
+          0.11166,
+          0.8436,
+          0.78663
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        292.9,
+        313.85,
+        1913.55,
+        2208.55
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          1.0367,
+          -19.1169
+        ],
+        [
+          0.9807,
+          -8.5283
+        ],
+        [
+          0.9387,
+          -1.4987
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-homemobile-img-home39002-21bc390c679c-960.webp",
+        "width": 960,
+        "height": 1122,
+        "bytes": 155658,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "homeMobile.imgImgHome39003",
+        "homeShopMobile.imgImgHome390Shop03"
+      ],
+      "oldSrc": "/design/studio/homeMobile-img-home39003-ccfd60556c.png",
+      "oldSize": [
+        343,
+        400
+      ],
+      "oldBytes": 29572,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "homeMobile.imgImgHome39004",
+        "homeShopMobile.imgImgHome390Shop04"
+      ],
+      "oldSrc": "/design/studio/homeMobile-img-home39004-5b6a46fbcb.png",
+      "oldSize": [
+        343,
+        400
+      ],
+      "oldBytes": 16958,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "homeMobile.imgImgHome39005",
+        "homeShopMobile.imgImgHome390Shop05"
+      ],
+      "oldSrc": "/design/studio/homeMobile-img-home39005-bd83ebcdc1.png",
+      "oldSize": [
+        343,
+        401
+      ],
+      "oldBytes": 37080,
+      "original": {
+        "name": "E3FD0B93-1698-40E1-9188-0B0109B5A23F.jpg",
+        "size": [
+          1850,
+          2313
+        ],
+        "sha256": "51fab9fc94e99ed2bf25b5c9fd1415a85a390cc34a5980ad6f7abbc253dea089",
+        "driveId": "1MmbqGoVIqWBemhVHu79Nu9qcxujR0-uL"
+      },
+      "match": {
+        "inliers": 238,
+        "colorMae": 9.42,
+        "normalizedCrop": [
+          0.13405,
+          0.14649,
+          0.86851,
+          0.83321
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        248.02,
+        338.8,
+        1606.72,
+        1927.25
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          0.9898,
+          -6.0891
+        ],
+        [
+          0.998,
+          -6.5078
+        ],
+        [
+          0.9969,
+          -6.4845
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-homemobile-img-home39005-4c54b51e025c-960.webp",
+        "width": 960,
+        "height": 1122,
+        "bytes": 199994,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "homeMobile.imgImgHome39006",
+        "homeShopMobile.imgImgHome390Shop06"
+      ],
+      "oldSrc": "/design/studio/homeMobile-img-home39006-81e7e9fc35.png",
+      "oldSize": [
+        86,
+        404
+      ],
+      "oldBytes": 7935,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "homeMobile.imgImgHome39007",
+        "homeShopMobile.imgImgHome390Shop07"
+      ],
+      "oldSrc": "/design/studio/homeMobile-img-home39007-0e2a2f1fc4.png",
+      "oldSize": [
+        86,
+        403
+      ],
+      "oldBytes": 7115,
+      "original": {
+        "name": "F6E10D0C-09EF-46BC-8826-C883037E27FA.jpg",
+        "size": [
+          1376,
+          1519
+        ],
+        "sha256": "f193af40d1308d08ecb22ffbc7370f5b787e8cc5e558bc076f97253fc36935fb",
+        "driveId": "1pczBWKfhH6EQPFj6me6oW6zH77KdZgau"
+      },
+      "match": {
+        "inliers": 16,
+        "colorMae": 7.36,
+        "normalizedCrop": [
+          0.01748,
+          0.05951,
+          0.22012,
+          0.9164
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        24.32,
+        89.14,
+        302.62,
+        1393.26
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          0.9181,
+          -0.7074
+        ],
+        [
+          0.9798,
+          -3.8533
+        ],
+        [
+          0.9537,
+          -0.3899
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-homemobile-img-home39007-9503ff965035-256.webp",
+        "width": 256,
+        "height": 1200,
+        "bytes": 28364,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "homeMobile.imgImgHome39008"
+      ],
+      "oldSrc": "/images/hero/olena-popova-home-mobile-2b88b2c84b6b-1280.webp",
+      "oldSize": [
+        1280,
+        1344
+      ],
+      "oldBytes": 162718,
+      "original": {
+        "name": "IMG_5902.JPG",
+        "size": [
+          4480,
+          5952
+        ],
+        "sha256": "545b17a0e1261d91cd09268db6910cfad7c85f0ae9dadff4bcd40cff8b999397",
+        "driveId": "1Mu-7CxmgVE7jVKeJqaqjQDlCGsofa_yF"
+      },
+      "match": {
+        "inliers": 492,
+        "colorMae": 1.57,
+        "normalizedCrop": [
+          -0.00014,
+          0.04192,
+          1.00002,
+          0.83227
+        ]
+      },
+      "status": "retained",
+      "reason": "Already uses the sharp 1280px IMG_5902 mobile crop."
+    },
+    {
+      "keys": [
+        "homeMobile.imgImgHome39009",
+        "homeShopMobile.imgImgHome390Shop09",
+        "homeStudioMobile.imgImgHome390Studio05"
+      ],
+      "oldSrc": "/design/studio/homeMobile-img-home39009-2b44ecbfa9.png",
+      "oldSize": [
+        780,
+        129
+      ],
+      "oldBytes": 8832,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "homeMobile.imgImgHome39010",
+        "homeShopMobile.imgImgHome390Shop10",
+        "homeStudioMobile.imgImgHome390Studio06"
+      ],
+      "oldSrc": "/design/studio/homeMobile-img-home39010-631958caeb.png",
+      "oldSize": [
+        371,
+        465
+      ],
+      "oldBytes": 36580,
+      "original": {
+        "name": "F6E10D0C-09EF-46BC-8826-C883037E27FA.jpg",
+        "size": [
+          1376,
+          1519
+        ],
+        "sha256": "f193af40d1308d08ecb22ffbc7370f5b787e8cc5e558bc076f97253fc36935fb",
+        "driveId": "1pczBWKfhH6EQPFj6me6oW6zH77KdZgau"
+      },
+      "match": {
+        "inliers": 150,
+        "colorMae": 8.58,
+        "normalizedCrop": [
+          0.01783,
+          0.02756,
+          0.82704,
+          0.94783
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        24.08,
+        42.44,
+        1138.47,
+        1439.18
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          0.9803,
+          -5.4456
+        ],
+        [
+          1.0011,
+          -6.8039
+        ],
+        [
+          0.9693,
+          -2.3686
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-homemobile-img-home39010-73b583989fbb-720.webp",
+        "width": 720,
+        "height": 902,
+        "bytes": 91882,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "homeMobile.imgImgHome39011",
+        "homeShopMobile.imgImgHome390Shop11",
+        "homeStudioMobile.imgImgHome390Studio07"
+      ],
+      "oldSrc": "/design/studio/homeMobile-img-home39011-14e269abd8.png",
+      "oldSize": [
+        371,
+        464
+      ],
+      "oldBytes": 45980,
+      "original": {
+        "name": "IMG_6477.JPG",
+        "size": [
+          1914,
+          3402
+        ],
+        "sha256": "8bf01151f6a89f02869bdb85b91daad8c545afecb4ee36bdff592f390f581e8c",
+        "driveId": "1KdQS9HV-RES3Fm8Cd1eLOcWlDYJW_lIM"
+      },
+      "match": {
+        "inliers": 310,
+        "colorMae": 11.16,
+        "normalizedCrop": [
+          0.00321,
+          0.14135,
+          0.99707,
+          0.84005
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        6.57,
+        480.34,
+        1907.97,
+        2858.38
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          0.9551,
+          -3.5927
+        ],
+        [
+          0.9645,
+          -4.669
+        ],
+        [
+          0.9655,
+          -5.5872
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-homemobile-img-home39011-de51ef7118ea-720.webp",
+        "width": 720,
+        "height": 900,
+        "bytes": 114112,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "homeMobile.imgImgHome39012",
+        "homeShopMobile.imgImgHome390Shop12",
+        "homeStudioMobile.imgImgHome390Studio08"
+      ],
+      "oldSrc": "/design/studio/homeMobile-img-home39012-95ba8b84ed.png",
+      "oldSize": [
+        371,
+        464
+      ],
+      "oldBytes": 43546,
+      "original": {
+        "name": "E3FD0B93-1698-40E1-9188-0B0109B5A23F.jpg",
+        "size": [
+          1850,
+          2313
+        ],
+        "sha256": "51fab9fc94e99ed2bf25b5c9fd1415a85a390cc34a5980ad6f7abbc253dea089",
+        "driveId": "1MmbqGoVIqWBemhVHu79Nu9qcxujR0-uL"
+      },
+      "match": {
+        "inliers": 282,
+        "colorMae": 9.19,
+        "normalizedCrop": [
+          0.13518,
+          0.12333,
+          0.86738,
+          0.85631
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        249.83,
+        285.58,
+        1604.9,
+        1980.33
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          0.9872,
+          -5.5817
+        ],
+        [
+          0.9955,
+          -5.9826
+        ],
+        [
+          0.9947,
+          -6.0294
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-homemobile-img-home39012-f4bf0e332545-720.webp",
+        "width": 720,
+        "height": 900,
+        "bytes": 134768,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "homeMobile.imgImgHome39013",
+        "homeShopMobile.imgImgHome390Shop13",
+        "homeStudioMobile.imgImgHome390Studio09"
+      ],
+      "oldSrc": "/design/studio/homeMobile-img-home39013-11e4134c63.png",
+      "oldSize": [
+        371,
+        464
+      ],
+      "oldBytes": 48986,
+      "status": "restored",
+      "original": {
+        "name": "IMG_4979 1.webp",
+        "sourceUrl": "https://s3.amazonaws.com/webflow-prod-assets/694a5cc146bb9192fcdbb5ac/69cea4dc5d9d33768a861af8_IMG_4979%201.webp",
+        "size": [
+          1648,
+          2200
+        ],
+        "sha256": "197a40549156af42f7d2ac2bff2e3965824d9df0a28231e270d9822e30da5399"
+      },
+      "match": {
+        "inliers": 226,
+        "colorMae": 13.53,
+        "normalizedCrop": [
+          0.00631,
+          0.02291,
+          1.00032,
+          0.95261
+        ]
+      },
+      "crop": [
+        11.08,
+        49.55,
+        1647.84,
+        2096.6
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          0.8767,
+          2.0161
+        ],
+        [
+          0.8699,
+          3.4011
+        ],
+        [
+          0.8549,
+          3.8944
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-homemobile-img-home39013-d16adf9dd389-720.webp",
+        "width": 720,
+        "height": 900,
+        "bytes": 187960,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "homeMobile.imgImgHome39014"
+      ],
+      "oldSrc": "/design/studio/homeMobile-img-home39014-72eb20126c.png",
+      "oldSize": [
+        780,
+        226
+      ],
+      "oldBytes": 13666,
+      "original": {
+        "name": "softbox.webp",
+        "size": [
+          1400,
+          467
+        ],
+        "sha256": "7d9dca071a5b867073d5038adffa1cfa5734b0d21214308a6c638ef7ba137623",
+        "artifactSrc": "/design/studio/artifact/softbox-7d9dca071a.webp"
+      },
+      "match": {
+        "inliers": 191,
+        "colorMae": 0.51,
+        "normalizedCrop": [
+          8e-05,
+          0.05972,
+          1.00012,
+          0.92766
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        0.4,
+        27.81,
+        1399.88,
+        433.3
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-homemobile-img-home39014-3afa1f81b726-1280.webp",
+        "width": 1280,
+        "height": 371,
+        "bytes": 10502,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "homeMobile.imgImgHome39015"
+      ],
+      "oldSrc": "/design/studio/homeMobile-img-home39015-07faf22fac.png",
+      "oldSize": [
+        780,
+        226
+      ],
+      "oldBytes": 17725,
+      "original": {
+        "name": "studio_band.webp",
+        "size": [
+          1400,
+          467
+        ],
+        "sha256": "93718ea239d4d69ca7559e01569b17ffab1a55185ec964f617f434b1ba454374",
+        "artifactSrc": "/design/studio/artifact/studio_band-93718ea239.webp"
+      },
+      "match": {
+        "inliers": 73,
+        "colorMae": 1.02,
+        "normalizedCrop": [
+          4e-05,
+          0.06026,
+          1.00009,
+          0.92768
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        0.55,
+        28.0,
+        1399.63,
+        433.37
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-homemobile-img-home39015-4219c69736fa-1280.webp",
+        "width": 1280,
+        "height": 371,
+        "bytes": 18202,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "homeShopMobile.imgImgHome390Shop01"
+      ],
+      "oldSrc": "/design/studio/homeShopMobile-img-home390-shop01-0b37f3e862.png",
+      "oldSize": [
+        780,
+        1688
+      ],
+      "oldBytes": 205516,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "homeShopMobile.imgImgHome390Shop08",
+        "homeStudioMobile.imgImgHome390Studio04"
+      ],
+      "oldSrc": "/design/studio/homeMobile-img-home39008-60b0c1af6c.png",
+      "oldSize": [
+        780,
+        819
+      ],
+      "oldBytes": 39825,
+      "original": {
+        "name": "IMG_5902.JPG",
+        "size": [
+          4480,
+          5952
+        ],
+        "sha256": "545b17a0e1261d91cd09268db6910cfad7c85f0ae9dadff4bcd40cff8b999397",
+        "driveId": "1Mu-7CxmgVE7jVKeJqaqjQDlCGsofa_yF"
+      },
+      "match": {
+        "inliers": 47,
+        "colorMae": 28.21,
+        "normalizedCrop": [
+          -0.00089,
+          0.03957,
+          0.9927,
+          0.82147
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        0.77,
+        230.53,
+        4442.54,
+        4894.38
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          1.1563,
+          -30.0
+        ],
+        [
+          1.1484,
+          -30.0
+        ],
+        [
+          1.1863,
+          -30.0
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-homemobile-img-home39008-9f4bf61aba7d-1280.webp",
+        "width": 1280,
+        "height": 1344,
+        "bytes": 161012,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "homeShopMobile.imgImgHome390Shop14",
+        "homeStudioMobile.imgImgHome390Studio10"
+      ],
+      "oldSrc": "/design/studio/homeShopMobile-img-home390-shop14-5c777f373d.png",
+      "oldSize": [
+        780,
+        152
+      ],
+      "oldBytes": 9229,
+      "original": {
+        "name": "softbox.webp",
+        "size": [
+          1400,
+          467
+        ],
+        "sha256": "7d9dca071a5b867073d5038adffa1cfa5734b0d21214308a6c638ef7ba137623",
+        "artifactSrc": "/design/studio/artifact/softbox-7d9dca071a.webp"
+      },
+      "match": {
+        "inliers": 126,
+        "colorMae": 0.5,
+        "normalizedCrop": [
+          0.00015,
+          0.18657,
+          1.00013,
+          0.77114
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        0.0,
+        87.22,
+        1400.0,
+        360.04
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-homeshopmobile-img-home390-shop14-3826d49dc6fe-1280.webp",
+        "width": 1280,
+        "height": 249,
+        "bytes": 7032,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "homeShopMobile.imgImgHome390Shop15",
+        "homeStudioMobile.imgImgHome390Studio11"
+      ],
+      "oldSrc": "/design/studio/homeShopMobile-img-home390-shop15-25ca6e23ee.png",
+      "oldSize": [
+        780,
+        152
+      ],
+      "oldBytes": 12160,
+      "original": {
+        "name": "studio_band.webp",
+        "size": [
+          1400,
+          467
+        ],
+        "sha256": "93718ea239d4d69ca7559e01569b17ffab1a55185ec964f617f434b1ba454374",
+        "artifactSrc": "/design/studio/artifact/studio_band-93718ea239.webp"
+      },
+      "match": {
+        "inliers": 33,
+        "colorMae": 1.17,
+        "normalizedCrop": [
+          0.00052,
+          0.18551,
+          0.99983,
+          0.77239
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        0.0,
+        87.26,
+        1400.0,
+        360.08
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-homeshopmobile-img-home390-shop15-1b909a4b8d95-1280.webp",
+        "width": 1280,
+        "height": 249,
+        "bytes": 12652,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "homeStudioMobile.imgImgHome390Studio01"
+      ],
+      "oldSrc": "/design/studio/homeStudioMobile-img-home390-studio01-c65d597363.png",
+      "oldSize": [
+        710,
+        1537
+      ],
+      "oldBytes": 137408,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "homeStudioMobile.imgImgHome390Studio02"
+      ],
+      "oldSrc": "/design/studio/homeStudioMobile-img-home390-studio02-887148e72b.png",
+      "oldSize": [
+        562,
+        449
+      ],
+      "oldBytes": 37230,
+      "status": "source-limited",
+      "reason": "Matched a local derivative but did not verify an original from the audited inventory.",
+      "localCandidate": "public/images/hero/home-studio-13d7c1da32fd-1200.webp"
+    },
+    {
+      "keys": [
+        "homeStudioMobile.imgImgHome390Studio03"
+      ],
+      "oldSrc": "/design/studio/homeStudioMobile-img-home390-studio03-755a5befeb.png",
+      "oldSize": [
+        214,
+        449
+      ],
+      "oldBytes": 10966,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "home.imgImgHome144001"
+      ],
+      "oldSrc": "/design/studio/home-img-home144001-9ddf423067.png",
+      "oldSize": [
+        2200,
+        1332
+      ],
+      "oldBytes": 128028,
+      "original": {
+        "name": "1.2. Інста що продає.JPG",
+        "size": [
+          5760,
+          3840
+        ],
+        "sha256": "77d1ffe9b21a969b60605311f7c36517385ba830a67f9b34d0f171b3b9cea541",
+        "driveId": "1ip5NJOSXL37vz74dpsQK7f2ENp07DfQ3"
+      },
+      "match": {
+        "inliers": 487,
+        "colorMae": 5.38,
+        "normalizedCrop": [
+          -5e-05,
+          0.04128,
+          1.0001,
+          0.95045
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        0.0,
+        160.41,
+        5760.0,
+        3647.83
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-home-img-home144001-019c0c4a94e0-3200.webp",
+        "width": 3200,
+        "height": 1937,
+        "bytes": 249104,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "home.imgImgHome144002"
+      ],
+      "oldSrc": "/design/studio/home-img-home144002-bb19d4f459.png",
+      "oldSize": [
+        2200,
+        1375
+      ],
+      "oldBytes": 707467,
+      "original": {
+        "name": "IMG_5050.JPG",
+        "size": [
+          1200,
+          800
+        ],
+        "sha256": "3e4018ee7e953a03e64ecdaf85dd26ca2462a6917e38c556b57d3492a9a2a182",
+        "driveId": "1ie2N3gmVVqfjcVaZuhYcOInmFf6uv4Zk"
+      },
+      "match": {
+        "inliers": 908,
+        "colorMae": 5.45,
+        "normalizedCrop": [
+          -1e-05,
+          0.01914,
+          1.00039,
+          0.95678
+        ]
+      },
+      "status": "retained",
+      "reason": "Matching color original is only 1200×800. Its crop has fewer pixels than the current export."
+    },
+    {
+      "keys": [
+        "home.imgImgHome144003"
+      ],
+      "oldSrc": "/design/studio/home-img-home144003-daa2141c33.png",
+      "oldSize": [
+        957,
+        1180
+      ],
+      "oldBytes": 157939,
+      "original": {
+        "name": "562871AD-B896-486D-8BAF-4A692358114D.jpg",
+        "size": [
+          2268,
+          2808
+        ],
+        "sha256": "aa06b531b103f2d3edac1b2733df64a312551cb3fb1423ca5a43df0a8cefc2d9",
+        "driveId": "1pI6wLpDYGGYyC82Eczf2tzqRUSCQLL5A"
+      },
+      "match": {
+        "inliers": 436,
+        "colorMae": 14.47,
+        "normalizedCrop": [
+          0.12879,
+          0.09274,
+          0.84346,
+          0.80515
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        291.71,
+        260.88,
+        1913.35,
+        2260.39
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          1.033,
+          -19.0956
+        ],
+        [
+          0.9742,
+          -8.3873
+        ],
+        [
+          0.9311,
+          -1.5004
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-home-img-home144003-2b586f1b06e4-1200.webp",
+        "width": 1200,
+        "height": 1480,
+        "bytes": 236162,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "home.imgImgHome144004"
+      ],
+      "oldSrc": "/design/studio/home-img-home144004-6d77332dc8.png",
+      "oldSize": [
+        957,
+        1181
+      ],
+      "oldBytes": 134206,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "home.imgImgHome144005"
+      ],
+      "oldSrc": "/design/studio/home-img-home144005-bb4eba5276.png",
+      "oldSize": [
+        957,
+        1181
+      ],
+      "oldBytes": 73276,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "home.imgImgHome144006"
+      ],
+      "oldSrc": "/design/studio/home-img-home144006-60957a1de1.png",
+      "oldSize": [
+        656,
+        810
+      ],
+      "oldBytes": 97701,
+      "original": {
+        "name": "E3FD0B93-1698-40E1-9188-0B0109B5A23F.jpg",
+        "size": [
+          1850,
+          2313
+        ],
+        "sha256": "51fab9fc94e99ed2bf25b5c9fd1415a85a390cc34a5980ad6f7abbc253dea089",
+        "driveId": "1MmbqGoVIqWBemhVHu79Nu9qcxujR0-uL"
+      },
+      "match": {
+        "inliers": 515,
+        "colorMae": 8.92,
+        "normalizedCrop": [
+          0.13389,
+          0.12665,
+          0.86824,
+          0.85263
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        247.35,
+        293.37,
+        1606.59,
+        1971.7
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          0.9815,
+          -4.5903
+        ],
+        [
+          0.9902,
+          -5.0583
+        ],
+        [
+          0.9908,
+          -5.2994
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-home-img-home144006-2541fef8c91f-1200.webp",
+        "width": 1200,
+        "height": 1482,
+        "bytes": 274722,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "home.imgImgHome144007"
+      ],
+      "oldSrc": "/design/studio/home-img-home144007-a0568503f0.png",
+      "oldSize": [
+        674,
+        832
+      ],
+      "oldBytes": 72946,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "home.imgImgHome144008"
+      ],
+      "oldSrc": "/design/studio/home-img-home144008-a03a0d809c.png",
+      "oldSize": [
+        646,
+        796
+      ],
+      "oldBytes": 80239,
+      "original": {
+        "name": "F6E10D0C-09EF-46BC-8826-C883037E27FA.jpg",
+        "size": [
+          1376,
+          1519
+        ],
+        "sha256": "f193af40d1308d08ecb22ffbc7370f5b787e8cc5e558bc076f97253fc36935fb",
+        "driveId": "1pczBWKfhH6EQPFj6me6oW6zH77KdZgau"
+      },
+      "match": {
+        "inliers": 334,
+        "colorMae": 8.29,
+        "normalizedCrop": [
+          0.01769,
+          0.03543,
+          0.82688,
+          0.93974
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        24.0,
+        54.23,
+        1138.12,
+        1427.05
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          0.9776,
+          -5.1016
+        ],
+        [
+          0.9997,
+          -6.5766
+        ],
+        [
+          0.9695,
+          -2.3641
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-home-img-home144008-32a88c6cc57a-1080.webp",
+        "width": 1080,
+        "height": 1331,
+        "bytes": 153812,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "home.imgImgHome144010"
+      ],
+      "oldSrc": "/design/studio/home-img-home144010-0b45ca59ca.png",
+      "oldSize": [
+        2880,
+        209
+      ],
+      "oldBytes": 40785,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "home.imgImgHome144011"
+      ],
+      "oldSrc": "/design/studio/home-img-home144011-6be189dcfe.png",
+      "oldSize": [
+        646,
+        808
+      ],
+      "oldBytes": 80509,
+      "original": {
+        "name": "F6E10D0C-09EF-46BC-8826-C883037E27FA.jpg",
+        "size": [
+          1376,
+          1519
+        ],
+        "sha256": "f193af40d1308d08ecb22ffbc7370f5b787e8cc5e558bc076f97253fc36935fb",
+        "driveId": "1pczBWKfhH6EQPFj6me6oW6zH77KdZgau"
+      },
+      "match": {
+        "inliers": 343,
+        "colorMae": 8.28,
+        "normalizedCrop": [
+          0.01764,
+          0.02857,
+          0.82688,
+          0.94661
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        23.92,
+        43.83,
+        1138.14,
+        1437.46
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          0.9775,
+          -5.0968
+        ],
+        [
+          0.9995,
+          -6.5454
+        ],
+        [
+          0.9698,
+          -2.4201
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-home-img-home144011-7b7d004a3b00-1080.webp",
+        "width": 1080,
+        "height": 1351,
+        "bytes": 154854,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "home.imgImgHome144012"
+      ],
+      "oldSrc": "/design/studio/home-img-home144012-f49f77e39b.png",
+      "oldSize": [
+        654,
+        818
+      ],
+      "oldBytes": 107100,
+      "original": {
+        "name": "IMG_6477.JPG",
+        "size": [
+          1914,
+          3402
+        ],
+        "sha256": "8bf01151f6a89f02869bdb85b91daad8c545afecb4ee36bdff592f390f581e8c",
+        "driveId": "1KdQS9HV-RES3Fm8Cd1eLOcWlDYJW_lIM"
+      },
+      "match": {
+        "inliers": 207,
+        "colorMae": 11.06,
+        "normalizedCrop": [
+          0.00276,
+          0.1412,
+          0.99726,
+          0.83995
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        6.01,
+        479.45,
+        1908.03,
+        2858.42
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          0.9511,
+          -3.2067
+        ],
+        [
+          0.9566,
+          -3.6985
+        ],
+        [
+          0.9555,
+          -4.4194
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-home-img-home144012-d40170a72ea4-1440.webp",
+        "width": 1440,
+        "height": 1801,
+        "bytes": 303692,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "home.imgImgHome144013"
+      ],
+      "oldSrc": "/design/studio/home-img-home144013-ca8ffd3c8a.png",
+      "oldSize": [
+        654,
+        818
+      ],
+      "oldBytes": 101228,
+      "original": {
+        "name": "E3FD0B93-1698-40E1-9188-0B0109B5A23F.jpg",
+        "size": [
+          1850,
+          2313
+        ],
+        "sha256": "51fab9fc94e99ed2bf25b5c9fd1415a85a390cc34a5980ad6f7abbc253dea089",
+        "driveId": "1MmbqGoVIqWBemhVHu79Nu9qcxujR0-uL"
+      },
+      "match": {
+        "inliers": 512,
+        "colorMae": 8.91,
+        "normalizedCrop": [
+          0.13497,
+          0.12313,
+          0.86718,
+          0.85616
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        249.45,
+        285.11,
+        1604.53,
+        1979.99
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          0.9815,
+          -4.547
+        ],
+        [
+          0.9901,
+          -5.0326
+        ],
+        [
+          0.9906,
+          -5.2249
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-home-img-home144013-dbd4927c664d-1280.webp",
+        "width": 1280,
+        "height": 1601,
+        "bytes": 302380,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "home.imgImgHome144014"
+      ],
+      "oldSrc": "/design/studio/home-img-home144014-631987355d.png",
+      "oldSize": [
+        654,
+        818
+      ],
+      "oldBytes": 112299,
+      "status": "restored",
+      "original": {
+        "name": "IMG_4979 1.webp",
+        "sourceUrl": "https://s3.amazonaws.com/webflow-prod-assets/694a5cc146bb9192fcdbb5ac/69cea4dc5d9d33768a861af8_IMG_4979%201.webp",
+        "size": [
+          1648,
+          2200
+        ],
+        "sha256": "197a40549156af42f7d2ac2bff2e3965824d9df0a28231e270d9822e30da5399"
+      },
+      "match": {
+        "inliers": 355,
+        "colorMae": 12.77,
+        "normalizedCrop": [
+          0.00602,
+          0.02272,
+          1.0,
+          0.95235
+        ]
+      },
+      "crop": [
+        10.65,
+        49.07,
+        1647.27,
+        2096.09
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          0.8821,
+          1.5133
+        ],
+        [
+          0.8752,
+          2.9276
+        ],
+        [
+          0.8625,
+          3.2455
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-home-img-home144014-3d3fefe4c3ae-1280.webp",
+        "width": 1280,
+        "height": 1601,
+        "bytes": 568496,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "home.imgImgHome144015"
+      ],
+      "oldSrc": "/design/studio/home-img-home144015-1fc80d4dfc.png",
+      "oldSize": [
+        898,
+        467
+      ],
+      "oldBytes": 27621,
+      "status": "source-limited",
+      "reason": "Matched a local derivative but did not verify an original from the audited inventory.",
+      "localCandidate": "public/images/hero/home-shop-0212dda4496d-1200.webp"
+    },
+    {
+      "keys": [
+        "shop.imgHero"
+      ],
+      "oldSrc": "/design/studio/shop-hero-d82363024a.png",
+      "oldSize": [
+        2200,
+        1352
+      ],
+      "oldBytes": 580582,
+      "original": {
+        "name": "IMG_6794.JPG",
+        "size": [
+          4143,
+          2902
+        ],
+        "sha256": "4dc6c33801c7d40c7c6dbec0e9e37f4450f6931607c50217964df0112bc23280",
+        "driveId": "18OStal7fkPt5Fqu2E_AKvscEgN_Nphkp"
+      },
+      "match": {
+        "inliers": 979,
+        "colorMae": 5.71,
+        "normalizedCrop": [
+          -4e-05,
+          0.07885,
+          1.0,
+          0.9568
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        0.0,
+        229.7,
+        4143.0,
+        2775.76
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          1.0716,
+          -1.9085
+        ],
+        [
+          1.0386,
+          -5.7611
+        ],
+        [
+          1.053,
+          -7.5986
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-shop-hero-693c79757619-3200.webp",
+        "width": 3200,
+        "height": 1967,
+        "bytes": 1346182,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "studio.imgHero"
+      ],
+      "oldSrc": "/design/studio/studio-hero-66ab29f201.png",
+      "oldSize": [
+        2200,
+        1467
+      ],
+      "oldBytes": 1017733,
+      "original": {
+        "name": "IMG_5050.JPG",
+        "size": [
+          1200,
+          800
+        ],
+        "sha256": "3e4018ee7e953a03e64ecdaf85dd26ca2462a6917e38c556b57d3492a9a2a182",
+        "driveId": "1ie2N3gmVVqfjcVaZuhYcOInmFf6uv4Zk"
+      },
+      "match": {
+        "inliers": 944,
+        "colorMae": 5.3,
+        "normalizedCrop": [
+          0.0,
+          5e-05,
+          1.00037,
+          1.00044
+        ]
+      },
+      "status": "retained",
+      "reason": "Matching color original is only 1200×800. Its crop has fewer pixels than the current export."
+    },
+    {
+      "keys": [
+        "studio.imgImgCyclo1"
+      ],
+      "oldSrc": "/design/studio/studio-img-cyclo1-5cd753f103.png",
+      "oldSize": [
+        1500,
+        832
+      ],
+      "oldBytes": 204077,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "studio.imgImgCyclo2"
+      ],
+      "oldSrc": "/design/studio/studio-img-cyclo2-b42e6e8185.png",
+      "oldSize": [
+        1500,
+        1000
+      ],
+      "oldBytes": 237581,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "studio.imgImgContent1"
+      ],
+      "oldSrc": "/design/studio/studio-img-content1-8293d19de9.png",
+      "oldSize": [
+        1500,
+        1009
+      ],
+      "oldBytes": 105859,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "studio.imgImgContent3"
+      ],
+      "oldSrc": "/design/studio/studio-img-content3-d96c394744.png",
+      "oldSize": [
+        1000,
+        1112
+      ],
+      "oldBytes": 63907,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "studio.imgImgMakeup1"
+      ],
+      "oldSrc": "/design/studio/studio-img-makeup1-26dddac586.png",
+      "oldSize": [
+        1000,
+        983
+      ],
+      "oldBytes": 163576,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "studio.imgImgMakeup3"
+      ],
+      "oldSrc": "/design/studio/studio-img-makeup3-81e214aecd.png",
+      "oldSize": [
+        1000,
+        1204
+      ],
+      "oldBytes": 187058,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "artifact.hero_space"
+      ],
+      "oldSrc": "/design/studio/artifact/hero_space-7156c7ca70.webp",
+      "oldSize": [
+        2600,
+        1537
+      ],
+      "oldBytes": 236238,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "artifact.hero_academy"
+      ],
+      "oldSrc": "/design/studio/artifact/hero_academy-2664dadc4c.webp",
+      "oldSize": [
+        2200,
+        1454
+      ],
+      "oldBytes": 49826,
+      "original": {
+        "name": "IMG_0283.JPG",
+        "size": [
+          5760,
+          3840
+        ],
+        "sha256": "77d1ffe9b21a969b60605311f7c36517385ba830a67f9b34d0f171b3b9cea541",
+        "driveId": "18umR5CgY2x4r4JOjS2zl3b4iPP1EopW7"
+      },
+      "match": {
+        "inliers": 603,
+        "colorMae": 5.67,
+        "normalizedCrop": [
+          0.0,
+          -0.00023,
+          0.99993,
+          0.99191
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        0.0,
+        0.61,
+        5760.0,
+        3807.44
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-hero_academy-3a346ccab4f1-3200.webp",
+        "width": 3200,
+        "height": 2115,
+        "bytes": 328864,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "artifact.hero_studio"
+      ],
+      "oldSrc": "/design/studio/artifact/hero_studio-216d11e3d6.webp",
+      "oldSize": [
+        2200,
+        1467
+      ],
+      "oldBytes": 467560,
+      "original": {
+        "name": "IMG_5050.JPG",
+        "size": [
+          1200,
+          800
+        ],
+        "sha256": "3e4018ee7e953a03e64ecdaf85dd26ca2462a6917e38c556b57d3492a9a2a182",
+        "driveId": "1ie2N3gmVVqfjcVaZuhYcOInmFf6uv4Zk"
+      },
+      "match": {
+        "inliers": 932,
+        "colorMae": 5.24,
+        "normalizedCrop": [
+          -0.0,
+          5e-05,
+          1.00038,
+          1.00044
+        ]
+      },
+      "status": "retained",
+      "reason": "Matching color original is only 1200×800. Its crop has fewer pixels than the current export."
+    },
+    {
+      "keys": [
+        "artifact.hero_shop"
+      ],
+      "oldSrc": "/design/studio/artifact/hero_shop-af4c45f4dd.webp",
+      "oldSize": [
+        2200,
+        1352
+      ],
+      "oldBytes": 219106,
+      "original": {
+        "name": "IMG_6794.JPG",
+        "size": [
+          4143,
+          2902
+        ],
+        "sha256": "4dc6c33801c7d40c7c6dbec0e9e37f4450f6931607c50217964df0112bc23280",
+        "driveId": "18OStal7fkPt5Fqu2E_AKvscEgN_Nphkp"
+      },
+      "match": {
+        "inliers": 987,
+        "colorMae": 5.71,
+        "normalizedCrop": [
+          -3e-05,
+          0.07885,
+          1.0,
+          0.95681
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        0.0,
+        229.7,
+        4143.0,
+        2775.76
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          1.0716,
+          -1.9085
+        ],
+        [
+          1.0386,
+          -5.7611
+        ],
+        [
+          1.053,
+          -7.5986
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-shop-hero-693c79757619-3200.webp",
+        "width": 3200,
+        "height": 1967,
+        "bytes": 1346182,
+        "quality": 86
+      },
+      "sharedWith": "shop.imgHero"
+    },
+    {
+      "keys": [
+        "artifact.dir_gold"
+      ],
+      "oldSrc": "/design/studio/artifact/dir_gold-e8266eb8d7.webp",
+      "oldSize": [
+        986,
+        1454
+      ],
+      "oldBytes": 80310,
+      "original": {
+        "name": "562871AD-B896-486D-8BAF-4A692358114D.jpg",
+        "size": [
+          2268,
+          2808
+        ],
+        "sha256": "aa06b531b103f2d3edac1b2733df64a312551cb3fb1423ca5a43df0a8cefc2d9",
+        "driveId": "1pI6wLpDYGGYyC82Eczf2tzqRUSCQLL5A"
+      },
+      "match": {
+        "inliers": 542,
+        "colorMae": 16.92,
+        "normalizedCrop": [
+          0.12873,
+          0.02299,
+          0.8436,
+          0.87493
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        291.89,
+        65.16,
+        1913.4,
+        2456.32
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          1.0117,
+          -18.757
+        ],
+        [
+          0.9603,
+          -9.2182
+        ],
+        [
+          0.9242,
+          -1.751
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-academy-img-dir-gold-039cf78b5087-1600.webp",
+        "width": 1600,
+        "height": 2359,
+        "bytes": 463242,
+        "quality": 86
+      },
+      "sharedWith": "academy.imgImgDirGold"
+    },
+    {
+      "keys": [
+        "artifact.hero_tech"
+      ],
+      "oldSrc": "/design/studio/artifact/hero_tech-a34ebaa457.webp",
+      "oldSize": [
+        2600,
+        1733
+      ],
+      "oldBytes": 359912,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "artifact.dir_curly"
+      ],
+      "oldSrc": "/design/studio/artifact/dir_curly-259092f114.webp",
+      "oldSize": [
+        982,
+        1454
+      ],
+      "oldBytes": 65776,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "artifact.dir_suit"
+      ],
+      "oldSrc": "/design/studio/artifact/dir_suit-83b0430908.webp",
+      "oldSize": [
+        984,
+        1454
+      ],
+      "oldBytes": 25334,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "artifact.work1"
+      ],
+      "oldSrc": "/design/studio/artifact/work1-56f9c96922.webp",
+      "oldSize": [
+        646,
+        818
+      ],
+      "oldBytes": 37722,
+      "original": {
+        "name": "F6E10D0C-09EF-46BC-8826-C883037E27FA.jpg",
+        "size": [
+          1376,
+          1519
+        ],
+        "sha256": "f193af40d1308d08ecb22ffbc7370f5b787e8cc5e558bc076f97253fc36935fb",
+        "driveId": "1pczBWKfhH6EQPFj6me6oW6zH77KdZgau"
+      },
+      "match": {
+        "inliers": 352,
+        "colorMae": 8.26,
+        "normalizedCrop": [
+          0.0177,
+          0.02289,
+          0.82685,
+          0.95225
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        23.99,
+        35.24,
+        1138.11,
+        1446.0
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          0.9787,
+          -5.2851
+        ],
+        [
+          0.9999,
+          -6.5745
+        ],
+        [
+          0.9691,
+          -2.3978
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-work1-b2b6a8c6124d-1080.webp",
+        "width": 1080,
+        "height": 1368,
+        "bytes": 156786,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "artifact.work2"
+      ],
+      "oldSrc": "/design/studio/artifact/work2-fdabede088.webp",
+      "oldSize": [
+        658,
+        818
+      ],
+      "oldBytes": 54414,
+      "original": {
+        "name": "IMG_6477.JPG",
+        "size": [
+          1914,
+          3402
+        ],
+        "sha256": "8bf01151f6a89f02869bdb85b91daad8c545afecb4ee36bdff592f390f581e8c",
+        "driveId": "1KdQS9HV-RES3Fm8Cd1eLOcWlDYJW_lIM"
+      },
+      "match": {
+        "inliers": 206,
+        "colorMae": 10.99,
+        "normalizedCrop": [
+          -0.0002,
+          0.14121,
+          1.00012,
+          0.83995
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        0.23,
+        479.63,
+        1913.61,
+        2858.27
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          0.9522,
+          -3.3705
+        ],
+        [
+          0.9569,
+          -3.7123
+        ],
+        [
+          0.9542,
+          -4.2705
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-work2-fefae4ce996f-1440.webp",
+        "width": 1440,
+        "height": 1790,
+        "bytes": 303390,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "artifact.work4"
+      ],
+      "oldSrc": "/design/studio/artifact/work4-560b73409c.webp",
+      "oldSize": [
+        658,
+        818
+      ],
+      "oldBytes": 51332,
+      "status": "restored",
+      "original": {
+        "name": "IMG_4979 1.webp",
+        "sourceUrl": "https://s3.amazonaws.com/webflow-prod-assets/694a5cc146bb9192fcdbb5ac/69cea4dc5d9d33768a861af8_IMG_4979%201.webp",
+        "size": [
+          1648,
+          2200
+        ],
+        "sha256": "197a40549156af42f7d2ac2bff2e3965824d9df0a28231e270d9822e30da5399"
+      },
+      "match": {
+        "inliers": 346,
+        "colorMae": 12.71,
+        "normalizedCrop": [
+          0.00297,
+          0.0227,
+          1.00309,
+          0.95238
+        ]
+      },
+      "crop": [
+        1.28,
+        49.02,
+        1648.0,
+        2096.16
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          0.8484,
+          3.9386
+        ],
+        [
+          0.8406,
+          5.9464
+        ],
+        [
+          0.8279,
+          6.2763
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-work4-784c8ca5954c-1440.webp",
+        "width": 1440,
+        "height": 1790,
+        "bytes": 685466,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "artifact.work3"
+      ],
+      "oldSrc": "/design/studio/artifact/work3-e87826845b.webp",
+      "oldSize": [
+        656,
+        818
+      ],
+      "oldBytes": 47376,
+      "original": {
+        "name": "E3FD0B93-1698-40E1-9188-0B0109B5A23F.jpg",
+        "size": [
+          1850,
+          2313
+        ],
+        "sha256": "51fab9fc94e99ed2bf25b5c9fd1415a85a390cc34a5980ad6f7abbc253dea089",
+        "driveId": "1MmbqGoVIqWBemhVHu79Nu9qcxujR0-uL"
+      },
+      "match": {
+        "inliers": 515,
+        "colorMae": 8.96,
+        "normalizedCrop": [
+          0.13389,
+          0.123,
+          0.86824,
+          0.85627
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        247.29,
+        285.0,
+        1606.65,
+        1980.05
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          0.9807,
+          -4.5744
+        ],
+        [
+          0.99,
+          -4.9536
+        ],
+        [
+          0.9893,
+          -5.2626
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-work3-da4d25e20f0d-1280.webp",
+        "width": 1280,
+        "height": 1596,
+        "bytes": 300888,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "artifact.gw2"
+      ],
+      "oldSrc": "/design/studio/artifact/gw2-9c24889514.webp",
+      "oldSize": [
+        352,
+        440
+      ],
+      "oldBytes": 21520,
+      "original": {
+        "name": "IMG_0733.JPG",
+        "size": [
+          1024,
+          1279
+        ],
+        "sha256": "e4eac92d35bcde04d4fae5afba18eb3dd8299f6f9287a1a393209b34da66fa93",
+        "driveId": "1PoqKZb156aKYsj_1Z6BSal5zulCIDFpH"
+      },
+      "match": {
+        "inliers": 469,
+        "colorMae": 17.8,
+        "normalizedCrop": [
+          0.00065,
+          0.00037,
+          1.0001,
+          1.00027
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        0.78,
+        0.0,
+        1023.98,
+        1279.0
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          0.7622,
+          1.3991
+        ],
+        [
+          0.7773,
+          0.6695
+        ],
+        [
+          0.7649,
+          0.6972
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-gw2-21fb43858b58-1023.webp",
+        "width": 1023,
+        "height": 1279,
+        "bytes": 90900,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "artifact.gw1"
+      ],
+      "oldSrc": "/design/studio/artifact/gw1-3b04af3243.webp",
+      "oldSize": [
+        700,
+        828
+      ],
+      "oldBytes": 18026,
+      "original": {
+        "name": "Image 04.04.2025 at 20.03.jpeg",
+        "size": [
+          1036,
+          1465
+        ],
+        "sha256": "f46c55f39c7c494a439c54e8ee7aae0408e7d48fc9cfdc78b9eb6b4bcb43bf06",
+        "driveId": "1TeXIEjJki0ieuzFueoFBSiGU2nOONeU3"
+      },
+      "match": {
+        "inliers": 204,
+        "colorMae": 2.25,
+        "normalizedCrop": [
+          -0.00027,
+          0.1038,
+          1.00022,
+          0.94058
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        0.0,
+        152.29,
+        1036.0,
+        1377.73
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          0.9896,
+          1.1457
+        ],
+        [
+          1.0036,
+          0.4467
+        ],
+        [
+          0.996,
+          1.1467
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-gw1-a5d74d18a04e-1036.webp",
+        "width": 1036,
+        "height": 1225,
+        "bytes": 44184,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "artifact.gw3"
+      ],
+      "oldSrc": "/design/studio/artifact/gw3-fb7ded8476.webp",
+      "oldSize": [
+        896,
+        1200
+      ],
+      "oldBytes": 99546,
+      "original": {
+        "name": "F78A67C3-9BF0-4395-83E5-D0740FEC4802.jpg",
+        "size": [
+          2316,
+          3088
+        ],
+        "sha256": "908c76618aae19b1037751b9238216730640c328ffdf97d00349b44feb880298",
+        "driveId": "1z9-u7zOGr0rM3PTmkGhdU1NBeFr-EKzY"
+      },
+      "match": {
+        "inliers": 1029,
+        "colorMae": 2.11,
+        "normalizedCrop": [
+          0.00443,
+          0.00014,
+          0.99946,
+          0.9998
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        10.15,
+        0.58,
+        2314.86,
+        3087.24
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          1.0017,
+          0.136
+        ],
+        [
+          1.0017,
+          0.1359
+        ],
+        [
+          1.0017,
+          0.136
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-gw3-9c941371927f-1600.webp",
+        "width": 1600,
+        "height": 2143,
+        "bytes": 333648,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "artifact.gw4"
+      ],
+      "oldSrc": "/design/studio/artifact/gw4-fd5be6fd16.webp",
+      "oldSize": [
+        786,
+        933
+      ],
+      "oldBytes": 89442,
+      "original": {
+        "name": "IMG_3789.JPG",
+        "size": [
+          960,
+          1280
+        ],
+        "sha256": "75f252c8479f9faf51063d4734725c5d623cbfce393a760d1d53e2a5b793ca5e",
+        "driveId": "1-O3sL2q-ksft6xwu10JVsD6JmQV6icaG"
+      },
+      "match": {
+        "inliers": 915,
+        "colorMae": 3.74,
+        "normalizedCrop": [
+          -4e-05,
+          0.10969,
+          1.00001,
+          0.99999
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        0.0,
+        140.42,
+        960.0,
+        1279.97
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          0.9958,
+          0.5985
+        ],
+        [
+          0.9967,
+          1.1087
+        ],
+        [
+          0.9942,
+          0.7735
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-gw4-7bd0ea4a6f3b-960.webp",
+        "width": 960,
+        "height": 1139,
+        "bytes": 170208,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "artifact.gw5"
+      ],
+      "oldSrc": "/design/studio/artifact/gw5-c7559147e4.webp",
+      "oldSize": [
+        404,
+        538
+      ],
+      "oldBytes": 20262,
+      "original": {
+        "name": "IMG_0254.JPG",
+        "size": [
+          960,
+          1280
+        ],
+        "sha256": "77008b66766f1b0692862b69215897be4ac76cb6f9d546b5141e704cd6bc9041",
+        "driveId": "1ZOt78PrDPnviDN2bg5TusRYMPzQv49Dq"
+      },
+      "match": {
+        "inliers": 391,
+        "colorMae": 12.03,
+        "normalizedCrop": [
+          -8e-05,
+          0.00083,
+          1.00045,
+          0.9997
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        0.0,
+        1.13,
+        960.0,
+        1279.55
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          0.7949,
+          0.5758
+        ],
+        [
+          0.799,
+          0.696
+        ],
+        [
+          0.7974,
+          0.1555
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-gw5-60e690c2d63b-960.webp",
+        "width": 960,
+        "height": 1278,
+        "bytes": 102672,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "artifact.gw7"
+      ],
+      "oldSrc": "/design/studio/artifact/gw7-28d45d0063.webp",
+      "oldSize": [
+        896,
+        1068
+      ],
+      "oldBytes": 91728,
+      "original": {
+        "name": "IMG_4516.JPG",
+        "size": [
+          1024,
+          1280
+        ],
+        "sha256": "e20c298fa3af427d9a59945c7d46e3ff406cd3849387260a07d144ea6044e8e3",
+        "driveId": "1EfpHx29b5PBgHX_BuIYo-MvYKRP4Vwxc"
+      },
+      "match": {
+        "inliers": 743,
+        "colorMae": 3.33,
+        "normalizedCrop": [
+          0.0667,
+          0.10995,
+          0.99996,
+          0.99998
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        68.27,
+        140.77,
+        1023.99,
+        1279.94
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          0.9941,
+          1.0157
+        ],
+        [
+          0.995,
+          1.031
+        ],
+        [
+          0.9546,
+          3.0998
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-gw7-48e884d3e725-955.webp",
+        "width": 955,
+        "height": 1138,
+        "bytes": 165898,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "artifact.gw6"
+      ],
+      "oldSrc": "/design/studio/artifact/gw6-ecb6491806.webp",
+      "oldSize": [
+        899,
+        1200
+      ],
+      "oldBytes": 66726,
+      "original": {
+        "name": "IMG_9066.JPG",
+        "size": [
+          2151,
+          2868
+        ],
+        "sha256": "5e9a1614daf3358b85c07aff7ae96defae4357e7de40a34471d025e4b5daecf1",
+        "driveId": "105l7hvfAAzBbnXvMaK6V7B0cLGwKvgBS"
+      },
+      "match": {
+        "inliers": 1004,
+        "colorMae": 2.2,
+        "normalizedCrop": [
+          0.00037,
+          -2e-05,
+          0.9996,
+          0.99998
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        1.16,
+        0.0,
+        2149.77,
+        2868.0
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          0.9947,
+          0.2496
+        ],
+        [
+          1.004,
+          0.1211
+        ],
+        [
+          0.9941,
+          0.3253
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-gw6-9af81c9262a7-1600.webp",
+        "width": 1600,
+        "height": 2136,
+        "bytes": 220962,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "artifact.cyclo1"
+      ],
+      "oldSrc": "/design/studio/artifact/cyclo1-12d38b9a5a.webp",
+      "oldSize": [
+        1500,
+        832
+      ],
+      "oldBytes": 65402,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "artifact.olena"
+      ],
+      "oldSrc": "/design/studio/artifact/olena-2c1e6855d1.webp",
+      "oldSize": [
+        1100,
+        1472
+      ],
+      "oldBytes": 26074,
+      "original": {
+        "name": "IMG_5902.JPG",
+        "size": [
+          4480,
+          5952
+        ],
+        "sha256": "545b17a0e1261d91cd09268db6910cfad7c85f0ae9dadff4bcd40cff8b999397",
+        "driveId": "1Mu-7CxmgVE7jVKeJqaqjQDlCGsofa_yF"
+      },
+      "match": {
+        "inliers": 55,
+        "colorMae": 27.2,
+        "normalizedCrop": [
+          -0.00065,
+          -0.00197,
+          0.99225,
+          0.99158
+        ]
+      },
+      "status": "restored",
+      "crop": [
+        4.35,
+        0.0,
+        4438.02,
+        5933.05
+      ],
+      "padded": false,
+      "colorScaleOffset": [
+        [
+          1.1455,
+          -30.0
+        ],
+        [
+          1.129,
+          -30.0
+        ],
+        [
+          1.1591,
+          -30.0
+        ]
+      ],
+      "output": {
+        "src": "/images/hero/restored-olena-9f53e20a5057-1440.webp",
+        "width": 1440,
+        "height": 1927,
+        "bytes": 319124,
+        "quality": 86
+      }
+    },
+    {
+      "keys": [
+        "artifact.logos"
+      ],
+      "oldSrc": "/design/studio/artifact/logos-457c311d11.webp",
+      "oldSize": [
+        3954,
+        276
+      ],
+      "oldBytes": 35458,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "artifact.studio_band"
+      ],
+      "oldSrc": "/design/studio/artifact/studio_band-93718ea239.webp",
+      "oldSize": [
+        1400,
+        467
+      ],
+      "oldBytes": 22830,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "artifact.softbox"
+      ],
+      "oldSrc": "/design/studio/artifact/softbox-7d9dca071a.webp",
+      "oldSize": [
+        1400,
+        467
+      ],
+      "oldBytes": 11504,
+      "status": "source-limited",
+      "reason": "Matched a local derivative but did not verify an original from the audited inventory.",
+      "localCandidate": "public/images/hero/home-shop-0212dda4496d-1200.webp"
+    },
+    {
+      "keys": [
+        "artifact.ws_art2"
+      ],
+      "oldSrc": "/design/studio/artifact/ws_art2-48d022cc07.webp",
+      "oldSize": [
+        959,
+        1280
+      ],
+      "oldBytes": 93986,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "artifact.ws_art3"
+      ],
+      "oldSrc": "/design/studio/artifact/ws_art3-4654f0f38d.webp",
+      "oldSize": [
+        960,
+        1280
+      ],
+      "oldBytes": 111212,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "artifact.ws_art1"
+      ],
+      "oldSrc": "/design/studio/artifact/ws_art1-a1fd278615.webp",
+      "oldSize": [
+        1050,
+        1400
+      ],
+      "oldBytes": 159278,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "artifact.ws_hero"
+      ],
+      "oldSrc": "/design/studio/artifact/ws_hero-063001a44a.webp",
+      "oldSize": [
+        1500,
+        2000
+      ],
+      "oldBytes": 145754,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    },
+    {
+      "keys": [
+        "artifact.ws_art4"
+      ],
+      "oldSrc": "/design/studio/artifact/ws_art4-2088d9b52d.webp",
+      "oldSize": [
+        1400,
+        1050
+      ],
+      "oldBytes": 192766,
+      "status": "unmatched",
+      "reason": "No sufficiently strong match against the available originals and thumbnails."
+    }
+  ]
+}

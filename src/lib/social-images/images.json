@@ -4,20 +4,20 @@
     "description": "Курси фотографії, відео та створення контенту на телефон і камеру. Онлайн і в Києві.",
     "images": [
       {
-        "src": "/social/home-9a0f91d1c3a9-wide.jpg",
+        "src": "/social/home-62e80070b481-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "ProPhoto Academy — фотографія починається з бачення · ProPhoto — Підводний портрет із тканинами",
-        "sha256": "9a0f91d1c3a97e80a6312fa24f02ea83209e815dd68c000e3d453428b48baf1c",
-        "bytes": 71499
+        "sha256": "62e80070b481507c78dab1b3c5f51df54b9075d068bb7d8c44283fa1caee8f8d",
+        "bytes": 71542
       },
       {
-        "src": "/social/home-7e60d11340e6-square.jpg",
+        "src": "/social/home-50ae1f4e0020-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "ProPhoto Academy — фотографія починається з бачення · ProPhoto — Підводний портрет із тканинами",
-        "sha256": "7e60d11340e6383b227191c7253cc34d412b058dab7487b4dda53c039745d286",
-        "bytes": 42211
+        "sha256": "50ae1f4e00207704e40501c01c99745b6884033edfd6e7de3d6d2d4a4826bf4b",
+        "bytes": 42045
       }
     ]
   },
@@ -26,20 +26,20 @@
     "description": "Курси, воркшопи, індивідуальне та корпоративне навчання ProPhoto Academy.",
     "images": [
       {
-        "src": "/social/academy-c79881d87cdc-wide.jpg",
+        "src": "/social/academy-556299022186-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Академія · ProPhoto — Портрет у золотій тканині; Портрет серед засніжених гір",
-        "sha256": "c79881d87cdcce9cd40714847970d197b6c96666fd458608b0e56b8d6c727a7d",
-        "bytes": 141663
+        "sha256": "556299022186ae2e9a9a484dec44b7f977c4d4f3cdaf789b958122a0dc88208e",
+        "bytes": 148809
       },
       {
-        "src": "/social/academy-b1c2a1d0c7fc-square.jpg",
+        "src": "/social/academy-b7258937b994-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Академія · ProPhoto — Портрет у золотій тканині; Портрет серед засніжених гір",
-        "sha256": "b1c2a1d0c7fcb13c9bb7dadd53737677b24fc2fa82a0416e5bb05066e9b62195",
-        "bytes": 70983
+        "sha256": "b7258937b994dd0c6f3ec5cf63e5b39df015b9817d6280c178607edb297d0d5c",
+        "bytes": 72620
       }
     ]
   },
@@ -48,20 +48,20 @@
     "description": "Навчання фотографії, відео й візуального контенту. Оберіть програму під вашу мету.",
     "images": [
       {
-        "src": "/social/courses-673810a36e7f-wide.jpg",
+        "src": "/social/courses-d3869d41eac6-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Курси та програми · ProPhoto — Портрет у золотій тканині",
-        "sha256": "673810a36e7ff89be56c51fe6c86100260ad330b40f1ee88c52f57523109dbf2",
-        "bytes": 107270
+        "sha256": "d3869d41eac6a12a9c1f52dfc7467e9bc5d3da856ef8106bbd538be08a6c0434",
+        "bytes": 117238
       },
       {
-        "src": "/social/courses-cde86bcb2ec0-square.jpg",
+        "src": "/social/courses-1fde73977e2b-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Курси та програми · ProPhoto — Портрет у золотій тканині",
-        "sha256": "cde86bcb2ec06d47912d8f847a00121bb3835cc080f80907947a921d48dab84b",
-        "bytes": 44082
+        "sha256": "1fde73977e2b1da4dab08fd718a838478e0b0fb66b3f8cc5f08e03eda5c64f64",
+        "bytes": 49995
       }
     ]
   },
@@ -70,20 +70,20 @@
     "description": "Основи фотографії, композиції, світла та відео на телефон і фотокамеру.",
     "images": [
       {
-        "src": "/social/visual-content-d5f68905675f-wide.jpg",
+        "src": "/social/visual-content-ae0b8237bd36-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Візуальний контент на телефон та фотокамеру · ProPhoto — Портрет у золотій тканині",
-        "sha256": "d5f68905675f2c309309f21af2923643475c0c3a14dcafc76d16508303232a42",
-        "bytes": 106417
+        "sha256": "ae0b8237bd36eecc1268f643938add9d2484d4bee17c3e46b126da3e392b6b2a",
+        "bytes": 116372
       },
       {
-        "src": "/social/visual-content-d7fcaf9d66ae-square.jpg",
+        "src": "/social/visual-content-1387b4d87386-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Візуальний контент на телефон та фотокамеру · ProPhoto — Портрет у золотій тканині",
-        "sha256": "d7fcaf9d66ae6d8f6f0da0aea88e9e29d192058c2650d6ca6f2bc63362fdc9de",
-        "bytes": 43378
+        "sha256": "1387b4d8738686d7f664d503ba1199fc6df5d0e829dfdca05b8345557257ce2f",
+        "bytes": 49292
       }
     ]
   },
@@ -114,20 +114,20 @@
     "description": "Позиціонування, візуальний контент і розвиток Instagram для власного бренду.",
     "images": [
       {
-        "src": "/social/course-smm-instagram-80ddf290b176-wide.jpg",
+        "src": "/social/course-smm-instagram-8a99318a7107-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Інста, яка продає · ProPhoto — Портрет серед засніжених гір",
-        "sha256": "80ddf290b176c5158c8d490e8d86cde9cff7971d65894e02985cdf3cdbc40643",
-        "bytes": 146189
+        "sha256": "8a99318a7107fb9c956759e3b53194885d99f11aed47c7fe0f2c1c64166e713e",
+        "bytes": 146743
       },
       {
-        "src": "/social/course-smm-instagram-ba51e1a564b2-square.jpg",
+        "src": "/social/course-smm-instagram-80de313f08d0-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Інста, яка продає · ProPhoto — Портрет серед засніжених гір",
-        "sha256": "ba51e1a564b2128f84a10cdd0c318ec56d4f59574fccf3f014704e0a6949870a",
-        "bytes": 63638
+        "sha256": "80de313f08d0775afa541cb9f233134874ec22bdc474eef9011547a0d2ba746b",
+        "bytes": 63046
       }
     ]
   },

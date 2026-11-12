@@ -22,7 +22,7 @@ export function StudioProgramFaculty({ instructors }: StudioProgramFacultyProps)
               asset={instructor.asset}
               alt={instructor.alt}
               fit="cover"
-              sizes="(max-width: 760px) 35vw, 20vw"
+              sizes="(max-width: 760px) 38vw, 20vw"
             />
             <div>
               <h3>{instructor.name}</h3>
