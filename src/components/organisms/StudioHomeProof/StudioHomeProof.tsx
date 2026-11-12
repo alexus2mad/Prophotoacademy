@@ -1,9 +1,28 @@
 'use client';
 
-import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
 import { studioAssets } from '@/lib/studio-design/assets';
+import { studioAssetUrl } from '@/lib/studio-design/urls';
 import styles from './StudioHomeProof.module.css';
 import { usePartnerRail } from './hooks';
+
+const strip = studioAssets.artifact.logos;
+const stripImage = `url("${studioAssetUrl(strip.src)}")`;
+
+// Source rectangles include a small margin around each mark's visible pixels.
+const logos = [
+  { name: 'Lay’s', x: 30, y: 32, width: 131, height: 126 },
+  { name: 'Bang & Olufsen', x: 347, y: 67, width: 293, height: 57 },
+  { name: 'Сільпо', x: 825, y: 51, width: 210, height: 88 },
+  { name: 'iSpace', x: 1219, y: 63, width: 246, height: 65 },
+  { name: 'Динамо Київ', x: 1649, y: 33, width: 79, height: 125 },
+  { name: 'AllyProof', x: 1877, y: 71, width: 365, height: 81 },
+  { name: 'McDonald’s', x: 2389, y: 42, width: 130, height: 106 },
+  { name: 'Instytutum', x: 2705, y: 58, width: 334, height: 75 },
+  { name: 'Pepsi', x: 3223, y: 49, width: 233, height: 93 },
+  { name: 'Novus', x: 3641, y: 63, width: 289, height: 65 },
+];
+
+const partnerNames = logos.map(({ name }) => name).join(', ');
 
 export function StudioHomeProof() {
   const { railRef, copyCount } = usePartnerRail();
@@ -29,17 +48,22 @@ export function StudioHomeProof() {
               className={styles.copy}
               data-partner-copy
               aria-hidden={index > 0 ? true : undefined}
+              role={index === 0 ? 'img' : undefined}
+              aria-label={index === 0 ? partnerNames : undefined}
             >
-              <StudioImage
-                asset={studioAssets.artifact.logos}
-                alt={
-                  index === 0
-                    ? 'Lay’s, Bang & Olufsen, Сільпо, iSpace, Динамо Київ, AllyProof, McDonald’s, Institutum, Pepsi, Novus'
-                    : ''
-                }
-                className={styles.logos}
-                sizes="(max-width: 760px) 860px, 1440px"
-              />
+              {logos.map(({ name, x, y, width, height }) => (
+                <span
+                  key={name}
+                  className={styles.logo}
+                  aria-hidden="true"
+                  style={{
+                    width: `calc(var(--strip-height) * ${width / strip.height})`,
+                    height: `calc(var(--strip-height) * ${height / strip.height})`,
+                    backgroundImage: stripImage,
+                    backgroundPosition: `${(x / (strip.width - width)) * 100}% ${(y / (strip.height - height)) * 100}%`,
+                  }}
+                />
+              ))}
             </div>
           ))}
         </div>

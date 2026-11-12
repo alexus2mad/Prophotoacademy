@@ -30,16 +30,6 @@
 .image[data-motion-ready='true'] img {
   animation: photograph 6s ease-in-out infinite alternate;
 }
-.image[data-hero-visual='shop'][data-motion-ready='true'] img {
-  animation-duration: 8s;
-}
-.panorama img {
-  width: max(calc(var(--hero-height, 100svh) * 1.6916), calc(var(--hero-width, 100vw) * 1.15));
-  max-width: none;
-}
-.panorama[data-motion-ready='true'] img {
-  animation: panorama 12s linear forwards;
-}
 .image[data-active='false'] img,
 .hero[data-motion-playing='false'] .image img {
   animation-play-state: paused;
@@ -50,14 +40,6 @@
   }
   to {
     transform: scale(1.045) translate(0.3%, -0.2%);
-  }
-}
-@keyframes panorama {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(calc(var(--hero-width, 100vw) - 100%));
   }
 }
 .hero::before {
@@ -115,13 +97,13 @@
   justify-content: flex-end;
   padding: 18px 0 0;
 }
-.tabs {
+.brands {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   margin-top: 30px;
   border-top: 1px solid rgba(255, 255, 255, 0.3);
 }
-.tab {
+.brand {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -133,16 +115,16 @@
   padding: 16px 0 18px;
   cursor: pointer;
 }
-.tab:nth-child(2) {
+.brand:nth-child(2) {
   align-items: center;
 }
-.tab:last-child {
+.brand:last-child {
   align-items: flex-end;
 }
-.tab[aria-selected='true'] {
+.brand[aria-current='true'] {
   color: #fff;
 }
-.tab[aria-selected='true']::before {
+.brand[aria-current='true']::before {
   content: '';
   height: 2px;
   position: absolute;
@@ -151,28 +133,28 @@
   right: 0;
   background: #eb423b;
 }
-.tab small {
+.brand small {
   font-size: 11px;
   line-height: 1.55;
   letter-spacing: 0.02em;
 }
-.tabLogo {
+.brandLogo {
   position: relative;
   display: block;
   overflow: hidden;
   height: 13px;
   width: 70.3px;
 }
-.tabLogo img {
+.brandLogo img {
   position: absolute;
   right: 0;
   top: 0;
   max-width: none;
 }
-.tab[data-brand='academy'] .tabLogo {
+.brand[data-brand='academy'] .brandLogo {
   width: 93px;
 }
-.tab[data-brand='shop'] .tabLogo {
+.brand[data-brand='shop'] .brandLogo {
   width: 51.2px;
 }
 .mobileLogo {
@@ -193,12 +175,6 @@
   }
   .image[data-hero-visual='academy-2'] img {
     object-position: 77% 50%;
-  }
-  .panorama img {
-    width: 100%;
-  }
-  .panorama[data-motion-ready='true'] img {
-    animation: none;
   }
   .hero {
     min-height: min(100svh, 900px);
@@ -237,27 +213,27 @@
   .ctaArrow {
     display: none;
   }
-  .tabs {
+  .brands {
     display: flex;
     justify-content: space-between;
     order: 2;
     margin-top: 20px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   }
-  .tab {
+  .brand {
     padding: 14px 0;
   }
-  .tab small {
+  .brand small {
     display: none;
   }
-  .tabLogo {
+  .brandLogo {
     height: 14px;
     width: 75.7px;
   }
-  .tab[data-brand='academy'] .tabLogo {
+  .brand[data-brand='academy'] .brandLogo {
     width: 100.2px;
   }
-  .tab[data-brand='shop'] .tabLogo {
+  .brand[data-brand='shop'] .brandLogo {
     width: 55.2px;
   }
   .desktopLogo {
@@ -270,9 +246,6 @@
 @media (prefers-reduced-motion: reduce) {
   .image {
     transition: none;
-  }
-  .panorama img {
-    width: 100%;
   }
   .image[data-motion-ready='true'] img {
     animation: none;

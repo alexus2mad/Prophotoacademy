@@ -43,16 +43,13 @@ it('links public footer visitors to Academy information and legal pages', () => 
   ).toEqual(['/terms-of-service', '/privacy-policy']);
 });
 
-it.each([
-  ['studio', 'https://prophotohub.com.ua/booking'],
-  ['shop', 'https://www.instagram.com/prophoto.shop?mdxt=ZnIwcnUzdHp2eGh2'],
-  ['academy', '/academy'],
-] as const)('keeps the %s hero action on its intended customer journey', (mode, href) => {
-  const $ = load(
-    renderToStaticMarkup(createElement(StudioHomeHero, { mode, onModeChange: vi.fn() })),
+it('keeps the Academy hero action and links directly to the other brands', () => {
+  const $ = load(renderToStaticMarkup(createElement(StudioHomeHero)));
+  expect($('a.studio-button').attr('href')).toBe('/academy');
+  expect($('nav a[data-brand="studio"]').attr('href')).toBe('https://prophotohub.com.ua');
+  expect($('nav a[data-brand="shop"]').attr('href')).toBe(
+    'https://www.instagram.com/prophoto.shop?mdxt=ZnIwcnUzdHp2eGh2',
   );
-  expect($('a')).toHaveLength(1);
-  expect($('a').attr('href')).toBe(href);
 });
 
 it.each([

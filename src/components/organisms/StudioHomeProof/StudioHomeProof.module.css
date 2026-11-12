@@ -25,14 +25,19 @@
   width: max-content;
 }
 .copy {
+  --strip-height: clamp(60px, 7vw, 100px);
+  --logo-gap: calc(var(--strip-height) * 0.66 + 6px);
+  display: flex;
   flex: 0 0 auto;
+  align-items: center;
+  gap: var(--logo-gap);
+  height: var(--strip-height);
+  padding-right: var(--logo-gap);
 }
-.logos {
-  display: block;
-  height: clamp(60px, 7vw, 100px);
-  width: auto;
-  max-width: none;
-  padding-right: 64px;
+.logo {
+  flex: 0 0 auto;
+  background-size: auto var(--strip-height);
+  background-repeat: no-repeat;
   mix-blend-mode: screen;
 }
 .brands:focus-visible {

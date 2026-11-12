@@ -20,7 +20,9 @@ Horizontal browsing rails retain native touch, trackpad and keyboard scrolling. 
 
 The partner strip renders only enough identical copies to cover its viewport plus
 one repeat, recalculated on resize. Never append copies as time passes. Desktop
-and mobile autoplay share the same loop. Pointer presses and horizontal scrolling
+and mobile autoplay share the same loop. Individual marks from the shared artwork
+sit on a common centerline with the same gap between marks and across repeats.
+Pointer presses and horizontal scrolling
 pause it until three seconds after the gesture and native momentum settle, then
 speed eases back in over one second. Autoplay scroll events must not restart that
 idle timer. Deliberate keyboard focus stays paused; passive desktop hover does
@@ -100,7 +102,8 @@ and the legacy dialog compose one `useInquirySubmission` workflow, preserving
 server validation, attribution, consent and review-mode restrictions.
 
 Production navigation uses `ecosystemDestinations` for the existing Hub domain
-and the Shop Instagram profile. The Academy fixture's Shop setting mirrors this
+and the Shop Instagram profile. The homepage hero stays on Academy, with its
+Academy portrait rotation and ordinary links to the three brands. The Academy fixture's Shop setting mirrors this
 destination for the retained legacy design. The `/photo-studio` and `/shop`
 designs remain directly previewable but
 unlinked, excluded from the sitemap and marked noindex. Course sales can be
