@@ -468,14 +468,23 @@
 }
 .academy-studio .studio-footer-columns {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: minmax(272px, 1fr) repeat(3, minmax(0, 1fr));
   gap: 28px;
 }
 .academy-studio .studio-footer-home .studio-footer-columns {
-  grid-template-columns: 1.3fr 1fr 1fr 1.2fr;
+  grid-template-columns: minmax(272px, 1.3fr) 1fr 1fr 1.2fr;
 }
 .academy-studio .studio-footer .studio-label {
   color: var(--studio-steel);
+}
+.academy-studio .studio-footer-inquiry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.academy-studio .studio-footer-inquiry .studio-button {
+  max-width: 100%;
 }
 .academy-studio .studio-footer-inquiry .studio-label {
   margin-bottom: 12px;
@@ -535,6 +544,9 @@
 .academy-studio .studio-footer-social img {
   width: 26px;
   height: 26px;
+}
+.academy-studio .studio-footer-social-mobile {
+  display: none;
 }
 .academy-studio .studio-footer-focused {
   display: flex;
@@ -711,6 +723,9 @@
   }
   .academy-studio .studio-footer-contact .studio-label {
     margin-bottom: 10px;
+  }
+  .academy-studio .studio-footer-social-mobile {
+    display: block;
   }
   .academy-studio .studio-footer-legal-strip,
   .academy-studio .studio-footer-legal-strip .studio-footer-legal {

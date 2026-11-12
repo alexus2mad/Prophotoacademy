@@ -40,6 +40,24 @@ export function StudioFooter({ settings }: StudioFooterProps) {
       asset: { src: '/brand/social/facebook.svg', width: 11, height: 18 },
     },
   ];
+  const socialNavigation = (
+    <nav className="studio-footer-social" aria-label="Соціальні мережі">
+      {socials
+        .filter((social) => social.href)
+        .map((social) => (
+          <a
+            key={social.label}
+            href={social.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${social.label} — нова вкладка`}
+            title={social.label}
+          >
+            <StudioImage asset={social.asset} alt="" sizes="26px" fit="contain" />
+          </a>
+        ))}
+    </nav>
+  );
 
   if (focused) {
     return (
@@ -62,6 +80,7 @@ export function StudioFooter({ settings }: StudioFooterProps) {
           >
             Залишити заявку <span aria-hidden="true">→</span>
           </InquiryButton>
+          {socialNavigation}
         </div>
         <nav className="studio-footer-links" aria-label="Екосистема">
           <h2 className="studio-label">Екосистема</h2>
@@ -91,22 +110,7 @@ export function StudioFooter({ settings }: StudioFooterProps) {
           )}
         </div>
       </div>
-      <nav className="studio-footer-social studio-wrap" aria-label="Соціальні мережі">
-        {socials
-          .filter((social) => social.href)
-          .map((social) => (
-            <a
-              key={social.label}
-              href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${social.label} — нова вкладка`}
-              title={social.label}
-            >
-              <StudioImage asset={social.asset} alt="" sizes="26px" fit="contain" />
-            </a>
-          ))}
-      </nav>
+      <div className="studio-footer-social-mobile studio-wrap">{socialNavigation}</div>
       <div className="studio-footer-legal-strip studio-wrap">{legalNavigation}</div>
       <Link href="/" className="studio-footer-mark" aria-label="ProPhoto — головна">
         <StudioImage
