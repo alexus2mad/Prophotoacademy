@@ -19,9 +19,26 @@ export function StudioFooter({ settings }: StudioFooterProps) {
     </nav>
   );
   const socials = [
-    { href: settings.instagram, label: 'Instagram', asset: studioAssets.homeMobile.imgSvg },
-    { href: settings.telegram, label: 'Telegram', asset: studioAssets.homeMobile.imgSvg1 },
-    { href: settings.youtube, label: 'YouTube', asset: studioAssets.homeMobile.imgSvg2 },
+    {
+      href: settings.instagram,
+      label: 'Instagram',
+      asset: { src: '/brand/social/instagram.svg', width: 20, height: 20 },
+    },
+    {
+      href: settings.telegram,
+      label: 'Telegram',
+      asset: { src: '/brand/social/telegram.svg', width: 17, height: 17 },
+    },
+    {
+      href: settings.youtube,
+      label: 'YouTube',
+      asset: { src: '/brand/social/youtube.svg', width: 20, height: 15 },
+    },
+    {
+      href: 'https://www.facebook.com/elenap0p0va',
+      label: 'Facebook',
+      asset: { src: '/brand/social/facebook.svg', width: 11, height: 18 },
+    },
   ];
 
   if (focused) {
@@ -74,7 +91,7 @@ export function StudioFooter({ settings }: StudioFooterProps) {
           )}
         </div>
       </div>
-      <div className="studio-footer-social">
+      <nav className="studio-footer-social studio-wrap" aria-label="Соціальні мережі">
         {socials
           .filter((social) => social.href)
           .map((social) => (
@@ -82,13 +99,14 @@ export function StudioFooter({ settings }: StudioFooterProps) {
               key={social.label}
               href={social.href}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               aria-label={`${social.label} — нова вкладка`}
+              title={social.label}
             >
-              <StudioImage asset={social.asset} alt="" sizes="26px" />
+              <StudioImage asset={social.asset} alt="" sizes="26px" fit="contain" />
             </a>
           ))}
-      </div>
+      </nav>
       <div className="studio-footer-legal-strip studio-wrap">{legalNavigation}</div>
       <Link href="/" className="studio-footer-mark" aria-label="ProPhoto — головна">
         <StudioImage

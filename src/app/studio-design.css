@@ -512,7 +512,29 @@
   margin-inline: 0;
 }
 .academy-studio .studio-footer-social {
-  display: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px;
+}
+.academy-studio .studio-footer-social a {
+  display: grid;
+  place-items: center;
+  flex: 0 0 56px;
+  width: 56px;
+  height: 56px;
+  border: 2px solid var(--studio-paper);
+  border-radius: 50%;
+  transition: background-color 160ms ease;
+}
+.academy-studio .studio-footer-social a:hover,
+.academy-studio .studio-footer-social a:focus-visible {
+  background-color: rgba(251, 251, 251, 0.12);
+}
+.academy-studio .studio-footer-social img {
+  width: 26px;
+  height: 26px;
 }
 .academy-studio .studio-footer-focused {
   display: flex;
@@ -689,24 +711,6 @@
   }
   .academy-studio .studio-footer-contact .studio-label {
     margin-bottom: 10px;
-  }
-  .academy-studio .studio-footer-social {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    margin-top: 33px;
-  }
-  .academy-studio .studio-footer-social a {
-    display: grid;
-    place-items: center;
-    width: 64px;
-    height: 64px;
-    border: 2px solid white;
-    border-radius: 50%;
-  }
-  .academy-studio .studio-footer-social img {
-    width: 26px;
-    height: 26px;
   }
   .academy-studio .studio-footer-legal-strip,
   .academy-studio .studio-footer-legal-strip .studio-footer-legal {
