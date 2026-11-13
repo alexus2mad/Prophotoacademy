@@ -6,3 +6,12 @@
   touch-action: pan-y pinch-zoom;
   user-select: none;
 }
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--secondary);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}

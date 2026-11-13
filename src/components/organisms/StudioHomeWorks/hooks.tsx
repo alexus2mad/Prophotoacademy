@@ -35,7 +35,6 @@ export function useStudioHomeWorks({ works }: StudioHomeWorksProps) {
     src: studioAssetUrl(work.image.src),
     id: work.id,
     alt: work.alt,
-    title: work.alt,
   }));
   return { carousel: { ...carousel, select, onKeyDown }, gallery, images };
 }

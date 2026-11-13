@@ -871,9 +871,6 @@
 .academy-editorial .gallery-dialog :focus-visible {
   outline-color: var(--text);
 }
-.academy-editorial .lightbox-caption p span {
-  font-size: 14px;
-}
 .academy-editorial .form-stack {
   gap: 24px;
 }

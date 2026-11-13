@@ -6,8 +6,6 @@ export type GalleryImage = {
   width: number;
   height: number;
   alt: string;
-  title: string;
-  credit?: string;
 };
 
 export type GalleryDirection = -1 | 1;

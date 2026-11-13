@@ -17,7 +17,6 @@ export function StudioSpacesGallery({ images, label, variant = 'room' }: StudioS
     id: asset.src,
     src: studioAssetUrl(asset.src),
     alt,
-    title: alt,
   }));
   return (
     <div className={`${styles.gallery} ${variant === 'artworks' ? styles.artworks : styles.room}`}>

@@ -64,20 +64,12 @@ body:has(.lesson-image-viewer[open]) {
   display: grid;
 }
 .lesson-image-viewer-footer {
-  display: grid;
-  grid-template-columns: 48px minmax(0, 1fr) 48px;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 24px;
   padding: 16px 24px;
   border-top: 1px solid var(--border);
-}
-.lesson-image-viewer-footer p {
-  max-height: 5lh;
-  overflow: auto;
-  text-align: center;
-  text-wrap: pretty;
-  overflow-wrap: anywhere;
-  font-size: 0.9375rem;
 }
 .lesson-image-viewer .icon-button {
   flex-shrink: 0;

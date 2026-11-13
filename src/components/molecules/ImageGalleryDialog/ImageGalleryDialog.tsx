@@ -39,7 +39,7 @@ export function ImageGalleryDialog({
           />
         )}
       </div>
-      <div className="lightbox-caption">
+      <div className={styles.controls}>
         <IconButton
           aria-label="Попереднє фото"
           disabled={images.length < 2}
@@ -47,12 +47,8 @@ export function ImageGalleryDialog({
         >
           <ArrowLeft />
         </IconButton>
-        <p tabIndex={0} aria-live="polite" aria-atomic="true">
-          {image?.title}
-          <span>
-            {image?.credit && `${image.credit} · `}
-            {image ? index + 1 : 0}/{images.length}
-          </span>
+        <p aria-live="polite" aria-atomic="true">
+          {image ? index + 1 : 0}/{images.length}
         </p>
         <IconButton
           aria-label="Наступне фото"

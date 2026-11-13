@@ -30,7 +30,7 @@ describe('student-work popup coverage', () => {
     expect(triggers.find('a')).toHaveLength(0);
     expect($('[aria-roledescription="карусель"] > [role="group"]')).toHaveLength(4);
     expect($('dialog.gallery-dialog')).toHaveLength(1);
-    expect($('.lightbox-caption').text()).toContain('1/16');
+    expect($('dialog [aria-live="polite"]').text()).toContain('1/16');
   });
 
   it('uses one four-image popup for AI Artwork, keeping its label distinct from student work', () => {
@@ -39,7 +39,7 @@ describe('student-work popup coverage', () => {
     expect(rail.find('button[aria-haspopup="dialog"]')).toHaveLength(4);
     expect($('dialog.gallery-dialog')).toHaveLength(1);
     expect($('dialog').attr('aria-label')).toBe('Роботи AI artwork');
-    expect($('.lightbox-caption').text()).toContain('1/4');
+    expect($('dialog [aria-live="polite"]').text()).toContain('1/4');
     expect($('dialog img').attr('alt')).toBe(rail.find('img').first().attr('alt'));
   });
 
@@ -57,11 +57,11 @@ describe('student-work popup coverage', () => {
         works.map((work) => `Відкрити роботу: ${work.title}`),
       );
       expect($('#student-works dialog.gallery-dialog')).toHaveLength(1);
-      expect($('#student-works .lightbox-caption').text()).toContain(`1/${works.length}`);
+      expect($('#student-works dialog [aria-live="polite"]').text()).toContain(`1/${works.length}`);
     },
   );
 
-  it('preserves the complete student-work collection, captions and credit', () => {
+  it('keeps the card title and image alt without captions in the popup', () => {
     const $ = load(
       renderToStaticMarkup(
         createElement(Gallery, { works: content.works, images: content.images }),
@@ -70,8 +70,8 @@ describe('student-work popup coverage', () => {
     const first = content.works[0];
     const image = content.images.find((item) => item.id === first.imageId)!;
     expect($('.work-grid button[aria-haspopup="dialog"]')).toHaveLength(content.works.length);
-    expect($('.lightbox-caption').text()).toContain(first.title);
-    expect($('.lightbox-caption').text()).toContain(image.credit);
+    expect($('.work-item figcaption').first().text()).toContain(first.title);
+    expect($('dialog').text().trim()).toBe(`1/${content.works.length}`);
     expect($('dialog img').attr('alt')).toBe(image.alt);
   });
 
@@ -122,6 +122,6 @@ describe('student-work popup coverage', () => {
         .map((_, button) => $(button).attr('aria-label'))
         .get(),
     ).toEqual(['Закрити фото', 'Попереднє фото', 'Наступне фото']);
-    expect($('.lightbox-caption [aria-live="polite"]').text()).toContain('2/2');
+    expect($('dialog [aria-live="polite"]').text()).toContain('2/2');
   });
 });

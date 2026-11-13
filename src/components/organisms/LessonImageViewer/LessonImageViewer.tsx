@@ -49,7 +49,6 @@ export function LessonImageViewer(props: LessonImageViewerProps) {
         >
           <ChevronLeft size={24} />
         </IconButton>
-        <p tabIndex={0}>{current.caption || current.alt || current.title}</p>
         <IconButton
           data-gallery-direction="1"
           aria-label="Наступне фото"
