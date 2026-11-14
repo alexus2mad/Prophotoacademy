@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { StudioHomeDirectionCard } from '@/components/molecules/StudioHomeDirectionCard/StudioHomeDirectionCard';
 import { studioHomeRooms } from '@/lib/studio-home/selectors';
-import { ecosystemDestinations } from '@/lib/ecosystem';
+import { ecosystemPages } from '@/lib/ecosystem';
 import type { StudioHomeDirectionsProps } from './types';
 import { useDirectionRail } from './hooks';
 import styles from './StudioHomeDirections.module.css';
@@ -32,7 +32,7 @@ export function StudioHomeDirections({ mode, directions, sectionRef }: StudioHom
         </div>
         <Link
           className="studio-button-outline"
-          href={isStudio ? ecosystemDestinations.studio : '/academy'}
+          href={isStudio ? ecosystemPages.studio : '/academy'}
         >
           {isStudio ? 'Уся студія' : 'Вся академія'}
           <span aria-hidden="true">→</span>

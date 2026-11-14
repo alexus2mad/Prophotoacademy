@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
 import { studioAssets } from '@/lib/studio-design/assets';
 import { phoneLabel } from '@/lib/format';
-import { ecosystemDestinations } from '@/lib/ecosystem';
+import { ecosystemPages } from '@/lib/ecosystem';
 import { useStudioHeader } from './hooks';
 import type { StudioHeaderProps } from './types';
 
@@ -27,14 +27,14 @@ export function StudioHeader({ settings }: StudioHeaderProps) {
     process.env.NEXT_PUBLIC_REVIEW_MODE === 'pages' ? '/demo/account' : '/account';
   const destinations = [
     {
-      href: ecosystemDestinations.studio,
+      href: ecosystemPages.studio,
       label: '01 · Студія',
       alt: 'ProPhoto Studio',
       logo: studioAssets.menu.imgLogoStudio,
       links: [
-        [ecosystemDestinations.studio, 'Циклорама'],
-        [ecosystemDestinations.studio, 'Контент-зал'],
-        [ecosystemDestinations.studio, 'Гримерна'],
+        [`${ecosystemPages.studio}#cyclorama`, 'Циклорама'],
+        [`${ecosystemPages.studio}#content-room`, 'Контент-зал'],
+        [`${ecosystemPages.studio}#makeup`, 'Гримерна'],
       ],
     },
     {
@@ -50,11 +50,11 @@ export function StudioHeader({ settings }: StudioHeaderProps) {
       ],
     },
     {
-      href: ecosystemDestinations.shop,
+      href: ecosystemPages.shop,
       label: '03 · Магазин',
       alt: 'ProPhoto Shop',
       logo: studioAssets.menu.imgLogoShop,
-      links: [[ecosystemDestinations.shop, 'Обладнання']],
+      links: [[`${ecosystemPages.shop}#equipment-selection`, 'Обладнання']],
     },
   ];
   const socials = [
@@ -103,8 +103,8 @@ export function StudioHeader({ settings }: StudioHeaderProps) {
             <nav className="studio-header-nav" aria-label="Головна навігація">
               {[
                 ['/academy', 'Академія'],
-                [ecosystemDestinations.studio, 'Студія'],
-                [ecosystemDestinations.shop, 'Shop'],
+                [ecosystemPages.studio, 'Студія'],
+                [ecosystemPages.shop, 'Shop'],
                 ['/contacts', 'Контакти'],
               ].map(([href, label]) => (
                 <Link

@@ -2,11 +2,12 @@ import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
 import { StudioMobileAction } from '@/components/molecules/StudioMobileAction/StudioMobileAction';
 import { StudioSpacesGallery } from '@/components/organisms/StudioSpacesGallery/StudioSpacesGallery';
 import { studioAssets } from '@/lib/studio-design/assets';
+import { ecosystemDestinations } from '@/lib/ecosystem';
 import type { StudioSpacesTemplateProps } from './types';
 import styles from './StudioSpacesTemplate.module.css';
 
 export function StudioSpacesTemplate({ content }: StudioSpacesTemplateProps) {
-  const bookingUrl = content.hub.bookingUrl;
+  const bookingUrl = ecosystemDestinations.studioBooking;
   const rooms = [
     {
       id: 'cyclorama',

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { StudioHomePicture } from '@/components/molecules/StudioHomePicture/StudioHomePicture';
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
 import { studioAssets } from '@/lib/studio-design/assets';
-import { ecosystemDestinations } from '@/lib/ecosystem';
+import { ecosystemPages } from '@/lib/ecosystem';
 import { useStudioHomeHero } from './hooks';
 import styles from './StudioHomeHero.module.css';
 
@@ -13,7 +13,7 @@ const brands = [
     key: 'studio',
     name: 'Studio',
     caption: 'оренда залів',
-    href: ecosystemDestinations.studio,
+    href: ecosystemPages.studio,
     logo: studioAssets.home.imgLogoStudio,
     mobileLogo: studioAssets.homeMobile.imgLogoStudio,
   },
@@ -29,7 +29,7 @@ const brands = [
     key: 'shop',
     name: 'Shop',
     caption: 'техніка для зйомки',
-    href: ecosystemDestinations.shop,
+    href: ecosystemPages.shop,
     logo: studioAssets.home.imgLogoShop,
     mobileLogo: studioAssets.homeMobile.imgLogoShop,
   },

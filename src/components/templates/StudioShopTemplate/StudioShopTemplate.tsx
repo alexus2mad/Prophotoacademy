@@ -2,10 +2,10 @@ import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
 import { StudioMobileAction } from '@/components/molecules/StudioMobileAction/StudioMobileAction';
 import { StudioShopSelection } from '@/components/organisms/StudioShopSelection/StudioShopSelection';
 import { studioAssets } from '@/lib/studio-design/assets';
-import type { StudioShopTemplateProps } from './types';
+import { ecosystemDestinations } from '@/lib/ecosystem';
 import styles from './StudioShopTemplate.module.css';
 
-export function StudioShopTemplate({ content }: StudioShopTemplateProps) {
+export function StudioShopTemplate() {
   return (
     <>
       <section className={`${styles.hero} studio-dark`}>
@@ -25,14 +25,14 @@ export function StudioShopTemplate({ content }: StudioShopTemplateProps) {
             </span>
             Бачити більше
           </h1>
-          <a className={`${styles.heroAction} studio-button`} href="#equipment-selection">
+          <a className={`${styles.heroAction} studio-button`} href={ecosystemDestinations.shop}>
             Підібрати техніку →
           </a>
         </div>
       </section>
-      <StudioShopSelection shopUrl={content.settings.shop} />
+      <StudioShopSelection shopUrl={ecosystemDestinations.shop} />
       <StudioMobileAction>
-        <a className="studio-button" href="#equipment-selection">
+        <a className="studio-button" href={ecosystemDestinations.shop}>
           Підібрати техніку →
         </a>
       </StudioMobileAction>

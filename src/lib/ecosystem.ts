@@ -1,5 +1,10 @@
 import type { PracticeSession, SiteBrand } from './content/types';
 
+export const ecosystemPages = {
+  studio: '/photo-studio',
+  shop: '/shop',
+} as const;
+
 export const ecosystemDestinations = {
   studio: 'https://prophotohub.com.ua',
   studioBooking: 'https://prophotohub.com.ua/booking',

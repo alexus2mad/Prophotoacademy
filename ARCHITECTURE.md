@@ -101,12 +101,15 @@ The source-backed destinations `/academy`, `/photo-studio`, `/shop` and
 and the legacy dialog compose one `useInquirySubmission` workflow, preserving
 server validation, attribution, consent and review-mode restrictions.
 
-Production navigation uses `ecosystemDestinations` for the existing Hub domain
-and the Shop Instagram profile. The homepage hero stays on Academy, with its
-Academy portrait rotation and ordinary links to the three brands. The Academy fixture's Shop setting mirrors this
-destination for the retained legacy design. The `/photo-studio` and `/shop`
-designs remain directly previewable but
-unlinked, excluded from the sitemap and marked noindex. Course sales can be
+Brand navigation uses `ecosystemPages` for the Academy-hosted `/photo-studio`
+and `/shop` introductions. Header, menu, footer and hero links open these pages;
+room links target their corresponding Studio sections. Booking and shopping
+CTAs use `ecosystemDestinations` for the public Hub booking page and Shop
+Instagram profile. Do not route visitors directly to the booking embed.
+The homepage hero stays on Academy, with its Academy portrait rotation.
+The Academy fixture's Shop setting mirrors the external destination for the
+retained legacy design. Studio and Shop remain excluded from the sitemap and
+marked noindex as introductions to the separate businesses. Course sales can be
 explicitly `closed` in the offering model; presentation and all checkout modes
 share this policy. Closing sales never changes existing student access or rejects
 verified callbacks for already-issued orders. Product tickets retain the existing

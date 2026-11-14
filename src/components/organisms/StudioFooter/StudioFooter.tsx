@@ -6,7 +6,7 @@ import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
 import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
 import { studioAssets } from '@/lib/studio-design/assets';
 import { phoneLabel } from '@/lib/format';
-import { ecosystemDestinations } from '@/lib/ecosystem';
+import { ecosystemPages } from '@/lib/ecosystem';
 import { useStudioFooter } from './hooks';
 import type { StudioFooterProps } from './types';
 
@@ -85,8 +85,8 @@ export function StudioFooter({ settings }: StudioFooterProps) {
         <nav className="studio-footer-links" aria-label="Екосистема">
           <h2 className="studio-label">Екосистема</h2>
           <Link href="/academy">Академія</Link>
-          <Link href={ecosystemDestinations.studio}>Студія</Link>
-          <Link href={ecosystemDestinations.shop}>Shop</Link>
+          <Link href={ecosystemPages.studio}>Студія</Link>
+          <Link href={ecosystemPages.shop}>Shop</Link>
         </nav>
         <nav className="studio-footer-links" aria-label="Навчання">
           <h2 className="studio-label">Навчання</h2>
