@@ -102,7 +102,7 @@ and the legacy dialog compose one `useInquirySubmission` workflow, preserving
 server validation, attribution, consent and review-mode restrictions.
 
 Brand navigation uses `ecosystemPages` for the Academy-hosted `/photo-studio`
-and `/shop` introductions. Header, menu, footer and hero links open these pages;
+and `/shop` introductions. Header, menu and footer links open these pages;
 room links target their corresponding Studio sections. Booking and shopping
 CTAs use `ecosystemDestinations` for the public Hub booking page and Shop
 Instagram profile. Do not route visitors directly to the booking embed.
