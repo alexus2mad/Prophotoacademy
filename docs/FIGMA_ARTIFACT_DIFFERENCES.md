@@ -1,5 +1,14 @@
 # Figma / Claude artifact source conflicts
 
+## Homepage Shop image — 15 November 2026
+
+The homepage Shop tab uses the artifact's `hero_tech.webp`, a Profoto lighting
+setup. The desktop image previously came from the standalone Shop design, while
+the mobile layout used a portrait crop of the equipment setup. The homepage now
+serves the exact 2600 × 1733 WebP with the artifact's 52% desktop and 70% mobile
+horizontal focal points. The supplied Drive library was checked for a larger
+source of the same shot. No exact match was found among its 319 image entries.
+
 ## Updated Content Creator — 15 November 2026
 
 New live Figma frame **949:443** supersedes the old statement below that there is

@@ -30,6 +30,9 @@
 .image[data-motion-ready='true'] img {
   animation: photograph 6s ease-in-out infinite alternate;
 }
+.image[data-hero-visual='shop'] img {
+  object-position: 52% 50%;
+}
 .image[data-hero-visual='shop'][data-motion-ready='true'] img {
   animation-duration: 8s;
 }
@@ -193,6 +196,9 @@
   }
   .image[data-hero-visual='academy-2'] img {
     object-position: 77% 50%;
+  }
+  .image[data-hero-visual='shop'] img {
+    object-position: 70% 50%;
   }
   .panorama img {
     width: 100%;

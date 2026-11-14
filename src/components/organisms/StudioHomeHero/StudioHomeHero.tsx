@@ -46,8 +46,7 @@ export function StudioHomeHero({ mode, onModeChange }: StudioHomeHeroProps) {
       name: 'Academy',
     },
     shop: {
-      image: studioAssets.shop.imgHero,
-      mobileImage: studioAssets.homeShopMobile.imgImgHome390Shop01,
+      image: studioAssets.artifact.hero_tech,
       kick: 'техніка, щоб',
       mobileKick: 'техніка, щоб',
       label: 'Підібрати техніку',
@@ -64,7 +63,7 @@ export function StudioHomeHero({ mode, onModeChange }: StudioHomeHeroProps) {
     { id: 'academy-1', image: studioAssets.artifact.hero_studio, mobileImage: undefined },
     { id: 'academy-2', image: studioAssets.artifact.hero_shop, mobileImage: undefined },
     { id: 'studio', image: states.studio.image, mobileImage: states.studio.mobileImage },
-    { id: 'shop', image: states.shop.image, mobileImage: states.shop.mobileImage },
+    { id: 'shop', image: states.shop.image, mobileImage: undefined },
   ];
   return (
     <section
@@ -91,7 +90,7 @@ export function StudioHomeHero({ mode, onModeChange }: StudioHomeHeroProps) {
             alt=""
             eager
             fetchPriority={visual.id === 'academy-0' ? 'high' : undefined}
-            sizes="100vw"
+            sizes={visual.id === 'shop' ? 'max(100vw, 150svh)' : '100vw'}
           />
         </div>
       ))}
