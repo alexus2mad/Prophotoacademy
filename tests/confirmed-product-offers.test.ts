@@ -69,26 +69,43 @@ describe('owner-confirmed November offers', () => {
     ]);
   });
 
-  it('closes the dated event after its day and preserves the temporary course-sales closure', () => {
+  it('closes the dated event after its day while keeping the confirmed future course open', () => {
     vi.stubEnv('PAYMENT_MODE', 'wayforpay');
     const later = new Date('2026-11-23T10:00:00Z');
     for (const pack of eventOffering.packages) {
       expect(canEnroll(eventOffering, pack, later)).toBe(false);
       expect(() => resolvePurchase(content, eventOffering.id, pack.id, later)).toThrow();
     }
-    expect(commercialOffering.startDate).toBe('2026-11-06');
+    expect(commercialOffering.startDate).toBe('2026-11-27');
     for (const pack of commercialOffering.packages) {
-      expect(canEnroll(commercialOffering, pack, now)).toBe(false);
-      expect(() => resolvePurchase(content, commercialOffering.id, pack.id, now)).toThrow(
-        'Набір закрито',
-      );
+      expect(canEnroll(commercialOffering, pack, now)).toBe(true);
+      expect(resolvePurchase(content, commercialOffering.id, pack.id, now).pack).toBe(pack);
     }
     expect(programSchedule(commercial, commercialOffering, now)).toMatchObject({
-      status: 'Набір закрито',
-      date: '2026-11-06',
-      inquirySuggested: true,
+      label: 'Старт навчання',
+      status: 'Набір відкрито',
+      date: '2026-11-27',
+      inquirySuggested: false,
     });
   });
+
+  it.each(['mock', 'wayforpay'])(
+    'opens the three confirmed Content Creator packages in %s mode with unchanged prices',
+    (mode) => {
+      vi.stubEnv('PAYMENT_MODE', mode);
+      expect(commercialOffering.packages.map((pack) => [pack.id, pack.price])).toEqual([
+        ['commercial-base', 9600],
+        ['commercial-gold', 29900],
+        ['commercial-platinum', 79900],
+      ]);
+      for (const pack of commercialOffering.packages) {
+        expect(resolvePurchase(content, commercialOffering.id, pack.id, now).offering).toBe(
+          commercialOffering,
+        );
+      }
+      expect(commercialOffering.packages.find((pack) => pack.featured)?.id).toBe('commercial-gold');
+    },
+  );
 
   it('keeps the separate Food Photography program inquiry-only', () => {
     const food = content.programs.find((program) => program.slug === 'food-photography')!;

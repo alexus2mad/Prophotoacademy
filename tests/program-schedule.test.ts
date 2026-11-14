@@ -10,6 +10,7 @@ const commercial = content.programs.find((program) => program.id === 'program-co
 // Keep the schedule-policy baseline independent of the current intake's delivery state.
 const offering: Offering = {
   ...content.offerings.find((item) => item.programId === commercial.id)!,
+  startDate: '2026-11-06',
   availability: 'open',
   learningState: undefined,
   joiningOpen: undefined,

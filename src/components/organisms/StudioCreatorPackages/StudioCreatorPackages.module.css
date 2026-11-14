@@ -112,7 +112,9 @@
 
 .packages :global(.price-amount) {
   max-width: 100%;
-  overflow-wrap: anywhere;
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: normal;
 }
 
 .packages :global(.price-currency) {

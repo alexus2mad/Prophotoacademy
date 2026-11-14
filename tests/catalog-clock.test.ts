@@ -17,6 +17,7 @@ const content: AcademyContent = {
   ...(fixture as AcademyContent),
   offerings: (fixture as AcademyContent).offerings.map((item) => ({
     ...item,
+    startDate: item.programId === 'program-commercial' ? '2026-11-06' : item.startDate,
     availability: 'open',
     learningState: undefined,
     joiningOpen: undefined,

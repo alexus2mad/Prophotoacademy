@@ -24,9 +24,11 @@ presentation without changing eligibility or other layouts.
 
 ## Intentional exceptions
 
-- Preserve current prices: BASE 9,600, GOLD 29,900, PLATINUM 79,900 UAH, package
-  promises and closed sales. Figma's prices, VIP name, date, lecture schedule,
-  installment text and remaining-seat claims do not update commerce.
+- Preserve current prices: BASE 9,600, GOLD 29,900, PLATINUM 79,900 UAH and package
+  promises. The user's subsequent instruction opens this course's three packages
+  and confirms the Figma start of 27 November 2026. Other course offers remain
+  unchanged. Figma's prices, VIP name, lecture schedule, installment text and
+  remaining-seat claims do not update commerce.
 - Benefits/process copy does not promise support or commercial practice in packages
   that omit it. The disclosure reveals the actual marketing curriculum, not an
   invented syllabus behind the prototype's closed row.
@@ -52,6 +54,12 @@ The hero requests adequate image resolution for the tall mobile cover crop.
 Closed CTAs open the real contextual inquiry drawer. Reopening an authorized
 offering uses existing checkout URLs and server rules. The Studio CTA uses the
 configured Hub booking destination.
+
+The open offer displays `Старт 27.11` in the hero and introduction, using semantic
+dates with the complete date available to assistive tools. Production retains
+WayForPay; staging retains simulated payments. Prices may wrap between thousands
+groups at enlarged text sizes, never inside a digit group. The curriculum has
+one disclosure indicator, with the inherited global indicator suppressed.
 
 ## Verification evidence
 

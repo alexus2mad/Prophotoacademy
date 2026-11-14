@@ -16,7 +16,7 @@ November 9–10 artifact HTML/CSS/JS, explicitly not a verified current revision
 | Lecturers | Two profile cards | Eleven Figma lecturer rows; retain nine intentionally blank image slots |
 | Reviews | Light section | Dark section with three visible cards, source attribution retained |
 | Packages | Earlier section, prices by inquiry | Late large-price grid with raised GOLD; keep confirmed 9,600 / 29,900 / 79,900 prices and PLATINUM name |
-| Offer terms | Incomplete prototype terms | Figma 27.11, 8,500/25,500/70,000, VIP, Gold lifetime, scarcity and installments conflict with live data; retain existing terms and closed enrollment |
+| Offer terms | Incomplete prototype terms | User subsequently authorized open commercial-course sales and Figma's 27.11 start (2026). Retain existing package prices/rights and PLATINUM name; do not copy Figma's 8,500/25,500/70,000, VIP, Gold lifetime, scarcity or installments |
 | Photography | Older Olena image | Figma also uses the older portrait; retain the explicitly approved high-quality replacement |
 | Navigation/footer | Shared source controls | Keep current approved shared navigation, social/legal links and existing course anchors |
 

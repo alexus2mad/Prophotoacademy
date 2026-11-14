@@ -99,6 +99,10 @@
 .curriculum summary::-webkit-details-marker {
   display: none;
 }
+.curriculum > summary::after {
+  display: none;
+  content: none;
+}
 .curriculum summary span::after {
   content: '+';
   font-size: 32px;

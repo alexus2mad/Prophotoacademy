@@ -17,23 +17,25 @@ import { PackageCard } from '../src/components/molecules/PackageCard/PackageCard
 const content = fixture as AcademyContent;
 const courses = content.programs.filter((program) => program.category === 'course');
 const courseIds = new Set(courses.map((program) => program.id));
-const offerings = content.offerings.filter((offering) => courseIds.has(offering.programId));
+const offerings = content.offerings.filter(
+  (offering) => courseIds.has(offering.programId) && offering.programId !== 'program-commercial',
+);
 const now = new Date('2026-11-11T10:00:00Z');
 
 afterEach(() => vi.unstubAllEnvs());
 
-describe('temporary course sales closure', () => {
-  it('closes every configured course offering without altering its package identities or prices', () => {
-    expect(offerings).toHaveLength(3);
+describe('temporary closure of courses other than Content Creator', () => {
+  it('retains the other course closures without altering package identities or prices', () => {
+    expect(offerings).toHaveLength(2);
     expect(offerings.every((offering) => offering.availability === 'closed')).toBe(true);
-    expect(offerings.flatMap((offering) => offering.packages)).toHaveLength(9);
+    expect(offerings.flatMap((offering) => offering.packages)).toHaveLength(6);
     expect(offerings.every((offering) => offering.packages.every((pack) => pack.price > 0))).toBe(
       true,
     );
   });
 
   it.each(['mock', 'disabled', 'wayforpay'])(
-    'denies all course packages and catalog purchase links in %s mode',
+    'denies closed course packages and catalog purchase links in %s mode',
     async (mode) => {
       vi.stubEnv('PAYMENT_MODE', mode);
       for (const offering of offerings) {

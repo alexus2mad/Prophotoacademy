@@ -52,7 +52,11 @@ export function PackageCard({
       <div className="price">
         {layout === 'editorial' ? (
           <>
-            <span className="price-amount">{money(pack.price).replace(/\s*₴$/, '')}</span>
+            <span className="price-amount">
+              {money(pack.price)
+                .replace(/\s*₴$/, '')
+                .replace(/\u00a0/g, ' ')}
+            </span>
             <span className="price-currency">грн</span>
           </>
         ) : (

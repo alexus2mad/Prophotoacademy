@@ -35,7 +35,11 @@ export function StudioCreatorTemplate({
       <StudioInquirySection
         title="Залиште"
         hand="заявку"
-        description="Розкажемо про наступний набір, пакети й допоможемо обрати свій формат навчання."
+        description={
+          presentation.open
+            ? 'Розкажемо про програму, пакети й допоможемо обрати свій формат навчання.'
+            : 'Розкажемо про наступний набір, пакети й допоможемо обрати свій формат навчання.'
+        }
         context={{
           programId: program.id,
           offeringId: offering?.id,

@@ -8,7 +8,22 @@ import styles from './StudioCreatorHero.module.css';
 export function StudioCreatorHero({ program, offering, presentation }: StudioCreatorHeroProps) {
   const schedule = programSchedule(program, offering);
   const facts =
-    presentation.status === 'closed' ? schedule.status : `${schedule.label}: ${schedule.value}`;
+    presentation.open && schedule.date ? (
+      <>
+        Старт{' '}
+        <time dateTime={schedule.date} title={schedule.value}>
+          {new Intl.DateTimeFormat('uk-UA', {
+            day: '2-digit',
+            month: '2-digit',
+            timeZone: 'Europe/Kyiv',
+          }).format(new Date(`${schedule.date}T12:00:00Z`))}
+        </time>
+      </>
+    ) : presentation.status === 'closed' ? (
+      schedule.status
+    ) : (
+      `${schedule.label}: ${schedule.value}`
+    );
   return (
     <>
       <section

@@ -54,11 +54,17 @@ describe('Content Creator route and commercial boundaries', () => {
   it.each(['disabled', 'mock', 'wayforpay'] as const)(
     'keeps closed enrollment closed in %s mode, including stale available package IDs',
     (mode) => {
+      const closedContent = {
+        ...content,
+        offerings: content.offerings.map((item) =>
+          item.id === offering.id ? { ...item, availability: 'closed' as const } : item,
+        ),
+      };
       const $ = load(
         renderToStaticMarkup(
           createElement(StudioCreatorTemplate, {
             program,
-            content,
+            content: closedContent,
             enrollment: {
               mode,
               packageIds: offering.packages.map((pack) => pack.id),
