@@ -172,7 +172,11 @@ describe('direct Studio learning navigation', () => {
   });
 
   it('takes the Academy hero to its overview and the course card directly to its course section', () => {
-    const hero = load(renderToStaticMarkup(createElement(StudioHomeHero)));
+    const hero = load(
+      renderToStaticMarkup(
+        createElement(StudioHomeHero, { mode: 'academy', onModeChange: vi.fn() }),
+      ),
+    );
     expect(hero('a.studio-button').attr('href')).toBe('/academy');
     expect(hero('[data-hero-visual] img[fetchpriority="high"]')).toHaveLength(1);
     expect(hero('[data-hero-visual="academy-0"] img').attr('fetchpriority')).toBe('high');

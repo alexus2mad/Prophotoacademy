@@ -1,9 +1,11 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import type { SyntheticEvent, TransitionEvent } from 'react';
+import type { KeyboardEvent, SyntheticEvent, TransitionEvent } from 'react';
+import type { StudioHomeHeroProps } from './types';
 
-export function useStudioHomeHero(portraitCount: number) {
+export function useStudioHomeHero({ mode }: StudioHomeHeroProps) {
   const hero = useRef<HTMLElement>(null);
+  const tabs = useRef<HTMLDivElement>(null);
   const loaded = useRef(new Set<string>());
   const [reducedMotion, setReducedMotion] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -14,7 +16,7 @@ export function useStudioHomeHero(portraitCount: number) {
     visibleImage,
     reducedMotion,
   );
-  const requestedImage = `academy-${portrait}`;
+  const requestedImage = mode === 'academy' ? `academy-${portrait}` : mode;
   const requested = useRef(requestedImage);
   const playing = !reducedMotion && visible && documentVisible;
 
@@ -24,6 +26,12 @@ export function useStudioHomeHero(portraitCount: number) {
     const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
     const updateMotion = () => setReducedMotion(preference.matches);
     const updateVisibility = () => setDocumentVisible(!document.hidden);
+    const updateSize = () => {
+      element.style.setProperty('--hero-width', `${element.clientWidth}px`);
+      element.style.setProperty('--hero-height', `${element.clientHeight}px`);
+    };
+    const resize = new ResizeObserver(updateSize);
+    resize.observe(element);
     const observer = new IntersectionObserver(
       ([entry]) => setVisible(entry.isIntersecting && entry.intersectionRatio >= 0.5),
       { threshold: [0, 0.5] },
@@ -33,11 +41,13 @@ export function useStudioHomeHero(portraitCount: number) {
     document.addEventListener('visibilitychange', updateVisibility);
     updateMotion();
     updateVisibility();
+    updateSize();
     element.querySelectorAll<HTMLImageElement>('[data-hero-visual] img').forEach((image) => {
       const key = image.closest<HTMLElement>('[data-hero-visual]')?.dataset.heroVisual;
       if (key && image.complete && image.naturalWidth > 0) loaded.current.add(key);
     });
     return () => {
+      resize.disconnect();
       observer.disconnect();
       preference.removeEventListener('change', updateMotion);
       document.removeEventListener('visibilitychange', updateVisibility);
@@ -50,13 +60,10 @@ export function useStudioHomeHero(portraitCount: number) {
   }, [requestedImage]);
 
   useEffect(() => {
-    if (!playing || portraitCount < 2) return;
-    const timer = window.setInterval(
-      () => setPortrait((current) => (current + 1) % portraitCount),
-      3_000,
-    );
+    if (!playing || mode !== 'academy') return;
+    const timer = window.setInterval(() => setPortrait((current) => (current + 1) % 3), 3_000);
     return () => window.clearInterval(timer);
-  }, [playing, portraitCount]);
+  }, [playing, mode]);
 
   function onImageLoad(event: SyntheticEvent<HTMLElement>) {
     if (!(event.target instanceof HTMLImageElement)) return;
@@ -66,7 +73,37 @@ export function useStudioHomeHero(portraitCount: number) {
     if (key === requested.current) setVisibleImage(key);
   }
 
-  return { hero, visibleImage, retainedImages, playing, onImageLoad, onImageTransitionEnd };
+  function onTabKeyDown(event: KeyboardEvent<HTMLButtonElement>) {
+    const buttons = Array.from(
+      tabs.current?.querySelectorAll<HTMLButtonElement>('[role="tab"]') ?? [],
+    );
+    const current = buttons.indexOf(event.currentTarget);
+    const next =
+      event.key === 'ArrowRight'
+        ? (current + 1) % buttons.length
+        : event.key === 'ArrowLeft'
+          ? (current - 1 + buttons.length) % buttons.length
+          : event.key === 'Home'
+            ? 0
+            : event.key === 'End'
+              ? buttons.length - 1
+              : -1;
+    if (next >= 0) {
+      event.preventDefault();
+      buttons[next]?.focus();
+    }
+  }
+
+  return {
+    hero,
+    tabs,
+    visibleImage,
+    retainedImages,
+    playing,
+    onImageLoad,
+    onImageTransitionEnd,
+    onTabKeyDown,
+  };
 }
 
 /** Reset a photograph only after it has completely faded, never while it is still visible. */

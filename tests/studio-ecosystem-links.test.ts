@@ -43,11 +43,19 @@ it('links public footer visitors to Academy information and legal pages', () => 
   ).toEqual(['/terms-of-service', '/privacy-policy']);
 });
 
-it('keeps the Academy hero action and links to the other brand introductions', () => {
-  const $ = load(renderToStaticMarkup(createElement(StudioHomeHero)));
-  expect($('a.studio-button').attr('href')).toBe('/academy');
-  expect($('nav a[data-brand="studio"]').attr('href')).toBe('/photo-studio');
-  expect($('nav a[data-brand="shop"]').attr('href')).toBe('/shop');
+it.each([
+  ['academy', '/academy'],
+  ['studio', 'https://prophotohub.com.ua/booking'],
+  ['shop', 'https://www.instagram.com/prophoto.shop?mdxt=ZnIwcnUzdHp2eGh2'],
+] as const)('switches the %s hero action while keeping brand selectors as tabs', (mode, href) => {
+  const $ = load(
+    renderToStaticMarkup(createElement(StudioHomeHero, { mode, onModeChange: vi.fn() })),
+  );
+  expect($('a.studio-button').attr('href')).toBe(href);
+  expect($('[role="tab"]')).toHaveLength(3);
+  expect($('[role="tab"][aria-selected="true"]').attr('data-brand')).toBe(mode);
+  expect($('[role="tab"][tabindex="0"]').attr('data-brand')).toBe(mode);
+  expect($('a[data-brand]')).toHaveLength(0);
 });
 
 it.each([

@@ -1,6 +1,9 @@
 'use client';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import type { StudioHomeMode } from '@/lib/studio-home/types';
 
 export function useStudioHomeExperience() {
-  return useRef<HTMLElement>(null);
+  const [mode, setMode] = useState<StudioHomeMode>('academy');
+  const directionsRef = useRef<HTMLElement>(null);
+  return { mode, setMode, directionsRef };
 }
