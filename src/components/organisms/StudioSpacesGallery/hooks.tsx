@@ -65,5 +65,10 @@ export function useStudioGallery(length: number, draggable = false) {
       move(event.key === 'ArrowLeft' ? -1 : 1);
     }
   };
-  return { track, position, move, onKeyDown };
+  const reset = () => {
+    drag.current?.cancelMomentum();
+    track.current?.scrollTo({ left: 0, behavior: 'instant' });
+    setPosition({ index: 1, start: true, end: length < 2 });
+  };
+  return { track, position, move, onKeyDown, reset };
 }

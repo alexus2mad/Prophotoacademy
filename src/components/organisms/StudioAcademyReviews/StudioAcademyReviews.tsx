@@ -3,20 +3,33 @@
 import Link from 'next/link';
 import { useStudioHomeCarousel } from '@/components/molecules/StudioHomeCarousel/hooks';
 import { studioReviews } from '@/lib/studio-reviews/reviews';
+import { StudioCreatorHeading } from '@/components/molecules/StudioCreatorHeading/StudioCreatorHeading';
+import type { StudioAcademyReviewsProps } from './types';
+import { studioAssetUrl } from '@/lib/studio-design/urls';
 import styles from './StudioAcademyReviews.module.css';
 
-export function StudioAcademyReviews() {
+export function StudioAcademyReviews({ variant = 'academy' }: StudioAcademyReviewsProps) {
   const { rail, active, maximum, select, onKeyDown } = useStudioHomeCarousel();
 
   return (
-    <section className="studio-band studio-dark" aria-labelledby="academy-reviews-title">
+    <section
+      id={variant === 'creator' ? 'program-reviews' : undefined}
+      className="studio-band studio-dark"
+      aria-labelledby="academy-reviews-title"
+    >
       <div className="studio-wrap">
-        <header className={styles.heading}>
-          <p className="studio-label studio-eyebrow">Відгуки учнів</p>
-          <h2 className="studio-title" id="academy-reviews-title">
-            Що кажуть випускники
-          </h2>
-        </header>
+        {variant === 'creator' ? (
+          <StudioCreatorHeading id="academy-reviews-title" label="Відгуки">
+            Що кажуть <span className="studio-hand">*випускники</span>
+          </StudioCreatorHeading>
+        ) : (
+          <header className={styles.heading}>
+            <p className="studio-label studio-eyebrow">Відгуки учнів</p>
+            <h2 className="studio-title" id="academy-reviews-title">
+              Що кажуть випускники
+            </h2>
+          </header>
+        )}
         <div
           id="academy-reviews"
           className={styles.rail}
@@ -30,7 +43,14 @@ export function StudioAcademyReviews() {
             <article className={styles.review} key={review.id}>
               <header>
                 <h3>{review.name}</h3>
-                <span aria-label="5 із 5">★★★★★</span>
+                {variant === 'creator' ? (
+                  <img
+                    src={studioAssetUrl('/images/studio/creator/review-stars-088b2ea487ba.svg')}
+                    alt="5 із 5"
+                  />
+                ) : (
+                  <span aria-label="5 із 5">★★★★★</span>
+                )}
               </header>
               <p className={styles.title}>{review.title}</p>
               {review.kind === 'story' ? (

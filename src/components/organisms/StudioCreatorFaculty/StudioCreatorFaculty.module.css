@@ -1,0 +1,150 @@
+.people {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.person {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr) minmax(0, 380px);
+  align-items: center;
+  column-gap: 34.5px;
+  min-height: 158px;
+  padding-right: 34.5px;
+  color: var(--studio-paper);
+}
+
+.person::before {
+  position: absolute;
+  z-index: -1;
+  inset: 14px 0 0;
+  background: var(--studio-ink);
+  content: '';
+}
+
+.person:first-child {
+  min-height: 172px;
+}
+
+.portrait {
+  position: relative;
+  display: block;
+  align-self: stretch;
+  width: 100%;
+  min-height: 158px;
+  background: #1c1816;
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.identity {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  min-width: 0;
+  padding-block: 24px;
+}
+
+.identity[data-has-biography='false'] {
+  grid-column: 2 / -1;
+}
+
+.identity h3 {
+  max-width: 100%;
+  color: var(--studio-red);
+  font:
+    700 46.1px/0.92 var(--font-studio-condensed),
+    sans-serif;
+  letter-spacing: -0.005em;
+  overflow-wrap: anywhere;
+  text-transform: uppercase;
+}
+
+.role {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  flex-shrink: 0;
+  font-size: 11px;
+  line-height: 1.35;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.role span {
+  display: block;
+}
+
+.biography {
+  padding-block: 24px 10px;
+  color: var(--studio-steel);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+@media (max-width: 1250px) {
+  .person {
+    grid-template-columns: minmax(180px, 22%) minmax(0, 1fr) minmax(0, 30%);
+    column-gap: 24px;
+    padding-right: 24px;
+  }
+
+  .identity h3 {
+    font-size: clamp(32px, 3.2vw, 40px);
+  }
+}
+
+@media (max-width: 760px) {
+  .people {
+    gap: 16px;
+  }
+
+  .person,
+  .person:first-child {
+    grid-template-columns: 112px minmax(0, 1fr);
+    gap: 0 20px;
+    min-height: 0;
+    padding: 0;
+  }
+
+  .person::before {
+    inset: 0;
+  }
+
+  .portrait {
+    min-height: 140px;
+  }
+
+  .identity,
+  .identity[data-has-biography='false'] {
+    grid-column: 2;
+    padding: 20px 16px 20px 0;
+  }
+
+  .identity h3 {
+    font-size: clamp(27px, 4.5vw, 34px);
+    line-height: 1;
+  }
+
+  .role {
+    flex-shrink: 1;
+  }
+
+  .biography {
+    grid-column: 1 / -1;
+    padding: 20px;
+  }
+}
+.section {
+  color: var(--studio-ink);
+}

@@ -1,5 +1,5 @@
 import type { Offering, Package, Program } from '@/lib/content/types';
-export type PackageCardLayout = 'summary-first' | 'benefits-first';
+export type PackageCardLayout = 'summary-first' | 'benefits-first' | 'editorial';
 export type PackageCardProps = {
   offering: Offering;
   program: Program;

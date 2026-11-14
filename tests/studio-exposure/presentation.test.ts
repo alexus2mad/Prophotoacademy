@@ -76,7 +76,7 @@ it('keeps server-rendered directions readable without an animation override befo
   );
   expect($('section').attr('style')).toBeUndefined();
   expect($('h2').text()).toContain('зал');
-  expect($('a').first().attr('href')).toBe('https://prophotohub.com.ua');
+  expect($('a').first().attr('href')).toBe('/photo-studio');
 });
 
 it('renders one complete semantic title without duplicated or repositioned words', () => {

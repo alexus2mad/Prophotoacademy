@@ -1,0 +1,128 @@
+.description {
+  max-width: 740px;
+  color: #a9a5a2;
+  font-size: 18px;
+  line-height: 1.55;
+  margin-top: -14px !important;
+  margin-bottom: 54px !important;
+}
+.filters {
+  display: inline-flex;
+  max-width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 4px;
+  border-radius: 999px;
+  gap: 4px;
+  margin-bottom: 18px;
+}
+.filters button {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  min-height: 36px;
+  padding: 10px 22px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #fbfbfb;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.filters button[aria-pressed='true'] {
+  color: #0a0807;
+  background: #fbfbfb;
+}
+.rail {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-inline: contain;
+}
+.rail::-webkit-scrollbar {
+  display: none;
+}
+.work {
+  flex: 0 0 calc((100% - 24px) / 3.5);
+  aspect-ratio: 4/5;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: #1c1816;
+  overflow: hidden;
+  scroll-snap-align: start;
+  cursor: zoom-in;
+}
+.work[data-partial] {
+  flex-basis: calc((100% - 24px) / 7);
+  aspect-ratio: 2/5;
+}
+.work img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.work:focus-visible {
+  outline-offset: -4px !important;
+}
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 24px;
+  font-size: 12px;
+}
+.controls button {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.controls button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.rail[data-dragging],
+.rail[data-coasting] {
+  scroll-snap-type: none;
+  user-select: none;
+}
+.rail[data-dragging] .work {
+  cursor: grabbing;
+}
+@media (hover: hover) and (pointer: fine) {
+  .rail {
+    scroll-snap-type: none;
+  }
+  .work {
+    cursor: grab;
+  }
+}
+@media (max-width: 760px) {
+  .description {
+    margin-top: 0 !important;
+    margin-bottom: 28px !important;
+    font-size: 16px;
+  }
+  .filters button {
+    min-height: 44px;
+  }
+  .rail {
+    margin-inline: calc(-1 * var(--studio-gutter));
+  }
+  .work {
+    flex-basis: 80%;
+  }
+  .work[data-partial] {
+    flex-basis: 40%;
+  }
+}

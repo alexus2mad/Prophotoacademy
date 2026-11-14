@@ -8,6 +8,7 @@ export function ProgramPackages({
   program,
   enrollment,
   packageLayout,
+  heading,
 }: ProgramPackagesProps) {
   const available = (id: string) => {
     const pack = offering.packages.find((p) => p.id === id);
@@ -34,7 +35,7 @@ export function ProgramPackages({
   return (
     <section className="program-packages" id="packages" aria-labelledby="packages-title">
       <div className="section-heading">
-        <h2 id="packages-title">Пакети й вартість</h2>
+        {heading ?? <h2 id="packages-title">Пакети й вартість</h2>}
         {compared.length > 1 && (
           <PackageComparison
             packages={compared}

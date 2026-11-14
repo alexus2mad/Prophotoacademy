@@ -86,6 +86,12 @@ requires rebuilding. See [final design implementation](docs/FINAL_DESIGN_IMPLEME
 and [source difference register](docs/FIGMA_ARTIFACT_DIFFERENCES.md).
 
 The Studio shell uses Figma's KyivType Sans, Roboto Condensed and Marck Script.
+The commercial course alone selects `StudioCreatorTemplate`, sourced from updated
+Figma frame 949:443. Its editorial sections are separate from the generic course
+template; both reuse the same offering and enrollment policies. The optional
+`editorial` package layout changes presentation only. Camera/phone work filters
+cancel rail momentum before resetting; galleries keep shared dialog behavior.
+See `docs/CONTENT_CREATOR_DESIGN.md` for source conflicts and visual exceptions.
 The explicit 10 November designer resolutions in the source difference register
 override the general Figma-first rule. Shared secondary hero metrics follow the
 artifact; inquiry sections use paper backgrounds and white-on-red primary CTAs.

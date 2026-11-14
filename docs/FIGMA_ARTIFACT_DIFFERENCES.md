@@ -1,5 +1,30 @@
 # Figma / Claude artifact source conflicts
 
+## Updated Content Creator — 15 November 2026
+
+New live Figma frame **949:443** supersedes the old statement below that there is
+no dedicated course frame. The current artifact shell can be fetched, but its
+authored content endpoint is challenged. Comparison uses the complete saved
+November 9–10 artifact HTML/CSS/JS, explicitly not a verified current revision.
+
+| Area | Saved artifact | New Figma / implementation decision |
+| --- | --- | --- |
+| Hero | White copy plus underwater image | Full-width monochrome portrait, KyivType title and Marck Script accent; follow Figma |
+| Audience / benefits | Eight personas and nine tiles | Six bordered audience cells then six ruled benefit rows; follow Figma |
+| Curriculum / process | Four details, first open | One closed disclosure then five steps; reveal existing curriculum inside native details |
+| Student work | Mixed images, no filters | Camera/phone rail; preserve popup/swipe/drag and actual category counts |
+| Lecturers | Two profile cards | Eleven Figma lecturer rows; retain nine intentionally blank image slots |
+| Reviews | Light section | Dark section with three visible cards, source attribution retained |
+| Packages | Earlier section, prices by inquiry | Late large-price grid with raised GOLD; keep confirmed 9,600 / 29,900 / 79,900 prices and PLATINUM name |
+| Offer terms | Incomplete prototype terms | Figma 27.11, 8,500/25,500/70,000, VIP, Gold lifetime, scarcity and installments conflict with live data; retain existing terms and closed enrollment |
+| Photography | Older Olena image | Figma also uses the older portrait; retain the explicitly approved high-quality replacement |
+| Navigation/footer | Shared source controls | Keep current approved shared navigation, social/legal links and existing course anchors |
+
+Figma typography wins over saved HeliosCond. Primary red CTAs retain white text.
+Responsive layouts use the saved artifact's spacing and stacking guidance; no
+mobile frame was supplied for this course. Missing mobile detail is adapted for
+readability. Full implementation notes: [Content Creator](CONTENT_CREATOR_DESIGN.md).
+
 ## Academy destination correction — 12 November 2026
 
 The designer identified screenshots of two competing learning indexes. A fresh

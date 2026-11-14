@@ -16,7 +16,13 @@ export function useStudioHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const focused = path === '/checkout' || path === '/thanks';
-  const darkHero = ['/', '/photo-studio', '/shop', '/ai-artwork'].includes(path);
+  const darkHero = [
+    '/',
+    '/photo-studio',
+    '/shop',
+    '/ai-artwork',
+    '/food-product-photography',
+  ].includes(path);
   const secondary = ['/academy', '/photo-studio', '/shop', '/contacts'].includes(path);
 
   useEffect(() => {

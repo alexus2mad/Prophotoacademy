@@ -5,6 +5,7 @@ import { PortableText } from '@portabletext/react';
 import { getContent } from '@/lib/content';
 import { ProgramTemplate } from '@/components/templates/ProgramTemplate/ProgramTemplate';
 import { StudioProgramTemplate } from '@/components/templates/StudioProgramTemplate/StudioProgramTemplate';
+import { StudioCreatorTemplate } from '@/components/templates/StudioCreatorTemplate/StudioCreatorTemplate';
 import { academyDesign } from '@/lib/studio-design/variant';
 import { connection } from 'next/server';
 import { enrollmentOptions } from '@/lib/commerce/catalog';
@@ -47,7 +48,12 @@ export default async function Detail({ params }: SlugPageProps) {
   const content = await getContent();
   const program = content.programs.find((p) => p.slug === slug);
   if (program) {
-    const Template = academyDesign() === 'studio' ? StudioProgramTemplate : ProgramTemplate;
+    const Template =
+      academyDesign() === 'studio'
+        ? program.id === 'program-commercial'
+          ? StudioCreatorTemplate
+          : StudioProgramTemplate
+        : ProgramTemplate;
     const breadcrumb = academyBreadcrumbSchema([
       { name: academyName, path: '/' },
       { name: 'Програми академії', path: '/academy' },

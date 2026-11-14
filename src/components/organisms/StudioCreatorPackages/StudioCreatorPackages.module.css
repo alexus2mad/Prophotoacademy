@@ -1,0 +1,383 @@
+.packages {
+  --text: #150b08;
+  --secondary: #5c5552;
+  --border: rgba(21, 11, 8, 0.22);
+}
+
+.packages :global(.program-packages) {
+  margin: 0;
+  padding: 0;
+}
+
+.packages :global(.section-heading) {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.packages :global(.section-heading) > header {
+  margin: 0;
+}
+
+.packages :global(.package-source-note) {
+  margin-block: 16px 24px;
+  color: var(--secondary);
+  font-size: 14px;
+}
+
+.packages :global(.package-grid) {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2px;
+  padding-top: 14px;
+}
+
+.packages :global(.package-card) {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+  padding: 32px;
+  border: 0;
+  border-radius: 0;
+  background: #ebebeb;
+  color: #150b08;
+  box-shadow: none;
+  transform: none;
+}
+
+.packages :global(.package-card[data-featured='true']) {
+  --text: #fbfbfb;
+  --secondary: #a9a5a2;
+  --border: rgba(255, 255, 255, 0.22);
+  margin-top: -14px;
+  background: #150b08;
+  color: #fbfbfb;
+}
+
+.packages :global(.package-header) {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.packages :global(.package-header h3) {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  font:
+    700 clamp(38px, 3.61vw, 52px) / 1 var(--font-studio-condensed),
+    sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.packages :global(.package-popularity) {
+  display: inline-block;
+  max-width: 100%;
+  padding: 8px 10px;
+  background: #eb423b;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.packages :global(.package-card > p) {
+  margin: 14px 0 24px;
+  color: var(--secondary);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.packages :global(.package-card .price) {
+  display: flex;
+  align-items: start;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 0 0 24px;
+  border: 0;
+  font:
+    1000 clamp(44px, 4.4445vw, 64px) / 1 var(--font-studio-sans),
+    sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.packages :global(.price-amount) {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.packages :global(.price-currency) {
+  padding-top: 8px;
+  font:
+    700 13px / 1 var(--font-studio-sans),
+    sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.packages :global(.previous-price) {
+  width: 100%;
+  color: var(--secondary);
+  font:
+    350 15px / 1.4 var(--font-studio-sans),
+    sans-serif;
+  letter-spacing: 0;
+  text-decoration: line-through;
+}
+
+.packages :global(.package-benefits) {
+  margin-bottom: 32px;
+}
+
+.packages :global(.package-conditions-note) {
+  margin: 0;
+  color: var(--secondary);
+  font-size: 16px;
+}
+
+.packages :global(.package-includes-desktop) {
+  display: block;
+}
+
+.packages :global(.package-card .check-list) {
+  display: grid;
+  gap: 12px;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  font-size: 16px;
+  line-height: 1.55;
+  list-style: none;
+}
+
+.packages :global(.package-card .check-list li) {
+  position: relative;
+  display: block;
+  padding-left: 18px;
+}
+
+.packages :global(.package-card .check-list li::before) {
+  position: absolute;
+  left: 0;
+  color: #eb423b;
+  font-weight: 700;
+  content: '*';
+}
+
+.packages :global(.package-card .check-list svg) {
+  display: none;
+}
+
+.packages :global(.package-action) {
+  margin-top: auto;
+}
+
+.packages :global(.package-status) {
+  display: block;
+  padding-block: 16px;
+}
+
+.packages :global(.button) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 52px;
+  padding: 16px 24px;
+  border: 1.5px solid transparent;
+  border-radius: 999px;
+  background: #eb423b;
+  color: #fff;
+  font:
+    700 13px / 1.3 var(--font-studio-sans),
+    sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: normal;
+}
+
+.packages :global(.button:hover) {
+  background: #d6332d;
+  color: #fff;
+}
+
+.packages :global(.button-secondary) {
+  border-color: currentColor;
+  background: transparent;
+  color: inherit;
+}
+
+.packages :global(.button-secondary:hover) {
+  background: color-mix(in srgb, currentColor 8%, transparent);
+  color: inherit;
+}
+
+.packages :global(.text-link) {
+  width: auto;
+  padding: 12px 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 12px;
+}
+
+.packages :global(.text-link:hover) {
+  background: transparent;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.packages :global(.compare-short) {
+  display: none;
+}
+
+.packages :global(.compare-long) {
+  display: inline;
+}
+
+.packages :global(.package-comparison-dialog) {
+  width: min(1120px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  padding: 56px 28px 28px;
+  border: 0;
+  border-radius: 0;
+  background: #fbfbfb;
+  color: #150b08;
+}
+
+.packages :global(.package-comparison-dialog h2) {
+  margin-bottom: 24px;
+  font:
+    700 clamp(30px, 4vw, 52px) / 1 var(--font-studio-condensed),
+    sans-serif;
+  text-transform: uppercase;
+}
+
+.packages :global(.dialog-close) {
+  border-color: currentColor;
+  background: transparent;
+  color: #150b08;
+}
+
+.packages :global(.comparison-mobile) {
+  display: none;
+}
+
+.packages :global(.comparison-desktop) {
+  overflow: auto;
+}
+
+.packages :global(.comparison-table) {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.packages :global(.comparison-table td),
+.packages :global(.comparison-table th) {
+  padding: 16px;
+  border-bottom: 1px solid rgba(21, 11, 8, 0.2);
+  text-align: left;
+  vertical-align: top;
+}
+
+.packages :global(.comparison-table th) {
+  font-weight: 700;
+}
+
+.packages :global(.comparison-table th .package-popularity) {
+  margin-top: 8px;
+}
+
+.packages :global(.comparison-table [data-featured='true']) {
+  background: #ebebeb;
+}
+
+.packages :global(.comparison-selectors) {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.packages :global(.comparison-selectors label) {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+}
+
+.packages :global(.comparison-selectors select) {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px;
+  border: 1px solid #150b08;
+  border-radius: 0;
+  background: #fbfbfb;
+  color: #150b08;
+  font-size: 16px;
+}
+
+@media (max-width: 1100px) {
+  .packages :global(.package-card) {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 760px) {
+  .packages :global(.section-heading) {
+    display: grid;
+    justify-content: initial;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .packages :global(.compare-trigger) {
+    justify-self: start;
+  }
+
+  .packages :global(.package-grid) {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0;
+  }
+
+  .packages :global(.package-card[data-featured='true']) {
+    margin-top: 0;
+  }
+
+  .packages :global(.package-header h3) {
+    font-size: 44px;
+  }
+
+  .packages :global(.package-card .price) {
+    font-size: clamp(44px, 12.3vw, 64px);
+  }
+
+  .packages :global(.comparison-desktop) {
+    display: none;
+  }
+
+  .packages :global(.comparison-mobile) {
+    display: block;
+  }
+
+  .packages :global(.package-comparison-dialog) {
+    padding: 56px 16px 20px;
+  }
+
+  .packages :global(.comparison-table td),
+  .packages :global(.comparison-table th) {
+    padding: 12px 8px;
+  }
+}

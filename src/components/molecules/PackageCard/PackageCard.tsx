@@ -17,7 +17,6 @@ export function PackageCard({
   const closed = isEnrollmentClosed(offering, pack);
   const benefits = (
     <>
-      <p>{pack.description}</p>
       {!pack.includes.length && !isProduct(pack) && (
         <p className="package-conditions-note">
           Уточніть обсяг навчання, підтримку, практику й строк доступу до вибору пакета.
@@ -28,7 +27,7 @@ export function PackageCard({
           <PackageIncludes pack={pack} />
         </div>
       )}
-      {!!pack.includes.length && (
+      {!!pack.includes.length && layout !== 'editorial' && (
         <details className="package-includes-mobile">
           <summary>Що входить у пакет</summary>
           <PackageIncludes pack={pack} />
@@ -40,6 +39,7 @@ export function PackageCard({
     <article
       key={pack.id}
       className="package-card"
+      data-layout={layout === 'editorial' ? layout : undefined}
       data-featured={pack.featured || undefined}
       data-unavailable={pack.availability === 'soldOut'}
     >
@@ -47,13 +47,22 @@ export function PackageCard({
         <h3>{pack.name}</h3>
         {pack.featured && <span className="package-popularity">Найпопулярніший</span>}
       </div>
+      {(layout === 'benefits-first' || layout === 'editorial') && <p>{pack.description}</p>}
       {layout === 'benefits-first' && benefits}
       <div className="price">
-        {money(pack.price)}
+        {layout === 'editorial' ? (
+          <>
+            <span className="price-amount">{money(pack.price).replace(/\s*₴$/, '')}</span>
+            <span className="price-currency">грн</span>
+          </>
+        ) : (
+          money(pack.price)
+        )}
         {pack.previousPrice !== undefined && pack.previousPrice > pack.price && (
           <span className="previous-price">{money(pack.previousPrice)}</span>
         )}
       </div>
+      {layout === 'editorial' && <div className="package-benefits">{benefits}</div>}
       <div className="package-action">
         {!closed && !pack.inquiryOnly && (enrollable ?? canEnroll(offering, pack)) ? (
           <Link
@@ -87,7 +96,12 @@ export function PackageCard({
           <EnrollmentScope lessons={availableLessons} />
         )}
       </div>
-      {layout === 'summary-first' && benefits}
+      {layout === 'summary-first' && (
+        <>
+          <p>{pack.description}</p>
+          {benefits}
+        </>
+      )}
     </article>
   );
 }
