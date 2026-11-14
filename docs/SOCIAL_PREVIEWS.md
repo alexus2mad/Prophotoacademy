@@ -10,12 +10,19 @@ Hub designs have their own artwork without adding links or changing indexing.
 - Maximum **300,000 bytes per file**, sRGB, no transparency or animation
 - Exact ProPhoto vector wordmarks, Roboto Condensed Bold headings and KyivType
   Sans supporting text; paper `#fbfbfb`, ink `#150b08`, accent `#eb423b`
-- 56px wide-format and 40px square-format insets; no CTA-shaped decoration
-- Photographic feature for the homepage, editorial text/photo layouts for
-  programs, gallery sequences for the Academy and student work, quieter brand
-  treatments for information and workspace routes
-- Photograph crops are independently directed for wide and square formats.
-  Keep faces visible. The About square preserves the complete portrait
+- 56px wide-format and 42px square-format insets; no CTA-shaped decoration
+- Both formats use the same photograph across the whole canvas. Keep one
+  wordmark, an optional category, the same headline lines, and supporting copy.
+  Leave the domain and repeated brand labels to the sharing interface.
+- Direct each crop around its subject. Keep faces visible, and replace an image
+  when the subject cannot survive both crops. The About card uses a seated
+  portrait, and student work uses a portrait with space beside the face.
+- A soft gradient sits behind the wordmark and the copy. The renderer samples
+  the shaded pixels beneath the solid strokes and requires 4.5:1 contrast;
+  it increases the gradient strength only if needed. Visually review the image
+  as well: contrast alone cannot catch a poorly framed subject.
+- Information and private routes without a relevant photograph use the same
+  type hierarchy and a quiet brand mark.
 - No prices, enrollment dates, availability, ratings or fabricated quotations
   embedded in long-lived images
 
@@ -81,7 +88,9 @@ for WhatsApp or Viber; user preview settings can also suppress previews.
 ## Editing and verification
 
 1. Update the authored card and use existing public source assets
-2. Run `pnpm social:generate`; inspect every changed wide and square crop
+2. Run `pnpm social:generate`; inspect every changed wide and square crop.
+   Review the paired crops at preview size, and remake any with obscured
+   subjects, weak type hierarchy, or a composition that changes across formats.
 3. Run `pnpm social:review` for all 66 images in the private, self-contained
    `.data/social-images/index.html` and six labeled review sheets
 4. Run `pnpm social:check`, architecture, TypeScript and relevant tests

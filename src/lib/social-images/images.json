@@ -4,20 +4,20 @@
     "description": "Курси фотографії, відео та створення контенту на телефон і камеру. Онлайн і в Києві.",
     "images": [
       {
-        "src": "/social/home-62e80070b481-wide.jpg",
+        "src": "/social/home-27dde18047df-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "ProPhoto Academy — фотографія починається з бачення · ProPhoto — Підводний портрет із тканинами",
-        "sha256": "62e80070b481507c78dab1b3c5f51df54b9075d068bb7d8c44283fa1caee8f8d",
-        "bytes": 71542
+        "sha256": "27dde18047df924bc530e909eaee6925b8a47e5354755925a267ec1fe7dfe458",
+        "bytes": 59101
       },
       {
-        "src": "/social/home-50ae1f4e0020-square.jpg",
+        "src": "/social/home-ac47d598fe0e-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "ProPhoto Academy — фотографія починається з бачення · ProPhoto — Підводний портрет із тканинами",
-        "sha256": "50ae1f4e00207704e40501c01c99745b6884033edfd6e7de3d6d2d4a4826bf4b",
-        "bytes": 42045
+        "sha256": "ac47d598fe0eab00bcd20ca2cf575dd28b71c202e1bf25c70344fed2c3be4719",
+        "bytes": 45845
       }
     ]
   },
@@ -26,20 +26,20 @@
     "description": "Курси, воркшопи, індивідуальне та корпоративне навчання ProPhoto Academy.",
     "images": [
       {
-        "src": "/social/academy-556299022186-wide.jpg",
+        "src": "/social/academy-6b3e0e844bef-wide.jpg",
         "width": 1200,
         "height": 630,
-        "alt": "Академія · ProPhoto — Портрет у золотій тканині; Портрет серед засніжених гір",
-        "sha256": "556299022186ae2e9a9a484dec44b7f977c4d4f3cdaf789b958122a0dc88208e",
-        "bytes": 148809
+        "alt": "Академія · ProPhoto — Портрет у золотій тканині",
+        "sha256": "6b3e0e844bef127f5e80f297b39bb743023af8847af3aa3bc989e44a5be84f47",
+        "bytes": 109995
       },
       {
-        "src": "/social/academy-b7258937b994-square.jpg",
+        "src": "/social/academy-944aaaf06a69-square.jpg",
         "width": 630,
         "height": 630,
-        "alt": "Академія · ProPhoto — Портрет у золотій тканині; Портрет серед засніжених гір",
-        "sha256": "b7258937b994dd0c6f3ec5cf63e5b39df015b9817d6280c178607edb297d0d5c",
-        "bytes": 72620
+        "alt": "Академія · ProPhoto — Портрет у золотій тканині",
+        "sha256": "944aaaf06a69f326d67a9d40ed71f88cb00a30fd4cfa0a1eebfb78ccb405175e",
+        "bytes": 81118
       }
     ]
   },
@@ -48,20 +48,20 @@
     "description": "Навчання фотографії, відео й візуального контенту. Оберіть програму під вашу мету.",
     "images": [
       {
-        "src": "/social/courses-d3869d41eac6-wide.jpg",
+        "src": "/social/courses-1e80d2cd3d4f-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Курси та програми · ProPhoto — Портрет у золотій тканині",
-        "sha256": "d3869d41eac6a12a9c1f52dfc7467e9bc5d3da856ef8106bbd538be08a6c0434",
-        "bytes": 117238
+        "sha256": "1e80d2cd3d4f23941a67633388ec2a2a9cfc5167891201b957f37347800d75df",
+        "bytes": 105159
       },
       {
-        "src": "/social/courses-1fde73977e2b-square.jpg",
+        "src": "/social/courses-258003d7b631-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Курси та програми · ProPhoto — Портрет у золотій тканині",
-        "sha256": "1fde73977e2b1da4dab08fd718a838478e0b0fb66b3f8cc5f08e03eda5c64f64",
-        "bytes": 49995
+        "sha256": "258003d7b63155eeda9834821428f99eff7c1418c62ea8b3cf88346d3a4afec3",
+        "bytes": 77352
       }
     ]
   },
@@ -70,20 +70,20 @@
     "description": "Основи фотографії, композиції, світла та відео на телефон і фотокамеру.",
     "images": [
       {
-        "src": "/social/visual-content-ae0b8237bd36-wide.jpg",
+        "src": "/social/visual-content-c3dfa7298976-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Візуальний контент на телефон та фотокамеру · ProPhoto — Портрет у золотій тканині",
-        "sha256": "ae0b8237bd36eecc1268f643938add9d2484d4bee17c3e46b126da3e392b6b2a",
-        "bytes": 116372
+        "sha256": "c3dfa729897609f23dbfc48e433376103f5cf9905a545e9441aabfee93176ec2",
+        "bytes": 105987
       },
       {
-        "src": "/social/visual-content-1387b4d87386-square.jpg",
+        "src": "/social/visual-content-4cb598c301bf-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Візуальний контент на телефон та фотокамеру · ProPhoto — Портрет у золотій тканині",
-        "sha256": "1387b4d8738686d7f664d503ba1199fc6df5d0e829dfdca05b8345557257ce2f",
-        "bytes": 49292
+        "sha256": "4cb598c301bf60c5e86d8b34f0d1396e4d628fa1fe51c12be6a79af162c8abf3",
+        "bytes": 78238
       }
     ]
   },
@@ -92,20 +92,20 @@
     "description": "Предметна та фуд-фотографія, світло, фактури й відео для брендів.",
     "images": [
       {
-        "src": "/social/food-product-photography-fa44a0c2c10e-wide.jpg",
+        "src": "/social/food-product-photography-78518147cd47-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Комерційний контент-кріейтор · ProPhoto — Скибки лимона у бризках води на чорному тлі",
-        "sha256": "fa44a0c2c10e56adfa2f2c950c35de47ed993600a2d4f8eb718ca0dc400f7723",
-        "bytes": 83724
+        "sha256": "78518147cd47e0bfe2a545a74f5abe3c4220fd51dc46a9e0483dc0aca9553312",
+        "bytes": 77313
       },
       {
-        "src": "/social/food-product-photography-545873b2dfd4-square.jpg",
+        "src": "/social/food-product-photography-d7dd6f05bbab-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Комерційний контент-кріейтор · ProPhoto — Скибки лимона у бризках води на чорному тлі",
-        "sha256": "545873b2dfd487e95da371c9fd5e770f3c98fa4847d33c76a35d29141fb89091",
-        "bytes": 46014
+        "sha256": "d7dd6f05bbab903d9af8438146b5aaa3cbc92620558027c67922ab1f2964a07f",
+        "bytes": 54987
       }
     ]
   },
@@ -114,20 +114,20 @@
     "description": "Позиціонування, візуальний контент і розвиток Instagram для власного бренду.",
     "images": [
       {
-        "src": "/social/course-smm-instagram-8a99318a7107-wide.jpg",
+        "src": "/social/course-smm-instagram-1402256ab07d-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Інста, яка продає · ProPhoto — Портрет серед засніжених гір",
-        "sha256": "8a99318a7107fb9c956759e3b53194885d99f11aed47c7fe0f2c1c64166e713e",
-        "bytes": 146743
+        "sha256": "1402256ab07d89fc986755769f63c7334404fde03bf8dd8f4c4d9f10e14b5077",
+        "bytes": 147533
       },
       {
-        "src": "/social/course-smm-instagram-80de313f08d0-square.jpg",
+        "src": "/social/course-smm-instagram-296ba2143951-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Інста, яка продає · ProPhoto — Портрет серед засніжених гір",
-        "sha256": "80de313f08d0775afa541cb9f233134874ec22bdc474eef9011547a0d2ba746b",
-        "bytes": 63046
+        "sha256": "296ba2143951bb9120df440c5159517395a7a12bc3ad1ff314fe765942bf057e",
+        "bytes": 97035
       }
     ]
   },
@@ -136,20 +136,20 @@
     "description": "Фуд-фотографія та предметна зйомка: композиція, світло й робота з продуктом.",
     "images": [
       {
-        "src": "/social/food-photography-b65059570a1a-wide.jpg",
+        "src": "/social/food-photography-036eba7d0ea3-wide.jpg",
         "width": 1200,
         "height": 630,
-        "alt": "Фуд фото і предметна зйомка · ProPhoto — Скибки лимона у бризках води на чорному тлі; Паста й томати на зеленому тлі",
-        "sha256": "b65059570a1aa4593fe3fe0763f24f3952b0fbcf2cd7ccd1e6a075f6229d1d90",
-        "bytes": 103987
+        "alt": "Фуд фото і предметна зйомка · ProPhoto — Паста й томати на зеленому тлі",
+        "sha256": "036eba7d0ea3104d2cd3826c0e766be4afb7dfba8a753a715fa1337a925452ed",
+        "bytes": 85884
       },
       {
-        "src": "/social/food-photography-ef056df54250-square.jpg",
+        "src": "/social/food-photography-729f93ef9b56-square.jpg",
         "width": 630,
         "height": 630,
-        "alt": "Фуд фото і предметна зйомка · ProPhoto — Скибки лимона у бризках води на чорному тлі; Паста й томати на зеленому тлі",
-        "sha256": "ef056df542506759f8d4d48984baa836e0e785c2f70e1e92f35501b1ec8eb732",
-        "bytes": 55569
+        "alt": "Фуд фото і предметна зйомка · ProPhoto — Паста й томати на зеленому тлі",
+        "sha256": "729f93ef9b560c55d1b720db0c45d88a84deacd89205fcae89be6e4cb20d0fb1",
+        "bytes": 58225
       }
     ]
   },
@@ -158,20 +158,20 @@
     "description": "Зустрічі, лекції та практика створення контенту в ProPhoto Academy.",
     "images": [
       {
-        "src": "/social/pro-photo-lab-2117e4f71923-wide.jpg",
+        "src": "/social/pro-photo-lab-6447aba05c8b-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Pro Photo Lab: Content Day · ProPhoto — Олена Попова проводить практичне заняття",
-        "sha256": "2117e4f71923cddf2aa35232589d5c569f61659c9d62d2d4295bb5b49fb9e80a",
-        "bytes": 69494
+        "sha256": "6447aba05c8bccd72261d0a0114b19b6846408da401eb10db94c176d7b21996e",
+        "bytes": 75038
       },
       {
-        "src": "/social/pro-photo-lab-fc9a3b267a95-square.jpg",
+        "src": "/social/pro-photo-lab-f07a7861edbe-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Pro Photo Lab: Content Day · ProPhoto — Олена Попова проводить практичне заняття",
-        "sha256": "fc9a3b267a955150a94cf3d2584b8853e6c0d3a8b872e711e7d45926181aaefd",
-        "bytes": 40624
+        "sha256": "f07a7861edbe39385da4e712e254d9bdabb792ca27ff9a13f6de9aad978e5d7d",
+        "bytes": 48700
       }
     ]
   },
@@ -180,20 +180,20 @@
     "description": "Індивідуальна програма фотографії, відео та контенту під вашу мету.",
     "images": [
       {
-        "src": "/social/individual-training-7b36eeefeee7-wide.jpg",
+        "src": "/social/individual-training-31f283462d30-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Індивідуальне навчання · ProPhoto — Практика з телефоном, штативом і студійним світлом",
-        "sha256": "7b36eeefeee762a5d6c7e7912f2df1ee26feb820f9a9e5bdaccf67c7f81ab644",
-        "bytes": 73328
+        "sha256": "31f283462d30f396d5271251ecb6a2e1e4b3813b0d670556dc6971f661234071",
+        "bytes": 67268
       },
       {
-        "src": "/social/individual-training-abb64d1de3b3-square.jpg",
+        "src": "/social/individual-training-5a657c02c126-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Індивідуальне навчання · ProPhoto — Практика з телефоном, штативом і студійним світлом",
-        "sha256": "abb64d1de3b389d95febc09c01a68fbbb625de851202df4ba9b88f1e493a2c9c",
-        "bytes": 35266
+        "sha256": "5a657c02c1265966fef287d3b04beede390337f1d0754a998af2b217ea7d4a9f",
+        "bytes": 49359
       }
     ]
   },
@@ -202,20 +202,20 @@
     "description": "Фотографія, відео та візуальний контент для вашої команди й бізнесу.",
     "images": [
       {
-        "src": "/social/corporate-training-73ec0065baa9-wide.jpg",
+        "src": "/social/corporate-training-e014365d57d2-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Навчання для команди · ProPhoto — Олена Попова проводить практичне заняття",
-        "sha256": "73ec0065baa99b089070e0af90ecb2753f1d459b3e71f9d45dc59f791fbac058",
-        "bytes": 71260
+        "sha256": "e014365d57d2f09c53b4d67dfcd974c0c58b2a5c57b105903f4a870fa31f705b",
+        "bytes": 75863
       },
       {
-        "src": "/social/corporate-training-a71d7e7213f2-square.jpg",
+        "src": "/social/corporate-training-a95c5f19d2f7-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Навчання для команди · ProPhoto — Олена Попова проводить практичне заняття",
-        "sha256": "a71d7e7213f2db7ecd70bb15ac2c19dbf92c601fbeaaaac32575daf01a34e152",
-        "bytes": 41844
+        "sha256": "a95c5f19d2f74f91573223661a9c9bbd342b8d6a23fe8307f4f2605c6e527755",
+        "bytes": 49252
       }
     ]
   },
@@ -224,20 +224,20 @@
     "description": "Практичний інтенсив зі створення візуальних історій за допомогою штучного інтелекту.",
     "images": [
       {
-        "src": "/social/ai-artwork-8a87bd6085e8-wide.jpg",
+        "src": "/social/ai-artwork-205f9ab518f4-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Від кадрів до AI artwork · ProPhoto — Модель серед білих троянд фарбує пелюстки червоним пензлем",
-        "sha256": "8a87bd6085e8915eb7a6c2afdec7666aacca27185c258aca0fdbc13416eff1ad",
-        "bytes": 86860
+        "sha256": "205f9ab518f44cdfa43c41d2769d015763eedd97bfce3fb39fdc7742616cbcdf",
+        "bytes": 78372
       },
       {
-        "src": "/social/ai-artwork-443f5c123320-square.jpg",
+        "src": "/social/ai-artwork-24b97154038b-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Від кадрів до AI artwork · ProPhoto — Модель серед білих троянд фарбує пелюстки червоним пензлем",
-        "sha256": "443f5c12332010bcdd275de53353f6b811882e8d703d3a26ac2ccdbcb707328a",
-        "bytes": 47460
+        "sha256": "24b97154038b183f9a33222227c780ff6877acaa3ed1ee0d723418e9a0cdae04",
+        "bytes": 52567
       }
     ]
   },
@@ -246,20 +246,20 @@
     "description": "Засновниця Олена Попова, команда та підхід до навчання ProPhoto Academy.",
     "images": [
       {
-        "src": "/social/about-us-1b8a1f2e4343-wide.jpg",
+        "src": "/social/about-us-9a92f76a50a6-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Про академію · ProPhoto — Олена Попова — засновниця ProPhoto Academy",
-        "sha256": "1b8a1f2e4343a527db902c76f43dc4038eadeee9587ebfdad35ea3ac88e11d5e",
-        "bytes": 68203
+        "sha256": "9a92f76a50a62f613b938ae1c994c4642ec9faeeeb02dfdb6dade899c1b0bfca",
+        "bytes": 54586
       },
       {
-        "src": "/social/about-us-53ce0b61f191-square.jpg",
+        "src": "/social/about-us-430544bac109-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Про академію · ProPhoto — Олена Попова — засновниця ProPhoto Academy",
-        "sha256": "53ce0b61f19195bb090d5f82f33767f0c2b371d0e48bcdf38f2dc0620a53467f",
-        "bytes": 30082
+        "sha256": "430544bac109b6da05b39c238cb7d8a57d9aa5f0e2ab109fa017b8170f01deef",
+        "bytes": 38153
       }
     ]
   },
@@ -268,20 +268,20 @@
     "description": "Портрети, предметні та фуд-композиції, створені студентами ProPhoto Academy.",
     "images": [
       {
-        "src": "/social/student-work-3d3978bb34e0-wide.jpg",
+        "src": "/social/student-work-957f103f0458-wide.jpg",
         "width": 1200,
         "height": 630,
-        "alt": "Роботи студентів · ProPhoto — Полуниці над чорною мискою на яскравому жовтому тлі; Скульптурний чорно-білий портрет у профіль; Помада та вишні у предметній композиції",
-        "sha256": "3d3978bb34e0be746435bd2b91df4e3b8c66845cb83fd8a688b52bf63409f224",
-        "bytes": 85806
+        "alt": "Роботи студентів · ProPhoto — Чоловічий портрет у червоному й зеленому світлі",
+        "sha256": "957f103f0458aff981b3f7037f093a22378eb5ba4f7d2b57dd8d438bcb7d2199",
+        "bytes": 64006
       },
       {
-        "src": "/social/student-work-e299bfb85bf6-square.jpg",
+        "src": "/social/student-work-d8424bfec760-square.jpg",
         "width": 630,
         "height": 630,
-        "alt": "Роботи студентів · ProPhoto — Полуниці над чорною мискою на яскравому жовтому тлі; Скульптурний чорно-білий портрет у профіль; Помада та вишні у предметній композиції",
-        "sha256": "e299bfb85bf66f8229d3a21ab4ab616bb7e9a43c689039f89060407b7140d7b7",
-        "bytes": 49216
+        "alt": "Роботи студентів · ProPhoto — Чоловічий портрет у червоному й зеленому світлі",
+        "sha256": "d8424bfec760b37e1e29c1efdf0843c79c7aa31cdd01c70dec890c210cb5d04f",
+        "bytes": 46760
       }
     ]
   },
@@ -290,20 +290,20 @@
     "description": "Відгуки студентів про навчання та практику в ProPhoto Academy.",
     "images": [
       {
-        "src": "/social/reviews-6a288313f812-wide.jpg",
+        "src": "/social/reviews-2c995159a343-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Відгуки студентів · ProPhoto",
-        "sha256": "6a288313f8122935b2a340ec2b5af15a167fb6662896cc4673d92c17d30fccdf",
-        "bytes": 30504
+        "sha256": "2c995159a34380aa682656673bb6da60ece47365538a0a2f095787ae25556bb7",
+        "bytes": 28690
       },
       {
-        "src": "/social/reviews-c5c62ef4b130-square.jpg",
+        "src": "/social/reviews-c36bf0992bd4-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Відгуки студентів · ProPhoto",
-        "sha256": "c5c62ef4b130fb92496a23aa759aa125358c6cd42fa6f630b49f24703d94eb55",
-        "bytes": 23859
+        "sha256": "c36bf0992bd4aca0b16fff87e0884128aac1d155a64d03e8b28c1b73eb12f95b",
+        "bytes": 21643
       }
     ]
   },
@@ -312,20 +312,20 @@
     "description": "Зв’яжіться з ProPhoto Academy щодо програм, форматів та організації навчання.",
     "images": [
       {
-        "src": "/social/contacts-a4b52db850bd-wide.jpg",
+        "src": "/social/contacts-a287c566a02a-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Контакти · ProPhoto",
-        "sha256": "a4b52db850bd442e042e957e9093bfc57b5e2e17d924f7dfd3ab9a8016303656",
-        "bytes": 29552
+        "sha256": "a287c566a02af9cee22272ddc162e0c7a6c0360cc383531dfe22314e4eea6437",
+        "bytes": 29061
       },
       {
-        "src": "/social/contacts-1c659eb6086c-square.jpg",
+        "src": "/social/contacts-4f991386893f-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Контакти · ProPhoto",
-        "sha256": "1c659eb6086c109ade2c472b17489caf53d2f8ef078c7479d73eaf87a1cfc314",
-        "bytes": 24036
+        "sha256": "4f991386893f66c2f5f42ac4a6897c9caf7e1c507a3d807790b545517c89709e",
+        "bytes": 22379
       }
     ]
   },
@@ -334,20 +334,20 @@
     "description": "Як ProPhoto Academy обробляє та захищає персональні дані.",
     "images": [
       {
-        "src": "/social/privacy-policy-07fbceb518fc-wide.jpg",
+        "src": "/social/privacy-policy-b8afa7a28c18-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Політика конфіденційності · ProPhoto",
-        "sha256": "07fbceb518fca3402dfe17c126d016ddcac188830e52454d75ebc83676c38549",
-        "bytes": 33550
+        "sha256": "b8afa7a28c1843545e337a872a924ae695eac5a9c5dc0691ad661678fa84fcfe",
+        "bytes": 32683
       },
       {
-        "src": "/social/privacy-policy-fc07f1511c16-square.jpg",
+        "src": "/social/privacy-policy-38d0905bb34f-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Політика конфіденційності · ProPhoto",
-        "sha256": "fc07f1511c165ad4e3a6fe4d25d28f0f1df8c33af8ac2f1ee8f837b1e1e13043",
-        "bytes": 26858
+        "sha256": "38d0905bb34f4d126cdcbc556383c3bec0d5f39e2f3fe570d8d8e292d50bf8eb",
+        "bytes": 25972
       }
     ]
   },
@@ -356,20 +356,20 @@
     "description": "Умови надання освітніх послуг ProPhoto Academy.",
     "images": [
       {
-        "src": "/social/terms-of-service-e09afff32dd4-wide.jpg",
+        "src": "/social/terms-of-service-cab3e927ff93-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Договір публічної оферти · ProPhoto",
-        "sha256": "e09afff32dd4fdf9a85da5c8380401f6658809f110edbe419bf1e08f5ec3a0c9",
-        "bytes": 27083
+        "sha256": "cab3e927ff9315009e1bcd0b8b0e28e565ca44b7a03edc865bd620210018cb81",
+        "bytes": 25779
       },
       {
-        "src": "/social/terms-of-service-7aa0aeb6f959-square.jpg",
+        "src": "/social/terms-of-service-1a6208b5e704-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Договір публічної оферти · ProPhoto",
-        "sha256": "7aa0aeb6f9598d449b1961b8b0c70fb92d4cfc145c346c249cab28f0f212543d",
-        "bytes": 21159
+        "sha256": "1a6208b5e704409dc00c4627679c4c64c40f22c74c898e1a0306ceed50249f3b",
+        "bytes": 20682
       }
     ]
   },
@@ -378,20 +378,20 @@
     "description": "Фотостудія ProPhoto: простір і обладнання для створення контенту.",
     "images": [
       {
-        "src": "/social/photo-studio-cb134585dec7-wide.jpg",
+        "src": "/social/photo-studio-4f19b5dc886b-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "ProPhoto Studio · ProPhoto — Циклорама та обладнання у ProPhoto Hub",
-        "sha256": "cb134585dec7d6b5fd9b4f9d7fd4fbaf803d796c0a6cc7cd10e9b19c4cedb649",
-        "bytes": 59929
+        "sha256": "4f19b5dc886b88441568e1a3c5f6f9caf3c401bdee6ab49d600734a9f359c498",
+        "bytes": 76992
       },
       {
-        "src": "/social/photo-studio-616f145b64c0-square.jpg",
+        "src": "/social/photo-studio-13e0025eb28b-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "ProPhoto Studio · ProPhoto — Циклорама та обладнання у ProPhoto Hub",
-        "sha256": "616f145b64c0f37e2cb09135a581ba379212a3c9bcce914f50e24cdf6a5b4f30",
-        "bytes": 41610
+        "sha256": "13e0025eb28b9b7123c21ac09986ba4beb9dca49d66ae194de997bf3a362bfcc",
+        "bytes": 41507
       }
     ]
   },
@@ -400,42 +400,42 @@
     "description": "Обладнання для фотографії, відео та створення контенту.",
     "images": [
       {
-        "src": "/social/shop-c2ebd24c921d-wide.jpg",
+        "src": "/social/shop-71da6efa98ed-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "ProPhoto Shop · ProPhoto — Студійне світло та фотопарасоля",
-        "sha256": "c2ebd24c921db3c0551403de6ed6582ac6447e6da5fbd131fa2bcb8065cb895e",
-        "bytes": 47724
+        "sha256": "71da6efa98eddb54c86b50cda1643f6dfd264dc29de701ebf1b9c6da57ffc0d5",
+        "bytes": 47931
       },
       {
-        "src": "/social/shop-070432182a48-square.jpg",
+        "src": "/social/shop-19dbd230c2d4-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "ProPhoto Shop · ProPhoto — Студійне світло та фотопарасоля",
-        "sha256": "070432182a489c99755ca21ef6259ead3753410ee05bb40f49fdfee1e08c017a",
-        "bytes": 32633
+        "sha256": "19dbd230c2d4619ff1974983d221342bf413ba783d36bc0251af7b24b2135c9a",
+        "bytes": 31835
       }
     ]
   },
   "/login": {
     "title": "Вхід до кабінету",
-    "description": "Увійдіть до кабінету ProPhoto Academy",
+    "description": "Увійдіть до кабінету студента",
     "images": [
       {
-        "src": "/social/login-ae0cf0fa3791-wide.jpg",
+        "src": "/social/login-4bfca3426531-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Вхід до кабінету · ProPhoto",
-        "sha256": "ae0cf0fa37911b597bbade005f5d7959bc8e9e11c5cb8f48295e2b908fb88628",
-        "bytes": 29212
+        "sha256": "4bfca34265316d51e057887e2198c5f45b960738049036abf5c659b273b1b277",
+        "bytes": 24608
       },
       {
-        "src": "/social/login-e8531172e0e7-square.jpg",
+        "src": "/social/login-722713de01e9-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Вхід до кабінету · ProPhoto",
-        "sha256": "e8531172e0e7bd641d3138ef379b24d4d6f46fe6a9a06ea3d624c328fb96a3e0",
-        "bytes": 22043
+        "sha256": "722713de01e986246bc5de40946404082c302183b205d2199df2f7c3f91e7591",
+        "bytes": 18703
       }
     ]
   },
@@ -444,42 +444,42 @@
     "description": "Навчання у вашому темпі",
     "images": [
       {
-        "src": "/social/account-01b8a068b0ae-wide.jpg",
+        "src": "/social/account-6cfe93d0a68a-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Кабінет студента · ProPhoto",
-        "sha256": "01b8a068b0ae135c838142bc442610081565c0fe79bdf2c5412018dff31c8491",
-        "bytes": 31476
+        "sha256": "6cfe93d0a68a395b7d4d280259853655398d7ead46618ce41a5fb532b9460270",
+        "bytes": 27935
       },
       {
-        "src": "/social/account-b13e2f1c30b7-square.jpg",
+        "src": "/social/account-c2a05526a73a-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Кабінет студента · ProPhoto",
-        "sha256": "b13e2f1c30b7d94f7c3ff86c7c91046d1a6489c30941f148fe1aa3437a4057dd",
-        "bytes": 25691
+        "sha256": "c2a05526a73a71b1a9291a53e3e79afa345f120d76b92692b86ece6a7825f4aa",
+        "bytes": 22102
       }
     ]
   },
   "/learn": {
     "title": "Навчання",
-    "description": "Уроки та матеріали ProPhoto Academy",
+    "description": "Уроки та матеріали курсу",
     "images": [
       {
-        "src": "/social/learn-70be5610d121-wide.jpg",
+        "src": "/social/learn-0076fa69ee8c-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Навчання · ProPhoto",
-        "sha256": "70be5610d1217db642610012f632d28d358fca18045f730e35e438021bf7a406",
-        "bytes": 34781
+        "sha256": "0076fa69ee8cbeb448b4276d15e62a605b1eb0235d59bbdf306a43dcfa0360cc",
+        "bytes": 29931
       },
       {
-        "src": "/social/learn-019611a7e389-square.jpg",
+        "src": "/social/learn-b8dcbf5426a8-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Навчання · ProPhoto",
-        "sha256": "019611a7e389bc18584d3a06d591255b32351d98e3b87eeb8c73b771e06cf18a",
-        "bytes": 27546
+        "sha256": "b8dcbf5426a84b92185f364a0e677ca05e81d8591b4fba4c2396bfe03a547a0a",
+        "bytes": 24290
       }
     ]
   },
@@ -488,42 +488,42 @@
     "description": "Керування навчанням в академії",
     "images": [
       {
-        "src": "/social/admin-09aec3f02fcb-wide.jpg",
+        "src": "/social/admin-ae6ae90cb672-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Адміністрування · ProPhoto",
-        "sha256": "09aec3f02fcb9903289662a86eb32d5fd01213197428ed803567b1728b043434",
-        "bytes": 31102
+        "sha256": "ae6ae90cb6723eec36a746853ee07f15b0c596abf954fa4fde5b36f65338f2f0",
+        "bytes": 28565
       },
       {
-        "src": "/social/admin-83bded57dde1-square.jpg",
+        "src": "/social/admin-53dd7908de91-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Адміністрування · ProPhoto",
-        "sha256": "83bded57dde1759499dc7136529fba3855d74b982394e4952a7da2716a14a804",
-        "bytes": 24538
+        "sha256": "53dd7908de914006e95a64910b2c8abd4ddb65aad5fbc0b31ff8dcc1c8c0b631",
+        "bytes": 20755
       }
     ]
   },
   "/checkout": {
     "title": "Оформлення замовлення",
-    "description": "Оформлення замовлення в ProPhoto Academy",
+    "description": "Оформлення замовлення",
     "images": [
       {
-        "src": "/social/checkout-fc3fc50fa2f1-wide.jpg",
+        "src": "/social/checkout-310b806364aa-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Оформлення замовлення · ProPhoto",
-        "sha256": "fc3fc50fa2f18a0ab6a02e60f5e1f3db3b2760073444a9dcb01a027d4c44ef76",
-        "bytes": 32316
+        "sha256": "310b806364aa4dc564ee73861ca205e394c3eb99a3daeae9598f751755b605ed",
+        "bytes": 27602
       },
       {
-        "src": "/social/checkout-945f2bf14576-square.jpg",
+        "src": "/social/checkout-2575788e11ef-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Оформлення замовлення · ProPhoto",
-        "sha256": "945f2bf1457609c6a8533e4908a7b0208209c1902c726542205cdcf4f529ecf0",
-        "bytes": 26330
+        "sha256": "2575788e11ef757a9897773767f0c12d40387575c2a132294a7d58fbe0c8db1b",
+        "bytes": 20518
       }
     ]
   },
@@ -532,20 +532,20 @@
     "description": "Інформація про ваше замовлення",
     "images": [
       {
-        "src": "/social/thanks-170d2538fede-wide.jpg",
+        "src": "/social/thanks-ba71bdbcc018-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Статус замовлення · ProPhoto",
-        "sha256": "170d2538fedee1252c3d878246cc0293b2f79e6a10cbcad78a153a947e080d44",
-        "bytes": 29595
+        "sha256": "ba71bdbcc0188aae51f1ed8aed4a8df77580e320ffb05a7211e9764d3ce59bb6",
+        "bytes": 27112
       },
       {
-        "src": "/social/thanks-495348029439-square.jpg",
+        "src": "/social/thanks-646852db4722-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Статус замовлення · ProPhoto",
-        "sha256": "49534802943921da1704d6e446e2e71e0a2e110496f2680a443ab611d959625f",
-        "bytes": 24626
+        "sha256": "646852db47222cb28ba4a25ee4355d9110d05d43bd68d12db567122cda2459f5",
+        "bytes": 20477
       }
     ]
   },
@@ -554,20 +554,20 @@
     "description": "Циклорама · подкаст-зала · гримерна",
     "images": [
       {
-        "src": "/social/hub-1a1e1b4eed87-wide.jpg",
+        "src": "/social/hub-7476bd26d804-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "ProPhoto Hub — фотостудія в Києві · ProPhoto — Циклорама та обладнання у ProPhoto Hub",
-        "sha256": "1a1e1b4eed87ded6f9ed8898cf54af7dcc36d8a562470d2b53d3fb9f589539ac",
-        "bytes": 61709
+        "sha256": "7476bd26d8043ad5904d67d53c634a8549820c48dea589d1c5b0281af089e540",
+        "bytes": 78426
       },
       {
-        "src": "/social/hub-4eb67824c60e-square.jpg",
+        "src": "/social/hub-cd148fddf4a7-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "ProPhoto Hub — фотостудія в Києві · ProPhoto — Циклорама та обладнання у ProPhoto Hub",
-        "sha256": "4eb67824c60e6483a81e3413ba7048f817d6d96eba235ab04706fe4205a65d8d",
-        "bytes": 43521
+        "sha256": "cd148fddf4a7d89b24735dfa09358b2c42f4c69594ce8bc43cbeb50325975ca5",
+        "bytes": 43424
       }
     ]
   },
@@ -576,20 +576,20 @@
     "description": "Простір для ваших ідей",
     "images": [
       {
-        "src": "/social/hub-about-d56398ffa5b8-wide.jpg",
+        "src": "/social/hub-about-cdbdc8ae13ee-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Про ProPhoto Hub · ProPhoto — Циклорама та обладнання у ProPhoto Hub",
-        "sha256": "d56398ffa5b8e57e8cda630213cf85437b1ec32a1928c1fb9e857fc3e36b9b1b",
-        "bytes": 57441
+        "sha256": "cdbdc8ae13ee9371e122e725206ce10616269d1f86dd1e1bac40b0d67998d2ae",
+        "bytes": 75043
       },
       {
-        "src": "/social/hub-about-5ae5fa4e3e18-square.jpg",
+        "src": "/social/hub-about-6a2067c901d1-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Про ProPhoto Hub · ProPhoto — Циклорама та обладнання у ProPhoto Hub",
-        "sha256": "5ae5fa4e3e1880bc694b40c4843471688d4cec52ff1b42d957c8bab34b6aab60",
-        "bytes": 40678
+        "sha256": "6a2067c901d138dee6f59bcd074286e64e32e49364267c90e93396e745dac9d9",
+        "bytes": 42229
       }
     ]
   },
@@ -598,42 +598,42 @@
     "description": "Фотостудія в Києві",
     "images": [
       {
-        "src": "/social/hub-contact-4f126143964d-wide.jpg",
+        "src": "/social/hub-contact-14cea6ac275a-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Контакти ProPhoto Hub · ProPhoto — Циклорама та обладнання у ProPhoto Hub",
-        "sha256": "4f126143964d4a93c6a1fc96c545db21c9faa9729a4722b92d5af106df970ced",
-        "bytes": 60355
+        "sha256": "14cea6ac275a545d9cd42338bc089d050759e18f42b24280adac7832cf8aab64",
+        "bytes": 76349
       },
       {
-        "src": "/social/hub-contact-9884a81e908a-square.jpg",
+        "src": "/social/hub-contact-444792d917e9-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Контакти ProPhoto Hub · ProPhoto — Циклорама та обладнання у ProPhoto Hub",
-        "sha256": "9884a81e908afbfc971ac78e5fa216d9a8ef51296680cd7cc460c1717f5a1b6a",
-        "bytes": 43339
+        "sha256": "444792d917e9475802f88cd3377631bc982b56f8259dbdbe2ecae51a3982b981",
+        "bytes": 42457
       }
     ]
   },
   "/hub/booking": {
     "title": "Бронювання студії",
-    "description": "Бронювання простору ProPhoto Hub",
+    "description": "Оберіть зал і зручний час",
     "images": [
       {
-        "src": "/social/hub-booking-e3cab7d8d4f9-wide.jpg",
+        "src": "/social/hub-booking-98c1db5944ad-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Бронювання студії · ProPhoto — Циклорама та обладнання у ProPhoto Hub",
-        "sha256": "e3cab7d8d4f9c3ab35a6767c92330abfd79891ac9a3cff10fcdc36aa8220819d",
-        "bytes": 63566
+        "sha256": "98c1db5944add993cdeaaabf4121a341029b17d169ef12bf9733ba731d44dc40",
+        "bytes": 77253
       },
       {
-        "src": "/social/hub-booking-7a760b7f8762-square.jpg",
+        "src": "/social/hub-booking-22e5ae93d5c0-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Бронювання студії · ProPhoto — Циклорама та обладнання у ProPhoto Hub",
-        "sha256": "7a760b7f876260800a3c331fbdb30cf1ac09dc54f78be25349ff3717ea8e9fd6",
-        "bytes": 44332
+        "sha256": "22e5ae93d5c02e5f7719ada88cd4b16e41465fcd2265b3e723fcface76607869",
+        "bytes": 41329
       }
     ]
   },
@@ -642,20 +642,20 @@
     "description": "Циклорама у ProPhoto Hub. Простір для зйомки в Києві.",
     "images": [
       {
-        "src": "/social/hub-mainhall-c8c3a585a00c-wide.jpg",
+        "src": "/social/hub-mainhall-5feaebb716ff-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Циклорама · ProPhoto — Біла циклорама, студійні спалахи й рожевий фон у ProPhoto Hub",
-        "sha256": "c8c3a585a00cd8e9203d77bcb3a5c3f64e0a9d81986a1daef247eb5c0d996859",
-        "bytes": 57882
+        "sha256": "5feaebb716ffb267f08ed79a66cf2cad0909f4158227f8d31d115bdfab1bb316",
+        "bytes": 78778
       },
       {
-        "src": "/social/hub-mainhall-0e0d76d49e21-square.jpg",
+        "src": "/social/hub-mainhall-3dee08223b74-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Циклорама · ProPhoto — Біла циклорама, студійні спалахи й рожевий фон у ProPhoto Hub",
-        "sha256": "0e0d76d49e21bab4909bc2253a62c0c863abf845984550bdc5dc1185ad8313fc",
-        "bytes": 38636
+        "sha256": "3dee08223b74d63e3e3b5f1a188f21f2d3a643cfa79b069465ecc9bcb78ce590",
+        "bytes": 41029
       }
     ]
   },
@@ -664,20 +664,20 @@
     "description": "Подкаст-зала у ProPhoto Hub. Простір для зйомки в Києві.",
     "images": [
       {
-        "src": "/social/hub-smallhall-290c4ddfe4ee-wide.jpg",
+        "src": "/social/hub-smallhall-0c8f1114478d-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Подкаст-зала · ProPhoto — Інтер’єр малої зали ProPhoto Hub",
-        "sha256": "290c4ddfe4eec986ffd9b126361abd61c7c09f7c58c89dfe92c27df8e13db112",
-        "bytes": 56550
+        "sha256": "0c8f1114478d72c57bb0e98612a78cf783d0e1bb1cbeefce54ede09ed0382b78",
+        "bytes": 50152
       },
       {
-        "src": "/social/hub-smallhall-10f3f137b4f2-square.jpg",
+        "src": "/social/hub-smallhall-10601aeb8528-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Подкаст-зала · ProPhoto — Інтер’єр малої зали ProPhoto Hub",
-        "sha256": "10f3f137b4f2e3721fb3068bd82b7a4ab9378ee18933d54785ff8865acd3df9e",
-        "bytes": 28846
+        "sha256": "10601aeb852829d579fd9764482de446ba38303cb573b33ded8f862321dc899d",
+        "bytes": 35851
       }
     ]
   },
@@ -686,20 +686,20 @@
     "description": "Гримерна у ProPhoto Hub. Простір для зйомки в Києві.",
     "images": [
       {
-        "src": "/social/hub-makeuproom-8857ef7edebf-wide.jpg",
+        "src": "/social/hub-makeuproom-c2a36ed4c0e3-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Гримерна · ProPhoto — Гримерна ProPhoto Hub із дзеркалами та підсвіткою",
-        "sha256": "8857ef7edebf5e4e44b750f0a2f09f8450027c32115d58da1a9adab3fa8642ec",
-        "bytes": 73955
+        "sha256": "c2a36ed4c0e3991a5abe3495b60afabdcae5521388ef2e811ca8b5b90a1fffc2",
+        "bytes": 106345
       },
       {
-        "src": "/social/hub-makeuproom-ae9c9d8e3c14-square.jpg",
+        "src": "/social/hub-makeuproom-f071962ce742-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Гримерна · ProPhoto — Гримерна ProPhoto Hub із дзеркалами та підсвіткою",
-        "sha256": "ae9c9d8e3c14d180a5cb6d27544cc2f133d9322ba27f79d112e1c7ccb7e6667c",
-        "bytes": 46680
+        "sha256": "f071962ce742fe4037be05a816c9ea45e52446e7bf6ff1fe3bcab0e1c7b15dac",
+        "bytes": 60827
       }
     ]
   },
@@ -708,20 +708,20 @@
     "description": "Підготовка до зйомки та практика в просторі ProPhoto Hub.",
     "images": [
       {
-        "src": "/social/hub-content-practice-9c89f1dff744-wide.jpg",
+        "src": "/social/hub-content-practice-c05ef259e59d-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Контент-практика в ProPhoto Hub · ProPhoto — Біла циклорама, студійні спалахи й рожевий фон у ProPhoto Hub",
-        "sha256": "9c89f1dff744b2715591ca98d6649e1cada9f5943a6efb82dc82a49fa8660721",
-        "bytes": 61596
+        "sha256": "c05ef259e59d2efeb95eea639bec13c874f22819340fb9381b5312cee49bda08",
+        "bytes": 79707
       },
       {
-        "src": "/social/hub-content-practice-58528c72c2f3-square.jpg",
+        "src": "/social/hub-content-practice-89fc688ea6e9-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Контент-практика в ProPhoto Hub · ProPhoto — Біла циклорама, студійні спалахи й рожевий фон у ProPhoto Hub",
-        "sha256": "58528c72c2f315b58609977086becde9f9854acd61e60df544635fd1b46d45b2",
-        "bytes": 41409
+        "sha256": "89fc688ea6e95999339325c5a87f1abe67df38fed8b3da337c7c6974df74bd91",
+        "bytes": 41669
       }
     ]
   }

@@ -3,7 +3,6 @@ export type SocialPhoto = {
   alt: string;
   position?: string;
   squarePosition?: string;
-  squareFit?: 'contain';
 };
 
 export type SocialCard = {
@@ -11,9 +10,8 @@ export type SocialCard = {
   title: string;
   lines: string[];
   description: string;
-  label: string;
+  label?: string;
   subtitle: string;
-  style: 'feature' | 'split' | 'gallery' | 'identity';
   photos: SocialPhoto[];
   brand?: 'academy' | 'hub' | 'shop';
 };
@@ -23,4 +21,12 @@ export type TextStyle = {
   color: string;
   font: 'heading' | 'body';
   maxWidth?: number;
+};
+
+export type ArtworkLayer = {
+  input: Buffer;
+  width: number;
+  height: number;
+  left: number;
+  top: number;
 };
