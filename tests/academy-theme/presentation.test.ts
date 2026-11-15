@@ -7,6 +7,9 @@ import fixture from '../../content/academy.json';
 import type { AcademyContent } from '../../src/lib/content/types';
 import type { EnrollmentCardView } from '../../src/lib/learning/types';
 import type { FontOptions } from './types';
+import NotFound from '../../src/app/not-found';
+import AcademyNotFound from '../../src/app/(academy)/not-found';
+import HubNotFound from '../../src/app/hub/not-found';
 import { SiteShell } from '../../src/components/templates/SiteShell/SiteShell';
 import { StatusFrame } from '../../src/components/templates/StatusFrame/StatusFrame';
 import { WorkspaceShell } from '../../src/components/templates/WorkspaceShell/WorkspaceShell';
@@ -57,7 +60,30 @@ describe('Academy presentation boundaries', () => {
     );
     expect($('.academy-theme').length).toBe(academy ? 1 : 0);
     expect($('.status-panel h1').text()).toBe('Сторінку не знайдено');
-    expect($('main#main[tabindex="-1"]')).toHaveLength(1);
+    expect($('main')).toHaveLength(0);
+  });
+
+  it('provides one skip-link destination for standalone and in-shell 404s', () => {
+    const standalone = render(createElement(NotFound));
+    expect(standalone('main#main[tabindex="-1"] .status-panel h1')).toHaveLength(1);
+
+    const pages = [
+      createElement(SiteShell, {
+        site: 'academy',
+        settings: content.settings,
+        children: createElement(AcademyNotFound),
+      }),
+      createElement(SiteShell, {
+        site: 'hub',
+        settings: content.hub,
+        children: createElement(HubNotFound),
+      }),
+    ];
+    for (const page of pages) {
+      const inShell = render(page);
+      expect(inShell('main')).toHaveLength(1);
+      expect(inShell('main#main .status-panel h1')).toHaveLength(1);
+    }
   });
 
   it('wraps Academy content and dialogs in the theme without applying it to Hub', () => {
