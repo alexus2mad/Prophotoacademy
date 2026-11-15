@@ -2,9 +2,6 @@
   width: 100%;
   background: #0a0807;
 }
-.page :global([id]) {
-  scroll-margin-top: 80px;
-}
 .page :global(.studio-title) {
   overflow-wrap: anywhere;
 }

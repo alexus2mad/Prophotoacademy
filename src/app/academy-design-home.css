@@ -1,6 +1,6 @@
 /* Homepage composition; the Academy theme owns shared palette and controls. */
 .academy-editorial:has(.academy-design-home) .site-header {
-  margin-bottom: -88px;
+  margin-bottom: calc(-1 * var(--site-header-height));
   color: #fff;
   background: linear-gradient(#0009, #0000);
   border-color: transparent;
@@ -151,9 +151,6 @@
   color: #fff;
   text-decoration: underline;
   text-underline-offset: 8px;
-}
-.academy-design-directions {
-  scroll-margin-top: 88px;
 }
 .academy-design-home .academy-design-slogan {
   padding: clamp(64px, 8.8vw, 148px) 24px;
@@ -483,9 +480,6 @@
   }
 }
 @media (max-width: 767px) {
-  .academy-editorial:has(.academy-design-home) .site-header {
-    margin-bottom: -72px;
-  }
   .academy-design-hero {
     width: 100%;
     aspect-ratio: auto;

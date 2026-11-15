@@ -8,9 +8,6 @@
   --border: rgba(21, 11, 8, 0.22);
   --accent: #eb423b;
 }
-.program :global([id]) {
-  scroll-margin-top: 128px;
-}
 .heading {
   display: grid;
   gap: 18px;
@@ -444,9 +441,6 @@
   }
 }
 @media (max-width: 760px) {
-  .program :global([id]) {
-    scroll-margin-top: 120px;
-  }
   .outcomes,
   .audience {
     grid-template-columns: minmax(0, 1fr);

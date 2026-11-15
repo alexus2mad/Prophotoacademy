@@ -57,7 +57,7 @@ describe('Academy presentation boundaries', () => {
     );
     expect($('.academy-theme').length).toBe(academy ? 1 : 0);
     expect($('.status-panel h1').text()).toBe('Сторінку не знайдено');
-    expect($('main').length).toBe(0);
+    expect($('main#main[tabindex="-1"]')).toHaveLength(1);
   });
 
   it('wraps Academy content and dialogs in the theme without applying it to Hub', () => {

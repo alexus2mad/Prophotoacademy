@@ -6,7 +6,7 @@ import styles from './StudioProgramNavigation.module.css';
 export function StudioProgramNavigation({ links, children }: StudioProgramNavigationProps) {
   const { rail, active } = useStudioProgramNavigation(links);
   return (
-    <nav className={styles.navigation} aria-label="Розділи курсу">
+    <nav className={styles.navigation} aria-label="Розділи курсу" data-studio-course-navigation>
       <div className="studio-wrap" ref={rail}>
         {links.map(([href, label]) => (
           <a key={href} href={href} aria-current={active === href ? 'location' : undefined}>

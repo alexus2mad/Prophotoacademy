@@ -96,13 +96,13 @@
 }
 @media(max-width:1199px) { .hub-opening,.hub-detail-opening { gap:40px; }.room-heading { flex-wrap:wrap;gap:4px; }.room-grid { gap:24px; } }
 @media(max-width:1023px) { .desktop-nav { display:none; }.header-actions { margin-left:auto; }.hub-opening-photo { height:420px; }.room-photo { height:180px; }.practice-preview { gap:32px; } }
+html:has(.site-header[data-site='hub']) { scroll-padding-top: calc(var(--site-header-height) + 24px); }
 @media(max-width:767px) {
- html { scroll-padding-top:120px; }
- .site-header { height:108px; }
+ :root:has(.site-header[data-site='hub']:not(.header-focused)) { --site-header-height:108px; }
+ html:has(.site-header[data-site='hub']) { scroll-padding-top: calc(var(--site-header-height) + 12px); }
  .header-inner { flex-wrap:wrap;gap:0 12px;align-content:center; }
  .header-inner>.ecosystem-nav { order:3;width:100%;justify-content:center;height:32px;gap:20px;font-size:13px; }
  .header-inner>.ecosystem-nav a { min-height:32px; }
- .header-focused { height:72px; }
  .header-focused .header-inner { flex-wrap:nowrap; }
  .brand-logo-hub { width:110px; }
  .brand-logo-hub.brand-logo-large { width:190px; }

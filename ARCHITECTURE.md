@@ -44,6 +44,11 @@ Header contrast observes explicit `data-header-tone` changes rather than all inl
 styles. Mobile exposure backgrounds use opacity layers so the approved transition
 does not repaint entire sections; keep native scrolling and the existing card zoom.
 
+Document fragment navigation uses layout-specific `scroll-padding-top`. Studio
+pages use the fixed header height and add the sticky course navigation height on
+standard course pages. Lesson pages allow a reading gap below their sticky
+header. Avoid adding a second offset to section targets.
+
 Atomic Design is a mental model, not a requirement to wrap every HTML element. Use native elements directly when extraction adds no stable responsibility. A small unique route may compose molecules directly; major layouts use templates. Classification follows the component's purpose and dependencies rather than its size.
 
 ## Component ownership

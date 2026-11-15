@@ -50,7 +50,7 @@ for (const [route, destination] of [
   await mkdir(path.join(stage, 'src/app', route), { recursive: true });
   await writeFile(
     path.join(stage, 'src/app', route, 'page.tsx'),
-    `import Link from 'next/link';import {socialMetadata} from '@/lib/social-images/metadata';export const metadata={robots:{index:false,follow:false},...socialMetadata('/${route}')};export default function ReviewEntry(){return <main className="workspace-empty"><h1>Демонстрація кабінету</h1><p>У GitHub-огляді використовуються лише приклади даних</p><Link className="button" href="${destination}">Відкрити демонстрацію</Link></main>;}`,
+    `import Link from 'next/link';import {socialMetadata} from '@/lib/social-images/metadata';export const metadata={robots:{index:false,follow:false},...socialMetadata('/${route}')};export default function ReviewEntry(){return <main id="main" tabIndex={-1} className="workspace-empty"><h1>Демонстрація кабінету</h1><p>У GitHub-огляді використовуються лише приклади даних</p><Link className="button" href="${destination}">Відкрити демонстрацію</Link></main>;}`,
   );
 }
 const layout = prepareReviewLayout(await readFile(path.join(stage, 'src/app/layout.tsx'), 'utf8'));

@@ -89,6 +89,8 @@ async function inspect(dir) {
       if (!$('meta[name="robots"]').attr('content')?.includes('noindex'))
         errors.push('Missing noindex: ' + file);
       if (!$('.review-notice').length) errors.push('Missing review notice: ' + file);
+      if ($('.skip-link[href="#main"]').length && $('main#main').length !== 1)
+        errors.push('Expected one main skip-link destination: ' + file);
       for (const rel of ['icon', 'apple-touch-icon']) {
         if (!$(`link[rel="${rel}"][href]`).length) errors.push('Missing ' + rel + ': ' + file);
       }

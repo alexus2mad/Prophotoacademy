@@ -8,8 +8,12 @@ export function StatusFrame({ children }: StatusFrameProps) {
   const site = useStatusSite();
 
   return (
-    <div className={site === 'academy' ? `academy-status ${academyThemeClassName}` : undefined}>
+    <main
+      id="main"
+      tabIndex={-1}
+      className={site === 'academy' ? `academy-status ${academyThemeClassName}` : undefined}
+    >
       <div className="container status-panel">{children}</div>
-    </div>
+    </main>
   );
 }

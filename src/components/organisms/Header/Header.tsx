@@ -15,6 +15,7 @@ export function Header({ site = 'academy' }: HeaderProps) {
   return (
     <header
       className={`site-header ${scrolled ? 'is-scrolled' : ''} ${focused ? 'header-focused' : ''}`}
+      data-site={site}
     >
       <div className="container header-inner">
         <Link

@@ -12,7 +12,6 @@
   width: calc(100% - 2 * var(--page-gutter));
 }
 .academy-editorial .site-header {
-  height: 88px;
   background: rgb(0 0 0 / 72%);
   border-bottom: 1px solid var(--border);
 }
@@ -431,7 +430,6 @@
 .academy-editorial .program-packages {
   margin-top: 48px;
   padding-top: 32px;
-  scroll-margin-top: 112px;
 }
 .academy-editorial .program-packages .section-heading {
   margin-bottom: 24px;
@@ -682,7 +680,6 @@
   width: 100%;
   padding-top: 48px;
   border-top: 1px solid var(--border);
-  scroll-margin-top: 112px;
   margin-top: 32px;
 }
 .academy-editorial .program-student-work .section-heading h2 {
@@ -1140,7 +1137,6 @@
     --section-gap: 64px;
   }
   .academy-editorial .site-header {
-    height: 72px;
     background: var(--canvas);
   }
   .academy-editorial .header-inner {

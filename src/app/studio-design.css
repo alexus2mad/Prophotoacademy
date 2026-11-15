@@ -1,3 +1,18 @@
+:root {
+  --studio-header-height: 64px;
+  --studio-course-nav-row-height: 48px;
+  --studio-course-nav-border-width: 1px;
+}
+html:has(.academy-studio) {
+  scroll-padding-top: var(--studio-header-height);
+}
+html:has(.academy-studio [data-studio-course-navigation]) {
+  scroll-padding-top: calc(
+    var(--studio-header-height) + var(--studio-course-nav-row-height) +
+      var(--studio-course-nav-border-width)
+  );
+}
+
 .academy-studio {
   --canvas: #fbfbfb;
   --surface: #efedea;
@@ -41,9 +56,6 @@
 .academy-studio :where(a, button, input, select, textarea):focus-visible {
   outline: 2px solid var(--studio-red);
   outline-offset: 5px;
-}
-.academy-studio :where([id]) {
-  scroll-margin-top: 80px;
 }
 .academy-studio ::selection {
   color: white;
@@ -167,7 +179,7 @@
   position: fixed;
   inset: 0 0 auto;
   z-index: 40;
-  height: 64px;
+  height: var(--studio-header-height);
   transition: background-color 160ms;
 }
 .academy-studio .studio-header-dark {
@@ -603,8 +615,8 @@
 }
 
 @media (max-width: 767px) {
-  .academy-studio .studio-header {
-    height: 56px;
+  :root {
+    --studio-header-height: 56px;
   }
   .academy-studio .studio-header-nav {
     display: none;

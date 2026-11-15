@@ -648,11 +648,17 @@
   font-size: 14px;
   color: var(--secondary);
 }
+:root {
+  --lesson-header-height: 64px;
+}
+html:has(.lesson-header) {
+  scroll-padding-top: calc(var(--lesson-header-height) + 24px);
+}
 .lesson-header {
   width: 100%;
   max-width: var(--academy-content-max);
   margin-inline: auto;
-  height: 64px;
+  height: var(--lesson-header-height);
   position: sticky;
   top: 0;
   z-index: 30;
@@ -696,9 +702,9 @@
   grid-template-columns: 1fr;
 }
 .lesson-sidebar {
-  height: calc(100svh - 64px);
+  height: calc(100svh - var(--lesson-header-height));
   position: sticky;
-  top: 64px;
+  top: var(--lesson-header-height);
   border-right: 1px solid var(--border);
   overflow: auto;
   background: var(--surface);
@@ -1828,7 +1834,6 @@
 }
 /* Lesson editorial rhythm and formative assessments share the learning palette. */
 .lesson-material-anchor {
-  scroll-margin-top: 88px;
   min-width: 0;
 }
 .lesson-header > .lesson-preview-back {
@@ -2035,7 +2040,6 @@
   margin: 6px 0 0;
 }
 .quiz-result {
-  scroll-margin-top: 88px;
   margin-bottom: 32px;
   padding: 24px;
   border: 1px solid #84b99b;
