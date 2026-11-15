@@ -9,8 +9,8 @@ import { useImageGallery } from '@/components/molecules/ImageGalleryDialog/hooks
 import { studioAssetUrl } from '@/lib/studio-design/urls';
 import type { StudioHomeWorksProps } from './types';
 
-export function useStudioHomeWorks({ works }: StudioHomeWorksProps) {
-  const carousel = useStudioHomeCarousel();
+export function useStudioHomeWorks({ works }: StudioHomeWorksProps, groupSize: number) {
+  const carousel = useStudioHomeCarousel(groupSize);
   const gallery = useImageGallery(works.length);
   const drag = useRef<HorizontalRailController | undefined>(undefined);
   useEffect(() => {

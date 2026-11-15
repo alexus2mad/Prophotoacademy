@@ -1,0 +1,47 @@
+@media (max-width: 760px) {
+  [data-inline-gallery] {
+    --inline-gallery-spacing: var(--inline-gallery-gap, 8px);
+    --inline-gallery-item-width: calc((100% - 2 * var(--inline-gallery-spacing)) / 2.5);
+    display: flex;
+    align-items: start;
+    gap: var(--inline-gallery-spacing);
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+  }
+
+  [data-inline-gallery]::-webkit-scrollbar {
+    display: none;
+  }
+
+  [data-inline-gallery] > [data-inline-gallery-group] {
+    display: contents;
+  }
+
+  [data-inline-gallery] > :not([data-inline-gallery-group]),
+  [data-inline-gallery] > [data-inline-gallery-group] > * {
+    flex: 0 0 var(--inline-gallery-item-width);
+    min-inline-size: 0;
+    scroll-snap-align: start;
+  }
+
+  [data-inline-gallery='scroll']::after {
+    /* Leave enough scroll range to bring the final photo to the same edge. */
+    content: '';
+    flex: 0 0 calc(100% - var(--inline-gallery-item-width) - var(--inline-gallery-spacing));
+  }
+
+  .work-grid[data-inline-gallery] > .work-item {
+    margin-bottom: 0;
+  }
+
+  .work-grid[data-inline-gallery] .work-image {
+    aspect-ratio: 4 / 5;
+  }
+
+  .work-grid[data-inline-gallery] .work-image img {
+    width: 100%;
+    height: 100%;
+  }
+}

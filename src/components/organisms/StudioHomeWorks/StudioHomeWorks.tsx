@@ -8,11 +8,13 @@ import { useStudioHomeWorks } from './hooks';
 import type { StudioHomeWorksProps } from './types';
 import styles from './StudioHomeWorks.module.css';
 
+const photosPerPage = 4;
+
 export function StudioHomeWorks({ works }: StudioHomeWorksProps) {
-  const { carousel, gallery, images } = useStudioHomeWorks({ works });
+  const { carousel, gallery, images } = useStudioHomeWorks({ works }, photosPerPage);
   const { rail, active, maximum, select, onKeyDown } = carousel;
-  const pages = Array.from({ length: Math.ceil(works.length / 4) }, (_, index) =>
-    works.slice(index * 4, index * 4 + 4),
+  const pages = Array.from({ length: Math.ceil(works.length / photosPerPage) }, (_, index) =>
+    works.slice(index * photosPerPage, (index + 1) * photosPerPage),
   );
   return (
     <section className={styles.works} data-home-section="works" aria-labelledby="home-works-title">
@@ -26,6 +28,7 @@ export function StudioHomeWorks({ works }: StudioHomeWorksProps) {
       </div>
       <div
         className={styles.rail}
+        data-inline-gallery={works.length > 2 ? 'scroll' : ''}
         ref={rail}
         tabIndex={0}
         onKeyDown={onKeyDown}
@@ -36,6 +39,7 @@ export function StudioHomeWorks({ works }: StudioHomeWorksProps) {
         {pages.map((page, index) => (
           <div
             className={styles.page}
+            data-inline-gallery-group
             key={page[0].id}
             role="group"
             aria-label={`${index + 1} з ${pages.length}`}
@@ -47,13 +51,13 @@ export function StudioHomeWorks({ works }: StudioHomeWorksProps) {
                 className={styles.image}
                 aria-label={`Відкрити роботу: ${work.alt}`}
                 aria-haspopup="dialog"
-                onClick={() => gallery.open(index * 4 + photoIndex)}
+                onClick={() => gallery.open(index * photosPerPage + photoIndex)}
               >
                 <StudioHomePicture
                   image={work.image}
                   mobileImage={work.mobileImage}
                   alt={work.alt}
-                  sizes="(max-width: 760px) 48vw, 25vw"
+                  sizes="(max-width: 760px) 40vw, 25vw"
                 />
               </button>
             ))}

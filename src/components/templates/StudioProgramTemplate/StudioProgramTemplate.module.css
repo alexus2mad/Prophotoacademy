@@ -386,17 +386,11 @@
   text-underline-offset: 0.2em;
 }
 .gallery :global(.work-grid) {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  columns: auto;
-  gap: 2px;
+  --inline-gallery-gap: 2px;
 }
 .gallery :global(.work-item) {
   min-width: 0;
   margin: 0;
-}
-.gallery :global(.work-item:nth-child(n + 5)) {
-  display: none;
 }
 .gallery :global(.work-image) {
   display: block;
@@ -429,6 +423,18 @@
 }
 .faq {
   padding-top: 0;
+}
+
+@media (width > 760px) {
+  .gallery :global(.work-grid) {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    columns: auto;
+    gap: var(--inline-gallery-gap);
+  }
+  .gallery :global(.work-item:nth-child(n + 5)) {
+    display: none;
+  }
 }
 
 @media (max-width: 1040px) {
@@ -466,31 +472,5 @@
     padding: 12px 8px;
     font-size: 12px;
     overflow-wrap: anywhere;
-  }
-  .gallery :global(.work-grid) {
-    grid-template-columns: none;
-    grid-auto-columns: calc((100% - 2px) / 2);
-    grid-template-rows: repeat(2, auto);
-    grid-auto-flow: row;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-  }
-  .gallery :global(.work-grid::-webkit-scrollbar) {
-    display: none;
-  }
-  .gallery :global(.work-item:nth-child(n + 5)) {
-    display: block;
-  }
-  .gallery :global(.work-item:nth-child(4n + 1)),
-  .gallery :global(.work-item:nth-child(4n + 2)) {
-    grid-row: 1;
-  }
-  .gallery :global(.work-item:nth-child(4n + 3)),
-  .gallery :global(.work-item:nth-child(4n + 4)) {
-    grid-row: 2;
-  }
-  .gallery :global(.work-item:nth-child(4n + 1)) {
-    scroll-snap-align: start;
   }
 }

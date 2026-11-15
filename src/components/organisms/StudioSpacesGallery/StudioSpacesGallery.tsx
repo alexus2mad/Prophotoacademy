@@ -22,6 +22,7 @@ export function StudioSpacesGallery({ images, label, variant = 'room' }: StudioS
     <div className={`${styles.gallery} ${variant === 'artworks' ? styles.artworks : styles.room}`}>
       <div
         className={styles.track}
+        data-inline-gallery={images.length > 2 ? 'scroll' : ''}
         ref={track}
         tabIndex={0}
         role="region"
@@ -42,7 +43,7 @@ export function StudioSpacesGallery({ images, label, variant = 'room' }: StudioS
                 asset={asset}
                 alt={alt}
                 fit="cover"
-                sizes="(max-width: 760px) 86vw, 41vw"
+                sizes="(max-width: 760px) 40vw, 41vw"
               />
             </button>
           ) : (
@@ -52,7 +53,7 @@ export function StudioSpacesGallery({ images, label, variant = 'room' }: StudioS
               alt={alt}
               fit="cover"
               className={styles.image}
-              sizes="(max-width: 760px) 86vw, 40vw"
+              sizes="40vw"
             />
           ),
         )}

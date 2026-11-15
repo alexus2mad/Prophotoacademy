@@ -14,10 +14,15 @@ export function AcademyDesignVoices({ testimonials }: AcademyDesignVoicesProps) 
           </figure>
         ))}
       </section>
-      <section className="academy-design-gallery" aria-label="Фотографії Олени Попової">
+      <section
+        className="academy-design-gallery"
+        data-inline-gallery="scroll"
+        aria-label="Фотографії Олени Попової"
+        tabIndex={0}
+      >
         {(['knit', 'city', 'sea', 'camp'] as const).map((id) => (
           <figure key={id}>
-            <PreparedPhoto image={academyHomePhoto(id)} sizes="(max-width: 767px) 50vw, 25vw" />
+            <PreparedPhoto image={academyHomePhoto(id)} sizes="(max-width: 760px) 40vw, 25vw" />
           </figure>
         ))}
       </section>

@@ -42,6 +42,7 @@ export function StudioCreatorWorks(props: StudioCreatorWorksProps) {
       <div
         id="creator-work-rail"
         className={styles.rail}
+        data-inline-gallery={entries.length > 2 ? 'scroll' : ''}
         ref={carousel.track}
         tabIndex={0}
         role="region"
@@ -58,12 +59,7 @@ export function StudioCreatorWorks(props: StudioCreatorWorksProps) {
             aria-label={`Відкрити роботу: ${work.alt}`}
             aria-haspopup="dialog"
           >
-            <StudioImage
-              asset={work}
-              alt={work.alt}
-              sizes="(max-width: 760px) 80vw, 28vw"
-              fit="cover"
-            />
+            <StudioImage asset={work} alt={work.alt} sizes="(max-width: 760px) 40vw, 28vw" />
           </button>
         ))}
       </div>

@@ -2,28 +2,46 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { KeyboardEvent } from 'react';
 
-export function useStudioHomeCarousel() {
+function carouselLayout(element: HTMLDivElement, groupSize: number) {
+  const first = element.firstElementChild;
+  const flattened = groupSize > 1 && first && getComputedStyle(first).display === 'contents';
+  const item = flattened ? first.firstElementChild : first;
+  const pageSize = flattened ? groupSize : 1;
+  const finalGroupSize = flattened ? (element.lastElementChild?.childElementCount ?? 0) : 1;
+  const count = Math.max(0, (element.childElementCount - 1) * pageSize + finalGroupSize);
+  const gap = parseFloat(getComputedStyle(element).columnGap) || 0;
+  const step = item ? item.getBoundingClientRect().width + gap : 0;
+  const scrollable = Math.max(0, element.scrollWidth - element.clientWidth);
+  const last = step > 0 ? Math.min(count - 1, Math.ceil(scrollable / step)) : 0;
+  const current =
+    step > 0 && element.scrollLeft < scrollable - 2
+      ? Math.min(last, Math.round(element.scrollLeft / step))
+      : last;
+  return { pageSize, step, last, current };
+}
+
+function scrollToItem(
+  element: HTMLDivElement,
+  index: number,
+  { step, last }: ReturnType<typeof carouselLayout>,
+) {
+  element.scrollTo({
+    left: Math.max(0, Math.min(last, index)) * step,
+    behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+  });
+}
+
+export function useStudioHomeCarousel(groupSize = 1) {
   const rail = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
   const [maximum, setMaximum] = useState(0);
   const measure = useCallback(() => {
     const element = rail.current;
     if (!element) return;
-    const item = element.firstElementChild;
-    const step = item
-      ? item.getBoundingClientRect().width + parseFloat(getComputedStyle(element).columnGap || '0')
-      : element.clientWidth;
-    const scrollable = Math.max(0, element.scrollWidth - element.clientWidth);
-    const last = step > 0 ? Math.ceil(scrollable / step) : 0;
-    setMaximum(last);
-    setActive(
-      step > 0
-        ? element.scrollLeft >= scrollable - 2
-          ? last
-          : Math.min(last, Math.round(element.scrollLeft / step))
-        : 0,
-    );
-  }, []);
+    const { current, last, pageSize } = carouselLayout(element, groupSize);
+    setMaximum(Math.floor(last / pageSize));
+    setActive(Math.floor(current / pageSize));
+  }, [groupSize]);
   useEffect(() => {
     const element = rail.current;
     if (!element) return;
@@ -38,24 +56,22 @@ export function useStudioHomeCarousel() {
   }, [measure]);
   function select(index: number) {
     const element = rail.current;
-    const first = element?.firstElementChild;
-    if (!element || !first) return;
-    const step =
-      first.getBoundingClientRect().width + parseFloat(getComputedStyle(element).columnGap || '0');
-    element.scrollTo({
-      left: Math.max(0, Math.min(maximum, index)) * step,
-      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-    });
+    if (!element) return;
+    const layout = carouselLayout(element, groupSize);
+    scrollToItem(element, index * layout.pageSize, layout);
   }
   function onKeyDown(event: KeyboardEvent<HTMLDivElement>) {
-    if (event.target !== event.currentTarget) return;
+    const element = event.currentTarget;
+    if (event.target !== element) return;
     if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
       event.preventDefault();
-      select(active + (event.key === 'ArrowRight' ? 1 : -1));
+      const layout = carouselLayout(element, groupSize);
+      scrollToItem(element, layout.current + (event.key === 'ArrowRight' ? 1 : -1), layout);
     }
     if (event.key === 'Home' || event.key === 'End') {
       event.preventDefault();
-      select(event.key === 'Home' ? 0 : maximum);
+      const layout = carouselLayout(element, groupSize);
+      scrollToItem(element, event.key === 'Home' ? 0 : layout.last, layout);
     }
   }
   return { rail, active, maximum, select, onKeyDown };

@@ -699,7 +699,7 @@
 /* Proof, people and contact details have room to be read. */
 .academy-editorial .work-grid {
   columns: 3;
-  column-gap: 24px;
+  column-gap: var(--inline-gallery-spacing, 24px);
 }
 .academy-editorial .work-item {
   break-inside: avoid;

@@ -36,6 +36,12 @@ Arrows, keyboard navigation and a new gesture cancel momentum immediately.
 Dragging must not open an image dialog, while ordinary clicks still do. Do not
 enable inertia globally on logos, navigation rails, or static image grids.
 
+Inline photo galleries opt into the shared mobile rail using `data-inline-gallery`.
+Equal-width thumbnails expose two full photos and half of the next. Native
+scroll snapping aligns every image with the start of the rail, including the
+last photo when the set overflows. Desktop composition and dialog navigation
+belong to their respective gallery components.
+
 Scroll animation state stays inside its owning section, not the homepage composition.
 Share continuous visual progress through explicit element references and CSS properties;
 avoid re-rendering unrelated heroes or card grids on each frame. Batch geometry reads,

@@ -12,10 +12,7 @@ export function WorkCard({ work, image: img, onOpen }: WorkCardProps) {
         aria-label={`Відкрити роботу: ${work.title}`}
         aria-haspopup="dialog"
       >
-        <Photo
-          image={img}
-          sizes="(max-width: 599px) calc(100vw - 40px), (max-width: 1023px) 44vw, 30vw"
-        />
+        <Photo image={img} sizes="(max-width: 760px) 40vw, (max-width: 1023px) 44vw, 30vw" />
         <span className="work-open" aria-hidden="true">
           <Maximize2 size={16} />
         </span>

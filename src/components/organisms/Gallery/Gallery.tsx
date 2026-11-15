@@ -8,7 +8,7 @@ export function Gallery({ works, images }: GalleryProps) {
   const { index, dialog, entries, open, move } = useGallery({ works, images });
   return (
     <>
-      <div className="work-grid">
+      <div className="work-grid" data-inline-gallery={entries.length > 2 ? 'scroll' : ''}>
         {entries.map((image, i) => {
           const work = works.find((item) => item.id === image.id)!;
           return <WorkCard key={work.id} work={work} image={image} onOpen={() => open(i)} />;

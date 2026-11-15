@@ -2,8 +2,9 @@
   min-width: 0;
 }
 .track {
+  --inline-gallery-gap: 2px;
   display: flex;
-  gap: 2px;
+  gap: var(--inline-gallery-gap);
   overflow-x: auto;
   scrollbar-width: none;
   scroll-snap-type: x mandatory;
@@ -19,7 +20,7 @@
 .track[data-dragging] .trigger {
   cursor: grabbing;
 }
-@media (hover: hover) and (pointer: fine) {
+@media (width > 760px) and (hover: hover) and (pointer: fine) {
   .artworks .track {
     scroll-snap-type: none;
     cursor: grab;
@@ -94,14 +95,17 @@
   .room .image,
   .room .image + .image {
     width: auto;
-    max-width: 86vw;
-    height: min(68vw, 320px);
+    height: auto;
+    aspect-ratio: 4 / 3;
   }
   .artworks .image {
-    width: 93.69%;
-    height: 499.2px;
+    height: auto;
+    aspect-ratio: 3 / 4;
   }
-  .room .controls {
+  .track:not([data-inline-gallery='scroll']) + .controls {
+    display: none;
+  }
+  .room:has([data-inline-gallery='scroll']) .controls {
     display: flex;
   }
 }

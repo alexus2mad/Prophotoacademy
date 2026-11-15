@@ -423,9 +423,11 @@
   line-height: 1.75;
   color: #d3d3d3;
 }
-.academy-design-gallery {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+@media (width > 760px) {
+  .academy-design-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 .academy-design-gallery figure {
   aspect-ratio: 3/4;

@@ -28,7 +28,11 @@ describe('student-work popup coverage', () => {
     );
     expect(triggers.filter('[type="button"]')).toHaveLength(16);
     expect(triggers.find('a')).toHaveLength(0);
-    expect($('[aria-roledescription="карусель"] > [role="group"]')).toHaveLength(4);
+    expect(
+      $(
+        '[aria-roledescription="карусель"][data-inline-gallery="scroll"] > [data-inline-gallery-group]',
+      ),
+    ).toHaveLength(4);
     expect($('dialog.gallery-dialog')).toHaveLength(1);
     expect($('dialog [aria-live="polite"]').text()).toContain('1/16');
   });
@@ -36,6 +40,7 @@ describe('student-work popup coverage', () => {
   it('uses one four-image popup for AI Artwork, keeping its label distinct from student work', () => {
     const $ = load(renderToStaticMarkup(createElement(StudioIntensiveTemplate, { content })));
     const rail = $('[role="region"][aria-label="Роботи AI artwork"]');
+    expect(rail.attr('data-inline-gallery')).toBe('scroll');
     expect(rail.find('button[aria-haspopup="dialog"]')).toHaveLength(4);
     expect($('dialog.gallery-dialog')).toHaveLength(1);
     expect($('dialog').attr('aria-label')).toBe('Роботи AI artwork');
@@ -85,6 +90,7 @@ describe('student-work popup coverage', () => {
       ),
     );
     expect($('[role="region"] > img')).toHaveLength(1);
+    expect($('[role="region"]').attr('data-inline-gallery')).toBe('');
     expect($('[role="region"] button, dialog')).toHaveLength(0);
   });
 
