@@ -1,4 +1,6 @@
 /** Editorial copy from Figma 949:443; commerce remains in the offering model. */
+export const creatorCurriculumId = 'program-curriculum';
+
 export const creatorAudience = [
   {
     title: 'Початківців',

@@ -133,7 +133,10 @@ describe('Content Creator learning outline and work sources', () => {
     for (const module of program.modules) {
       for (const topic of module.topics) expect(disclosure.text()).toContain(topic);
     }
-    expect($('a[href="#program-curriculum"]')).toHaveLength(1);
+    const heroActions = $('[aria-labelledby="creator-title"] .studio-actions').children();
+    expect(heroActions).toHaveLength(1);
+    expect(heroActions.attr('href')).toBe('#program-curriculum');
+    expect(heroActions.text()).toBe('Програма');
   });
 
   it('preserves every scoped work and its device when applying the approved opening sequence', () => {

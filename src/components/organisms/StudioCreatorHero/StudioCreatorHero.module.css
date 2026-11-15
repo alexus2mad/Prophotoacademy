@@ -187,11 +187,7 @@
   .facts span + span {
     padding-left: 12px;
   }
-  .copy :global(.studio-actions) {
-    gap: 10px;
-  }
   .copy :global(.studio-actions) > * {
-    flex: 1 1 auto;
     padding-inline: 16px;
     font-size: 11px;
   }

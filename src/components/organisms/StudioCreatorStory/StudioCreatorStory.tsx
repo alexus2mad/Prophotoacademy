@@ -2,6 +2,7 @@ import { StudioCreatorHeading } from '@/components/molecules/StudioCreatorHeadin
 import {
   creatorAudience,
   creatorBenefits,
+  creatorCurriculumId,
   creatorLearningSteps,
 } from '@/lib/studio-creator/content';
 import { creatorAssets } from '@/lib/studio-creator/assets';
@@ -57,7 +58,7 @@ export function StudioCreatorStory({ program, duration }: StudioCreatorStoryProp
         </ul>
       </section>
       <section
-        id="program-curriculum"
+        id={creatorCurriculumId}
         className="studio-light studio-band studio-wrap"
         aria-labelledby="creator-curriculum-title"
       >

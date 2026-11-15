@@ -1,5 +1,6 @@
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
 import { StudioCreatorAction } from '@/components/molecules/StudioCreatorAction/StudioCreatorAction';
+import { StudioCreatorCurriculumLink } from '@/components/molecules/StudioCreatorCurriculumLink/StudioCreatorCurriculumLink';
 import { creatorAssets } from '@/lib/studio-creator/assets';
 import { programSchedule } from '@/lib/program-schedule';
 import type { StudioCreatorHeroProps } from './types';
@@ -50,14 +51,7 @@ export function StudioCreatorHero({ program, offering, presentation }: StudioCre
             {offering?.duration && <span>{offering.duration}</span>}
           </div>
           <div className="studio-actions">
-            <StudioCreatorAction
-              program={program}
-              offering={offering}
-              presentation={presentation}
-            />
-            <a href="#program-curriculum" className="studio-button-outline">
-              Програма
-            </a>
+            <StudioCreatorCurriculumLink />
           </div>
         </div>
       </section>

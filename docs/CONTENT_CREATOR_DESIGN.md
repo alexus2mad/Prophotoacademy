@@ -61,7 +61,8 @@ Source photos and the contact sheets are in `.data/creator-portraits/`. Commit
 The course sections span the full viewport on desktop and use the Studio side
 gutters. Individual text blocks retain their reading widths.
 
-The curriculum is a native collapsed disclosure. Camera/phone filters cancel
+The hero's only action, “Програма”, jumps to the curriculum and opens its native
+disclosure. Direct curriculum links also open it. Camera/phone filters cancel
 momentum and reset the rail. Touch scrolling, desktop drag/inertia, keyboard
 arrows and the shared captionless swipeable popup remain available. Reading
 sections remain stationary. Mobile packages are vertical with all benefits visible.
