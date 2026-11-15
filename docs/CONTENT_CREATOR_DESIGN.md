@@ -34,17 +34,16 @@ presentation without changing eligibility or other layouts.
   invented syllabus behind the prototype's closed row.
 - Red primary buttons keep white text. Shared header/footer retain approved
   navigation, social and legal links. Existing section anchors remain valid.
-- Keep the user-supplied high-quality Olena portrait rather than restoring Figma's
-  older photograph. Oleksandra and the first two works reuse the same photographs
-  at higher resolution. Figma supplied two faculty portraits. Additional
-  lecturers use portraits identified in their published education material.
+- Keep the user-supplied high-quality Olena portrait. Oleksandra and the first
+  two works reuse the Figma photographs at higher resolution. The two original
+  faculty portraits are live while the additional portraits await review.
 - The fourth Figma work image is a cropped half-width asset. Keep its narrow
   fragment, without stretching it into a full portrait. Gallery counts derive
   from real entries rather than the prototype's `30`.
 - Remove heading-ending punctuation. Preserve review attribution and distinguish
   academy-authored stories from direct quotations.
 
-## Faculty portrait sources
+## Faculty portraits saved for review
 
 | Lecturer | Published portrait source |
 | --- | --- |
@@ -53,11 +52,14 @@ presentation without changing eligibility or other layouts.
 | Андрій Провотар | [ProPhotoStudy](https://prophotostudy.com.ua/subject-food), the named lecturer portrait on the previous ProPhoto course |
 | Наталія Авдєєва | [ProPhotoStudy](https://prophotostudy.com.ua/subject-food), the named lecturer portrait on the previous ProPhoto course |
 
-The page uses local WebP copies and sets each portrait's focal position for the
-wide desktop and taller mobile frames. Remaining empty slots await a verified
-portrait of the lecturer.
+The optimized WebPs are archived in `.data/creator-portraits/archived-webp/`.
+Source photos and the contact sheets are in `.data/creator-portraits/`. Commit
+`c254a69` records the asset paths and focal positions for future restoration.
 
 ## Interaction and responsive behavior
+
+The course sections span the full viewport on desktop and use the Studio side
+gutters. Individual text blocks retain their reading widths.
 
 The curriculum is a native collapsed disclosure. Camera/phone filters cancel
 momentum and reset the rail. Touch scrolling, desktop drag/inertia, keyboard

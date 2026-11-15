@@ -1,7 +1,5 @@
 .page {
   width: 100%;
-  max-width: 1470px;
-  margin-inline: auto;
   background: #0a0807;
 }
 .page :global([id]) {

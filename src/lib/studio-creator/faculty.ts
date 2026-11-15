@@ -32,12 +32,6 @@ export const creatorFaculty: readonly CreatorLecturer[] = [
     name: 'Ренат Зіганшин',
     roles: ['Маркетолог', 'таргетолог'],
     bio: 'Запускав проєкти для «Київстар», «Веселої корівки» та інших великих українських і міжнародних брендів. Викладає маркетинг і таргетовану рекламу, зокрема в Києво-Могилянській академії.',
-    portrait: {
-      src: '/images/studio/creator/faculty/renat-zihanshyn-fabbbe6146b1.webp',
-      width: 800,
-      height: 1200,
-      position: 'center 4%',
-    },
   },
   {
     id: 'yuliia-davydenko',
@@ -50,12 +44,6 @@ export const creatorFaculty: readonly CreatorLecturer[] = [
     name: 'Анна Лютько',
     roles: ['YouTube', 'SMM'],
     bio: 'Експертка з YouTube і маркетингу в соцмережах: 12 золотих і 50 срібних кнопок YouTube.',
-    portrait: {
-      src: '/images/studio/creator/faculty/anna-liutko-d679b8e7e6bd.webp',
-      width: 719,
-      height: 1200,
-      position: 'center 3%',
-    },
   },
   {
     id: 'anna-shtamburh',
@@ -74,22 +62,11 @@ export const creatorFaculty: readonly CreatorLecturer[] = [
     name: 'Андрій Провотар',
     roles: ['Креативний продюсер', 'режисер реклами'],
     bio: 'Розробляв і знімав відеоконтент для Pepsi, АТБ, Novus, Lay’s та інших брендів.',
-    portrait: {
-      src: '/images/studio/creator/faculty/andrii-provotar-73b2cb13a70e.webp',
-      width: 800,
-      height: 1200,
-      position: 'center 19%',
-    },
   },
   {
     id: 'nataliia-avdieieva',
     name: 'Наталія Авдєєва',
     roles: ['Комунікації'],
     bio: 'Директорка з комунікацій Фонду Притули. Була CEO Stand Up Art House Kyiv і Laklabel, SMM-менеджеркою 1900 і Coffeereligia, працювала з OBERIG і BULGARI, у 2019 році — в комунікаційній команді МОЗ.',
-    portrait: {
-      src: '/images/studio/creator/faculty/nataliia-avdieieva-c4c93849c95e.webp',
-      width: 621,
-      height: 572,
-    },
   },
 ];
