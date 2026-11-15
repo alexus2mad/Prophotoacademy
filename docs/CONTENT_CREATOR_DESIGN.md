@@ -37,9 +37,10 @@ presentation without changing eligibility or other layouts.
 - Keep the user-supplied high-quality Olena portrait. Oleksandra and the first
   two works reuse the Figma photographs at higher resolution. The two original
   faculty portraits are live while the additional portraits await review.
-- The fourth Figma work image is a cropped half-width asset. Keep its narrow
-  fragment, without stretching it into a full portrait. Gallery counts derive
-  from real entries rather than the prototype's `30`.
+- The fourth gallery entry uses the full 1080 × 1440 portrait from the Academy
+  Drive. Its uncropped frame fits inside the thumbnail and opens in the shared
+  gallery dialog. [Drive original](https://drive.google.com/file/d/1wY35e1swHvFQ4imX1xD5De-7Y9wCz6CR/view)
+- Gallery counts derive from actual entries.
 - Remove heading-ending punctuation. Preserve review attribution and distinguish
   academy-authored stories from direct quotations.
 

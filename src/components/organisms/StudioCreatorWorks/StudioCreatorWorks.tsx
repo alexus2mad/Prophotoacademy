@@ -54,12 +54,16 @@ export function StudioCreatorWorks(props: StudioCreatorWorksProps) {
             type="button"
             key={work.id}
             className={styles.work}
-            data-partial={work.partial || undefined}
             onClick={() => gallery.open(index)}
             aria-label={`Відкрити роботу: ${work.alt}`}
             aria-haspopup="dialog"
           >
-            <StudioImage asset={work} alt={work.alt} sizes="(max-width: 760px) 40vw, 28vw" />
+            <StudioImage
+              asset={work}
+              alt={work.alt}
+              fit={work.preserveFraming ? 'contain' : undefined}
+              sizes="(max-width: 760px) 40vw, 28vw"
+            />
           </button>
         ))}
       </div>

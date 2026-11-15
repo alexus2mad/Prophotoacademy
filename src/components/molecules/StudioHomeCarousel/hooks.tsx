@@ -17,16 +17,16 @@ function carouselLayout(element: HTMLDivElement, groupSize: number) {
     step > 0 && element.scrollLeft < scrollable - 2
       ? Math.min(last, Math.round(element.scrollLeft / step))
       : last;
-  return { pageSize, step, last, current };
+  return { pageSize, step, last, current, scrollable };
 }
 
 function scrollToItem(
   element: HTMLDivElement,
   index: number,
-  { step, last }: ReturnType<typeof carouselLayout>,
+  { step, last, scrollable }: ReturnType<typeof carouselLayout>,
 ) {
   element.scrollTo({
-    left: Math.max(0, Math.min(last, index)) * step,
+    left: index >= last ? scrollable : Math.max(0, index) * step,
     behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
   });
 }

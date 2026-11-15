@@ -96,12 +96,6 @@
 .rail[data-dragging] .work {
   cursor: grabbing;
 }
-@media (width > 760px) {
-  .work[data-partial] {
-    flex-basis: calc((100% - 24px) / 7);
-    aspect-ratio: 2/5;
-  }
-}
 @media (width > 760px) and (hover: hover) and (pointer: fine) {
   .rail {
     scroll-snap-type: none;
@@ -121,8 +115,5 @@
   }
   .rail {
     margin-inline: calc(-1 * var(--studio-gutter));
-  }
-  .work[data-partial] img {
-    object-fit: contain;
   }
 }

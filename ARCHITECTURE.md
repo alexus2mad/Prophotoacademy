@@ -38,9 +38,9 @@ enable inertia globally on logos, navigation rails, or static image grids.
 
 Inline photo galleries opt into the shared mobile rail using `data-inline-gallery`.
 Equal-width thumbnails expose two full photos and half of the next. Native
-scroll snapping aligns every image with the start of the rail, including the
-last photo when the set overflows. Desktop composition and dialog navigation
-belong to their respective gallery components.
+scroll snapping aligns images with the start of the rail until the final stop,
+which aligns the last photo with the end of the rail. Desktop composition and
+dialog navigation belong to their respective gallery components.
 
 Scroll animation state stays inside its owning section, not the homepage composition.
 Share continuous visual progress through explicit element references and CSS properties;

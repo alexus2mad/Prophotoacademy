@@ -9,9 +9,9 @@ export const creatorAssets = {
     height: 938,
   },
   curly: {
-    src: '/images/studio/creator/student-curly-preview-419bcb36ce56.webp',
-    width: 375,
-    height: 938,
+    src: '/images/studio/creator/student-curly-portrait-da78249f409e.webp',
+    width: 1080,
+    height: 1440,
   },
   studio: studioAssets.artifact.studio_band,
   connectors: [

@@ -177,6 +177,13 @@ describe('Content Creator learning outline and work sources', () => {
         .map((_, element) => $(element).attr('alt'))
         .get(),
     ).toEqual(camera.map((entry) => entry.alt));
+    const portrait = triggers.find('img').filter((_, image) => {
+      return decodeURIComponent($(image).attr('src') ?? '').includes(creatorAssets.curly.src);
+    });
+    expect(portrait).toHaveLength(1);
+    expect(portrait.attr('width')).toBe('1080');
+    expect(portrait.attr('height')).toBe('1440');
+    expect(portrait.attr('style')).toContain('object-fit:contain');
     expect(
       $('#student-works [aria-controls="creator-work-rail"][aria-pressed="true"]').text(),
     ).toBe('На камеру');

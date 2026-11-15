@@ -10,7 +10,9 @@ export function galleryImageTarget(
   offsets: readonly number[],
   scrollLeft: number,
   direction: number,
+  maxScroll: number,
 ) {
-  const current = nearestGalleryImage(offsets, scrollLeft);
-  return offsets[Math.max(0, Math.min(offsets.length - 1, current + direction))] ?? 0;
+  const stops = [...offsets.filter((offset) => offset < maxScroll - 1), maxScroll];
+  const current = nearestGalleryImage(stops, scrollLeft);
+  return stops[Math.max(0, Math.min(stops.length - 1, current + direction))];
 }

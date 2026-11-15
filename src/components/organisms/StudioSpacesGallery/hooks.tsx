@@ -53,7 +53,12 @@ export function useStudioGallery(length: number, draggable = false) {
     const element = track.current;
     if (!element) return;
     element.scrollTo({
-      left: galleryImageTarget(imageOffsets(element), element.scrollLeft, direction),
+      left: galleryImageTarget(
+        imageOffsets(element),
+        element.scrollLeft,
+        direction,
+        element.scrollWidth - element.clientWidth,
+      ),
       behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
         ? 'instant'
         : 'smooth',

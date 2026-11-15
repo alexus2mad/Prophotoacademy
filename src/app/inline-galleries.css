@@ -26,10 +26,9 @@
     scroll-snap-align: start;
   }
 
-  [data-inline-gallery='scroll']::after {
-    /* Leave enough scroll range to bring the final photo to the same edge. */
-    content: '';
-    flex: 0 0 calc(100% - var(--inline-gallery-item-width) - var(--inline-gallery-spacing));
+  [data-inline-gallery='scroll'] > :last-child:not([data-inline-gallery-group]),
+  [data-inline-gallery='scroll'] > [data-inline-gallery-group]:last-child > :last-child {
+    scroll-snap-align: end;
   }
 
   .work-grid[data-inline-gallery] > .work-item {
