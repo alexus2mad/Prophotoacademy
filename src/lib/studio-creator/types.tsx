@@ -5,5 +5,5 @@ export type CreatorLecturer = {
   name: string;
   roles: readonly string[];
   bio?: string;
-  portrait?: StudioAsset;
+  portrait?: StudioAsset & { position?: string };
 };

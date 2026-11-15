@@ -36,12 +36,26 @@ presentation without changing eligibility or other layouts.
   navigation, social and legal links. Existing section anchors remain valid.
 - Keep the user-supplied high-quality Olena portrait rather than restoring Figma's
   older photograph. Oleksandra and the first two works reuse the same photographs
-  at higher resolution. Nine empty lecturer photo slots remain intentionally empty.
+  at higher resolution. Figma supplied two faculty portraits. Additional
+  lecturers use portraits identified in their published education material.
 - The fourth Figma work image is a cropped half-width asset. Keep its narrow
   fragment, without stretching it into a full portrait. Gallery counts derive
   from real entries rather than the prototype's `30`.
 - Remove heading-ending punctuation. Preserve review attribution and distinguish
   academy-authored stories from direct quotations.
+
+## Faculty portrait sources
+
+| Lecturer | Published portrait source |
+| --- | --- |
+| Ренат Зіганшин | [Kyiv-Mohyla training page](https://pro.ukma.edu.ua/trainings/training-visual-content), the named lecturer portrait for his joint training with Olena and Oleksandra |
+| Анна Лютько | [YouTube for Business](https://youtube-for-business.sendpulse.academy/), the named author portrait from her own course |
+| Андрій Провотар | [ProPhotoStudy](https://prophotostudy.com.ua/subject-food), the named lecturer portrait on the previous ProPhoto course |
+| Наталія Авдєєва | [ProPhotoStudy](https://prophotostudy.com.ua/subject-food), the named lecturer portrait on the previous ProPhoto course |
+
+The page uses local WebP copies and sets each portrait's focal position for the
+wide desktop and taller mobile frames. Remaining empty slots await a verified
+portrait of the lecturer.
 
 ## Interaction and responsive behavior
 

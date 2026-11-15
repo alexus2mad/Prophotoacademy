@@ -23,7 +23,7 @@ export function StudioCreatorFaculty({ instructors }: StudioCreatorFacultyProps)
                   alt={`Портрет: ${instructor.name}`}
                   className={styles.image}
                   fit="cover"
-                  position="center 35%"
+                  position={instructor.portrait.position ?? 'center 35%'}
                   sizes="(max-width: 760px) 112px, (max-width: 1250px) 22vw, 280px"
                 />
               </div>
