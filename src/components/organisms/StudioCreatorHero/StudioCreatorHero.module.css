@@ -159,6 +159,9 @@
   margin-top: 8px !important;
 }
 .installments {
+  align-self: stretch;
+  display: grid;
+  justify-items: center;
   margin-top: 16px;
   --installment-label-color: var(--studio-mute);
 }
