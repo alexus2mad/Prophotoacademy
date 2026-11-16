@@ -2,6 +2,7 @@ import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
 import { StudioIntensiveAction } from '@/components/molecules/StudioIntensiveAction/StudioIntensiveAction';
 import { StudioIntensivePackage } from '@/components/molecules/StudioIntensivePackage/StudioIntensivePackage';
 import { StudioMobileAction } from '@/components/molecules/StudioMobileAction/StudioMobileAction';
+import { InstallmentMethods } from '@/components/molecules/InstallmentMethods/InstallmentMethods';
 import { StudioIntensiveProgram } from '@/components/organisms/StudioIntensiveProgram/StudioIntensiveProgram';
 import { StudioSpacesGallery } from '@/components/organisms/StudioSpacesGallery/StudioSpacesGallery';
 import { StudioInquirySection } from '@/components/organisms/StudioInquirySection/StudioInquirySection';
@@ -23,6 +24,7 @@ export function StudioIntensiveTemplate({ content, enrollment }: StudioIntensive
     time,
     prices,
     purchaseAvailable,
+    showInstallments,
     purchaseNotice,
     note,
   } = studioIntensiveOffer(content, enrollment);
@@ -79,6 +81,11 @@ export function StudioIntensiveTemplate({ content, enrollment }: StudioIntensive
             ))}
           </div>
           {purchaseNotice && <p className={styles.purchaseNotice}>{purchaseNotice}</p>}
+          {showInstallments && (
+            <div className={styles.installments}>
+              <InstallmentMethods prominent />
+            </div>
+          )}
           <p className={styles.practice}>4–5 годин практики</p>
           <h3 className={styles.requirementsTitle}>Photoshop + Firefly</h3>
           <p className={styles.requirements}>

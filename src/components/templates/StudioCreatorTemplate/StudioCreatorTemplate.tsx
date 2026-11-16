@@ -9,6 +9,7 @@ import { StudioCreatorPackages } from '@/components/organisms/StudioCreatorPacka
 import { StudioAcademyReviews } from '@/components/organisms/StudioAcademyReviews/StudioAcademyReviews';
 import { StudioInquirySection } from '@/components/organisms/StudioInquirySection/StudioInquirySection';
 import { studioProgramPage } from '@/lib/studio-program/selectors';
+import { showsInstallmentMethods } from '@/lib/commerce/selectors';
 import { creatorFaculty } from '@/lib/studio-creator/faculty';
 import { creatorAssets } from '@/lib/studio-creator/assets';
 import { studioAssets } from '@/lib/studio-design/assets';
@@ -24,7 +25,12 @@ export function StudioCreatorTemplate({
   const { offering, presentation, works } = studioProgramPage(program, content, enrollment);
   return (
     <div className={styles.page} data-course-design="creator">
-      <StudioCreatorHero program={program} offering={offering} presentation={presentation} />
+      <StudioCreatorHero
+        program={program}
+        offering={offering}
+        presentation={presentation}
+        showInstallments={showsInstallmentMethods(offering, enrollment)}
+      />
       <StudioCreatorStory program={program} duration={offering?.duration ?? 'За програмою курсу'} />
       <StudioCreatorWorks works={works} images={content.images} />
       <StudioCreatorFaculty instructors={creatorFaculty} />

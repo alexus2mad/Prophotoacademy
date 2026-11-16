@@ -1,12 +1,18 @@
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
 import { StudioCreatorAction } from '@/components/molecules/StudioCreatorAction/StudioCreatorAction';
 import { StudioCreatorCurriculumLink } from '@/components/molecules/StudioCreatorCurriculumLink/StudioCreatorCurriculumLink';
+import { InstallmentMethods } from '@/components/molecules/InstallmentMethods/InstallmentMethods';
 import { creatorAssets } from '@/lib/studio-creator/assets';
 import { programSchedule } from '@/lib/program-schedule';
 import type { StudioCreatorHeroProps } from './types';
 import styles from './StudioCreatorHero.module.css';
 
-export function StudioCreatorHero({ program, offering, presentation }: StudioCreatorHeroProps) {
+export function StudioCreatorHero({
+  program,
+  offering,
+  presentation,
+  showInstallments,
+}: StudioCreatorHeroProps) {
   const schedule = programSchedule(program, offering);
   const facts =
     presentation.open && schedule.date ? (
@@ -83,6 +89,11 @@ export function StudioCreatorHero({ program, offering, presentation }: StudioCre
               <strong>{new Intl.NumberFormat('uk-UA').format(presentation.price)}</strong>
               <span>грн</span>
             </p>
+          </div>
+        )}
+        {showInstallments && (
+          <div className={styles.installments}>
+            <InstallmentMethods prominent />
           </div>
         )}
         {presentation.status === 'closed' && (

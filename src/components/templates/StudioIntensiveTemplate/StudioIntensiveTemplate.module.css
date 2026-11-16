@@ -116,6 +116,12 @@
   font-size: 14px;
   line-height: 1.5;
 }
+.installments {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  --installment-label-color: var(--studio-mute);
+}
 .practice {
   color: #a9a5a2;
   font-size: 14px;

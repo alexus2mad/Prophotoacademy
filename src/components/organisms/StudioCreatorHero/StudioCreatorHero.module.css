@@ -158,8 +158,15 @@
   font-size: 12px;
   margin-top: 8px !important;
 }
+.installments {
+  margin-top: 16px;
+  --installment-label-color: var(--studio-mute);
+}
 .intro > :global(.studio-button) {
   margin-top: 32px;
+}
+.intro > .installments + :global(.studio-button) {
+  margin-top: 20px;
 }
 @media (max-width: 760px) {
   .hero {

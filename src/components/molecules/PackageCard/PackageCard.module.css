@@ -1,0 +1,6 @@
+.installments {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  --installment-label-color: var(--secondary);
+}

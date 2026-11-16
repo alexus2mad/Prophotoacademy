@@ -2,6 +2,7 @@ import { PackageCard } from '@/components/molecules/PackageCard/PackageCard';
 import { PackageComparison } from '@/components/organisms/PackageComparison/PackageComparison';
 import { canEnroll, isEnrollmentClosed } from '@/lib/format';
 import { OfferingSummary } from '@/components/molecules/OfferingSummary/OfferingSummary';
+import { showsInstallmentMethods } from '@/lib/commerce/selectors';
 import type { ProgramPackagesProps } from './types';
 export function ProgramPackages({
   offering,
@@ -66,6 +67,7 @@ export function ProgramPackages({
             program={program}
             enrollable={available(pack.id)}
             paymentDisabled={enrollment?.mode === 'disabled'}
+            showInstallments={showsInstallmentMethods(offering, enrollment, pack)}
             availableLessons={enrollment?.lessonTitles?.[pack.id]}
             layout={packageLayout}
           />

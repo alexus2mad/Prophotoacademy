@@ -6,7 +6,7 @@ import fixture from '../content/academy.json';
 import type { AcademyContent } from '../src/lib/content/types';
 import { resolvePurchase } from '../src/lib/checkout';
 import { enrollmentOptions } from '../src/lib/commerce/catalog';
-import { canTestEnroll } from '../src/lib/commerce/selectors';
+import { canTestEnroll, showsInstallmentMethods } from '../src/lib/commerce/selectors';
 import { canEnroll, programStatusLabel } from '../src/lib/format';
 import { programSchedule } from '../src/lib/program-schedule';
 import { programPresentation } from '../src/lib/programs/selectors';
@@ -66,6 +66,24 @@ describe('temporary closure of courses other than Content Creator', () => {
       expect(resolvePurchase(content, offering.id, pack.id, now).pack.kind).toBe('product');
       expect(canTestEnroll(offering, pack)).toBe(false);
     }
+  });
+
+  it('shows the installment notice only for eligible paid offers and staging checkout previews', () => {
+    const commercial = content.offerings.find((item) => item.programId === 'program-commercial')!;
+    const pack = commercial.packages[0];
+    const inquiry = { ...commercial.packages[1], inquiryOnly: true };
+    const soldOut = { ...commercial.packages[2], availability: 'soldOut' as const };
+    const offering = { ...commercial, openAfterStart: true, packages: [pack, inquiry, soldOut] };
+    const packageIds = offering.packages.map((entry) => entry.id);
+    const live = { mode: 'wayforpay' as const, packageIds };
+    expect(showsInstallmentMethods(offering, live, pack)).toBe(true);
+    expect(showsInstallmentMethods(offering, live, inquiry)).toBe(false);
+    expect(showsInstallmentMethods(offering, live, soldOut)).toBe(false);
+    expect(showsInstallmentMethods(offering, live, { ...pack, price: 0 })).toBe(false);
+    expect(showsInstallmentMethods(offering, { mode: 'mock', packageIds })).toBe(true);
+    expect(showsInstallmentMethods(offering, { mode: 'disabled', packageIds })).toBe(false);
+    expect(showsInstallmentMethods(offering, { ...live, packageIds: ['old-package'] })).toBe(false);
+    expect(showsInstallmentMethods({ ...offering, availability: 'closed' }, live)).toBe(false);
   });
 
   it('uses explicit closed copy across schedule, hero and packages even with stale enrollment props', () => {

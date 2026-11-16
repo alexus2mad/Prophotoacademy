@@ -74,6 +74,7 @@ describe('Content Creator route and commercial boundaries', () => {
         ),
       );
       expect($('a[href^="/checkout"]')).toHaveLength(0);
+      expect($('[data-installment-methods]')).toHaveLength(0);
       expect($.text()).toContain('Набір закрито');
       expect($.text()).toContain('Наступний набір');
       expect($.text()).not.toContain('Private lesson title');
@@ -109,6 +110,9 @@ describe('Content Creator route and commercial boundaries', () => {
       true,
     );
     expect(checkoutUrls.every((url) => !url.searchParams.has('price'))).toBe(true);
+    expect($('#program-about [data-installment-methods="prominent"]')).toHaveLength(1);
+    expect($('.package-grid [data-installment-methods="compact"]')).toHaveLength(2);
+    expect($('.package-grid article').last().find('[data-installment-methods]')).toHaveLength(0);
     expect($('.package-grid article').last().find('button[aria-haspopup="dialog"]')).toHaveLength(
       1,
     );

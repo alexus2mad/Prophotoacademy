@@ -59,6 +59,7 @@ describe('AI Artwork purchase presentation', () => {
     };
     const offer = studioIntensiveOffer(empty, { mode: 'wayforpay', packageIds: ['ai-offline'] });
     expect(offer.purchaseAvailable).toBe(false);
+    expect(offer.showInstallments).toBe(false);
     expect(offer.prices.map(({ label, price }) => ({ label, price }))).toEqual([
       { label: 'Офлайн', price: 3900 },
       { label: 'Онлайн', price: 3000 },
@@ -163,6 +164,7 @@ describe('AI Artwork purchase presentation', () => {
       ),
     );
     expect($('#intensive-offers a')).toHaveLength(1);
+    expect($('[data-installment-methods]')).toHaveLength(1);
     expect($('#intensive-offers article').last().text()).toContain('Місць немає');
     expect($.text()).toContain('Тестове оформлення — без оплати й підтвердження участі');
   });
@@ -181,6 +183,7 @@ describe('AI Artwork purchase presentation', () => {
       ),
     );
     expect($('#intensive-offers a, a[href="#intensive-offers"]')).toHaveLength(0);
+    expect($('[data-installment-methods]')).toHaveLength(0);
     expect($('button[aria-controls="inquiry-dialog"]')).toHaveLength(3);
     expect($.text()).toContain('Умови участі підтвердимо після заявки');
   });

@@ -27,8 +27,8 @@ presentation without changing eligibility or other layouts.
 - Preserve current prices: BASE 9,600, GOLD 29,900, PLATINUM 79,900 UAH and package
   promises. The user's subsequent instruction opens this course's three packages
   and confirms the Figma start of 27 November 2026. Other course offers remain
-  unchanged. Figma's prices, VIP name, lecture schedule, installment text and
-  remaining-seat claims do not update commerce.
+  unchanged. The page uses configured prices, package names, schedules and
+  availability instead of the mockup's terms.
 - Benefits/process copy does not promise support or commercial practice in packages
   that omit it. The disclosure reveals the actual marketing curriculum, not an
   invented syllabus behind the prototype's closed row.
@@ -43,6 +43,21 @@ presentation without changing eligibility or other layouts.
 - Gallery counts derive from actual entries.
 - Remove heading-ending punctuation. Preserve review attribution and distinguish
   academy-authored stories from direct quotations.
+
+## Installment presentation — 16 November 2026
+
+The design uses the exact four Figma exports from `986:770`, in order: monobank,
+ПриватБанк «Оплата частинами», ПриватБанк «Миттєва розстрочка», and А-Банк.
+Use the 208 × 40 pill in the Creator introduction under the starting price and
+the 158 × 35 treatment from `986:778` / `986:837` above each eligible package's CTA.
+Other course templates reuse the package treatment. The AI Artwork ticket grid
+shares one installment notice below the formats.
+
+The notice requires a sellable package in the server's enrollment options. Mock
+checkout presents the design alongside its existing test notice. Free-access
+enrollment and offers without a buyable package omit the notice. The WayForPay
+merchant settings and the buyer's bank determine the methods available at checkout.
+[Figma mobile layout](https://www.figma.com/design/CvY4dgmOevd9ehxk9Xsaqd/PROPHOTO-STUDIO?node-id=951-450)
 
 ## Faculty portraits saved for review
 

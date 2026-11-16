@@ -1,20 +1,25 @@
 import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
 import { PackageIncludes } from '@/components/molecules/PackageIncludes/PackageIncludes';
 import { EnrollmentScope } from '@/components/molecules/EnrollmentScope/EnrollmentScope';
+import { InstallmentMethods } from '@/components/molecules/InstallmentMethods/InstallmentMethods';
 import { canEnroll, isEnrollmentClosed, money } from '@/lib/format';
 import { isProduct } from '@/lib/commerce/selectors';
 import Link from 'next/link';
 import type { PackageCardProps } from './types';
+import styles from './PackageCard.module.css';
 export function PackageCard({
   offering,
   program,
   pack,
   enrollable,
   paymentDisabled,
+  showInstallments,
   availableLessons,
   layout = 'summary-first',
 }: PackageCardProps) {
   const closed = isEnrollmentClosed(offering, pack);
+  const purchaseAvailable =
+    !closed && !pack.inquiryOnly && (enrollable ?? canEnroll(offering, pack));
   const benefits = (
     <>
       {!pack.includes.length && !isProduct(pack) && (
@@ -68,7 +73,12 @@ export function PackageCard({
       </div>
       {layout === 'editorial' && <div className="package-benefits">{benefits}</div>}
       <div className="package-action">
-        {!closed && !pack.inquiryOnly && (enrollable ?? canEnroll(offering, pack)) ? (
+        {purchaseAvailable && showInstallments && (
+          <div className={styles.installments}>
+            <InstallmentMethods />
+          </div>
+        )}
+        {purchaseAvailable ? (
           <Link
             href={`/checkout?offering=${encodeURIComponent(offering.id)}&package=${encodeURIComponent(pack.id)}`}
             className={`button button-wide${pack.featured ? '' : ' button-secondary'}`}

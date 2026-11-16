@@ -1,6 +1,7 @@
 import type { InquiryContext } from '@/lib/inquiries/types';
 import type { AcademyContent } from '@/lib/content/types';
 import { findOffering } from '@/lib/content/selectors';
+import { showsInstallmentMethods } from '@/lib/commerce/selectors';
 import { programSchedule } from '@/lib/program-schedule';
 import type { EnrollmentOptions } from '@/lib/commerce/types';
 import type { StudioIntensiveBlock, StudioIntensivePrice, StudioPoint } from './types';
@@ -48,6 +49,7 @@ export function studioIntensiveOffer(content: AcademyContent, enrollment?: Enrol
     time: schedule?.time,
     prices,
     purchaseAvailable,
+    showInstallments: showsInstallmentMethods(offering, enrollment),
     purchaseNotice:
       purchaseAvailable && enrollment?.mode === 'mock'
         ? 'Тестове оформлення — без оплати й підтвердження участі'

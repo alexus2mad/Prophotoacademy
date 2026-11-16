@@ -25,14 +25,13 @@ November 9–10 artifact HTML/CSS/JS, explicitly not a verified current revision
 | Lecturers | Two profile cards | Eleven Figma lecturer rows; retain nine intentionally blank image slots |
 | Reviews | Light section | Dark section with three visible cards, source attribution retained |
 | Packages | Earlier section, prices by inquiry | Late large-price grid with raised GOLD; keep confirmed 9,600 / 29,900 / 79,900 prices and PLATINUM name |
-| Offer terms | Incomplete prototype terms | User subsequently authorized open commercial-course sales and Figma's 27.11 start (2026). Retain existing package prices/rights and PLATINUM name; do not copy Figma's 8,500/25,500/70,000, VIP, Gold lifetime, scarcity or installments |
+| Offer terms | Incomplete prototype terms | User authorized open commercial-course sales and the 27 November 2026 start. The offer uses existing prices and rights. VIP in the supplied copy refers to PLATINUM. The 16 November installment update applies to checkout-eligible packages. |
 | Photography | Older Olena image | Figma also uses the older portrait; retain the explicitly approved high-quality replacement |
 | Navigation/footer | Shared source controls | Keep current approved shared navigation, social/legal links and existing course anchors |
 
 Figma typography wins over saved HeliosCond. Primary red CTAs retain white text.
-Responsive layouts use the saved artifact's spacing and stacking guidance; no
-mobile frame was supplied for this course. Missing mobile detail is adapted for
-readability. Full implementation notes: [Content Creator](CONTENT_CREATOR_DESIGN.md).
+The installment update uses the mobile Figma frame `951:450` and the card
+studies adjacent to it. See [Content Creator](CONTENT_CREATOR_DESIGN.md).
 
 ## Academy destination correction — 12 November 2026
 
