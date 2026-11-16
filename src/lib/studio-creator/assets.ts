@@ -14,6 +14,7 @@ export const creatorAssets = {
     height: 1440,
   },
   studio: studioAssets.artifact.studio_band,
+  connectorArrow: '/images/studio/creator/connector-arrow-fc220646fe17.svg',
   connectors: [
     'connector-practice-667cb0478a98.svg',
     'connector-all-practice-ed011219883b.svg',

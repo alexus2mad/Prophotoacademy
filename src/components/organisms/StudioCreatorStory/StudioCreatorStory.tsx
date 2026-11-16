@@ -45,13 +45,20 @@ export function StudioCreatorStory({ program, duration }: StudioCreatorStoryProp
             <li key={item.title}>
               <h3>{item.title}</h3>
               <span className={styles.connector} aria-hidden="true">
-                <img src={studioAssetUrl(creatorAssets.connectors[index])} alt="" />
+                <span
+                  className={styles.shaft}
+                  style={{
+                    backgroundImage: `url("${studioAssetUrl(creatorAssets.connectors[index])}")`,
+                  }}
+                />
+                <img
+                  className={styles.arrow}
+                  src={studioAssetUrl(creatorAssets.connectorArrow)}
+                  width={8}
+                  height={14}
+                  alt=""
+                />
               </span>
-              <img
-                className={styles.arrow}
-                src={studioAssetUrl('/images/studio/creator/connector-arrow-fc220646fe17.svg')}
-                alt=""
-              />
               <p>{item.text}</p>
             </li>
           ))}

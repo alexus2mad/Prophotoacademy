@@ -41,7 +41,7 @@
 .benefits li {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   min-height: 90px;
   padding-block: 22px;
   border-top: 1px solid rgba(255, 255, 255, 0.22);
@@ -63,19 +63,35 @@
   color: var(--studio-mute);
 }
 .connector {
-  flex: 1 1 0;
-  min-width: 24px;
-  overflow: hidden;
+  position: relative;
   display: flex;
+  flex: 1 1 0;
+  min-inline-size: 24px;
   align-items: center;
+  margin-inline-start: 6px;
 }
-.connector img {
-  flex: none;
-  max-width: none;
+.connector::before {
+  position: absolute;
+  inset-inline-start: -3px;
+  inset-block-start: 50%;
+  inline-size: 6px;
+  block-size: 6px;
+  border-radius: 50%;
+  background: #fff;
+  transform: translateY(-50%);
+  content: '';
+}
+.shaft {
+  flex: 1;
+  block-size: 2px;
+  /* Keep the original dash spacing and carry the last dash into the arrowhead. */
+  background-position: right center;
+  background-repeat: repeat-x;
+  margin-inline-end: -6px;
 }
 .arrow {
+  display: block;
   flex: none;
-  margin-left: -16px;
 }
 .curriculum {
   background: #0a0807;
@@ -174,9 +190,6 @@
     gap: 24px;
   }
   .connector {
-    display: none;
-  }
-  .arrow {
     display: none;
   }
   .steps {
