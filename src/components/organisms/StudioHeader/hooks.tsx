@@ -1,15 +1,19 @@
 'use client';
 
+import { useStudioHomeFragment } from '@/components/behaviors/StudioHomeNavigation/hooks';
 import { useDialog } from '@/components/molecules/Dialog/hooks';
+import { studioHomeModeForFragment } from '@/lib/studio-home/navigation';
+import { studioAcademyDestinations } from '@/lib/studio-pages/navigation';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { headerUsesInk } from './presentation';
-import { studioAcademyDestinations } from '@/lib/studio-pages/navigation';
 import type { HeaderControlTones } from './types';
 
 export function useStudioHeader() {
   const pathname = usePathname().replace(/\/+$/, '') || '/';
   const path = pathname === '/courses' ? studioAcademyDestinations.overview : pathname;
+  const fragment = useStudioHomeFragment();
+  const brand = path === '/' ? studioHomeModeForFragment(fragment) : undefined;
   const { dialog } = useDialog();
   const header = useRef<HTMLElement>(null);
   const [controlTones, setControlTones] = useState<HeaderControlTones>({});
@@ -106,6 +110,7 @@ export function useStudioHeader() {
   const usesInk = (control: string) => focused || (controlTones[control] ?? !darkHero);
   return {
     path,
+    brand,
     header,
     dialog,
     open,

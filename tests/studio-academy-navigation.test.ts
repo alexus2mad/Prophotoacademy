@@ -165,7 +165,6 @@ describe('direct Studio learning navigation', () => {
       const $ = load(
         renderToStaticMarkup(createElement(component, { settings: content.settings })),
       );
-      expect($('a[href="/academy"]').length).toBeGreaterThan(0);
       expect($('a[href="/academy#courses"]').length).toBeGreaterThan(0);
       expect($('a[href^="/courses"]')).toHaveLength(0);
     }

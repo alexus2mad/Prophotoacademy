@@ -17,14 +17,25 @@ vi.mock('next/navigation', () => ({ usePathname: () => '/academy' }));
 
 const content = fixture as AcademyContent;
 
-it('opens the Studio and Shop introductions from header, menu and footer navigation', () => {
-  for (const component of [StudioHeader, StudioFooter]) {
-    const $ = load(renderToStaticMarkup(createElement(component, { settings: content.settings })));
-    expect($('a[href="/photo-studio"]').length).toBeGreaterThan(0);
-    expect($('a[href="/shop"]').length).toBeGreaterThan(0);
-    expect($('a[href^="https://prophotohub.com.ua"]')).toHaveLength(0);
-    expect($('a[href="/academy"]').length).toBeGreaterThan(0);
+it('opens each homepage brand from the desktop header and mobile menu', () => {
+  const $ = load(renderToStaticMarkup(createElement(StudioHeader, { settings: content.settings })));
+  for (const mode of ['academy', 'studio', 'shop']) {
+    const href = `/#home-${mode}`;
+    expect($(`.studio-header-nav a[href="${href}"]`)).toHaveLength(1);
+    expect($(`.studio-menu-logo[href="${href}"]`)).toHaveLength(1);
   }
+  expect($('.studio-header-nav a[href="/contacts"]')).toHaveLength(1);
+  expect($('a[href="/photo-studio#cyclorama"]')).toHaveLength(1);
+  expect($('a[href="/shop#equipment-selection"]')).toHaveLength(1);
+  expect($('a[href^="https://prophotohub.com.ua"]')).toHaveLength(0);
+});
+
+it('keeps the dedicated brand pages reachable from the footer', () => {
+  const $ = load(renderToStaticMarkup(createElement(StudioFooter, { settings: content.settings })));
+  expect($('a[href="/photo-studio"]')).toHaveLength(1);
+  expect($('a[href="/shop"]')).toHaveLength(1);
+  expect($('a[href="/academy"]')).toHaveLength(1);
+  expect($('a[href^="https://prophotohub.com.ua"]')).toHaveLength(0);
   const legacy = load(renderToStaticMarkup(createElement(Footer, { settings: content.settings })));
   expect(
     legacy('a[href="https://www.instagram.com/prophoto.shop?mdxt=ZnIwcnUzdHp2eGh2"]').length,

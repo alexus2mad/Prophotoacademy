@@ -3,6 +3,7 @@ import { studioAcademyDestinations } from '@/lib/studio-pages/navigation';
 
 import Link from 'next/link';
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
+import { studioHomeBrandNavigation } from '@/components/behaviors/StudioHomeNavigation/hooks';
 import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
 import { studioAssets } from '@/lib/studio-design/assets';
 import { phoneLabel } from '@/lib/format';
@@ -112,7 +113,12 @@ export function StudioFooter({ settings }: StudioFooterProps) {
       </div>
       <div className="studio-footer-social-mobile studio-wrap">{socialNavigation}</div>
       <div className="studio-footer-legal-strip studio-wrap">{legalNavigation}</div>
-      <Link href="/" className="studio-footer-mark" aria-label="ProPhoto — головна">
+      <Link
+        href="/"
+        className="studio-footer-mark"
+        aria-label="ProPhoto — головна"
+        onNavigate={studioHomeBrandNavigation(home, 'academy')}
+      >
         <StudioImage
           asset={home ? studioAssets.home.imgLogoMark : studioAssets.components.imgLogoMark}
           alt="ProPhoto"

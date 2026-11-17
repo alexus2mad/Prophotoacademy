@@ -118,9 +118,11 @@ The source-backed destinations `/academy`, `/photo-studio`, `/shop` and
 and the legacy dialog compose one `useInquirySubmission` workflow, preserving
 server validation, attribution, consent and review-mode restrictions.
 
-Brand navigation uses `ecosystemPages` for the Academy-hosted `/photo-studio`
-and `/shop` introductions. Header, menu and footer links open these pages;
-room links target their corresponding Studio sections. Booking and shopping
+Top-level Academy, Studio and Shop links in the desktop header and mobile menu
+select the matching homepage panel from any marketing page. Their homepage
+fragments are shared with the hero tabs and respond to browser history. Footer
+links and detailed menu links still use the dedicated Academy, Studio and Shop
+pages. Room links target their corresponding Studio sections. Booking and shopping
 CTAs use `ecosystemDestinations` for the public Hub booking page and Shop
 Instagram profile. Do not route visitors directly to the booking embed.
 The homepage starts on Academy. Its Studio/Academy/Shop tabs switch the hero

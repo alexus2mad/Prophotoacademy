@@ -2,16 +2,19 @@
 import { studioAcademyDestinations } from '@/lib/studio-pages/navigation';
 
 import Link from 'next/link';
+import { studioHomeBrandNavigation } from '@/components/behaviors/StudioHomeNavigation/hooks';
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
 import { studioAssets } from '@/lib/studio-design/assets';
 import { phoneLabel } from '@/lib/format';
 import { ecosystemPages } from '@/lib/ecosystem';
+import { studioHomeBrandHref } from '@/lib/studio-home/navigation';
 import { useStudioHeader } from './hooks';
 import type { StudioHeaderProps } from './types';
 
 export function StudioHeader({ settings }: StudioHeaderProps) {
   const {
     path,
+    brand,
     header,
     dialog,
     open,
@@ -25,9 +28,10 @@ export function StudioHeader({ settings }: StudioHeaderProps) {
   } = useStudioHeader();
   const accountHref =
     process.env.NEXT_PUBLIC_REVIEW_MODE === 'pages' ? '/demo/account' : '/account';
-  const destinations = [
-    {
-      href: ecosystemPages.studio,
+  const home = path === '/';
+  const destinations = {
+    studio: {
+      name: 'Студія',
       label: '01 · Студія',
       alt: 'ProPhoto Studio',
       logo: studioAssets.menu.imgLogoStudio,
@@ -37,8 +41,8 @@ export function StudioHeader({ settings }: StudioHeaderProps) {
         [`${ecosystemPages.studio}#makeup`, 'Гримерна'],
       ],
     },
-    {
-      href: '/academy',
+    academy: {
+      name: 'Академія',
       label: '02 · Навчання',
       alt: 'ProPhoto Academy',
       logo: studioAssets.menu.imgLogoAcademy,
@@ -49,14 +53,14 @@ export function StudioHeader({ settings }: StudioHeaderProps) {
         ['/academy#corporate', 'Корпоративне навчання'],
       ],
     },
-    {
-      href: ecosystemPages.shop,
+    shop: {
+      name: 'Shop',
       label: '03 · Магазин',
       alt: 'ProPhoto Shop',
       logo: studioAssets.menu.imgLogoShop,
       links: [[`${ecosystemPages.shop}#equipment-selection`, 'Обладнання']],
     },
-  ];
+  } as const;
   const socials = [
     { href: settings.instagram, label: 'Instagram', asset: studioAssets.menu.imgSvg },
     { href: settings.telegram, label: 'Telegram', asset: studioAssets.menu.imgSvg1 },
@@ -86,6 +90,7 @@ export function StudioHeader({ settings }: StudioHeaderProps) {
           aria-label="ProPhoto — головна"
           data-header-control="brand"
           data-header-ink={usesInk('brand')}
+          onNavigate={studioHomeBrandNavigation(home, 'academy')}
         >
           <StudioImage
             asset={darkHero ? studioAssets.home.imgLogoMark1 : studioAssets.contacts.imgLogoMark1}
@@ -101,22 +106,26 @@ export function StudioHeader({ settings }: StudioHeaderProps) {
         ) : (
           <>
             <nav className="studio-header-nav" aria-label="Головна навігація">
-              {[
-                ['/academy', 'Академія'],
-                [ecosystemPages.studio, 'Студія'],
-                [ecosystemPages.shop, 'Shop'],
-                ['/contacts', 'Контакти'],
-              ].map(([href, label]) => (
+              {(['academy', 'studio', 'shop'] as const).map((mode) => (
                 <Link
-                  key={href}
-                  href={href}
-                  aria-current={path === href ? 'page' : undefined}
-                  data-header-control={href}
-                  data-header-ink={usesInk(href)}
+                  key={mode}
+                  href={studioHomeBrandHref(mode)}
+                  aria-current={brand === mode ? 'location' : undefined}
+                  data-header-control={mode}
+                  data-header-ink={usesInk(mode)}
+                  onNavigate={studioHomeBrandNavigation(home, mode)}
                 >
-                  {label}
+                  {destinations[mode].name}
                 </Link>
               ))}
+              <Link
+                href="/contacts"
+                aria-current={path === '/contacts' ? 'page' : undefined}
+                data-header-control="/contacts"
+                data-header-ink={usesInk('/contacts')}
+              >
+                Контакти
+              </Link>
             </nav>
             <button
               type="button"
@@ -154,18 +163,23 @@ export function StudioHeader({ settings }: StudioHeaderProps) {
             <span />
           </button>
           <nav className="studio-menu-destinations" aria-label="Напрями ProPhoto">
-            {destinations.map((destination) => (
-              <section key={destination.href} className="studio-menu-group">
-                <p className="studio-menu-label">{destination.label}</p>
-                <Link href={destination.href} className="studio-menu-logo" onClick={closeMenu}>
+            {(['studio', 'academy', 'shop'] as const).map((mode) => (
+              <section key={mode} className="studio-menu-group">
+                <p className="studio-menu-label">{destinations[mode].label}</p>
+                <Link
+                  href={studioHomeBrandHref(mode)}
+                  className="studio-menu-logo"
+                  aria-current={brand === mode ? 'location' : undefined}
+                  onNavigate={studioHomeBrandNavigation(home, mode, closeMenu)}
+                >
                   <StudioImage
-                    asset={destination.logo}
-                    alt={destination.alt}
+                    asset={destinations[mode].logo}
+                    alt={destinations[mode].alt}
                     sizes="(max-width: 767px) 338px, 270px"
                   />
                 </Link>
                 <ul>
-                  {destination.links.map(([href, label]) => (
+                  {destinations[mode].links.map(([href, label]) => (
                     <li key={label}>
                       <Link href={href} onClick={closeMenu}>
                         {label}
