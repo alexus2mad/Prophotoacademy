@@ -123,8 +123,6 @@
   margin-top: 18px;
   min-width: min(360px, 100%);
   padding: 18px 32px 24px;
-  border-radius: 32px;
-  background: #1c1816;
 }
 .price > p:first-child {
   color: #a9a5a2;
