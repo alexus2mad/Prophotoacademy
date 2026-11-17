@@ -12,7 +12,12 @@ export function StudioHomeDirectionCard({ direction }: StudioHomeDirectionCardPr
     </span>
   );
   return (
-    <article className={styles.card} data-header-tone="dark" data-card-motion>
+    <article
+      className={styles.card}
+      data-header-tone="dark"
+      data-card-motion
+      data-image-position={direction.imagePosition}
+    >
       <StudioHomePicture
         image={direction.image}
         mobileImage={direction.mobileImage}

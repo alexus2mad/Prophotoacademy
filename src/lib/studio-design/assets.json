@@ -175,6 +175,11 @@
     }
   },
   "homeMobile": {
+    "offlinePrograms": {
+      "src": "/images/hero/offline-programs-img-6346-672.webp",
+      "width": 672,
+      "height": 840
+    },
     "imgImgHome39001": {
       "src": "/images/hero/restored-homemobile-img-home39001-de349f4cada0-1280.webp",
       "width": 1280,
@@ -571,6 +576,11 @@
     }
   },
   "home": {
+    "offlinePrograms": {
+      "src": "/images/hero/offline-programs-img-6346-1280.webp",
+      "width": 1280,
+      "height": 1600
+    },
     "imgImgHome144001": {
       "src": "/images/hero/restored-home-img-home144001-019c0c4a94e0-3200.webp",
       "width": 3200,

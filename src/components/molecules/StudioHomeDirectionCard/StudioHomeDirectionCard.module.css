@@ -24,6 +24,10 @@
   object-fit: cover;
   transform-origin: center;
 }
+.card[data-image-position='top'] .image img {
+  object-position: center top;
+  transform-origin: center top;
+}
 .card::before {
   content: '';
   position: absolute;

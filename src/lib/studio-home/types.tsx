@@ -29,6 +29,7 @@ export type StudioHomeDirection = {
   action: string;
   image: StudioHomeAsset;
   mobileImage?: StudioHomeAsset;
+  imagePosition?: 'top';
   href?: string;
   inquiry?: InquiryContext;
 };

@@ -28,8 +28,9 @@ export function studioHomeDirections(content: AcademyContent): StudioHomeDirecti
       title: 'Офлайн програми',
       description: 'Заняття наживо в Києві',
       action: 'Дізнатись розклад',
-      image: studioAssets.home.imgImgHome144005,
-      mobileImage: studioAssets.homeMobile.imgImgHome39004,
+      image: studioAssets.home.offlinePrograms,
+      mobileImage: studioAssets.homeMobile.offlinePrograms,
+      imagePosition: 'top',
       inquiry: {
         title: 'Дізнатись розклад офлайн програм',
         subject: 'program-selection',
