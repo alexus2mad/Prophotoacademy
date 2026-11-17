@@ -324,12 +324,10 @@ html:has(.academy-studio [data-studio-course-navigation]) {
   flex: 1;
   display: grid;
   grid-template-columns: 1fr 1.0633fr 0.5824fr;
-  align-items: center;
+  align-content: center;
+  align-items: start;
   gap: 0;
   padding: 0 5vw 8px 11.403vw;
-}
-.academy-studio .studio-menu-group {
-  align-self: center;
 }
 .academy-studio .studio-menu-label {
   margin-bottom: 14px;
