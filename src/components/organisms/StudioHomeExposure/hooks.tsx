@@ -7,13 +7,9 @@ import {
   studioExposureAtProgress,
   studioExposureState,
 } from '@/lib/studio-home/exposure';
-import type { StudioHomeMode } from '@/lib/studio-home/types';
 import type { StudioHomeExposureProps } from './types';
 
-export function useStudioHomeExposure(
-  mode: StudioHomeMode,
-  directionsRef?: StudioHomeExposureProps['directionsRef'],
-) {
+export function useStudioHomeExposure(directionsRef?: StudioHomeExposureProps['directionsRef']) {
   const section = useRef<HTMLElement>(null);
   const [exposure, setExposure] = useState(() =>
     studioExposureState({
@@ -172,6 +168,6 @@ export function useStudioHomeExposure(
       window.cancelAnimationFrame(frame);
       directionsRef?.current?.style.removeProperty('--mobile-exposure');
     };
-  }, [mode, directionsRef]);
+  }, [directionsRef]);
   return { section, exposure, ready, compact };
 }

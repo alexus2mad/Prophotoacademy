@@ -4,7 +4,7 @@ import { load } from 'cheerio';
 import { expect, it } from 'vitest';
 import fixture from '../content/academy.json';
 import type { AcademyContent } from '../src/lib/content/types';
-import { studioHomeDirections, studioHomeRooms } from '../src/lib/studio-home/selectors';
+import { studioHomeDirections } from '../src/lib/studio-home/selectors';
 import { StudioHomeDirectionCard } from '../src/components/molecules/StudioHomeDirectionCard/StudioHomeDirectionCard';
 import { StudioAcademyPrograms } from '../src/components/organisms/StudioAcademyPrograms/StudioAcademyPrograms';
 import { StudioAcademyProgramRow } from '../src/components/molecules/StudioAcademyProgramRow/StudioAcademyProgramRow';
@@ -12,7 +12,7 @@ import { StudioAcademyProgramRow } from '../src/components/molecules/StudioAcade
 const content = fixture as AcademyContent;
 
 it('keeps each full-area homepage card to one named native action and preserves its motion target', () => {
-  for (const direction of [...studioHomeDirections(content), ...studioHomeRooms]) {
+  for (const direction of studioHomeDirections(content)) {
     const $ = load(renderToStaticMarkup(createElement(StudioHomeDirectionCard, { direction })));
     const action = $('article > a, article > button');
     expect(action).toHaveLength(1);

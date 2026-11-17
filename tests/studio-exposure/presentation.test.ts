@@ -22,7 +22,7 @@ function renderScene(exposure: StudioExposureState, ready = false, compact = fal
     ready,
     compact,
   });
-  return load(renderToStaticMarkup(createElement(StudioHomeExposure, { mode: 'academy' })));
+  return load(renderToStaticMarkup(createElement(StudioHomeExposure)));
 }
 
 it('connects the photo stage and meter to the same desktop exposure', () => {
@@ -48,7 +48,6 @@ it('renders compact exposure locally and leaves the directions cards outside its
   const directions = load(
     renderToStaticMarkup(
       createElement(StudioHomeDirections, {
-        mode: 'academy',
         directions: [],
       }),
     ),
@@ -71,12 +70,10 @@ it('keeps header controls light over the dark beginning of the compact transitio
 });
 
 it('keeps server-rendered directions readable without an animation override before hydration', () => {
-  const $ = load(
-    renderToStaticMarkup(createElement(StudioHomeDirections, { mode: 'studio', directions: [] })),
-  );
+  const $ = load(renderToStaticMarkup(createElement(StudioHomeDirections, { directions: [] })));
   expect($('section').attr('style')).toBeUndefined();
-  expect($('h2').text()).toContain('зал');
-  expect($('a').first().attr('href')).toBe('/photo-studio');
+  expect($('h2').text()).toContain('вчитися');
+  expect($('a').first().attr('href')).toBe('/academy');
 });
 
 it('renders one complete semantic title without duplicated or repositioned words', () => {

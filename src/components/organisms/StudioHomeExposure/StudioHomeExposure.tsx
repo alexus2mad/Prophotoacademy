@@ -7,8 +7,8 @@ import type { StudioExposureStyle, StudioHomeExposureProps } from './types';
 import { useStudioHomeExposure } from './hooks';
 import styles from './StudioHomeExposure.module.css';
 
-export function StudioHomeExposure({ mode, directionsRef }: StudioHomeExposureProps) {
-  const { section, exposure, ready, compact } = useStudioHomeExposure(mode, directionsRef);
+export function StudioHomeExposure({ directionsRef }: StudioHomeExposureProps) {
+  const { section, exposure, ready, compact } = useStudioHomeExposure(directionsRef);
   const style: StudioExposureStyle = {
     '--exposure-progress': exposure.progress,
     '--mobile-exposure': compact && ready ? exposure.progress : 0,

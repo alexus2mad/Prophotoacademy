@@ -1,5 +1,16 @@
 # Figma / Claude artifact source conflicts
 
+## Homepage brand panels — 17 November 2026
+
+The Studio and Shop homepage tabs use the bodies from the linked desktop frames
+`854:417` and `854:539`. Studio shows the three room galleries and the live Hub
+booking handoff. Shop shows the equipment choices and consultation form. The
+older phone frames `897:405` and `898:424` use a shared Academy tail. The 17
+November request for full homepage switching takes precedence. The dedicated
+bodies adapt to one column on phones, retaining the existing tab hero artwork
+and transition. The approved paper booking section directs visitors to the Hub
+booking service for availability.
+
 ## Homepage Shop image — 15 November 2026
 
 The homepage Shop tab uses the artifact's `hero_tech.webp`, a Profoto lighting

@@ -55,23 +55,8 @@ export function StudioHomeBanner({ destination }: StudioHomeBannerProps) {
             ? 'Парасолька-відбивач для студійного світла'
             : 'Зал ProPhoto Studio зі студійним світлом і рожевим фоном'
         }
-        className={`${styles.image} ${styles.academyImage}`}
+        className={styles.image}
         sizes="(max-width: 760px) 100vw, 50vw"
-      />
-      <StudioImage
-        asset={
-          isShop
-            ? studioAssets.homeStudioMobile.imgImgHome390Studio10
-            : studioAssets.homeStudioMobile.imgImgHome390Studio11
-        }
-        alt={
-          isShop
-            ? 'Парасолька-відбивач для студійного світла'
-            : 'Зал ProPhoto Studio зі студійним світлом і рожевим фоном'
-        }
-        className={styles.alternateImage}
-        sizes="100vw"
-        fit="cover"
       />
     </section>
   );

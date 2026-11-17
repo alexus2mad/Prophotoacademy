@@ -95,12 +95,7 @@ export function StudioHomeHero({ mode, onModeChange }: StudioHomeHeroProps) {
         </div>
       ))}
       <div className={`${styles.body} studio-wrap`}>
-        <div
-          id="home-hero-panel"
-          role="tabpanel"
-          aria-labelledby={`home-tab-${mode}`}
-          className={styles.title}
-        >
+        <div className={styles.title}>
           <p className={styles.kick}>
             <span aria-hidden="true">*</span>
             <span className={styles.desktopKick}>{selected.kick}</span>
@@ -115,6 +110,11 @@ export function StudioHomeHero({ mode, onModeChange }: StudioHomeHeroProps) {
               →
             </span>
           </Link>
+          {mode === 'studio' && (
+            <a className={`studio-button-outline ${styles.roomsAction}`} href="#spaces">
+              Подивитись зали
+            </a>
+          )}
         </div>
         <div className={styles.tabs} role="tablist" aria-label="Напрями ProPhoto" ref={tabs}>
           {(['studio', 'academy', 'shop'] as const).map((key) => (
@@ -123,7 +123,7 @@ export function StudioHomeHero({ mode, onModeChange }: StudioHomeHeroProps) {
               type="button"
               role="tab"
               id={`home-tab-${key}`}
-              aria-controls="home-hero-panel"
+              aria-controls={`home-panel-${key}`}
               aria-selected={mode === key}
               tabIndex={mode === key ? 0 : -1}
               onClick={() => onModeChange(key)}

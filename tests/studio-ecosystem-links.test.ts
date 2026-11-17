@@ -8,7 +8,7 @@ import { StudioHeader } from '../src/components/organisms/StudioHeader/StudioHea
 import { StudioFooter } from '../src/components/organisms/StudioFooter/StudioFooter';
 import { StudioHomeHero } from '../src/components/organisms/StudioHomeHero/StudioHomeHero';
 import { StudioHomeBanner } from '../src/components/organisms/StudioHomeBanner/StudioHomeBanner';
-import { StudioHomeDirections } from '../src/components/organisms/StudioHomeDirections/StudioHomeDirections';
+import { StudioSpaceSections } from '../src/components/organisms/StudioSpaceSections/StudioSpaceSections';
 import { Footer } from '../src/components/organisms/Footer/Footer';
 import { StudioSpacesTemplate } from '../src/components/templates/StudioSpacesTemplate/StudioSpacesTemplate';
 import { StudioShopTemplate } from '../src/components/templates/StudioShopTemplate/StudioShopTemplate';
@@ -55,7 +55,9 @@ it.each([
   expect($('[role="tab"]')).toHaveLength(3);
   expect($('[role="tab"][aria-selected="true"]').attr('data-brand')).toBe(mode);
   expect($('[role="tab"][tabindex="0"]').attr('data-brand')).toBe(mode);
+  expect($('[role="tab"][aria-selected="true"]').attr('aria-controls')).toBe(`home-panel-${mode}`);
   expect($('a[data-brand]')).toHaveLength(0);
+  expect($('a[href="#spaces"]')).toHaveLength(mode === 'studio' ? 1 : 0);
 });
 
 it.each([
@@ -67,21 +69,16 @@ it.each([
   expect($('a').attr('href')).toBe(href);
 });
 
-it('opens each room at its Studio section and the overview at the page top', () => {
+it('keeps the three directly linkable rooms inside the shared Studio sections', () => {
   const $ = load(
-    renderToStaticMarkup(createElement(StudioHomeDirections, { mode: 'studio', directions: [] })),
+    renderToStaticMarkup(createElement(StudioSpaceSections, { address: content.hub.address })),
   );
-  expect($('a')).toHaveLength(4);
   expect(
-    $('a')
-      .map((_, link) => $(link).attr('href'))
+    $('#spaces article')
+      .map((_, room) => $(room).attr('id'))
       .get(),
-  ).toEqual([
-    '/photo-studio',
-    '/photo-studio#cyclorama',
-    '/photo-studio#content-room',
-    '/photo-studio#makeup',
-  ]);
+  ).toEqual(['cyclorama', 'content-room', 'makeup']);
+  expect($('#studio-booking').text()).toContain(content.hub.address);
 });
 
 it('reserves Studio rooms on the public Hub booking page, not its embed', () => {

@@ -22,9 +22,6 @@
 .mobileLogo {
   display: none;
 }
-.alternateImage {
-  display: none;
-}
 .studio {
   display: none;
 }
@@ -75,32 +72,5 @@
   }
   .studio .action {
     margin-top: 27px;
-  }
-  :global([data-home-mode='studio']) .banner,
-  :global([data-home-mode='shop']) .banner {
-    padding-block: 28px 36px;
-  }
-  :global([data-home-mode='studio']) .banner .image,
-  :global([data-home-mode='shop']) .banner .image {
-    height: 76px;
-  }
-  :global([data-home-mode='studio']) .banner .academyImage,
-  :global([data-home-mode='shop']) .banner .academyImage {
-    display: none;
-  }
-  :global([data-home-mode='studio']) .banner .alternateImage,
-  :global([data-home-mode='shop']) .banner .alternateImage {
-    display: block;
-    width: 100%;
-    height: 76px;
-    order: -1;
-  }
-  :global([data-home-mode='studio']) .banner .body,
-  :global([data-home-mode='shop']) .banner .body {
-    margin-top: -40px;
-  }
-  :global([data-home-mode='studio']) .banner .action,
-  :global([data-home-mode='shop']) .banner .action {
-    margin-top: 18px;
   }
 }

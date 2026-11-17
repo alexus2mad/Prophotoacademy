@@ -1,0 +1,96 @@
+.spaces h2 {
+  margin-bottom: 56px;
+}
+.room {
+  display: grid;
+  grid-template-columns: 420px minmax(0, 1fr);
+  gap: 48px;
+  padding: 56px 0;
+  border-top: 1px solid rgb(255 255 255 / 40%);
+}
+.roomCopy h3 {
+  margin: 0;
+  font: 700 70px/0.96 var(--font-studio-condensed);
+  text-transform: uppercase;
+}
+.roomCopy p {
+  margin: 14px 0;
+  color: var(--studio-mute);
+  font-size: 16px;
+  line-height: 1.55;
+}
+.bookingGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 80px;
+}
+.bookingGrid :global(.studio-lead) {
+  margin-top: 18px;
+}
+.bookingDestination {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.bookingDestination ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+}
+.bookingDestination li a {
+  display: inline-flex;
+  border: 1.5px solid currentColor;
+  border-radius: 30px;
+  min-height: 44px;
+  align-items: center;
+  padding: 8px 18px;
+  font-size: 15px;
+}
+.bookingDestination li:first-child a {
+  border-color: var(--studio-warm);
+  color: var(--studio-paper);
+  background: var(--studio-warm);
+}
+.bookingDestination p {
+  margin: 0;
+  line-height: 1.55;
+}
+.bookingDestination .address {
+  font-size: 13px;
+}
+@media (max-width: 1100px) {
+  .room {
+    grid-template-columns: 31% minmax(0, 1fr);
+    gap: 28px;
+  }
+  .roomCopy h3 {
+    font-size: 5vw;
+  }
+}
+@media (max-width: 1040px) {
+  .bookingGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 36px;
+  }
+}
+@media (max-width: 760px) {
+  .spaces h2 {
+    margin-bottom: 32px;
+  }
+  .room {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 32px 0;
+  }
+  .roomCopy h3 {
+    font-size: 44px;
+  }
+  .roomCopy p {
+    font-size: 15px;
+  }
+  .roomCopy .roomAction {
+    display: none;
+  }
+}

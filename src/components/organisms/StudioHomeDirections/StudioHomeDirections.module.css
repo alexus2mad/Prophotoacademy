@@ -30,9 +30,6 @@
 .grid[data-dragging] * {
   cursor: grabbing;
 }
-.rooms > article {
-  aspect-ratio: 4/3;
-}
 @media (max-width: 760px) {
   .section.section:global(.studio-light) {
     position: relative;
@@ -98,12 +95,6 @@
   }
   .grid > :nth-child(6) {
     order: 6;
-  }
-  .rooms {
-    grid-template-columns: repeat(3, 72cqw);
-  }
-  .rooms > article {
-    aspect-ratio: 4/3.2;
   }
 }
 @media (max-width: 760px) and (prefers-reduced-motion: reduce) {

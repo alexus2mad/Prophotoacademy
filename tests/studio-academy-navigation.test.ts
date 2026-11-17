@@ -183,7 +183,6 @@ describe('direct Studio learning navigation', () => {
     const directions = load(
       renderToStaticMarkup(
         createElement(StudioHomeDirections, {
-          mode: 'academy',
           directions: studioHomeDirections(content),
         }),
       ),

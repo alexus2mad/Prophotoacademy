@@ -2,15 +2,12 @@
 
 import Link from 'next/link';
 import { StudioHomeDirectionCard } from '@/components/molecules/StudioHomeDirectionCard/StudioHomeDirectionCard';
-import { studioHomeRooms } from '@/lib/studio-home/selectors';
-import { ecosystemPages } from '@/lib/ecosystem';
 import type { StudioHomeDirectionsProps } from './types';
 import { useDirectionRail } from './hooks';
 import styles from './StudioHomeDirections.module.css';
 
-export function StudioHomeDirections({ mode, directions, sectionRef }: StudioHomeDirectionsProps) {
-  const isStudio = mode === 'studio';
-  const railRef = useDirectionRail(mode);
+export function StudioHomeDirections({ directions, sectionRef }: StudioHomeDirectionsProps) {
+  const railRef = useDirectionRail();
   return (
     <section
       id="education-id"
@@ -22,30 +19,24 @@ export function StudioHomeDirections({ mode, directions, sectionRef }: StudioHom
     >
       <div className={`${styles.heading} studio-wrap`}>
         <div>
-          <p className="studio-label">{isStudio ? 'Студія' : 'Академія'}</p>
+          <p className="studio-label">Академія</p>
           <h2 className="studio-title" id="home-directions-title">
-            {isStudio ? 'Оберіть' : 'Оберіть, як'}{' '}
-            <span className={`studio-hand ${!isStudio ? styles.learning : ''}`}>
-              *{isStudio ? 'зал' : 'вчитися'}
-            </span>
+            Оберіть, як <span className={`studio-hand ${styles.learning}`}>*вчитися</span>
           </h2>
         </div>
-        <Link
-          className="studio-button-outline"
-          href={isStudio ? ecosystemPages.studio : '/academy'}
-        >
-          {isStudio ? 'Уся студія' : 'Вся академія'}
+        <Link className="studio-button-outline" href="/academy">
+          Вся академія
           <span aria-hidden="true">→</span>
         </Link>
       </div>
       <div
         ref={railRef}
-        className={`${styles.grid} ${isStudio ? styles.rooms : ''}`}
+        className={styles.grid}
         tabIndex={0}
         role="region"
-        aria-label={isStudio ? 'Зали студії' : 'Напрями навчання'}
+        aria-label="Напрями навчання"
       >
-        {(isStudio ? studioHomeRooms : directions).map((direction) => (
+        {directions.map((direction) => (
           <StudioHomeDirectionCard key={direction.title} direction={direction} />
         ))}
       </div>

@@ -123,12 +123,14 @@ and `/shop` introductions. Header, menu and footer links open these pages;
 room links target their corresponding Studio sections. Booking and shopping
 CTAs use `ecosystemDestinations` for the public Hub booking page and Shop
 Instagram profile. Do not route visitors directly to the booking embed.
-The homepage starts on Academy and its Studio/Academy/Shop tabs switch the
-scene only on explicit click or keyboard activation. Do not add automatic
-brand cycling or swipe-to-change behavior. Academy may rotate its portraits
-within the selected Academy scene. Preserve the Studio panorama, eased photo
-motion and the outgoing image pose until its crossfade finishes. Scroll state
-remains owned by the exposure section, separate from the mode selection.
+The homepage starts on Academy. Its Studio/Academy/Shop tabs switch the hero
+and the page content below it, with room and equipment sections shared with
+their dedicated routes. The selected body owns its tab panel. Only that body's
+sections mount, so the exposure scene, reviews and student work run within the
+Academy tab. A recognized homepage fragment opens the panel that owns it. The
+brand switches on explicit visitor navigation. Academy may rotate its portraits
+within its own scene. Preserve the Studio panorama, eased photo motion and the
+outgoing image pose until its crossfade finishes.
 The Academy fixture's Shop setting mirrors the external destination for the
 retained legacy design. Studio and Shop remain excluded from the sitemap and
 marked noindex as introductions to the separate businesses. Course sales can be

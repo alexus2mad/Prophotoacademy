@@ -1,6 +1,5 @@
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 import type { DependencyList, EffectCallback } from 'react';
-import type { StudioHomeMode } from '../../src/lib/studio-home/types';
 import type { StudioHomeExposureProps } from '../../src/components/organisms/StudioHomeExposure/types';
 import type { ExposureEffect, PendingExposureEffect } from './types';
 import { useStudioHomeExposure } from '../../src/components/organisms/StudioHomeExposure/hooks';
@@ -63,13 +62,10 @@ let now = 0;
 const stage = { getBoundingClientRect: vi.fn(() => ({ height: stageHeight, width: stageWidth })) };
 const computedStyle = vi.fn(() => ({ top: `${stickyOffset}px` }));
 const frames = new Map<number, FrameRequestCallback>();
-const render = (
-  mode: StudioHomeMode = 'academy',
-  directionsRef?: StudioHomeExposureProps['directionsRef'],
-) => {
+const render = (directionsRef?: StudioHomeExposureProps['directionsRef']) => {
   lifecycle.stateIndex = 0;
   lifecycle.effectIndex = 0;
-  const result = useStudioHomeExposure(mode, directionsRef);
+  const result = useStudioHomeExposure(directionsRef);
   for (const { index, callback, dependencies } of lifecycle.pending.splice(0)) {
     lifecycle.effects[index]?.cleanup?.();
     lifecycle.effects[index] = { dependencies, cleanup: callback() };
@@ -319,15 +315,17 @@ it('resynchronizes on browser-tab return and back-forward restoration', () => {
   expect(render().exposure.progress).toBe(0);
 });
 
-it('resynchronizes hero-tab changes without preserving stale measurements', () => {
+it('measures the current position when remounting the Academy tab', () => {
   render();
   const previous = Observer.instances[0];
   browser.dispatchEvent(new Event('scroll'));
   bounds.top = -180;
-  render('studio');
+  unmount();
+  lifecycle.states = [];
+  render();
   expect(previous.disconnect).toHaveBeenCalledOnce();
   expect(frames.size).toBe(0);
-  expect(render('studio').exposure.progress).toBe(0.5);
+  expect(render().exposure.progress).toBe(0.5);
 });
 
 it('removes listeners and observer work on unmount', () => {
@@ -435,7 +433,7 @@ it('hands compact presentation to the directions element without React progress 
     setAttribute: vi.fn((name: string, value: string) => attributes.set(name, value)),
   };
   const ref = { current: directions as unknown as HTMLElement };
-  render('academy', ref);
+  render(ref);
   expect(directions.style.setProperty.mock.lastCall?.[0]).toBe('--mobile-exposure');
   expect(Number(directions.style.setProperty.mock.lastCall?.[1])).toBeCloseTo(0);
   expect(directions.setAttribute).toHaveBeenCalledWith('data-header-tone', 'dark');
