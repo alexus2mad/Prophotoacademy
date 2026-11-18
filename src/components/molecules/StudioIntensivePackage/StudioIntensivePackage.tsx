@@ -3,24 +3,32 @@ import type { StudioIntensivePackageProps } from './types';
 import styles from './StudioIntensivePackage.module.css';
 
 export function StudioIntensivePackage({ option }: StudioIntensivePackageProps) {
-  return (
-    <article className={styles.card}>
+  const summary = (
+    <>
       <h3>{option.label}</h3>
       <p className={styles.price}>
         <strong>{option.price}</strong>
         <sup>грн</sup>
       </p>
-      {option.purchaseUrl ? (
-        <Link
-          href={option.purchaseUrl}
-          className={`studio-button ${styles.action}`}
-          aria-label={`Придбати: ${option.label}`}
-        >
-          Придбати
-        </Link>
-      ) : option.status ? (
-        <p className={styles.status}>{option.status}</p>
-      ) : null}
+    </>
+  );
+
+  if (option.purchaseUrl) {
+    return (
+      <Link
+        href={option.purchaseUrl}
+        className={styles.card}
+        aria-label={`${option.label}, ${option.price} грн — оформити квиток`}
+      >
+        {summary}
+      </Link>
+    );
+  }
+
+  return (
+    <article className={styles.card}>
+      {summary}
+      {option.status && <p className={styles.status}>{option.status}</p>}
     </article>
   );
 }

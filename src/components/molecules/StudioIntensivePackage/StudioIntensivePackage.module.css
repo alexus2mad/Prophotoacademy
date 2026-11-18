@@ -4,6 +4,9 @@
   padding: 16px 24px 30px;
   min-height: 145.4px;
 }
+a.card:hover {
+  border-color: rgb(255 255 255 / 65%);
+}
 .card h3 {
   margin: 0;
   font-size: 11px;
@@ -33,10 +36,6 @@
   letter-spacing: 1.12px;
   text-transform: uppercase;
 }
-.action {
-  width: 100%;
-  margin-top: 20px;
-}
 .status {
   margin: 20px 0 0;
   color: #a9a5a2;
@@ -59,9 +58,5 @@
   .price sup {
     font-size: 11px;
     margin-top: 6px;
-  }
-  .action {
-    padding-inline: 12px;
-    margin-top: 16px;
   }
 }

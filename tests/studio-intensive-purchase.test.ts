@@ -105,7 +105,7 @@ describe('AI Artwork purchase presentation', () => {
     ).toBe(false);
   });
 
-  it('renders both purchase formats with distinct links and selection anchors', () => {
+  it('uses each buyable price card as the checkout link without extra calls to action', () => {
     const $ = load(
       renderToStaticMarkup(
         createElement(StudioIntensiveTemplate, {
@@ -114,7 +114,7 @@ describe('AI Artwork purchase presentation', () => {
         }),
       ),
     );
-    const options = $('#intensive-offers article');
+    const options = $('#intensive-offers > a');
     expect(options).toHaveLength(2);
     expect(
       options
@@ -122,28 +122,23 @@ describe('AI Artwork purchase presentation', () => {
         .map((_, node) => $(node).text())
         .get(),
     ).toEqual(['Офлайн', 'Онлайн']);
-    expect(
-      options
-        .find('a')
-        .map((_, node) => $(node).attr('href'))
-        .get(),
-    ).toEqual([
+    expect(options.map((_, node) => $(node).attr('href')).get()).toEqual([
       '/checkout?offering=offering-ai-artwork&package=ai-offline',
       '/checkout?offering=offering-ai-artwork&package=ai-online',
     ]);
-    expect(
-      options
-        .find('a')
-        .map((_, node) => $(node).attr('aria-label'))
-        .get(),
-    ).toEqual(['Придбати: Офлайн', 'Придбати: Онлайн']);
+    expect(options.map((_, node) => $(node).attr('aria-label')).get()).toEqual([
+      'Офлайн, 3900 грн — оформити квиток',
+      'Онлайн, 3000 грн — оформити квиток',
+    ]);
     expect($('a[href="#intensive-offers"]')).toHaveLength(2);
     expect(
       $('a[href="#intensive-offers"]')
         .map((_, node) => $(node).text())
         .get(),
     ).toEqual(['Обрати формат →', 'Обрати формат →']);
-    expect(options.find('a a, a button')).toHaveLength(0);
+    expect($('#intensive-offers .studio-button, #intensive-offers button')).toHaveLength(0);
+    expect(options.find('a')).toHaveLength(0);
+    expect(options.text()).not.toContain('Придбати');
     expect($.text()).not.toContain('без оплати й підтвердження участі');
   });
 
