@@ -28,6 +28,9 @@
   padding-bottom: 36px;
   min-width: 0;
 }
+.desktopAction {
+  display: contents;
+}
 .copy h1 {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -195,6 +198,9 @@
   }
   .facts span + span {
     padding-left: 12px;
+  }
+  .desktopAction {
+    display: none;
   }
   .facts span:nth-child(n + 3) {
     flex-basis: 100%;

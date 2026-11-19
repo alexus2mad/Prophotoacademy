@@ -142,10 +142,13 @@ describe('Content Creator learning outline and work sources', () => {
     for (const module of program.modules) {
       for (const topic of module.topics) expect(disclosure.text()).toContain(topic);
     }
-    const heroActions = $('[aria-labelledby="creator-title"] .studio-actions').children();
-    expect(heroActions).toHaveLength(1);
-    expect(heroActions.attr('href')).toBe('#program-curriculum');
-    expect(heroActions.text()).toBe('Програма');
+    const heroActions = $('[aria-labelledby="creator-title"] .studio-actions a');
+    expect(heroActions).toHaveLength(2);
+    expect(heroActions.first().attr('href')).toBe('#packages');
+    expect(heroActions.first().text()).toBe('Хочу на курс→');
+    expect(heroActions.first().parent().attr('class')).toContain('desktopAction');
+    expect(heroActions.last().attr('href')).toBe('#program-curriculum');
+    expect(heroActions.last().text()).toBe('Програма');
   });
 
   it('preserves every scoped work and its device when applying the approved opening sequence', () => {

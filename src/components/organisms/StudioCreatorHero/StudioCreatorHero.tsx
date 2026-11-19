@@ -69,6 +69,14 @@ export function StudioCreatorHero({
             ))}
           </div>
           <div className="studio-actions">
+            {/* Phones get the same action from the fixed StudioMobileAction bar. */}
+            <div className={styles.desktopAction}>
+              <StudioCreatorAction
+                program={program}
+                offering={offering}
+                presentation={presentation}
+              />
+            </div>
             <StudioCreatorCurriculumLink />
           </div>
         </div>

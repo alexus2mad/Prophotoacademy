@@ -78,7 +78,10 @@ Source photos and the contact sheets are in `.data/creator-portraits/`. Commit
 The course sections span the full viewport on desktop and use the Studio side
 gutters. Individual text blocks retain their reading widths.
 
-The hero's only action, “Програма”, jumps to the curriculum and opens its native
+On desktop the hero shows the red “Хочу на курс” action (to the packages, or the
+inquiry drawer when sales are closed) before “Програма”. Since 20 November 2026
+phones show that action only in the fixed bottom bar, so it appears once at every
+width. “Програма” jumps to the curriculum and opens its native
 disclosure. Direct curriculum links also open it. Camera/phone filters cancel
 momentum and reset the rail. Touch scrolling, desktop drag/inertia, keyboard
 arrows and the shared captionless swipeable popup remain available. Reading

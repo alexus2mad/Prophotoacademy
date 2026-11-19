@@ -44,6 +44,11 @@ describe('Food and product photography course page', () => {
     expect($.text()).toContain('40+ лекцій');
     expect($.text()).toContain('13 тижнів');
     expect($.text()).not.toContain('*комерційний');
+    const heroActions = $('[aria-labelledby="creator-title"] .studio-actions a');
+    expect(heroActions.map((_, link) => $(link).attr('href')).get()).toEqual([
+      '#packages',
+      '#program-curriculum',
+    ]);
   });
 
   it('lists every audience card, benefit and curriculum week from the course brief', async () => {
