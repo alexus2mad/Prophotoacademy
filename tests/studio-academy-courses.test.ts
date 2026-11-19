@@ -42,7 +42,7 @@ describe('Academy main courses', () => {
     expect(image).toEqual(studioAssets.academy.imgImgContent2);
     expect(studioProgramArtwork(program, content).asset).toEqual(image);
     expect(content.programs.find((item) => item.id === 'program-commercial')?.slug).toBe(
-      'food-product-photography',
+      'content-creator',
     );
   });
 });

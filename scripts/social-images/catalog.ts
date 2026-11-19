@@ -76,7 +76,7 @@ export const socialCards: SocialCard[] = [
     photos: [gold],
   },
   {
-    path: '/food-product-photography',
+    path: '/content-creator',
     title: 'Комерційний контент-кріейтор',
     lines: ['КОМЕРЦІЙНИЙ', 'КОНТЕНТ'],
     description: 'Предметна та фуд-фотографія, світло, фактури й відео для брендів.',

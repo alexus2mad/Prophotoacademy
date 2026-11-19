@@ -48,7 +48,7 @@ describe('student-work popup coverage', () => {
     expect($('dialog img').attr('alt')).toBe(rail.find('img').first().attr('alt'));
   });
 
-  it.each(['visual-content', 'food-product-photography', 'course-smm-instagram'])(
+  it.each(['visual-content', 'content-creator', 'course-smm-instagram'])(
     'keeps %s works scoped to that program and connected to the same popup',
     (slug) => {
       const program = content.programs.find((item) => item.slug === slug)!;

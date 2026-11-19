@@ -365,7 +365,7 @@ const redirects = await batch([...redirectChecks.values()], async ({ from, to, s
   };
 });
 
-const botPaths = ['/', '/academy', '/food-product-photography'];
+const botPaths = ['/', '/academy', '/content-creator', '/food-product-photography'];
 const botSamples = production
   ? await batch(
       Object.entries(botAgents).flatMap(([agent, userAgent]) =>

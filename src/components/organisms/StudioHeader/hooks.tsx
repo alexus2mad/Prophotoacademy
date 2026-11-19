@@ -25,6 +25,7 @@ export function useStudioHeader() {
     '/photo-studio',
     '/shop',
     '/ai-artwork',
+    '/content-creator',
     '/food-product-photography',
   ].includes(path);
   const secondary = ['/academy', '/photo-studio', '/shop', '/contacts'].includes(path);

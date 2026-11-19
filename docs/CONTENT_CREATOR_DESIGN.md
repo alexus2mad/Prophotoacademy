@@ -1,8 +1,9 @@
 # Content Creator page — November 2026
 
-The Studio presentation of `/food-product-photography` uses updated Figma frame
-**949:443** in `CvY4dgmOevd9ehxk9Xsaqd`. Route, program and package identities
-remain unchanged. Other courses retain `StudioProgramTemplate`; the unused legacy
+The Studio presentation of `/content-creator` uses updated Figma frame
+**949:443** in `CvY4dgmOevd9ehxk9Xsaqd`. Program and package identities remain
+unchanged. On 19 November 2026 the course moved from `/food-product-photography`,
+which now serves the food and product photography course. Other courses retain `StudioProgramTemplate`; the unused legacy
 design retains `ProgramTemplate`.
 
 ## Sources and layout

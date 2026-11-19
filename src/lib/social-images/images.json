@@ -87,12 +87,12 @@
       }
     ]
   },
-  "/food-product-photography": {
+  "/content-creator": {
     "title": "Комерційний контент-кріейтор",
     "description": "Предметна та фуд-фотографія, світло, фактури й відео для брендів.",
     "images": [
       {
-        "src": "/social/food-product-photography-78518147cd47-wide.jpg",
+        "src": "/social/content-creator-78518147cd47-wide.jpg",
         "width": 1200,
         "height": 630,
         "alt": "Комерційний контент-кріейтор · ProPhoto — Скибки лимона у бризках води на чорному тлі",
@@ -100,7 +100,7 @@
         "bytes": 77313
       },
       {
-        "src": "/social/food-product-photography-d7dd6f05bbab-square.jpg",
+        "src": "/social/content-creator-d7dd6f05bbab-square.jpg",
         "width": 630,
         "height": 630,
         "alt": "Комерційний контент-кріейтор · ProPhoto — Скибки лимона у бризках води на чорному тлі",

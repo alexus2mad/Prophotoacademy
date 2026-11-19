@@ -7,7 +7,7 @@ const content = fixture as AcademyContent;
 
 describe('editorial course priority', () => {
   it('selects the configured primary course and leads the catalog without duplicating it', () => {
-    expect(primaryProgram(content)?.slug).toBe('food-product-photography');
+    expect(primaryProgram(content)?.slug).toBe('content-creator');
     const ordered = prioritizePrograms(content.programs, content.settings.primaryProgramId);
     expect(ordered[0].id).toBe('program-commercial');
     expect(ordered.map((program) => program.id)).toHaveLength(content.programs.length);
