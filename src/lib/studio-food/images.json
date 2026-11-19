@@ -1,0 +1,235 @@
+[
+  {
+    "id": "spices-mortar-spoons",
+    "src": "/images/studio/food/spices-mortar-spoons-e15716d0fee2.webp",
+    "width": 1280,
+    "height": 921,
+    "alt": "Спеції в ложках, ступка з перцем і розмарин на темному дерев'яному столі",
+    "device": "camera",
+    "role": "hero",
+    "position": {
+      "desktop": "50% 80%",
+      "mobile": "28% 50%"
+    }
+  },
+  {
+    "id": "spice-test-tubes",
+    "src": "/images/studio/food/spice-test-tubes-49d194183f0c.webp",
+    "width": 960,
+    "height": 1280,
+    "alt": "Скляні пробірки зі спеціями та бадьян на темному тлі",
+    "device": "camera",
+    "role": "work",
+    "position": "50% 50%"
+  },
+  {
+    "id": "champagne-cherry-splash",
+    "src": "/images/studio/food/champagne-cherry-splash-a26ea75747a9.webp",
+    "width": 922,
+    "height": 1280,
+    "alt": "Вишня падає в келих шампанського з бризками на білому тлі",
+    "device": "camera",
+    "role": "work",
+    "position": "50% 0%"
+  },
+  {
+    "id": "apples-pattern",
+    "src": "/images/studio/food/apples-pattern-e8e7756c73d9.webp",
+    "width": 964,
+    "height": 1280,
+    "alt": "Ряди червоних яблук на бірюзовому тлі й одне надкушене",
+    "device": "camera",
+    "role": "work",
+    "position": "50% 50%"
+  },
+  {
+    "id": "perfume-gold-reflection",
+    "src": "/images/studio/food/perfume-gold-reflection-8ba1b32cc379.webp",
+    "width": 819,
+    "height": 1280,
+    "alt": "Флакон парфумів із золотим відблиском у темній воді",
+    "device": "camera",
+    "role": "work",
+    "position": "50% 50%"
+  },
+  {
+    "id": "tortellini-flour-flat-lay",
+    "src": "/images/studio/food/tortellini-flour-flat-lay-bf006da38e4c.webp",
+    "width": 720,
+    "height": 1280,
+    "alt": "Тортеліні на дошці, борошно з жовтком і качалка на темному столі",
+    "device": "camera",
+    "role": "work",
+    "position": "50% 50%"
+  },
+  {
+    "id": "lipsticks-peach",
+    "src": "/images/studio/food/lipsticks-peach-48342932a409.webp",
+    "width": 1018,
+    "height": 1440,
+    "alt": "Золоті помади з жорсткими тінями на персиковому тлі",
+    "device": "camera",
+    "role": "work",
+    "position": "50% 50%"
+  },
+  {
+    "id": "sushi-black",
+    "src": "/images/studio/food/sushi-black-9971abbc283d.webp",
+    "width": 721,
+    "height": 1280,
+    "alt": "Роли з лососем і мікрозеленню з віддзеркаленням на чорному тлі",
+    "device": "camera",
+    "role": "work",
+    "position": "50% 50%"
+  },
+  {
+    "id": "tomatoes-green-light",
+    "src": "/images/studio/food/tomatoes-green-light-4b561bcd0762.webp",
+    "width": 720,
+    "height": 1280,
+    "alt": "Гілка черрі та один томат на зеленому тлі в смугах сонячного світла",
+    "device": "phone",
+    "role": "work",
+    "position": "50% 15%"
+  },
+  {
+    "id": "glass-splash-amber",
+    "src": "/images/studio/food/glass-splash-amber-71d7f175a755.webp",
+    "width": 1024,
+    "height": 1280,
+    "alt": "Сплеск води в келиху з лимоном на бурштиновому тлі з тінню",
+    "device": "camera",
+    "role": "work",
+    "position": "50% 50%"
+  },
+  {
+    "id": "violet-perfume-black",
+    "src": "/images/studio/food/violet-perfume-black-fa974e8626f2.webp",
+    "width": 1080,
+    "height": 1352,
+    "alt": "Фіолетовий флакон парфумів із віддзеркаленням на чорному тлі",
+    "device": "camera",
+    "role": "work",
+    "position": "50% 50%"
+  },
+  {
+    "id": "chocolate-pattern",
+    "src": "/images/studio/food/chocolate-pattern-3e61414354b6.webp",
+    "width": 960,
+    "height": 1280,
+    "alt": "Плитки шоколаду по діагоналі на жовтому тлі й одна надкушена",
+    "device": "camera",
+    "role": "work",
+    "position": "50% 50%"
+  },
+  {
+    "id": "water-glass-splash",
+    "src": "/images/studio/food/water-glass-splash-f4453501f538.webp",
+    "width": 719,
+    "height": 1280,
+    "alt": "Вода з льодом вихлюпується з келиха на блакитному тлі",
+    "device": "camera",
+    "role": "work",
+    "position": "50% 30%"
+  },
+  {
+    "id": "chocolate-ice-cream",
+    "src": "/images/studio/food/chocolate-ice-cream-81cb369d8718.webp",
+    "width": 960,
+    "height": 1280,
+    "alt": "Шоколадне морозиво на паличках із замороженою малиною на тарілці",
+    "device": "phone",
+    "role": "work",
+    "position": "50% 50%"
+  },
+  {
+    "id": "skincare-geometry",
+    "src": "/images/studio/food/skincare-geometry-ea3ed56dc428.webp",
+    "width": 1100,
+    "height": 1440,
+    "alt": "Флакони догляду за шкірою на білій площині з різкою тінню",
+    "device": "camera",
+    "role": "work",
+    "position": "50% 50%"
+  },
+  {
+    "id": "rose-vase-shadows",
+    "src": "/images/studio/food/rose-vase-shadows-296edc1fbb95.webp",
+    "width": 720,
+    "height": 1280,
+    "alt": "Троянда в рубіновій вазі з рожевими й бірюзовими смугами світла",
+    "device": "phone",
+    "role": "work",
+    "position": "50% 50%"
+  },
+  {
+    "id": "watch-crystals",
+    "src": "/images/studio/food/watch-crystals-e8ec34b6a209.webp",
+    "width": 961,
+    "height": 1280,
+    "alt": "Циферблат годинника з кристалами крупним планом на чорному тлі",
+    "device": "camera",
+    "role": "work",
+    "position": "50% 50%"
+  },
+  {
+    "id": "olive-oil-still-life",
+    "src": "/images/studio/food/olive-oil-still-life-4b805592294e.webp",
+    "width": 960,
+    "height": 1280,
+    "alt": "Оливкова олія в графині, банка оливок і кришка в польоті",
+    "device": "camera",
+    "role": "work",
+    "position": "50% 50%"
+  },
+  {
+    "id": "cleanser-in-water",
+    "src": "/images/studio/food/cleanser-in-water-0e23dbf43aef.webp",
+    "width": 1080,
+    "height": 1329,
+    "alt": "Тюбик засобу для вмивання у воді з брижами",
+    "device": "camera",
+    "role": "work",
+    "position": "50% 50%"
+  },
+  {
+    "id": "wine-glass-color-light",
+    "src": "/images/studio/food/wine-glass-color-light-0a05b6d10165.webp",
+    "width": 853,
+    "height": 1280,
+    "alt": "Келих червоного вина на зелено-помаранчевому кольоровому тлі",
+    "device": "camera",
+    "role": "work",
+    "position": "50% 50%"
+  },
+  {
+    "id": "lipstick-cherries",
+    "src": "/images/studio/food/lipstick-cherries-f186360c96fc.webp",
+    "width": 853,
+    "height": 1280,
+    "alt": "Червона помада й вишні на білих подіумах і червоному глянці",
+    "device": "camera",
+    "role": "work",
+    "position": "50% 50%"
+  },
+  {
+    "id": "passion-fruit-cocktail",
+    "src": "/images/studio/food/passion-fruit-cocktail-031b93e7a612.webp",
+    "width": 1080,
+    "height": 1080,
+    "alt": "Коктейль із половинкою маракуї зверху на темних дошках",
+    "device": "phone",
+    "role": "work",
+    "position": "50% 50%"
+  },
+  {
+    "id": "mango-blue-plates",
+    "src": "/images/studio/food/mango-blue-plates-0c044c206445.webp",
+    "width": 963,
+    "height": 1280,
+    "alt": "Манго на синіх і зелених тарілках зверху",
+    "device": "phone",
+    "role": "work",
+    "position": "50% 50%"
+  }
+]

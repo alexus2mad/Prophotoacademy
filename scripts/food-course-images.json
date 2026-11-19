@@ -1,0 +1,174 @@
+{
+  "page": "food",
+  "sourceDirectory": "../food",
+  "images": [
+    {
+      "id": "spices-mortar-spoons",
+      "source": "IMG_3749.JPG",
+      "role": "hero",
+      "alt": "Спеції в ложках, ступка з перцем і розмарин на темному дерев'яному столі",
+      "device": "camera",
+      "position": {
+        "desktop": "50% 80%",
+        "mobile": "28% 50%"
+      }
+    },
+    {
+      "id": "spice-test-tubes",
+      "source": "IMG_9269.JPG",
+      "role": "work",
+      "alt": "Скляні пробірки зі спеціями та бадьян на темному тлі",
+      "device": "camera"
+    },
+    {
+      "id": "champagne-cherry-splash",
+      "source": "IMG_1183.JPG",
+      "role": "work",
+      "alt": "Вишня падає в келих шампанського з бризками на білому тлі",
+      "device": "camera",
+      "position": "50% 0%"
+    },
+    {
+      "id": "apples-pattern",
+      "source": "IMG_9756.JPG",
+      "role": "work",
+      "alt": "Ряди червоних яблук на бірюзовому тлі й одне надкушене",
+      "device": "camera"
+    },
+    {
+      "id": "perfume-gold-reflection",
+      "source": "IMG_9165.JPG",
+      "role": "work",
+      "alt": "Флакон парфумів із золотим відблиском у темній воді",
+      "device": "camera"
+    },
+    {
+      "id": "tortellini-flour-flat-lay",
+      "source": "IMG_4350.JPG",
+      "role": "work",
+      "alt": "Тортеліні на дошці, борошно з жовтком і качалка на темному столі",
+      "device": "camera"
+    },
+    {
+      "id": "lipsticks-peach",
+      "source": "IMG_2393.JPEG",
+      "role": "work",
+      "alt": "Золоті помади з жорсткими тінями на персиковому тлі",
+      "device": "camera"
+    },
+    {
+      "id": "sushi-black",
+      "source": "IMG_9173.JPG",
+      "role": "work",
+      "alt": "Роли з лососем і мікрозеленню з віддзеркаленням на чорному тлі",
+      "device": "camera"
+    },
+    {
+      "id": "tomatoes-green-light",
+      "source": "IMG_9018 (2).JPG",
+      "role": "work",
+      "alt": "Гілка черрі та один томат на зеленому тлі в смугах сонячного світла",
+      "device": "phone",
+      "position": "50% 15%"
+    },
+    {
+      "id": "glass-splash-amber",
+      "source": "IMG_4519.JPG",
+      "role": "work",
+      "alt": "Сплеск води в келиху з лимоном на бурштиновому тлі з тінню",
+      "device": "camera"
+    },
+    {
+      "id": "violet-perfume-black",
+      "source": "Копия IMG_2397.JPG",
+      "role": "work",
+      "alt": "Фіолетовий флакон парфумів із віддзеркаленням на чорному тлі",
+      "device": "camera"
+    },
+    {
+      "id": "chocolate-pattern",
+      "source": "IMG_5027.JPG",
+      "role": "work",
+      "alt": "Плитки шоколаду по діагоналі на жовтому тлі й одна надкушена",
+      "device": "camera"
+    },
+    {
+      "id": "water-glass-splash",
+      "source": "IMG_9801 (2).JPG",
+      "role": "work",
+      "alt": "Вода з льодом вихлюпується з келиха на блакитному тлі",
+      "device": "camera",
+      "position": "50% 30%"
+    },
+    {
+      "id": "chocolate-ice-cream",
+      "source": "IMG_4384.JPG",
+      "role": "work",
+      "alt": "Шоколадне морозиво на паличках із замороженою малиною на тарілці",
+      "device": "phone"
+    },
+    {
+      "id": "skincare-geometry",
+      "source": "IMG_2394.JPEG",
+      "role": "work",
+      "alt": "Флакони догляду за шкірою на білій площині з різкою тінню",
+      "device": "camera"
+    },
+    {
+      "id": "rose-vase-shadows",
+      "source": "IMG_9019 (2).JPG",
+      "role": "work",
+      "alt": "Троянда в рубіновій вазі з рожевими й бірюзовими смугами світла",
+      "device": "phone"
+    },
+    {
+      "id": "watch-crystals",
+      "source": "IMG_2439.JPG",
+      "role": "work",
+      "alt": "Циферблат годинника з кристалами крупним планом на чорному тлі",
+      "device": "camera"
+    },
+    {
+      "id": "olive-oil-still-life",
+      "source": "IMG_0255.JPG",
+      "role": "work",
+      "alt": "Оливкова олія в графині, банка оливок і кришка в польоті",
+      "device": "camera"
+    },
+    {
+      "id": "cleanser-in-water",
+      "source": "Копия IMG_2398.JPG",
+      "role": "work",
+      "alt": "Тюбик засобу для вмивання у воді з брижами",
+      "device": "camera"
+    },
+    {
+      "id": "wine-glass-color-light",
+      "source": "IMG_2444.JPG",
+      "role": "work",
+      "alt": "Келих червоного вина на зелено-помаранчевому кольоровому тлі",
+      "device": "camera"
+    },
+    {
+      "id": "lipstick-cherries",
+      "source": "IMG_1178.JPG",
+      "role": "work",
+      "alt": "Червона помада й вишні на білих подіумах і червоному глянці",
+      "device": "camera"
+    },
+    {
+      "id": "passion-fruit-cocktail",
+      "source": "IMG_4218.JPG",
+      "role": "work",
+      "alt": "Коктейль із половинкою маракуї зверху на темних дошках",
+      "device": "phone"
+    },
+    {
+      "id": "mango-blue-plates",
+      "source": "IMG_0707.JPG",
+      "role": "work",
+      "alt": "Манго на синіх і зелених тарілках зверху",
+      "device": "phone"
+    }
+  ]
+}
