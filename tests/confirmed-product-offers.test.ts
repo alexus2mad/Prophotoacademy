@@ -107,9 +107,21 @@ describe('owner-confirmed November offers', () => {
     },
   );
 
-  it('keeps the separate Food Photography program inquiry-only', () => {
-    const food = content.programs.find((program) => program.slug === 'food-photography')!;
-    expect(food).toBeDefined();
-    expect(findOffering(content, food.id)).toBeUndefined();
+  it('opens the food and product photography course with the confirmed December packages', () => {
+    const food = content.programs.find((program) => program.slug === 'food-product-photography')!;
+    expect(food.id).toBe('program-food');
+    const offering = findOffering(content, food.id)!;
+    expect(offering).toMatchObject({
+      id: 'offering-food-2026-12',
+      startDate: '2026-12-18',
+      availability: 'open',
+      verificationRequired: false,
+    });
+    expect(offering.packages.map(({ id, name, price }) => [id, name, price])).toEqual([
+      ['food-base', 'BASE', 7900],
+      ['food-gold-pro', 'GOLD PRO', 19600],
+      ['food-vip-pro', 'VIP PRO', 59999],
+    ]);
+    expect(offering.packages.find((pack) => pack.featured)?.id).toBe('food-gold-pro');
   });
 });

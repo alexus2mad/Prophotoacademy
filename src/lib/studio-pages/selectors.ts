@@ -22,6 +22,5 @@ export function studioProgramImage(program: Program, images: ImageAsset[]) {
   if (program.slug === 'visual-content') return studioAssets.academy.imgImgDirGold;
   if (program.slug === 'course-smm-instagram') return studioAssets.academy.imgImgSnow;
   if (program.id === 'program-commercial') return studioAssets.artifact.hero_academy;
-  if (program.slug === 'food-photography') return studioAssets.academy.imgImgContent2;
   return images.find((image) => image.id === program.imageId);
 }

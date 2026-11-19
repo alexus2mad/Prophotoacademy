@@ -69,7 +69,7 @@ describe('customer API flow', () => {
     const data = JSON.parse(
       (database().prepare('SELECT data FROM inquiries').get() as SerializedRow).data,
     );
-    expect(data.programTitle).toBe('Фуд фото і предметна зйомка');
+    expect(data.programTitle).toBe('Предметна та фуд-зйомка');
     expect(data).not.toHaveProperty('offeringId');
     expect(data).not.toHaveProperty('packageId');
     expect(

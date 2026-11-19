@@ -14,7 +14,7 @@ Google's public `site:prophotoacademy.com.ua` search visibly returned these five
 | `/contacts`                 | Keep URL; improve Ukrainian title and description   |
 | `/reviews`                  | Keep URL and attributed reviews                     |
 | `/individual-training`      | Keep URL; improve discovery from Academy            |
-| `/food-product-photography` | Keep the historically indexed commercial-course URL |
+| `/food-product-photography` | Keep URL; serves the food course since 19 November |
 
 These five URLs are a public search sample. Search Console access was unavailable during the initial crawl and restored on 12 November for the `sc-domain:prophotoacademy.com.ua` property. The three-month Performance report displayed a data-processing message and an empty table, with the Pages and Countries tabs and export disabled. Page Indexing also displayed a processing message and supplied no counts or URL examples. The connected analytics account does not expose an Academy property. Index coverage, clicks, impressions, conversions, backlink counts and query volumes remain unverified. [Google site-operator documentation](https://developers.google.com/search/docs/monitor-debug/search-operators/all-search-site)
 
@@ -46,7 +46,7 @@ Baseline strengths: all 16 sitemap pages return 200, public documents use Ukrain
 
 ## Migration rules
 
-Keep working legacy URLs with their existing intent. The indexed `/food-product-photography` path represents the commercial-content program; the newer `/food-photography` page represents the narrower food course. Renaming or merging them would obscure that distinction and risk existing links.
+Keep working legacy URLs with their existing intent. On 19 November 2026 the owner reassigned `/food-product-photography` to the food and product photography course, which its name describes. The commercial-content program moved to `/content-creator`. The former `/food-photography` page permanently redirects to `/food-product-photography`.
 
 Only redirect when there is a genuine replacement. `/courses` and the historical course-placeholder path lead to `/academy`; retired utilities without relevant replacements retain proper noindex/404 behavior. Unknown URLs must return 404, not redirect to the homepage. Keep historical event pages useful as records and never imply that an ended event is bookable.
 
@@ -64,8 +64,8 @@ The queries below express intent, not measured search volumes or guaranteed rank
 | ---------------------------------------- | -------------------------------------------------------------- | --------------------------------------------- |
 | School in Kyiv; online choice nationwide | фотошкола Київ; курси фотографії Київ; онлайн курси фотографії | `/academy`                                    |
 | Beginner photography on phone or camera  | курс фотографії з нуля; курс мобільної фотографії              | `/visual-content`                             |
-| Commercial photo/video for brands        | курс комерційної зйомки; курс контент-кріейтора                | `/food-product-photography`                   |
-| Food and product stills                  | курс фуд фотографії; курс предметної зйомки                    | `/food-photography`                           |
+| Commercial photo/video for brands        | курс комерційної зйомки; курс контент-кріейтора                | `/content-creator`                            |
+| Food and product stills                  | курс фуд фотографії; курс предметної зйомки                    | `/food-product-photography`                   |
 | Expert brand and Instagram content       | курс створення контенту для Instagram                          | `/course-smm-instagram`                       |
 | Personal or team instruction             | індивідуальні уроки фотографії; корпоративне навчання контенту | `/individual-training`, `/corporate-training` |
 | Named practical AI event                 | AI Artwork; майстер-клас Photoshop Firefly Київ                | `/ai-artwork`                                 |

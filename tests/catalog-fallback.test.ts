@@ -27,7 +27,7 @@ describe('catalog before client navigation is ready', () => {
     );
     expect($('[data-catalog-category]').attr('data-catalog-category')).toBe('course');
     expect($('.course-card')).toHaveLength(4);
-    expect($('.course-card a[href="/food-photography"]').length).toBeGreaterThan(0);
+    expect($('.course-card a[href="/food-product-photography"]').length).toBeGreaterThan(0);
     expect($('nav[aria-label="Категорії програм"] a').first().attr('href')).toBe(
       '/academy?utm_source=stage2-check&tag=one&tag=two',
     );

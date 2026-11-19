@@ -196,6 +196,11 @@
   .facts span + span {
     padding-left: 12px;
   }
+  .facts span:nth-child(n + 3) {
+    flex-basis: 100%;
+    padding-left: 0;
+    border-left: 0;
+  }
   .copy :global(.studio-actions) > * {
     padding-inline: 16px;
     font-size: 11px;

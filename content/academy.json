@@ -420,15 +420,15 @@
     },
     {
       "id": "program-food",
-      "slug": "food-photography",
-      "title": "Фуд фото і предметна зйомка",
-      "shortTitle": "Фуд фото і предметна зйомка",
+      "slug": "food-product-photography",
+      "title": "Предметна та фуд-зйомка",
+      "shortTitle": "Предметна та фуд-зйомка",
       "category": "course",
       "level": "all",
-      "eyebrow": "Комерційні фото для брендів, меню та соцмереж",
-      "description": "Практичний курс, де ви навчитеся створювати стильні комерційні фото для брендів, меню та соцмереж: від світла й композиції до зйомки та базової обробки.",
+      "eyebrow": "Спец курс фото та відео",
+      "description": "Курс наживо онлайн та офлайн у Києві: предметна й фуд-зйомка, контент-відео, робота зі штучним інтелектом, SMM, таргет і вихід на комерцію. Практика на комерційних зйомках — у пакетах Gold Pro та VIP Pro.",
       "audienceLabel": "Для фотографів і контент-креаторів",
-      "homepageDescription": "Створюйте комерційні фото для брендів, меню та соцмереж: від світла й композиції до зйомки та базової обробки.",
+      "homepageDescription": "Предметна й фуд-зйомка на телефон і камеру: світло, композиція, колір, контент-відео та вихід на комерцію.",
       "audience": [
         "Початківцям-фотографам",
         "SMM-спеціалістам",
@@ -440,49 +440,154 @@
         "Власникам інтернет-магазинів"
       ],
       "outcomes": [
-        "Працювати зі світлом, кольором і композицією",
-        "Створювати комерційні фото для брендів, меню та соцмереж",
-        "Знімати й виконувати базову обробку фотографій",
-        "Знаходити замовників і розвиватися у комерційній зйомці"
+        "Будувати композицію, світло й колір у предметному та фуд-кадрі",
+        "Знімати фото й відео на білому й чорному фоні, з рідинами, склом, левітацією та сплесками",
+        "Обробляти фото й монтувати відео в додатках",
+        "Знаходити замовників і формувати прайс"
       ],
-      "imageId": "commercial",
+      "imageId": "food-apples-pattern",
       "instructorIds": [
         "olena",
         "oleksandra"
       ],
-      "workIds": [],
+      "workIds": [
+        "food-spice-test-tubes",
+        "food-champagne-cherry-splash",
+        "food-apples-pattern",
+        "food-perfume-gold-reflection",
+        "food-tortellini-flour-flat-lay",
+        "food-lipsticks-peach",
+        "food-sushi-black",
+        "food-tomatoes-green-light",
+        "food-glass-splash-amber",
+        "food-violet-perfume-black",
+        "food-chocolate-pattern",
+        "food-water-glass-splash",
+        "food-chocolate-ice-cream",
+        "food-skincare-geometry",
+        "food-rose-vase-shadows",
+        "food-watch-crystals",
+        "food-olive-oil-still-life",
+        "food-cleanser-in-water",
+        "food-wine-glass-color-light",
+        "food-lipstick-cherries",
+        "food-passion-fruit-cocktail",
+        "food-mango-blue-plates"
+      ],
       "modules": [
         {
-          "title": "Основи візуалу",
+          "title": "Вступна лекція",
           "topics": [
-            "Теорія композиції, світла та кольору",
-            "Основи розуміння візуалу"
+            "Налаштування, функції та можливості камери телефону",
+            "Як знімати на телефон так, щоб кадри були як на професійне обладнання"
           ]
         },
         {
-          "title": "Лекції та практика",
+          "title": "Тиждень 1",
           "topics": [
-            "Практичні завдання після лекцій",
-            "Розбір робіт"
+            "Композиція та ракурси в предметній фотографії та відео",
+            "Світло та необхідне обладнання. Світлотіньовий малюнок. Природне світло й основні схеми з додатковими джерелами",
+            "Теорія кольору: види гармоній, свідоме поєднання кольорів у кадрі та під час обробки"
           ]
         },
         {
-          "title": "Комерційні зйомки",
+          "title": "Тиждень 2",
           "topics": [
-            "Практика створення комерційних фотографій"
+            "Фони для предметної зйомки. Flatlay. Лекція й відеоінструкція до завдання",
+            "Обробка фото в додатках",
+            "Фотокамера: трикутник експозиції, мануальний режим, меню, вибір камери й обʼєктивів — у Gold Pro та VIP Pro"
           ]
         },
         {
-          "title": "Вихід на комерцію",
+          "title": "Тиждень 3",
           "topics": [
-            "Як знаходити замовників",
-            "Подальший професійний розвиток"
+            "Особливості фуд-зйомки. Воркшоп: зйомка на білому фоні. Геометрія кадру й мінімалізм. Маски в Lightroom",
+            "Обробка в додатках",
+            "Комерційна каталожна зйомка. Lightroom, компʼютерна версія — у Gold Pro та VIP Pro"
+          ]
+        },
+        {
+          "title": "Тиждень 4",
+          "topics": [
+            "Де брати натхнення. Мудборд. Практика: фото й відео на чорному фоні. Lightroom: маски й пензлі",
+            "Обробка в додатках",
+            "Початок роботи з Photoshop, компʼютерна версія: RAW-конвертер, шари, маски, пензлі — у Gold Pro та VIP Pro"
+          ]
+        },
+        {
+          "title": "Тиждень 5",
+          "topics": [
+            "Робота з референсами: вчимося їх «читати». Практика: левітація в кадрі, лекція й відеоінструкція до завдання",
+            "Обробка в додатках",
+            "Photoshop, компʼютерна версія: пензлі, заплатка, виділення й видалення зайвих предметів — у Gold Pro та VIP Pro"
+          ]
+        },
+        {
+          "title": "Тиждень 6",
+          "topics": [
+            "Воркшоп: фото- та відеозйомка рідини, скла й прозорих предметів",
+            "Обробка в додатках. Основи монтажу",
+            "Комерційна зйомка ювелірних виробів: світло, ракурси, обʼєктиви — у Gold Pro та VIP Pro"
+          ]
+        },
+        {
+          "title": "Тиждень 7",
+          "topics": [
+            "Стопмоушн. Створення патернів. Кольорокорекція відео: принципи та інструменти",
+            "Сплески. Динамічні фото й відео. Нелінійний монтаж, лекція й відеоінструкція до завдання",
+            "Photoshop, компʼютерна версія: різкість, перо, Dodge & Burn, кольорокорекція — у Gold Pro та VIP Pro"
+          ]
+        },
+        {
+          "title": "Тиждень 8",
+          "topics": [
+            "Відео: сценарії, режисерські прийоми, принципи захоплення уваги, тренди",
+            "Складний монтаж. Монтаж під біти. Ефекти на відео",
+            "Дипломне завдання для Base",
+            "Поворотні столи, стабілізатори й основи професійної відеозйомки з Кирилом Барвицьким — у Gold Pro та VIP Pro"
+          ]
+        },
+        {
+          "title": "Тиждень 9 — Gold Pro та VIP Pro",
+          "topics": [
+            "Photoshop, компʼютерна версія: логотип на предметі, пластика, текст і шрифти, контраст і єдиний стиль кольору",
+            "Створення візуалу за допомогою штучного інтелекту: вступ та інструменти",
+            "Створення візуалу за допомогою штучного інтелекту: практика"
+          ]
+        },
+        {
+          "title": "Тиждень 10 — Gold Pro та VIP Pro",
+          "topics": [
+            "Професійний SMM: маркетинг соціальних мереж",
+            "Практичний воркшоп для групи",
+            "Професійний SMM: архетипи та стратегія бренду",
+            "Професійний SMM: комерційний копірайтинг"
+          ]
+        },
+        {
+          "title": "Тиждень 11 — Gold Pro та VIP Pro",
+          "topics": [
+            "Розуміння цільової аудиторії. Підбір стратегії просування бренду",
+            "Таргетована реклама: рекламний кабінет, кампанії, налаштування цільової аудиторії",
+            "Вихід на комерцію: де знайти замовників, як сформувати прайс"
+          ]
+        },
+        {
+          "title": "Тиждень 13 — дипломний тиждень",
+          "topics": [
+            "Практичний воркшоп для групи",
+            "Воркшоп «Робота із замовником»: від прийняття замовлення до здачі",
+            "Випуск"
           ]
         }
       ],
       "faqs": [],
       "sourceUrl": "https://claude.ai/artifact/FwrroMxpu7ApuHRefQRW3t#course-food",
-      "featured": false
+      "featured": false,
+      "seo": {
+        "title": "Курс предметної та фуд-зйомки у Києві й онлайн",
+        "description": "Спец курс предметної та фуд-зйомки: 13 тижнів, 40+ лекцій наживо, практика на телефон і камеру, контент-відео, AI, SMM і вихід на комерцію. Старт 18 грудня."
+      }
     },
     {
       "id": "program-ai-artwork",
@@ -935,6 +1040,139 @@
       ],
       "sourceNotes": [
         "BASE, GOLD та PLATINUM відкриті для придбання після старту 02.10.2026 за рішенням власника від 27.10.2026. Колишній PLATINUM EXPERT перейменовано на GOLD зі збереженням ID та умов. Склад нового PLATINUM ще уточнюється; додаткових переваг і автоматичного доступу не обіцяємо."
+      ]
+    },
+    {
+      "id": "offering-food-2026-12",
+      "programId": "program-food",
+      "startDate": "2026-12-18",
+      "duration": "13 тижнів",
+      "format": "hybrid",
+      "location": "Київ",
+      "availability": "open",
+      "verificationRequired": false,
+      "packages": [
+        {
+          "id": "food-base",
+          "name": "BASE",
+          "price": 7900,
+          "availability": "open",
+          "description": "Вільний слухач: самостійне проходження курсу",
+          "includes": [
+            "17 лекцій",
+            "Доступ до лекцій протягом пів року",
+            "Самостійне проходження курсу"
+          ],
+          "comparison": {
+            "learning": {
+              "state": "included",
+              "text": "Самостійно; 17 лекцій"
+            },
+            "support": {
+              "state": "unknown"
+            },
+            "homework": {
+              "state": "unknown"
+            },
+            "practice": {
+              "state": "unknown"
+            },
+            "access": {
+              "state": "included",
+              "text": "6 місяців"
+            },
+            "limits": {
+              "state": "unknown"
+            }
+          }
+        },
+        {
+          "id": "food-gold-pro",
+          "name": "GOLD PRO",
+          "price": 19600,
+          "featured": true,
+          "availability": "open",
+          "description": "Повна програма з практикою, консультацією та першим замовленням",
+          "includes": [
+            "41 лекція: 3 на тиждень, 13 тижнів і дипломний тиждень",
+            "4 воркшопи",
+            "Індивідуальна консультація",
+            "Повне продюсування першого замовлення",
+            "Навчання на професійну камеру",
+            "Photoshop, візуал зі штучним інтелектом, SMM і таргетована реклама",
+            "Особиста стратегія виходу на комерцію та розвитку бренду",
+            "Диплом після обовʼязкових завдань і дипломної роботи в терміни"
+          ],
+          "comparison": {
+            "learning": {
+              "state": "included",
+              "text": "41 лекція за 13 тижнів; фотокамера, Photoshop, AI, SMM і таргетинг"
+            },
+            "support": {
+              "state": "included",
+              "text": "Індивідуальна консультація та особиста стратегія виходу на комерцію"
+            },
+            "homework": {
+              "state": "unknown"
+            },
+            "practice": {
+              "state": "included",
+              "text": "4 воркшопи, практика на комерційних зйомках і повне продюсування першого замовлення"
+            },
+            "access": {
+              "state": "unknown"
+            },
+            "limits": {
+              "state": "included",
+              "text": "Диплом після обовʼязкових завдань і дипломної роботи в терміни"
+            }
+          }
+        },
+        {
+          "id": "food-vip-pro",
+          "name": "VIP PRO",
+          "price": 59999,
+          "availability": "open",
+          "description": "Gold Pro і місяць індивідуального супроводу після курсу",
+          "includes": [
+            "41 лекція: 3 на тиждень, 13 тижнів і дипломний тиждень",
+            "4 воркшопи",
+            "Індивідуальна консультація",
+            "Повне продюсування першого замовлення",
+            "Навчання на професійну камеру",
+            "Photoshop, візуал зі штучним інтелектом, SMM і таргетована реклама",
+            "Особиста стратегія виходу на комерцію та розвитку бренду",
+            "Диплом після обовʼязкових завдань і дипломної роботи в терміни",
+            "Місяць індивідуального супроводу після курсу: 4 практичні заняття по 3,5 години й 4 онлайн-зустрічі з розбором обробки та стратегією особистого бренду"
+          ],
+          "comparison": {
+            "learning": {
+              "state": "included",
+              "text": "41 лекція за 13 тижнів; фотокамера, Photoshop, AI, SMM і таргетинг"
+            },
+            "support": {
+              "state": "included",
+              "text": "Індивідуальна консультація, особиста стратегія та місяць індивідуального супроводу після курсу"
+            },
+            "homework": {
+              "state": "unknown"
+            },
+            "practice": {
+              "state": "included",
+              "text": "4 воркшопи, практика на комерційних зйомках і повне продюсування першого замовлення"
+            },
+            "access": {
+              "state": "unknown"
+            },
+            "limits": {
+              "state": "included",
+              "text": "Диплом після обовʼязкових завдань і дипломної роботи в терміни"
+            }
+          }
+        }
+      ],
+      "sourceNotes": [
+        "Пакети, ціни й старт — з опису курсу від 19 листопада 2026 року"
       ]
     },
     {
@@ -1603,6 +1841,229 @@
       "width": 1500,
       "height": 731,
       "bytes": 106063
+    },
+    {
+      "id": "food-spice-test-tubes",
+      "src": "/images/studio/food/spice-test-tubes-49d194183f0c.webp",
+      "alt": "Скляні пробірки зі спеціями та бадьян на темному тлі",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 960,
+      "height": 1280,
+      "sourceFile": "IMG_9269.JPG"
+    },
+    {
+      "id": "food-champagne-cherry-splash",
+      "src": "/images/studio/food/champagne-cherry-splash-a26ea75747a9.webp",
+      "alt": "Вишня падає в келих шампанського з бризками на білому тлі",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 922,
+      "height": 1280,
+      "sourceFile": "IMG_1183.JPG",
+      "position": "50% 0%"
+    },
+    {
+      "id": "food-apples-pattern",
+      "src": "/images/studio/food/apples-pattern-e8e7756c73d9.webp",
+      "alt": "Ряди червоних яблук на бірюзовому тлі й одне надкушене",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 964,
+      "height": 1280,
+      "sourceFile": "IMG_9756.JPG"
+    },
+    {
+      "id": "food-perfume-gold-reflection",
+      "src": "/images/studio/food/perfume-gold-reflection-8ba1b32cc379.webp",
+      "alt": "Флакон парфумів із золотим відблиском у темній воді",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 819,
+      "height": 1280,
+      "sourceFile": "IMG_9165.JPG"
+    },
+    {
+      "id": "food-tortellini-flour-flat-lay",
+      "src": "/images/studio/food/tortellini-flour-flat-lay-bf006da38e4c.webp",
+      "alt": "Тортеліні на дошці, борошно з жовтком і качалка на темному столі",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 720,
+      "height": 1280,
+      "sourceFile": "IMG_4350.JPG"
+    },
+    {
+      "id": "food-lipsticks-peach",
+      "src": "/images/studio/food/lipsticks-peach-48342932a409.webp",
+      "alt": "Золоті помади з жорсткими тінями на персиковому тлі",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 1018,
+      "height": 1440,
+      "sourceFile": "IMG_2393.JPEG"
+    },
+    {
+      "id": "food-sushi-black",
+      "src": "/images/studio/food/sushi-black-9971abbc283d.webp",
+      "alt": "Роли з лососем і мікрозеленню з віддзеркаленням на чорному тлі",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 721,
+      "height": 1280,
+      "sourceFile": "IMG_9173.JPG"
+    },
+    {
+      "id": "food-tomatoes-green-light",
+      "src": "/images/studio/food/tomatoes-green-light-4b561bcd0762.webp",
+      "alt": "Гілка черрі та один томат на зеленому тлі в смугах сонячного світла",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 720,
+      "height": 1280,
+      "sourceFile": "IMG_9018 (2).JPG",
+      "position": "50% 15%"
+    },
+    {
+      "id": "food-glass-splash-amber",
+      "src": "/images/studio/food/glass-splash-amber-71d7f175a755.webp",
+      "alt": "Сплеск води в келиху з лимоном на бурштиновому тлі з тінню",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 1024,
+      "height": 1280,
+      "sourceFile": "IMG_4519.JPG"
+    },
+    {
+      "id": "food-violet-perfume-black",
+      "src": "/images/studio/food/violet-perfume-black-fa974e8626f2.webp",
+      "alt": "Фіолетовий флакон парфумів із віддзеркаленням на чорному тлі",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 1080,
+      "height": 1352,
+      "sourceFile": "Копия IMG_2397.JPG"
+    },
+    {
+      "id": "food-chocolate-pattern",
+      "src": "/images/studio/food/chocolate-pattern-3e61414354b6.webp",
+      "alt": "Плитки шоколаду по діагоналі на жовтому тлі й одна надкушена",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 960,
+      "height": 1280,
+      "sourceFile": "IMG_5027.JPG"
+    },
+    {
+      "id": "food-water-glass-splash",
+      "src": "/images/studio/food/water-glass-splash-f4453501f538.webp",
+      "alt": "Вода з льодом вихлюпується з келиха на блакитному тлі",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 719,
+      "height": 1280,
+      "sourceFile": "IMG_9801 (2).JPG",
+      "position": "50% 30%"
+    },
+    {
+      "id": "food-chocolate-ice-cream",
+      "src": "/images/studio/food/chocolate-ice-cream-81cb369d8718.webp",
+      "alt": "Шоколадне морозиво на паличках із замороженою малиною на тарілці",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 960,
+      "height": 1280,
+      "sourceFile": "IMG_4384.JPG"
+    },
+    {
+      "id": "food-skincare-geometry",
+      "src": "/images/studio/food/skincare-geometry-ea3ed56dc428.webp",
+      "alt": "Флакони догляду за шкірою на білій площині з різкою тінню",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 1100,
+      "height": 1440,
+      "sourceFile": "IMG_2394.JPEG"
+    },
+    {
+      "id": "food-rose-vase-shadows",
+      "src": "/images/studio/food/rose-vase-shadows-296edc1fbb95.webp",
+      "alt": "Троянда в рубіновій вазі з рожевими й бірюзовими смугами світла",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 720,
+      "height": 1280,
+      "sourceFile": "IMG_9019 (2).JPG"
+    },
+    {
+      "id": "food-watch-crystals",
+      "src": "/images/studio/food/watch-crystals-e8ec34b6a209.webp",
+      "alt": "Циферблат годинника з кристалами крупним планом на чорному тлі",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 961,
+      "height": 1280,
+      "sourceFile": "IMG_2439.JPG"
+    },
+    {
+      "id": "food-olive-oil-still-life",
+      "src": "/images/studio/food/olive-oil-still-life-4b805592294e.webp",
+      "alt": "Оливкова олія в графині, банка оливок і кришка в польоті",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 960,
+      "height": 1280,
+      "sourceFile": "IMG_0255.JPG"
+    },
+    {
+      "id": "food-cleanser-in-water",
+      "src": "/images/studio/food/cleanser-in-water-0e23dbf43aef.webp",
+      "alt": "Тюбик засобу для вмивання у воді з брижами",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 1080,
+      "height": 1329,
+      "sourceFile": "Копия IMG_2398.JPG"
+    },
+    {
+      "id": "food-wine-glass-color-light",
+      "src": "/images/studio/food/wine-glass-color-light-0a05b6d10165.webp",
+      "alt": "Келих червоного вина на зелено-помаранчевому кольоровому тлі",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 853,
+      "height": 1280,
+      "sourceFile": "IMG_2444.JPG"
+    },
+    {
+      "id": "food-lipstick-cherries",
+      "src": "/images/studio/food/lipstick-cherries-f186360c96fc.webp",
+      "alt": "Червона помада й вишні на білих подіумах і червоному глянці",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 853,
+      "height": 1280,
+      "sourceFile": "IMG_1178.JPG"
+    },
+    {
+      "id": "food-passion-fruit-cocktail",
+      "src": "/images/studio/food/passion-fruit-cocktail-031b93e7a612.webp",
+      "alt": "Коктейль із половинкою маракуї зверху на темних дошках",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 1080,
+      "height": 1080,
+      "sourceFile": "IMG_4218.JPG"
+    },
+    {
+      "id": "food-mango-blue-plates",
+      "src": "/images/studio/food/mango-blue-plates-0c044c206445.webp",
+      "alt": "Манго на синіх і зелених тарілках зверху",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 963,
+      "height": 1280,
+      "sourceFile": "IMG_0707.JPG"
     }
   ],
   "instructors": [
@@ -1873,6 +2334,138 @@
       "title": "Малюнок тіні",
       "imageId": "student-portrait-shadow",
       "device": "camera"
+    },
+    {
+      "id": "food-spice-test-tubes",
+      "title": "Спеції в пробірках",
+      "imageId": "food-spice-test-tubes",
+      "device": "camera"
+    },
+    {
+      "id": "food-champagne-cherry-splash",
+      "title": "Вишня в шампанському",
+      "imageId": "food-champagne-cherry-splash",
+      "device": "camera"
+    },
+    {
+      "id": "food-apples-pattern",
+      "title": "Патерн з яблук",
+      "imageId": "food-apples-pattern",
+      "device": "camera"
+    },
+    {
+      "id": "food-perfume-gold-reflection",
+      "title": "Парфум і золоте відображення",
+      "imageId": "food-perfume-gold-reflection",
+      "device": "camera"
+    },
+    {
+      "id": "food-tortellini-flour-flat-lay",
+      "title": "Тортеліні на борошні",
+      "imageId": "food-tortellini-flour-flat-lay",
+      "device": "camera"
+    },
+    {
+      "id": "food-lipsticks-peach",
+      "title": "Помади на персиковому тлі",
+      "imageId": "food-lipsticks-peach",
+      "device": "camera"
+    },
+    {
+      "id": "food-sushi-black",
+      "title": "Суші на чорному",
+      "imageId": "food-sushi-black",
+      "device": "camera"
+    },
+    {
+      "id": "food-tomatoes-green-light",
+      "title": "Томати й смуги світла",
+      "imageId": "food-tomatoes-green-light",
+      "device": "phone"
+    },
+    {
+      "id": "food-glass-splash-amber",
+      "title": "Сплеск у бурштиновому світлі",
+      "imageId": "food-glass-splash-amber",
+      "device": "camera"
+    },
+    {
+      "id": "food-violet-perfume-black",
+      "title": "Фіолетовий парфум",
+      "imageId": "food-violet-perfume-black",
+      "device": "camera"
+    },
+    {
+      "id": "food-chocolate-pattern",
+      "title": "Шоколадний патерн",
+      "imageId": "food-chocolate-pattern",
+      "device": "camera"
+    },
+    {
+      "id": "food-water-glass-splash",
+      "title": "Сплеск води в келиху",
+      "imageId": "food-water-glass-splash",
+      "device": "camera"
+    },
+    {
+      "id": "food-chocolate-ice-cream",
+      "title": "Шоколадне морозиво з малиною",
+      "imageId": "food-chocolate-ice-cream",
+      "device": "phone"
+    },
+    {
+      "id": "food-skincare-geometry",
+      "title": "Догляд і геометрія",
+      "imageId": "food-skincare-geometry",
+      "device": "camera"
+    },
+    {
+      "id": "food-rose-vase-shadows",
+      "title": "Троянда в кольоровому світлі",
+      "imageId": "food-rose-vase-shadows",
+      "device": "phone"
+    },
+    {
+      "id": "food-watch-crystals",
+      "title": "Годинник із кристалами",
+      "imageId": "food-watch-crystals",
+      "device": "camera"
+    },
+    {
+      "id": "food-olive-oil-still-life",
+      "title": "Оливки й олія",
+      "imageId": "food-olive-oil-still-life",
+      "device": "camera"
+    },
+    {
+      "id": "food-cleanser-in-water",
+      "title": "Засіб для вмивання у воді",
+      "imageId": "food-cleanser-in-water",
+      "device": "camera"
+    },
+    {
+      "id": "food-wine-glass-color-light",
+      "title": "Вино в кольоровому світлі",
+      "imageId": "food-wine-glass-color-light",
+      "device": "camera"
+    },
+    {
+      "id": "food-lipstick-cherries",
+      "title": "Помада й вишні",
+      "imageId": "food-lipstick-cherries",
+      "device": "camera"
+    },
+    {
+      "id": "food-passion-fruit-cocktail",
+      "title": "Коктейль з маракуєю",
+      "imageId": "food-passion-fruit-cocktail",
+      "device": "phone"
+    },
+    {
+      "id": "food-mango-blue-plates",
+      "title": "Манго на синіх тарілках",
+      "imageId": "food-mango-blue-plates",
+      "device": "phone"
     }
   ],
   "pages": [

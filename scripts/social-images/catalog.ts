@@ -94,13 +94,14 @@ export const socialCards: SocialCard[] = [
     photos: [snow],
   },
   {
-    path: '/food-photography',
-    title: 'Фуд фото і предметна зйомка',
-    lines: ['ФУД ФОТО', 'І ПРЕДМЕТНА', 'ЗЙОМКА'],
-    description: 'Фуд-фотографія та предметна зйомка: композиція, світло й робота з продуктом.',
+    path: '/food-product-photography',
+    title: 'Предметна та фуд-зйомка',
+    lines: ['ПРЕДМЕТНА', 'ТА ФУД-ЗЙОМКА'],
+    description:
+      'Спец курс фото та відео: світло, композиція, колір, контент-відео й вихід на комерцію.',
     label: 'КУРС',
-    subtitle: 'Композиція · світло · продукт',
-    photos: [photo('student-pasta')],
+    subtitle: 'Старт 18 грудня · 13 тижнів',
+    photos: [photo('food-apples-pattern')],
   },
   {
     path: '/pro-photo-lab',

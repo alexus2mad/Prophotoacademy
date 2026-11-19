@@ -4,6 +4,7 @@ import type { CourseWorksOpening } from '@/lib/studio-creator/types';
 export type StudioCreatorWork = GalleryImage & {
   device: Work['device'];
   preserveFraming?: boolean;
+  position?: string;
 };
 export type StudioCreatorWorksProps = {
   works: Work[];

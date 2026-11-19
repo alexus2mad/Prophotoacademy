@@ -62,6 +62,7 @@ export function StudioCreatorWorks(props: StudioCreatorWorksProps) {
               asset={work}
               alt={work.alt}
               fit={work.preserveFraming ? 'contain' : undefined}
+              position={work.position}
               sizes="(max-width: 760px) 40vw, 28vw"
             />
           </button>

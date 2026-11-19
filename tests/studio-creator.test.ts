@@ -38,7 +38,7 @@ describe('Content Creator route and commercial boundaries', () => {
     );
     expect(commercial('[data-course-design="creator"]')).toHaveLength(1);
     expect(commercial('h1')).toHaveLength(1);
-    for (const id of ['program-visual', 'program-food', 'program-instagram']) {
+    for (const id of ['program-visual', 'program-instagram']) {
       const other = content.programs.find((item) => item.id === id)!;
       const html = renderToStaticMarkup(
         await Detail({ params: Promise.resolve({ slug: other.slug }) }),

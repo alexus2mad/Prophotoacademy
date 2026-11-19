@@ -56,7 +56,7 @@ for (const image of seed.images) {
   if (
     !image.alt ||
     !image.credit ||
-    (!image.driveId && !(image as SourceImage).sourceUrl) ||
+    (!image.driveId && !(image as SourceImage).sourceUrl && !(image as SourceImage).sourceFile) ||
     !image.width ||
     !image.height
   )

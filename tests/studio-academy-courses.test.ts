@@ -5,7 +5,6 @@ import { programPresentation } from '../src/lib/programs/selectors';
 import { programSchedule } from '../src/lib/program-schedule';
 import { studioAcademyCourses, studioProgramImage } from '../src/lib/studio-pages/selectors';
 import { studioProgramArtwork } from '../src/lib/studio-program/selectors';
-import { studioAssets } from '../src/lib/studio-design/assets';
 
 const content = fixture as AcademyContent;
 
@@ -25,21 +24,16 @@ describe('Academy main courses', () => {
     expect(programs.map((program) => program.id)).toEqual(originalIds);
   });
 
-  it('keeps the distinct food course inquiry-only until an offering is authored', () => {
-    const program = content.programs.find((item) => item.slug === 'food-photography')!;
+  it('presents the food course at its own URL with its open offering and course photograph', () => {
+    const program = content.programs.find((item) => item.slug === 'food-product-photography')!;
     const offering = content.offerings.find((item) => item.programId === program.id);
     const presentation = programPresentation(program, offering);
     const image = studioProgramImage(program, content.images);
 
-    expect(program.id).not.toBe('program-commercial');
-    expect(offering).toBeUndefined();
-    expect(presentation).toMatchObject({ open: false, price: undefined });
-    expect(programSchedule(program, offering)).toMatchObject({
-      value: 'Дату уточнюємо',
-      inquirySuggested: true,
-    });
-    expect(image).toBeDefined();
-    expect(image).toEqual(studioAssets.academy.imgImgContent2);
+    expect(program.id).toBe('program-food');
+    expect(presentation).toMatchObject({ open: true, price: 7900 });
+    expect(programSchedule(program, offering)).toMatchObject({ date: '2026-12-18' });
+    expect(image).toEqual(content.images.find((item) => item.id === 'food-apples-pattern'));
     expect(studioProgramArtwork(program, content).asset).toEqual(image);
     expect(content.programs.find((item) => item.id === 'program-commercial')?.slug).toBe(
       'content-creator',

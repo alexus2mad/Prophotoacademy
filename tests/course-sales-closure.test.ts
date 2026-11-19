@@ -18,13 +18,15 @@ const content = fixture as AcademyContent;
 const courses = content.programs.filter((program) => program.category === 'course');
 const courseIds = new Set(courses.map((program) => program.id));
 const offerings = content.offerings.filter(
-  (offering) => courseIds.has(offering.programId) && offering.programId !== 'program-commercial',
+  (offering) =>
+    courseIds.has(offering.programId) &&
+    !['program-commercial', 'program-food'].includes(offering.programId),
 );
 const now = new Date('2026-11-11T10:00:00Z');
 
 afterEach(() => vi.unstubAllEnvs());
 
-describe('temporary closure of courses other than Content Creator', () => {
+describe('temporary closure of courses other than Content Creator and Food Photography', () => {
   it('retains the other course closures without altering package identities or prices', () => {
     expect(offerings).toHaveLength(2);
     expect(offerings.every((offering) => offering.availability === 'closed')).toBe(true);

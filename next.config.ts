@@ -15,7 +15,10 @@ const config: NextConfig = {
   outputFileTracingExcludes: { '/*': ['./.data/**/*', './content/source/**/*', './scripts/**/*'] },
   images: { remotePatterns: [{ protocol: 'https', hostname: 'cdn.sanity.io' }] },
   async redirects() {
-    return [{ source: '/401', destination: '/', permanent: true }];
+    return [
+      { source: '/401', destination: '/', permanent: true },
+      { source: '/food-photography', destination: '/food-product-photography', permanent: true },
+    ];
   },
   async headers() {
     const indexingDisabled =

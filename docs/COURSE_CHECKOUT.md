@@ -12,6 +12,14 @@ The owner requested payment-disabled enrollment on 12 October 2026. This is an e
 
 Never infer free access from missing provider keys. Unknown modes fail closed. Browser input cannot choose a mode, price, course rights or access duration. Existing orders retain their original mode.
 
+## Food and product photography intake — 19 November 2026
+
+The food course (`program-food`, now at `/food-product-photography`) opens
+`offering-food-2026-12`: start 18 December 2026, BASE 7 900, GOLD PRO 19 600 and
+VIP PRO 59 999 UAH. The packages have no curriculum rules yet, so production sells
+them with team-granted access as described below. The closure that follows still
+applies to Visual Content and Instagram.
+
 ## Temporary course-sales closure — 11 November 2026
 
 The production design release closes all currently configured course intakes:

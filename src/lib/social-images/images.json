@@ -131,25 +131,25 @@
       }
     ]
   },
-  "/food-photography": {
-    "title": "Фуд фото і предметна зйомка",
-    "description": "Фуд-фотографія та предметна зйомка: композиція, світло й робота з продуктом.",
+  "/food-product-photography": {
+    "title": "Предметна та фуд-зйомка",
+    "description": "Спец курс фото та відео: світло, композиція, колір, контент-відео й вихід на комерцію.",
     "images": [
       {
-        "src": "/social/food-photography-036eba7d0ea3-wide.jpg",
+        "src": "/social/food-product-photography-1507fb8362f0-wide.jpg",
         "width": 1200,
         "height": 630,
-        "alt": "Фуд фото і предметна зйомка · ProPhoto — Паста й томати на зеленому тлі",
-        "sha256": "036eba7d0ea3104d2cd3826c0e766be4afb7dfba8a753a715fa1337a925452ed",
-        "bytes": 85884
+        "alt": "Предметна та фуд-зйомка · ProPhoto — Ряди червоних яблук на бірюзовому тлі й одне надкушене",
+        "sha256": "1507fb8362f07f6074dd8b6d5ba555138aa82f7f7ba8f935eab92d5f7711a52e",
+        "bytes": 138660
       },
       {
-        "src": "/social/food-photography-729f93ef9b56-square.jpg",
+        "src": "/social/food-product-photography-14d10d6afa31-square.jpg",
         "width": 630,
         "height": 630,
-        "alt": "Фуд фото і предметна зйомка · ProPhoto — Паста й томати на зеленому тлі",
-        "sha256": "729f93ef9b560c55d1b720db0c45d88a84deacd89205fcae89be6e4cb20d0fb1",
-        "bytes": 58225
+        "alt": "Предметна та фуд-зйомка · ProPhoto — Ряди червоних яблук на бірюзовому тлі й одне надкушене",
+        "sha256": "14d10d6afa31b65ae009f9b2865a0a6c7f5be330eb1fb652f4a8b9058be2915d",
+        "bytes": 93451
       }
     ]
   },
