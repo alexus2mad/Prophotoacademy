@@ -1,7 +1,10 @@
-/** Editorial copy from Figma 949:443; commerce remains in the offering model. */
+import { creatorAssets } from './assets';
+import { creatorFaculty } from './faculty';
+import type { CourseTextItem, StudioCourseEditorial } from './types';
+
 export const creatorCurriculumId = 'program-curriculum';
 
-export const creatorAudience = [
+const audience: readonly CourseTextItem[] = [
   {
     title: 'Початківців',
     text: 'Налаштування камери, світло, композиція й колір, обробка фото та відео в Lightroom і Photoshop.',
@@ -25,7 +28,7 @@ export const creatorAudience = [
   },
 ];
 
-export const creatorBenefits = [
+const benefits: readonly CourseTextItem[] = [
   {
     title: 'Комерційна практика',
     text: 'Практичні воркшопи у GOLD і PLATINUM. Підготовка першого замовлення — у PLATINUM.',
@@ -49,7 +52,7 @@ export const creatorBenefits = [
   },
 ];
 
-export const creatorLearningSteps = [
+const learningSteps: readonly CourseTextItem[] = [
   {
     title: 'Реєстрація',
     text: 'Оберіть свій пакет навчання. Після підтвердженої оплати команда надішле організаційні деталі вашого потоку.',
@@ -71,3 +74,42 @@ export const creatorLearningSteps = [
     text: 'У PLATINUM — для тих, хто виконав обов’язкові завдання та дипломну роботу у визначені терміни.',
   },
 ];
+
+/** Editorial copy from Figma 949:443; commerce remains in the offering model. */
+export const creatorEditorial: StudioCourseEditorial = {
+  hero: {
+    asset: creatorAssets.hero,
+    alt: 'Чорно-білий портрет жінки у серпанку',
+    hand: '*комерційний',
+    title: 'Контент-креатор',
+    subject: 'Курс фото та відеозйомки',
+  },
+  intro: {
+    eyebrow: 'Онлайн наживо + практика офлайн у Києві',
+    heading: { lines: ['Неважливо, на', 'що ви знімаєте', 'Важливо'], hand: '*як' },
+    description:
+      'Камера, телефон чи плівка — ми навчаємо бачити: композицію, світло, колір і налаштування камери. Тисячі випускників уже переконалися.',
+  },
+  audience,
+  benefits,
+  learningSteps,
+  worksOpening: {
+    ids: ['student-beauty-shadows', 'student-lipstick-study'],
+    extras: [
+      {
+        ...creatorAssets.monochrome,
+        id: 'creator-monochrome',
+        device: 'camera',
+        alt: 'Чорно-білий портрет жінки, робота студента',
+      },
+      {
+        ...creatorAssets.curly,
+        id: 'creator-curly',
+        device: 'camera',
+        preserveFraming: true,
+        alt: 'Портрет усміхненої жінки з кучерявим волоссям',
+      },
+    ],
+  },
+  faculty: creatorFaculty,
+};

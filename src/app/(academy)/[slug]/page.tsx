@@ -7,6 +7,7 @@ import { ProgramTemplate } from '@/components/templates/ProgramTemplate/ProgramT
 import { StudioProgramTemplate } from '@/components/templates/StudioProgramTemplate/StudioProgramTemplate';
 import { StudioCreatorTemplate } from '@/components/templates/StudioCreatorTemplate/StudioCreatorTemplate';
 import { academyDesign } from '@/lib/studio-design/variant';
+import { courseEditorial } from '@/lib/studio-creator/selectors';
 import { connection } from 'next/server';
 import { enrollmentOptions } from '@/lib/commerce/catalog';
 import { findOffering } from '@/lib/content/selectors';
@@ -48,12 +49,10 @@ export default async function Detail({ params }: SlugPageProps) {
   const content = await getContent();
   const program = content.programs.find((p) => p.slug === slug);
   if (program) {
-    const Template =
-      academyDesign() === 'studio'
-        ? program.id === 'program-commercial'
-          ? StudioCreatorTemplate
-          : StudioProgramTemplate
-        : ProgramTemplate;
+    const studio = academyDesign() === 'studio';
+    const editorial = studio ? courseEditorial(program) : undefined;
+    const Template = studio ? StudioProgramTemplate : ProgramTemplate;
+    const enrollment = await enrollmentOptions(findOffering(content, program.id));
     const breadcrumb = academyBreadcrumbSchema([
       { name: academyName, path: '/' },
       { name: 'Програми академії', path: '/academy' },
@@ -63,11 +62,16 @@ export default async function Detail({ params }: SlugPageProps) {
       <>
         {program.category === 'course' && <JsonLd data={academyCourseSchema(program)} />}
         <JsonLd data={breadcrumb} />
-        <Template
-          program={program}
-          content={content}
-          enrollment={await enrollmentOptions(findOffering(content, program.id))}
-        />
+        {editorial ? (
+          <StudioCreatorTemplate
+            program={program}
+            content={content}
+            enrollment={enrollment}
+            editorial={editorial}
+          />
+        ) : (
+          <Template program={program} content={content} enrollment={enrollment} />
+        )}
       </>
     );
   }

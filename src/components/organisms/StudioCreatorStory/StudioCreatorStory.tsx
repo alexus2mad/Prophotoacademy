@@ -1,16 +1,14 @@
 import { StudioCreatorHeading } from '@/components/molecules/StudioCreatorHeading/StudioCreatorHeading';
-import {
-  creatorAudience,
-  creatorBenefits,
-  creatorCurriculumId,
-  creatorLearningSteps,
-} from '@/lib/studio-creator/content';
+import { creatorCurriculumId } from '@/lib/studio-creator/content';
 import { creatorAssets } from '@/lib/studio-creator/assets';
 import { studioAssetUrl } from '@/lib/studio-design/urls';
 import type { StudioCreatorStoryProps } from './types';
 import styles from './StudioCreatorStory.module.css';
 
-export function StudioCreatorStory({ program, duration }: StudioCreatorStoryProps) {
+export function StudioCreatorStory({ program, duration, editorial }: StudioCreatorStoryProps) {
+  const { audience, benefits, learningSteps } = editorial;
+  const audienceTotal = String(audience.length).padStart(2, '0');
+  const connectors = creatorAssets.connectors;
   return (
     <>
       <section
@@ -22,10 +20,10 @@ export function StudioCreatorStory({ program, duration }: StudioCreatorStoryProp
           Цей курс <span className="studio-hand">*для</span>
         </StudioCreatorHeading>
         <ol className={styles.audience}>
-          {creatorAudience.map((item, index) => (
+          {audience.map((item, index) => (
             <li key={item.title}>
               <span className={styles.index} aria-hidden="true">
-                {String(index + 1).padStart(2, '0')} / 06
+                {String(index + 1).padStart(2, '0')} / {audienceTotal}
               </span>
               <h3>{item.title}</h3>
               <p>{item.text}</p>
@@ -41,14 +39,14 @@ export function StudioCreatorStory({ program, duration }: StudioCreatorStoryProp
           Чому <span className="studio-hand">*цей курс</span>
         </StudioCreatorHeading>
         <ul className={styles.benefits}>
-          {creatorBenefits.map((item, index) => (
+          {benefits.map((item, index) => (
             <li key={item.title}>
               <h3>{item.title}</h3>
               <span className={styles.connector} aria-hidden="true">
                 <span
                   className={styles.shaft}
                   style={{
-                    backgroundImage: `url("${studioAssetUrl(creatorAssets.connectors[index])}")`,
+                    backgroundImage: `url("${studioAssetUrl(connectors[index % connectors.length])}")`,
                   }}
                 />
                 <img
@@ -99,7 +97,7 @@ export function StudioCreatorStory({ program, duration }: StudioCreatorStoryProp
           Як проходить <span className="studio-hand">*навчання</span>
         </StudioCreatorHeading>
         <ol className={styles.steps}>
-          {creatorLearningSteps.map((step, index) => (
+          {learningSteps.map((step, index) => (
             <li key={step.title}>
               <span className={styles.index} aria-hidden="true">
                 {String(index + 1).padStart(2, '0')}

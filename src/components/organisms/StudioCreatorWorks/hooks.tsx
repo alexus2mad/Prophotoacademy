@@ -7,8 +7,11 @@ import { creatorWorks } from './selectors';
 import type { StudioCreatorWorksProps } from './types';
 
 export function useCreatorWorks(props: StudioCreatorWorksProps) {
-  const [device, setDevice] = useState<Work['device']>('camera');
-  const entries = creatorWorks(props).filter((work) => work.device === device);
+  const all = creatorWorks(props);
+  const [device, setDevice] = useState<Work['device']>(
+    all.some((work) => work.device === 'camera') ? 'camera' : 'phone',
+  );
+  const entries = all.filter((work) => work.device === device);
   const carousel = useStudioGallery(entries.length, true);
   const gallery = useImageGallery(entries.length);
   function selectDevice(next: Work['device']) {

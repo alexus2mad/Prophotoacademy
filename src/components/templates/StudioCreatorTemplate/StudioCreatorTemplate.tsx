@@ -10,7 +10,6 @@ import { StudioAcademyReviews } from '@/components/organisms/StudioAcademyReview
 import { StudioInquirySection } from '@/components/organisms/StudioInquirySection/StudioInquirySection';
 import { studioProgramPage } from '@/lib/studio-program/selectors';
 import { showsInstallmentMethods } from '@/lib/commerce/selectors';
-import { creatorFaculty } from '@/lib/studio-creator/faculty';
 import { creatorAssets } from '@/lib/studio-creator/assets';
 import { studioAssets } from '@/lib/studio-design/assets';
 import { ecosystemDestinations } from '@/lib/ecosystem';
@@ -21,6 +20,7 @@ export function StudioCreatorTemplate({
   program,
   content,
   enrollment,
+  editorial,
 }: StudioCreatorTemplateProps) {
   const { offering, presentation, works } = studioProgramPage(program, content, enrollment);
   return (
@@ -30,10 +30,15 @@ export function StudioCreatorTemplate({
         offering={offering}
         presentation={presentation}
         showInstallments={showsInstallmentMethods(offering, enrollment)}
+        editorial={editorial}
       />
-      <StudioCreatorStory program={program} duration={offering?.duration ?? 'За програмою курсу'} />
-      <StudioCreatorWorks works={works} images={content.images} />
-      <StudioCreatorFaculty instructors={creatorFaculty} />
+      <StudioCreatorStory
+        program={program}
+        duration={offering?.duration ?? 'За програмою курсу'}
+        editorial={editorial}
+      />
+      <StudioCreatorWorks works={works} images={content.images} opening={editorial.worksOpening} />
+      {editorial.faculty && <StudioCreatorFaculty instructors={editorial.faculty} />}
       <StudioAcademyReviews variant="creator" />
       {offering?.packages.length ? (
         <StudioCreatorPackages program={program} offering={offering} enrollment={enrollment} />

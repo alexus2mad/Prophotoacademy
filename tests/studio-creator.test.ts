@@ -10,6 +10,7 @@ import { getContent } from '../src/lib/content';
 import { enrollmentOptions } from '../src/lib/commerce/catalog';
 import Detail from '../src/app/(academy)/[slug]/page';
 import { StudioCreatorTemplate } from '../src/components/templates/StudioCreatorTemplate/StudioCreatorTemplate';
+import { creatorEditorial } from '../src/lib/studio-creator/content';
 import { creatorWorks } from '../src/components/organisms/StudioCreatorWorks/selectors';
 import { creatorAssets } from '../src/lib/studio-creator/assets';
 
@@ -64,6 +65,7 @@ describe('Content Creator route and commercial boundaries', () => {
         renderToStaticMarkup(
           createElement(StudioCreatorTemplate, {
             program,
+            editorial: creatorEditorial,
             content: closedContent,
             enrollment: {
               mode,
@@ -97,6 +99,7 @@ describe('Content Creator route and commercial boundaries', () => {
       renderToStaticMarkup(
         createElement(StudioCreatorTemplate, {
           program,
+          editorial: creatorEditorial,
           content: { ...content, offerings: [openOffering] },
           enrollment: { mode: 'wayforpay', packageIds: enabledIds },
         }),
@@ -122,7 +125,9 @@ describe('Content Creator route and commercial boundaries', () => {
 describe('Content Creator learning outline and work sources', () => {
   it('exposes the real curriculum through one initially collapsed native disclosure', () => {
     const $ = load(
-      renderToStaticMarkup(createElement(StudioCreatorTemplate, { program, content })),
+      renderToStaticMarkup(
+        createElement(StudioCreatorTemplate, { program, editorial: creatorEditorial, content }),
+      ),
     );
     const disclosure = $('#program-curriculum > details');
     expect(disclosure).toHaveLength(1);
@@ -144,7 +149,11 @@ describe('Content Creator learning outline and work sources', () => {
   });
 
   it('preserves every scoped work and its device when applying the approved opening sequence', () => {
-    const entries = creatorWorks({ works, images: content.images });
+    const entries = creatorWorks({
+      works,
+      images: content.images,
+      opening: creatorEditorial.worksOpening,
+    });
     expect(new Set(entries.map((entry) => entry.id)).size).toBe(entries.length);
     for (const work of works) {
       const original = content.images.find((image) => image.id === work.imageId)!;
@@ -166,11 +175,15 @@ describe('Content Creator learning outline and work sources', () => {
   });
 
   it('connects the filtered default rail and its actual count to the existing captionless popup', () => {
-    const camera = creatorWorks({ works, images: content.images }).filter(
-      (entry) => entry.device === 'camera',
-    );
+    const camera = creatorWorks({
+      works,
+      images: content.images,
+      opening: creatorEditorial.worksOpening,
+    }).filter((entry) => entry.device === 'camera');
     const $ = load(
-      renderToStaticMarkup(createElement(StudioCreatorTemplate, { program, content })),
+      renderToStaticMarkup(
+        createElement(StudioCreatorTemplate, { program, editorial: creatorEditorial, content }),
+      ),
     );
     const rail = $('#creator-work-rail');
     const triggers = rail.children('button[aria-haspopup="dialog"]');
@@ -207,7 +220,9 @@ describe('Content Creator learning outline and work sources', () => {
   it('keeps page and popup assets inside the review base path and backed by local files', () => {
     vi.stubEnv('NEXT_PUBLIC_BASE_PATH', '/Prophotoacademy');
     const $ = load(
-      renderToStaticMarkup(createElement(StudioCreatorTemplate, { program, content })),
+      renderToStaticMarkup(
+        createElement(StudioCreatorTemplate, { program, editorial: creatorEditorial, content }),
+      ),
     );
     const sources = $('img')
       .map((_, element) => {

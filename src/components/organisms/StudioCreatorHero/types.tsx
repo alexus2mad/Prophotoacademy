@@ -1,2 +1,6 @@
 import type { StudioCreatorActionProps } from '@/components/molecules/StudioCreatorAction/types';
-export type StudioCreatorHeroProps = StudioCreatorActionProps & { showInstallments: boolean };
+import type { StudioCourseEditorial } from '@/lib/studio-creator/types';
+export type StudioCreatorHeroProps = StudioCreatorActionProps & {
+  showInstallments: boolean;
+  editorial: Pick<StudioCourseEditorial, 'hero' | 'intro'>;
+};
