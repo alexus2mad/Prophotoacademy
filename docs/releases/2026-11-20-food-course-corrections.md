@@ -19,3 +19,10 @@ WayForPay).
 Staging and production retain `ec1c3797548ced4b5d01f47210f5a1dbfd539d76` as the
 single rollback; `f8a8c1eb058ffc30fb8946f4852f9fc45e4ed9e7` was pruned. Transfer
 and builder copies of this release were removed.
+
+## Follow-up: centered price
+
+Source `fca572a2715c8ab68462a103582c2d39168fc082` centers the package price and
+the installment notice in Creator-layout cards. Deployed at the owner's request
+without rerunning the test suite; candidate and live release checks passed on
+both environments. `b2be1e2` is now the single rollback; `ec1c379` was pruned.
