@@ -26,3 +26,12 @@ Source `fca572a2715c8ab68462a103582c2d39168fc082` centers the package price and
 the installment notice in Creator-layout cards. Deployed at the owner's request
 without rerunning the test suite; candidate and live release checks passed on
 both environments. `b2be1e2` is now the single rollback; `ec1c379` was pruned.
+
+## Follow-up: amount-only centering
+
+Source `b081a5dafb39720170e7f0dc640a64fcca0d485d` centers only the package amount;
+«грн» sits beside it in a separate grid column so it does not shift the amount.
+Checked locally at 1440px and 390px (amount and installment notice exactly on the
+card's center line). Deployed without the full test suite at the owner's
+request; candidate and live release checks passed. `fca572a` is the rollback;
+`b2be1e2` was pruned.
