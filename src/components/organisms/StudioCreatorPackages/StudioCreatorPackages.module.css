@@ -99,6 +99,7 @@
 .packages :global(.package-card .price) {
   display: flex;
   align-items: start;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 8px;
   padding: 0;
@@ -133,6 +134,7 @@
     350 15px / 1.4 var(--font-studio-sans),
     sans-serif;
   letter-spacing: 0;
+  text-align: center;
   text-decoration: line-through;
 }
 
