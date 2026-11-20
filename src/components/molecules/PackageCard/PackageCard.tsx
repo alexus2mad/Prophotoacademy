@@ -20,6 +20,7 @@ export function PackageCard({
   const closed = isEnrollmentClosed(offering, pack);
   const purchaseAvailable =
     !closed && !pack.inquiryOnly && (enrollable ?? canEnroll(offering, pack));
+  const installments = purchaseAvailable && showInstallments && <InstallmentMethods />;
   const benefits = (
     <>
       {!pack.includes.length && !isProduct(pack) && (
@@ -71,12 +72,13 @@ export function PackageCard({
           <span className="previous-price">{money(pack.previousPrice)}</span>
         )}
       </div>
+      {layout === 'editorial' && installments && (
+        <div className={`${styles.installments} ${styles.underPrice}`}>{installments}</div>
+      )}
       {layout === 'editorial' && <div className="package-benefits">{benefits}</div>}
       <div className="package-action">
-        {purchaseAvailable && showInstallments && (
-          <div className={styles.installments}>
-            <InstallmentMethods />
-          </div>
+        {layout !== 'editorial' && installments && (
+          <div className={styles.installments}>{installments}</div>
         )}
         {purchaseAvailable ? (
           <Link

@@ -50,8 +50,10 @@ presentation without changing eligibility or other layouts.
 The design uses the exact four Figma exports from `986:770`, in order: monobank,
 ПриватБанк «Оплата частинами», ПриватБанк «Миттєва розстрочка», and А-Банк.
 Use the 208 × 40 pill in the Creator introduction under the starting price and
-the 158 × 35 treatment from `986:778` / `986:837` above each eligible package's CTA.
-Other course templates reuse the package treatment. The AI Artwork ticket grid
+the 158 × 35 treatment from `986:778` / `986:837` under each eligible package's price
+(moved from above the CTA on 20 November 2026). Other course templates reuse the
+package treatment above the CTA. Since 20 November 2026 the caption reads
+«Є оплата частинами» everywhere. The AI Artwork ticket grid
 shares one installment notice below the formats.
 
 The notice requires a sellable package in the server's enrollment options. Mock
@@ -62,12 +64,12 @@ merchant settings and the buyer's bank determine the methods available at checko
 
 ## Faculty portraits saved for review
 
-| Lecturer | Published portrait source |
-| --- | --- |
-| Ренат Зіганшин | [Kyiv-Mohyla training page](https://pro.ukma.edu.ua/trainings/training-visual-content), the named lecturer portrait for his joint training with Olena and Oleksandra |
-| Анна Лютько | [YouTube for Business](https://youtube-for-business.sendpulse.academy/), the named author portrait from her own course |
-| Андрій Провотар | [ProPhotoStudy](https://prophotostudy.com.ua/subject-food), the named lecturer portrait on the previous ProPhoto course |
-| Наталія Авдєєва | [ProPhotoStudy](https://prophotostudy.com.ua/subject-food), the named lecturer portrait on the previous ProPhoto course |
+| Lecturer        | Published portrait source                                                                                                                                            |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Ренат Зіганшин  | [Kyiv-Mohyla training page](https://pro.ukma.edu.ua/trainings/training-visual-content), the named lecturer portrait for his joint training with Olena and Oleksandra |
+| Анна Лютько     | [YouTube for Business](https://youtube-for-business.sendpulse.academy/), the named author portrait from her own course                                               |
+| Андрій Провотар | [ProPhotoStudy](https://prophotostudy.com.ua/subject-food), the named lecturer portrait on the previous ProPhoto course                                              |
+| Наталія Авдєєва | [ProPhotoStudy](https://prophotostudy.com.ua/subject-food), the named lecturer portrait on the previous ProPhoto course                                              |
 
 The optimized WebPs are archived in `.data/creator-portraits/archived-webp/`.
 Source photos and the contact sheets are in `.data/creator-portraits/`. Commit

@@ -445,34 +445,57 @@
         "Обробляти фото й монтувати відео в додатках",
         "Знаходити замовників і формувати прайс"
       ],
-      "imageId": "food-apples-pattern",
+      "imageId": "food-chocolate-pattern",
       "instructorIds": [
         "olena",
         "oleksandra"
       ],
       "workIds": [
-        "food-spice-test-tubes",
-        "food-champagne-cherry-splash",
-        "food-apples-pattern",
-        "food-perfume-gold-reflection",
-        "food-tortellini-flour-flat-lay",
-        "food-lipsticks-peach",
-        "food-sushi-black",
-        "food-tomatoes-green-light",
-        "food-glass-splash-amber",
-        "food-violet-perfume-black",
         "food-chocolate-pattern",
+        "food-spice-test-tubes",
         "food-water-glass-splash",
-        "food-chocolate-ice-cream",
-        "food-skincare-geometry",
-        "food-rose-vase-shadows",
-        "food-watch-crystals",
+        "food-ladybug-stem",
+        "food-shoes-car-seat",
+        "food-sushi-black",
+        "food-apple-levitation",
+        "food-red-shoes-thread",
+        "food-sneakers-shrimp",
         "food-olive-oil-still-life",
-        "food-cleanser-in-water",
-        "food-wine-glass-color-light",
+        "food-shoes-bouquet",
+        "food-candy-paint-splash",
+        "food-garlic-black",
+        "food-cinnamon-glass",
+        "food-popcorn-black",
+        "food-spices-spoons-top",
+        "food-spices-mortar-table",
+        "food-phone-bread-shot",
+        "food-red-pepper-black",
+        "food-boots-mirror",
+        "food-tomatoes-green-light",
+        "food-rose-vase-shadows",
+        "food-chocolate-ice-cream",
+        "food-blueberries-bowl",
+        "food-beach-cocktail",
+        "food-glass-splash-amber",
+        "food-aloe-drops",
+        "food-mango-blue-plates",
+        "food-apple-dark",
+        "food-chili-tomato-pattern",
+        "food-glass-splash-landscape",
+        "food-skincare-geometry",
+        "food-lipsticks-peach",
+        "food-lipstick-cherry-arch",
+        "food-watch-crystals",
+        "food-cream-white-stones",
+        "food-lipstick-stones",
         "food-lipstick-cherries",
-        "food-passion-fruit-cocktail",
-        "food-mango-blue-plates"
+        "food-red-lipstick-black",
+        "food-lip-gloss-pink",
+        "food-wine-glass-color-light",
+        "food-lipsticks-red-light",
+        "food-lemon-levitation",
+        "food-orange-juice-glass",
+        "food-flask-gold-sparkles"
       ],
       "modules": [
         {
@@ -573,7 +596,7 @@
           ]
         },
         {
-          "title": "Тиждень 13 — дипломний тиждень",
+          "title": "Тиждень 12 — дипломний тиждень",
           "topics": [
             "Практичний воркшоп для групи",
             "Воркшоп «Робота із замовником»: від прийняття замовлення до здачі",
@@ -586,7 +609,7 @@
       "featured": false,
       "seo": {
         "title": "Курс предметної та фуд-зйомки у Києві й онлайн",
-        "description": "Спец курс предметної та фуд-зйомки: 13 тижнів, 40+ лекцій наживо, практика на телефон і камеру, контент-відео, AI, SMM і вихід на комерцію. Старт 18 грудня."
+        "description": "Спец курс предметної та фуд-зйомки: 12 тижнів, 40+ лекцій наживо, практика на телефон і камеру, контент-відео, AI, SMM і вихід на комерцію. Старт 18 грудня."
       }
     },
     {
@@ -1046,7 +1069,7 @@
       "id": "offering-food-2026-12",
       "programId": "program-food",
       "startDate": "2026-12-18",
-      "duration": "13 тижнів",
+      "duration": "12 тижнів",
       "format": "hybrid",
       "location": "Київ",
       "availability": "open",
@@ -1094,7 +1117,7 @@
           "availability": "open",
           "description": "Повна програма з практикою, консультацією та першим замовленням",
           "includes": [
-            "41 лекція: 3 на тиждень, 13 тижнів і дипломний тиждень",
+            "41 лекція: 3 на тиждень, 12 тижнів разом із дипломним",
             "4 воркшопи",
             "Індивідуальна консультація",
             "Повне продюсування першого замовлення",
@@ -1106,7 +1129,7 @@
           "comparison": {
             "learning": {
               "state": "included",
-              "text": "41 лекція за 13 тижнів; фотокамера, Photoshop, AI, SMM і таргетинг"
+              "text": "41 лекція за 12 тижнів; фотокамера, Photoshop, AI, SMM і таргетинг"
             },
             "support": {
               "state": "included",
@@ -1135,7 +1158,7 @@
           "availability": "open",
           "description": "Gold Pro і місяць індивідуального супроводу після курсу",
           "includes": [
-            "41 лекція: 3 на тиждень, 13 тижнів і дипломний тиждень",
+            "41 лекція: 3 на тиждень, 12 тижнів разом із дипломним",
             "4 воркшопи",
             "Індивідуальна консультація",
             "Повне продюсування першого замовлення",
@@ -1148,7 +1171,7 @@
           "comparison": {
             "learning": {
               "state": "included",
-              "text": "41 лекція за 13 тижнів; фотокамера, Photoshop, AI, SMM і таргетинг"
+              "text": "41 лекція за 12 тижнів; фотокамера, Photoshop, AI, SMM і таргетинг"
             },
             "support": {
               "state": "included",
@@ -1843,6 +1866,16 @@
       "bytes": 106063
     },
     {
+      "id": "food-chocolate-pattern",
+      "src": "/images/studio/food/chocolate-pattern-3e61414354b6.webp",
+      "alt": "Плитки шоколаду рядами на бежевому тлі",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 960,
+      "height": 1280,
+      "sourceFile": "food-gallery/phone/IMG_2304.JPG"
+    },
+    {
       "id": "food-spice-test-tubes",
       "src": "/images/studio/food/spice-test-tubes-49d194183f0c.webp",
       "alt": "Скляні пробірки зі спеціями та бадьян на темному тлі",
@@ -1850,220 +1883,437 @@
       "driveId": "",
       "width": 960,
       "height": 1280,
-      "sourceFile": "IMG_9269.JPG"
-    },
-    {
-      "id": "food-champagne-cherry-splash",
-      "src": "/images/studio/food/champagne-cherry-splash-a26ea75747a9.webp",
-      "alt": "Вишня падає в келих шампанського з бризками на білому тлі",
-      "credit": "Робота студента академії",
-      "driveId": "",
-      "width": 922,
-      "height": 1280,
-      "sourceFile": "IMG_1183.JPG",
-      "position": "50% 0%"
-    },
-    {
-      "id": "food-apples-pattern",
-      "src": "/images/studio/food/apples-pattern-e8e7756c73d9.webp",
-      "alt": "Ряди червоних яблук на бірюзовому тлі й одне надкушене",
-      "credit": "Робота студента академії",
-      "driveId": "",
-      "width": 964,
-      "height": 1280,
-      "sourceFile": "IMG_9756.JPG"
-    },
-    {
-      "id": "food-perfume-gold-reflection",
-      "src": "/images/studio/food/perfume-gold-reflection-8ba1b32cc379.webp",
-      "alt": "Флакон парфумів із золотим відблиском у темній воді",
-      "credit": "Робота студента академії",
-      "driveId": "",
-      "width": 819,
-      "height": 1280,
-      "sourceFile": "IMG_9165.JPG"
-    },
-    {
-      "id": "food-tortellini-flour-flat-lay",
-      "src": "/images/studio/food/tortellini-flour-flat-lay-bf006da38e4c.webp",
-      "alt": "Тортеліні на дошці, борошно з жовтком і качалка на темному столі",
-      "credit": "Робота студента академії",
-      "driveId": "",
-      "width": 720,
-      "height": 1280,
-      "sourceFile": "IMG_4350.JPG"
-    },
-    {
-      "id": "food-lipsticks-peach",
-      "src": "/images/studio/food/lipsticks-peach-48342932a409.webp",
-      "alt": "Золоті помади з жорсткими тінями на персиковому тлі",
-      "credit": "Робота студента академії",
-      "driveId": "",
-      "width": 1018,
-      "height": 1440,
-      "sourceFile": "IMG_2393.JPEG"
-    },
-    {
-      "id": "food-sushi-black",
-      "src": "/images/studio/food/sushi-black-9971abbc283d.webp",
-      "alt": "Роли з лососем і мікрозеленню з віддзеркаленням на чорному тлі",
-      "credit": "Робота студента академії",
-      "driveId": "",
-      "width": 721,
-      "height": 1280,
-      "sourceFile": "IMG_9173.JPG"
-    },
-    {
-      "id": "food-tomatoes-green-light",
-      "src": "/images/studio/food/tomatoes-green-light-4b561bcd0762.webp",
-      "alt": "Гілка черрі та один томат на зеленому тлі в смугах сонячного світла",
-      "credit": "Робота студента академії",
-      "driveId": "",
-      "width": 720,
-      "height": 1280,
-      "sourceFile": "IMG_9018 (2).JPG",
-      "position": "50% 15%"
-    },
-    {
-      "id": "food-glass-splash-amber",
-      "src": "/images/studio/food/glass-splash-amber-71d7f175a755.webp",
-      "alt": "Сплеск води в келиху з лимоном на бурштиновому тлі з тінню",
-      "credit": "Робота студента академії",
-      "driveId": "",
-      "width": 1024,
-      "height": 1280,
-      "sourceFile": "IMG_4519.JPG"
-    },
-    {
-      "id": "food-violet-perfume-black",
-      "src": "/images/studio/food/violet-perfume-black-fa974e8626f2.webp",
-      "alt": "Фіолетовий флакон парфумів із віддзеркаленням на чорному тлі",
-      "credit": "Робота студента академії",
-      "driveId": "",
-      "width": 1080,
-      "height": 1352,
-      "sourceFile": "Копия IMG_2397.JPG"
-    },
-    {
-      "id": "food-chocolate-pattern",
-      "src": "/images/studio/food/chocolate-pattern-3e61414354b6.webp",
-      "alt": "Плитки шоколаду по діагоналі на жовтому тлі й одна надкушена",
-      "credit": "Робота студента академії",
-      "driveId": "",
-      "width": 960,
-      "height": 1280,
-      "sourceFile": "IMG_5027.JPG"
+      "sourceFile": "food-gallery/phone/IMG_7195.JPG"
     },
     {
       "id": "food-water-glass-splash",
-      "src": "/images/studio/food/water-glass-splash-f4453501f538.webp",
-      "alt": "Вода з льодом вихлюпується з келиха на блакитному тлі",
+      "src": "/images/studio/food/water-glass-splash-399cc26141f5.webp",
+      "alt": "Вода хлюпає з келиха на блакитному тлі",
       "credit": "Робота студента академії",
       "driveId": "",
       "width": 719,
       "height": 1280,
-      "sourceFile": "IMG_9801 (2).JPG",
-      "position": "50% 30%"
+      "sourceFile": "food-gallery/phone/IMG_7196.JPG"
     },
     {
-      "id": "food-chocolate-ice-cream",
-      "src": "/images/studio/food/chocolate-ice-cream-81cb369d8718.webp",
-      "alt": "Шоколадне морозиво на паличках із замороженою малиною на тарілці",
-      "credit": "Робота студента академії",
-      "driveId": "",
-      "width": 960,
-      "height": 1280,
-      "sourceFile": "IMG_4384.JPG"
-    },
-    {
-      "id": "food-skincare-geometry",
-      "src": "/images/studio/food/skincare-geometry-ea3ed56dc428.webp",
-      "alt": "Флакони догляду за шкірою на білій площині з різкою тінню",
-      "credit": "Робота студента академії",
-      "driveId": "",
-      "width": 1100,
-      "height": 1440,
-      "sourceFile": "IMG_2394.JPEG"
-    },
-    {
-      "id": "food-rose-vase-shadows",
-      "src": "/images/studio/food/rose-vase-shadows-296edc1fbb95.webp",
-      "alt": "Троянда в рубіновій вазі з рожевими й бірюзовими смугами світла",
+      "id": "food-ladybug-stem",
+      "src": "/images/studio/food/ladybug-stem-deacac5db3fa.webp",
+      "alt": "Сонечко на зеленому стеблі рослини",
       "credit": "Робота студента академії",
       "driveId": "",
       "width": 720,
       "height": 1280,
-      "sourceFile": "IMG_9019 (2).JPG"
+      "sourceFile": "food-gallery/phone/IMG_7197.JPG"
     },
     {
-      "id": "food-watch-crystals",
-      "src": "/images/studio/food/watch-crystals-e8ec34b6a209.webp",
-      "alt": "Циферблат годинника з кристалами крупним планом на чорному тлі",
+      "id": "food-shoes-car-seat",
+      "src": "/images/studio/food/shoes-car-seat-2479af2dbc46.webp",
+      "alt": "Дитячі туфлі на сидінні автомобіля",
       "credit": "Робота студента академії",
       "driveId": "",
-      "width": 961,
+      "width": 959,
       "height": 1280,
-      "sourceFile": "IMG_2439.JPG"
+      "sourceFile": "food-gallery/phone/IMG_7201.JPG"
+    },
+    {
+      "id": "food-sushi-black",
+      "src": "/images/studio/food/sushi-black-9971abbc283d.webp",
+      "alt": "Роли суші з віддзеркаленням на чорному тлі",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 721,
+      "height": 1280,
+      "sourceFile": "food-gallery/phone/IMG_7199.JPG"
+    },
+    {
+      "id": "food-apple-levitation",
+      "src": "/images/studio/food/apple-levitation-f7ebe81f36cb.webp",
+      "alt": "Скибки яблука ширяють у повітрі одна над одною",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 1024,
+      "height": 1280,
+      "sourceFile": "food-gallery/phone/IMG_7194.JPG"
+    },
+    {
+      "id": "food-red-shoes-thread",
+      "src": "/images/studio/food/red-shoes-thread-232a849f13f9.webp",
+      "alt": "Червоні туфлі й котушки ниток на білому тлі",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 1022,
+      "height": 1280,
+      "sourceFile": "food-gallery/phone/IMG_7198.JPG"
+    },
+    {
+      "id": "food-sneakers-shrimp",
+      "src": "/images/studio/food/sneakers-shrimp-30a27885d057.webp",
+      "alt": "Кросівки серед креветок, зелені й овочів у польоті",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 720,
+      "height": 1280,
+      "sourceFile": "food-gallery/phone/IMG_7202.JPG"
     },
     {
       "id": "food-olive-oil-still-life",
       "src": "/images/studio/food/olive-oil-still-life-4b805592294e.webp",
-      "alt": "Оливкова олія в графині, банка оливок і кришка в польоті",
+      "alt": "Пляшка оливкової олії, банка оливок і дерев'яна ложка",
       "credit": "Робота студента академії",
       "driveId": "",
       "width": 960,
       "height": 1280,
-      "sourceFile": "IMG_0255.JPG"
+      "sourceFile": "food-gallery/phone/IMG_7203.JPG"
     },
     {
-      "id": "food-cleanser-in-water",
-      "src": "/images/studio/food/cleanser-in-water-0e23dbf43aef.webp",
-      "alt": "Тюбик засобу для вмивання у воді з брижами",
+      "id": "food-shoes-bouquet",
+      "src": "/images/studio/food/shoes-bouquet-072f126cf0d5.webp",
+      "alt": "Букет у крафтовому папері з взуттям замість квітів",
       "credit": "Робота студента академії",
       "driveId": "",
-      "width": 1080,
-      "height": 1329,
-      "sourceFile": "Копия IMG_2398.JPG"
-    },
-    {
-      "id": "food-wine-glass-color-light",
-      "src": "/images/studio/food/wine-glass-color-light-0a05b6d10165.webp",
-      "alt": "Келих червоного вина на зелено-помаранчевому кольоровому тлі",
-      "credit": "Робота студента академії",
-      "driveId": "",
-      "width": 853,
+      "width": 720,
       "height": 1280,
-      "sourceFile": "IMG_2444.JPG"
+      "sourceFile": "food-gallery/phone/IMG_7205.JPG"
     },
     {
-      "id": "food-lipstick-cherries",
-      "src": "/images/studio/food/lipstick-cherries-f186360c96fc.webp",
-      "alt": "Червона помада й вишні на білих подіумах і червоному глянці",
+      "id": "food-candy-paint-splash",
+      "src": "/images/studio/food/candy-paint-splash-4226c9a00f7b.webp",
+      "alt": "Кольорові драже й пензель на тлі яскравих бризок фарби",
       "credit": "Робота студента академії",
       "driveId": "",
-      "width": 853,
+      "width": 1024,
+      "height": 1279,
+      "sourceFile": "food-gallery/phone/IMG_7206.JPG"
+    },
+    {
+      "id": "food-garlic-black",
+      "src": "/images/studio/food/garlic-black-3c3de5b2aed2.webp",
+      "alt": "Головки часнику на чорному тлі",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 859,
       "height": 1280,
-      "sourceFile": "IMG_1178.JPG"
+      "sourceFile": "food-gallery/phone/IMG_7204.JPG"
     },
     {
-      "id": "food-passion-fruit-cocktail",
-      "src": "/images/studio/food/passion-fruit-cocktail-031b93e7a612.webp",
-      "alt": "Коктейль із половинкою маракуї зверху на темних дошках",
+      "id": "food-cinnamon-glass",
+      "src": "/images/studio/food/cinnamon-glass-42800441a6af.webp",
+      "alt": "Палички кориці в склянці серед розсипаних спецій",
       "credit": "Робота студента академії",
       "driveId": "",
-      "width": 1080,
-      "height": 1080,
-      "sourceFile": "IMG_4218.JPG"
+      "width": 672,
+      "height": 1280,
+      "sourceFile": "food-gallery/phone/IMG_7209.JPG"
+    },
+    {
+      "id": "food-popcorn-black",
+      "src": "/images/studio/food/popcorn-black-004bf0c065c8.webp",
+      "alt": "Попкорн у чорному відерці на темному тлі",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 960,
+      "height": 1280,
+      "sourceFile": "food-gallery/phone/IMG_7207.JPG"
+    },
+    {
+      "id": "food-spices-spoons-top",
+      "src": "/images/studio/food/spices-spoons-top-0d914aab662d.webp",
+      "alt": "Спеції в ложках, ступка й розмарин, вигляд згори",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 940,
+      "height": 1280,
+      "sourceFile": "food-gallery/phone/IMG_7210.JPG"
+    },
+    {
+      "id": "food-spices-mortar-table",
+      "src": "/images/studio/food/spices-mortar-table-e15716d0fee2.webp",
+      "alt": "Спеції в ложках і ступка з перцем на дерев'яному столі",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 1280,
+      "height": 921,
+      "sourceFile": "food-gallery/phone/IMG_7208.JPG"
+    },
+    {
+      "id": "food-phone-bread-shot",
+      "src": "/images/studio/food/phone-bread-shot-346096356146.webp",
+      "alt": "Рука з телефоном знімає хліб над мисками з борошном і яйцями",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 720,
+      "height": 1280,
+      "sourceFile": "food-gallery/phone/IMG_7211.JPG"
+    },
+    {
+      "id": "food-red-pepper-black",
+      "src": "/images/studio/food/red-pepper-black-7e4fd3d0e121.webp",
+      "alt": "Червоний солодкий перець на чорному тлі",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 827,
+      "height": 1280,
+      "sourceFile": "food-gallery/phone/IMG_7212.JPG"
+    },
+    {
+      "id": "food-boots-mirror",
+      "src": "/images/studio/food/boots-mirror-ef5ad1bfd6a0.webp",
+      "alt": "Черевик на дзеркалі з відображенням неба",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 960,
+      "height": 1280,
+      "sourceFile": "food-gallery/phone/IMG_7213.JPG"
+    },
+    {
+      "id": "food-tomatoes-green-light",
+      "src": "/images/studio/food/tomatoes-green-light-4b561bcd0762.webp",
+      "alt": "Гілка томатів черрі на зеленому тлі зі смугами світла",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 720,
+      "height": 1280,
+      "sourceFile": "food-gallery/phone/IMG_7214.JPG"
+    },
+    {
+      "id": "food-rose-vase-shadows",
+      "src": "/images/studio/food/rose-vase-shadows-296edc1fbb95.webp",
+      "alt": "Троянда в рубіновій вазі з кольоровими тінями",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 720,
+      "height": 1280,
+      "sourceFile": "food-gallery/phone/IMG_7216.JPG"
+    },
+    {
+      "id": "food-chocolate-ice-cream",
+      "src": "/images/studio/food/chocolate-ice-cream-81cb369d8718.webp",
+      "alt": "Шоколадне морозиво з печивом і малиною",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 960,
+      "height": 1280,
+      "sourceFile": "food-gallery/phone/IMG_7215.JPG"
+    },
+    {
+      "id": "food-blueberries-bowl",
+      "src": "/images/studio/food/blueberries-bowl-342e52b6a354.webp",
+      "alt": "Чорниці в мисці з листком м'яти на білому тлі",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 720,
+      "height": 1280,
+      "sourceFile": "food-gallery/phone/IMG_7218.JPG"
+    },
+    {
+      "id": "food-beach-cocktail",
+      "src": "/images/studio/food/beach-cocktail-8f054be6bf28.webp",
+      "alt": "Коктейль у руці на шезлонгу біля моря",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 1024,
+      "height": 1280,
+      "sourceFile": "food-gallery/phone/IMG_7217.JPG"
+    },
+    {
+      "id": "food-glass-splash-amber",
+      "src": "/images/studio/food/glass-splash-amber-71d7f175a755.webp",
+      "alt": "Бризки в келиху на помаранчевому тлі з тінню",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 1024,
+      "height": 1280,
+      "sourceFile": "food-gallery/phone/IMG_2295.JPG"
+    },
+    {
+      "id": "food-aloe-drops",
+      "src": "/images/studio/food/aloe-drops-e315b230d6fb.webp",
+      "alt": "Листя алое з краплями води",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 960,
+      "height": 1280,
+      "sourceFile": "food-gallery/phone/IMG_2279.JPG"
     },
     {
       "id": "food-mango-blue-plates",
       "src": "/images/studio/food/mango-blue-plates-0c044c206445.webp",
-      "alt": "Манго на синіх і зелених тарілках зверху",
+      "alt": "Манго на синіх тарілках",
       "credit": "Робота студента академії",
       "driveId": "",
       "width": 963,
       "height": 1280,
-      "sourceFile": "IMG_0707.JPG"
+      "sourceFile": "food-gallery/phone/IMG_7220.JPG"
+    },
+    {
+      "id": "food-apple-dark",
+      "src": "/images/studio/food/apple-dark-c772e658d111.webp",
+      "alt": "Червоне яблуко з краплями на темному тлі",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 960,
+      "height": 1280,
+      "sourceFile": "food-gallery/phone/IMG_2286.JPG"
+    },
+    {
+      "id": "food-chili-tomato-pattern",
+      "src": "/images/studio/food/chili-tomato-pattern-a67ac4b499c5.webp",
+      "alt": "Перці чилі й томати черрі на жовтому тлі",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 1158,
+      "height": 1144,
+      "sourceFile": "food-gallery/phone/IMG_2302.JPG"
+    },
+    {
+      "id": "food-glass-splash-landscape",
+      "src": "/images/studio/food/glass-splash-landscape-b6dd51025f46.webp",
+      "alt": "Вода хлюпає з келиха на тлі гір і моря",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 960,
+      "height": 1280,
+      "sourceFile": "food-gallery/phone/IMG_2303.JPG"
+    },
+    {
+      "id": "food-skincare-geometry",
+      "src": "/images/studio/food/skincare-geometry-ea3ed56dc428.webp",
+      "alt": "Засоби для догляду за шкірою на світло-сірому тлі",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 1100,
+      "height": 1440,
+      "sourceFile": "food-gallery/camera/IMG_7180.JPG"
+    },
+    {
+      "id": "food-lipsticks-peach",
+      "src": "/images/studio/food/lipsticks-peach-48342932a409.webp",
+      "alt": "Золоті помади на персиковому тлі",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 1018,
+      "height": 1440,
+      "sourceFile": "food-gallery/camera/IMG_7181.JPG"
+    },
+    {
+      "id": "food-lipstick-cherry-arch",
+      "src": "/images/studio/food/lipstick-cherry-arch-ea5e6b0a3f86.webp",
+      "alt": "Червона помада з вишнею на тлі білого кола",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 853,
+      "height": 1280,
+      "sourceFile": "food-gallery/camera/IMG_7182.JPG"
+    },
+    {
+      "id": "food-watch-crystals",
+      "src": "/images/studio/food/watch-crystals-e8ec34b6a209.webp",
+      "alt": "Циферблат годинника з кристалами крупним планом",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 961,
+      "height": 1280,
+      "sourceFile": "food-gallery/camera/IMG_7183.JPG"
+    },
+    {
+      "id": "food-cream-white-stones",
+      "src": "/images/studio/food/cream-white-stones-997f78011884.webp",
+      "alt": "Баночка крему на білому камінні",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 853,
+      "height": 1280,
+      "sourceFile": "food-gallery/camera/IMG_7184.JPG"
+    },
+    {
+      "id": "food-lipstick-stones",
+      "src": "/images/studio/food/lipstick-stones-4899759ce65a.webp",
+      "alt": "Червона помада на білих каменях",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 853,
+      "height": 1280,
+      "sourceFile": "food-gallery/camera/IMG_7185.JPG"
+    },
+    {
+      "id": "food-lipstick-cherries",
+      "src": "/images/studio/food/lipstick-cherries-802105dbfeae.webp",
+      "alt": "Помади й вишні на червоно-білих подіумах",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 853,
+      "height": 1280,
+      "sourceFile": "food-gallery/camera/IMG_7186.JPG"
+    },
+    {
+      "id": "food-red-lipstick-black",
+      "src": "/images/studio/food/red-lipstick-black-d0a152def59d.webp",
+      "alt": "Червона помада крупним планом на чорному тлі",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 922,
+      "height": 1152,
+      "sourceFile": "food-gallery/camera/IMG_7187.JPG"
+    },
+    {
+      "id": "food-lip-gloss-pink",
+      "src": "/images/studio/food/lip-gloss-pink-9a88822da414.webp",
+      "alt": "Рожеві блиски для губ на білому тлі",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 1280,
+      "height": 1280,
+      "sourceFile": "food-gallery/camera/IMG_7188.JPG"
+    },
+    {
+      "id": "food-wine-glass-color-light",
+      "src": "/images/studio/food/wine-glass-color-light-0a05b6d10165.webp",
+      "alt": "Келих червоного вина на зелено-помаранчевому тлі",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 853,
+      "height": 1280,
+      "sourceFile": "food-gallery/camera/IMG_7189.JPG"
+    },
+    {
+      "id": "food-lipsticks-red-light",
+      "src": "/images/studio/food/lipsticks-red-light-26a762b632ca.webp",
+      "alt": "Помади в червоному світлі крупним планом",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 603,
+      "height": 853,
+      "sourceFile": "food-gallery/camera/IMG_7190.JPG"
+    },
+    {
+      "id": "food-lemon-levitation",
+      "src": "/images/studio/food/lemon-levitation-2eef25e39c68.webp",
+      "alt": "Скибки лимона й кубики льоду з бризками на чорному тлі",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 603,
+      "height": 835,
+      "sourceFile": "food-gallery/camera/IMG_7191.JPG"
+    },
+    {
+      "id": "food-orange-juice-glass",
+      "src": "/images/studio/food/orange-juice-glass-724bca4de85a.webp",
+      "alt": "Келих апельсинового соку з полуницею на темному тлі",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 603,
+      "height": 757,
+      "sourceFile": "food-gallery/camera/IMG_7192.JPG"
+    },
+    {
+      "id": "food-flask-gold-sparkles",
+      "src": "/images/studio/food/flask-gold-sparkles-abe340248823.webp",
+      "alt": "Скляна колба із золотими блискітками на чорному тлі",
+      "credit": "Робота студента академії",
+      "driveId": "",
+      "width": 1205,
+      "height": 1440,
+      "sourceFile": "food-gallery/camera/IMG_7193.JPG"
     }
   ],
   "instructors": [
@@ -2336,46 +2586,124 @@
       "device": "camera"
     },
     {
+      "id": "food-chocolate-pattern",
+      "title": "Шоколадний патерн",
+      "imageId": "food-chocolate-pattern",
+      "device": "phone"
+    },
+    {
       "id": "food-spice-test-tubes",
       "title": "Спеції в пробірках",
       "imageId": "food-spice-test-tubes",
-      "device": "camera"
+      "device": "phone"
     },
     {
-      "id": "food-champagne-cherry-splash",
-      "title": "Вишня в шампанському",
-      "imageId": "food-champagne-cherry-splash",
-      "device": "camera"
+      "id": "food-water-glass-splash",
+      "title": "Сплеск у келиху",
+      "imageId": "food-water-glass-splash",
+      "device": "phone"
     },
     {
-      "id": "food-apples-pattern",
-      "title": "Патерн з яблук",
-      "imageId": "food-apples-pattern",
-      "device": "camera"
+      "id": "food-ladybug-stem",
+      "title": "Сонечко на стеблі",
+      "imageId": "food-ladybug-stem",
+      "device": "phone"
     },
     {
-      "id": "food-perfume-gold-reflection",
-      "title": "Парфум і золоте відображення",
-      "imageId": "food-perfume-gold-reflection",
-      "device": "camera"
-    },
-    {
-      "id": "food-tortellini-flour-flat-lay",
-      "title": "Тортеліні на борошні",
-      "imageId": "food-tortellini-flour-flat-lay",
-      "device": "camera"
-    },
-    {
-      "id": "food-lipsticks-peach",
-      "title": "Помади на персиковому тлі",
-      "imageId": "food-lipsticks-peach",
-      "device": "camera"
+      "id": "food-shoes-car-seat",
+      "title": "Туфлі в авто",
+      "imageId": "food-shoes-car-seat",
+      "device": "phone"
     },
     {
       "id": "food-sushi-black",
       "title": "Суші на чорному",
       "imageId": "food-sushi-black",
-      "device": "camera"
+      "device": "phone"
+    },
+    {
+      "id": "food-apple-levitation",
+      "title": "Левітація яблука",
+      "imageId": "food-apple-levitation",
+      "device": "phone"
+    },
+    {
+      "id": "food-red-shoes-thread",
+      "title": "Туфлі й нитки",
+      "imageId": "food-red-shoes-thread",
+      "device": "phone"
+    },
+    {
+      "id": "food-sneakers-shrimp",
+      "title": "Кросівки в русі",
+      "imageId": "food-sneakers-shrimp",
+      "device": "phone"
+    },
+    {
+      "id": "food-olive-oil-still-life",
+      "title": "Оливкова олія",
+      "imageId": "food-olive-oil-still-life",
+      "device": "phone"
+    },
+    {
+      "id": "food-shoes-bouquet",
+      "title": "Букет із взуття",
+      "imageId": "food-shoes-bouquet",
+      "device": "phone"
+    },
+    {
+      "id": "food-candy-paint-splash",
+      "title": "Драже й фарба",
+      "imageId": "food-candy-paint-splash",
+      "device": "phone"
+    },
+    {
+      "id": "food-garlic-black",
+      "title": "Часник",
+      "imageId": "food-garlic-black",
+      "device": "phone"
+    },
+    {
+      "id": "food-cinnamon-glass",
+      "title": "Кориця",
+      "imageId": "food-cinnamon-glass",
+      "device": "phone"
+    },
+    {
+      "id": "food-popcorn-black",
+      "title": "Попкорн",
+      "imageId": "food-popcorn-black",
+      "device": "phone"
+    },
+    {
+      "id": "food-spices-spoons-top",
+      "title": "Спеції згори",
+      "imageId": "food-spices-spoons-top",
+      "device": "phone"
+    },
+    {
+      "id": "food-spices-mortar-table",
+      "title": "Спеції й ступка",
+      "imageId": "food-spices-mortar-table",
+      "device": "phone"
+    },
+    {
+      "id": "food-phone-bread-shot",
+      "title": "Зйомка на телефон",
+      "imageId": "food-phone-bread-shot",
+      "device": "phone"
+    },
+    {
+      "id": "food-red-pepper-black",
+      "title": "Червоний перець",
+      "imageId": "food-red-pepper-black",
+      "device": "phone"
+    },
+    {
+      "id": "food-boots-mirror",
+      "title": "Черевик і дзеркало",
+      "imageId": "food-boots-mirror",
+      "device": "phone"
     },
     {
       "id": "food-tomatoes-green-light",
@@ -2384,46 +2712,82 @@
       "device": "phone"
     },
     {
-      "id": "food-glass-splash-amber",
-      "title": "Сплеск у бурштиновому світлі",
-      "imageId": "food-glass-splash-amber",
-      "device": "camera"
-    },
-    {
-      "id": "food-violet-perfume-black",
-      "title": "Фіолетовий парфум",
-      "imageId": "food-violet-perfume-black",
-      "device": "camera"
-    },
-    {
-      "id": "food-chocolate-pattern",
-      "title": "Шоколадний патерн",
-      "imageId": "food-chocolate-pattern",
-      "device": "camera"
-    },
-    {
-      "id": "food-water-glass-splash",
-      "title": "Сплеск води в келиху",
-      "imageId": "food-water-glass-splash",
-      "device": "camera"
+      "id": "food-rose-vase-shadows",
+      "title": "Троянда й тіні",
+      "imageId": "food-rose-vase-shadows",
+      "device": "phone"
     },
     {
       "id": "food-chocolate-ice-cream",
-      "title": "Шоколадне морозиво з малиною",
+      "title": "Шоколадне морозиво",
       "imageId": "food-chocolate-ice-cream",
       "device": "phone"
     },
     {
+      "id": "food-blueberries-bowl",
+      "title": "Чорниці",
+      "imageId": "food-blueberries-bowl",
+      "device": "phone"
+    },
+    {
+      "id": "food-beach-cocktail",
+      "title": "Коктейль біля моря",
+      "imageId": "food-beach-cocktail",
+      "device": "phone"
+    },
+    {
+      "id": "food-glass-splash-amber",
+      "title": "Сплеск на помаранчевому",
+      "imageId": "food-glass-splash-amber",
+      "device": "phone"
+    },
+    {
+      "id": "food-aloe-drops",
+      "title": "Алое",
+      "imageId": "food-aloe-drops",
+      "device": "phone"
+    },
+    {
+      "id": "food-mango-blue-plates",
+      "title": "Манго на синіх тарілках",
+      "imageId": "food-mango-blue-plates",
+      "device": "phone"
+    },
+    {
+      "id": "food-apple-dark",
+      "title": "Яблуко на темному",
+      "imageId": "food-apple-dark",
+      "device": "phone"
+    },
+    {
+      "id": "food-chili-tomato-pattern",
+      "title": "Чилі й томати",
+      "imageId": "food-chili-tomato-pattern",
+      "device": "phone"
+    },
+    {
+      "id": "food-glass-splash-landscape",
+      "title": "Сплеск і пейзаж",
+      "imageId": "food-glass-splash-landscape",
+      "device": "phone"
+    },
+    {
       "id": "food-skincare-geometry",
-      "title": "Догляд і геометрія",
+      "title": "Догляд за шкірою",
       "imageId": "food-skincare-geometry",
       "device": "camera"
     },
     {
-      "id": "food-rose-vase-shadows",
-      "title": "Троянда в кольоровому світлі",
-      "imageId": "food-rose-vase-shadows",
-      "device": "phone"
+      "id": "food-lipsticks-peach",
+      "title": "Помади на персиковому",
+      "imageId": "food-lipsticks-peach",
+      "device": "camera"
+    },
+    {
+      "id": "food-lipstick-cherry-arch",
+      "title": "Помада й вишня",
+      "imageId": "food-lipstick-cherry-arch",
+      "device": "camera"
     },
     {
       "id": "food-watch-crystals",
@@ -2432,15 +2796,33 @@
       "device": "camera"
     },
     {
-      "id": "food-olive-oil-still-life",
-      "title": "Оливки й олія",
-      "imageId": "food-olive-oil-still-life",
+      "id": "food-cream-white-stones",
+      "title": "Крем на каменях",
+      "imageId": "food-cream-white-stones",
       "device": "camera"
     },
     {
-      "id": "food-cleanser-in-water",
-      "title": "Засіб для вмивання у воді",
-      "imageId": "food-cleanser-in-water",
+      "id": "food-lipstick-stones",
+      "title": "Помада на каменях",
+      "imageId": "food-lipstick-stones",
+      "device": "camera"
+    },
+    {
+      "id": "food-lipstick-cherries",
+      "title": "Помади й вишні",
+      "imageId": "food-lipstick-cherries",
+      "device": "camera"
+    },
+    {
+      "id": "food-red-lipstick-black",
+      "title": "Червона помада",
+      "imageId": "food-red-lipstick-black",
+      "device": "camera"
+    },
+    {
+      "id": "food-lip-gloss-pink",
+      "title": "Блиски для губ",
+      "imageId": "food-lip-gloss-pink",
       "device": "camera"
     },
     {
@@ -2450,22 +2832,28 @@
       "device": "camera"
     },
     {
-      "id": "food-lipstick-cherries",
-      "title": "Помада й вишні",
-      "imageId": "food-lipstick-cherries",
+      "id": "food-lipsticks-red-light",
+      "title": "Помади в червоному світлі",
+      "imageId": "food-lipsticks-red-light",
       "device": "camera"
     },
     {
-      "id": "food-passion-fruit-cocktail",
-      "title": "Коктейль з маракуєю",
-      "imageId": "food-passion-fruit-cocktail",
-      "device": "phone"
+      "id": "food-lemon-levitation",
+      "title": "Левітація лимона",
+      "imageId": "food-lemon-levitation",
+      "device": "camera"
     },
     {
-      "id": "food-mango-blue-plates",
-      "title": "Манго на синіх тарілках",
-      "imageId": "food-mango-blue-plates",
-      "device": "phone"
+      "id": "food-orange-juice-glass",
+      "title": "Апельсиновий сік",
+      "imageId": "food-orange-juice-glass",
+      "device": "camera"
+    },
+    {
+      "id": "food-flask-gold-sparkles",
+      "title": "Колба з блискітками",
+      "imageId": "food-flask-gold-sparkles",
+      "device": "camera"
     }
   ],
   "pages": [

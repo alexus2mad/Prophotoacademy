@@ -6,8 +6,10 @@ import { useCreatorWorks } from './hooks';
 import type { StudioCreatorWorksProps } from './types';
 import styles from './StudioCreatorWorks.module.css';
 
+const deviceLabels = { camera: 'На камеру', phone: 'На телефон' } as const;
+
 export function StudioCreatorWorks(props: StudioCreatorWorksProps) {
-  const { device, selectDevice, entries, carousel, gallery } = useCreatorWorks(props);
+  const { devices, device, selectDevice, entries, carousel, gallery } = useCreatorWorks(props);
   return (
     <section
       id="student-works"
@@ -22,22 +24,17 @@ export function StudioCreatorWorks(props: StudioCreatorWorksProps) {
         ідеї зйомки.
       </p>
       <div className={styles.filters} role="group" aria-label="Техніка зйомки">
-        <button
-          type="button"
-          aria-pressed={device === 'camera'}
-          aria-controls="creator-work-rail"
-          onClick={() => selectDevice('camera')}
-        >
-          На камеру
-        </button>
-        <button
-          type="button"
-          aria-pressed={device === 'phone'}
-          aria-controls="creator-work-rail"
-          onClick={() => selectDevice('phone')}
-        >
-          На телефон
-        </button>
+        {devices.map((option) => (
+          <button
+            type="button"
+            key={option}
+            aria-pressed={device === option}
+            aria-controls="creator-work-rail"
+            onClick={() => selectDevice(option)}
+          >
+            {deviceLabels[option]}
+          </button>
+        ))}
       </div>
       <div
         id="creator-work-rail"

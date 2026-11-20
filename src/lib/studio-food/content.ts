@@ -112,4 +112,5 @@ export const foodEditorial: StudioCourseEditorial = {
   audience,
   benefits,
   learningSteps,
+  worksDevices: ['phone', 'camera'],
 };

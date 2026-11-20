@@ -10,4 +10,6 @@ export type StudioCreatorWorksProps = {
   works: Work[];
   images: ImageAsset[];
   opening?: CourseWorksOpening;
+  /** Filter order; the first device with works is selected initially. */
+  devices?: readonly Work['device'][];
 };

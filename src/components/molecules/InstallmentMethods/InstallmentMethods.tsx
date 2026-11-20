@@ -44,7 +44,7 @@ export function InstallmentMethods({ prominent = false }: InstallmentMethodsProp
           </li>
         ))}
       </ul>
-      <figcaption className={styles.caption}>Оплата частинами</figcaption>
+      <figcaption className={styles.caption}>Є оплата частинами</figcaption>
     </figure>
   );
 }

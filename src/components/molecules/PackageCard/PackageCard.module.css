@@ -4,3 +4,8 @@
   margin-bottom: 20px;
   --installment-label-color: var(--secondary);
 }
+
+.underPrice {
+  justify-content: start;
+  margin: 0 0 28px;
+}

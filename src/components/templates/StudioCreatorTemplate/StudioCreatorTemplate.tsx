@@ -37,7 +37,12 @@ export function StudioCreatorTemplate({
         duration={offering?.duration ?? 'За програмою курсу'}
         editorial={editorial}
       />
-      <StudioCreatorWorks works={works} images={content.images} opening={editorial.worksOpening} />
+      <StudioCreatorWorks
+        works={works}
+        images={content.images}
+        opening={editorial.worksOpening}
+        devices={editorial.worksDevices}
+      />
       {editorial.faculty && <StudioCreatorFaculty instructors={editorial.faculty} />}
       <StudioAcademyReviews variant="creator" />
       {offering?.packages.length ? (

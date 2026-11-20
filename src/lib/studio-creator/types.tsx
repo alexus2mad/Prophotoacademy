@@ -45,5 +45,7 @@ export type StudioCourseEditorial = {
   benefits: readonly CourseTextItem[];
   learningSteps: readonly CourseTextItem[];
   worksOpening?: CourseWorksOpening;
+  /** Works filter order; defaults to camera, then phone. */
+  worksDevices?: readonly Work['device'][];
   faculty?: readonly CreatorLecturer[];
 };

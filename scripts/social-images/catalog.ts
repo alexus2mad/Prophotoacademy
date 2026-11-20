@@ -100,8 +100,8 @@ export const socialCards: SocialCard[] = [
     description:
       'Спец курс фото та відео: світло, композиція, колір, контент-відео й вихід на комерцію.',
     label: 'КУРС',
-    subtitle: 'Старт 18 грудня · 13 тижнів',
-    photos: [photo('food-apples-pattern')],
+    subtitle: 'Старт 18 грудня · 12 тижнів',
+    photos: [photo('food-chocolate-pattern')],
   },
   {
     path: '/pro-photo-lab',

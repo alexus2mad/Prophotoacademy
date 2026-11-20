@@ -42,13 +42,22 @@ describe('Food and product photography course page', () => {
     expect($('h1').text()).toBe('*предметна таФуд-зйомка');
     expect($('#program-lecturers')).toHaveLength(0);
     expect($.text()).toContain('40+ лекцій');
-    expect($.text()).toContain('13 тижнів');
+    expect($.text()).toContain('12 тижнів');
+    expect($.text()).not.toContain('13 тижнів');
     expect($.text()).not.toContain('*комерційний');
     const heroActions = $('[aria-labelledby="creator-title"] .studio-actions a');
     expect(heroActions.map((_, link) => $(link).attr('href')).get()).toEqual([
       '#packages',
       '#program-curriculum',
     ]);
+  });
+
+  it('numbers the curriculum weeks 1 to 12 without a gap', async () => {
+    const weeks = program.modules
+      .map((module) => /^Тиждень (\d+)/.exec(module.title)?.[1])
+      .filter(Boolean)
+      .map(Number);
+    expect(weeks).toEqual(Array.from({ length: 12 }, (_, index) => index + 1));
   });
 
   it('lists every audience card, benefit and curriculum week from the course brief', async () => {
@@ -70,6 +79,36 @@ describe('Food and product photography course page', () => {
     }
     expect($('#packages').text()).toContain('59 999');
     expect($('[data-installment-methods]').length).toBeGreaterThan(0);
+  });
+
+  it('shows the installment notice under each package price', async () => {
+    const $ = await render();
+    $('#packages .package-card').each((_, card) => {
+      const notice = $(card).find('.price').next();
+      expect(notice.find('[data-installment-methods]')).toHaveLength(1);
+      expect(notice.text()).toContain('Є оплата частинами');
+      expect($(card).find('.package-action [data-installment-methods]')).toHaveLength(0);
+    });
+  });
+
+  it('opens the works on the phone tab, listed before the camera tab, in the curated order', async () => {
+    const $ = await render();
+    expect(
+      $('#student-works [aria-controls="creator-work-rail"]')
+        .map((_, button) => $(button).text())
+        .get(),
+    ).toEqual(['На телефон', 'На камеру']);
+    expect($('#student-works [aria-pressed="true"]').text()).toBe('На телефон');
+    const phone = program.workIds.filter(
+      (id) => content.works.find((work) => work.id === id)?.device === 'phone',
+    );
+    expect(phone.slice(0, 3)).toEqual([
+      'food-chocolate-pattern',
+      'food-spice-test-tubes',
+      'food-water-glass-splash',
+    ]);
+    expect(phone.at(-1)).toBe('food-glass-splash-landscape');
+    expect($('#creator-work-rail img')).toHaveLength(phone.length);
   });
 
   it('shows only the food course works in the rail', async () => {

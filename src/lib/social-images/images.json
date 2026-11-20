@@ -136,20 +136,20 @@
     "description": "Спец курс фото та відео: світло, композиція, колір, контент-відео й вихід на комерцію.",
     "images": [
       {
-        "src": "/social/food-product-photography-1507fb8362f0-wide.jpg",
+        "src": "/social/food-product-photography-c45c1c9a8860-wide.jpg",
         "width": 1200,
         "height": 630,
-        "alt": "Предметна та фуд-зйомка · ProPhoto — Ряди червоних яблук на бірюзовому тлі й одне надкушене",
-        "sha256": "1507fb8362f07f6074dd8b6d5ba555138aa82f7f7ba8f935eab92d5f7711a52e",
-        "bytes": 138660
+        "alt": "Предметна та фуд-зйомка · ProPhoto — Плитки шоколаду рядами на бежевому тлі",
+        "sha256": "c45c1c9a8860e20ba820546ec0b617e3058ac37ec4b68fafe655acb861e8796b",
+        "bytes": 120605
       },
       {
-        "src": "/social/food-product-photography-14d10d6afa31-square.jpg",
+        "src": "/social/food-product-photography-7a79f8c0a690-square.jpg",
         "width": 630,
         "height": 630,
-        "alt": "Предметна та фуд-зйомка · ProPhoto — Ряди червоних яблук на бірюзовому тлі й одне надкушене",
-        "sha256": "14d10d6afa31b65ae009f9b2865a0a6c7f5be330eb1fb652f4a8b9058be2915d",
-        "bytes": 93451
+        "alt": "Предметна та фуд-зйомка · ProPhoto — Плитки шоколаду рядами на бежевому тлі",
+        "sha256": "7a79f8c0a6906a77948331aa19e8948163d193f40c645f0f883c4a1a4d419261",
+        "bytes": 77605
       }
     ]
   },

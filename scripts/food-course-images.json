@@ -1,10 +1,10 @@
 {
   "page": "food",
-  "sourceDirectory": "../food",
+  "sourceDirectory": "..",
   "images": [
     {
       "id": "spices-mortar-spoons",
-      "source": "IMG_3749.JPG",
+      "source": "food/IMG_3749.JPG",
       "role": "hero",
       "alt": "Спеції в ложках, ступка з перцем і розмарин на темному дерев'яному столі",
       "device": "camera",
@@ -14,161 +14,320 @@
       }
     },
     {
+      "id": "chocolate-pattern",
+      "source": "food-gallery/phone/IMG_2304.JPG",
+      "role": "work",
+      "alt": "Плитки шоколаду рядами на бежевому тлі",
+      "device": "phone"
+    },
+    {
       "id": "spice-test-tubes",
-      "source": "IMG_9269.JPG",
+      "source": "food-gallery/phone/IMG_7195.JPG",
       "role": "work",
       "alt": "Скляні пробірки зі спеціями та бадьян на темному тлі",
-      "device": "camera"
-    },
-    {
-      "id": "champagne-cherry-splash",
-      "source": "IMG_1183.JPG",
-      "role": "work",
-      "alt": "Вишня падає в келих шампанського з бризками на білому тлі",
-      "device": "camera",
-      "position": "50% 0%"
-    },
-    {
-      "id": "apples-pattern",
-      "source": "IMG_9756.JPG",
-      "role": "work",
-      "alt": "Ряди червоних яблук на бірюзовому тлі й одне надкушене",
-      "device": "camera"
-    },
-    {
-      "id": "perfume-gold-reflection",
-      "source": "IMG_9165.JPG",
-      "role": "work",
-      "alt": "Флакон парфумів із золотим відблиском у темній воді",
-      "device": "camera"
-    },
-    {
-      "id": "tortellini-flour-flat-lay",
-      "source": "IMG_4350.JPG",
-      "role": "work",
-      "alt": "Тортеліні на дошці, борошно з жовтком і качалка на темному столі",
-      "device": "camera"
-    },
-    {
-      "id": "lipsticks-peach",
-      "source": "IMG_2393.JPEG",
-      "role": "work",
-      "alt": "Золоті помади з жорсткими тінями на персиковому тлі",
-      "device": "camera"
-    },
-    {
-      "id": "sushi-black",
-      "source": "IMG_9173.JPG",
-      "role": "work",
-      "alt": "Роли з лососем і мікрозеленню з віддзеркаленням на чорному тлі",
-      "device": "camera"
-    },
-    {
-      "id": "tomatoes-green-light",
-      "source": "IMG_9018 (2).JPG",
-      "role": "work",
-      "alt": "Гілка черрі та один томат на зеленому тлі в смугах сонячного світла",
-      "device": "phone",
-      "position": "50% 15%"
-    },
-    {
-      "id": "glass-splash-amber",
-      "source": "IMG_4519.JPG",
-      "role": "work",
-      "alt": "Сплеск води в келиху з лимоном на бурштиновому тлі з тінню",
-      "device": "camera"
-    },
-    {
-      "id": "violet-perfume-black",
-      "source": "Копия IMG_2397.JPG",
-      "role": "work",
-      "alt": "Фіолетовий флакон парфумів із віддзеркаленням на чорному тлі",
-      "device": "camera"
-    },
-    {
-      "id": "chocolate-pattern",
-      "source": "IMG_5027.JPG",
-      "role": "work",
-      "alt": "Плитки шоколаду по діагоналі на жовтому тлі й одна надкушена",
-      "device": "camera"
+      "device": "phone"
     },
     {
       "id": "water-glass-splash",
-      "source": "IMG_9801 (2).JPG",
+      "source": "food-gallery/phone/IMG_7196.JPG",
       "role": "work",
-      "alt": "Вода з льодом вихлюпується з келиха на блакитному тлі",
-      "device": "camera",
-      "position": "50% 30%"
-    },
-    {
-      "id": "chocolate-ice-cream",
-      "source": "IMG_4384.JPG",
-      "role": "work",
-      "alt": "Шоколадне морозиво на паличках із замороженою малиною на тарілці",
+      "alt": "Вода хлюпає з келиха на блакитному тлі",
       "device": "phone"
     },
     {
-      "id": "skincare-geometry",
-      "source": "IMG_2394.JPEG",
+      "id": "ladybug-stem",
+      "source": "food-gallery/phone/IMG_7197.JPG",
       "role": "work",
-      "alt": "Флакони догляду за шкірою на білій площині з різкою тінню",
-      "device": "camera"
-    },
-    {
-      "id": "rose-vase-shadows",
-      "source": "IMG_9019 (2).JPG",
-      "role": "work",
-      "alt": "Троянда в рубіновій вазі з рожевими й бірюзовими смугами світла",
+      "alt": "Сонечко на зеленому стеблі рослини",
       "device": "phone"
     },
     {
-      "id": "watch-crystals",
-      "source": "IMG_2439.JPG",
+      "id": "shoes-car-seat",
+      "source": "food-gallery/phone/IMG_7201.JPG",
       "role": "work",
-      "alt": "Циферблат годинника з кристалами крупним планом на чорному тлі",
-      "device": "camera"
+      "alt": "Дитячі туфлі на сидінні автомобіля",
+      "device": "phone"
+    },
+    {
+      "id": "sushi-black",
+      "source": "food-gallery/phone/IMG_7199.JPG",
+      "role": "work",
+      "alt": "Роли суші з віддзеркаленням на чорному тлі",
+      "device": "phone"
+    },
+    {
+      "id": "apple-levitation",
+      "source": "food-gallery/phone/IMG_7194.JPG",
+      "role": "work",
+      "alt": "Скибки яблука ширяють у повітрі одна над одною",
+      "device": "phone"
+    },
+    {
+      "id": "red-shoes-thread",
+      "source": "food-gallery/phone/IMG_7198.JPG",
+      "role": "work",
+      "alt": "Червоні туфлі й котушки ниток на білому тлі",
+      "device": "phone"
+    },
+    {
+      "id": "sneakers-shrimp",
+      "source": "food-gallery/phone/IMG_7202.JPG",
+      "role": "work",
+      "alt": "Кросівки серед креветок, зелені й овочів у польоті",
+      "device": "phone"
     },
     {
       "id": "olive-oil-still-life",
-      "source": "IMG_0255.JPG",
+      "source": "food-gallery/phone/IMG_7203.JPG",
       "role": "work",
-      "alt": "Оливкова олія в графині, банка оливок і кришка в польоті",
-      "device": "camera"
+      "alt": "Пляшка оливкової олії, банка оливок і дерев'яна ложка",
+      "device": "phone"
     },
     {
-      "id": "cleanser-in-water",
-      "source": "Копия IMG_2398.JPG",
+      "id": "shoes-bouquet",
+      "source": "food-gallery/phone/IMG_7205.JPG",
       "role": "work",
-      "alt": "Тюбик засобу для вмивання у воді з брижами",
-      "device": "camera"
+      "alt": "Букет у крафтовому папері з взуттям замість квітів",
+      "device": "phone"
     },
     {
-      "id": "wine-glass-color-light",
-      "source": "IMG_2444.JPG",
+      "id": "candy-paint-splash",
+      "source": "food-gallery/phone/IMG_7206.JPG",
       "role": "work",
-      "alt": "Келих червоного вина на зелено-помаранчевому кольоровому тлі",
-      "device": "camera"
+      "alt": "Кольорові драже й пензель на тлі яскравих бризок фарби",
+      "device": "phone"
     },
     {
-      "id": "lipstick-cherries",
-      "source": "IMG_1178.JPG",
+      "id": "garlic-black",
+      "source": "food-gallery/phone/IMG_7204.JPG",
       "role": "work",
-      "alt": "Червона помада й вишні на білих подіумах і червоному глянці",
-      "device": "camera"
+      "alt": "Головки часнику на чорному тлі",
+      "device": "phone"
     },
     {
-      "id": "passion-fruit-cocktail",
-      "source": "IMG_4218.JPG",
+      "id": "cinnamon-glass",
+      "source": "food-gallery/phone/IMG_7209.JPG",
       "role": "work",
-      "alt": "Коктейль із половинкою маракуї зверху на темних дошках",
+      "alt": "Палички кориці в склянці серед розсипаних спецій",
+      "device": "phone"
+    },
+    {
+      "id": "popcorn-black",
+      "source": "food-gallery/phone/IMG_7207.JPG",
+      "role": "work",
+      "alt": "Попкорн у чорному відерці на темному тлі",
+      "device": "phone"
+    },
+    {
+      "id": "spices-spoons-top",
+      "source": "food-gallery/phone/IMG_7210.JPG",
+      "role": "work",
+      "alt": "Спеції в ложках, ступка й розмарин, вигляд згори",
+      "device": "phone"
+    },
+    {
+      "id": "spices-mortar-table",
+      "source": "food-gallery/phone/IMG_7208.JPG",
+      "role": "work",
+      "alt": "Спеції в ложках і ступка з перцем на дерев'яному столі",
+      "device": "phone"
+    },
+    {
+      "id": "phone-bread-shot",
+      "source": "food-gallery/phone/IMG_7211.JPG",
+      "role": "work",
+      "alt": "Рука з телефоном знімає хліб над мисками з борошном і яйцями",
+      "device": "phone"
+    },
+    {
+      "id": "red-pepper-black",
+      "source": "food-gallery/phone/IMG_7212.JPG",
+      "role": "work",
+      "alt": "Червоний солодкий перець на чорному тлі",
+      "device": "phone"
+    },
+    {
+      "id": "boots-mirror",
+      "source": "food-gallery/phone/IMG_7213.JPG",
+      "role": "work",
+      "alt": "Черевик на дзеркалі з відображенням неба",
+      "device": "phone"
+    },
+    {
+      "id": "tomatoes-green-light",
+      "source": "food-gallery/phone/IMG_7214.JPG",
+      "role": "work",
+      "alt": "Гілка томатів черрі на зеленому тлі зі смугами світла",
+      "device": "phone"
+    },
+    {
+      "id": "rose-vase-shadows",
+      "source": "food-gallery/phone/IMG_7216.JPG",
+      "role": "work",
+      "alt": "Троянда в рубіновій вазі з кольоровими тінями",
+      "device": "phone"
+    },
+    {
+      "id": "chocolate-ice-cream",
+      "source": "food-gallery/phone/IMG_7215.JPG",
+      "role": "work",
+      "alt": "Шоколадне морозиво з печивом і малиною",
+      "device": "phone"
+    },
+    {
+      "id": "blueberries-bowl",
+      "source": "food-gallery/phone/IMG_7218.JPG",
+      "role": "work",
+      "alt": "Чорниці в мисці з листком м'яти на білому тлі",
+      "device": "phone"
+    },
+    {
+      "id": "beach-cocktail",
+      "source": "food-gallery/phone/IMG_7217.JPG",
+      "role": "work",
+      "alt": "Коктейль у руці на шезлонгу біля моря",
+      "device": "phone"
+    },
+    {
+      "id": "glass-splash-amber",
+      "source": "food-gallery/phone/IMG_2295.JPG",
+      "role": "work",
+      "alt": "Бризки в келиху на помаранчевому тлі з тінню",
+      "device": "phone"
+    },
+    {
+      "id": "aloe-drops",
+      "source": "food-gallery/phone/IMG_2279.JPG",
+      "role": "work",
+      "alt": "Листя алое з краплями води",
       "device": "phone"
     },
     {
       "id": "mango-blue-plates",
-      "source": "IMG_0707.JPG",
+      "source": "food-gallery/phone/IMG_7220.JPG",
       "role": "work",
-      "alt": "Манго на синіх і зелених тарілках зверху",
+      "alt": "Манго на синіх тарілках",
       "device": "phone"
+    },
+    {
+      "id": "apple-dark",
+      "source": "food-gallery/phone/IMG_2286.JPG",
+      "role": "work",
+      "alt": "Червоне яблуко з краплями на темному тлі",
+      "device": "phone"
+    },
+    {
+      "id": "chili-tomato-pattern",
+      "source": "food-gallery/phone/IMG_2302.JPG",
+      "role": "work",
+      "alt": "Перці чилі й томати черрі на жовтому тлі",
+      "device": "phone"
+    },
+    {
+      "id": "glass-splash-landscape",
+      "source": "food-gallery/phone/IMG_2303.JPG",
+      "role": "work",
+      "alt": "Вода хлюпає з келиха на тлі гір і моря",
+      "device": "phone"
+    },
+    {
+      "id": "skincare-geometry",
+      "source": "food-gallery/camera/IMG_7180.JPG",
+      "role": "work",
+      "alt": "Засоби для догляду за шкірою на світло-сірому тлі",
+      "device": "camera"
+    },
+    {
+      "id": "lipsticks-peach",
+      "source": "food-gallery/camera/IMG_7181.JPG",
+      "role": "work",
+      "alt": "Золоті помади на персиковому тлі",
+      "device": "camera"
+    },
+    {
+      "id": "lipstick-cherry-arch",
+      "source": "food-gallery/camera/IMG_7182.JPG",
+      "role": "work",
+      "alt": "Червона помада з вишнею на тлі білого кола",
+      "device": "camera"
+    },
+    {
+      "id": "watch-crystals",
+      "source": "food-gallery/camera/IMG_7183.JPG",
+      "role": "work",
+      "alt": "Циферблат годинника з кристалами крупним планом",
+      "device": "camera"
+    },
+    {
+      "id": "cream-white-stones",
+      "source": "food-gallery/camera/IMG_7184.JPG",
+      "role": "work",
+      "alt": "Баночка крему на білому камінні",
+      "device": "camera"
+    },
+    {
+      "id": "lipstick-stones",
+      "source": "food-gallery/camera/IMG_7185.JPG",
+      "role": "work",
+      "alt": "Червона помада на білих каменях",
+      "device": "camera"
+    },
+    {
+      "id": "lipstick-cherries",
+      "source": "food-gallery/camera/IMG_7186.JPG",
+      "role": "work",
+      "alt": "Помади й вишні на червоно-білих подіумах",
+      "device": "camera"
+    },
+    {
+      "id": "red-lipstick-black",
+      "source": "food-gallery/camera/IMG_7187.JPG",
+      "role": "work",
+      "alt": "Червона помада крупним планом на чорному тлі",
+      "device": "camera"
+    },
+    {
+      "id": "lip-gloss-pink",
+      "source": "food-gallery/camera/IMG_7188.JPG",
+      "role": "work",
+      "alt": "Рожеві блиски для губ на білому тлі",
+      "device": "camera"
+    },
+    {
+      "id": "wine-glass-color-light",
+      "source": "food-gallery/camera/IMG_7189.JPG",
+      "role": "work",
+      "alt": "Келих червоного вина на зелено-помаранчевому тлі",
+      "device": "camera"
+    },
+    {
+      "id": "lipsticks-red-light",
+      "source": "food-gallery/camera/IMG_7190.JPG",
+      "role": "work",
+      "alt": "Помади в червоному світлі крупним планом",
+      "device": "camera"
+    },
+    {
+      "id": "lemon-levitation",
+      "source": "food-gallery/camera/IMG_7191.JPG",
+      "role": "work",
+      "alt": "Скибки лимона й кубики льоду з бризками на чорному тлі",
+      "device": "camera"
+    },
+    {
+      "id": "orange-juice-glass",
+      "source": "food-gallery/camera/IMG_7192.JPG",
+      "role": "work",
+      "alt": "Келих апельсинового соку з полуницею на темному тлі",
+      "device": "camera"
+    },
+    {
+      "id": "flask-gold-sparkles",
+      "source": "food-gallery/camera/IMG_7193.JPG",
+      "role": "work",
+      "alt": "Скляна колба із золотими блискітками на чорному тлі",
+      "device": "camera"
     }
-  ]
+  ],
+  "gallerySource": "https://drive.google.com/drive/folders/14PZ6MmWtTLcye7IlGzuzz8-VP-bt9_09 (Телефон → food-gallery/phone, Камера → food-gallery/camera); phone order follows the 20 November 2026 screenshots"
 }

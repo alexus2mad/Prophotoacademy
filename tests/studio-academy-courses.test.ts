@@ -33,7 +33,7 @@ describe('Academy main courses', () => {
     expect(program.id).toBe('program-food');
     expect(presentation).toMatchObject({ open: true, price: 7900 });
     expect(programSchedule(program, offering)).toMatchObject({ date: '2026-12-18' });
-    expect(image).toEqual(content.images.find((item) => item.id === 'food-apples-pattern'));
+    expect(image).toEqual(content.images.find((item) => item.id === 'food-chocolate-pattern'));
     expect(studioProgramArtwork(program, content).asset).toEqual(image);
     expect(content.programs.find((item) => item.id === 'program-commercial')?.slug).toBe(
       'content-creator',
