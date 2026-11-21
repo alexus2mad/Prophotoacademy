@@ -8,7 +8,7 @@ const require = createRequire(import.meta.url);
 const { parse, evaluate } = await import(
   pathToFileURL(require.resolve('groq-js', { paths: [require.resolve('sanity')] })).href
 );
-const source = await readFile('src/lib/content.ts', 'utf8');
+const source = await readFile('src/lib/content/source.ts', 'utf8');
 const sourceFile = ts.createSourceFile('content.ts', source, ts.ScriptTarget.Latest, true);
 const queryDeclaration = sourceFile.statements
   .filter(ts.isVariableStatement)

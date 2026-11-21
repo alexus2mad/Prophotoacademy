@@ -11,7 +11,7 @@ export const metadata = academyMetadata('/photo-studio', {
   description: 'Огляд просторів для фото та відеозйомок у Києві.',
   noindex: true,
 });
-export default async function PhotoStudio({ searchParams }: SiteRouteProps = {}) {
+export default async function PhotoStudio({ searchParams }: SiteRouteProps) {
   if (academyDesign() === 'legacy') redirect('/hub');
   return (
     <StudioSpacesTemplate

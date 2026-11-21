@@ -10,7 +10,7 @@ export const metadata = academyMetadata('/shop', {
   description: 'ProPhoto Shop: реквізит і матеріали для створення контенту.',
   noindex: true,
 });
-export default async function Shop({ searchParams }: SiteRouteProps = {}) {
+export default async function Shop({ searchParams }: SiteRouteProps) {
   if (academyDesign() === 'legacy') redirect('/contacts');
   return <StudioShopTemplate page={await readSitePage('/shop', searchParams)} />;
 }

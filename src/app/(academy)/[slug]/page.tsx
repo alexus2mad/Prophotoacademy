@@ -7,7 +7,12 @@ import { ProgramTemplate } from '@/components/templates/ProgramTemplate/ProgramT
 import { StudioProgramTemplate } from '@/components/templates/StudioProgramTemplate/StudioProgramTemplate';
 import { StudioCreatorTemplate } from '@/components/templates/StudioCreatorTemplate/StudioCreatorTemplate';
 import { academyDesign } from '@/lib/studio-design/variant';
-import { courseEditorial } from '@/lib/studio-creator/selectors';
+import { readSitePage } from '@/lib/site-editor/public';
+import { programPresentationContent } from '@/lib/site-editor/program';
+import { legalContent } from '@/lib/site-editor/support-pages';
+import { readField } from '@/lib/site-editor/fields';
+import { EditorialLandingTemplate } from '@/components/templates/EditorialLandingTemplate/EditorialLandingTemplate';
+import type { SiteRouteProps } from '@/lib/site-editor/types';
 import { connection } from 'next/server';
 import { enrollmentOptions } from '@/lib/commerce/catalog';
 import { findOffering } from '@/lib/content/selectors';
@@ -36,22 +41,31 @@ export async function generateMetadata({ params }: SlugPageProps): Promise<Metad
     return academyMetadata(`/${slug}`, { title, description, socialTitle: title });
   }
   const page = content.pages.find((p) => p.slug === slug);
-  if (!page) return {};
+  if (!page) {
+    const published = await readSitePage('/' + slug);
+    if (!published?.sections.some((s) => s.id === 'landing-cover')) return {};
+    return academyMetadata(published.path, {
+      title: readField(published, 'landing-cover', 'title') || published.title,
+      description: readField(published, 'landing-cover', 'description'),
+    });
+  }
   return academyMetadata(`/${slug}`, {
     title: page.title,
     description: legalDescriptions.get(slug),
     socialTitle: page.title,
   });
 }
-export default async function Detail({ params }: SlugPageProps) {
+export default async function Detail({ params, searchParams }: SlugPageProps & SiteRouteProps) {
   if (process.env.NEXT_PUBLIC_REVIEW_MODE !== 'pages') await connection();
   const { slug } = await params;
   const content = await getContent();
-  const program = content.programs.find((p) => p.slug === slug);
-  if (program) {
+  const pageContent = await readSitePage('/' + slug, searchParams);
+  const original = content.programs.find((p) => p.slug === slug);
+  if (original) {
     const studio = academyDesign() === 'studio';
-    const editorial = studio ? courseEditorial(program) : undefined;
-    const Template = studio ? StudioProgramTemplate : ProgramTemplate;
+    const updated = programPresentationContent(content, original, pageContent);
+    const { program, artwork } = updated;
+    const editorial = studio ? updated.editorial : undefined;
     const enrollment = await enrollmentOptions(findOffering(content, program.id));
     const breadcrumb = academyBreadcrumbSchema([
       { name: academyName, path: '/' },
@@ -65,25 +79,39 @@ export default async function Detail({ params }: SlugPageProps) {
         {editorial ? (
           <StudioCreatorTemplate
             program={program}
-            content={content}
+            content={updated.content}
             enrollment={enrollment}
             editorial={editorial}
+            page={pageContent}
+          />
+        ) : studio ? (
+          <StudioProgramTemplate
+            program={program}
+            content={updated.content}
+            enrollment={enrollment}
+            artwork={artwork}
+            page={pageContent}
           />
         ) : (
-          <Template program={program} content={content} enrollment={enrollment} />
+          <ProgramTemplate program={program} content={updated.content} enrollment={enrollment} />
         )}
       </>
     );
   }
   const page = content.pages.find((p) => p.slug === slug);
-  if (!page) notFound();
+  if (!page) {
+    if (pageContent?.sections.some((s) => s.id === 'landing-cover'))
+      return <EditorialLandingTemplate page={pageContent} />;
+    notFound();
+  }
+  const legal = legalContent(page, pageContent);
   return (
     <div className="container">
       <div className="page-heading">
-        <h1>{page.title}</h1>
+        <h1>{legal.title}</h1>
       </div>
       <article className="prose">
-        <PortableText value={page.body} />
+        <PortableText value={legal.body} />
       </article>
     </div>
   );

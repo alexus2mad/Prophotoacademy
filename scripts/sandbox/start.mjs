@@ -125,6 +125,9 @@ try {
   Object.assign(env, {
     NODE_ENV: 'development',
     PAYMENT_MODE: 'disabled',
+    NEXT_PUBLIC_ACADEMY_DESIGN: 'studio',
+    SITE_EDITOR_MODE: 'local',
+    SITE_EDITOR_LOCAL_DIR: path.join(directory, 'marketing'),
     NEXT_TELEMETRY_DISABLED: '1',
     SANDBOX_RPC_URL: 'http://127.0.0.1:3202',
     SANDBOX_RPC_TOKEN: token,

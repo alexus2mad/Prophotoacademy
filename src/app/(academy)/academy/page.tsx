@@ -13,7 +13,7 @@ export function generateMetadata() {
   return academyIndexMetadata(academyDesign());
 }
 
-export default async function Academy({ searchParams }: SiteRouteProps = {}) {
+export default async function Academy({ searchParams }: SiteRouteProps) {
   const content = await getContent();
   if (academyDesign() === 'studio') {
     const [page, additionalPages] = await Promise.all([

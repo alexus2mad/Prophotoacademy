@@ -16,7 +16,7 @@ export const metadata = academyMetadata('/ai-artwork', {
   description:
     'Практичний інтенсив «Від кадрів до AI Artwork»: студійна зйомка, розробка концепції та генеративна обробка фотографій в Adobe Photoshop.',
 });
-export default async function Intensive({ searchParams }: SiteRouteProps = {}) {
+export default async function Intensive({ searchParams }: SiteRouteProps) {
   if (process.env.NEXT_PUBLIC_REVIEW_MODE !== 'pages') await connection();
   const content = await getContent();
   const program = content.programs.find((entry) => entry.slug === 'ai-artwork');

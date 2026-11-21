@@ -1,5 +1,8 @@
 import Image from 'next/image';
 import { getContent } from '@/lib/content';
+import type { SiteRouteProps } from '@/lib/site-editor/types';
+import { readSitePage } from '@/lib/site-editor/public';
+import { reviewsContent } from '@/lib/site-editor/support-pages';
 import { Consultation } from '@/components/organisms/Consultation/Consultation';
 import { academyMetadata } from '@/lib/seo/metadata';
 export const metadata = academyMetadata('/reviews', {
@@ -7,16 +10,19 @@ export const metadata = academyMetadata('/reviews', {
   description:
     'Читайте відгуки про навчання в ProPhoto Academy: досвід студентів курсів фотографії та візуального контенту, історії та посилання на оригінали.',
 });
-export default async function Reviews() {
-  const content = await getContent();
+export default async function Reviews({ searchParams }: SiteRouteProps) {
+  const { title, testimonials } = reviewsContent(
+    await getContent(),
+    await readSitePage('/reviews', searchParams),
+  );
   return (
     <>
       <div className="container">
         <div className="page-heading">
-          <h1>Відгуки студентів</h1>
+          <h1>{title}</h1>
         </div>
         <div className="review-grid">
-          {content.testimonials.map((t) => (
+          {testimonials.map((t) => (
             <article className="review-card" key={t.id}>
               {t.kind === 'story' && <p className="eyebrow review-kind">Історія від академії</p>}
               {t.quote &&
@@ -28,7 +34,7 @@ export default async function Reviews() {
               {t.image && (
                 <Image
                   src={t.image}
-                  alt={`Відгук: ${t.name}`}
+                  alt={t.alt}
                   width={800}
                   height={1000}
                   sizes="(max-width:767px) 88vw, 44vw"

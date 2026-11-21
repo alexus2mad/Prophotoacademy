@@ -1,4 +1,19 @@
 {
+  "site-page-editing": {
+    "entries": [
+      "src/app/admin/content/page.tsx",
+      "src/app/api/admin/site-content/route.ts",
+      "src/app/api/admin/site-content/image/route.ts",
+      "src/app/api/site-content/images/[id]/route.ts",
+      "scripts/seed-site-pages.ts",
+      "package.json#site:seed"
+    ],
+    "evidence": [
+      "docs/site-content-editor.md",
+      "src/lib/site-editor/public.ts",
+      "src/lib/site-editor/store.ts"
+    ]
+  },
   "public-navigation": {
     "entries": [
       "src/app/(academy)/academy/page.tsx",
@@ -18,10 +33,7 @@
     ]
   },
   "public-programs": {
-    "entries": [
-      "src/app/(academy)/[slug]/page.tsx",
-      "src/app/(academy)/ai-artwork/page.tsx"
-    ],
+    "entries": ["src/app/(academy)/[slug]/page.tsx", "src/app/(academy)/ai-artwork/page.tsx"],
     "evidence": [
       "docs/openspec/public.md",
       "tests/confirmed-product-offers.test.ts",
@@ -29,9 +41,7 @@
     ]
   },
   "visual-interactions": {
-    "entries": [
-      "src/app/(academy)/student-work/page.tsx"
-    ],
+    "entries": ["src/app/(academy)/student-work/page.tsx"],
     "evidence": [
       "docs/openspec/public.md",
       "tests/student-work-galleries.test.ts",
@@ -67,11 +77,7 @@
       "src/app/hub/not-found.tsx",
       "src/app/hub/page.tsx"
     ],
-    "evidence": [
-      "docs/openspec/public.md",
-      "src/lib/ecosystem.ts",
-      "tests/ecosystem.test.ts"
-    ]
+    "evidence": ["docs/openspec/public.md", "src/lib/ecosystem.ts", "tests/ecosystem.test.ts"]
   },
   "public-content": {
     "entries": [
@@ -79,11 +85,7 @@
       "src/app/(academy)/contacts/page.tsx",
       "src/app/(academy)/reviews/page.tsx"
     ],
-    "evidence": [
-      "docs/openspec/public.md",
-      "tests/review-layout.test.ts",
-      "src/lib/content.ts"
-    ]
+    "evidence": ["docs/openspec/public.md", "tests/review-layout.test.ts", "src/lib/content.ts"]
   },
   "checkout-and-fulfillment": {
     "entries": [
@@ -287,11 +289,7 @@
       "src/app/demo/learn/[lesson]/page.tsx",
       "src/app/demo/learn/layout.tsx"
     ],
-    "evidence": [
-      "docs/openspec/operations.md",
-      "scripts/build-pages.mjs",
-      "tests/sandbox.test.ts"
-    ]
+    "evidence": ["docs/openspec/operations.md", "scripts/build-pages.mjs", "tests/sandbox.test.ts"]
   },
   "release-operations": {
     "entries": [

@@ -7,6 +7,7 @@ export function proxy(request: NextRequest) {
   const path = request.nextUrl.pathname;
   const allowedApi =
     /^\/api\/(auth|admin|learning)(\/|$)/.test(path) ||
+    /^\/api\/site-content\/images\/[a-f0-9]{64}$/.test(path) ||
     ['/api/integrations/ps-booking', '/api/checkout', '/api/orders/status'].includes(path);
   if ((path.startsWith('/api/') && !allowedApi) || /^\/(hub\/booking|studio)(\/|$)/.test(path))
     return NextResponse.json(

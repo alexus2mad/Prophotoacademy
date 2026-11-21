@@ -21,6 +21,7 @@ export function StudioCreatorTemplate({
   content,
   enrollment,
   editorial,
+  page,
 }: StudioCreatorTemplateProps) {
   const { offering, presentation, works } = studioProgramPage(program, content, enrollment);
   return (
@@ -44,7 +45,7 @@ export function StudioCreatorTemplate({
         devices={editorial.worksDevices}
       />
       {editorial.faculty && <StudioCreatorFaculty instructors={editorial.faculty} />}
-      <StudioAcademyReviews variant="creator" />
+      <StudioAcademyReviews variant="creator" page={page} />
       {offering?.packages.length ? (
         <StudioCreatorPackages program={program} offering={offering} enrollment={enrollment} />
       ) : null}

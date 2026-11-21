@@ -16,7 +16,7 @@ export const metadata = academyMetadata('/', {
   description,
 });
 
-export default async function Home({ searchParams }: SiteRouteProps = {}) {
+export default async function Home({ searchParams }: SiteRouteProps) {
   const content = await getContent();
   const studio = academyDesign() === 'studio';
   const [page, studioPage, shopPage] = studio

@@ -27,6 +27,11 @@ const config: NextConfig = {
       { source: noindexPath, headers: [noindexHeader] },
       {
         source: '/:path*',
+        has: [{ type: 'query' as const, key: 'site-editor-preview', value: '1' }],
+        headers: [noindexHeader, { key: 'Cache-Control', value: 'private, no-store, max-age=0' }],
+      },
+      {
+        source: '/:path*',
         // Next's Draft Mode uses this cookie. Mark previews even if a route redirects.
         has: [{ type: 'cookie' as const, key: '__prerender_bypass' }],
         headers: [noindexHeader],

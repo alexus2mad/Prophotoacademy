@@ -23,6 +23,7 @@
     "start": "next start --hostname 127.0.0.1",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
+    "site:seed": "tsx scripts/seed-site-pages.ts",
     "content:validate": "tsx scripts/validate-content.ts",
     "content:migrate": "tsx scripts/migrate-sanity.ts",
     "outbox:deliver": "tsx scripts/deliver-outbox.ts",
@@ -58,6 +59,7 @@
     "react-markdown": "^10.1.0",
     "remark-gfm": "4.0.1",
     "sanity": "6.18.0",
+    "sharp": "^0.34.5",
     "tailwindcss": "^4.2.0",
     "zod": "^4.3.0"
   },
@@ -70,7 +72,6 @@
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "prettier": "3.6.2",
-    "sharp": "^0.34.5",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "vitest": "^4.0.0"

@@ -1,4 +1,7 @@
 import { phoneLabel } from '@/lib/format';
+import type { SiteRouteProps } from '@/lib/site-editor/types';
+import { readSitePage } from '@/lib/site-editor/public';
+import { contactContent } from '@/lib/site-editor/support-pages';
 import { getContent } from '@/lib/content';
 import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
 import { StudioContactsTemplate } from '@/components/templates/StudioContactsTemplate/StudioContactsTemplate';
@@ -9,9 +12,13 @@ export const metadata = academyMetadata('/contacts', {
   description:
     'Телефон, email та адреса ProPhoto Academy у Києві. Зв’яжіться з академією, щоб обрати курс фотографії або уточнити формат навчання.',
 });
-export default async function Contacts() {
-  const { settings } = await getContent();
-  if (academyDesign() === 'studio') return <StudioContactsTemplate settings={settings} />;
+export default async function Contacts({ searchParams }: SiteRouteProps) {
+  const { settings, intro } = contactContent(
+    await getContent(),
+    await readSitePage('/contacts', searchParams),
+  );
+  if (academyDesign() === 'studio')
+    return <StudioContactsTemplate settings={settings} intro={intro} />;
   return (
     <div className="container">
       <div className="page-heading">

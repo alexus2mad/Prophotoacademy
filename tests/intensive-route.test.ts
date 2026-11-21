@@ -58,7 +58,7 @@ describe('AI Artwork route ownership', () => {
     'uses the same configured offering and enrollment in the %s design',
     async (design) => {
       vi.stubEnv('NEXT_PUBLIC_ACADEMY_DESIGN', design);
-      const page = await Intensive();
+      const page = await Intensive({});
       expect(page.type).toBe(design === 'studio' ? StudioIntensiveTemplate : ProgramTemplate);
       expect(page.props).toMatchObject({ content, enrollment });
       if (design === 'legacy') expect(page.props.program).toBe(program);
@@ -71,7 +71,7 @@ describe('AI Artwork route ownership', () => {
 
   it('keeps the dedicated review page static', async () => {
     vi.stubEnv('NEXT_PUBLIC_REVIEW_MODE', 'pages');
-    expect((await Intensive()).type).toBe(StudioIntensiveTemplate);
+    expect((await Intensive({})).type).toBe(StudioIntensiveTemplate);
     expect(connection).not.toHaveBeenCalled();
   });
 
@@ -81,7 +81,7 @@ describe('AI Artwork route ownership', () => {
       ...content,
       programs: content.programs.filter((item) => item.slug !== 'ai-artwork'),
     });
-    await expect(Intensive()).rejects.toThrow('redirect');
+    await expect(Intensive({})).rejects.toThrow('redirect');
     expect(redirect).toHaveBeenCalledWith('/academy');
   });
 

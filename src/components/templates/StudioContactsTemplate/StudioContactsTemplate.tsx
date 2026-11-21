@@ -6,12 +6,13 @@ import { phoneLabel } from '@/lib/format';
 import type { StudioContactsTemplateProps } from './types';
 import styles from './StudioContactsTemplate.module.css';
 
-export function StudioContactsTemplate({ settings }: StudioContactsTemplateProps) {
+export function StudioContactsTemplate({ settings, intro }: StudioContactsTemplateProps) {
   return (
     <section className={`studio-light studio-wrap ${styles.page}`}>
-      <p className="studio-label studio-eyebrow">Контакти ProPhoto Academy</p>
+      <p className="studio-label studio-eyebrow">{intro?.label ?? 'Контакти ProPhoto Academy'}</p>
       <h1>
-        <span>*пишіть, телефонуйте</span>Будемо раді
+        <span>{intro?.accent ?? '*пишіть, телефонуйте'}</span>
+        {intro?.title ?? 'Будемо раді'}
       </h1>
       <div className={styles.columns}>
         <div>

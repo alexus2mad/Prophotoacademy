@@ -1,0 +1,39 @@
+.page {
+  background: var(--studio-paper, #fafafa);
+  color: var(--studio-ink, #110b09);
+  padding: clamp(3rem, 7vw, 7rem) var(--studio-gutter, clamp(1rem, 4vw, 4rem));
+}
+.section {
+  max-width: 56rem;
+  margin-inline: auto;
+}
+.section + .section {
+  margin-top: clamp(3rem, 7vw, 6rem);
+  padding-top: 2rem;
+  border-top: 1px solid currentColor;
+}
+.section h1,
+.section h2 {
+  font-family: var(--font-studio-condensed), sans-serif;
+  line-height: 1.03;
+  text-wrap: balance;
+}
+.section h1 {
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+}
+.section h2 {
+  font-size: clamp(1.75rem, 4vw, 3.5rem);
+}
+.section p {
+  max-width: 65ch;
+  margin-top: 1em;
+  line-height: 1.65;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+.section img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 1.5rem;
+}

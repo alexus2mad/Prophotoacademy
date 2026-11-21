@@ -11,6 +11,7 @@ import { StudioProgramHero } from '@/components/organisms/StudioProgramHero/Stud
 import { StudioProgramFaculty } from '@/components/organisms/StudioProgramFaculty/StudioProgramFaculty';
 import { StudioProgramReviews } from '@/components/organisms/StudioProgramReviews/StudioProgramReviews';
 import { studioProgramPage } from '@/lib/studio-program/selectors';
+import { programFacultyContent } from '@/lib/site-editor/program-faculty';
 import type { StudioProgramTemplateProps } from './types';
 import styles from './StudioProgramTemplate.module.css';
 
@@ -18,6 +19,8 @@ export function StudioProgramTemplate({
   program,
   content,
   enrollment,
+  artwork,
+  page,
 }: StudioProgramTemplateProps) {
   const { offering, presentation, works, instructors, reviews, hero } = studioProgramPage(
     program,
@@ -41,7 +44,7 @@ export function StudioProgramTemplate({
         program={program}
         offering={offering}
         presentation={presentation}
-        hero={hero}
+        hero={artwork ?? hero}
       />
       <StudioProgramNavigation links={links}>
         {presentation.open && hasPackages ? (
@@ -140,7 +143,9 @@ export function StudioProgramTemplate({
       <div className={`${styles.practice} studio-light studio-wrap`}>
         <PracticePreview content={content} programId={program.id} compact />
       </div>
-      {!!instructors.length && <StudioProgramFaculty instructors={instructors} />}
+      {!!instructors.length && (
+        <StudioProgramFaculty instructors={programFacultyContent(instructors, page).instructors} />
+      )}
       {!!works.length && (
         <section
           id="student-works"
@@ -158,7 +163,7 @@ export function StudioProgramTemplate({
           <Gallery works={works} images={content.images} />
         </section>
       )}
-      {!!reviews.length && <StudioProgramReviews reviews={reviews} />}
+      {!!reviews.length && <StudioProgramReviews reviews={reviews} page={page} />}
       {!!program.faqs.length && (
         <section
           className={`${styles.faq} studio-light studio-band studio-wrap`}
