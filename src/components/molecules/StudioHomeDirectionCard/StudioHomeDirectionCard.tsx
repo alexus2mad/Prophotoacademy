@@ -4,10 +4,10 @@ import { StudioHomePicture } from '@/components/molecules/StudioHomePicture/Stud
 import type { StudioHomeDirectionCardProps } from './types';
 import styles from './StudioHomeDirectionCard.module.css';
 
-export function StudioHomeDirectionCard({ direction }: StudioHomeDirectionCardProps) {
+export function StudioHomeDirectionCard({ direction, fieldPrefix }: StudioHomeDirectionCardProps) {
   const actionLabel = (
     <span className={styles.actionLabel}>
-      <span>{direction.action}</span>
+      <span data-site-field={fieldPrefix + '-action'}>{direction.action}</span>
       <span aria-hidden="true">→</span>
     </span>
   );
@@ -19,6 +19,8 @@ export function StudioHomeDirectionCard({ direction }: StudioHomeDirectionCardPr
       data-image-position={direction.imagePosition}
     >
       <StudioHomePicture
+        fieldId={fieldPrefix + '-image'}
+        mobileFieldId={fieldPrefix + '-mobile-image'}
         image={direction.image}
         mobileImage={direction.mobileImage}
         alt=""
@@ -26,8 +28,10 @@ export function StudioHomeDirectionCard({ direction }: StudioHomeDirectionCardPr
         sizes="(max-width: 760px) 44vw, 33vw"
       />
       <div className={styles.copy}>
-        <h3>{direction.title}</h3>
-        {direction.description && <p>{direction.description}</p>}
+        <h3 data-site-field={fieldPrefix + '-title'}>{direction.title}</h3>
+        {direction.description && (
+          <p data-site-field={fieldPrefix + '-description'}>{direction.description}</p>
+        )}
       </div>
       {direction.href ? (
         <Link

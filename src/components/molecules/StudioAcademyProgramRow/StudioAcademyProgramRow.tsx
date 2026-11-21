@@ -15,20 +15,31 @@ export function StudioAcademyProgramRow({
   const price = startingPrice(offering);
   const schedule = programSchedule(program, offering, asOf ? new Date(asOf) : undefined);
   return (
-    <Link href={`/${program.slug}`} className={styles.course}>
+    <Link
+      data-site-section={'catalog-' + program.id}
+      href={`/${program.slug}`}
+      className={styles.course}
+    >
       {asset && (
-        <StudioImage asset={asset} alt="" className={styles.photo} fit="cover" sizes="128px" />
+        <StudioImage
+          fieldId="image"
+          asset={asset}
+          alt=""
+          className={styles.photo}
+          fit="cover"
+          sizes="128px"
+        />
       )}
       <div className={styles.copy}>
-        <Heading>{program.title}</Heading>
-        <p>{program.homepageDescription || program.description}</p>
-        <p className={styles.schedule}>
+        <Heading data-site-field="title">{program.title}</Heading>
+        <p data-site-field="description">{program.homepageDescription || program.description}</p>
+        <p data-site-locked="" className={styles.schedule}>
           {offering && <>{formatLabel[offering.format]} · </>}
           {schedule.value}
           {price !== undefined && <> · від {money(price)}</>}
         </p>
       </div>
-      <span className={styles.action}>
+      <span data-site-locked="" className={styles.action}>
         <span className={styles.status}>{schedule.status}</span>
         <span className={styles.arrow} aria-hidden="true">
           →

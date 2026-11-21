@@ -13,7 +13,11 @@ const content = fixture as AcademyContent;
 
 it('keeps each full-area homepage card to one named native action and preserves its motion target', () => {
   for (const direction of studioHomeDirections(content)) {
-    const $ = load(renderToStaticMarkup(createElement(StudioHomeDirectionCard, { direction })));
+    const $ = load(
+      renderToStaticMarkup(
+        createElement(StudioHomeDirectionCard, { direction, fieldPrefix: 'card-1' }),
+      ),
+    );
     const action = $('article > a, article > button');
     expect(action).toHaveLength(1);
     expect(action.attr('aria-label')).toBe(`${direction.title}: ${direction.action}`);

@@ -1,6 +1,8 @@
 # Admin site content editor
 
-Administrators open **Сторінки сайту** in the Academy workspace at `/admin/content`. Search by Ukrainian title or public path. Choose a section, change its copy or replace a photograph, and enter descriptive alternative text wherever that image conveys information. The desktop and phone buttons change the width of the actual page preview.
+Administrators open **Сторінки сайту** in the Academy workspace at `/admin/content`. Find a page by Ukrainian title or public path. Click or tap editable text on the page and type where the text appears. Keyboard users can focus a field and press Enter. Escape restores the value from when the active edit began.
+
+Select a photograph on the page to choose its replacement. After a successful upload, the new photo appears in the page and its field. Use **Поля** on phones, or the section inspector on desktop, for image descriptions, empty fields and content outside the current view. **Сторінка** returns to the mobile canvas. The desktop and phone preview controls let managers check how the working copy wraps and crops before saving it.
 
 **Зберегти чернетку** saves a private version. Check the result in the preview, then use **Опублікувати** to make it visible at the same public address. Leaving an unsaved edit prompts for confirmation. A revision conflict keeps local changes visible so the editor can copy their work before loading the newer version.
 

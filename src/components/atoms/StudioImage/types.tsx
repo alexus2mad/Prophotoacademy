@@ -4,6 +4,7 @@ import type { StudioAsset } from '@/lib/studio-design/types';
 
 export type StudioImageProps = {
   asset: StudioAsset;
+  fieldId?: string;
   alt: string;
   className?: string;
   sizes?: string;

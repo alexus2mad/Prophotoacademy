@@ -27,7 +27,12 @@ export function StudioHomeWorks({ page, works: originals }: StudioHomeWorksProps
     works.slice(index * photosPerPage, (index + 1) * photosPerPage),
   );
   return (
-    <section className={styles.works} data-home-section="works" aria-labelledby="home-works-title">
+    <section
+      className={styles.works}
+      data-home-section="works"
+      data-site-section="works"
+      aria-labelledby="home-works-title"
+    >
       <div className={`${styles.heading} studio-wrap`}>
         <h2 className="studio-title" id="home-works-title">
           {text('title')} <span className="studio-hand">{text('emphasis')}</span>
@@ -65,6 +70,8 @@ export function StudioHomeWorks({ page, works: originals }: StudioHomeWorksProps
                 onClick={() => gallery.open(index * photosPerPage + photoIndex)}
               >
                 <StudioHomePicture
+                  fieldId={work.id + '-image'}
+                  mobileFieldId={work.id + '-mobile-image'}
                   image={work.image}
                   mobileImage={work.mobileImage}
                   alt={work.alt}

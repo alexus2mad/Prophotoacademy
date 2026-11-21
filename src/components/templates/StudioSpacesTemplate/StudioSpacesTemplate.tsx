@@ -13,7 +13,7 @@ export function StudioSpacesTemplate({ page, content }: StudioSpacesTemplateProp
   const bookingUrl = ecosystemDestinations.studioBooking;
   return (
     <>
-      <section className={`${styles.hero} studio-dark`}>
+      <section data-site-section="hero" className={`${styles.hero} studio-dark`}>
         <StudioImage
           asset={image('image', studioAssets.artifact.hero_space)}
           alt={text('image-alt')}

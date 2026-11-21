@@ -79,17 +79,17 @@ export function SiteContentEditor(props: SiteContentEditorProps) {
           <div className={styles.mobileSwitch} role="group" aria-label="Режим редактора">
             <button
               type="button"
-              aria-pressed={h.panel === 'fields'}
-              onClick={() => h.setPanel('fields')}
-            >
-              Редагування
-            </button>
-            <button
-              type="button"
               aria-pressed={h.panel === 'preview'}
               onClick={() => h.setPanel('preview')}
             >
-              Перегляд
+              Сторінка
+            </button>
+            <button
+              type="button"
+              aria-pressed={h.panel === 'fields'}
+              onClick={() => h.setPanel('fields')}
+            >
+              Поля
             </button>
           </div>
           <div className={styles.split} data-panel={h.panel}>
@@ -137,18 +137,24 @@ export function SiteContentEditor(props: SiteContentEditorProps) {
               )}
             </section>
             <div className={styles.canvas}>
+              <input
+                ref={h.imagePicker}
+                type="file"
+                hidden
+                aria-label="Замінити фото на сторінці"
+                accept="image/jpeg,image/png,image/webp,image/avif"
+                disabled={disabled}
+                onChange={(event) => h.replaceCanvasImage(event.currentTarget.files?.[0])}
+              />
               <SiteEditorPreview
-                page={record.page}
+                page={page}
+                savedPage={record.page}
+                editable={!disabled}
                 sectionId={h.sectionId}
-                onInspect={({ sectionId, fieldId }) => {
-                  h.setSectionId(sectionId);
-                  h.setPanel('fields');
-                  requestAnimationFrame(() =>
-                    document.getElementById('editor-field-' + fieldId)?.focus(),
-                  );
-                }}
+                onSelect={({ sectionId }) => h.setSectionId(sectionId)}
+                onChange={({ sectionId, fieldId }, value) => h.update(sectionId, fieldId, value)}
+                onReplaceImage={h.chooseCanvasImage}
                 version={h.previewKey}
-                dirty={h.dirty}
               />
             </div>
           </div>

@@ -25,6 +25,7 @@ export function StudioHomeHero({ page, mode, onModeChange }: StudioHomeHeroProps
     <section
       className={styles.hero}
       data-home-section="hero"
+      data-site-section="hero"
       aria-label="Екосистема ProPhoto"
       ref={hero}
       onLoadCapture={onImageLoad}
@@ -41,6 +42,8 @@ export function StudioHomeHero({ page, mode, onModeChange }: StudioHomeHeroProps
           aria-hidden="true"
         >
           <StudioHomePicture
+            fieldId={visual.id + '-image'}
+            mobileFieldId={visual.id + '-mobile-image'}
             image={image(visual.id + '-image', visual.image)}
             mobileImage={
               visual.mobileImage && image(visual.id + '-mobile-image', visual.mobileImage)
@@ -56,10 +59,14 @@ export function StudioHomeHero({ page, mode, onModeChange }: StudioHomeHeroProps
         <div className={styles.title}>
           <p className={styles.kick}>
             <span aria-hidden="true">*</span>
-            <span className={styles.desktopKick}>{text(mode + '-kick')}</span>
-            <span className={styles.mobileKick}>{text(mode + '-mobile-kick')}</span>
+            <span data-site-field={mode + '-kick'} className={styles.desktopKick}>
+              {text(mode + '-kick')}
+            </span>
+            <span data-site-field={mode + '-mobile-kick'} className={styles.mobileKick}>
+              {text(mode + '-mobile-kick')}
+            </span>
           </p>
-          <h1>{text('title')}</h1>
+          <h1 data-site-field="title">{text('title')}</h1>
         </div>
         <div className={styles.foot}>
           <Link className="studio-button" href={selected.href}>
@@ -98,7 +105,7 @@ export function StudioHomeHero({ page, mode, onModeChange }: StudioHomeHeroProps
                 />
               </span>
               <span className={styles.srOnly}>{homeModes[key].name}</span>
-              <small>{text(key + '-caption')}</small>
+              <small data-site-field={key + '-caption'}>{text(key + '-caption')}</small>
             </button>
           ))}
         </div>

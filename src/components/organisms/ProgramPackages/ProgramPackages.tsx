@@ -34,7 +34,12 @@ export function ProgramPackages({
     inquiryAllowed: pack.availability !== 'soldOut',
   }));
   return (
-    <section className="program-packages" id="packages" aria-labelledby="packages-title">
+    <section
+      className="program-packages"
+      id="packages"
+      data-site-locked=""
+      aria-labelledby="packages-title"
+    >
       <div className="section-heading">
         {heading ?? <h2 id="packages-title">Пакети й вартість</h2>}
         {compared.length > 1 && (

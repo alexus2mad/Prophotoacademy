@@ -1,7 +1,7 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { SyntheticEvent } from 'react';
-import { findPreviewField, previewIndex, scrollPreviewToSection } from './match';
+import { connectPreviewFrame } from './frame';
 import type { SiteEditorPreviewProps } from './types';
 
 export function useSiteEditorPreview(props: SiteEditorPreviewProps) {
@@ -10,17 +10,22 @@ export function useSiteEditorPreview(props: SiteEditorPreviewProps) {
   const stage = useRef<HTMLDivElement>(null);
   const frame = useRef<HTMLIFrameElement>(null);
   const latest = useRef(props);
-  useEffect(() => {
+  const canvas = useRef<ReturnType<typeof connectPreviewFrame> | null>(null);
+  const canvasSection = useRef('');
+  const scrollPosition = useRef({ path: '', top: 0 });
+  const detach = useRef<() => void>(() => {});
+  useLayoutEffect(() => {
     latest.current = props;
+    canvas.current?.sync();
   }, [props]);
   useEffect(() => {
     if (window.matchMedia('(max-width: 850px)').matches) setWidth(390);
   }, []);
   useEffect(() => {
-    const doc = frame.current?.contentDocument;
-    const section = props.page.sections.find((s) => s.id === props.sectionId);
-    if (doc && section) scrollPreviewToSection(doc, section);
-  }, [props.page, props.sectionId]);
+    if (canvasSection.current !== props.sectionId) canvas.current?.scrollToSection(props.sectionId);
+    canvasSection.current = '';
+  }, [props.sectionId]);
+  useLayoutEffect(() => () => detach.current(), [props.savedPage.path, props.version]);
   useEffect(() => {
     const node = stage.current;
     if (!node) return;
@@ -33,26 +38,32 @@ export function useSiteEditorPreview(props: SiteEditorPreviewProps) {
   const scale = Math.min(1, (box.width || width) / width);
   function guardFrame(event: SyntheticEvent<HTMLIFrameElement>) {
     const doc = event.currentTarget.contentDocument;
-    if (!doc) return;
-    const index = previewIndex(latest.current.page, doc.baseURI);
-    const stopNavigation = (e: Event) => {
-      const element = e.target as Element | null;
-      if (element?.closest && e.type === 'click') {
-        const { sectionId, onInspect } = latest.current;
-        const field = findPreviewField(element, index, sectionId);
-        if (field) {
-          e.preventDefault();
-          onInspect(field);
-        }
-      }
-      if (element?.closest?.('a[href],button[type=submit],input[type=submit]')) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-      }
+    const view = doc?.defaultView;
+    if (!doc || !view) return;
+    detach.current();
+    const instance = connectPreviewFrame(
+      doc,
+      () => latest.current,
+      (field) => {
+        canvasSection.current = field.sectionId;
+        latest.current.onSelect(field);
+      },
+    );
+    canvas.current = instance;
+    const path = latest.current.savedPage.path;
+    if (scrollPosition.current.path === path)
+      view.scrollTo({ top: scrollPosition.current.top, behavior: 'instant' });
+    const storePosition = () => {
+      scrollPosition.current = { path, top: view.scrollY };
     };
-    doc.addEventListener('click', stopNavigation, true);
-    doc.addEventListener('auxclick', stopNavigation, true);
-    doc.addEventListener('submit', (e) => e.preventDefault(), true);
+    storePosition();
+    view.addEventListener('scroll', storePosition, { passive: true });
+    detach.current = () => {
+      view.removeEventListener('scroll', storePosition);
+      instance.disconnect();
+      canvas.current = null;
+      detach.current = () => {};
+    };
   }
   return {
     width,

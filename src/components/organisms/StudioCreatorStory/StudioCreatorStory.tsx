@@ -13,6 +13,7 @@ export function StudioCreatorStory({ program, duration, editorial }: StudioCreat
     <>
       <section
         id="program-audience"
+        data-site-section="audience"
         className="studio-light studio-band studio-wrap"
         aria-labelledby="creator-audience-title"
       >
@@ -25,8 +26,8 @@ export function StudioCreatorStory({ program, duration, editorial }: StudioCreat
               <span className={styles.index} aria-hidden="true">
                 {String(index + 1).padStart(2, '0')} / {audienceTotal}
               </span>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
+              <h3 data-site-field={'title-' + index}>{item.title}</h3>
+              <p data-site-field={'text-' + index}>{item.text}</p>
             </li>
           ))}
         </ol>
@@ -34,6 +35,7 @@ export function StudioCreatorStory({ program, duration, editorial }: StudioCreat
       <section
         className="studio-dark studio-band studio-wrap"
         aria-labelledby="creator-benefits-title"
+        data-site-section="benefits"
       >
         <StudioCreatorHeading id="creator-benefits-title">
           Чому <span className="studio-hand">*цей курс</span>
@@ -41,7 +43,7 @@ export function StudioCreatorStory({ program, duration, editorial }: StudioCreat
         <ul className={styles.benefits}>
           {benefits.map((item, index) => (
             <li key={item.title}>
-              <h3>{item.title}</h3>
+              <h3 data-site-field={'title-' + index}>{item.title}</h3>
               <span className={styles.connector} aria-hidden="true">
                 <span
                   className={styles.shaft}
@@ -57,13 +59,14 @@ export function StudioCreatorStory({ program, duration, editorial }: StudioCreat
                   alt=""
                 />
               </span>
-              <p>{item.text}</p>
+              <p data-site-field={'text-' + index}>{item.text}</p>
             </li>
           ))}
         </ul>
       </section>
       <section
         id={creatorCurriculumId}
+        data-site-section="curriculum"
         className="studio-light studio-band studio-wrap"
         aria-labelledby="creator-curriculum-title"
       >
@@ -76,12 +79,14 @@ export function StudioCreatorStory({ program, duration, editorial }: StudioCreat
             <span aria-hidden="true" />
           </summary>
           <div className={styles.modules}>
-            {program.modules.map((module) => (
+            {program.modules.map((module, index) => (
               <section key={module.title}>
-                <h3>{module.title}</h3>
+                <h3 data-site-field={'module-' + index}>{module.title}</h3>
                 <ul>
-                  {module.topics.map((topic) => (
-                    <li key={topic}>{topic}</li>
+                  {module.topics.map((topic, topicIndex) => (
+                    <li key={topic} data-site-field={`topic-${index}-${topicIndex}`}>
+                      {topic}
+                    </li>
                   ))}
                 </ul>
               </section>
@@ -92,6 +97,7 @@ export function StudioCreatorStory({ program, duration, editorial }: StudioCreat
       <section
         className={`${styles.format} studio-dark studio-band studio-wrap`}
         aria-labelledby="creator-format-title"
+        data-site-section="steps"
       >
         <StudioCreatorHeading id="creator-format-title" label="Формат">
           Як проходить <span className="studio-hand">*навчання</span>
@@ -102,8 +108,8 @@ export function StudioCreatorStory({ program, duration, editorial }: StudioCreat
               <span className={styles.index} aria-hidden="true">
                 {String(index + 1).padStart(2, '0')}
               </span>
-              <h3>{step.title}</h3>
-              <p>{step.text}</p>
+              <h3 data-site-field={'title-' + index}>{step.title}</h3>
+              <p data-site-field={'text-' + index}>{step.text}</p>
             </li>
           ))}
         </ol>

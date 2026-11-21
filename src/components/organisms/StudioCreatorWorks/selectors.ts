@@ -9,7 +9,15 @@ export function creatorWorks({
   const originals = works.flatMap((work) => {
     const image = images.find((item) => item.id === work.imageId);
     return image
-      ? [{ ...image, id: work.id, device: work.device, src: studioAssetUrl(image.src) }]
+      ? [
+          {
+            ...image,
+            id: work.id,
+            imageId: image.id,
+            device: work.device,
+            src: studioAssetUrl(image.src),
+          },
+        ]
       : [];
   });
   if (!opening) return originals;

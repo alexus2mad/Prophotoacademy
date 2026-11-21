@@ -50,6 +50,7 @@ export function StudioCreatorWorks(props: StudioCreatorWorksProps) {
           <button
             type="button"
             key={work.id}
+            data-site-section={work.imageId ? 'gallery' : 'featured-' + work.id}
             className={styles.work}
             onClick={() => gallery.open(index)}
             aria-label={`Відкрити роботу: ${work.alt}`}
@@ -57,6 +58,7 @@ export function StudioCreatorWorks(props: StudioCreatorWorksProps) {
           >
             <StudioImage
               asset={work}
+              fieldId={work.imageId ?? 'image'}
               alt={work.alt}
               fit={work.preserveFraming ? 'contain' : undefined}
               position={work.position}

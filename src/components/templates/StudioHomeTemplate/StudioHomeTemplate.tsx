@@ -34,7 +34,7 @@ export function StudioHomeTemplate({
           <StudioHomeWorks page={page} works={studioHomeWorks} />
           <StudioHomeBanner page={page} destination="shop" />
           <StudioHomeBanner page={page} destination="studio" />
-          <div data-home-section="inquiry">
+          <div data-home-section="inquiry" data-site-section="inquiry">
             <StudioInquirySection
               title={text('title')}
               hand={text('emphasis')}

@@ -4,6 +4,7 @@ import type { StudioImageProps } from './types';
 
 export function StudioImage({
   asset,
+  fieldId,
   alt,
   className,
   sizes = '(max-width: 767px) 100vw, 50vw',
@@ -16,6 +17,7 @@ export function StudioImage({
 }: StudioImageProps) {
   return (
     <Image
+      data-site-field={fieldId}
       src={studioAssetUrl(asset.src)}
       width={Math.round(asset.width)}
       height={Math.round(asset.height)}

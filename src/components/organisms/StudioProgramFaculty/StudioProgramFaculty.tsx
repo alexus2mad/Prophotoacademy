@@ -17,17 +17,24 @@ export function StudioProgramFaculty({ instructors }: StudioProgramFacultyProps)
       </header>
       <div className={styles.people}>
         {instructors.map((instructor) => (
-          <article key={instructor.id} className={styles.person}>
+          <article
+            key={instructor.id}
+            className={styles.person}
+            data-site-section={'instructor-' + instructor.id}
+          >
             <StudioImage
               asset={instructor.asset}
+              fieldId="image"
               alt={instructor.alt}
               fit="cover"
               sizes="(max-width: 760px) 38vw, 20vw"
             />
             <div>
-              <h3>{instructor.name}</h3>
-              <p className={styles.role}>{instructor.role}</p>
-              <p>{instructor.bio}</p>
+              <h3 data-site-field="name">{instructor.name}</h3>
+              <p className={styles.role} data-site-field="role">
+                {instructor.role}
+              </p>
+              <p data-site-field="bio">{instructor.bio}</p>
             </div>
           </article>
         ))}

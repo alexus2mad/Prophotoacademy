@@ -15,7 +15,7 @@ export function StudioAcademyCommunity({ page }: BrandContentProps = {}) {
   const { text, image } = bindSection(page, academyCommunity);
   return (
     <>
-      <section id="about" className="studio-band studio-light">
+      <section data-site-section="community" id="about" className="studio-band studio-light">
         <div className="studio-wrap">
           <header className={styles.head}>
             <p className="studio-label studio-eyebrow">{text('audience-eyebrow')}</p>
@@ -37,7 +37,7 @@ export function StudioAcademyCommunity({ page }: BrandContentProps = {}) {
           </div>
         </div>
       </section>
-      <section className="studio-band studio-dark">
+      <section data-site-section="community" className="studio-band studio-dark">
         <div className="studio-wrap">
           <header className={styles.head}>
             <h2 className="studio-title">{text('trust-title')}</h2>
@@ -52,7 +52,7 @@ export function StudioAcademyCommunity({ page }: BrandContentProps = {}) {
           </div>
         </div>
       </section>
-      <section id="lecturers" className="studio-band studio-light">
+      <section data-site-section="community" id="lecturers" className="studio-band studio-light">
         <div className="studio-wrap">
           <header className={styles.head}>
             <p className="studio-label studio-eyebrow">{text('lecturers-eyebrow')}</p>

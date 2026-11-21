@@ -39,9 +39,11 @@ export function StudioCreatorHero({
       <section
         className={`${styles.hero} studio-dark`}
         data-header-tone="dark"
+        data-site-section="hero"
         aria-labelledby="creator-title"
       >
         <StudioImage
+          fieldId="image"
           asset={hero.asset}
           alt={hero.alt}
           className={styles.photo}
@@ -57,18 +59,24 @@ export function StudioCreatorHero({
         />
         <div className={`${styles.copy} studio-wrap`}>
           <h1 id="creator-title">
-            <span className={styles.hand}>{hero.hand}</span>
-            <span className={styles.title}>{hero.title}</span>
+            <span data-site-field="accent" className={styles.hand}>
+              {hero.hand}
+            </span>
+            <span data-site-field="title" className={styles.title}>
+              {hero.title}
+            </span>
           </h1>
-          <p className={styles.subject}>{hero.subject}</p>
+          <p data-site-field="subject" className={styles.subject}>
+            {hero.subject}
+          </p>
           <div className={styles.facts}>
-            <span>{facts}</span>
-            {offering?.duration && <span>{offering.duration}</span>}
+            <span data-site-locked="">{facts}</span>
+            {offering?.duration && <span data-site-locked="">{offering.duration}</span>}
             {hero.facts?.map((fact) => (
               <span key={fact}>{fact}</span>
             ))}
           </div>
-          <div className="studio-actions">
+          <div data-site-locked="" className="studio-actions">
             {/* Phones get the same action from the fixed StudioMobileAction bar. */}
             <div className={styles.desktopAction}>
               <StudioCreatorAction
@@ -82,6 +90,7 @@ export function StudioCreatorHero({
         </div>
       </section>
       <section
+        data-site-section="introduction"
         id="program-about"
         className={`${styles.intro} studio-dark studio-band studio-wrap`}
         aria-labelledby="creator-intro-title"
@@ -97,12 +106,12 @@ export function StudioCreatorHero({
           <span className="studio-hand">{intro.heading.hand}</span>
         </h2>
         <p className={styles.description}>{intro.description}</p>
-        <div className={styles.capsule}>
+        <div data-site-locked="" className={styles.capsule}>
           <span>{facts}</span>
           {offering?.duration && <span>{offering.duration}</span>}
         </div>
         {presentation.price !== undefined && (
-          <div className={styles.price}>
+          <div data-site-locked="" className={styles.price}>
             <p className="studio-label">Вартість від</p>
             <p>
               <strong>{new Intl.NumberFormat('uk-UA').format(presentation.price)}</strong>
@@ -111,12 +120,14 @@ export function StudioCreatorHero({
           </div>
         )}
         {showInstallments && (
-          <div className={styles.installments}>
+          <div data-site-locked="" className={styles.installments}>
             <InstallmentMethods prominent />
           </div>
         )}
         {presentation.status === 'closed' && (
-          <p className={styles.note}>Про наступний набір повідомимо за заявкою</p>
+          <p data-site-locked="" className={styles.note}>
+            Про наступний набір повідомимо за заявкою
+          </p>
         )}
         {offering?.packages.length ? (
           <a className="studio-button" href="#packages">

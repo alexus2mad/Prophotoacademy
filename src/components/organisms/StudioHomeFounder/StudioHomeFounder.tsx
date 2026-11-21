@@ -13,9 +13,12 @@ export function StudioHomeFounder({ page }: BrandContentProps = {}) {
     <section
       className={styles.founder}
       data-home-section="founder"
+      data-site-section="founder"
       aria-labelledby="home-founder-title"
     >
       <StudioHomePicture
+        fieldId="portrait-image"
+        mobileFieldId="portrait-mobile-image"
         image={image('portrait-image', studioAssets.home.imgImgHome144009)}
         mobileImage={image('portrait-mobile-image', studioAssets.homeMobile.imgImgHome39008)}
         alt={text('portrait-image-alt')}

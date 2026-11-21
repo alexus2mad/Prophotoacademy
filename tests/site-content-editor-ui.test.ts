@@ -4,6 +4,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import { SiteEditorField } from '@/components/molecules/SiteEditorField/SiteEditorField';
 import { SiteEditorPreview } from '@/components/molecules/SiteEditorPreview/SiteEditorPreview';
+import { textEditCommand } from '@/components/molecules/SiteEditorPreview/text-control';
 import { previewIndex } from '@/components/molecules/SiteEditorPreview/match';
 import { SiteContentEditor } from '@/components/organisms/SiteContentEditor/SiteContentEditor';
 import type { SitePage } from '@/lib/site-editor/types';
@@ -30,6 +31,17 @@ const page: SitePage = {
 };
 
 describe('Site content editor', () => {
+  it('retains native multiline and composing input while supporting accessible edit shortcuts', () => {
+    const enter = { key: 'Enter', keyCode: 13, isComposing: false, ctrlKey: false, metaKey: false };
+    expect(textEditCommand(enter, false)).toBeUndefined();
+    expect(textEditCommand(enter, true)).toBe('commit');
+    expect(textEditCommand({ ...enter, metaKey: true }, false)).toBe('commit');
+    expect(textEditCommand({ ...enter, ctrlKey: true }, false)).toBe('commit');
+    expect(textEditCommand({ ...enter, key: 'Escape' }, false)).toBe('cancel');
+    expect(textEditCommand({ ...enter, key: 'Tab' }, true)).toBe('tab');
+    expect(textEditCommand({ ...enter, isComposing: true }, true)).toBeUndefined();
+    expect(textEditCommand({ ...enter, keyCode: 229 }, true)).toBeUndefined();
+  });
   it('identifies a readonly library and preserves the page picker', () => {
     const $ = load(
       renderToStaticMarkup(
@@ -53,22 +65,32 @@ describe('Site content editor', () => {
     expect($('li').text()).toContain('Опубліковано');
   });
 
-  it('previews the saved page in a sandbox without scripts, forms or popup privileges', () => {
-    const $ = load(
-      renderToStaticMarkup(
-        createElement(SiteEditorPreview, {
-          page,
-          sectionId: 'hero',
-          version: 0,
-          dirty: true,
-          onInspect: () => {},
-        }),
-      ),
-    );
-    expect($('iframe').attr('sandbox')).toBe('allow-same-origin');
-    expect($('iframe').attr('src')).toBe(page.path + '?site-editor-preview=1');
-    expect($('p').text()).toContain('останню збережену версію');
-  });
+  it.each([false, true])(
+    'keeps the preview sandboxed and accurately explains editability (%s)',
+    (editable) => {
+      const $ = load(
+        renderToStaticMarkup(
+          createElement(SiteEditorPreview, {
+            page,
+            savedPage: page,
+            sectionId: 'hero',
+            version: 0,
+            editable,
+            onSelect: () => {},
+            onChange: () => {},
+            onReplaceImage: () => {},
+          }),
+        ),
+      );
+      expect($('iframe').attr('sandbox')).toBe('allow-same-origin');
+      expect($('iframe').attr('src')).toBe(page.path + '?site-editor-preview=1');
+      expect($('p').text()).toBe(
+        editable
+          ? 'Натисніть на текст, щоб його змінити, або на фото, щоб замінити зображення'
+          : 'Перегляд сторінки',
+      );
+    },
+  );
 
   it('labels the real upload input and shows its existing photograph', () => {
     const $ = load(

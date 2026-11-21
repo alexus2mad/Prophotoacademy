@@ -37,8 +37,9 @@ export function StudioIntensiveTemplate({
   } = studioIntensiveOffer(content, enrollment);
   return (
     <>
-      <section className={`${styles.hero} studio-dark`}>
+      <section data-site-section="workshop" className={`${styles.hero} studio-dark`}>
         <StudioImage
+          fieldId="image"
           asset={image('image', studioAssets.aiArtwork.imgImgWs144001)}
           alt={text('image-alt')}
           className={`${styles.heroImage} ${styles.desktopImage}`}
@@ -47,6 +48,7 @@ export function StudioIntensiveTemplate({
           sizes="100vw"
         />
         <StudioImage
+          fieldId="mobile-image"
           asset={image('mobile-image', studioAssets.aiArtworkMobile.imgImgWs39001)}
           alt=""
           className={`${styles.heroImage} ${styles.mobileImage}`}
@@ -60,7 +62,7 @@ export function StudioIntensiveTemplate({
             {text('hero-title')}
           </h1>
           <p className={styles.facts}>{text('hero-description')}</p>
-          <p className={styles.date}>
+          <p data-site-locked="" className={styles.date}>
             <span>{dateTime ? <time dateTime={dateTime}>{date}</time> : date}</span>
             {time && <span>{time}</span>}
           </p>
@@ -72,23 +74,37 @@ export function StudioIntensiveTemplate({
           </div>
         </div>
       </section>
-      <section className={`${styles.announcement} studio-band studio-dark`}>
+      <section
+        data-site-section="workshop"
+        className={`${styles.announcement} studio-band studio-dark`}
+      >
         <div className="studio-wrap">
           <p className="studio-label studio-eyebrow">{text('announcement-eyebrow')}</p>
           <h2>{text('announcement-title')}</h2>
-          <p className={styles.subtitle}>{deliveryDescription || text('hero-description')}</p>
-          <p className={styles.when}>
+          <p data-site-locked={deliveryDescription ? '' : undefined} className={styles.subtitle}>
+            {deliveryDescription || text('hero-description')}
+          </p>
+          <p data-site-locked="" className={styles.when}>
             <span>{dateTime ? <time dateTime={dateTime}>{date}</time> : date}</span>
             {time && <span>{time}</span>}
           </p>
-          <div id="intensive-offers" className={styles.prices} aria-label="Формати участі">
+          <div
+            id="intensive-offers"
+            data-site-locked=""
+            className={styles.prices}
+            aria-label="Формати участі"
+          >
             {prices.map((option) => (
               <StudioIntensivePackage key={option.id} option={option} />
             ))}
           </div>
-          {purchaseNotice && <p className={styles.purchaseNotice}>{purchaseNotice}</p>}
+          {purchaseNotice && (
+            <p data-site-locked="" className={styles.purchaseNotice}>
+              {purchaseNotice}
+            </p>
+          )}
           {showInstallments && (
-            <div className={styles.installments}>
+            <div data-site-locked="" className={styles.installments}>
               <InstallmentMethods prominent />
             </div>
           )}
@@ -103,7 +119,7 @@ export function StudioIntensiveTemplate({
         </div>
       </section>
       <StudioIntensiveProgram page={page} />
-      <section className={`${styles.faculty} studio-band studio-dark`}>
+      <section data-site-section="workshop" className={`${styles.faculty} studio-band studio-dark`}>
         <div className="studio-wrap">
           <header>
             <div className={styles.lecturerLabel}>
@@ -138,7 +154,7 @@ export function StudioIntensiveTemplate({
           </ul>
         </div>
       </section>
-      <section className={`${styles.works} studio-dark`}>
+      <section data-site-section="workshop" className={`${styles.works} studio-dark`}>
         <div className="studio-wrap">
           <h2 className="studio-title">
             {text('gallery-title')}

@@ -16,7 +16,7 @@ export function StudioAcademyTemplate({
   const { text } = bindSection(page, academyIntroduction);
   return (
     <>
-      <section className={`${styles.hero} studio-light`}>
+      <section data-site-section="introduction" className={`${styles.hero} studio-light`}>
         <div className="studio-wrap">
           <p className={`${styles.label} studio-label studio-eyebrow`}>{text('eyebrow')}</p>
           <h1>
@@ -35,12 +35,24 @@ export function StudioAcademyTemplate({
             </div>
           </div>
           <nav className={styles.jump} aria-label="Розділи академії">
-            <a href="#courses">{text('courses')}</a>
-            <a href="#workshops">{text('workshops')}</a>
-            <a href="#individual">{text('individual')}</a>
-            <a href="#corporate">{text('corporate')}</a>
-            <a href="#camp">{text('camp')}</a>
-            <a href="#lecturers">{text('lecturers')}</a>
+            <a data-site-field="courses" href="#courses">
+              {text('courses')}
+            </a>
+            <a data-site-field="workshops" href="#workshops">
+              {text('workshops')}
+            </a>
+            <a data-site-field="individual" href="#individual">
+              {text('individual')}
+            </a>
+            <a data-site-field="corporate" href="#corporate">
+              {text('corporate')}
+            </a>
+            <a data-site-field="camp" href="#camp">
+              {text('camp')}
+            </a>
+            <a data-site-field="lecturers" href="#lecturers">
+              {text('lecturers')}
+            </a>
           </nav>
         </div>
       </section>

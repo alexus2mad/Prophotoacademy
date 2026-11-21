@@ -21,6 +21,7 @@ export function PreparedPhoto({
   return (
     <img
       src={prepared.src}
+      data-site-image-source={image.src}
       srcSet={prepared.srcSet}
       sizes={sizes}
       width={image.width}

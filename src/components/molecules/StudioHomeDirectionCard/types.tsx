@@ -1,2 +1,2 @@
 import type { StudioHomeDirection } from '@/lib/studio-home/types';
-export type StudioHomeDirectionCardProps = { direction: StudioHomeDirection };
+export type StudioHomeDirectionCardProps = { direction: StudioHomeDirection; fieldPrefix: string };

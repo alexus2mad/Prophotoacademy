@@ -1,13 +1,20 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import type { EditorPage, SitePage } from '@/lib/site-editor/types';
+import type { PreviewField } from '@/components/molecules/SiteEditorPreview/types';
 import {
   EditorRequestError,
   fetchEditorPage,
   uploadEditorImage,
   writeEditorPage,
 } from './requests';
-import type { EditorPanel, EditorTask, NewPageValues, SiteContentEditorProps } from './types';
+import type {
+  CanvasImageTarget,
+  EditorPanel,
+  EditorTask,
+  NewPageValues,
+  SiteContentEditorProps,
+} from './types';
 
 const leave = 'Є незбережені зміни. Залишити їх і продовжити?';
 
@@ -23,7 +30,7 @@ export function useSiteContentEditor({ initialPages, writable }: SiteContentEdit
   const [record, setRecord] = useState<EditorPage | null>(null);
   const [page, setPage] = useState<SitePage | null>(null);
   const [sectionId, setSectionId] = useState('');
-  const [panel, setPanel] = useState<EditorPanel>('fields');
+  const [panel, setPanel] = useState<EditorPanel>('preview');
   const [task, setTask] = useState<EditorTask>(null);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
@@ -33,6 +40,8 @@ export function useSiteContentEditor({ initialPages, writable }: SiteContentEdit
   const [previewKey, setPreviewKey] = useState(0);
   const lock = useRef(false);
   const heading = useRef<HTMLHeadingElement>(null);
+  const imagePicker = useRef<HTMLInputElement>(null);
+  const imageTarget = useRef<CanvasImageTarget | null>(null);
   const dirty = !!page && !!record && JSON.stringify(page) !== JSON.stringify(record.page);
 
   function accept(result: EditorPage) {
@@ -141,7 +150,7 @@ export function useSiteContentEditor({ initialPages, writable }: SiteContentEdit
     if (dirty && !window.confirm(leave)) return;
     void perform('load', async () => {
       accept(await fetchEditorPage(path));
-      setPanel('fields');
+      setPanel('preview');
       focusHeading();
     });
   }
@@ -158,6 +167,7 @@ export function useSiteContentEditor({ initialPages, writable }: SiteContentEdit
     focusHeading();
   }
   function update(section: string, id: string, value: string) {
+    if (!writable) return;
     setPage(
       (p) =>
         p && {
@@ -206,8 +216,21 @@ export function useSiteContentEditor({ initialPages, writable }: SiteContentEdit
       void perform('upload', async () => {
         const { url } = await uploadEditorImage(file);
         update(section, id, url);
-        setMessage('Зображення замінено. Збережіть чернетку для перегляду');
+        setMessage('Зображення замінено. Збережіть чернетку');
       });
+  }
+  function chooseCanvasImage(field: PreviewField) {
+    if (!writable || lock.current || !page || !imagePicker.current) return;
+    setSectionId(field.sectionId);
+    imageTarget.current = { ...field, path: page.path };
+    imagePicker.current.value = '';
+    imagePicker.current.click();
+  }
+  function replaceCanvasImage(file?: File) {
+    const target = imageTarget.current;
+    imageTarget.current = null;
+    if (file && target && target.path === page?.path)
+      upload(target.sectionId, target.fieldId, file);
   }
   function save(action: 'save' | 'publish') {
     if (
@@ -255,6 +278,9 @@ export function useSiteContentEditor({ initialPages, writable }: SiteContentEdit
     open,
     update,
     upload,
+    imagePicker,
+    chooseCanvasImage,
+    replaceCanvasImage,
     save,
     create,
     appendSection,

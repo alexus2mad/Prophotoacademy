@@ -186,7 +186,7 @@
 }
 .split {
   display: grid;
-  grid-template-columns: minmax(285px, 0.75fr) minmax(0, 1.25fr);
+  grid-template-columns: clamp(17.5rem, 28%, 24rem) minmax(0, 1fr);
   gap: clamp(16px, 2vw, 32px);
   align-items: start;
 }

@@ -65,6 +65,7 @@ export function StudioProgramTemplate({
       {!!program.outcomes.length && (
         <section
           id="program-about"
+          data-site-section="outcomes"
           className="studio-dark studio-band studio-wrap"
           aria-labelledby="program-about-title"
         >
@@ -75,9 +76,9 @@ export function StudioProgramTemplate({
             </h2>
           </header>
           <ul className={styles.outcomes}>
-            {program.outcomes.map((outcome) => (
+            {program.outcomes.map((outcome, index) => (
               <li key={outcome}>
-                <h3>{outcome}</h3>
+                <h3 data-site-field={'item-' + index}>{outcome}</h3>
               </li>
             ))}
           </ul>
@@ -86,6 +87,7 @@ export function StudioProgramTemplate({
       {!!program.audience.length && (
         <section
           id="program-audience"
+          data-site-section="audience"
           className="studio-light studio-band studio-wrap"
           aria-labelledby="program-audience-title"
         >
@@ -96,9 +98,9 @@ export function StudioProgramTemplate({
             </h2>
           </header>
           <ul className={styles.audience}>
-            {program.audience.map((audience) => (
+            {program.audience.map((audience, index) => (
               <li key={audience}>
-                <h3>{audience}</h3>
+                <h3 data-site-field={'item-' + index}>{audience}</h3>
               </li>
             ))}
           </ul>
@@ -117,6 +119,7 @@ export function StudioProgramTemplate({
       {!!program.modules.length && (
         <section
           id="program-curriculum"
+          data-site-section="curriculum"
           className="studio-dark studio-band studio-wrap"
           aria-labelledby="program-curriculum-title"
         >
@@ -129,10 +132,14 @@ export function StudioProgramTemplate({
           <div className={styles.accordion}>
             {program.modules.map((module, index) => (
               <details key={module.title} open={index === 0}>
-                <summary>{module.title}</summary>
+                <summary>
+                  <span data-site-field={'module-' + index}>{module.title}</span>
+                </summary>
                 <ul>
-                  {module.topics.map((topic) => (
-                    <li key={topic}>{topic}</li>
+                  {module.topics.map((topic, topicIndex) => (
+                    <li key={topic} data-site-field={`topic-${index}-${topicIndex}`}>
+                      {topic}
+                    </li>
                   ))}
                 </ul>
               </details>
@@ -149,6 +156,7 @@ export function StudioProgramTemplate({
       {!!works.length && (
         <section
           id="student-works"
+          data-site-section="gallery"
           className={`${styles.gallery} studio-dark studio-band`}
           aria-labelledby="program-works-title"
         >
@@ -168,6 +176,7 @@ export function StudioProgramTemplate({
         <section
           className={`${styles.faq} studio-light studio-band studio-wrap`}
           aria-labelledby="program-faq-title"
+          data-site-section="faq"
         >
           <header className={styles.heading}>
             <p className="studio-label">Питання</p>
@@ -176,10 +185,12 @@ export function StudioProgramTemplate({
             </h2>
           </header>
           <div className={styles.accordion}>
-            {program.faqs.map((faq) => (
+            {program.faqs.map((faq, index) => (
               <details key={faq.question}>
-                <summary>{faq.question}</summary>
-                <p>{faq.answer}</p>
+                <summary>
+                  <span data-site-field={'question-' + index}>{faq.question}</span>
+                </summary>
+                <p data-site-field={'answer-' + index}>{faq.answer}</p>
               </details>
             ))}
           </div>

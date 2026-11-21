@@ -15,6 +15,7 @@ export function StudioHomeBanner({ page, destination }: StudioHomeBannerProps) {
     <section
       className={`${styles.banner} ${!isShop ? styles.studio : ''}`}
       data-home-section={destination}
+      data-site-section="banners"
       aria-label={text(destination + '-label')}
     >
       <div className={`${styles.body} studio-wrap`}>
@@ -43,6 +44,8 @@ export function StudioHomeBanner({ page, destination }: StudioHomeBannerProps) {
         </Link>
       </div>
       <StudioHomePicture
+        fieldId={destination + '-image'}
+        mobileFieldId={destination + '-mobile-image'}
         image={image(
           destination + '-image',
           isShop ? studioAssets.home.imgImgHome144015 : studioAssets.homeMobile.imgImgHome39015,

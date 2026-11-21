@@ -33,6 +33,7 @@ export function StudioHomeProof({ page }: BrandContentProps = {}) {
   return (
     <section
       className={styles.proof}
+      data-site-section="proof"
       data-home-section="proof"
       aria-label="Досвід ProPhoto Academy"
     >

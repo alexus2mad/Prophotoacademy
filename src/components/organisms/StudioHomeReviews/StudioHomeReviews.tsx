@@ -17,7 +17,7 @@ export function StudioHomeReviews({ page }: BrandContentProps = {}) {
       data-home-section="reviews"
       aria-labelledby="home-reviews-title"
     >
-      <div className={styles.heading}>
+      <div className={styles.heading} data-site-section="reviews-heading">
         <h2 className="studio-label" id="home-reviews-title">
           {copy.label}
         </h2>
@@ -37,7 +37,11 @@ export function StudioHomeReviews({ page }: BrandContentProps = {}) {
         aria-label="Відгуки студентів"
       >
         {reviews.map((review) => (
-          <article className={styles.review} key={review.id}>
+          <article
+            data-site-section={'review-' + review.id}
+            className={styles.review}
+            key={review.id}
+          >
             <div className={styles.reviewHeader}>
               <h3>{review.name}</h3>
               <span aria-label="5 з 5">★★★★★</span>

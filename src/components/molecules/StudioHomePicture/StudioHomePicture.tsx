@@ -5,6 +5,8 @@ import type { StudioHomePictureProps } from './types';
 export function StudioHomePicture({
   image,
   mobileImage,
+  fieldId,
+  mobileFieldId,
   alt,
   className,
   eager,
@@ -15,6 +17,7 @@ export function StudioHomePicture({
     <picture className={className}>
       {mobileImage && (
         <source
+          data-site-field={mobileFieldId}
           media="(max-width: 760px)"
           srcSet={studioAssetUrl(mobileImage.src)}
           width={mobileImage.width}
@@ -23,6 +26,7 @@ export function StudioHomePicture({
       )}
       <StudioImage
         asset={image}
+        fieldId={fieldId}
         alt={alt}
         eager={eager}
         fetchPriority={fetchPriority}

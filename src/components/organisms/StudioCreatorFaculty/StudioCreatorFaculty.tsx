@@ -15,11 +15,16 @@ export function StudioCreatorFaculty({ instructors }: StudioCreatorFacultyProps)
       </StudioCreatorHeading>
       <ul className={styles.people}>
         {instructors.map((instructor) => (
-          <li className={styles.person} key={instructor.id}>
+          <li
+            className={styles.person}
+            key={instructor.id}
+            data-site-section={'lecturer-' + instructor.id}
+          >
             {instructor.portrait ? (
               <div className={styles.portrait}>
                 <StudioImage
                   asset={instructor.portrait}
+                  fieldId="portrait"
                   alt={`Портрет: ${instructor.name}`}
                   className={styles.image}
                   fit="cover"
@@ -31,14 +36,20 @@ export function StudioCreatorFaculty({ instructors }: StudioCreatorFacultyProps)
               <div className={styles.portrait} aria-hidden="true" />
             )}
             <div className={styles.identity} data-has-biography={Boolean(instructor.bio)}>
-              <h3>{instructor.name}</h3>
+              <h3 data-site-field="name">{instructor.name}</h3>
               <p className={styles.role}>
-                {instructor.roles.map((role) => (
-                  <span key={role}>{role}</span>
+                {instructor.roles.map((role, index) => (
+                  <span key={role} data-site-field={'role-' + index}>
+                    {role}
+                  </span>
                 ))}
               </p>
             </div>
-            {instructor.bio && <p className={styles.biography}>{instructor.bio}</p>}
+            {instructor.bio && (
+              <p className={styles.biography} data-site-field="bio">
+                {instructor.bio}
+              </p>
+            )}
           </li>
         ))}
       </ul>

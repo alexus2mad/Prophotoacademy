@@ -15,6 +15,7 @@ export function StudioHomeDirections({ page, directions, sectionRef }: StudioHom
     <section
       id="education-id"
       data-home-section="directions"
+      data-site-section="directions"
       ref={sectionRef}
       data-header-tone="light"
       className={`${styles.section} studio-light`}
@@ -45,6 +46,7 @@ export function StudioHomeDirections({ page, directions, sectionRef }: StudioHom
           return (
             <StudioHomeDirectionCard
               key={id}
+              fieldPrefix={id}
               direction={{
                 ...direction,
                 title: text(id + '-title'),

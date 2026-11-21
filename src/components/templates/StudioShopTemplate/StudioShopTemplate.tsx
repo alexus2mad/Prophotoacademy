@@ -12,7 +12,7 @@ export function StudioShopTemplate({ page }: BrandContentProps = {}) {
   const { text, image } = bindSection(page, shopHero);
   return (
     <>
-      <section className={`${styles.hero} studio-dark`}>
+      <section data-site-section="hero" className={`${styles.hero} studio-dark`}>
         <StudioImage
           asset={image('image', studioAssets.shop.imgHero)}
           alt={text('image-alt')}

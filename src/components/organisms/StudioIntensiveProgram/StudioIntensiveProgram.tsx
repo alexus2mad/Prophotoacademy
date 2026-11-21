@@ -7,7 +7,11 @@ import styles from './StudioIntensiveProgram.module.css';
 export function StudioIntensiveProgram({ page }: BrandContentProps = {}) {
   const { text } = bindSection(page, artworkCurriculum);
   return (
-    <section id="intensive-program" className="studio-band studio-light">
+    <section
+      data-site-section="curriculum"
+      id="intensive-program"
+      className="studio-band studio-light"
+    >
       <div className="studio-wrap">
         <header className={styles.head}>
           <p className="studio-label studio-eyebrow">{text('eyebrow')}</p>
@@ -23,7 +27,9 @@ export function StudioIntensiveProgram({ page }: BrandContentProps = {}) {
                   {text('block-label')} {index + 1}
                 </span>
                 <h3>{text('block-' + index + '-title')}</h3>
-                <span className={styles.duration}>{text('block-' + index + '-duration')}</span>
+                <span data-site-field={'block-' + index + '-duration'} className={styles.duration}>
+                  {text('block-' + index + '-duration')}
+                </span>
                 <span className={styles.toggle} aria-hidden="true" />
               </summary>
               <div className={styles.body}>

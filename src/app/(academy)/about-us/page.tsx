@@ -19,30 +19,34 @@ export default async function About({ searchParams }: SiteRouteProps) {
   return (
     <>
       <div className="container academy-about-page">
-        <div className="page-heading">
-          <h1>{intro.title}</h1>
+        <div className="page-heading" data-site-section="intro">
+          <h1 data-site-field="title">{intro.title}</h1>
         </div>
-        <section className="about-intro">
+        <section className="about-intro" data-site-section="intro">
           <PreparedPhoto
             image={hero}
             priority
             sizes="(max-width: 767px) calc(100vw - 40px), 44vw"
           />
           <div>
-            <h2>{intro.heading}</h2>
-            <p>{intro.description}</p>
-            <p>{intro.detail}</p>
+            <h2 data-site-field="heading">{intro.heading}</h2>
+            <p data-site-field="description">{intro.description}</p>
+            <p data-site-field="detail">{intro.detail}</p>
           </div>
         </section>
-        <section className="section stats-grid" aria-label="Академія в цифрах">
+        <section
+          className="section stats-grid"
+          aria-label="Академія в цифрах"
+          data-site-section="figures"
+        >
           {stats.map((stat, i) => (
             <div key={i}>
-              <strong>{stat.number}</strong>
-              <span>{stat.label}</span>
+              <strong data-site-field={'number-' + i}>{stat.number}</strong>
+              <span data-site-field={'label-' + i}>{stat.label}</span>
             </div>
           ))}
         </section>
-        <section className="section" id="team">
+        <section className="section" id="team" data-site-section="team">
           <div className="section-heading">
             <div>
               <h2>{teamTitle}</h2>
@@ -50,7 +54,7 @@ export default async function About({ searchParams }: SiteRouteProps) {
           </div>
           <div className="instructors-grid">
             {instructors.map((i) => (
-              <article className="instructor-card" key={i.id}>
+              <article data-site-section={'person-' + i.id} className="instructor-card" key={i.id}>
                 <div className="instructor-photo">
                   <Photo image={i.image} />
                 </div>

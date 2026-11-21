@@ -6,7 +6,7 @@ import styles from './StudioExposureTitle.module.css';
 export function StudioExposureTitle({ page }: BrandContentProps = {}) {
   const { text } = bindSection(page, homeExposureTitle);
   return (
-    <h2 id="exposure-title" className={styles.title}>
+    <h2 data-site-section="exposure-title" id="exposure-title" className={styles.title}>
       {text('title')}{' '}
       <strong>
         {text('emphasis')}

@@ -23,7 +23,7 @@ export function StudioAcademyPrograms({
 
   return (
     <>
-      <section id="courses" className="studio-band studio-dark">
+      <section data-site-section="programs" id="courses" className="studio-band studio-dark">
         <div className="studio-wrap">
           <header className={styles.head}>
             <p className="studio-label studio-eyebrow">{text('courses-eyebrow')}</p>
@@ -42,7 +42,7 @@ export function StudioAcademyPrograms({
           </div>
         </div>
       </section>
-      <section id="workshops" className="studio-band studio-light">
+      <section data-site-section="programs" id="workshops" className="studio-band studio-light">
         <div className="studio-wrap">
           <header className={styles.head}>
             <p className="studio-label studio-eyebrow">{text('workshops-eyebrow')}</p>
@@ -51,7 +51,9 @@ export function StudioAcademyPrograms({
           <div className={styles.rows}>
             {intensive && (
               <article className={styles.workshop}>
-                <h3>{intensive.shortTitle}</h3>
+                <h3 data-site-section="featured-workshop" data-site-field="title">
+                  {intensive.shortTitle}
+                </h3>
                 <Link
                   href={`/${intensive.slug}`}
                   className={`${styles.archiveLink} ${styles.cardAction}`}
@@ -66,7 +68,7 @@ export function StudioAcademyPrograms({
               const title = text('workshop-' + i);
               return (
                 <article className={styles.workshop} key={title}>
-                  <h3>{title}</h3>
+                  <h3 data-site-field={'workshop-' + i}>{title}</h3>
                   <InquiryButton
                     title={`Дізнатися про воркшоп «${title}»`}
                     subject="workshops"
@@ -82,7 +84,11 @@ export function StudioAcademyPrograms({
           </div>
         </div>
       </section>
-      <section className={styles.formats} aria-label="Інші формати навчання">
+      <section
+        data-site-section="programs"
+        className={styles.formats}
+        aria-label="Інші формати навчання"
+      >
         <article id="individual">
           <span className={styles.badge}>{text('individual-eyebrow')}</span>
           <h2>

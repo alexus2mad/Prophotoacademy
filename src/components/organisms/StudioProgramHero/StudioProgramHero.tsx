@@ -15,18 +15,27 @@ export function StudioProgramHero({
 }: StudioProgramHeroProps) {
   const schedule = programSchedule(program, offering);
   return (
-    <section className={`${styles.hero} studio-light`} aria-labelledby="program-title">
+    <section
+      className={`${styles.hero} studio-light`}
+      data-site-section="overview"
+      aria-labelledby="program-title"
+    >
       <div className={`${styles.copy} studio-wrap`} data-header-tone="light">
         <Link className={styles.back} href={studioAcademyDestinations.courses}>
           ← Усі курси
         </Link>
-        <p className={`${styles.status} ${presentation.open ? styles.open : ''}`}>
+        <p
+          data-site-locked=""
+          className={`${styles.status} ${presentation.open ? styles.open : ''}`}
+        >
           {schedule.status}
         </p>
-        <h1 id="program-title">{program.title}</h1>
+        <h1 data-site-field="title" id="program-title">
+          {program.title}
+        </h1>
         {program.eyebrow && <p className={styles.subtitle}>{program.eyebrow}</p>}
         <p className={styles.description}>{program.description}</p>
-        <div className={styles.facts}>
+        <div data-site-locked="" className={styles.facts}>
           <p>
             {program.deliveryDescription ||
               (offering ? formatLabel[offering.format] : 'За запитом')}
@@ -44,7 +53,7 @@ export function StudioProgramHero({
         {program.equipmentDescription && (
           <p className={styles.note}>{program.equipmentDescription}</p>
         )}
-        <div className={styles.price}>
+        <div data-site-locked="" className={styles.price}>
           <span className="studio-label">
             {presentation.price !== undefined ? 'Вартість від' : 'Вартість'}
           </span>
@@ -54,7 +63,10 @@ export function StudioProgramHero({
         </div>
         {schedule.explanation && <p className={styles.note}>{schedule.explanation}</p>}
         {presentation.testEnrollment && <p className={styles.note}>Тестовий запис — без оплати</p>}
-        <div className={`${styles.actions} studio-actions program-hero-actions`}>
+        <div
+          data-site-locked=""
+          className={`${styles.actions} studio-actions program-hero-actions`}
+        >
           {presentation.open && offering?.packages.length ? (
             <a href="#packages" className="studio-button">
               Обрати пакет <span aria-hidden="true">→</span>
@@ -79,8 +91,9 @@ export function StudioProgramHero({
           </InquiryButton>
         </div>
       </div>
-      <div className={styles.image} data-header-tone="dark">
+      <div data-site-section="hero" className={styles.image} data-header-tone="dark">
         <StudioImage
+          fieldId="image"
           asset={hero.asset}
           alt={hero.alt}
           fit="cover"

@@ -20,6 +20,7 @@ export function StudioHomeExposure({ page, directionsRef }: StudioHomeExposurePr
     <section
       className={styles.exposure}
       data-home-section="exposure"
+      data-site-section="exposure"
       data-header-tone={compact && exposure.progress >= 0.5 ? 'light' : 'dark'}
       data-exposure-ready={ready}
       ref={section}

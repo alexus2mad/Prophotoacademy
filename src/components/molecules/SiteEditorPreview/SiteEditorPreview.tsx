@@ -7,7 +7,7 @@ export function SiteEditorPreview(props: SiteEditorPreviewProps) {
   const {
     page: { path, title },
     version,
-    dirty,
+    editable,
   } = props;
   const h = useSiteEditorPreview(props);
   return (
@@ -36,9 +36,9 @@ export function SiteEditorPreview(props: SiteEditorPreviewProps) {
         </div>
       </div>
       <p className={styles.hint}>
-        {dirty
-          ? 'Перегляд показує останню збережену версію'
-          : 'Натисніть на текст або фото, щоб перейти до його поля'}
+        {editable
+          ? 'Натисніть на текст, щоб його змінити, або на фото, щоб замінити зображення'
+          : 'Перегляд сторінки'}
       </p>
       <div ref={h.stage} className={styles.stage}>
         <iframe

@@ -8,7 +8,7 @@ import styles from './StudioContactsTemplate.module.css';
 
 export function StudioContactsTemplate({ settings, intro }: StudioContactsTemplateProps) {
   return (
-    <section className={`studio-light studio-wrap ${styles.page}`}>
+    <section data-site-section="intro" className={`studio-light studio-wrap ${styles.page}`}>
       <p className="studio-label studio-eyebrow">{intro?.label ?? 'Контакти ProPhoto Academy'}</p>
       <h1>
         <span>{intro?.accent ?? '*пишіть, телефонуйте'}</span>
@@ -16,7 +16,7 @@ export function StudioContactsTemplate({ settings, intro }: StudioContactsTempla
       </h1>
       <div className={styles.columns}>
         <div>
-          <dl>
+          <dl data-site-section="contacts">
             <StudioContactDetail
               label="Телефон"
               value={phoneLabel(settings.phone)}
@@ -29,7 +29,7 @@ export function StudioContactsTemplate({ settings, intro }: StudioContactsTempla
             />
             <StudioContactDetail label="Адреса" value={settings.address} />
           </dl>
-          <div className={styles.socials}>
+          <div className={styles.socials} data-site-locked="">
             <p className="studio-label studio-eyebrow">Соцмережі</p>
             <nav aria-label="Соціальні мережі академії">
               <a href={settings.instagram}>Instagram</a>
@@ -38,7 +38,7 @@ export function StudioContactsTemplate({ settings, intro }: StudioContactsTempla
             </nav>
           </div>
         </div>
-        <div className={styles.form}>
+        <div className={styles.form} data-site-locked="">
           <p className="studio-label studio-eyebrow">Безкоштовна консультація</p>
           <StudioInquiryForm id="studio-contacts" compact />
         </div>

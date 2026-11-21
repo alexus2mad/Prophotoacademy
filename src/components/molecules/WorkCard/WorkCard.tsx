@@ -3,7 +3,7 @@ import { Maximize2 } from 'lucide-react';
 import type { WorkCardProps } from './types';
 export function WorkCard({ work, image: img, onOpen }: WorkCardProps) {
   return (
-    <figure className="work-item" data-card-motion>
+    <figure className="work-item" data-site-section={'work-' + work.id} data-card-motion>
       <button
         type="button"
         onClick={() => onOpen()}
@@ -18,8 +18,8 @@ export function WorkCard({ work, image: img, onOpen }: WorkCardProps) {
         </span>
       </button>
       <figcaption>
-        <span>{work.title}</span>
-        <span>{work.device === 'phone' ? 'На телефон' : 'На камеру'}</span>
+        <span data-site-field="title">{work.title}</span>
+        <span data-site-locked="">{work.device === 'phone' ? 'На телефон' : 'На камеру'}</span>
       </figcaption>
     </figure>
   );
