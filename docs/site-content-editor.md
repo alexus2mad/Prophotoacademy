@@ -14,10 +14,13 @@ Use **Створити сторінку** for a new course presentation, worksho
 | `SITE_EDITOR_MODE=readonly` | Default. Render the initial page inventory and allow administrators to inspect it |
 | `SITE_EDITOR_MODE=local` | Development or the local learning sandbox. Drafts, published pages and WebP images persist together under `.data/site-editor` or `SITE_EDITOR_LOCAL_DIR` |
 | `SITE_EDITOR_MODE=sanity` | Use the public marketing project and dataset configured with `NEXT_PUBLIC_SANITY_PROJECT_ID` and `NEXT_PUBLIC_SANITY_DATASET` |
-| `SANITY_API_WRITE_TOKEN` | Server-side credential with draft, document and image write access to that marketing dataset |
+| `SITE_EDITOR_WRITE_TOKEN` | Dedicated server-side credential for marketing drafts, published documents and image uploads |
+| `SANITY_API_WRITE_TOKEN` | Existing non-staging fallback for the marketing writer |
 | `SANITY_API_READ_TOKEN` | Optional server credential for published reads when the dataset requires authentication |
 
 The private learning dataset and student records are managed separately. Keep the marketing writer scoped to its intended dataset. The GitHub Pages export uses the initial documents with its read-only adapter. Public editorial image uploads become public marketing assets by URL, including while the containing page is a draft. Use private course authoring for paid lesson media.
+
+Staging uses public dataset `production` in the independent project `p0dn7nmp`. Its private lessons use `learning-staging`. Set `SITE_EDITOR_WRITE_TOKEN` at runtime to the staging marketing writer. Leave `SANITY_API_WRITE_TOKEN` unset there. The staging pre-start check enforces that the marketing and learning credentials differ.
 
 1. Set the marketing dataset and server credentials on staging. Verify it is the intended dataset. Configure the editor independently of `CONTENT_MODE`, which selects the existing catalog and offering data.
 2. From a trusted source checkout, run `pnpm site:seed` to inspect the inventory. Run `pnpm site:seed --write` with the intended marketing dataset credentials to initialize published documents. Repeating the command preserves existing documents and drafts. Runtime release directories contain compiled files.

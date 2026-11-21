@@ -52,6 +52,23 @@ class StagingIsolation(unittest.TestCase):
         with self.assertRaises(ValueError):
             guard.validate(env)
 
+    def test_staging_editor_is_independently_scoped(self):
+        enabled = {**self.valid(), "SITE_EDITOR_MODE": "sanity",
+                   "NEXT_PUBLIC_SANITY_DATASET": "production",
+                   "SITE_EDITOR_WRITE_TOKEN": "test-staging-marketing"}
+        guard.validate(enabled)
+        for key, value in (
+            ("SITE_EDITOR_WRITE_TOKEN", ""),
+            ("SITE_EDITOR_WRITE_TOKEN", enabled["SANITY_LEARNING_WRITE_TOKEN"]),
+            ("SANITY_API_WRITE_TOKEN", "test-generic"),
+            ("NEXT_PUBLIC_SANITY_PROJECT_ID", "sfzp6094"),
+            ("NEXT_PUBLIC_SANITY_DATASET", "learning-staging"),
+            ("NEXT_PUBLIC_SANITY_DATASET", "other"),
+            ("SITE_EDITOR_MODE", "local"),
+        ):
+            with self.subTest(key=key, value=value), self.assertRaises(ValueError):
+                guard.validate({**enabled, key: value})
+
     def test_isolated_invitation_sender_allowed(self):
         guard.validate({**self.valid(),
             "INVITATION_RESEND_API_KEY": "re_staging_test_only",

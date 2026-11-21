@@ -1,7 +1,7 @@
 import { HttpError } from '../../http';
 import type { SitePage } from '../types';
 import { pageSchema } from '../validation';
-import { editorMode, marketingDatasetConfigured, unavailable } from './config';
+import { editorMode, marketingDatasetConfigured, marketingWriteToken, unavailable } from './config';
 import { localSave, localStates } from './local';
 import { sanityPublished, sanitySave, sanityStates } from './sanity';
 
@@ -9,9 +9,7 @@ export function siteEditorWritable() {
   const mode = editorMode();
   return (
     mode === 'local' ||
-    (mode === 'sanity' &&
-      marketingDatasetConfigured() &&
-      Boolean(process.env.SANITY_API_WRITE_TOKEN))
+    (mode === 'sanity' && marketingDatasetConfigured() && Boolean(marketingWriteToken()))
   );
 }
 

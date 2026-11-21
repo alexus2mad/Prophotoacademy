@@ -176,6 +176,49 @@ describe('visual editor persistence and authorization', () => {
     expect(() => siteEditorWritable()).toThrow('Локальний редактор');
   });
 
+  it('requires the isolated staging writer and the public staging marketing target', () => {
+    vi.stubEnv('SITE_EDITOR_MODE', 'sanity');
+    vi.stubEnv('NEXT_PUBLIC_SITE_URL', 'https://staging.prophotoacademy.com.ua');
+    vi.stubEnv('NEXT_PUBLIC_SANITY_PROJECT_ID', 'p0dn7nmp');
+    vi.stubEnv('NEXT_PUBLIC_SANITY_DATASET', 'production');
+    vi.stubEnv('SANITY_LEARNING_DATASET', 'learning-staging');
+    vi.stubEnv('SANITY_LEARNING_WRITE_TOKEN', 'private-learning');
+    vi.stubEnv('SANITY_API_WRITE_TOKEN', '');
+    vi.stubEnv('SITE_EDITOR_WRITE_TOKEN', 'public-marketing');
+    expect(siteEditorWritable()).toBe(true);
+    expect(storageConfig.marketingClient(true).config().token).toBe('public-marketing');
+    for (const [key, value] of [
+      ['SITE_EDITOR_WRITE_TOKEN', ''],
+      ['SITE_EDITOR_WRITE_TOKEN', 'private-learning'],
+      ['SANITY_API_WRITE_TOKEN', 'generic'],
+      ['NEXT_PUBLIC_SANITY_PROJECT_ID', 'sfzp6094'],
+      ['NEXT_PUBLIC_SANITY_DATASET', 'learning-staging'],
+      ['NEXT_PUBLIC_SANITY_DATASET', 'other'],
+      ['SANITY_LEARNING_DATASET', 'learning'],
+    ]) {
+      const previous = process.env[key];
+      vi.stubEnv(key, value);
+      expect(siteEditorWritable(), key).toBe(false);
+      expect(() => storageConfig.marketingClient(true), key).toThrow();
+      vi.stubEnv(key, previous);
+    }
+    vi.stubEnv('NEXT_PUBLIC_REVIEW_MODE', 'pages');
+    expect(siteEditorWritable()).toBe(false);
+  });
+
+  it('retains the existing non-staging writer and prefers a dedicated one when configured', () => {
+    vi.stubEnv('SITE_EDITOR_MODE', 'sanity');
+    vi.stubEnv('NEXT_PUBLIC_SANITY_PROJECT_ID', 'sfzp6094');
+    vi.stubEnv('NEXT_PUBLIC_SANITY_DATASET', 'production');
+    vi.stubEnv('SANITY_LEARNING_DATASET', 'learning');
+    vi.stubEnv('NEXT_PUBLIC_ACADEMY_URL', 'https://prophotoacademy.com.ua');
+    vi.stubEnv('SITE_EDITOR_WRITE_TOKEN', '');
+    vi.stubEnv('SANITY_API_WRITE_TOKEN', 'existing');
+    expect(storageConfig.marketingClient(true).config().token).toBe('existing');
+    vi.stubEnv('SITE_EDITOR_WRITE_TOKEN', 'dedicated');
+    expect(storageConfig.marketingClient(true).config().token).toBe('dedicated');
+  });
+
   it('guards admin reads, changes and uploads, including cross-origin writes', async () => {
     for (const status of [401, 403]) {
       vi.mocked(requireAdmin).mockRejectedValue(new HttpError(status, 'Доступ обмежено'));

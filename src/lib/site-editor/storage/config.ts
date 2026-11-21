@@ -2,6 +2,32 @@ import path from 'node:path';
 import { createClient } from '@sanity/client';
 import { HttpError } from '../../http';
 
+const stagingProject = 'p0dn7nmp';
+const stagingLearning = 'learning-staging';
+const stagingOrigin = 'https://staging.prophotoacademy.com.ua';
+
+function isStaging() {
+  return (
+    process.env.NEXT_PUBLIC_SITE_URL === stagingOrigin ||
+    process.env.NEXT_PUBLIC_ACADEMY_URL === stagingOrigin ||
+    process.env.NEXT_PUBLIC_SANITY_PROJECT_ID === stagingProject ||
+    process.env.SANITY_LEARNING_DATASET === stagingLearning
+  );
+}
+
+export function marketingWriteToken() {
+  const writer = process.env.SITE_EDITOR_WRITE_TOKEN;
+  if (!isStaging()) return writer || process.env.SANITY_API_WRITE_TOKEN;
+  if (
+    !marketingDatasetConfigured() ||
+    process.env.SANITY_API_WRITE_TOKEN ||
+    !writer ||
+    writer === process.env.SANITY_LEARNING_WRITE_TOKEN
+  )
+    return undefined;
+  return writer;
+}
+
 export function editorMode() {
   if (process.env.NEXT_PUBLIC_REVIEW_MODE === 'pages') return 'readonly';
   const mode = process.env.SITE_EDITOR_MODE || 'readonly';
@@ -20,12 +46,12 @@ export function localDirectory() {
 export function marketingClient(write = false) {
   const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
   const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
-  const token = write ? process.env.SANITY_API_WRITE_TOKEN : process.env.SANITY_API_READ_TOKEN;
+  const token = write ? marketingWriteToken() : process.env.SANITY_API_READ_TOKEN;
   if (
     editorMode() !== 'sanity' ||
     !projectId ||
     !dataset ||
-    dataset === (process.env.SANITY_LEARNING_DATASET || 'learning') ||
+    !marketingDatasetConfigured() ||
     (write && !token)
   )
     throw unavailable();
@@ -40,6 +66,13 @@ export function marketingClient(write = false) {
 }
 
 export function marketingDatasetConfigured() {
+  if (isStaging()) {
+    return (
+      process.env.NEXT_PUBLIC_SANITY_PROJECT_ID === stagingProject &&
+      process.env.NEXT_PUBLIC_SANITY_DATASET === 'production' &&
+      process.env.SANITY_LEARNING_DATASET === stagingLearning
+    );
+  }
   return Boolean(
     process.env.NEXT_PUBLIC_SANITY_PROJECT_ID &&
       process.env.NEXT_PUBLIC_SANITY_DATASET &&

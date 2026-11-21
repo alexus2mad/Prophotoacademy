@@ -60,6 +60,15 @@ def validate(env):
         raise ValueError("Staging must use its private learning dataset")
     if not env.get("SANITY_LEARNING_WRITE_TOKEN"):
         raise ValueError("Staging authoring credential is missing")
+    editor_mode = env.get("SITE_EDITOR_MODE") or "readonly"
+    if editor_mode not in ("readonly", "sanity"):
+        raise ValueError("Staging editor must use Sanity or readonly mode")
+    editor_token = env.get("SITE_EDITOR_WRITE_TOKEN")
+    if editor_mode == "sanity" or editor_token:
+        if env.get("NEXT_PUBLIC_SANITY_DATASET") != "production":
+            raise ValueError("Staging editor requires the marketing dataset in the staging project")
+        if not editor_token or editor_token == env.get("SANITY_LEARNING_WRITE_TOKEN"):
+            raise ValueError("Staging marketing editor requires a separate write credential")
     if env.get("DATABASE_PATH") != "/srv/prophotoacademy-staging/shared/academy.sqlite":
         raise ValueError("Staging ledger must use its isolated shared directory")
 
