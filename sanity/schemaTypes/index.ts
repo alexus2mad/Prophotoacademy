@@ -1,4 +1,5 @@
 import type { OfferingScheduleDocument, PackageIdentity } from './types';
+import { sitePageDocuments } from './sitePage';
 import { validateOfferingTime } from '../../src/lib/program-schedule/offering-time';
 import { defineArrayMember, defineField, defineType } from 'sanity';
 const text = (name: string, title: string, required = false) =>
@@ -111,6 +112,7 @@ const packageComparison = defineField({
   ),
 });
 export const schemaTypes = [
+  ...sitePageDocuments,
   defineType({
     name: 'studioRoom',
     title: 'Hub · Studio spaces',
