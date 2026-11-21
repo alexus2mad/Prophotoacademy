@@ -1,18 +1,14 @@
-# Management and cashbox belong to ps-booking
+# Academy student management and the ps-booking cashbox
 
-> **Superseded for student management on 17 October 2026.** At the owner's request, student accounts, access, administrator delegation, statistics and attendance moved to the Academy admin (`/admin/students`, `/admin/team`). Booking's `/academy.html` now signs managers in only for its customer-card Academy panel and redirects to the Academy admin. The cashbox sections below still apply.
+Since 17 October 2026, Academy owns the editable student and team workspaces, access, learning statistics and attendance. Managers use `/admin/students` and `/admin/team`. Booking owns the shared cashbox and provides a read-only Academy summary in its customer card. Academy, studio and cashbox roles have separate authorization.
 
-Updated 9 October 2026 following the owner's corrections. This supersedes the cashbox and student-administration UI sections of the learning-platform plan.
+## Management integration
 
-## Student-management implementation
-
-The new `/academy.html` area in `ps-booking` provides email-code login, student search, pending access by email, per-student purchases and learning progress, grant/upgrade/extend/revoke/restore/transfer controls, administrator privileges and Zoom attendance. It is linked from the existing studio administrator menu. Studio and cashbox rights remain separate; an Academy administrator does not acquire those privileges implicitly.
-
-The changes are implemented in branch `codex/academy-management`, using an isolated worktree at `E:/Projects/photoacademy/ps-booking-integration`. They are not a production deployment. Booking migration `017-academy-management.sql` stores encrypted upstream management credentials; Academy migration `202610090003_booking_management.sql` stores their hashes, verified identities and replay nonces.
+The 9 October implementation hosted editable student-management screens in booking. That UI was superseded on 17 October. The signed bridge remains compatible with earlier authenticated management operations. Booking migration `017-academy-management.sql` stores encrypted upstream management credentials. Academy migration `202610090003_booking_management.sql` stores their hashes, verified identities and replay nonces.
 
 Booking's `/api/academy/*` endpoints call Academy's fixed `/api/integrations/ps-booking` route over HTTPS. Both servers share a random 32+ character key. The signed body contains an action, validated input and an opaque verified-user credential; browsers never receive that credential. Timestamp validation, single-use nonces, current-role checks and recent verification protect commands. Access and privilege mutations are audited. Last-admin removal is prevented transactionally.
 
-All editable student-management UI is in booking. Identity, access and progress stay in the Academy database so protected content can enforce them directly. Academy's browser admin API exposes authoring only. `/operations` redirects and `/api/operations/customers` is retired. See `LEARNING_OPERATIONS.md` for activation.
+Academy's browser admin API handles course authoring, student access, invitations, role changes, promo codes and attendance. Identity, access and progress live in Academy PostgreSQL. `/operations` redirects to `/admin/students`. `/api/operations/customers` is retired and returns HTTP 410. See the [learning operations runbook](LEARNING_OPERATIONS.md) and [platform evidence](openspec/platform.md).
 
 ## Customer-card account connection
 
@@ -20,7 +16,7 @@ Booking customer cards use the signed `customer.summary` action to read a minima
 
 Matching is exact after trimming and lowercasing; no phone/name matching or Gmail alias consolidation. Shared CRM email contacts and multiple matching accounts require review. There is no persisted email-based authorization or duplicate student store: registered-account grants are selected by immutable user ID. Pending unclaimed grants remain distinct from a verified account. Revoked, expired and empty grants are omitted, and future intake start dates remain explicit. CRM contact changes neither update the login nor grant course access.
 
-## Verified existing implementation
+## Historical evidence from the booking repository
 
 Repository: `alexus2mad/ps-booking`, local checkout `E:/Projects/WIX_Koren_studio`, inspected commit `0033f86`.
 
@@ -49,4 +45,4 @@ If adding refund initiation or Academy reconciliation, implement it in ps-bookin
 
 Until that producer exists, immediate fulfillment uses the existing Academy callback. Missed callback/refund recovery across the two services remains a release integration item; an admin can explicitly change course access without creating a financial effect.
 
-The original booking checkout and unrelated SEO work remain untouched. Implementation is isolated in the worktree above; no real customers, payments, emails or production permissions were changed.
+Verify changes to booking endpoints or cashbox behavior in the owning repository. The historical checkout inspection above does not establish the currently deployed booking revision.
