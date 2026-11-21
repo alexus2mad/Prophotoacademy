@@ -1,0 +1,27 @@
+schema: spec-driven
+skillsScope: project
+context: |
+  ProPhoto Academy. Read AGENTS.md and the affected capability specs before planning.
+  Product UI and copy are Ukrainian. Engineering documentation is English.
+  ARCHITECTURE.md governs implementation. Approved Figma frames and recorded designer decisions govern visual changes.
+  Work from synthetic examples. Never put private teaching material, customer records or credentials into specs.
+rules:
+  proposal:
+    - Identify the requested observable change, its audience, and the existing capability paths it affects.
+    - Call out decisions that extend scope. Ask the user before incorporating them.
+  specs:
+    - State observable outcomes with WHEN and THEN scenarios. Cover the relevant failure, permission or environment boundary.
+    - Cite evidence for existing behavior. Keep mutable offer data in its authoritative source.
+  design:
+    - Reference the approved visual or technical source. Document conflicts and follow recorded designer resolutions.
+  tasks:
+    - Each checkbox names how to verify its outcome. Include relevant UI, domain, integration and coverage checks.
+operations:
+  apply:
+    guidance:
+      - A request to implement authorizes the written scope. Surface material open decisions before implementing them.
+      - Keep changes and verification in the matching worktree. Use an OpenSpec-Change trailer on significant commits.
+  archive:
+    guidance:
+      - Compare acceptance scenarios with implementation evidence and resolve archive merge findings before archiving.
+      - Re-run strict main and archive validation and the entry-point coverage check after archiving.
