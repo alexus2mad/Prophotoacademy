@@ -1,5 +1,5 @@
 import type { SitePage, SiteField } from '@/lib/site-editor/types';
-import type { PreviewField } from './types';
+import type { PreviewField, PreviewFieldCandidates } from './types';
 
 const normalize = (text: string) => text.replace(/\s+/g, ' ').trim().toLocaleLowerCase('uk');
 const ignore =
@@ -74,7 +74,7 @@ export function bindPreviewFields(doc: Document, savedPage: SitePage) {
     ]),
   );
 
-  const inferred = new Map<string, { field: PreviewField; nodes: (HTMLElement | Text)[] }>();
+  const inferred = new Map<string, PreviewFieldCandidates>();
   const identified = new Set<string>();
 
   function accept(node: HTMLElement | Text, field: PreviewField, explicit?: string) {

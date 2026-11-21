@@ -2,6 +2,8 @@ import type { SiteField, SitePage } from '@/lib/site-editor/types';
 
 export type PreviewField = { sectionId: string; fieldId: string };
 
+export type PreviewFieldCandidates = { field: PreviewField; nodes: (HTMLElement | Text)[] };
+
 export type SiteEditorPreviewProps = {
   page: SitePage;
   savedPage: SitePage;
