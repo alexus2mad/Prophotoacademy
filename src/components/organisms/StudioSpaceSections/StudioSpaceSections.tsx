@@ -1,49 +1,12 @@
+import { studioSpaces, rooms } from '@/lib/site-editor/brand/studio/spaces';
+import { bindSection } from '@/lib/site-editor/bind-section';
 import { StudioSpacesGallery } from '@/components/organisms/StudioSpacesGallery/StudioSpacesGallery';
 import { ecosystemDestinations } from '@/lib/ecosystem';
-import { studioAssets } from '@/lib/studio-design/assets';
 import type { StudioSpaceSectionsProps } from './types';
 import styles from './StudioSpaceSections.module.css';
 
-const rooms = [
-  {
-    id: 'cyclorama',
-    title: 'Циклорама',
-    description:
-      'Світлий зал із білою підлогою, цегляними стінами, зоною відпочинку та робочим місцем. Для портретних, предметних і рекламних зйомок.',
-    images: [
-      {
-        asset: studioAssets.studio.imgImgCyclo1,
-        alt: 'Світлий зал циклорами, зона відпочинку й обладнання',
-      },
-      { asset: studioAssets.studio.imgImgCyclo2, alt: 'Другий ракурс залу циклорами' },
-    ],
-  },
-  {
-    id: 'content-room',
-    title: 'Контент зал',
-    description:
-      'Темний зал з акустичними панелями, столом і мікрофонами. Для подкастів, інтервʼю та експертних відео.',
-    images: [
-      {
-        asset: studioAssets.studio.imgImgContent1,
-        alt: 'Темний контент зал з професійним освітленням',
-      },
-      { asset: studioAssets.studio.imgImgContent3, alt: 'Камера для зйомки в контент залі' },
-    ],
-  },
-  {
-    id: 'makeup',
-    title: 'Гримерна',
-    description:
-      'Чорний мармур, дзеркала з підсвіткою, зручні стільці. Місце для макіяжу, зачіски й підготовки до зйомки.',
-    images: [
-      { asset: studioAssets.studio.imgImgMakeup1, alt: 'Гримерна з дзеркалами та підсвіткою' },
-      { asset: studioAssets.studio.imgImgMakeup3, alt: 'Робочі місця гримерної' },
-    ],
-  },
-];
-
-export function StudioSpaceSections({ address }: StudioSpaceSectionsProps) {
+export function StudioSpaceSections({ page, address }: StudioSpaceSectionsProps) {
+  const { text, image } = bindSection(page, studioSpaces);
   const bookingUrl = ecosystemDestinations.studioBooking;
   return (
     <>
@@ -54,7 +17,7 @@ export function StudioSpaceSections({ address }: StudioSpaceSectionsProps) {
       >
         <div className="studio-wrap">
           <h2 className="studio-title" id="studio-spaces-title">
-            Три зали
+            {text('rooms-title')}
           </h2>
           {rooms.map((room) => (
             <article
@@ -64,13 +27,19 @@ export function StudioSpaceSections({ address }: StudioSpaceSectionsProps) {
               key={room.id}
             >
               <div className={styles.roomCopy}>
-                <h3 id={`${room.id}-title`}>{room.title}</h3>
-                <p>{room.description}</p>
+                <h3 id={`${room.id}-title`}>{text(room.id + '-title')}</h3>
+                <p>{text(room.id + '-description')}</p>
                 <a className={`${styles.roomAction} studio-button`} href={bookingUrl}>
-                  Забронювати →
+                  {text('room-action')}
                 </a>
               </div>
-              <StudioSpacesGallery images={room.images} label={`Фотографії: ${room.title}`} />
+              <StudioSpacesGallery
+                images={room.images.map((photo, i) => ({
+                  asset: image(room.id + '-image-' + i, photo.asset),
+                  alt: text(room.id + '-image-' + i + '-alt'),
+                }))}
+                label={`Фотографії: ${text(room.id + '-title')}`}
+              />
             </article>
           ))}
         </div>
@@ -83,26 +52,24 @@ export function StudioSpaceSections({ address }: StudioSpaceSectionsProps) {
         <div className={`${styles.bookingGrid} studio-wrap`}>
           <div>
             <h2 className="studio-title" id="studio-booking-title">
-              Забронюйте
+              {text('booking-title')}
               <br />
-              <span className="studio-hand">*час</span>
+              <span className="studio-hand">{text('booking-emphasis')}</span>
             </h2>
-            <p className="studio-lead">
-              Оберіть зал і зручний час. Адміністратор підтвердить бронювання та вартість.
-            </p>
+            <p className="studio-lead">{text('booking-intro')}</p>
           </div>
           <div className={styles.bookingDestination}>
-            <p className="studio-label studio-eyebrow">Зал</p>
+            <p className="studio-label studio-eyebrow">{text('room-label')}</p>
             <ul>
               {rooms.map((room) => (
                 <li key={room.id}>
-                  <a href={bookingUrl}>{room.title}</a>
+                  <a href={bookingUrl}>{text(room.id + '-title')}</a>
                 </li>
               ))}
             </ul>
-            <p>Вільний час, тривалість і вартість оренди доступні в нашому сервісі бронювання.</p>
+            <p>{text('booking-help')}</p>
             <a href={bookingUrl} className="studio-button">
-              Обрати час і забронювати →
+              {text('booking-action')}
             </a>
             <p className={styles.address}>{address}</p>
           </div>

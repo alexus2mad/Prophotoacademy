@@ -1,2 +1,5 @@
+import type { BrandContentProps } from '@/lib/site-editor/brand/types';
 import type { StudioHomeWork } from '@/lib/studio-home/types';
-export type StudioHomeWorksProps = { works: StudioHomeWork[] };
+export type StudioHomeWorksProps = BrandContentProps & {
+  works: StudioHomeWork[];
+};

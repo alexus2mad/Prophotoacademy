@@ -4,7 +4,9 @@ import { studioAssets } from '@/lib/studio-design/assets';
 import type { AcademyContent } from '@/lib/content/types';
 import type { StudioHomeDirection, StudioHomeReview, StudioHomeWork } from './types';
 
-export function studioHomeDirections(content: AcademyContent): StudioHomeDirection[] {
+export function studioHomeDirections(
+  content: Pick<AcademyContent, 'programs'>,
+): StudioHomeDirection[] {
   const individual = content.programs.find((program) => program.category === 'individual');
   const corporate = content.programs.find((program) => program.category === 'corporate');
   return [
@@ -57,7 +59,11 @@ export function studioHomeDirections(content: AcademyContent): StudioHomeDirecti
       description: 'Виїзна програма',
       action: 'Дізнатись дати',
       image: studioAssets.home.imgImgHome144008,
-      inquiry: { title: 'Дізнатись дати ProPhoto Кемпу', subject: 'camp', source: 'homepage-card' },
+      inquiry: {
+        title: 'Дізнатись дати ProPhoto Кемпу',
+        subject: 'camp',
+        source: 'homepage-card',
+      },
     },
   ];
 }
@@ -112,7 +118,11 @@ export const studioHomeWorks: StudioHomeWork[] = [
     image: studioAssets.artifact.gw5,
     alt: 'Робота студентки: оливки та оливкова олія',
   },
-  { id: 'work-10', image: studioAssets.artifact.gw6, alt: 'Робота студентки: портрет пари' },
+  {
+    id: 'work-10',
+    image: studioAssets.artifact.gw6,
+    alt: 'Робота студентки: портрет пари',
+  },
   {
     id: 'work-11',
     image: studioAssets.artifact.gw7,
@@ -138,7 +148,11 @@ export const studioHomeWorks: StudioHomeWork[] = [
     image: studioAssets.artifact.hero_academy,
     alt: 'Робота студентки: модель під водою',
   },
-  { id: 'work-16', image: studioAssets.artifact.hero_shop, alt: 'Робота студентки: б’юті-портрет' },
+  {
+    id: 'work-16',
+    image: studioAssets.artifact.hero_shop,
+    alt: 'Робота студентки: б’юті-портрет',
+  },
 ];
 
 export const studioHomeReviews: StudioHomeReview[] = studioReviews.slice(0, 8);

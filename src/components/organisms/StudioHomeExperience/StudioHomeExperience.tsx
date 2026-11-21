@@ -7,6 +7,7 @@ import type { StudioHomeExperienceProps } from './types';
 import styles from './StudioHomeExperience.module.css';
 
 export function StudioHomeExperience({
+  page,
   directions,
   academy,
   studio,
@@ -17,8 +18,8 @@ export function StudioHomeExperience({
     studio,
     academy: (
       <>
-        <StudioHomeExposure directionsRef={directionsRef} />
-        <StudioHomeDirections directions={directions} sectionRef={directionsRef} />
+        <StudioHomeExposure page={page} directionsRef={directionsRef} />
+        <StudioHomeDirections page={page} directions={directions} sectionRef={directionsRef} />
         {academy}
       </>
     ),
@@ -26,7 +27,7 @@ export function StudioHomeExperience({
   };
   return (
     <div className={styles.home} data-home-mode={mode}>
-      <StudioHomeHero mode={mode} onModeChange={selectMode} />
+      <StudioHomeHero page={page} mode={mode} onModeChange={selectMode} />
       {Object.entries(panels).map(([name, panel]) => (
         <div
           key={name}

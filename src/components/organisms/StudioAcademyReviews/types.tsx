@@ -1,1 +1,2 @@
-export type StudioAcademyReviewsProps = { variant?: 'academy' | 'creator' };
+import type { SitePage } from '@/lib/site-editor/types';
+export type StudioAcademyReviewsProps = { page?: SitePage } & { variant?: 'academy' | 'creator' };

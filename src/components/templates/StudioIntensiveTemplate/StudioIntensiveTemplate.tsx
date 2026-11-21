@@ -1,3 +1,5 @@
+import { artworkWorkshop, featuredArtworks } from '@/lib/site-editor/brand/artwork/workshop';
+import { bindSection } from '@/lib/site-editor/bind-section';
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
 import { StudioIntensiveAction } from '@/components/molecules/StudioIntensiveAction/StudioIntensiveAction';
 import { StudioIntensivePackage } from '@/components/molecules/StudioIntensivePackage/StudioIntensivePackage';
@@ -15,7 +17,12 @@ import {
 import type { StudioIntensiveTemplateProps } from './types';
 import styles from './StudioIntensiveTemplate.module.css';
 
-export function StudioIntensiveTemplate({ content, enrollment }: StudioIntensiveTemplateProps) {
+export function StudioIntensiveTemplate({
+  page,
+  content,
+  enrollment,
+}: StudioIntensiveTemplateProps) {
+  const { text, image } = bindSection(page, artworkWorkshop);
   const {
     inquiry,
     deliveryDescription,
@@ -32,15 +39,15 @@ export function StudioIntensiveTemplate({ content, enrollment }: StudioIntensive
     <>
       <section className={`${styles.hero} studio-dark`}>
         <StudioImage
-          asset={studioAssets.aiArtwork.imgImgWs144001}
-          alt="Модель у білій сукні серед троянд"
+          asset={image('image', studioAssets.aiArtwork.imgImgWs144001)}
+          alt={text('image-alt')}
           className={`${styles.heroImage} ${styles.desktopImage}`}
           fit="cover"
           preload
           sizes="100vw"
         />
         <StudioImage
-          asset={studioAssets.aiArtworkMobile.imgImgWs39001}
+          asset={image('mobile-image', studioAssets.aiArtworkMobile.imgImgWs39001)}
           alt=""
           className={`${styles.heroImage} ${styles.mobileImage}`}
           fit="cover"
@@ -49,9 +56,10 @@ export function StudioIntensiveTemplate({ content, enrollment }: StudioIntensive
         />
         <div className={`${styles.heroContent} studio-wrap`}>
           <h1>
-            <span>*від кадрів до</span>AI artwork
+            <span>{text('hero-emphasis')}</span>
+            {text('hero-title')}
           </h1>
-          <p className={styles.facts}>студійна зйомка + генеративна обробка</p>
+          <p className={styles.facts}>{text('hero-description')}</p>
           <p className={styles.date}>
             <span>{dateTime ? <time dateTime={dateTime}>{date}</time> : date}</span>
             {time && <span>{time}</span>}
@@ -59,18 +67,16 @@ export function StudioIntensiveTemplate({ content, enrollment }: StudioIntensive
           <div className={`${styles.heroActions} studio-actions`}>
             <StudioIntensiveAction inquiry={inquiry} purchaseAvailable={purchaseAvailable} />
             <a href="#intensive-program" className="studio-button-outline">
-              Програма
+              {text('program-action')}
             </a>
           </div>
         </div>
       </section>
       <section className={`${styles.announcement} studio-band studio-dark`}>
         <div className="studio-wrap">
-          <p className="studio-label studio-eyebrow">Анонс</p>
-          <h2>Практичний інтенсив</h2>
-          <p className={styles.subtitle}>
-            {deliveryDescription || 'студійна зйомка + генеративна обробка'}
-          </p>
+          <p className="studio-label studio-eyebrow">{text('announcement-eyebrow')}</p>
+          <h2>{text('announcement-title')}</h2>
+          <p className={styles.subtitle}>{deliveryDescription || text('hero-description')}</p>
           <p className={styles.when}>
             <span>{dateTime ? <time dateTime={dateTime}>{date}</time> : date}</span>
             {time && <span>{time}</span>}
@@ -86,12 +92,9 @@ export function StudioIntensiveTemplate({ content, enrollment }: StudioIntensive
               <InstallmentMethods prominent />
             </div>
           )}
-          <p className={styles.practice}>4–5 годин практики</p>
-          <h3 className={styles.requirementsTitle}>Photoshop + Firefly</h3>
-          <p className={styles.requirements}>
-            Потрібен ноутбук із встановленим Adobe Photoshop та активними генеративними кредитами
-            або підпискою Cloud Pro для роботи з Adobe Firefly.
-          </p>
+          <p className={styles.practice}>{text('practice')}</p>
+          <h3 className={styles.requirementsTitle}>{text('requirements-title')}</h3>
+          <p className={styles.requirements}>{text('requirements-description')}</p>
           {!purchaseAvailable && (
             <div className={styles.announcementAction}>
               <StudioIntensiveAction inquiry={inquiry} purchaseAvailable={false} />
@@ -99,12 +102,12 @@ export function StudioIntensiveTemplate({ content, enrollment }: StudioIntensive
           )}
         </div>
       </section>
-      <StudioIntensiveProgram />
+      <StudioIntensiveProgram page={page} />
       <section className={`${styles.faculty} studio-band studio-dark`}>
         <div className="studio-wrap">
           <header>
             <div className={styles.lecturerLabel}>
-              <p className="studio-label studio-eyebrow">Ваша лекторка</p>
+              <p className="studio-label studio-eyebrow">{text('lecturer-eyebrow')}</p>
               <a
                 href="https://www.instagram.com/photosone44ko/"
                 target="_blank"
@@ -114,21 +117,23 @@ export function StudioIntensiveTemplate({ content, enrollment }: StudioIntensive
                 <StudioImage asset={studioAssets.aiArtwork.imgSvg} alt="" />
               </a>
             </div>
-            <h2 className="studio-title">Анастасія Князєва</h2>
+            <h2 className="studio-title">{text('lecturer-name')}</h2>
           </header>
           <ul className={styles.experience}>
-            {studioIntensiveExperience.map((item) => (
+            {studioIntensiveExperience.map((item, i) => (
               <li key={item.title}>
-                <h3>{item.title}</h3>
+                <h3>{text('faculty-' + i + '-title')}</h3>
                 <span aria-hidden="true" />
-                <p>{item.text}</p>
+                <p>{text('faculty-' + i + '-description')}</p>
               </li>
             ))}
           </ul>
-          <p className={`${styles.clientsLabel} studio-label studio-eyebrow`}>Створювала арт для</p>
+          <p className={`${styles.clientsLabel} studio-label studio-eyebrow`}>
+            {text('clients-title')}
+          </p>
           <ul className={styles.clients}>
-            {studioIntensiveClients.map((client) => (
-              <li key={client}>{client}</li>
+            {studioIntensiveClients.map((client, i) => (
+              <li key={client}>{text('client-' + i)}</li>
             ))}
           </ul>
         </div>
@@ -136,38 +141,24 @@ export function StudioIntensiveTemplate({ content, enrollment }: StudioIntensive
       <section className={`${styles.works} studio-dark`}>
         <div className="studio-wrap">
           <h2 className="studio-title">
-            Роботи, які ти
+            {text('gallery-title')}
             <br />
-            <span className="studio-hand">*навчишся</span> створювати
+            <span className="studio-hand">{text('gallery-emphasis')}</span> {text('gallery-end')}
           </h2>
           <StudioSpacesGallery
             variant="artworks"
-            label="Роботи AI artwork"
-            images={[
-              {
-                asset: studioAssets.aiArtwork.imgImgWs144002,
-                alt: 'Фантазійний портрет серед скульптурних дерев і квітів',
-              },
-              {
-                asset: studioAssets.aiArtwork.imgImgWs144003,
-                alt: 'Портрет дівчини з квітами у волоссі на блакитному тлі',
-              },
-              {
-                asset: studioAssets.artifact.ws_art3,
-                alt: 'Авторська сюрреалістична композиція з квітами',
-              },
-              {
-                asset: studioAssets.artifact.ws_art4,
-                alt: 'Авторська робота Анастасії Князєвої з генеративною обробкою',
-              },
-            ]}
+            label={text('gallery-name')}
+            images={featuredArtworks.map((work, i) => ({
+              asset: image('work-' + i + '-image', work.asset),
+              alt: text('work-' + i + '-image-alt'),
+            }))}
           />
         </div>
       </section>
       <div id="intensive-inquiry">
         <StudioInquirySection
-          title={purchaseAvailable ? 'Маєте' : 'Залиште'}
-          hand={purchaseAvailable ? 'запитання' : 'заявку'}
+          title={text(purchaseAvailable ? 'purchase-inquiry-title' : 'closed-inquiry-title')}
+          hand={text(purchaseAvailable ? 'purchase-inquiry-emphasis' : 'closed-inquiry-emphasis')}
           description={note}
           context={inquiry}
         />

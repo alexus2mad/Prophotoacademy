@@ -32,6 +32,10 @@ vi.mock('next/navigation', async (importOriginal) => {
   return { ...navigation, usePathname: () => '/academy' };
 });
 vi.mock('../src/lib/content', () => ({ getContent: vi.fn() }));
+vi.mock('../src/lib/site-editor/public', () => ({
+  readSitePage: vi.fn(async () => undefined),
+  listNewSitePages: vi.fn(async () => []),
+}));
 vi.mock('../src/components/templates/CatalogTemplate/CatalogTemplate', () => ({
   CatalogTemplate: vi.fn(() => null),
 }));
@@ -116,7 +120,9 @@ describe('one approved Studio Academy destination', () => {
 
   it('renders the approved Academy template in the static review without a server redirect', async () => {
     vi.stubEnv('NEXT_PUBLIC_REVIEW_MODE', 'pages');
-    const page = await Courses({ searchParams: Promise.resolve({ category: 'course' }) });
+    const page = await Courses({
+      searchParams: Promise.resolve({ category: 'course' }),
+    });
     expect(page.type).toBe(StudioAcademyTemplate);
     expect(page.props.content).toBe(content);
     expect(connection).not.toHaveBeenCalled();
@@ -130,7 +136,10 @@ describe('one approved Studio Academy destination', () => {
   it('preserves the filterable legacy catalog and its query at the shared Academy URL', async () => {
     vi.stubEnv('NEXT_PUBLIC_ACADEMY_DESIGN', 'legacy');
     const page = await Academy({
-      searchParams: Promise.resolve({ category: 'course', utm_source: ['first', 'second'] }),
+      searchParams: Promise.resolve({
+        category: 'course',
+        utm_source: ['first', 'second'],
+      }),
     });
     expect(page.type).toBe(CatalogTemplate);
     expect(page.props.content).toBe(content);
@@ -173,7 +182,10 @@ describe('direct Studio learning navigation', () => {
   it('takes the Academy hero to its overview and the course card directly to its course section', () => {
     const hero = load(
       renderToStaticMarkup(
-        createElement(StudioHomeHero, { mode: 'academy', onModeChange: vi.fn() }),
+        createElement(StudioHomeHero, {
+          mode: 'academy',
+          onModeChange: vi.fn(),
+        }),
       ),
     );
     expect(hero('a.studio-button').attr('href')).toBe('/academy');

@@ -1,4 +1,7 @@
 'use client';
+import { readField } from '@/lib/site-editor/fields';
+import { homeWorks } from '@/lib/site-editor/brand/home/works';
+import { bindSection } from '@/lib/site-editor/bind-section';
 import { studioAcademyDestinations } from '@/lib/studio-pages/navigation';
 import Link from 'next/link';
 import { StudioHomePicture } from '@/components/molecules/StudioHomePicture/StudioHomePicture';
@@ -10,7 +13,14 @@ import styles from './StudioHomeWorks.module.css';
 
 const photosPerPage = 4;
 
-export function StudioHomeWorks({ works }: StudioHomeWorksProps) {
+export function StudioHomeWorks({ page, works: originals }: StudioHomeWorksProps) {
+  const { text, image } = bindSection(page, homeWorks);
+  const works = originals.map((work) => ({
+    ...work,
+    image: image(work.id + '-image', work.image),
+    mobileImage: work.mobileImage && image(work.id + '-mobile-image', work.mobileImage),
+    alt: readField(page, 'works', work.id + '-image-alt', work.alt),
+  }));
   const { carousel, gallery, images } = useStudioHomeWorks({ works }, photosPerPage);
   const { rail, active, maximum, select, onKeyDown } = carousel;
   const pages = Array.from({ length: Math.ceil(works.length / photosPerPage) }, (_, index) =>
@@ -20,10 +30,11 @@ export function StudioHomeWorks({ works }: StudioHomeWorksProps) {
     <section className={styles.works} data-home-section="works" aria-labelledby="home-works-title">
       <div className={`${styles.heading} studio-wrap`}>
         <h2 className="studio-title" id="home-works-title">
-          Роботи <span className="studio-hand">*студентів</span>
+          {text('title')} <span className="studio-hand">{text('emphasis')}</span>
         </h2>
         <Link href={studioAcademyDestinations.courses} className="studio-button-outline">
-          Хочу так само<span aria-hidden="true">→</span>
+          {text('action')}
+          <span aria-hidden="true">→</span>
         </Link>
       </div>
       <div
@@ -70,7 +81,7 @@ export function StudioHomeWorks({ works }: StudioHomeWorksProps) {
         previousDisabled={active === 0}
         nextDisabled={active >= maximum}
         onSelect={select}
-        label="Роботи студентів"
+        label={text('gallery-name')}
       />
       <ImageGalleryDialog
         images={images}

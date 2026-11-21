@@ -2,15 +2,16 @@
 
 import Link from 'next/link';
 import { useStudioHomeCarousel } from '@/components/molecules/StudioHomeCarousel/hooks';
-import { studioReviews } from '@/lib/studio-reviews/reviews';
+import { brandReviewContent } from '@/lib/site-editor/brand/reviews';
 import { StudioCreatorHeading } from '@/components/molecules/StudioCreatorHeading/StudioCreatorHeading';
 import type { StudioAcademyReviewsProps } from './types';
 import { studioAssetUrl } from '@/lib/studio-design/urls';
 import styles from './StudioAcademyReviews.module.css';
 
-export function StudioAcademyReviews({ variant = 'academy' }: StudioAcademyReviewsProps) {
+export function StudioAcademyReviews({ page, variant = 'academy' }: StudioAcademyReviewsProps) {
   const { rail, active, maximum, select, onKeyDown } = useStudioHomeCarousel();
 
+  const copy = brandReviewContent(variant, page);
   return (
     <section
       id={variant === 'creator' ? 'program-reviews' : undefined}
@@ -19,14 +20,14 @@ export function StudioAcademyReviews({ variant = 'academy' }: StudioAcademyRevie
     >
       <div className="studio-wrap">
         {variant === 'creator' ? (
-          <StudioCreatorHeading id="academy-reviews-title" label="Відгуки">
-            Що кажуть <span className="studio-hand">*випускники</span>
+          <StudioCreatorHeading id="academy-reviews-title" label={copy.label}>
+            {copy.title} <span className="studio-hand">{copy.accent}</span>
           </StudioCreatorHeading>
         ) : (
           <header className={styles.heading}>
-            <p className="studio-label studio-eyebrow">Відгуки учнів</p>
+            <p className="studio-label studio-eyebrow">{copy.label}</p>
             <h2 className="studio-title" id="academy-reviews-title">
-              Що кажуть випускники
+              {copy.title}
             </h2>
           </header>
         )}
@@ -39,7 +40,7 @@ export function StudioAcademyReviews({ variant = 'academy' }: StudioAcademyRevie
           aria-label="Відгуки випускників"
           onKeyDown={onKeyDown}
         >
-          {studioReviews.map((review) => (
+          {copy.reviews.map((review) => (
             <article className={styles.review} key={review.id}>
               <header>
                 <h3>{review.name}</h3>

@@ -1,10 +1,14 @@
+import { homeFounder } from '@/lib/site-editor/brand/home/founder';
+import { bindSection } from '@/lib/site-editor/bind-section';
+import type { BrandContentProps } from '@/lib/site-editor/brand/types';
 import { studioAcademyDestinations } from '@/lib/studio-pages/navigation';
 import Link from 'next/link';
 import { StudioHomePicture } from '@/components/molecules/StudioHomePicture/StudioHomePicture';
 import { studioAssets } from '@/lib/studio-design/assets';
 import styles from './StudioHomeFounder.module.css';
 
-export function StudioHomeFounder() {
+export function StudioHomeFounder({ page }: BrandContentProps = {}) {
+  const { text, image } = bindSection(page, homeFounder);
   return (
     <section
       className={styles.founder}
@@ -12,32 +16,26 @@ export function StudioHomeFounder() {
       aria-labelledby="home-founder-title"
     >
       <StudioHomePicture
-        image={studioAssets.home.imgImgHome144009}
-        mobileImage={studioAssets.homeMobile.imgImgHome39008}
-        alt="Олена Попова — засновниця ProPhoto Academy"
+        image={image('portrait-image', studioAssets.home.imgImgHome144009)}
+        mobileImage={image('portrait-mobile-image', studioAssets.homeMobile.imgImgHome39008)}
+        alt={text('portrait-image-alt')}
         className={styles.portrait}
         sizes="(max-width: 760px) 100vw, 42vw"
       />
       <div className={`${styles.body} studio-wrap`}>
-        <p className="studio-label">Засновниця · рекламний фотограф</p>
+        <p className="studio-label">{text('eyebrow')}</p>
         <h2 className="studio-title" id="home-founder-title">
-          Олена Попова
+          {text('title')}
         </h2>
-        <p className="studio-lead">
-          Професійний рекламний фотограф більше 15 років та засновниця школи створення візуального
-          контенту ProPhotoAcademy. Має потужний комерційний бекграунд: досвід роботи з міжнародним
-          і локальним бізнесом.
-        </p>
-        <p className={styles.background}>
-          Викладання та майстер-класи для Jysk, Mastercard, ООН, iSpace, DragonCapital, BihusInfo, у
-          Києво-Могилянській академії, ГО Право на захист і багатьох інших брендів та компаній.
-        </p>
+        <p className="studio-lead">{text('intro')}</p>
+        <p className={styles.background}>{text('biography')}</p>
         <div className={`${styles.actions} studio-actions`}>
           <Link href={studioAcademyDestinations.courses} className="studio-button">
-            Обрати курс<span aria-hidden="true">→</span>
+            {text('course-action')}
+            <span aria-hidden="true">→</span>
           </Link>
           <Link className={styles.lecturers} href="/academy#lecturers">
-            Усі лектори
+            {text('lecturers-action')}
           </Link>
         </div>
       </div>

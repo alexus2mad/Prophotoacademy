@@ -1,3 +1,5 @@
+import type { SiteRouteProps } from '@/lib/site-editor/types';
+import { readSitePage } from '@/lib/site-editor/public';
 import { redirect } from 'next/navigation';
 import { academyDesign } from '@/lib/studio-design/variant';
 import { StudioShopTemplate } from '@/components/templates/StudioShopTemplate/StudioShopTemplate';
@@ -8,7 +10,7 @@ export const metadata = academyMetadata('/shop', {
   description: 'ProPhoto Shop: реквізит і матеріали для створення контенту.',
   noindex: true,
 });
-export default async function Shop() {
+export default async function Shop({ searchParams }: SiteRouteProps = {}) {
   if (academyDesign() === 'legacy') redirect('/contacts');
-  return <StudioShopTemplate />;
+  return <StudioShopTemplate page={await readSitePage('/shop', searchParams)} />;
 }

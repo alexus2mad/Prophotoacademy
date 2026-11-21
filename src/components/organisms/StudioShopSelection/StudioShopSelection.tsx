@@ -1,29 +1,30 @@
 'use client';
+import { shopSelection, equipmentCategories } from '@/lib/site-editor/brand/shop/selection';
+import { bindSection } from '@/lib/site-editor/bind-section';
 
 import { StudioInquiryForm } from '@/components/organisms/StudioInquiryForm/StudioInquiryForm';
 import { useStudioShopSelection } from './hooks';
 import type { StudioShopSelectionProps } from './types';
 import styles from './StudioShopSelection.module.css';
 
-export function StudioShopSelection({ shopUrl }: StudioShopSelectionProps) {
+export function StudioShopSelection({ page, shopUrl }: StudioShopSelectionProps) {
+  const { text } = bindSection(page, shopSelection);
   const { selection, toggle, topic } = useStudioShopSelection();
   return (
     <section id="equipment-selection" className="studio-band studio-light">
       <div className={`${styles.grid} studio-wrap`}>
         <div className={styles.copy}>
-          <p className="studio-label studio-eyebrow">Обладнання</p>
+          <p className="studio-label studio-eyebrow">{text('eyebrow')}</p>
           <h2 className="studio-title">
-            Що <span className="studio-hand">*підібрати?</span>
+            {text('title')} <span className="studio-hand">{text('emphasis')}</span>
           </h2>
-          <p className="studio-lead">
-            Тут ви знайдете всю необхідну техніку для зйомки, яку ми допоможемо підібрати під ваші
-            задачі й бюджет.
-          </p>
+          <p className="studio-lead">{text('intro')}</p>
           <fieldset>
-            <legend className="studio-label studio-eyebrow">Оберіть, що потрібно</legend>
+            <legend className="studio-label studio-eyebrow">{text('legend')}</legend>
             <div className={styles.chips}>
-              {['Камера', 'Обʼєктив', 'Світло', 'Мікрофон', 'Штатив', 'Комплект під ключ'].map(
-                (item) => (
+              {equipmentCategories.map((_, i) => {
+                const item = text('category-' + i);
+                return (
                   <button
                     key={item}
                     type="button"
@@ -32,13 +33,13 @@ export function StudioShopSelection({ shopUrl }: StudioShopSelectionProps) {
                   >
                     {item}
                   </button>
-                ),
-              )}
+                );
+              })}
             </div>
           </fieldset>
           {shopUrl && (
             <a className={styles.shopLink} href={shopUrl}>
-              Переглянути обладнання в магазині →
+              {text('shop-action')}
             </a>
           )}
         </div>

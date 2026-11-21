@@ -1,4 +1,6 @@
 'use client';
+import { homeExposure } from '@/lib/site-editor/brand/home/exposure';
+import { bindSection } from '@/lib/site-editor/bind-section';
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
 import { StudioExposureTitle } from '@/components/molecules/StudioExposureTitle/StudioExposureTitle';
 import { studioAssets } from '@/lib/studio-design/assets';
@@ -7,7 +9,8 @@ import type { StudioExposureStyle, StudioHomeExposureProps } from './types';
 import { useStudioHomeExposure } from './hooks';
 import styles from './StudioHomeExposure.module.css';
 
-export function StudioHomeExposure({ directionsRef }: StudioHomeExposureProps) {
+export function StudioHomeExposure({ page, directionsRef }: StudioHomeExposureProps) {
+  const { text, image } = bindSection(page, homeExposure);
   const { section, exposure, ready, compact } = useStudioHomeExposure(directionsRef);
   const style: StudioExposureStyle = {
     '--exposure-progress': exposure.progress,
@@ -25,17 +28,17 @@ export function StudioHomeExposure({ directionsRef }: StudioHomeExposureProps) {
     >
       <div className={styles.stage} data-exposure-stage>
         <StudioImage
-          asset={studioAssets.home.imgImgHome144002}
+          asset={image('image', studioAssets.home.imgImgHome144002)}
           alt=""
           className={styles.image}
           fit="cover"
           sizes="100vw"
         />
         <div className={`${styles.inner} studio-wrap`}>
-          <StudioExposureTitle />
+          <StudioExposureTitle page={page} />
           <div className={styles.meter} data-exposure-meter aria-hidden="true">
             <div className={styles.meterLabel}>
-              <span>Експозиція</span>
+              <span>{text('meter')}</span>
               <span>{exposure.value}</span>
             </div>
             <div className={styles.bars}>
@@ -49,7 +52,9 @@ export function StudioHomeExposure({ directionsRef }: StudioHomeExposureProps) {
                         ? styles.on
                         : undefined
                   }
-                  style={{ height: `${14 + (index * 86) / (exposureBarCount - 1)}%` }}
+                  style={{
+                    height: `${14 + (index * 86) / (exposureBarCount - 1)}%`,
+                  }}
                 />
               ))}
             </div>

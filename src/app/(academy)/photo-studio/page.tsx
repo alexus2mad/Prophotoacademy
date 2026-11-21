@@ -1,3 +1,5 @@
+import type { SiteRouteProps } from '@/lib/site-editor/types';
+import { readSitePage } from '@/lib/site-editor/public';
 import { redirect } from 'next/navigation';
 import { getContent } from '@/lib/content';
 import { academyDesign } from '@/lib/studio-design/variant';
@@ -9,7 +11,12 @@ export const metadata = academyMetadata('/photo-studio', {
   description: 'Огляд просторів для фото та відеозйомок у Києві.',
   noindex: true,
 });
-export default async function PhotoStudio() {
+export default async function PhotoStudio({ searchParams }: SiteRouteProps = {}) {
   if (academyDesign() === 'legacy') redirect('/hub');
-  return <StudioSpacesTemplate content={await getContent()} />;
+  return (
+    <StudioSpacesTemplate
+      page={await readSitePage('/photo-studio', searchParams)}
+      content={await getContent()}
+    />
+  );
 }

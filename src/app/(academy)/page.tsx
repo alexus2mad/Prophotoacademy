@@ -1,3 +1,5 @@
+import type { SiteRouteProps } from '@/lib/site-editor/types';
+import { readSitePage } from '@/lib/site-editor/public';
 import { getContent } from '@/lib/content';
 import { AcademyHomeTemplate } from '@/components/templates/AcademyHomeTemplate/AcademyHomeTemplate';
 import { StudioHomeTemplate } from '@/components/templates/StudioHomeTemplate/StudioHomeTemplate';
@@ -14,13 +16,29 @@ export const metadata = academyMetadata('/', {
   description,
 });
 
-export default async function Home() {
+export default async function Home({ searchParams }: SiteRouteProps = {}) {
   const content = await getContent();
-  const Template = academyDesign() === 'studio' ? StudioHomeTemplate : AcademyHomeTemplate;
+  const studio = academyDesign() === 'studio';
+  const [page, studioPage, shopPage] = studio
+    ? await Promise.all([
+        readSitePage('/', searchParams),
+        readSitePage('/photo-studio'),
+        readSitePage('/shop'),
+      ])
+    : [];
   return (
     <>
       <JsonLd data={academyHomeSchema(content.settings, description)} />
-      <Template content={content} />
+      {studio ? (
+        <StudioHomeTemplate
+          content={content}
+          page={page}
+          studioPage={studioPage}
+          shopPage={shopPage}
+        />
+      ) : (
+        <AcademyHomeTemplate content={content} />
+      )}
     </>
   );
 }

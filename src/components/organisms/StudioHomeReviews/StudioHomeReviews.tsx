@@ -1,14 +1,16 @@
 'use client';
 import { StudioHomeCarousel } from '@/components/molecules/StudioHomeCarousel/StudioHomeCarousel';
 import { studioHomeReviews } from '@/lib/studio-home/selectors';
-import { studioReviews } from '@/lib/studio-reviews/reviews';
+import { brandReviewContent } from '@/lib/site-editor/brand/reviews';
+import type { BrandContentProps } from '@/lib/site-editor/brand/types';
 import { useStudioHomeReviews } from './hooks';
 import styles from './StudioHomeReviews.module.css';
 
-export function StudioHomeReviews() {
+export function StudioHomeReviews({ page }: BrandContentProps = {}) {
   const { rail, active, maximum, select, onKeyDown, expanded, toggleExpanded } =
     useStudioHomeReviews();
-  const reviews = expanded ? studioReviews : studioHomeReviews;
+  const copy = brandReviewContent('home', page);
+  const reviews = expanded ? copy.reviews : copy.reviews.slice(0, studioHomeReviews.length);
   return (
     <section
       className={`${styles.reviews} studio-wrap`}
@@ -17,13 +19,13 @@ export function StudioHomeReviews() {
     >
       <div className={styles.heading}>
         <h2 className="studio-label" id="home-reviews-title">
-          Відгуки учнів
+          {copy.label}
         </h2>
         <blockquote className={styles.quote}>
-          «Мій бренд говорить одразу,
-          <br /> я <span className="studio-hand">*не залежу</span> від підрядників»
+          {copy.title}
+          <br /> {copy.prefix} <span className="studio-hand">{copy.accent}</span> {copy.end}
         </blockquote>
-        <p className="studio-label">Яна Тітова, власниця бренду взуття ручної роботи</p>
+        <p className="studio-label">{copy.credit}</p>
       </div>
       <div
         id="home-reviews"

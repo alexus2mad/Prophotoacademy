@@ -1,1 +1,4 @@
-export type StudioHomeBannerProps = { destination: 'shop' | 'studio' };
+import type { BrandContentProps } from '@/lib/site-editor/brand/types';
+export type StudioHomeBannerProps = BrandContentProps & {
+  destination: 'shop' | 'studio';
+};

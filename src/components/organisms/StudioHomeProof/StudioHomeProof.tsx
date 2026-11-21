@@ -1,4 +1,7 @@
 'use client';
+import { homeProof, homeStatistics } from '@/lib/site-editor/brand/home/proof';
+import { bindSection } from '@/lib/site-editor/bind-section';
+import type { BrandContentProps } from '@/lib/site-editor/brand/types';
 
 import { studioAssets } from '@/lib/studio-design/assets';
 import { studioAssetUrl } from '@/lib/studio-design/urls';
@@ -24,7 +27,8 @@ const logos = [
 
 const partnerNames = logos.map(({ name }) => name).join(', ');
 
-export function StudioHomeProof() {
+export function StudioHomeProof({ page }: BrandContentProps = {}) {
+  const { text } = bindSection(page, homeProof);
   const { railRef, copyCount } = usePartnerRail();
   return (
     <section
@@ -32,7 +36,7 @@ export function StudioHomeProof() {
       data-home-section="proof"
       aria-label="Досвід ProPhoto Academy"
     >
-      <p className={`${styles.label} studio-label studio-wrap`}>Знімали та навчали для</p>
+      <p className={`${styles.label} studio-label studio-wrap`}>{text('title')}</p>
       <div
         ref={railRef}
         data-partner-rail
@@ -70,15 +74,10 @@ export function StudioHomeProof() {
       </div>
       <div className="studio-wrap">
         <dl className={styles.stats}>
-          {[
-            ['15', 'років досвіду'],
-            ['3000+', 'випускників'],
-            ['18+', 'навчальних груп'],
-            ['100%', 'практики'],
-          ].map(([value, label]) => (
-            <div key={label}>
-              <dt>{label}</dt>
-              <dd>{value}</dd>
+          {homeStatistics.map((_, i) => (
+            <div key={i}>
+              <dt>{text('stat-' + i + '-label')}</dt>
+              <dd>{text('stat-' + i + '-value')}</dd>
             </div>
           ))}
         </dl>

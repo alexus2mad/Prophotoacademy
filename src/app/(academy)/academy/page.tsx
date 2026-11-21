@@ -1,4 +1,6 @@
-import type { CoursesPageProps } from '@/app/types';
+import type { SiteRouteProps } from '@/lib/site-editor/types';
+import { readSitePage } from '@/lib/site-editor/public';
+import { listNewSitePages } from '@/lib/site-editor/public';
 import { connection } from 'next/server';
 import { getContent } from '@/lib/content';
 import { prioritizePrograms } from '@/lib/program-priority';
@@ -11,14 +13,22 @@ export function generateMetadata() {
   return academyIndexMetadata(academyDesign());
 }
 
-export default async function Academy({ searchParams }: CoursesPageProps) {
+export default async function Academy({ searchParams }: SiteRouteProps = {}) {
   const content = await getContent();
-  if (academyDesign() === 'studio') return <StudioAcademyTemplate content={content} />;
+  if (academyDesign() === 'studio') {
+    const [page, additionalPages] = await Promise.all([
+      readSitePage('/academy', searchParams),
+      listNewSitePages(),
+    ]);
+    return (
+      <StudioAcademyTemplate content={content} page={page} additionalPages={additionalPages} />
+    );
+  }
 
   const query = new URLSearchParams();
   if (process.env.NEXT_PUBLIC_REVIEW_MODE !== 'pages') {
     await connection();
-    for (const [key, value] of Object.entries(await searchParams)) {
+    for (const [key, value] of Object.entries((await searchParams) ?? {})) {
       if (value === undefined) continue;
       for (const item of Array.isArray(value) ? value : [value]) query.append(key, item);
     }

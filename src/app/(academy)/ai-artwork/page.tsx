@@ -1,3 +1,5 @@
+import type { SiteRouteProps } from '@/lib/site-editor/types';
+import { readSitePage } from '@/lib/site-editor/public';
 import { redirect } from 'next/navigation';
 import { connection } from 'next/server';
 import { getContent } from '@/lib/content';
@@ -14,7 +16,7 @@ export const metadata = academyMetadata('/ai-artwork', {
   description:
     'Практичний інтенсив «Від кадрів до AI Artwork»: студійна зйомка, розробка концепції та генеративна обробка фотографій в Adobe Photoshop.',
 });
-export default async function Intensive() {
+export default async function Intensive({ searchParams }: SiteRouteProps = {}) {
   if (process.env.NEXT_PUBLIC_REVIEW_MODE !== 'pages') await connection();
   const content = await getContent();
   const program = content.programs.find((entry) => entry.slug === 'ai-artwork');
@@ -24,5 +26,11 @@ export default async function Intensive() {
     if (!program) redirect(academyIndexPath);
     return <ProgramTemplate program={program} content={content} enrollment={enrollment} />;
   }
-  return <StudioIntensiveTemplate content={content} enrollment={enrollment} />;
+  return (
+    <StudioIntensiveTemplate
+      page={await readSitePage('/ai-artwork', searchParams)}
+      content={content}
+      enrollment={enrollment}
+    />
+  );
 }

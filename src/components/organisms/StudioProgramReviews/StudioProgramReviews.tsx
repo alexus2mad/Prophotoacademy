@@ -1,11 +1,13 @@
 'use client';
 
 import Link from 'next/link';
+import { programReviewContent } from '@/lib/site-editor/brand/reviews';
 import { useStudioGallery } from '@/components/organisms/StudioSpacesGallery/hooks';
 import type { StudioProgramReviewsProps } from './types';
 import styles from './StudioProgramReviews.module.css';
 
-export function StudioProgramReviews({ reviews }: StudioProgramReviewsProps) {
+export function StudioProgramReviews({ reviews: originals, page }: StudioProgramReviewsProps) {
+  const { reviews, label, title } = programReviewContent(originals, page);
   const { track, position, move, onKeyDown } = useStudioGallery(reviews.length);
   return (
     <section
@@ -14,9 +16,9 @@ export function StudioProgramReviews({ reviews }: StudioProgramReviewsProps) {
       aria-labelledby="program-reviews-title"
     >
       <header className={styles.heading}>
-        <p className="studio-label">Відгуки</p>
+        <p className="studio-label">{label}</p>
         <h2 className="studio-title" id="program-reviews-title">
-          Що кажуть випускники
+          {title}
         </h2>
       </header>
       <div

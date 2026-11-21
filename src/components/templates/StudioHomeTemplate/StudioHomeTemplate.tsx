@@ -1,3 +1,5 @@
+import { homeInquiry } from '@/lib/site-editor/brand/home/inquiry';
+import { bindSection } from '@/lib/site-editor/bind-section';
 import { StudioHomeExperience } from '@/components/organisms/StudioHomeExperience/StudioHomeExperience';
 import { StudioHomeFounder } from '@/components/organisms/StudioHomeFounder/StudioHomeFounder';
 import { StudioHomeProof } from '@/components/organisms/StudioHomeProof/StudioHomeProof';
@@ -11,25 +13,32 @@ import { ecosystemDestinations } from '@/lib/ecosystem';
 import { studioHomeDirections, studioHomeWorks } from '@/lib/studio-home/selectors';
 import type { StudioHomeTemplateProps } from './types';
 
-export function StudioHomeTemplate({ content }: StudioHomeTemplateProps) {
+export function StudioHomeTemplate({
+  page,
+  studioPage,
+  shopPage,
+  content,
+}: StudioHomeTemplateProps) {
+  const { text } = bindSection(page, homeInquiry);
   return (
     <StudioHomeExperience
+      page={page}
       directions={studioHomeDirections(content)}
-      studio={<StudioSpaceSections address={content.hub.address} />}
-      shop={<StudioShopSelection shopUrl={ecosystemDestinations.shop} />}
+      studio={<StudioSpaceSections page={studioPage} address={content.hub.address} />}
+      shop={<StudioShopSelection page={shopPage} shopUrl={ecosystemDestinations.shop} />}
       academy={
         <>
-          <StudioHomeFounder />
-          <StudioHomeProof />
-          <StudioHomeReviews />
-          <StudioHomeWorks works={studioHomeWorks} />
-          <StudioHomeBanner destination="shop" />
-          <StudioHomeBanner destination="studio" />
+          <StudioHomeFounder page={page} />
+          <StudioHomeProof page={page} />
+          <StudioHomeReviews page={page} />
+          <StudioHomeWorks page={page} works={studioHomeWorks} />
+          <StudioHomeBanner page={page} destination="shop" />
+          <StudioHomeBanner page={page} destination="studio" />
           <div data-home-section="inquiry">
             <StudioInquirySection
-              title="Готові бачити"
-              hand="більше?"
-              description="Заповніть форму та отримайте безкоштовну консультацію з нашим спеціалістом."
+              title={text('title')}
+              hand={text('emphasis')}
+              description={text('intro')}
               context={{ subject: 'program-selection', source: 'consultation' }}
             />
           </div>
