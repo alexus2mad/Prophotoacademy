@@ -1,5 +1,5 @@
 import { prepareReviewLayout } from './pages/prepare-layout.mjs';
-import { cp, mkdir, readFile, writeFile, readdir, rm } from 'node:fs/promises';
+import { cp, lstat, mkdir, readFile, writeFile, readdir, rm } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
@@ -8,6 +8,8 @@ const stage = path.resolve(root, '.pages-build');
 const output = path.resolve(root, 'pages-out');
 const basePath = process.env.PAGES_BASE_PATH || '/Prophotoacademy';
 const origin = process.env.PAGES_ORIGIN || 'https://alexus2mad.github.io';
+const buildArgs = process.argv.slice(2);
+if (buildArgs.some((arg) => arg !== '--webpack')) throw new Error('Usage: pages:build [--webpack]');
 if (!/^\/[A-Za-z0-9_-]+$/.test(basePath) || new URL(origin).protocol !== 'https:')
   throw new Error('Invalid Pages URL');
 for (const target of [stage, output]) {
@@ -16,7 +18,23 @@ for (const target of [stage, output]) {
     !['.pages-build', 'pages-out'].includes(path.basename(target))
   )
     throw new Error('Unsafe generated directory');
-  await rm(target, { recursive: true, force: true });
+  if (
+    target === stage &&
+    (
+      await lstat(stage).catch((error) => {
+        if (error.code === 'ENOENT') return null;
+        throw error;
+      })
+    )?.isDirectory()
+  ) {
+    // Next cleans its output on build while preserving its incremental cache and advisory retry state.
+    for (const entry of await readdir(stage, { withFileTypes: true })) {
+      if (entry.name === '.next' && entry.isDirectory()) continue;
+      await rm(path.join(stage, entry.name), { recursive: true, force: true });
+    }
+  } else {
+    await rm(target, { recursive: true, force: true });
+  }
 }
 await mkdir(stage, { recursive: true });
 await cp(path.join(root, 'src'), path.join(stage, 'src'), { recursive: true });
@@ -38,6 +56,17 @@ await writeFile(
 await writeFile(
   path.join(stage, 'src/lib/content.ts'),
   `import fixture from '../../content/academy.json';import type {AcademyContent} from './content/types';export async function getContent():Promise<AcademyContent>{return fixture as AcademyContent;}export {findImage,findOffering} from './content/selectors';`,
+);
+// Static review pages use the same initial documents and cannot access drafts or live storage.
+await writeFile(
+  path.join(stage, 'src/lib/site-editor/public.ts'),
+  `import {getSiteSeeds} from './seeds';
+import type {SitePage,SiteRouteProps} from './types';
+export async function readSitePage(path: string, _query?: SiteRouteProps['searchParams']) {
+  return (await getSiteSeeds()).find(page => page.path === path);
+}
+export async function listNewSitePages(): Promise<SitePage[]> { return []; }
+`,
 );
 for (const name of ['api', 'studio', 'operations', 'account', 'admin', 'learn', 'login'])
   await rm(path.join(stage, 'src/app', name), { recursive: true, force: true });
@@ -139,7 +168,9 @@ const env = {
   ...process.env,
   CONTENT_MODE: 'fixture',
   PROPHOTO_SITE: 'auto',
+  NEXT_PUBLIC_ACADEMY_DESIGN: process.env.NEXT_PUBLIC_ACADEMY_DESIGN || 'studio',
   NEXT_PUBLIC_REVIEW_MODE: 'pages',
+  SITE_EDITOR_MODE: 'readonly',
   NEXT_PUBLIC_SITE_URL: site,
   NEXT_PUBLIC_ACADEMY_URL: site,
   NEXT_PUBLIC_HUB_URL: site + '/hub',
@@ -159,7 +190,7 @@ for (const key of Object.keys(env))
 await new Promise((resolve, reject) => {
   const child = spawn(
     process.execPath,
-    [path.join(root, 'node_modules/next/dist/bin/next'), 'build', stage],
+    [path.join(root, 'node_modules/next/dist/bin/next'), 'build', ...buildArgs, stage],
     { cwd: root, env, stdio: 'inherit' },
   );
   child.on('error', reject);

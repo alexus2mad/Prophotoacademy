@@ -120,6 +120,7 @@ for (const privatePath of [
   'studio',
   'learn',
   'admin/courses',
+  'admin/content',
   'account/purchases',
   '.data',
 ]) {
