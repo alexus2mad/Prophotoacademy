@@ -10,6 +10,7 @@ Use **Створити сторінку** for a new course presentation, worksho
 
 | Setting | Purpose |
 | --- | --- |
+| `NEXT_PUBLIC_ACADEMY_DESIGN=studio` | Active Academy design used by the visual editor and its preview. Set before building the public app |
 | `SITE_EDITOR_MODE=readonly` | Default. Render the initial page inventory and allow administrators to inspect it |
 | `SITE_EDITOR_MODE=local` | Development or the local learning sandbox. Drafts, published pages and WebP images persist together under `.data/site-editor` or `SITE_EDITOR_LOCAL_DIR` |
 | `SITE_EDITOR_MODE=sanity` | Use the public marketing project and dataset configured with `NEXT_PUBLIC_SANITY_PROJECT_ID` and `NEXT_PUBLIC_SANITY_DATASET` |

@@ -1,6 +1,6 @@
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import path from 'node:path';
-import { mkdir, readFile, readdir, open, unlink } from 'node:fs/promises';
+import { mkdir, readFile, readdir, open, unlink, realpath } from 'node:fs/promises';
 import { createServer } from 'node:http';
 import { randomBytes } from 'node:crypto';
 import { spawn } from 'node:child_process';
@@ -144,12 +144,17 @@ try {
     SANITY_LEARNING_WRITE_TOKEN: 'local-test-only',
     DATABASE_URL: 'postgresql://sandbox.invalid/local',
   });
+  // A linked worktree can share dependencies outside Turbopack’s resolution root.
+  const sharedDependencies = path
+    .relative(path.resolve(root), await realpath(path.join(root, 'node_modules')))
+    .startsWith('..');
   child = spawn(
     process.execPath,
     [
       path.join(root, 'node_modules/next/dist/bin/next'),
       'dev',
       stage,
+      ...(sharedDependencies ? ['--webpack'] : []),
       '--hostname',
       '127.0.0.1',
       '--port',
