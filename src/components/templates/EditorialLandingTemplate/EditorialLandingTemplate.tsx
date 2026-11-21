@@ -1,4 +1,5 @@
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
+import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
 import type { EditorialLandingProps } from './types';
 import styles from './EditorialLandingTemplate.module.css';
 
@@ -17,6 +18,17 @@ export function EditorialLandingTemplate({ page }: EditorialLandingProps) {
             {text?.split(/\n\s*\n/).map((p, i) => (
               <p key={i}>{p}</p>
             ))}
+            {cover && (page.kind === 'course' || page.kind === 'workshop') && (
+              <div className={styles.action}>
+                <InquiryButton
+                  className="studio-button"
+                  title={title}
+                  subject={page.kind === 'workshop' ? 'workshops' : 'program-selection'}
+                >
+                  Дізнатися про участь
+                </InquiryButton>
+              </div>
+            )}
             {values.image && (
               <StudioImage
                 asset={{ src: values.image, width: 1600, height: 1000 }}

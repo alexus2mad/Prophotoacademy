@@ -31,6 +31,9 @@
   white-space: pre-line;
   overflow-wrap: anywhere;
 }
+.action {
+  margin-top: 24px;
+}
 .section img {
   display: block;
   width: 100%;
