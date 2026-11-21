@@ -1,0 +1,39 @@
+name: OpenSpec
+
+on:
+  pull_request:
+    branches-ignore: [gh-pages]
+  push:
+    branches-ignore: [gh-pages]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    if: ${{ !github.event.deleted }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        with:
+          node-version: 22.20.0
+          package-manager-cache: false
+      - run: npm install --global --ignore-scripts --no-fund --no-audit pnpm@11.25.0
+      - name: Validate specifications and inventory
+        env:
+          # This check uses the isolated CLI and Node built-ins. Skip application dependency installation.
+          pnpm_config_verify_deps_before_run: 'false'
+        run: pnpm spec:check
+      - name: Exercise the commit-link and inventory checks
+        run: node --test scripts/openspec/check-links.test.mjs scripts/openspec/check-coverage.test.mjs
+      - name: Check changes in this push or pull request
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/openspec/check-links.mjs "$BASE_SHA" "$HEAD_SHA"

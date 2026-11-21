@@ -1,3 +1,3 @@
 # ProPhoto instructions
 
-Read and follow [AGENTS.md](AGENTS.md) and [ARCHITECTURE.md](ARCHITECTURE.md). These files define the shared Atomic Design, semantic HTML, KISS, SOLID, verification and commit rules. Scoped `AGENTS.md` files add local responsibilities; do not maintain a conflicting copy of the rules here.
+Follow [AGENTS.md](AGENTS.md) for OpenSpec and [ARCHITECTURE.md](ARCHITECTURE.md) for implementation. Read the applicable scoped instructions. Claude uses `/openspec-propose` for a proposal and `/openspec-apply-change` for a prepared change. See the [contributor guide](docs/openspec/README.md) for the pinned CLI.

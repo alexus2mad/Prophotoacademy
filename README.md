@@ -4,15 +4,15 @@
 `prophoto-admin` on port `58222`. See [current hosting and deployment](docs/HOSTING.md)
 for the pinned SSH profile, environment branches and manual release procedure.
 
-The UI follows Atomic Design with owned component folders, colocated `types.tsx` and `hooks.tsx`, semantic HTML, KISS and SOLID. Read [ARCHITECTURE.md](ARCHITECTURE.md) and [AGENTS.md](AGENTS.md) before development. Run `pnpm architecture:check`, `pnpm typecheck`, `pnpm test` and `pnpm format:check` for verification.
+Start every change with the [OpenSpec contributor guide](docs/openspec/README.md) and [agent instructions](AGENTS.md). The [capability specifications](openspec/specs/) describe observable behavior and [ARCHITECTURE.md](ARCHITECTURE.md) owns Atomic Design, semantic HTML, KISS and SOLID.
 
-The connected ecosystem is implemented here. Review Academy at `/` and Hub at `/hub`; production keeps both domains. Hub has direct room booking, first-screen rates and separate contacts. Guided practice starts as an inquiry offer. The private team view is `/operations`. See [ECOSYSTEM.md](ECOSYSTEM.md) for deployment, shared Sanity content, customer records and attribution.
+Review Academy at `/` and Hub at `/hub`. Hub has its own booking journey and contacts. Academy manages students at `/admin/students` and administrators at `/admin/team`. The legacy `/operations` URL redirects to student management. ps-booking owns the shared cashbox. See [platform ownership](docs/PS_BOOKING_BOUNDARY.md).
 
 A local Next.js + Sanity implementation of the academy redesign. Ukrainian content, a direct program catalog, course details, student photography, inquiries and checkout are included. The current default uses the reviewed migration fixture and local payment simulation.
 
 ## Run locally
 
-Requires Node 22.12+ and pnpm. This workspace uses Node 22.20.
+For the application and contributor tools together, use Node 22.20.0 or newer and pnpm 11.25.0. The application retains its separate minimum Node engine.
 
 ```powershell
 cd E:\Projects\photoacademy\web
@@ -23,22 +23,23 @@ pnpm dev
 
 Open **http://127.0.0.1:3000/**. The default modes are `CONTENT_MODE=fixture`, `PAYMENT_MODE=mock`, `NOTIFICATION_MODE=local`. No Sanity credentials are needed to review the site. Local inquiries are saved to SQLite and clearly identified as local captures. Mock orders never charge money or send payment notifications externally.
 
-The current preview is already running. The synthetic checkout is **/checkout?demo=1**; it is separate from the academy’s unverified offers and is unavailable in real payment mode.
+In local mock mode the synthetic checkout is **/checkout?demo=1**. It is unavailable in live payment mode.
 
 ## Verify
 
 ```powershell
+pnpm spec:check
+pnpm architecture:check
 pnpm typecheck
 pnpm test
 pnpm content:validate
-pnpm content:migrate
 node scripts/validate-sanity-query.mjs
 pnpm build
 ```
 
 `content:migrate` defaults to a dry run. It writes the proposed import and provenance/conflict manifest to `content/generated/`. The GROQ check evaluates the real content query against those documents, including a new program without an imported ID. API tests cover purchase snapshots, idempotency, enrollment restrictions, callback signatures, order privacy, inquiries, package context and notification retries/concurrent workers.
 
-Browser review uses the rendered local site; see `reports/design-review.md` for the independent critique and implemented responses. Design rationale, precise tokens and reference projects are in `DESIGN.md`.
+Use the [Studio design guidance](docs/FINAL_DESIGN_IMPLEMENTATION.md) and [designer resolutions](docs/FIGMA_ARTIFACT_DIFFERENCES.md) for the Studio variant. `DESIGN.md` records the earlier visual system retained for the legacy variant.
 
 ## Content architecture
 
@@ -64,9 +65,9 @@ Imported IDs remain stable. New documents use their native Sanity IDs. Programs 
 2. Configure the project’s authenticated Studio/CORS origins for the intended local origin. Open `/studio` and verify the schema. An unconfigured Studio explains what is missing.
 3. Review the dry-run documents and source conflicts, then run `pnpm content:migrate --write`. The script uploads the selected photographs with provenance, deduplicates assets by hash and uses `createIfNotExists` to preserve existing editorial changes.
 4. Set `CONTENT_MODE=sanity` and restart Next.js. Studio Presentation preview enables draft mode through a validated Sanity preview token; the frontend shows a draft banner with an exit action.
-5. Confirm the dates, prices and package availability in each intake before explicitly clearing its verification flag. Past dates, sold-out packages and unverified intakes cannot be purchased server-side.
+5. Confirm intake dates, sale windows, package availability and verified mappings before opening sales. The server evaluates the configured offer, including explicitly permitted ongoing cohorts. See [course checkout](docs/COURSE_CHECKOUT.md).
 
-The migration was prepared and dry-run validated locally. No cloud dataset was modified in this implementation because credentials were not supplied.
+Use the [content and operations evidence](docs/openspec/operations.md) to distinguish the migration's historical decisions from the current configured environment.
 
 ## Connect payments and notifications
 

@@ -1,2 +1,3 @@
 *.pdf binary
 deploy/*.sh text eol=lf
+scripts/openspec/*.mjs text eol=lf

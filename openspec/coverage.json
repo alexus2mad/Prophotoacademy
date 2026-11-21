@@ -1,0 +1,395 @@
+{
+  "public-navigation": {
+    "entries": [
+      "src/app/(academy)/academy/page.tsx",
+      "src/app/(academy)/courses/page.tsx",
+      "src/app/(academy)/layout.tsx",
+      "src/app/(academy)/not-found.tsx",
+      "src/app/(academy)/page.tsx",
+      "src/app/error.tsx",
+      "src/app/layout.tsx",
+      "src/app/not-found.tsx",
+      "src/proxy.ts"
+    ],
+    "evidence": [
+      "docs/openspec/public.md",
+      "tests/studio-home-tabs.test.ts",
+      "src/lib/navigation/academy.ts"
+    ]
+  },
+  "public-programs": {
+    "entries": [
+      "src/app/(academy)/[slug]/page.tsx",
+      "src/app/(academy)/ai-artwork/page.tsx"
+    ],
+    "evidence": [
+      "docs/openspec/public.md",
+      "tests/confirmed-product-offers.test.ts",
+      "tests/studio-creator.test.ts"
+    ]
+  },
+  "visual-interactions": {
+    "entries": [
+      "src/app/(academy)/student-work/page.tsx"
+    ],
+    "evidence": [
+      "docs/openspec/public.md",
+      "tests/student-work-galleries.test.ts",
+      "tests/partner-marquee.test.ts"
+    ]
+  },
+  "search-discovery": {
+    "entries": [
+      "next.config.ts",
+      "scripts/seo-audit/crawl.mjs",
+      "scripts/seo-audit/findings.mjs",
+      "scripts/seo-audit/inspect.mjs",
+      "src/app/hub/robots.txt/route.ts",
+      "src/app/hub/sitemap.ts",
+      "src/app/robots.ts",
+      "src/app/sitemap.ts"
+    ],
+    "evidence": [
+      "docs/openspec/public.md",
+      "tests/seo-indexability.test.ts",
+      "tests/social-metadata.test.ts"
+    ]
+  },
+  "hub-and-shop": {
+    "entries": [
+      "src/app/(academy)/photo-studio/page.tsx",
+      "src/app/(academy)/shop/page.tsx",
+      "src/app/hub/[slug]/page.tsx",
+      "src/app/hub/about/page.tsx",
+      "src/app/hub/booking/page.tsx",
+      "src/app/hub/contact/page.tsx",
+      "src/app/hub/layout.tsx",
+      "src/app/hub/not-found.tsx",
+      "src/app/hub/page.tsx"
+    ],
+    "evidence": [
+      "docs/openspec/public.md",
+      "src/lib/ecosystem.ts",
+      "tests/ecosystem.test.ts"
+    ]
+  },
+  "public-content": {
+    "entries": [
+      "src/app/(academy)/about-us/page.tsx",
+      "src/app/(academy)/contacts/page.tsx",
+      "src/app/(academy)/reviews/page.tsx"
+    ],
+    "evidence": [
+      "docs/openspec/public.md",
+      "tests/review-layout.test.ts",
+      "src/lib/content.ts"
+    ]
+  },
+  "checkout-and-fulfillment": {
+    "entries": [
+      "package.json#db:import-legacy",
+      "scripts/migrate-ledger.ts",
+      "src/app/(academy)/checkout/page.tsx",
+      "src/app/(academy)/thanks/page.tsx",
+      "src/app/api/checkout/events/route.ts",
+      "src/app/api/checkout/promo/route.ts",
+      "src/app/api/checkout/route.ts",
+      "src/app/api/orders/status/route.ts",
+      "src/app/api/payments/mock/route.ts",
+      "src/app/api/payments/wayforpay/callback/route.ts",
+      "supabase/migrations/202610120001_test_enrollment.sql",
+      "supabase/migrations/202610170001_promo_codes.sql",
+      "supabase/migrations/202610170002_promo_code_delete.sql"
+    ],
+    "evidence": [
+      "docs/openspec/platform.md",
+      "src/lib/wayforpay.ts",
+      "src/lib/commerce/payment-events.ts",
+      "tests/test-enrollment.test.ts"
+    ]
+  },
+  "identity-and-access": {
+    "entries": [
+      "scripts/render-auth-emails.ts",
+      "src/app/api/auth/[action]/route.ts",
+      "src/app/login/page.tsx",
+      "supabase/templates/confirm-signup.html",
+      "supabase/templates/magic-link.html",
+      "supabase/templates/previous/confirm-signup.html",
+      "supabase/templates/previous/magic-link.html",
+      "supabase/templates/staging/confirm-signup.html",
+      "supabase/templates/staging/magic-link.html"
+    ],
+    "evidence": [
+      "docs/openspec/platform.md",
+      "src/lib/auth/server.ts",
+      "src/lib/learning/access.ts",
+      "tests/auth-session.test.ts"
+    ]
+  },
+  "student-learning": {
+    "entries": [
+      "scripts/migrate-quiz-completion.ts",
+      "scripts/prepare-learning.mjs",
+      "src/app/account/layout.tsx",
+      "src/app/account/page.tsx",
+      "src/app/account/purchases/page.tsx",
+      "src/app/account/settings/page.tsx",
+      "src/app/api/learning/[course]/[lesson]/calendar/route.ts",
+      "src/app/api/learning/[course]/[lesson]/media/[id]/route.ts",
+      "src/app/api/learning/[course]/[lesson]/progress/route.ts",
+      "src/app/learn/[course]/[lesson]/page.tsx",
+      "src/app/learn/layout.tsx",
+      "src/app/learn/not-found.tsx",
+      "supabase/migrations/202610130001_quiz_completion.sql"
+    ],
+    "evidence": [
+      "docs/openspec/platform.md",
+      "src/lib/learning/service.ts",
+      "src/lib/learning/progress.ts",
+      "tests/quiz.test.ts"
+    ]
+  },
+  "curriculum-authoring": {
+    "entries": [
+      "sanity/learningSchema/index.ts",
+      "src/app/admin/courses/[id]/page.tsx",
+      "src/app/admin/courses/[id]/preview/[lesson]/page.tsx",
+      "src/app/admin/courses/page.tsx",
+      "src/app/api/admin/courses/[id]/media/[media]/route.ts",
+      "src/app/api/admin/courses/[id]/route.ts",
+      "src/app/api/media/mux/route.ts",
+      "supabase/migrations/202610090002_authoring.sql"
+    ],
+    "evidence": [
+      "docs/openspec/platform.md",
+      "src/lib/learning/authoring.ts",
+      "src/lib/learning/media.ts",
+      "tests/publication.test.ts"
+    ]
+  },
+  "student-administration": {
+    "entries": [
+      "src/app/admin/layout.tsx",
+      "src/app/admin/page.tsx",
+      "src/app/admin/promo-codes/page.tsx",
+      "src/app/admin/settings/page.tsx",
+      "src/app/admin/students/[email]/page.tsx",
+      "src/app/admin/students/page.tsx",
+      "src/app/admin/team/page.tsx",
+      "src/app/api/admin/[action]/route.ts",
+      "src/app/api/admin/roster/route.ts",
+      "src/app/operations/page.tsx",
+      "supabase/migrations/202610090003_booking_management.sql"
+    ],
+    "evidence": [
+      "docs/openspec/platform.md",
+      "tests/admin-students.test.ts",
+      "docs/PS_BOOKING_BOUNDARY.md"
+    ]
+  },
+  "notifications-and-integrations": {
+    "entries": [
+      "deploy/deliver-email.mjs",
+      "deploy/prophotoacademy-email.service",
+      "deploy/prophotoacademy-email.timer",
+      "deploy/prophotoacademy-staging-email.service",
+      "deploy/prophotoacademy-staging-email.timer",
+      "package.json#activity:import",
+      "package.json#outbox:deliver",
+      "scripts/deliver-outbox.ts",
+      "scripts/import-activity.ts",
+      "src/app/api/cron/platform/route.ts",
+      "src/app/api/ecosystem/activity/route.ts",
+      "src/app/api/inquiries/route.ts",
+      "src/app/api/integrations/ps-booking/route.ts",
+      "src/app/api/operations/customers/route.ts",
+      "vercel.json#/api/cron/platform"
+    ],
+    "evidence": [
+      "docs/openspec/platform.md",
+      "src/lib/notifications/delivery.ts",
+      "src/lib/commerce/cashbox.ts",
+      "tests/emails.test.ts"
+    ]
+  },
+  "content-management": {
+    "entries": [
+      "package.json#content:migrate",
+      "package.json#content:query",
+      "package.json#content:validate",
+      "sanity.config.ts",
+      "sanity/schemaTypes/index.ts",
+      "scripts/capture-source.mjs",
+      "scripts/inspect-legal.mjs",
+      "scripts/inspect-source.mjs",
+      "scripts/migrate-sanity.ts",
+      "scripts/normalize-source.mjs",
+      "scripts/refine-titles.mjs",
+      "scripts/validate-content.ts",
+      "scripts/validate-sanity-query.mjs",
+      "src/app/api/draft/disable/route.ts",
+      "src/app/api/draft/route.ts",
+      "src/app/studio/[[...tool]]/page.tsx"
+    ],
+    "evidence": [
+      "docs/openspec/operations.md",
+      "sanity.config.ts",
+      "src/lib/content.ts",
+      "scripts/migrate-sanity.ts"
+    ]
+  },
+  "review-and-sandbox": {
+    "entries": [
+      "package.json#pages:build",
+      "package.json#pages:publish",
+      "package.json#pages:serve",
+      "package.json#pages:validate",
+      "package.json#prepages:build",
+      "package.json#sandbox:learning",
+      "scripts/build-pages.mjs",
+      "scripts/create-demo-pdf.mjs",
+      "scripts/pages/prepare-layout.mjs",
+      "scripts/publish-pages.mjs",
+      "scripts/sandbox/SandboxBanner.tsx",
+      "scripts/sandbox/SandboxPage.tsx",
+      "scripts/sandbox/add-course-media.mjs",
+      "scripts/sandbox/auth.ts",
+      "scripts/sandbox/course-flow-evidence.mjs",
+      "scripts/sandbox/database.ts",
+      "scripts/sandbox/evidence.mjs",
+      "scripts/sandbox/media.ts",
+      "scripts/sandbox/prepare.mjs",
+      "scripts/sandbox/proxy.ts",
+      "scripts/sandbox/rpc.ts",
+      "scripts/sandbox/sanity.ts",
+      "scripts/sandbox/services.mjs",
+      "scripts/sandbox/start.mjs",
+      "scripts/sandbox/store.mjs",
+      "scripts/sandbox/verify-course-flow.mjs",
+      "scripts/sandbox/verify.mjs",
+      "scripts/serve-pages.mjs",
+      "scripts/validate-pages.mjs",
+      "src/app/demo/account/page.tsx",
+      "src/app/demo/account/purchases/page.tsx",
+      "src/app/demo/account/settings/page.tsx",
+      "src/app/demo/admin/courses/[id]/page.tsx",
+      "src/app/demo/admin/courses/[id]/preview/[lesson]/page.tsx",
+      "src/app/demo/admin/courses/page.tsx",
+      "src/app/demo/admin/layout.tsx",
+      "src/app/demo/admin/page.tsx",
+      "src/app/demo/admin/promo-codes/page.tsx",
+      "src/app/demo/admin/settings/page.tsx",
+      "src/app/demo/admin/students/[email]/page.tsx",
+      "src/app/demo/admin/students/page.tsx",
+      "src/app/demo/admin/team/page.tsx",
+      "src/app/demo/layout.tsx",
+      "src/app/demo/learn/[lesson]/page.tsx",
+      "src/app/demo/learn/layout.tsx"
+    ],
+    "evidence": [
+      "docs/openspec/operations.md",
+      "scripts/build-pages.mjs",
+      "tests/sandbox.test.ts"
+    ]
+  },
+  "release-operations": {
+    "entries": [
+      "deploy/activate-staging.sh",
+      "deploy/build-candidate.sh",
+      "deploy/build-production.sh",
+      "deploy/build-staging.sh",
+      "deploy/nginx-environments.conf",
+      "deploy/nginx-http.conf",
+      "deploy/nginx-https.conf",
+      "deploy/prophotoacademy-staging.service",
+      "deploy/prophotoacademy.service",
+      "deploy/prune-releases.py",
+      "deploy/validate-staging.py",
+      "package.json#build",
+      "package.json#db:migrate",
+      "package.json#dev",
+      "package.json#prebuild",
+      "package.json#predev",
+      "package.json#start",
+      "scripts/database-migrate.ts",
+      "scripts/environment.ts",
+      "src/app/api/health/route.ts",
+      "supabase/migrations/202610090001_learning.sql"
+    ],
+    "evidence": [
+      "docs/openspec/operations.md",
+      "deploy/build-candidate.sh",
+      "deploy/test_prune_releases.py",
+      "docs/BACKUPS.md"
+    ]
+  },
+  "media-production": {
+    "entries": [
+      "package.json#images:prepare",
+      "package.json#social:check",
+      "package.json#social:generate",
+      "package.json#social:review",
+      "scripts/build-email-logo.mjs",
+      "scripts/download-display-font.mjs",
+      "scripts/download-media.mjs",
+      "scripts/optimize-media.mjs",
+      "scripts/prepare-academy-home.mjs",
+      "scripts/prepare-brand.mjs",
+      "scripts/prepare-food-course-images.mjs",
+      "scripts/prepare-hero-images.mjs",
+      "scripts/social-images/catalog.ts",
+      "scripts/social-images/generate.ts",
+      "scripts/social-images/render.ts",
+      "scripts/social-images/review.ts",
+      "videos/prophoto-seeing/index.html",
+      "videos/prophoto-seeing/package.json#check",
+      "videos/prophoto-seeing/package.json#dev",
+      "videos/prophoto-seeing/package.json#publish",
+      "videos/prophoto-seeing/package.json#render",
+      "videos/prophoto-seeing/scripts/align-voice.mjs",
+      "videos/prophoto-seeing/scripts/build-film.mjs",
+      "videos/prophoto-seeing/scripts/contact-sheet.mjs",
+      "videos/prophoto-seeing/scripts/generate-campaign-audio.mjs",
+      "videos/prophoto-seeing/scripts/prepare-lesson.mjs",
+      "videos/prophoto-seeing/scripts/select-voice.mjs",
+      "videos/prophoto-seeing/scripts/verify-export.mjs",
+      "videos/prophoto-workflow/index.html",
+      "videos/prophoto-workflow/package.json#check",
+      "videos/prophoto-workflow/package.json#dev",
+      "videos/prophoto-workflow/package.json#publish",
+      "videos/prophoto-workflow/package.json#render",
+      "videos/prophoto-workflow/scripts/build.mjs",
+      "videos/prophoto-workflow/scripts/finish-index.mjs",
+      "videos/prophoto-workflow/scripts/prepare-media.mjs"
+    ],
+    "evidence": [
+      "docs/openspec/operations.md",
+      "docs/IMAGE_QUALITY.md",
+      "scripts/social-images/generate.ts",
+      "videos/prophoto-seeing/scripts/verify-export.mjs"
+    ]
+  },
+  "spec-driven-development": {
+    "entries": [
+      ".github/workflows/openspec.yml",
+      "package.json#architecture:check",
+      "package.json#format",
+      "package.json#format:check",
+      "package.json#spec",
+      "package.json#spec:check",
+      "package.json#test",
+      "package.json#typecheck",
+      "scripts/architecture/rules.mjs",
+      "scripts/check-architecture.mjs",
+      "scripts/openspec/check-coverage.mjs",
+      "scripts/openspec/check-links.mjs"
+    ],
+    "evidence": [
+      "AGENTS.md",
+      "ARCHITECTURE.md",
+      "scripts/openspec/check-links.test.mjs",
+      "scripts/openspec/check-coverage.test.mjs"
+    ]
+  }
+}
