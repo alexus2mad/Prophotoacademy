@@ -15,6 +15,7 @@ export function WorkspaceShell({
   const links = admin
     ? [
         ['courses', 'Курси'],
+        ...(!demo ? [['content', 'Сторінки сайту']] : []),
         ['students', 'Студенти'],
         ['team', 'Команда'],
         ['promo-codes', 'Промокоди'],
@@ -41,7 +42,7 @@ export function WorkspaceShell({
           <BrandLogo />
         </Link>
         <Link className="workspace-area" href={base + (admin ? '/admin' : '/account')}>
-          {admin ? 'Матеріали курсів' : 'Кабінет студента'}
+          {admin ? 'Адміністрування' : 'Кабінет студента'}
         </Link>
         <AccountMenu member={member} demo={demo} />
       </header>
