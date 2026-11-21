@@ -90,7 +90,7 @@
   color: var(--learn-muted);
   font-size: 15px;
 }
-.search {
+.editor .search {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -102,7 +102,10 @@
   border-radius: 8px;
   background: var(--surface);
 }
-.search input {
+.search svg {
+  flex: 0 0 auto;
+}
+.editor .search input {
   width: 100%;
   min-width: 0;
   min-height: 46px;
@@ -113,10 +116,10 @@
   font-size: 16px;
   color: var(--text);
 }
-.search:focus-within {
+.editor .search:focus-within {
   outline: 2px solid var(--text);
 }
-.search input:focus {
+.editor .search input:focus {
   outline: 0;
 }
 .list {
@@ -301,6 +304,18 @@
   }
   .canvas {
     position: static;
+  }
+}
+@media (max-width: 550px) {
+  .actions {
+    display: grid;
+    align-items: stretch;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 8.5rem), 1fr));
+    width: 100%;
+  }
+  .editor .actions button {
+    min-width: 0;
+    padding-inline: 12px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
