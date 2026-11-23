@@ -8,7 +8,12 @@ import {
   listEditorPages,
   writeSitePage,
 } from '@/lib/site-editor/store';
-import { newPageKind, pagePathSchema, pageTitleSchema } from '@/lib/site-editor/validation';
+import {
+  newPageKind,
+  pagePathSchema,
+  pageTemplateSchema,
+  pageTitleSchema,
+} from '@/lib/site-editor/validation';
 
 const headers = { 'Cache-Control': 'private, no-store' };
 const mutation = z.discriminatedUnion('action', [
@@ -17,6 +22,7 @@ const mutation = z.discriminatedUnion('action', [
     path: pagePathSchema,
     title: pageTitleSchema,
     kind: newPageKind,
+    template: pageTemplateSchema.optional(),
   }),
   z.object({
     action: z.enum(['save', 'publish']),
@@ -44,7 +50,7 @@ export async function POST(request: Request) {
     await guardMutation(request, 'site-editor');
     const data = mutation.parse(await jsonBody(request, 2 * 1024 * 1024));
     if (data.action === 'create')
-      return Response.json(await createSiteDraft(data.path, data.title, data.kind), {
+      return Response.json(await createSiteDraft(data.path, data.title, data.kind, data.template), {
         status: 201,
         headers,
       });

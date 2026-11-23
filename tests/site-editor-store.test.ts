@@ -10,6 +10,7 @@ import { sanitySave } from '../src/lib/site-editor/storage/sanity';
 import { legacyAcademyIndexPaths } from '../src/lib/navigation/academy';
 import { revalidatePath } from 'next/cache';
 import { newSitePage } from '../src/lib/site-editor/fields';
+import { createBlock } from '../src/lib/site-editor/blocks';
 import { validateEdit } from '../src/lib/site-editor/validation';
 import {
   createSiteDraft,
@@ -135,6 +136,46 @@ describe('visual editor persistence and authorization', () => {
     expect(await seedPublishedPages([existing()])).toEqual({ total: 1, inserted: 0, preserved: 1 });
     expect((await getEditorPage('/existing')).revision).toBe(draft.revision);
     expect(await getPublishedPage('/existing')).toBeNull();
+  });
+
+  it('persists authored content and styled native copy on seeded pages only after explicit publication', async () => {
+    const old = existing();
+    await seedPublishedPages([old]);
+    const entry = await getEditorPage(old.path);
+    const heading = createBlock('heading');
+    heading.fields[0].value = 'Роботи студентів';
+    entry.page.sections.push(heading);
+    entry.page.sections[0].fields[0].style = { color: 'accent' };
+    const draft = await writeSitePage(entry.page, entry.revision, false);
+    expect((await getEditorPage(old.path)).page).toEqual(entry.page);
+    expect(await getPublishedPage(old.path)).toEqual(old);
+    await writeSitePage(draft.page, draft.revision, true);
+    expect(await getPublishedPage(old.path)).toEqual(entry.page);
+  });
+
+  it('accepts a chosen starting template through the authorized admin creation route', async () => {
+    const create = {
+      action: 'create',
+      path: '/kompozytsiia',
+      title: 'Композиція',
+      kind: 'landing',
+      template: 'editorial',
+    };
+    const response = await POST(json(create));
+    expect(response.status).toBe(201);
+    const draft = await response.json();
+    expect(draft.page.template).toBe('editorial');
+    expect(draft.page.sections).toHaveLength(3);
+    expect(draft.page.sections[1].blockType).toBe('paragraph');
+    expect((await getEditorPage(create.path)).page).toEqual(draft.page);
+    expect(await getPublishedPage(create.path)).toBeNull();
+    await expect(writeSitePage(draft.page, draft.revision, true)).rejects.toMatchObject({
+      status: 400,
+    });
+    const invalid = await POST(
+      json({ ...create, path: '/invalid-template', template: 'checkout' }),
+    );
+    expect(invalid.status).toBe(400);
   });
 
   it('limits edits to the template and rejects unsuitable image values', async () => {

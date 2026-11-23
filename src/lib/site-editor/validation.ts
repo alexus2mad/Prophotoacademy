@@ -4,6 +4,17 @@ import path from 'node:path';
 import { HttpError } from '../http';
 import { legacyAcademyIndexPaths } from '../navigation/academy';
 import { editorMode, localDirectory, marketingImagePrefix } from './storage/config';
+import {
+  blockTypes,
+  pageTemplateIds,
+  textAlignments,
+  textColors,
+  textFonts,
+  textSizes,
+  textWeights,
+} from './options';
+import { isStylableField, maxBlockItems } from './blocks';
+import { validateBlock } from './validate-block';
 import type { SitePage } from './types';
 
 export const pagePathSchema = z
@@ -15,15 +26,28 @@ export const pagePathSchema = z
   );
 export const pageTitleSchema = z.string().trim().min(1, 'Вкажіть назву сторінки.').max(240);
 export const newPageKind = z.enum(['course', 'workshop', 'landing']);
+export const pageTemplateSchema = z.enum(pageTemplateIds);
+const styleSchema = z
+  .object({
+    font: z.enum(textFonts).optional(),
+    size: z.enum(textSizes).optional(),
+    color: z.enum(textColors).optional(),
+    weight: z.enum(textWeights).optional(),
+    align: z.enum(textAlignments).optional(),
+  })
+  .strict();
 export const pageSchema = z.object({
   path: pagePathSchema,
   title: pageTitleSchema,
   kind: z.enum(['home', 'course', 'workshop', 'landing']),
+  template: pageTemplateSchema.optional(),
   sections: z
     .array(
       z.object({
         id: z.string().min(1).max(200),
         label: z.string().min(1).max(240),
+        blockType: z.enum(blockTypes).optional(),
+        itemIds: z.array(z.string().uuid()).max(maxBlockItems).optional(),
         fields: z
           .array(
             z.object({
@@ -31,6 +55,7 @@ export const pageSchema = z.object({
               label: z.string().min(1).max(500),
               kind: z.enum(['text', 'multiline', 'image']),
               value: z.string().max(50000),
+              style: styleSchema.optional(),
             }),
           )
           .max(1000),
@@ -111,15 +136,26 @@ export function validateEdit(
   const page = pageSchema.parse(input);
   const invalid = () =>
     new HttpError(400, 'Структура сторінки змінилася. Відкрийте актуальну версію.');
+  const native = page.sections.filter((section) => !section.blockType);
   if (
     page.path !== baseline.path ||
     page.kind !== baseline.kind ||
-    page.sections.length < baseline.sections.length ||
-    (seeded && page.sections.length !== baseline.sections.length) ||
+    page.template !== baseline.template ||
+    native.length < baseline.sections.length ||
+    (seeded && native.length !== baseline.sections.length) ||
+    native.some(
+      (section, index) => section !== page.sections[index] || section.itemIds !== undefined,
+    ) ||
     new Set(page.sections.map((s) => s.id)).size !== page.sections.length
   )
     throw invalid();
   for (const [index, section] of page.sections.entries()) {
+    if (section.fields.some((field) => field.style && !isStylableField(field)))
+      throw new HttpError(400, 'Форматування доступне лише для видимого тексту.');
+    if (section.blockType) {
+      validateBlock(section, publishing, validateImage);
+      continue;
+    }
     const extra = index >= baseline.sections.length;
     const expected = extra
       ? baseline.sections.find((s) => s.id === 'landing-body')

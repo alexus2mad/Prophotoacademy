@@ -1,5 +1,7 @@
 import { HttpError } from '../http';
 import { getSiteSeeds, newSitePage } from './seeds';
+import { applyPageTemplate, templateShell } from './templates';
+import { isStylableField } from './blocks';
 import { editorMode, unavailable } from './storage/config';
 import { localPublished } from './storage/local';
 import { sanityPublished } from './storage/sanity';
@@ -10,11 +12,12 @@ import {
   newPageKind,
   pagePathSchema,
   pageSchema,
+  pageTemplateSchema,
   pageTitleSchema,
   reservedPaths,
   validateEdit,
 } from './validation';
-import type { EditorPage, SitePage } from './types';
+import type { EditorPage, PageTemplateId, SitePage } from './types';
 
 function view(state: PageState | undefined, seed?: SitePage): EditorPage {
   const saved = state?.draft ?? state?.published;
@@ -26,20 +29,28 @@ function view(state: PageState | undefined, seed?: SitePage): EditorPage {
       ? {
           ...seed,
           title: saved.title,
-          sections: seed.sections.map((section) => {
-            const fields = new Map(
-              saved.sections
-                .find((item) => item.id === section.id)
-                ?.fields.map((field) => [field.id, field]),
-            );
-            return {
-              ...section,
-              fields: section.fields.map((field) => {
-                const prior = fields.get(field.id);
-                return prior?.kind === field.kind ? { ...field, value: prior.value } : field;
-              }),
-            };
-          }),
+          sections: [
+            ...seed.sections.map((section) => {
+              const fields = new Map(
+                saved.sections
+                  .find((item) => item.id === section.id)
+                  ?.fields.map((field) => [field.id, field]),
+              );
+              return {
+                ...section,
+                fields: section.fields.map((field) => {
+                  const prior = fields.get(field.id);
+                  if (prior?.kind !== field.kind) return field;
+                  return {
+                    ...field,
+                    value: prior.value,
+                    ...(prior.style && isStylableField(field) && { style: prior.style }),
+                  };
+                }),
+              };
+            }),
+            ...saved.sections.filter((section) => section.blockType),
+          ],
         }
       : (saved ?? seed);
   return {
@@ -84,7 +95,12 @@ export async function listPublishedPages(): Promise<SitePage[]> {
   return pages.flatMap((page) => (page ? [pageSchema.parse(page)] : []));
 }
 
-export async function createSiteDraft(path: string, title: string, kind: SitePage['kind']) {
+export async function createSiteDraft(
+  path: string,
+  title: string,
+  kind: SitePage['kind'],
+  template?: PageTemplateId,
+) {
   if (!siteEditorWritable()) throw unavailable();
   const parsedKind = newPageKind.parse(kind);
   pagePathSchema.parse(path);
@@ -92,7 +108,9 @@ export async function createSiteDraft(path: string, title: string, kind: SitePag
   if (reservedPaths.has(path) || seeds.some((p) => p.path === path))
     throw new HttpError(409, 'Цю адресу вже використовує сайт. Виберіть іншу.');
   const page = newSitePage(path, pageTitleSchema.parse(title), parsedKind);
-  return view(await persist(page, null, false));
+  const draft =
+    template === undefined ? page : applyPageTemplate(page, pageTemplateSchema.parse(template));
+  return view(await persist(draft, null, false));
 }
 
 export async function writeSitePage(input: unknown, revision: string | null, publish: boolean) {
@@ -101,9 +119,11 @@ export async function writeSitePage(input: unknown, revision: string | null, pub
   const [seeds, states] = await Promise.all([getSiteSeeds(), editorStates(request.path)]);
   const seed = seeds.find((p) => p.path === request.path);
   const current = view(states[0], seed);
-  const baseline =
+  const base =
     seed ??
     newSitePage(current.page.path, current.page.title, newPageKind.parse(current.page.kind));
+  const baseline =
+    !seed && current.page.template ? templateShell(base, current.page.template) : base;
   const page = validateEdit(request, baseline, Boolean(seed), publish);
   return view(await persist(page, revision, publish), seed);
 }
