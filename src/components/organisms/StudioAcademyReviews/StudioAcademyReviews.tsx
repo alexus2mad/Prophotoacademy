@@ -1,5 +1,6 @@
 'use client';
 
+import { ReviewSourceLink } from '@/components/atoms/ReviewSourceLink/ReviewSourceLink';
 import { SiteCopy } from '@/components/atoms/SiteCopy/SiteCopy';
 import Link from 'next/link';
 import { useStudioHomeCarousel } from '@/components/molecules/StudioHomeCarousel/hooks';
@@ -86,20 +87,11 @@ export function StudioAcademyReviews({ page, variant = 'academy' }: StudioAcadem
                   {review.quote}
                 </blockquote>
               )}
-              {review.sourceUrl === '/reviews' ? (
-                <Link className={styles.source} href="/reviews">
-                  Усі відгуки
-                </Link>
-              ) : (
-                <a
-                  className={styles.source}
-                  href={review.sourceUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Переглянути оригінал
-                </a>
-              )}
+              <ReviewSourceLink
+                className={styles.source}
+                source={review.sourceUrl}
+                indexLabel={variant === 'food' ? 'Усі відгуки' : 'Перейти до всіх відгуків'}
+              />
             </article>
           ))}
         </div>

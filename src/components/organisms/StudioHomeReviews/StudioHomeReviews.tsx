@@ -1,4 +1,5 @@
 'use client';
+import { ReviewSourceLink } from '@/components/atoms/ReviewSourceLink/ReviewSourceLink';
 import { SiteCopy } from '@/components/atoms/SiteCopy/SiteCopy';
 import { StudioHomeCarousel } from '@/components/molecules/StudioHomeCarousel/StudioHomeCarousel';
 import { studioHomeReviews } from '@/lib/studio-home/selectors';
@@ -64,9 +65,11 @@ export function StudioHomeReviews({ page }: BrandContentProps = {}) {
             ) : (
               <blockquote data-site-field="quote">{review.quote}</blockquote>
             )}
-            <a className={styles.source} href={review.sourceUrl} target="_blank" rel="noreferrer">
-              Переглянути оригінал
-            </a>
+            <ReviewSourceLink
+              className={styles.source}
+              source={review.sourceUrl}
+              indexLabel="Перейти до всіх відгуків"
+            />
           </article>
         ))}
       </div>

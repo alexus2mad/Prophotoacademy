@@ -91,7 +91,12 @@
       "src/app/(academy)/contacts/page.tsx",
       "src/app/(academy)/reviews/page.tsx"
     ],
-    "evidence": ["docs/openspec/public.md", "tests/review-layout.test.ts", "src/lib/content.ts"]
+    "evidence": [
+      "docs/openspec/public.md",
+      "tests/review-layout.test.ts",
+      "tests/review-sources-and-offer-copy.test.ts",
+      "src/lib/content.ts"
+    ]
   },
   "checkout-and-fulfillment": {
     "entries": [

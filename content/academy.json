@@ -973,12 +973,10 @@
               "text": "Самостійно; 14 лекцій"
             },
             "support": {
-              "state": "excluded",
-              "text": "Чат підтримки та індивідуальний дзвінок"
+              "state": "excluded"
             },
             "homework": {
-              "state": "excluded",
-              "text": "Детальний фідбек і перевірка домашніх завдань"
+              "state": "excluded"
             },
             "practice": {
               "state": "included",

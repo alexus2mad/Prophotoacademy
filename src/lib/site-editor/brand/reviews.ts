@@ -45,10 +45,6 @@ export function brandReviewContent(variant: BrandReviewVariant, page?: SitePage)
     const field = section('review-' + review.id, 'Відгук · ' + review.name);
     return {
       ...review,
-      sourceUrl:
-        variant === 'food' && review.sourceUrl === 'https://www.prophotoacademy.com.ua/reviews'
-          ? '/reviews'
-          : review.sourceUrl,
       name: field('name', 'Ім’я', review.name),
       title: field('title', 'Заголовок', review.title),
       quote: field('quote', 'Текст відгуку', review.quote, 'multiline'),

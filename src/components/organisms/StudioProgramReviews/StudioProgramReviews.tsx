@@ -1,5 +1,6 @@
 'use client';
 
+import { ReviewSourceLink } from '@/components/atoms/ReviewSourceLink/ReviewSourceLink';
 import Link from 'next/link';
 import { programReviewContent } from '@/lib/site-editor/brand/reviews';
 import { useStudioGallery } from '@/components/organisms/StudioSpacesGallery/hooks';
@@ -46,9 +47,11 @@ export function StudioProgramReviews({ reviews: originals, page }: StudioProgram
             ) : (
               <blockquote data-site-field="quote">{review.quote}</blockquote>
             )}
-            <a className={styles.source} href={review.sourceUrl} target="_blank" rel="noreferrer">
-              Переглянути оригінал
-            </a>
+            <ReviewSourceLink
+              className={styles.source}
+              source={review.sourceUrl}
+              indexLabel="Перейти до всіх відгуків"
+            />
           </article>
         ))}
       </div>

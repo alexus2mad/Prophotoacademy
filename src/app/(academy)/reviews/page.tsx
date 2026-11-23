@@ -1,3 +1,4 @@
+import { ReviewSourceLink } from '@/components/atoms/ReviewSourceLink/ReviewSourceLink';
 import Image from 'next/image';
 import { getContent } from '@/lib/content';
 import type { SiteRouteProps } from '@/lib/site-editor/types';
@@ -10,7 +11,7 @@ import { academyMetadata } from '@/lib/seo/metadata';
 export const metadata = academyMetadata('/reviews', {
   title: 'Відгуки студентів',
   description:
-    'Читайте відгуки про навчання в ProPhoto Academy: досвід студентів курсів фотографії та візуального контенту, історії та посилання на оригінали.',
+    'Читайте відгуки про навчання в ProPhoto Academy: досвід студентів курсів фотографії та візуального контенту та історії випускників.',
 });
 export default async function Reviews({ searchParams }: SiteRouteProps) {
   const [content, page] = await Promise.all([getContent(), readSitePage('/reviews', searchParams)]);
@@ -47,9 +48,7 @@ export default async function Reviews({ searchParams }: SiteRouteProps) {
                 />
               )}
               <h3 data-site-field="name">{t.name}</h3>
-              <a className="text-link" href={t.sourceUrl} target="_blank" rel="noreferrer">
-                Переглянути оригінал
-              </a>
+              <ReviewSourceLink className="text-link" source={t.sourceUrl} />
             </article>
           ))}
         </div>
