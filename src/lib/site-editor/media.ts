@@ -4,6 +4,7 @@ import path from 'node:path';
 import sharp from 'sharp';
 import { HttpError } from '../http';
 import { editorMode, localDirectory, marketingClient, unavailable } from './storage/config';
+import { uploadName } from './image-library/uploads';
 
 const imageLimit = 10 * 1024 * 1024;
 const multipartLimit = imageLimit + 64 * 1024;
@@ -40,13 +41,13 @@ async function multipartImage(request: Request) {
   if (!file || typeof file === 'string' || !file.size)
     throw new HttpError(400, 'Оберіть файл зображення.');
   if (file.size > imageLimit) throw new HttpError(413, 'Максимальний розмір зображення — 10 МБ.');
-  return Buffer.from(await file.arrayBuffer());
+  return { input: Buffer.from(await file.arrayBuffer()), name: uploadName(file.name) };
 }
 
 export async function uploadPageImage(request: Request) {
   const mode = editorMode();
   if (mode === 'readonly') throw unavailable();
-  const input = await multipartImage(request);
+  const { input, name } = await multipartImage(request);
   let webp: Buffer;
   try {
     const image = sharp(input, { limitInputPixels: 40_000_000, failOn: 'error' });
@@ -69,13 +70,18 @@ export async function uploadPageImage(request: Request) {
     try {
       await writeFile(temporary, webp, { flag: 'wx' });
       await rename(temporary, path.join(dir, id + '.webp'));
+      await writeFile(path.join(dir, id + '.name'), name, { flag: 'wx' }).catch(
+        (error: NodeJS.ErrnoException) => {
+          if (error.code !== 'EEXIST') throw error;
+        },
+      );
     } finally {
       await rm(temporary, { force: true });
     }
     return '/api/site-content/images/' + id;
   }
   const asset = await marketingClient(true).assets.upload('image', webp, {
-    filename: id + '.webp',
+    filename: name + '.webp',
     contentType: 'image/webp',
   });
   return asset.url;

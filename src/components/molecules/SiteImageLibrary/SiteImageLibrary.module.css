@@ -1,0 +1,258 @@
+.dialog {
+  width: min(880px, calc(100vw - 32px));
+  max-width: none;
+  max-height: calc(100dvh - 32px);
+  padding: 0;
+  margin: auto;
+  overflow: hidden;
+  border: 1px solid #454545;
+  border-radius: 14px;
+  background: #151515;
+  color: #fafafa;
+  box-shadow: 0 24px 72px #0009;
+}
+.dialog::backdrop {
+  background: #000b;
+}
+.layout {
+  display: grid;
+  grid-template-rows: auto auto auto minmax(0, 1fr) auto;
+  height: min(720px, calc(100dvh - 36px));
+}
+.header,
+.tools,
+.filters,
+.footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-inline: 24px;
+}
+.header {
+  padding-block: 18px 12px;
+  justify-content: space-between;
+}
+.header h2 {
+  margin: 0;
+  color: inherit;
+  font-size: clamp(22px, 4vw, 30px);
+}
+.dialog button {
+  font: inherit;
+  cursor: pointer;
+}
+.dialog button:disabled {
+  cursor: default;
+  opacity: 0.48;
+}
+.icon,
+.filters button,
+.upload,
+.more,
+.apply {
+  min-height: 44px;
+}
+.icon {
+  background: transparent;
+  color: inherit;
+  border: 0;
+  width: 44px;
+  display: grid;
+  place-items: center;
+}
+.tools {
+  gap: 10px;
+}
+.search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px;
+  flex: 1;
+  min-width: 0;
+  background: #0b0b0b;
+  border: 1px solid #565656;
+  border-radius: 8px;
+}
+.search input {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  color: #fff;
+  font: inherit;
+  font-size: 16px;
+  border: 0;
+  background: transparent;
+}
+.search input:focus-visible {
+  outline-offset: -2px;
+}
+.upload,
+.more {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  background: transparent;
+  border: 1px solid #777;
+  padding: 8px 14px;
+  border-radius: 8px;
+}
+.filters {
+  padding-block: 10px;
+  gap: 4px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #393939;
+}
+.filters button {
+  background: transparent;
+  border: 0;
+  color: #c7c7c7;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+.filters button[aria-pressed='true'] {
+  color: white;
+  background: #373737;
+}
+.scroll {
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 16px 24px 24px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(148px, 100%), 1fr));
+  gap: 16px 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.grid li {
+  min-width: 0;
+}
+.grid button {
+  width: 100%;
+  text-align: left;
+  border: 0;
+  border-radius: 6px;
+  color: inherit;
+  background: transparent;
+  padding: 3px;
+}
+.grid button[aria-pressed='true'] {
+  outline: 2px solid #ececec;
+}
+.grid button:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+.thumb {
+  background: #252525;
+  aspect-ratio: 3 / 2;
+  display: block;
+  overflow: hidden;
+  position: relative;
+  border-radius: 4px;
+}
+.thumb img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.check {
+  display: grid;
+  place-items: center;
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  background: #fff;
+  color: #090909;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+}
+.grid strong,
+.grid small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.grid strong {
+  margin-top: 6px;
+  font-size: 14px;
+}
+.grid small {
+  font-size: 13px;
+  color: #bdbdbd;
+}
+.more {
+  margin-top: 20px;
+}
+.error {
+  color: #ffbcb7;
+}
+.error button {
+  background: none;
+  color: inherit;
+  text-decoration: underline;
+  border: 0;
+}
+.footer {
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 14px;
+  border-top: 1px solid #393939;
+}
+.footer span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  color: #c5c5c5;
+}
+.apply {
+  background: #fff;
+  color: #101010;
+  font-weight: 650;
+  border: 0;
+  border-radius: 100px;
+  padding: 8px 18px;
+  flex-shrink: 0;
+}
+@media (max-width: 580px) {
+  .dialog {
+    width: calc(100vw - 12px);
+    max-height: calc(100dvh - 12px);
+  }
+  .layout {
+    height: calc(100dvh - 16px);
+  }
+  .header,
+  .tools,
+  .filters,
+  .footer,
+  .scroll {
+    padding-inline: 14px;
+  }
+  .tools {
+    flex-wrap: wrap;
+  }
+  .search {
+    flex-basis: 100%;
+  }
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .footer {
+    flex-wrap: wrap;
+  }
+  .footer span {
+    flex: 1 1 110px;
+  }
+  .apply {
+    max-width: 100%;
+  }
+}
