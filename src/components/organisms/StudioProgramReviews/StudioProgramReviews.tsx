@@ -15,9 +15,11 @@ export function StudioProgramReviews({ reviews: originals, page }: StudioProgram
       id="program-reviews"
       aria-labelledby="program-reviews-title"
     >
-      <header className={styles.heading}>
-        <p className="studio-label">{label}</p>
-        <h2 className="studio-title" id="program-reviews-title">
+      <header data-site-section="reviews-heading" className={styles.heading}>
+        <p data-site-field="eyebrow" className="studio-label">
+          {label}
+        </p>
+        <h2 data-site-field="title" className="studio-title" id="program-reviews-title">
           {title}
         </h2>
       </header>
@@ -30,15 +32,19 @@ export function StudioProgramReviews({ reviews: originals, page }: StudioProgram
         onKeyDown={onKeyDown}
       >
         {reviews.map((review) => (
-          <article className={styles.review} key={review.id}>
-            <h3>{review.name}</h3>
+          <article
+            data-site-section={'review-' + review.id}
+            className={styles.review}
+            key={review.id}
+          >
+            <h3 data-site-field="name">{review.name}</h3>
             {review.kind === 'story' ? (
               <>
                 <p className={styles.kind}>Історія від академії</p>
-                <p>{review.quote}</p>
+                <p data-site-field="quote">{review.quote}</p>
               </>
             ) : (
-              <blockquote>{review.quote}</blockquote>
+              <blockquote data-site-field="quote">{review.quote}</blockquote>
             )}
             <a className={styles.source} href={review.sourceUrl} target="_blank" rel="noreferrer">
               Переглянути оригінал

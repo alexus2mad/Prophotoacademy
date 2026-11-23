@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { getContent } from '@/lib/content';
 import type { SiteRouteProps } from '@/lib/site-editor/types';
+import { MarketingComposition } from '@/components/molecules/MarketingComposition/MarketingComposition';
 import { readSitePage } from '@/lib/site-editor/public';
 import { reviewsContent } from '@/lib/site-editor/support-pages';
 import { Consultation } from '@/components/organisms/Consultation/Consultation';
@@ -11,25 +12,27 @@ export const metadata = academyMetadata('/reviews', {
     'Читайте відгуки про навчання в ProPhoto Academy: досвід студентів курсів фотографії та візуального контенту, історії та посилання на оригінали.',
 });
 export default async function Reviews({ searchParams }: SiteRouteProps) {
-  const { title, testimonials } = reviewsContent(
-    await getContent(),
-    await readSitePage('/reviews', searchParams),
-  );
+  const [content, page] = await Promise.all([getContent(), readSitePage('/reviews', searchParams)]);
+  const { title, testimonials } = reviewsContent(content, page);
   return (
     <>
       <div className="container">
-        <div className="page-heading">
-          <h1>{title}</h1>
+        <div className="page-heading" data-site-section="intro">
+          <h1 data-site-field="title">{title}</h1>
         </div>
         <div className="review-grid">
           {testimonials.map((t) => (
-            <article className="review-card" key={t.id}>
+            <article className="review-card" data-site-section={'review-' + t.id} key={t.id}>
               {t.kind === 'story' && <p className="eyebrow review-kind">Історія від академії</p>}
               {t.quote &&
                 (t.kind === 'story' ? (
-                  <p className="review-story">{t.quote}</p>
+                  <p className="review-story" data-site-field="quote">
+                    {t.quote}
+                  </p>
                 ) : (
-                  <blockquote>«{t.quote}»</blockquote>
+                  <blockquote>
+                    «<span data-site-field="quote">{t.quote}</span>»
+                  </blockquote>
                 ))}
               {t.image && (
                 <Image
@@ -40,7 +43,7 @@ export default async function Reviews({ searchParams }: SiteRouteProps) {
                   sizes="(max-width:767px) 88vw, 44vw"
                 />
               )}
-              <h3>{t.name}</h3>
+              <h3 data-site-field="name">{t.name}</h3>
               <a className="text-link" href={t.sourceUrl} target="_blank" rel="noreferrer">
                 Переглянути оригінал
               </a>
@@ -49,6 +52,7 @@ export default async function Reviews({ searchParams }: SiteRouteProps) {
         </div>
       </div>
       <Consultation compact />
+      <MarketingComposition page={page} />
     </>
   );
 }

@@ -1,4 +1,5 @@
 'use client';
+import { SiteCopy } from '@/components/atoms/SiteCopy/SiteCopy';
 import { StudioHomeCarousel } from '@/components/molecules/StudioHomeCarousel/StudioHomeCarousel';
 import { studioHomeReviews } from '@/lib/studio-home/selectors';
 import { brandReviewContent } from '@/lib/site-editor/brand/reviews';
@@ -18,14 +19,20 @@ export function StudioHomeReviews({ page }: BrandContentProps = {}) {
       aria-labelledby="home-reviews-title"
     >
       <div className={styles.heading} data-site-section="reviews-heading">
-        <h2 className="studio-label" id="home-reviews-title">
+        <h2 data-site-field="eyebrow" className="studio-label" id="home-reviews-title">
           {copy.label}
         </h2>
         <blockquote className={styles.quote}>
-          {copy.title}
-          <br /> {copy.prefix} <span className="studio-hand">{copy.accent}</span> {copy.end}
+          <SiteCopy id="title">{copy.title}</SiteCopy>
+          <br /> <SiteCopy id="prefix">{copy.prefix}</SiteCopy>{' '}
+          <span data-site-field="accent" className="studio-hand">
+            {copy.accent}
+          </span>{' '}
+          <SiteCopy id="end">{copy.end}</SiteCopy>
         </blockquote>
-        <p className="studio-label">{copy.credit}</p>
+        <p data-site-field="author" className="studio-label">
+          {copy.credit}
+        </p>
       </div>
       <div
         id="home-reviews"
@@ -43,17 +50,19 @@ export function StudioHomeReviews({ page }: BrandContentProps = {}) {
             key={review.id}
           >
             <div className={styles.reviewHeader}>
-              <h3>{review.name}</h3>
+              <h3 data-site-field="name">{review.name}</h3>
               <span aria-label="5 з 5">★★★★★</span>
             </div>
-            <p className={styles.reviewTitle}>{review.title}</p>
+            <p data-site-field="title" className={styles.reviewTitle}>
+              {review.title}
+            </p>
             {review.kind === 'story' ? (
               <>
                 <p className={styles.kind}>Історія від академії</p>
-                <p>{review.quote}</p>
+                <p data-site-field="quote">{review.quote}</p>
               </>
             ) : (
-              <blockquote>{review.quote}</blockquote>
+              <blockquote data-site-field="quote">{review.quote}</blockquote>
             )}
             <a className={styles.source} href={review.sourceUrl} target="_blank" rel="noreferrer">
               Переглянути оригінал

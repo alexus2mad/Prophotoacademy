@@ -39,7 +39,7 @@ export function StudioHomeExposure({ page, directionsRef }: StudioHomeExposurePr
           <StudioExposureTitle page={page} />
           <div className={styles.meter} data-exposure-meter aria-hidden="true">
             <div className={styles.meterLabel}>
-              <span>{text('meter')}</span>
+              <span data-site-field="meter">{text('meter')}</span>
               <span>{exposure.value}</span>
             </div>
             <div className={styles.bars}>

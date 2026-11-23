@@ -1,4 +1,5 @@
 'use client';
+import { SiteCopy } from '@/components/atoms/SiteCopy/SiteCopy';
 import { shopSelection, equipmentCategories } from '@/lib/site-editor/brand/shop/selection';
 import { bindSection } from '@/lib/site-editor/bind-section';
 
@@ -11,22 +12,36 @@ export function StudioShopSelection({ page, shopUrl }: StudioShopSelectionProps)
   const { text } = bindSection(page, shopSelection);
   const { selection, toggle, topic } = useStudioShopSelection();
   return (
-    <section id="equipment-selection" className="studio-band studio-light">
+    <section
+      data-site-section="selection"
+      id="equipment-selection"
+      className="studio-band studio-light"
+    >
       <div className={`${styles.grid} studio-wrap`}>
         <div className={styles.copy}>
-          <p className="studio-label studio-eyebrow">{text('eyebrow')}</p>
+          <p data-site-field="eyebrow" className="studio-label studio-eyebrow">
+            {text('eyebrow')}
+          </p>
           <h2 className="studio-title">
-            {text('title')} <span className="studio-hand">{text('emphasis')}</span>
+            <SiteCopy id="title">{text('title')}</SiteCopy>{' '}
+            <span data-site-field="emphasis" className="studio-hand">
+              {text('emphasis')}
+            </span>
           </h2>
-          <p className="studio-lead">{text('intro')}</p>
+          <p data-site-field="intro" className="studio-lead">
+            {text('intro')}
+          </p>
           <fieldset>
-            <legend className="studio-label studio-eyebrow">{text('legend')}</legend>
+            <legend data-site-field="legend" className="studio-label studio-eyebrow">
+              {text('legend')}
+            </legend>
             <div className={styles.chips}>
               {equipmentCategories.map((_, i) => {
                 const item = text('category-' + i);
                 return (
                   <button
                     key={item}
+                    data-site-field={'category-' + i}
                     type="button"
                     aria-pressed={selection.includes(item)}
                     onClick={() => toggle(item)}

@@ -1,4 +1,5 @@
 'use client';
+import { SiteCopy } from '@/components/atoms/SiteCopy/SiteCopy';
 import { homeDirections } from '@/lib/site-editor/brand/home/directions';
 import { bindSection } from '@/lib/site-editor/bind-section';
 
@@ -23,10 +24,14 @@ export function StudioHomeDirections({ page, directions, sectionRef }: StudioHom
     >
       <div className={`${styles.heading} studio-wrap`}>
         <div>
-          <p className="studio-label">{text('eyebrow')}</p>
+          <p data-site-field="eyebrow" className="studio-label">
+            {text('eyebrow')}
+          </p>
           <h2 className="studio-title" id="home-directions-title">
-            {text('title')}{' '}
-            <span className={`studio-hand ${styles.learning}`}>{text('emphasis')}</span>
+            <SiteCopy id="title">{text('title')}</SiteCopy>{' '}
+            <span data-site-field="emphasis" className={`studio-hand ${styles.learning}`}>
+              {text('emphasis')}
+            </span>
           </h2>
         </div>
         <Link className="studio-button-outline" href="/academy">

@@ -3,6 +3,7 @@ import { Photo } from '@/components/atoms/Photo/Photo';
 import { PreparedPhoto } from '@/components/atoms/PreparedPhoto/PreparedPhoto';
 import { Consultation } from '@/components/organisms/Consultation/Consultation';
 import { aboutContent } from '@/lib/site-editor/support-pages';
+import { MarketingComposition } from '@/components/molecules/MarketingComposition/MarketingComposition';
 import { readSitePage } from '@/lib/site-editor/public';
 import type { SiteRouteProps } from '@/lib/site-editor/types';
 import { academyMetadata } from '@/lib/seo/metadata';
@@ -12,10 +13,11 @@ export const metadata = academyMetadata('/about-us', {
     'Pro Photo Academy. Олена Попова, Олександра Куліняк і навчання фотографії, відео та візуального контенту.',
 });
 export default async function About({ searchParams }: SiteRouteProps) {
-  const { intro, hero, stats, teamTitle, instructors } = aboutContent(
-    await getContent(),
-    await readSitePage('/about-us', searchParams),
-  );
+  const [content, page] = await Promise.all([
+    getContent(),
+    readSitePage('/about-us', searchParams),
+  ]);
+  const { intro, hero, stats, teamTitle, instructors } = aboutContent(content, page);
   return (
     <>
       <div className="container academy-about-page">
@@ -49,7 +51,7 @@ export default async function About({ searchParams }: SiteRouteProps) {
         <section className="section" id="team" data-site-section="team">
           <div className="section-heading">
             <div>
-              <h2>{teamTitle}</h2>
+              <h2 data-site-field="title">{teamTitle}</h2>
             </div>
           </div>
           <div className="instructors-grid">
@@ -58,15 +60,16 @@ export default async function About({ searchParams }: SiteRouteProps) {
                 <div className="instructor-photo">
                   <Photo image={i.image} />
                 </div>
-                <h3>{i.name}</h3>
-                <p>{i.role}</p>
-                <p>{i.bio}</p>
+                <h3 data-site-field="name">{i.name}</h3>
+                <p data-site-field="role">{i.role}</p>
+                <p data-site-field="bio">{i.bio}</p>
               </article>
             ))}
           </div>
         </section>
       </div>
       <Consultation compact />
+      <MarketingComposition page={page} />
     </>
   );
 }

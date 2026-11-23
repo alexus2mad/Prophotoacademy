@@ -1,3 +1,4 @@
+import { nativeTypographyRules } from '@/lib/site-editor/text-presentation';
 import type { SiteField, SitePage } from '@/lib/site-editor/types';
 import { bindPreviewFields } from './match';
 import { editCanvasText } from './text-control';
@@ -10,10 +11,11 @@ const frameStyles = `
   [data-canvas-field]:hover, [data-canvas-field]:focus-visible, [data-canvas-typing] {
     outline: 2px solid #e94239 !important; outline-offset: 2px;
   }
-  [data-canvas-field]:empty::before { content: "\\00a0"; }
+  [data-canvas-field]:empty:not([data-placeholder])::before { content: "\\00a0"; }
   [data-canvas-typing] {
     color: transparent !important; -webkit-text-fill-color: transparent !important; text-shadow: none !important;
   }
+  [data-canvas-typing]:empty::before { visibility:hidden; }
   textarea[data-canvas-input] {
     position: fixed !important; z-index: 2147483647; box-sizing: border-box; display: block;
     max-width: none; min-width: 0; min-height: 0; max-height: none; margin: 0;
@@ -90,6 +92,10 @@ export function connectPreviewFrame(
   const style = doc.createElement('style');
   style.textContent = frameStyles;
   doc.head.append(style);
+  // Saved styles came from SSR. Replace the sheet so resetting a field also resets its preview.
+  for (const sheet of doc.querySelectorAll('style[data-site-typography]')) sheet.remove();
+  const typography = doc.createElement('style');
+  doc.head.append(typography);
   const view = doc.defaultView!;
   const events = new AbortController();
   const capture = { capture: true, signal: events.signal };
@@ -106,6 +112,7 @@ export function connectPreviewFrame(
     restoreControls = [];
     for (const target of targets.values()) {
       target.element.removeAttribute('data-canvas-field');
+      target.element.removeAttribute('data-styled-field');
       if (target.shown !== target.original.value) target.restore();
     }
     targets.clear();
@@ -121,6 +128,7 @@ export function connectPreviewFrame(
       for (const [element, field] of bindPreviewFields(doc, savedPage)) {
         const original = saved.get(field.sectionId)?.get(field.fieldId);
         if (!original) continue;
+        element.dataset.styledField = field.sectionId + '/' + field.fieldId;
         targets.set(element, createTarget(element, field, original));
         if (!editable) continue;
         restoreControls.push(
@@ -144,6 +152,8 @@ export function connectPreviewFrame(
         } else element.setAttribute('aria-description', 'Редагувати текст · ' + original.label);
       }
     }
+    const css = nativeTypographyRules(page.sections);
+    if (typography.textContent !== css) typography.textContent = css;
     currentFields = pageFields(page);
     for (const target of targets.values()) {
       const value = currentFields.get(target.field.sectionId)?.get(target.field.fieldId)?.value;
@@ -153,7 +163,14 @@ export function connectPreviewFrame(
 
   function targetFor(element: Element | null) {
     const bound = element?.closest<HTMLElement>('[data-canvas-field]');
-    return bound ? targets.get(bound) : undefined;
+    if (!bound) return;
+    const original = targets.get(bound);
+    if (original) return original;
+    const sectionId = bound.closest<HTMLElement>('[data-block-type]')?.dataset.siteSection;
+    const fieldId = bound.dataset.siteField;
+    if (!sectionId || !fieldId) return;
+    const field = currentFields.get(sectionId)?.get(fieldId);
+    if (field) return createTarget(bound, { sectionId, fieldId }, field);
   }
 
   function activate(target: CanvasTarget, pointer?: MouseEvent) {
@@ -169,7 +186,7 @@ export function connectPreviewFrame(
         target.element,
         field,
         (value) => {
-          display(target, value);
+          if (!target.element.closest('[data-block-type]')) display(target, value);
           getProps().onChange(target.field, value);
         },
         pointer,
@@ -233,6 +250,16 @@ export function connectPreviewFrame(
   return {
     sync,
     scrollToSection(id: string) {
+      const block = Array.from(doc.querySelectorAll<HTMLElement>('[data-block-type]')).find(
+        (element) => element.dataset.siteSection === id,
+      );
+      if (block) {
+        view.scrollTo({
+          top: block.getBoundingClientRect().top + view.scrollY - 60,
+          behavior: 'instant',
+        });
+        return;
+      }
       for (const { element, field } of targets.values()) {
         if (field.sectionId !== id || !element.getClientRects().length) continue;
         view.scrollTo({
@@ -246,6 +273,7 @@ export function connectPreviewFrame(
       events.abort();
       clearTargets();
       style.remove();
+      typography.remove();
     },
   };
 }

@@ -44,6 +44,9 @@
   .academy > [data-home-section='reviews'] {
     order: 9;
   }
+  .academy > [data-site-composition] {
+    order: 11;
+  }
   .academy > [data-home-section='inquiry'] {
     order: 10;
   }

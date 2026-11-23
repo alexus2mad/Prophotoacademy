@@ -37,7 +37,9 @@ export function StudioHomeProof({ page }: BrandContentProps = {}) {
       data-home-section="proof"
       aria-label="Досвід ProPhoto Academy"
     >
-      <p className={`${styles.label} studio-label studio-wrap`}>{text('title')}</p>
+      <p data-site-field="title" className={`${styles.label} studio-label studio-wrap`}>
+        {text('title')}
+      </p>
       <div
         ref={railRef}
         data-partner-rail
@@ -77,8 +79,8 @@ export function StudioHomeProof({ page }: BrandContentProps = {}) {
         <dl className={styles.stats}>
           {homeStatistics.map((_, i) => (
             <div key={i}>
-              <dt>{text('stat-' + i + '-label')}</dt>
-              <dd>{text('stat-' + i + '-value')}</dd>
+              <dt data-site-field={'stat-' + i + '-label'}>{text('stat-' + i + '-label')}</dt>
+              <dd data-site-field={'stat-' + i + '-value'}>{text('stat-' + i + '-value')}</dd>
             </div>
           ))}
         </dl>

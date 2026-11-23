@@ -26,12 +26,18 @@ export function StudioHomeFounder({ page }: BrandContentProps = {}) {
         sizes="(max-width: 760px) 100vw, 42vw"
       />
       <div className={`${styles.body} studio-wrap`}>
-        <p className="studio-label">{text('eyebrow')}</p>
-        <h2 className="studio-title" id="home-founder-title">
+        <p data-site-field="eyebrow" className="studio-label">
+          {text('eyebrow')}
+        </p>
+        <h2 data-site-field="title" className="studio-title" id="home-founder-title">
           {text('title')}
         </h2>
-        <p className="studio-lead">{text('intro')}</p>
-        <p className={styles.background}>{text('biography')}</p>
+        <p data-site-field="intro" className="studio-lead">
+          {text('intro')}
+        </p>
+        <p data-site-field="biography" className={styles.background}>
+          {text('biography')}
+        </p>
         <div className={`${styles.actions} studio-actions`}>
           <Link href={studioAcademyDestinations.courses} className="studio-button">
             {text('course-action')}

@@ -1,3 +1,5 @@
+import { createPortal } from 'react-dom';
+import { MarketingBlock } from '@/components/molecules/MarketingBlock/MarketingBlock';
 import { Monitor, Smartphone } from 'lucide-react';
 import { useSiteEditorPreview } from './hooks';
 import type { SiteEditorPreviewProps } from './types';
@@ -40,6 +42,15 @@ export function SiteEditorPreview(props: SiteEditorPreviewProps) {
           ? 'Натисніть на текст, щоб його змінити, або на фото, щоб замінити зображення'
           : 'Перегляд сторінки'}
       </p>
+      {h.portalHost &&
+        createPortal(
+          props.page.sections
+            .filter((section) => section.blockType)
+            .map((section) => (
+              <MarketingBlock key={section.id} section={section} editing={editable} />
+            )),
+          h.portalHost,
+        )}
       <div ref={h.stage} className={styles.stage}>
         <iframe
           ref={h.frame}

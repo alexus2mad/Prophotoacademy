@@ -2,6 +2,7 @@ import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
 import { StudioCreatorAction } from '@/components/molecules/StudioCreatorAction/StudioCreatorAction';
 import { StudioCreatorCurriculumLink } from '@/components/molecules/StudioCreatorCurriculumLink/StudioCreatorCurriculumLink';
 import { InstallmentMethods } from '@/components/molecules/InstallmentMethods/InstallmentMethods';
+import { SiteCopy } from '@/components/atoms/SiteCopy/SiteCopy';
 import { Fragment } from 'react';
 import type { CSSProperties } from 'react';
 import { programSchedule } from '@/lib/program-schedule';
@@ -72,8 +73,10 @@ export function StudioCreatorHero({
           <div className={styles.facts}>
             <span data-site-locked="">{facts}</span>
             {offering?.duration && <span data-site-locked="">{offering.duration}</span>}
-            {hero.facts?.map((fact) => (
-              <span key={fact}>{fact}</span>
+            {hero.facts?.map((fact, index) => (
+              <span key={fact} data-site-field={'fact-' + index}>
+                {fact}
+              </span>
             ))}
           </div>
           <div data-site-locked="" className="studio-actions">
@@ -95,17 +98,23 @@ export function StudioCreatorHero({
         className={`${styles.intro} studio-dark studio-band studio-wrap`}
         aria-labelledby="creator-intro-title"
       >
-        <p className="studio-label studio-eyebrow">{intro.eyebrow}</p>
+        <p className="studio-label studio-eyebrow" data-site-field="eyebrow">
+          {intro.eyebrow}
+        </p>
         <h2 id="creator-intro-title">
           {intro.heading.lines.map((line, index) => (
             <Fragment key={line}>
               {index > 0 && <br />}
-              {line}
+              <SiteCopy id={'line-' + index}>{line}</SiteCopy>
             </Fragment>
           ))}{' '}
-          <span className="studio-hand">{intro.heading.hand}</span>
+          <span data-site-field="accent" className="studio-hand">
+            {intro.heading.hand}
+          </span>
         </h2>
-        <p className={styles.description}>{intro.description}</p>
+        <p className={styles.description} data-site-field="description">
+          {intro.description}
+        </p>
         <div data-site-locked="" className={styles.capsule}>
           <span>{facts}</span>
           {offering?.duration && <span>{offering.duration}</span>}

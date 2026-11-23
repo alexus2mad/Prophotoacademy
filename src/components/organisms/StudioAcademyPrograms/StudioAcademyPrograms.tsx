@@ -26,8 +26,12 @@ export function StudioAcademyPrograms({
       <section data-site-section="programs" id="courses" className="studio-band studio-dark">
         <div className="studio-wrap">
           <header className={styles.head}>
-            <p className="studio-label studio-eyebrow">{text('courses-eyebrow')}</p>
-            <h2 className="studio-title">{text('courses-title')}</h2>
+            <p data-site-field="courses-eyebrow" className="studio-label studio-eyebrow">
+              {text('courses-eyebrow')}
+            </p>
+            <h2 data-site-field="courses-title" className="studio-title">
+              {text('courses-title')}
+            </h2>
           </header>
           <div className={styles.rows}>
             {courses.map(({ program, asset }) => (
@@ -45,8 +49,12 @@ export function StudioAcademyPrograms({
       <section data-site-section="programs" id="workshops" className="studio-band studio-light">
         <div className="studio-wrap">
           <header className={styles.head}>
-            <p className="studio-label studio-eyebrow">{text('workshops-eyebrow')}</p>
-            <h2 className="studio-title">{text('workshops-title')}</h2>
+            <p data-site-field="workshops-eyebrow" className="studio-label studio-eyebrow">
+              {text('workshops-eyebrow')}
+            </p>
+            <h2 data-site-field="workshops-title" className="studio-title">
+              {text('workshops-title')}
+            </h2>
           </header>
           <div className={styles.rows}>
             {intensive && (
@@ -90,17 +98,23 @@ export function StudioAcademyPrograms({
         aria-label="Інші формати навчання"
       >
         <article id="individual">
-          <span className={styles.badge}>{text('individual-eyebrow')}</span>
+          <span data-site-field="individual-eyebrow" className={styles.badge}>
+            {text('individual-eyebrow')}
+          </span>
           <h2>
             {individual ? (
-              <Link href={`/${individual.slug}`} className={styles.formatLink}>
+              <Link
+                data-site-field="individual-title"
+                href={`/${individual.slug}`}
+                className={styles.formatLink}
+              >
                 {text('individual-title')}
               </Link>
             ) : (
               text('individual-title')
             )}
           </h2>
-          <p>{text('individual-description')}</p>
+          <p data-site-field="individual-description">{text('individual-description')}</p>
           <InquiryButton
             programId={individual?.id}
             title={text('individual-title')}
@@ -112,17 +126,23 @@ export function StudioAcademyPrograms({
           </InquiryButton>
         </article>
         <article id="corporate">
-          <span className={styles.badge}>{text('corporate-eyebrow')}</span>
+          <span data-site-field="corporate-eyebrow" className={styles.badge}>
+            {text('corporate-eyebrow')}
+          </span>
           <h2>
             {corporate ? (
-              <Link href={`/${corporate.slug}`} className={styles.formatLink}>
+              <Link
+                data-site-field="corporate-title"
+                href={`/${corporate.slug}`}
+                className={styles.formatLink}
+              >
                 {text('corporate-title')}
               </Link>
             ) : (
               text('corporate-title')
             )}
           </h2>
-          <p>{text('corporate-description')}</p>
+          <p data-site-field="corporate-description">{text('corporate-description')}</p>
           <InquiryButton
             programId={corporate?.id}
             title={text('corporate-title')}
@@ -134,9 +154,11 @@ export function StudioAcademyPrograms({
           </InquiryButton>
         </article>
         <article id="camp" className={styles.camp}>
-          <span className={styles.badge}>{text('camp-eyebrow')}</span>
-          <h2>{text('camp-title')}</h2>
-          <p>{text('camp-description')}</p>
+          <span data-site-field="camp-eyebrow" className={styles.badge}>
+            {text('camp-eyebrow')}
+          </span>
+          <h2 data-site-field="camp-title">{text('camp-title')}</h2>
+          <p data-site-field="camp-description">{text('camp-description')}</p>
           <InquiryButton
             subject="camp"
             title={text('camp-form-title')}

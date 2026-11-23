@@ -1,3 +1,4 @@
+import { SiteCopy } from '@/components/atoms/SiteCopy/SiteCopy';
 import { studioHero } from '@/lib/site-editor/brand/studio/hero';
 import { bindSection } from '@/lib/site-editor/bind-section';
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
@@ -6,6 +7,7 @@ import { StudioSpaceSections } from '@/components/organisms/StudioSpaceSections/
 import { studioAssets } from '@/lib/studio-design/assets';
 import { ecosystemDestinations } from '@/lib/ecosystem';
 import type { StudioSpacesTemplateProps } from './types';
+import { MarketingComposition } from '@/components/molecules/MarketingComposition/MarketingComposition';
 import styles from './StudioSpacesTemplate.module.css';
 
 export function StudioSpacesTemplate({ page, content }: StudioSpacesTemplateProps) {
@@ -23,13 +25,15 @@ export function StudioSpacesTemplate({ page, content }: StudioSpacesTemplateProp
           preload
         />
         <div className="studio-wrap">
-          <p className={`${styles.heroLabel} studio-label`}>{text('eyebrow')}</p>
+          <p data-site-field="eyebrow" className={`${styles.heroLabel} studio-label`}>
+            {text('eyebrow')}
+          </p>
           <h1>
             <span>
               <i>*</i>
-              {text('emphasis')}
+              <SiteCopy id="emphasis">{text('emphasis')}</SiteCopy>
             </span>
-            {text('title')}
+            <SiteCopy id="title">{text('title')}</SiteCopy>
           </h1>
           <div className={`${styles.heroActions} studio-actions`}>
             <a className="studio-button" href={bookingUrl}>
@@ -42,6 +46,7 @@ export function StudioSpacesTemplate({ page, content }: StudioSpacesTemplateProp
         </div>
       </section>
       <StudioSpaceSections page={page} address={content.hub.address} />
+      <MarketingComposition page={page} />
       <StudioMobileAction>
         <a className="studio-button" href={bookingUrl}>
           {text('book-action')}

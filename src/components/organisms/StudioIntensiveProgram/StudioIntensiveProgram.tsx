@@ -1,3 +1,4 @@
+import { SiteCopy } from '@/components/atoms/SiteCopy/SiteCopy';
 import { artworkCurriculum } from '@/lib/site-editor/brand/artwork/curriculum';
 import { bindSection } from '@/lib/site-editor/bind-section';
 import type { BrandContentProps } from '@/lib/site-editor/brand/types';
@@ -14,9 +15,14 @@ export function StudioIntensiveProgram({ page }: BrandContentProps = {}) {
     >
       <div className="studio-wrap">
         <header className={styles.head}>
-          <p className="studio-label studio-eyebrow">{text('eyebrow')}</p>
+          <p data-site-field="eyebrow" className="studio-label studio-eyebrow">
+            {text('eyebrow')}
+          </p>
           <h2 className="studio-title">
-            {text('title')} <span className="studio-hand">{text('emphasis')}</span>
+            <SiteCopy id="title">{text('title')}</SiteCopy>{' '}
+            <span data-site-field="emphasis" className="studio-hand">
+              {text('emphasis')}
+            </span>
           </h2>
         </header>
         <div className={styles.blocks}>
@@ -24,9 +30,11 @@ export function StudioIntensiveProgram({ page }: BrandContentProps = {}) {
             <details className={styles.block} key={block.title} open={index === 0}>
               <summary>
                 <span className={styles.number}>
-                  {text('block-label')} {index + 1}
+                  <SiteCopy id="block-label">{text('block-label')}</SiteCopy> {index + 1}
                 </span>
-                <h3>{text('block-' + index + '-title')}</h3>
+                <h3 data-site-field={'block-' + index + '-title'}>
+                  {text('block-' + index + '-title')}
+                </h3>
                 <span data-site-field={'block-' + index + '-duration'} className={styles.duration}>
                   {text('block-' + index + '-duration')}
                 </span>
@@ -36,7 +44,7 @@ export function StudioIntensiveProgram({ page }: BrandContentProps = {}) {
                 {block.paragraphs.map((_, i) => {
                   const paragraph = text('block-' + index + '-paragraph-' + i);
                   return (
-                    <p key={i}>
+                    <p key={i} data-site-field={'block-' + index + '-paragraph-' + i}>
                       <strong>{paragraph.slice(0, paragraph.indexOf('.') + 1)}</strong>
                       {paragraph.slice(paragraph.indexOf('.') + 1)}
                     </p>

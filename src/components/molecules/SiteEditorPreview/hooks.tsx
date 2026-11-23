@@ -5,6 +5,7 @@ import { connectPreviewFrame } from './frame';
 import type { SiteEditorPreviewProps } from './types';
 
 export function useSiteEditorPreview(props: SiteEditorPreviewProps) {
+  const [portalHost, setPortalHost] = useState<HTMLElement | null>(null);
   const [width, setWidth] = useState(1280);
   const [box, setBox] = useState({ width: 0, height: 0 });
   const stage = useRef<HTMLDivElement>(null);
@@ -41,6 +42,23 @@ export function useSiteEditorPreview(props: SiteEditorPreviewProps) {
     const view = doc?.defaultView;
     if (!doc || !view) return;
     detach.current();
+    let host = Array.from(doc.querySelectorAll<HTMLElement>('[data-site-composition]')).find(
+      (node) => node.dataset.siteComposition === latest.current.page.path,
+    );
+    if (!host) {
+      const scope = doc.querySelector('#home-panel-academy') || doc.querySelector('main');
+      if (!scope || !doc.location.pathname.endsWith(latest.current.page.path)) {
+        setPortalHost(null);
+        return;
+      }
+      host = doc.createElement('div');
+      host.dataset.siteComposition = latest.current.page.path;
+      scope.append(host);
+    }
+    // The frame cannot run scripts. Mount the same block components from the parent editor.
+    host.replaceChildren();
+    host.hidden = false;
+    setPortalHost(host);
     const instance = connectPreviewFrame(
       doc,
       () => latest.current,
@@ -66,6 +84,7 @@ export function useSiteEditorPreview(props: SiteEditorPreviewProps) {
     };
   }
   return {
+    portalHost,
     width,
     setWidth,
     stage,

@@ -4,13 +4,13 @@ import { useContactCopy } from './hooks';
 import type { StudioContactDetailProps } from './types';
 import styles from './StudioContactDetail.module.css';
 
-export function StudioContactDetail({ label, value, href }: StudioContactDetailProps) {
+export function StudioContactDetail({ label, value, href, fieldId }: StudioContactDetailProps) {
   const { status, copy } = useContactCopy(value);
   return (
     <div className={styles.row}>
       <dt className="studio-label">{label}</dt>
       <dd>
-        <span>{href ? <a href={href}>{value}</a> : value}</span>
+        <span data-site-field={fieldId}>{href ? <a href={href}>{value}</a> : value}</span>
         <Button className={styles.copy} onClick={copy} aria-label={`Копіювати: ${label}`}>
           {status === 'copied' ? 'Скопійовано' : 'Копіювати'}
         </Button>

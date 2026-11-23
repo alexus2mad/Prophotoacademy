@@ -1,3 +1,4 @@
+import { MarketingComposition } from '@/components/molecules/MarketingComposition/MarketingComposition';
 import { homeInquiry } from '@/lib/site-editor/brand/home/inquiry';
 import { bindSection } from '@/lib/site-editor/bind-section';
 import { StudioHomeExperience } from '@/components/organisms/StudioHomeExperience/StudioHomeExperience';
@@ -21,29 +22,49 @@ export function StudioHomeTemplate({
 }: StudioHomeTemplateProps) {
   const { text } = bindSection(page, homeInquiry);
   return (
-    <StudioHomeExperience
-      page={page}
-      directions={studioHomeDirections(content)}
-      studio={<StudioSpaceSections page={studioPage} address={content.hub.address} />}
-      shop={<StudioShopSelection page={shopPage} shopUrl={ecosystemDestinations.shop} />}
-      academy={
-        <>
-          <StudioHomeFounder page={page} />
-          <StudioHomeProof page={page} />
-          <StudioHomeReviews page={page} />
-          <StudioHomeWorks page={page} works={studioHomeWorks} />
-          <StudioHomeBanner page={page} destination="shop" />
-          <StudioHomeBanner page={page} destination="studio" />
-          <div data-home-section="inquiry" data-site-section="inquiry">
-            <StudioInquirySection
-              title={text('title')}
-              hand={text('emphasis')}
-              description={text('intro')}
-              context={{ subject: 'program-selection', source: 'consultation' }}
-            />
-          </div>
-        </>
-      }
-    />
+    <>
+      <MarketingComposition page={page} part="typography" within="homepage" />
+      <StudioHomeExperience
+        page={page}
+        directions={studioHomeDirections(content)}
+        studio={
+          <>
+            <StudioSpaceSections page={studioPage} address={content.hub.address} />
+            <MarketingComposition page={studioPage} within="home-panel-studio" />
+          </>
+        }
+        shop={
+          <>
+            <StudioShopSelection page={shopPage} shopUrl={ecosystemDestinations.shop} />
+            <MarketingComposition page={shopPage} within="home-panel-shop" />
+          </>
+        }
+        academy={
+          <>
+            <StudioHomeFounder page={page} />
+            <StudioHomeProof page={page} />
+            <StudioHomeReviews page={page} />
+            <StudioHomeWorks page={page} works={studioHomeWorks} />
+            <StudioHomeBanner page={page} destination="shop" />
+            <StudioHomeBanner page={page} destination="studio" />
+            <div data-home-section="inquiry">
+              <StudioInquirySection
+                identifiers={{
+                  section: 'inquiry',
+                  title: 'title',
+                  hand: 'emphasis',
+                  description: 'intro',
+                }}
+                title={text('title')}
+                hand={text('emphasis')}
+                description={text('intro')}
+                context={{ subject: 'program-selection', source: 'consultation' }}
+              />
+            </div>
+            <MarketingComposition page={page} part="blocks" />
+          </>
+        }
+      />
+    </>
   );
 }

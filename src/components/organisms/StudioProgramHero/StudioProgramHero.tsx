@@ -34,7 +34,9 @@ export function StudioProgramHero({
           {program.title}
         </h1>
         {program.eyebrow && <p className={styles.subtitle}>{program.eyebrow}</p>}
-        <p className={styles.description}>{program.description}</p>
+        <p data-site-field="description" className={styles.description}>
+          {program.description}
+        </p>
         <div data-site-locked="" className={styles.facts}>
           <p>
             {program.deliveryDescription ||

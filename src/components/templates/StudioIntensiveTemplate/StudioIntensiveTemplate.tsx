@@ -1,3 +1,4 @@
+import { SiteCopy } from '@/components/atoms/SiteCopy/SiteCopy';
 import { artworkWorkshop, featuredArtworks } from '@/lib/site-editor/brand/artwork/workshop';
 import { bindSection } from '@/lib/site-editor/bind-section';
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
@@ -15,6 +16,7 @@ import {
   studioIntensiveClients,
 } from '@/lib/studio-pages/intensive';
 import type { StudioIntensiveTemplateProps } from './types';
+import { MarketingComposition } from '@/components/molecules/MarketingComposition/MarketingComposition';
 import styles from './StudioIntensiveTemplate.module.css';
 
 export function StudioIntensiveTemplate({
@@ -58,10 +60,12 @@ export function StudioIntensiveTemplate({
         />
         <div className={`${styles.heroContent} studio-wrap`}>
           <h1>
-            <span>{text('hero-emphasis')}</span>
-            {text('hero-title')}
+            <span data-site-field="hero-emphasis">{text('hero-emphasis')}</span>
+            <SiteCopy id="hero-title">{text('hero-title')}</SiteCopy>
           </h1>
-          <p className={styles.facts}>{text('hero-description')}</p>
+          <p data-site-field="hero-description" className={styles.facts}>
+            {text('hero-description')}
+          </p>
           <p data-site-locked="" className={styles.date}>
             <span>{dateTime ? <time dateTime={dateTime}>{date}</time> : date}</span>
             {time && <span>{time}</span>}
@@ -79,9 +83,15 @@ export function StudioIntensiveTemplate({
         className={`${styles.announcement} studio-band studio-dark`}
       >
         <div className="studio-wrap">
-          <p className="studio-label studio-eyebrow">{text('announcement-eyebrow')}</p>
-          <h2>{text('announcement-title')}</h2>
-          <p data-site-locked={deliveryDescription ? '' : undefined} className={styles.subtitle}>
+          <p data-site-field="announcement-eyebrow" className="studio-label studio-eyebrow">
+            {text('announcement-eyebrow')}
+          </p>
+          <h2 data-site-field="announcement-title">{text('announcement-title')}</h2>
+          <p
+            data-site-field={deliveryDescription ? undefined : 'hero-description'}
+            data-site-locked={deliveryDescription ? '' : undefined}
+            className={styles.subtitle}
+          >
             {deliveryDescription || text('hero-description')}
           </p>
           <p data-site-locked="" className={styles.when}>
@@ -108,9 +118,15 @@ export function StudioIntensiveTemplate({
               <InstallmentMethods prominent />
             </div>
           )}
-          <p className={styles.practice}>{text('practice')}</p>
-          <h3 className={styles.requirementsTitle}>{text('requirements-title')}</h3>
-          <p className={styles.requirements}>{text('requirements-description')}</p>
+          <p data-site-field="practice" className={styles.practice}>
+            {text('practice')}
+          </p>
+          <h3 data-site-field="requirements-title" className={styles.requirementsTitle}>
+            {text('requirements-title')}
+          </h3>
+          <p data-site-field="requirements-description" className={styles.requirements}>
+            {text('requirements-description')}
+          </p>
           {!purchaseAvailable && (
             <div className={styles.announcementAction}>
               <StudioIntensiveAction inquiry={inquiry} purchaseAvailable={false} />
@@ -123,7 +139,9 @@ export function StudioIntensiveTemplate({
         <div className="studio-wrap">
           <header>
             <div className={styles.lecturerLabel}>
-              <p className="studio-label studio-eyebrow">{text('lecturer-eyebrow')}</p>
+              <p data-site-field="lecturer-eyebrow" className="studio-label studio-eyebrow">
+                {text('lecturer-eyebrow')}
+              </p>
               <a
                 href="https://www.instagram.com/photosone44ko/"
                 target="_blank"
@@ -133,23 +151,34 @@ export function StudioIntensiveTemplate({
                 <StudioImage asset={studioAssets.aiArtwork.imgSvg} alt="" />
               </a>
             </div>
-            <h2 className="studio-title">{text('lecturer-name')}</h2>
+            <h2 data-site-field="lecturer-name" className="studio-title">
+              {text('lecturer-name')}
+            </h2>
           </header>
           <ul className={styles.experience}>
             {studioIntensiveExperience.map((item, i) => (
               <li key={item.title}>
-                <h3>{text('faculty-' + i + '-title')}</h3>
+                <h3 data-site-field={'faculty-' + i + '-title'}>
+                  {text('faculty-' + i + '-title')}
+                </h3>
                 <span aria-hidden="true" />
-                <p>{text('faculty-' + i + '-description')}</p>
+                <p data-site-field={'faculty-' + i + '-description'}>
+                  {text('faculty-' + i + '-description')}
+                </p>
               </li>
             ))}
           </ul>
-          <p className={`${styles.clientsLabel} studio-label studio-eyebrow`}>
+          <p
+            data-site-field="clients-title"
+            className={`${styles.clientsLabel} studio-label studio-eyebrow`}
+          >
             {text('clients-title')}
           </p>
           <ul className={styles.clients}>
             {studioIntensiveClients.map((client, i) => (
-              <li key={client}>{text('client-' + i)}</li>
+              <li data-site-field={'client-' + i} key={client}>
+                {text('client-' + i)}
+              </li>
             ))}
           </ul>
         </div>
@@ -157,9 +186,12 @@ export function StudioIntensiveTemplate({
       <section data-site-section="workshop" className={`${styles.works} studio-dark`}>
         <div className="studio-wrap">
           <h2 className="studio-title">
-            {text('gallery-title')}
+            <SiteCopy id="gallery-title">{text('gallery-title')}</SiteCopy>
             <br />
-            <span className="studio-hand">{text('gallery-emphasis')}</span> {text('gallery-end')}
+            <span data-site-field="gallery-emphasis" className="studio-hand">
+              {text('gallery-emphasis')}
+            </span>{' '}
+            <SiteCopy id="gallery-end">{text('gallery-end')}</SiteCopy>
           </h2>
           <StudioSpacesGallery
             variant="artworks"
@@ -173,12 +205,18 @@ export function StudioIntensiveTemplate({
       </section>
       <div id="intensive-inquiry">
         <StudioInquirySection
+          identifiers={{
+            section: 'workshop',
+            title: purchaseAvailable ? 'purchase-inquiry-title' : 'closed-inquiry-title',
+            hand: purchaseAvailable ? 'purchase-inquiry-emphasis' : 'closed-inquiry-emphasis',
+          }}
           title={text(purchaseAvailable ? 'purchase-inquiry-title' : 'closed-inquiry-title')}
           hand={text(purchaseAvailable ? 'purchase-inquiry-emphasis' : 'closed-inquiry-emphasis')}
           description={note}
           context={inquiry}
         />
       </div>
+      <MarketingComposition page={page} />
       <StudioMobileAction spacing="spacious">
         <StudioIntensiveAction inquiry={inquiry} purchaseAvailable={purchaseAvailable} />
       </StudioMobileAction>

@@ -19,7 +19,9 @@ export function StudioHomeBanner({ page, destination }: StudioHomeBannerProps) {
       aria-label={text(destination + '-label')}
     >
       <div className={`${styles.body} studio-wrap`}>
-        <p className="studio-label">{text(destination + '-label')}</p>
+        <p data-site-field={destination + '-label'} className="studio-label">
+          {text(destination + '-label')}
+        </p>
         <StudioImage
           asset={isShop ? studioAssets.home.imgLogoShop1 : studioAssets.homeMobile.imgLogoStudio1}
           alt={isShop ? 'ProPhoto Shop' : 'ProPhoto Studio'}
@@ -33,7 +35,9 @@ export function StudioHomeBanner({ page, destination }: StudioHomeBannerProps) {
           className={styles.mobileLogo}
         />
         {isShop && (
-          <p className={`studio-lead ${styles.description}`}>{text('shop-description')}</p>
+          <p data-site-field="shop-description" className={`studio-lead ${styles.description}`}>
+            {text('shop-description')}
+          </p>
         )}
         <Link
           href={isShop ? ecosystemDestinations.shop : ecosystemDestinations.studioBooking}

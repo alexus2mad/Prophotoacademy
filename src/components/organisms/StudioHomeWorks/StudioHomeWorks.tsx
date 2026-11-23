@@ -1,4 +1,5 @@
 'use client';
+import { SiteCopy } from '@/components/atoms/SiteCopy/SiteCopy';
 import { readField } from '@/lib/site-editor/fields';
 import { homeWorks } from '@/lib/site-editor/brand/home/works';
 import { bindSection } from '@/lib/site-editor/bind-section';
@@ -35,7 +36,10 @@ export function StudioHomeWorks({ page, works: originals }: StudioHomeWorksProps
     >
       <div className={`${styles.heading} studio-wrap`}>
         <h2 className="studio-title" id="home-works-title">
-          {text('title')} <span className="studio-hand">{text('emphasis')}</span>
+          <SiteCopy id="title">{text('title')}</SiteCopy>{' '}
+          <span data-site-field="emphasis" className="studio-hand">
+            {text('emphasis')}
+          </span>
         </h2>
         <Link href={studioAcademyDestinations.courses} className="studio-button-outline">
           {text('action')}

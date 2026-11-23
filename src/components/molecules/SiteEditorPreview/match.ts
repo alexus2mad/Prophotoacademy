@@ -3,7 +3,7 @@ import type { PreviewField, PreviewFieldCandidates } from './types';
 
 const normalize = (text: string) => text.replace(/\s+/g, ' ').trim().toLocaleLowerCase('uk');
 const ignore =
-  'script,style,noscript,template,form,dialog,time,svg,[hidden],[inert],[data-site-locked],[data-hero-visual][data-active="false"],a[href^="/checkout"]';
+  '[data-site-composition],script,style,noscript,template,form,dialog,time,svg,[hidden],[inert],[data-site-locked],[data-hero-visual][data-active="false"],a[href^="/checkout"]';
 
 function imageUrl(src: string, base: string) {
   if (!src) return '';
@@ -23,6 +23,7 @@ function fieldValue(field: SiteField, base: string) {
 export function previewIndex(page: SitePage, base: string) {
   const index = new Map<string, PreviewField[]>();
   for (const section of page.sections) {
+    if (section.blockType) continue;
     for (const field of section.fields) {
       if (/(^|-)alt($|-)/.test(field.id)) continue;
       const value = fieldValue(field, base);

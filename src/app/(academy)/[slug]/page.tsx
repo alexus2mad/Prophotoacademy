@@ -1,3 +1,4 @@
+import { MarketingComposition } from '@/components/molecules/MarketingComposition/MarketingComposition';
 import type { SlugPageProps } from '@/app/types';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -9,6 +10,7 @@ import { StudioCreatorTemplate } from '@/components/templates/StudioCreatorTempl
 import { academyDesign } from '@/lib/studio-design/variant';
 import { readSitePage } from '@/lib/site-editor/public';
 import { programPresentationContent } from '@/lib/site-editor/program';
+import { legalTypography } from '@/lib/site-editor/legal-typography';
 import { legalContent } from '@/lib/site-editor/support-pages';
 import { readField } from '@/lib/site-editor/fields';
 import { EditorialLandingTemplate } from '@/components/templates/EditorialLandingTemplate/EditorialLandingTemplate';
@@ -95,6 +97,7 @@ export default async function Detail({ params, searchParams }: SlugPageProps & S
         ) : (
           <ProgramTemplate program={program} content={updated.content} enrollment={enrollment} />
         )}
+        <MarketingComposition page={pageContent} />
       </>
     );
   }
@@ -106,13 +109,27 @@ export default async function Detail({ params, searchParams }: SlugPageProps & S
   }
   const legal = legalContent(page, pageContent);
   return (
-    <div className="container">
-      <div className="page-heading">
-        <h1>{legal.title}</h1>
+    <>
+      <div className="container">
+        <div className="page-heading" data-site-section="intro">
+          <h1 data-site-field="title">{legal.title}</h1>
+        </div>
+        <article className="prose">
+          <PortableText
+            value={legalTypography(legal.body, pageContent)}
+            components={{
+              marks: {
+                siteTypography: ({ value, children }) => (
+                  <span data-site-section={value?.sectionId} data-site-field={value?.fieldId}>
+                    {children}
+                  </span>
+                ),
+              },
+            }}
+          />
+        </article>
       </div>
-      <article className="prose">
-        <PortableText value={legal.body} />
-      </article>
-    </div>
+      <MarketingComposition page={pageContent} />
+    </>
   );
 }

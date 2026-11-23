@@ -2,6 +2,7 @@ import { StudioContactDetail } from '@/components/molecules/StudioContactDetail/
 import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
 import { StudioMobileAction } from '@/components/molecules/StudioMobileAction/StudioMobileAction';
 import { StudioInquiryForm } from '@/components/organisms/StudioInquiryForm/StudioInquiryForm';
+import { SiteCopy } from '@/components/atoms/SiteCopy/SiteCopy';
 import { phoneLabel } from '@/lib/format';
 import type { StudioContactsTemplateProps } from './types';
 import styles from './StudioContactsTemplate.module.css';
@@ -9,10 +10,12 @@ import styles from './StudioContactsTemplate.module.css';
 export function StudioContactsTemplate({ settings, intro }: StudioContactsTemplateProps) {
   return (
     <section data-site-section="intro" className={`studio-light studio-wrap ${styles.page}`}>
-      <p className="studio-label studio-eyebrow">{intro?.label ?? 'Контакти ProPhoto Academy'}</p>
+      <p data-site-field="label" className="studio-label studio-eyebrow">
+        {intro?.label ?? 'Контакти ProPhoto Academy'}
+      </p>
       <h1>
-        <span>{intro?.accent ?? '*пишіть, телефонуйте'}</span>
-        {intro?.title ?? 'Будемо раді'}
+        <span data-site-field="accent">{intro?.accent ?? '*пишіть, телефонуйте'}</span>
+        <SiteCopy id="title">{intro?.title ?? 'Будемо раді'}</SiteCopy>
       </h1>
       <div className={styles.columns}>
         <div>
@@ -27,7 +30,7 @@ export function StudioContactsTemplate({ settings, intro }: StudioContactsTempla
               value={settings.email}
               href={`mailto:${settings.email}`}
             />
-            <StudioContactDetail label="Адреса" value={settings.address} />
+            <StudioContactDetail fieldId="address" label="Адреса" value={settings.address} />
           </dl>
           <div className={styles.socials} data-site-locked="">
             <p className="studio-label studio-eyebrow">Соцмережі</p>

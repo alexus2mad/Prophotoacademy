@@ -1,0 +1,104 @@
+.block {
+  color: var(--studio-ink, #110b09);
+  background: var(--studio-paper, #fafafa);
+  padding: clamp(1.5rem, 4vw, 3.5rem) var(--studio-gutter, clamp(1rem, 4vw, 4rem));
+  font-family: var(--font-studio-sans), Arial, sans-serif;
+  overflow-wrap: anywhere;
+}
+.block + .block {
+  padding-top: 0;
+}
+.inner {
+  width: 100%;
+  max-width: 70rem;
+  margin-inline: auto;
+}
+.inner h2,
+.inner h3 {
+  margin: 0;
+  font-family: var(--font-studio-condensed), Arial, sans-serif;
+  line-height: 1.08;
+}
+.inner h2 {
+  font-size: clamp(2rem, 4vw, 3.75rem);
+}
+.inner h3 {
+  font-size: clamp(1.5rem, 2.7vw, 2rem);
+}
+.inner h2 + :is(ul, div) {
+  margin-top: clamp(1.25rem, 3vw, 2.25rem);
+}
+.inner [data-site-field] {
+  white-space: pre-line;
+}
+.inner [data-site-field] p {
+  margin: 0;
+}
+.inner [data-site-field] p + p {
+  margin-top: 0.85em;
+}
+.inner div[data-site-field] {
+  max-width: 70ch;
+  font-size: 1.125rem;
+  line-height: 1.65;
+}
+.inner figure {
+  margin: 0;
+}
+.inner img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.inner figcaption {
+  margin-top: 0.625rem;
+  color: #655e5b;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+}
+.cards article {
+  position: relative;
+}
+.cards a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+.cards article:has(a:focus-visible) {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+.cards article > :not(:first-child) {
+  margin-top: 0.75rem;
+}
+.cards img {
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+.cards a {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  color: inherit;
+}
+.inner [data-canvas-field='image'] {
+  display: block;
+  width: 100%;
+  background: #eee9e6;
+  border: 1px dashed #918984;
+  color: #393330;
+  padding: 0;
+  min-height: 6rem;
+  cursor: pointer;
+}
+.inner [data-placeholder]:empty::before {
+  content: attr(data-placeholder);
+  color: #746861;
+}

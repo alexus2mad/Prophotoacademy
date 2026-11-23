@@ -1,3 +1,4 @@
+import { SiteCopy } from '@/components/atoms/SiteCopy/SiteCopy';
 import { academyIntroduction } from '@/lib/site-editor/brand/academy/introduction';
 import { bindSection } from '@/lib/site-editor/bind-section';
 import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
@@ -6,6 +7,7 @@ import { StudioAcademyPrograms } from '@/components/organisms/StudioAcademyProgr
 import { StudioAcademyCommunity } from '@/components/organisms/StudioAcademyCommunity/StudioAcademyCommunity';
 import { StudioInquirySection } from '@/components/organisms/StudioInquirySection/StudioInquirySection';
 import type { StudioAcademyTemplateProps } from './types';
+import { MarketingComposition } from '@/components/molecules/MarketingComposition/MarketingComposition';
 import styles from './StudioAcademyTemplate.module.css';
 
 export function StudioAcademyTemplate({
@@ -18,13 +20,15 @@ export function StudioAcademyTemplate({
     <>
       <section data-site-section="introduction" className={`${styles.hero} studio-light`}>
         <div className="studio-wrap">
-          <p className={`${styles.label} studio-label studio-eyebrow`}>{text('eyebrow')}</p>
+          <p data-site-field="eyebrow" className={`${styles.label} studio-label studio-eyebrow`}>
+            {text('eyebrow')}
+          </p>
           <h1>
-            <span>{text('emphasis')}</span>
-            {text('title')}
+            <span data-site-field="emphasis">{text('emphasis')}</span>
+            <SiteCopy id="title">{text('title')}</SiteCopy>
           </h1>
           <div className={styles.intro}>
-            <p>{text('intro')}</p>
+            <p data-site-field="intro">{text('intro')}</p>
             <div className={`${styles.actions} studio-actions`}>
               <a className="studio-button" href="#courses">
                 {text('course-action')}
@@ -65,11 +69,18 @@ export function StudioAcademyTemplate({
       />
       <StudioAcademyCommunity page={page} />
       <StudioInquirySection
+        identifiers={{
+          section: 'introduction',
+          title: 'inquiry-title',
+          hand: 'inquiry-emphasis',
+          description: 'inquiry-description',
+        }}
         title={text('inquiry-title')}
         hand={text('inquiry-emphasis')}
         description={text('inquiry-description')}
         layout="balanced"
       />
+      <MarketingComposition page={page} />
       <StudioMobileAction>
         <a className="studio-button" href="#courses">
           {text('course-action')}

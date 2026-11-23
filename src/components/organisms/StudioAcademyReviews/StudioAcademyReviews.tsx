@@ -1,5 +1,6 @@
 'use client';
 
+import { SiteCopy } from '@/components/atoms/SiteCopy/SiteCopy';
 import Link from 'next/link';
 import { useStudioHomeCarousel } from '@/components/molecules/StudioHomeCarousel/hooks';
 import { brandReviewContent } from '@/lib/site-editor/brand/reviews';
@@ -14,19 +15,28 @@ export function StudioAcademyReviews({ page, variant = 'academy' }: StudioAcadem
   const copy = brandReviewContent(variant, page);
   return (
     <section
+      data-site-section="reviews-heading"
       id={variant === 'creator' ? 'program-reviews' : undefined}
       className="studio-band studio-dark"
       aria-labelledby="academy-reviews-title"
     >
       <div className="studio-wrap">
         {variant === 'creator' ? (
-          <StudioCreatorHeading id="academy-reviews-title" label={copy.label}>
-            {copy.title} <span className="studio-hand">{copy.accent}</span>
+          <StudioCreatorHeading
+            id="academy-reviews-title"
+            label={<SiteCopy id="eyebrow">{copy.label}</SiteCopy>}
+          >
+            <SiteCopy id="title">{copy.title}</SiteCopy>{' '}
+            <span className="studio-hand" data-site-field="accent">
+              {copy.accent}
+            </span>
           </StudioCreatorHeading>
         ) : (
           <header className={styles.heading}>
-            <p className="studio-label studio-eyebrow">{copy.label}</p>
-            <h2 className="studio-title" id="academy-reviews-title">
+            <p data-site-field="eyebrow" className="studio-label studio-eyebrow">
+              {copy.label}
+            </p>
+            <h2 data-site-field="title" className="studio-title" id="academy-reviews-title">
               {copy.title}
             </h2>
           </header>
@@ -41,9 +51,13 @@ export function StudioAcademyReviews({ page, variant = 'academy' }: StudioAcadem
           onKeyDown={onKeyDown}
         >
           {copy.reviews.map((review) => (
-            <article className={styles.review} key={review.id}>
+            <article
+              data-site-section={'review-' + review.id}
+              className={styles.review}
+              key={review.id}
+            >
               <header>
-                <h3>{review.name}</h3>
+                <h3 data-site-field="name">{review.name}</h3>
                 {variant === 'creator' ? (
                   <img
                     src={studioAssetUrl('/images/studio/creator/review-stars-088b2ea487ba.svg')}
@@ -53,14 +67,18 @@ export function StudioAcademyReviews({ page, variant = 'academy' }: StudioAcadem
                   <span aria-label="5 із 5">★★★★★</span>
                 )}
               </header>
-              <p className={styles.title}>{review.title}</p>
+              <p data-site-field="title" className={styles.title}>
+                {review.title}
+              </p>
               {review.kind === 'story' ? (
                 <div className={styles.body}>
                   <p className={styles.kind}>Історія від академії</p>
-                  <p>{review.quote}</p>
+                  <p data-site-field="quote">{review.quote}</p>
                 </div>
               ) : (
-                <blockquote className={styles.body}>{review.quote}</blockquote>
+                <blockquote data-site-field="quote" className={styles.body}>
+                  {review.quote}
+                </blockquote>
               )}
               <a className={styles.source} href={review.sourceUrl} target="_blank" rel="noreferrer">
                 Переглянути оригінал
