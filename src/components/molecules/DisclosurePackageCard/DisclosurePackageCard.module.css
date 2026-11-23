@@ -70,17 +70,6 @@
 .details > summary::-webkit-details-marker {
   display: none;
 }
-.details > summary::after {
-  content: none;
-}
-.details > summary span::after {
-  content: '+';
-  font-size: 24px;
-  font-weight: 350;
-}
-.details[open] > summary span::after {
-  content: '−';
-}
 .details > summary:focus-visible {
   outline: 2px solid var(--studio-red);
   outline-offset: 3px;
@@ -96,6 +85,10 @@
 .card .details :global(.check-list) {
   gap: 10px;
   font-weight: 350;
+  line-height: 1.2;
+}
+.card .details :global(.check-list li) {
+  margin-block: 0;
   line-height: 1.2;
 }
 .details strong {

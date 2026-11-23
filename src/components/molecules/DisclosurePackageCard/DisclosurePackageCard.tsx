@@ -32,10 +32,7 @@ export function DisclosurePackageCard({
       </header>
       {price}
       <details className={styles.details} ref={details} data-site-locked="">
-        <summary>
-          Що входить у пакет
-          <span aria-hidden="true" />
-        </summary>
+        <summary>Що входить у пакет</summary>
         {installments}
         {benefits}
       </details>
