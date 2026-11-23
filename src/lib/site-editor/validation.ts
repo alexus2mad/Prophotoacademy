@@ -15,6 +15,7 @@ import {
 } from './options';
 import { isStylableField, maxBlockItems } from './blocks';
 import { validateBlock } from './validate-block';
+import { pagePlacements } from './placements';
 import type { SitePage } from './types';
 
 export const pagePathSchema = z
@@ -47,6 +48,7 @@ export const pageSchema = z.object({
         id: z.string().min(1).max(200),
         label: z.string().min(1).max(240),
         blockType: z.enum(blockTypes).optional(),
+        placement: z.string().min(1).max(220).optional(),
         itemIds: z.array(z.string().uuid()).max(maxBlockItems).optional(),
         fields: z
           .array(
@@ -144,15 +146,21 @@ export function validateEdit(
     native.length < baseline.sections.length ||
     (seeded && native.length !== baseline.sections.length) ||
     native.some(
-      (section, index) => section !== page.sections[index] || section.itemIds !== undefined,
+      (section, index) =>
+        section !== page.sections[index] ||
+        section.itemIds !== undefined ||
+        section.placement !== undefined,
     ) ||
     new Set(page.sections.map((s) => s.id)).size !== page.sections.length
   )
     throw invalid();
+  const allowedPlacements = new Set(pagePlacements(page).map(({ id }) => id));
   for (const [index, section] of page.sections.entries()) {
     if (section.fields.some((field) => field.style && !isStylableField(field)))
       throw new HttpError(400, 'Форматування доступне лише для видимого тексту.');
     if (section.blockType) {
+      if (section.placement !== undefined && !allowedPlacements.has(section.placement))
+        throw new HttpError(400, 'Оберіть доступне місце для блоку на цій сторінці.');
       validateBlock(section, publishing, validateImage);
       continue;
     }

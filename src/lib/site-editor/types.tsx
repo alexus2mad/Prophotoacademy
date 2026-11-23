@@ -10,6 +10,8 @@ import type {
 
 export type BlockType = (typeof blockTypes)[number];
 export type PageTemplateId = (typeof pageTemplateIds)[number];
+export type PlacementDefinition = { id: string; label: string };
+export type BlockPosition = { slot: string; beforeBlockId?: string };
 export type BlockDefinition = { type: BlockType; label: string; description: string };
 export type PageTemplateDefinition = {
   id: PageTemplateId;
@@ -37,6 +39,7 @@ export type SiteSection = {
   label: string;
   fields: SiteField[];
   blockType?: BlockType;
+  placement?: string;
   itemIds?: string[];
 };
 export type SitePage = {
@@ -45,6 +48,8 @@ export type SitePage = {
   kind: SitePageKind;
   sections: SiteSection[];
   template?: PageTemplateId;
+  /** Set only for the authorized preview response. Excluded from the document schema. */
+  editorPreview?: boolean;
 };
 export type SitePageSummary = Pick<SitePage, 'path' | 'title' | 'kind'> & {
   hasDraft: boolean;

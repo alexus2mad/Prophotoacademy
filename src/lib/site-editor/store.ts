@@ -2,6 +2,7 @@ import { HttpError } from '../http';
 import { getSiteSeeds, newSitePage } from './seeds';
 import { applyPageTemplate, templateShell } from './templates';
 import { isStylableField } from './blocks';
+import { pagePlacements } from './placements';
 import { editorMode, unavailable } from './storage/config';
 import { localPublished } from './storage/local';
 import { sanityPublished } from './storage/sanity';
@@ -53,8 +54,15 @@ function view(state: PageState | undefined, seed?: SitePage): EditorPage {
           ],
         }
       : (saved ?? seed);
+  const editable = pageSchema.parse(page);
+  // When a later design retires a location, keep its blocks editable at the page end.
+  const slots = new Set(pagePlacements(editable).map(({ id }) => id));
+  for (const section of editable.sections) {
+    if (section.blockType && section.placement && !slots.has(section.placement))
+      delete section.placement;
+  }
   return {
-    page: pageSchema.parse(page),
+    page: editable,
     revision: state?.revision ?? null,
     hasDraft: Boolean(state?.draft),
     published: Boolean(state?.published || seed),

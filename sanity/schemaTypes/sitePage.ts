@@ -20,6 +20,7 @@ const page = defineField({
             defineField({ name: 'id', title: 'Ключ', type: 'string' }),
             defineField({ name: 'label', title: 'Назва розділу', type: 'string' }),
             defineField({ name: 'blockType', title: 'Тип блоку', type: 'string' }),
+            defineField({ name: 'placement', title: 'Місце блоку на сторінці', type: 'string' }),
             defineField({
               name: 'itemIds',
               title: 'Порядок елементів',

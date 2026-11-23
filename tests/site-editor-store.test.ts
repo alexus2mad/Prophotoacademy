@@ -178,6 +178,27 @@ describe('visual editor persistence and authorization', () => {
     expect(invalid.status).toBe(400);
   });
 
+  it('reopens positioned blocks and preserves the old public order until each new position is published', async () => {
+    const base = existing();
+    await seedPublishedPages([base]);
+    const initial = await getEditorPage(base.path);
+    const heading = createBlock('heading');
+    heading.fields[0].value = 'Приклади робіт';
+    heading.placement = 'landing-body';
+    const page = { ...initial.page, sections: [...initial.page.sections, heading] };
+    const draft = await writeSitePage(page, initial.revision, false);
+    expect((await getEditorPage(base.path)).page.sections.at(-1)).toEqual(heading);
+    expect(await getPublishedPage(base.path)).toEqual(base);
+    const live = await writeSitePage(draft.page, draft.revision, true);
+    const moved = { ...heading, placement: 'landing-cover' };
+    const rearranged = { ...page, sections: [...base.sections, moved] };
+    const next = await writeSitePage(rearranged, live.revision, false);
+    expect((await getPublishedPage(base.path))?.sections.at(-1)).toEqual(heading);
+    await expect(writeSitePage(page, live.revision, true)).rejects.toMatchObject({ status: 409 });
+    await writeSitePage(next.page, next.revision, true);
+    expect((await getPublishedPage(base.path))?.sections.at(-1)).toEqual(moved);
+  });
+
   it('limits edits to the template and rejects unsuitable image values', async () => {
     const page = existing();
     page.sections[1].fields[0].id = 'price';
