@@ -156,6 +156,17 @@
 .modules li + li {
   margin-top: 8px;
 }
+[data-food-course] .modules li {
+  font-weight: 350;
+  line-height: 1.2;
+}
+[data-food-course] .modules li + li {
+  margin-top: 10px;
+}
+[data-food-course] .modules li strong {
+  color: #fbfbfb;
+  font-weight: 700;
+}
 .format {
   padding-bottom: 0 !important;
 }

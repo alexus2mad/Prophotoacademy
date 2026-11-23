@@ -1,3 +1,4 @@
+import { emphasizedRun } from '@/lib/text/emphasis';
 import { nativeTypographyRules } from '@/lib/site-editor/text-presentation';
 import type { SiteField, SitePage } from '@/lib/site-editor/types';
 import { bindPreviewFields } from './match';
@@ -46,6 +47,17 @@ function imageSources(element: HTMLElement) {
   return Array.from(element.closest('picture')?.querySelectorAll('source') ?? []);
 }
 
+function writeText(element: HTMLElement, value: string) {
+  const run = emphasizedRun(value, element.dataset.siteEmphasis);
+  if (!run) {
+    element.textContent = value;
+    return;
+  }
+  const bold = element.ownerDocument.createElement('strong');
+  bold.textContent = run.phrase;
+  element.replaceChildren(run.before, bold, run.after);
+}
+
 function createTarget(
   element: HTMLElement,
   field: PreviewField,
@@ -66,7 +78,7 @@ function createTarget(
     shown: original.value,
     restore() {
       if (original.kind === 'image') restoreImage.forEach((restore) => restore());
-      else element.textContent = originalText;
+      else writeText(element, originalText ?? '');
     },
   };
 }
@@ -75,7 +87,7 @@ function display(target: CanvasTarget, value: string) {
   if (target.shown === value) return;
   target.shown = value;
   if (value === target.original.value) target.restore();
-  else if (target.original.kind !== 'image') target.element.textContent = value;
+  else if (target.original.kind !== 'image') writeText(target.element, value);
   else {
     const image = target.element;
     // A responsive source or the Next image optimizer would otherwise keep displaying the old asset.

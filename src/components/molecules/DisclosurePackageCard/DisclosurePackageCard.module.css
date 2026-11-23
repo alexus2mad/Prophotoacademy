@@ -1,0 +1,115 @@
+.card {
+  position: relative;
+  container-type: inline-size;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 0 24px;
+}
+
+.header h3 {
+  margin: 0;
+  font:
+    700 clamp(38px, 3.61vw, 52px) / 1 var(--font-studio-condensed),
+    sans-serif;
+  letter-spacing: 0;
+}
+
+.header p {
+  max-width: 15ch;
+  margin: 4px 0 0;
+  font-size: 14px;
+  font-weight: 350;
+  line-height: 1.2;
+  text-align: end;
+  color: var(--secondary);
+}
+
+.sticker {
+  position: absolute;
+  z-index: 1;
+  inset-block-start: -16px;
+  inset-inline-end: 12px;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #eb423b;
+  color: #fff;
+  font:
+    700 13px / 1 var(--font-studio-sans),
+    sans-serif;
+  letter-spacing: 0.04em;
+  transform: rotate(10deg);
+}
+
+.details {
+  margin: 0 0 20px;
+  border-block: 1px solid var(--border);
+}
+
+.details > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 48px;
+  padding: 10px 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  list-style: none;
+  cursor: pointer;
+}
+
+.details > summary::-webkit-details-marker {
+  display: none;
+}
+.details > summary::after {
+  content: none;
+}
+.details > summary span::after {
+  content: '+';
+  font-size: 24px;
+  font-weight: 350;
+}
+.details[open] > summary span::after {
+  content: '−';
+}
+.details > summary:focus-visible {
+  outline: 2px solid var(--studio-red);
+  outline-offset: 3px;
+}
+
+.details > figure {
+  display: grid;
+  margin: 8px auto 20px;
+}
+.details :global(.package-includes-desktop) {
+  padding-bottom: 20px;
+}
+.card .details :global(.check-list) {
+  gap: 10px;
+  font-weight: 350;
+  line-height: 1.2;
+}
+.details strong {
+  font-weight: 700;
+}
+
+@container (max-width: 18rem) {
+  .header {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .header p {
+    max-width: none;
+    margin: 0;
+    text-align: start;
+  }
+}

@@ -14,6 +14,18 @@ function render(markup: string, model: SitePage) {
 }
 
 describe('editable preview field identity', () => {
+  it('edits an emphasized sentence as one complete value and keeps commerce protected', () => {
+    const text = 'Робота зі світлом та кольором';
+    const model = page(siteSection('curriculum', 'Програма', [siteField('topic', 'Тема', text)]));
+    const fields = render(
+      '<ul data-site-section="curriculum"><li data-site-field="topic"><span data-site-emphasis="світлом">Робота зі <strong>світлом</strong> та кольором</span></li></ul><div data-site-locked>' +
+        text +
+        '</div>',
+      model,
+    );
+    expect([...fields.values()]).toEqual([{ sectionId: 'curriculum', fieldId: 'topic' }]);
+    expect([...fields.keys()][0].textContent).toBe(text);
+  });
   it('distinguishes repeated visible labels by their authored section and field and skips ambiguous copy', () => {
     const model = page(
       siteSection('intro', 'Вступ', [

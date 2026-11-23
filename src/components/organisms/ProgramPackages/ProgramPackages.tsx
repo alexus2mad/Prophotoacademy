@@ -9,6 +9,7 @@ export function ProgramPackages({
   program,
   enrollment,
   packageLayout,
+  summaries,
   heading,
 }: ProgramPackagesProps) {
   const available = (id: string) => {
@@ -33,24 +34,8 @@ export function ProgramPackages({
       : undefined,
     inquiryAllowed: pack.availability !== 'soldOut',
   }));
-  return (
-    <section
-      className="program-packages"
-      id="packages"
-      data-site-locked=""
-      aria-labelledby="packages-title"
-    >
-      <div className="section-heading">
-        {heading ?? <h2 id="packages-title">Пакети й вартість</h2>}
-        {compared.length > 1 && (
-          <PackageComparison
-            packages={compared}
-            programId={program.id}
-            offeringId={offering.id}
-            programTitle={program.shortTitle}
-          />
-        )}
-      </div>
+  const availability = (
+    <>
       <OfferingSummary program={program} offering={offering} />
       {!open && !isEnrollmentClosed(offering) && (
         <p className="package-source-note">
@@ -63,6 +48,27 @@ export function ProgramPackages({
       {open && enrollment?.mode === 'mock' && (
         <p className="package-source-note">Тестове оформлення — без оплати й доступу до навчання</p>
       )}
+    </>
+  );
+  return (
+    <section
+      className="program-packages"
+      id="packages"
+      data-site-locked={packageLayout === 'disclosure' ? undefined : ''}
+      aria-labelledby="packages-title"
+    >
+      <div className="section-heading" data-site-locked={summaries ? '' : undefined}>
+        {heading ?? <h2 id="packages-title">Пакети й вартість</h2>}
+        {compared.length > 1 && (
+          <PackageComparison
+            packages={compared}
+            programId={program.id}
+            offeringId={offering.id}
+            programTitle={program.shortTitle}
+          />
+        )}
+      </div>
+      {summaries ? <div data-site-locked="">{availability}</div> : availability}
       <div className="package-grid">
         {offering.packages.map((pack) => (
           <PackageCard
@@ -75,6 +81,7 @@ export function ProgramPackages({
             showInstallments={showsInstallmentMethods(offering, enrollment, pack)}
             availableLessons={enrollment?.lessonTitles?.[pack.id]}
             layout={packageLayout}
+            summary={summaries?.[pack.id]}
           />
         ))}
       </div>

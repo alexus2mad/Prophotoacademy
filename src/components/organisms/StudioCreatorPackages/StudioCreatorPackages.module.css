@@ -35,6 +35,10 @@
   padding-top: 14px;
 }
 
+.packages :global(.package-grid):has([data-layout='disclosure']) {
+  align-items: start;
+}
+
 .packages :global(.package-card) {
   display: flex;
   flex-direction: column;

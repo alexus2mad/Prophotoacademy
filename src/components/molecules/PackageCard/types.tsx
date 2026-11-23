@@ -1,5 +1,5 @@
 import type { Offering, Package, Program } from '@/lib/content/types';
-export type PackageCardLayout = 'summary-first' | 'benefits-first' | 'editorial';
+export type PackageCardLayout = 'summary-first' | 'benefits-first' | 'editorial' | 'disclosure';
 export type PackageCardProps = {
   offering: Offering;
   program: Program;
@@ -9,4 +9,5 @@ export type PackageCardProps = {
   showInstallments?: boolean;
   availableLessons?: string[];
   layout?: PackageCardLayout;
+  summary?: string;
 };

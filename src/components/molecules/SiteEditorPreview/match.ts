@@ -148,6 +148,14 @@ export function bindPreviewFields(doc: Document, savedPage: SitePage) {
     }
     paragraph.dataset.siteField = fieldId;
   }
+  // One logical field can include a bold phrase in the middle of the sentence.
+  for (const run of main.querySelectorAll<HTMLElement>(
+    '[data-site-field] > [data-site-emphasis]',
+  )) {
+    const fieldId = run.parentElement?.dataset.siteField;
+    const match = resolve(run, normalize(run.textContent ?? ''), false, fieldId);
+    if (match) accept(run, match, fieldId);
+  }
   const walker = doc.createTreeWalker(main, 4 /* NodeFilter.SHOW_TEXT */);
   const runs: Text[] = [];
   while (walker.nextNode()) runs.push(walker.currentNode as Text);

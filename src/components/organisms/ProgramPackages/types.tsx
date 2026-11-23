@@ -7,5 +7,6 @@ export type ProgramPackagesProps = {
   program: Program;
   enrollment?: EnrollmentOptions;
   packageLayout?: PackageCardLayout;
+  summaries?: Record<string, string>;
   heading?: ReactNode;
 };
