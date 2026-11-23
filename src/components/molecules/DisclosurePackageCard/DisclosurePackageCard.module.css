@@ -102,7 +102,7 @@
   font-weight: 700;
 }
 
-@container (max-width: 18rem) {
+@container (max-width: 22rem) {
   .header {
     flex-direction: column;
     gap: 6px;
