@@ -5,7 +5,8 @@ Administrators open **Сторінки сайту** in the Academy workspace at 
 ## Авторська робота зі сторінкою
 
 - Щоб створити сторінку, відкрийте **Створити сторінку**, вкажіть назву й адресу та оберіть шаблон. **Чиста сторінка** починається з обкладинки. **Стаття** додає абзац і фотографію, **Курс** — вступ, заголовок і картки, **Воркшоп** — вступ і карусель. Кожна сторінка отримує власну копію блоків.
-- У структурі сторінки відкрийте бібліотеку блоків. Додайте заголовок, абзац, фотографію, картки або карусель. У вибраному блоці можна редагувати поля та змінювати порядок. Картки й слайди мають власні елементи керування. На сторінках із готовим дизайном додані блоки з’являються в окремій редакційній частині.
+- Щоб вставити заголовок, абзац, фотографію, картки або карусель, натисніть **+** у попередньому перегляді саме там, де має з’явитися блок. Оберіть тип і заповніть його. Можна вставляти між готовими розділами та між уже доданими блоками.
+- Щоб перемістити доданий блок, потягніть його за **Перемістити** до потрібної лінії. На телефоні або з клавіатури можна натиснути цю ж кнопку й обрати нове місце зі списку. Натисніть Escape, щоб скасувати. Порядок відображається у чернетці відразу, а на сайті — після публікації.
 - Натисніть текст у попередньому перегляді або виберіть його в полях. Для оформлюваного тексту можна вибрати шрифт, розмір, колір, насиченість і вирівнювання та повернути початковий вигляд. Перемикайте телефонний і настільний перегляд, щоб перевірити переноси й читабельність.
 - Натисніть фотографію або її поле, щоб відкрити **Бібліотеку зображень**. Знайдіть фото за назвою, виберіть із фотографій академії чи попередніх завантажень або скористайтеся **Завантажити файл**. Після вибору натисніть **Вставити зображення**. Впишіть опис, який пояснює цю фотографію саме в цьому місці.
 - Натисніть **Зберегти чернетку**, перевірте результат і виберіть **Опублікувати**, коли сторінка готова для відвідувачів. Якщо інший адміністратор змінив сторінку, редактор повідомить про конфлікт і збереже ваші зміни на екрані.
@@ -36,6 +37,8 @@ Staging edits public dataset `production` in marketing-only project `3k86g5dt`. 
 5. Repeat the verified activation on the production marketing dataset as a separate release. Returning the editor to readonly switches rendering back to the initial inventory. Existing Sanity documents remain available when Sanity mode is re-enabled.
 
 For a local rehearsal, `pnpm sandbox:learning` uses its existing synthetic administrator and isolated marketing storage. Open `http://127.0.0.1:3200/admin/content`. Local sandbox credentials are listed by the command. Data survives a sandbox restart.
+
+With the sandbox running and Chrome installed, run `node scripts/sandbox/verify-preview-placement.mjs` to check inserting two blocks, canceling a drag, and reordering them in the scaled preview. An optional argument selects a different local sandbox port. The check closes its browser session without saving the working copy.
 
 ## Maintenance
 

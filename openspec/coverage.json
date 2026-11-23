@@ -13,6 +13,10 @@
       "src/lib/site-editor/public.ts",
       "src/lib/site-editor/store.ts",
       "tests/site-editor-composition.test.ts",
+      "tests/site-editor-block-position.test.ts",
+      "tests/site-editor-placement-rendering.test.ts",
+      "tests/site-editor-placement-controls.test.ts",
+      "scripts/sandbox/verify-preview-placement.mjs",
       "tests/site-image-library.test.ts"
     ]
   },
