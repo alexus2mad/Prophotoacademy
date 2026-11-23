@@ -4,7 +4,8 @@
   align-content: start;
   min-width: 0;
 }
-.field label {
+.field label,
+.label {
   font-size: 15px;
   font-weight: 600;
 }
@@ -31,29 +32,36 @@
   font-size: 14px;
   line-height: 1.4;
 }
-.upload {
-  position: relative;
+.imageChoice {
   display: grid;
   place-items: center;
   min-height: 46px;
+  gap: 8px;
+  padding: 8px;
+  background: var(--canvas);
+  cursor: pointer;
   border: 1px solid var(--control-border);
   border-radius: 8px;
+  font: inherit;
   font-size: 15px;
   color: var(--text);
 }
-.upload:focus-within {
+.imageChoice span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 30px;
+}
+.imageChoice:focus-visible {
   outline: 2px solid var(--text);
   outline-offset: 3px;
 }
-.upload:has(:disabled) {
+.imageChoice:disabled {
   opacity: 0.55;
 }
-.upload .file {
-  position: absolute;
-  inset: 0;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
+.field[data-selected] > label:first-child,
+.field[data-selected] > .label {
+  font-weight: 750;
 }
 .image {
   display: block;

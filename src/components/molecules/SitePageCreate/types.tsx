@@ -1,6 +1,8 @@
-import type { SitePage } from '@/lib/site-editor/types';
+import type { PageTemplateId, SitePage } from '@/lib/site-editor/types';
 export type SitePageCreateProps = {
   busy: boolean;
   onCancel: () => void;
-  onCreate: (page: Pick<SitePage, 'kind' | 'path' | 'title'>) => void;
+  onCreate: (
+    page: Pick<SitePage, 'kind' | 'path' | 'title'> & { template: PageTemplateId },
+  ) => void;
 };

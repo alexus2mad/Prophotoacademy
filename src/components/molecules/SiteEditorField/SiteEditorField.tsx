@@ -1,3 +1,6 @@
+import { Images } from 'lucide-react';
+import { isStylableField } from '@/lib/site-editor/blocks';
+import { SiteTextFormatting } from '@/components/molecules/SiteTextFormatting/SiteTextFormatting';
 import type { SiteEditorFieldProps } from './types';
 import styles from './SiteEditorField.module.css';
 
@@ -5,36 +8,34 @@ export function SiteEditorField({
   field,
   disabled,
   removable,
+  selected,
   onChange,
-  onUpload,
+  onChooseImage,
+  onStyle,
 }: SiteEditorFieldProps) {
   const id = 'editor-field-' + field.id;
   if (field.kind === 'image')
     return (
-      <div className={styles.field}>
-        <label htmlFor={id}>{field.label}</label>
-        {field.value && (
-          <img src={field.value} alt={field.label} className={styles.image} loading="lazy" />
-        )}
-        <div className={styles.upload}>
-          <span aria-hidden="true">
-            {field.value ? 'Замінити зображення' : 'Додати зображення'}
+      <div className={styles.field} data-selected={selected || undefined}>
+        <span id={id + '-label'} className={styles.label}>
+          {field.label}
+        </span>
+        <button
+          type="button"
+          id={id}
+          className={styles.imageChoice}
+          disabled={disabled}
+          aria-label={`${field.value ? 'Замінити зображення' : 'Обрати зображення'} · ${field.label}`}
+          onClick={onChooseImage}
+        >
+          {field.value && (
+            <img src={field.value} alt={field.label} className={styles.image} loading="lazy" />
+          )}
+          <span>
+            <Images size={16} aria-hidden="true" />
+            {field.value ? 'Замінити зображення' : 'Обрати зображення'}
           </span>
-          <input
-            id={id}
-            className={styles.file}
-            type="file"
-            accept="image/jpeg,image/png,image/webp,image/avif"
-            disabled={disabled}
-            aria-describedby={id + '-formats'}
-            onChange={(event) => {
-              const file = event.target.files?.[0];
-              if (file) onUpload(file);
-              event.target.value = '';
-            }}
-          />
-        </div>
-        <small id={id + '-formats'}>JPG, PNG, WebP або AVIF · до 10 МБ</small>
+        </button>
         {removable && field.value && (
           <button
             className={styles.remove}
@@ -48,7 +49,7 @@ export function SiteEditorField({
       </div>
     );
   return (
-    <div className={styles.field}>
+    <div className={styles.field} data-selected={selected || undefined}>
       <label htmlFor={id}>{field.label}</label>
       {field.kind === 'multiline' ? (
         <textarea
@@ -65,6 +66,14 @@ export function SiteEditorField({
           value={field.value}
           disabled={disabled}
           onChange={(e) => onChange(e.target.value)}
+        />
+      )}
+      {isStylableField(field) && (
+        <SiteTextFormatting
+          fieldLabel={field.label}
+          style={field.style}
+          disabled={disabled}
+          onChange={onStyle}
         />
       )}
     </div>

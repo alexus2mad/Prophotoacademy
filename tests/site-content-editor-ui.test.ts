@@ -3,6 +3,11 @@ import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import { SiteEditorField } from '@/components/molecules/SiteEditorField/SiteEditorField';
+import { SiteBlockLibrary } from '@/components/molecules/SiteBlockLibrary/SiteBlockLibrary';
+import { SiteBlockInspector } from '@/components/organisms/SiteBlockInspector/SiteBlockInspector';
+import { SitePageCreate } from '@/components/molecules/SitePageCreate/SitePageCreate';
+import { addBlockItem, blockLibrary, createBlock, itemFieldId } from '@/lib/site-editor/blocks';
+import { pageTemplates } from '@/lib/site-editor/templates';
 import { SiteEditorPreview } from '@/components/molecules/SiteEditorPreview/SiteEditorPreview';
 import { textEditCommand } from '@/components/molecules/SiteEditorPreview/text-control';
 import { previewIndex } from '@/components/molecules/SiteEditorPreview/match';
@@ -92,22 +97,82 @@ describe('Site content editor', () => {
     },
   );
 
-  it('labels the real upload input and shows its existing photograph', () => {
+  it('opens the shared photo library for the specific field and shows the current photo', () => {
     const $ = load(
       renderToStaticMarkup(
         createElement(SiteEditorField, {
           field: page.sections[0].fields[1],
           disabled: false,
           removable: false,
-          onUpload: () => {},
+          onChooseImage: () => {},
+          onStyle: () => {},
           onChange: () => {},
         }),
       ),
     );
     expect($('img').attr('src')).toBe('/images/workshop.webp');
-    expect($('label').attr('for')).toBe($('input[type=file]').attr('id'));
-    expect($('input[type=file]').attr('accept')).toContain('image/avif');
-    expect($('button').length).toBe(0);
+    expect($('button').attr('aria-label')).toContain('Замінити зображення · Світлина');
+    expect($('details')).toHaveLength(0);
+  });
+
+  it('names every block and indicates where the choice will be inserted', () => {
+    const $ = load(
+      renderToStaticMarkup(
+        createElement(SiteBlockLibrary, {
+          afterLabel: 'Вступ',
+          onChoose: () => {},
+          onClose: () => {},
+        }),
+      ),
+    );
+    expect($('dialog').attr('aria-labelledby')).toBe($('h2').attr('id'));
+    expect($('dialog p').text()).toContain('Після блоку «Вступ»');
+    expect(
+      $('button strong')
+        .map((_, el) => $(el).text())
+        .get(),
+    ).toEqual(blockLibrary.map((b) => b.label));
+  });
+
+  it('presents four explicit templates with a single initial selection', () => {
+    const $ = load(
+      renderToStaticMarkup(
+        createElement(SitePageCreate, { busy: false, onCreate: () => {}, onCancel: () => {} }),
+      ),
+    );
+    const radios = $('input[type=radio][name=page-template]');
+    expect(radios.map((_, el) => $(el).attr('value')).get()).toEqual(
+      pageTemplates.map((t) => t.id),
+    );
+    expect(radios.filter('[checked]').attr('value')).toBe('blank');
+    expect(radios.parent().text()).toContain('Воркшоп');
+  });
+
+  it('selects a slide by stable field identity and protects the list boundaries', () => {
+    const section = addBlockItem(createBlock('carousel'));
+    const last = section.itemIds![1];
+    const $ = load(
+      renderToStaticMarkup(
+        createElement(SiteBlockInspector, {
+          section,
+          fieldId: itemFieldId(last, 'caption'),
+          disabled: false,
+          removableImages: true,
+          onSelectField: () => {},
+          onChange: () => {},
+          onStyle: () => {},
+          onChooseImage: () => {},
+          onAddItem: () => {},
+          onRemoveItem: () => {},
+          onMoveItem: () => {},
+        }),
+      ),
+    );
+    expect($('section[aria-label="Слайди каруселі"] select').first().val()).toBe(last);
+    expect($('button[aria-label^="Перемістити нижче"]').is(':disabled')).toBe(true);
+    expect($('button[aria-label^="Перемістити вище"]').is(':disabled')).toBe(false);
+    expect($('details summary[aria-label*=Підпис]')).toHaveLength(1);
+    expect($('summary[aria-label*="Опис фотографії"]')).toHaveLength(0);
   });
 
   it('retains duplicate matches for disambiguation when inspecting the saved preview', () => {

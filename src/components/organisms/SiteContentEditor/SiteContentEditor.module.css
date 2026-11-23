@@ -220,11 +220,6 @@
   color: var(--text);
   background: var(--canvas);
 }
-.fieldList {
-  padding: 20px;
-  display: grid;
-  gap: 22px;
-}
 .canvas {
   min-width: 0;
   position: sticky;

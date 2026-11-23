@@ -1,0 +1,30 @@
+.tools {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+.tools button {
+  height: 44px;
+  width: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--learn-border);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  padding: 0;
+}
+.tools button:enabled:hover {
+  background: var(--elevated);
+  border-color: var(--learn-muted);
+}
+.tools button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.tools .remove {
+  color: var(--error, #ffb4b4);
+  margin-inline-start: auto;
+}

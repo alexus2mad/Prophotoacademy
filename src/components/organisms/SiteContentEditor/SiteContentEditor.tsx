@@ -1,7 +1,11 @@
 'use client';
 import { ArrowLeft, ArrowRight, Plus, Search } from 'lucide-react';
 import { Button } from '@/components/atoms/Button/Button';
-import { SiteEditorField } from '@/components/molecules/SiteEditorField/SiteEditorField';
+import { SiteBlockActions } from '@/components/molecules/SiteBlockActions/SiteBlockActions';
+import { SiteBlockLibrary } from '@/components/molecules/SiteBlockLibrary/SiteBlockLibrary';
+import { SiteImageLibrary } from '@/components/molecules/SiteImageLibrary/SiteImageLibrary';
+import { SiteBlockInspector } from '@/components/organisms/SiteBlockInspector/SiteBlockInspector';
+import type { SiteSection } from '@/lib/site-editor/types';
 import { SiteEditorPreview } from '@/components/molecules/SiteEditorPreview/SiteEditorPreview';
 import { SitePageCreate } from '@/components/molecules/SitePageCreate/SitePageCreate';
 import { useSiteContentEditor } from './hooks';
@@ -10,12 +14,25 @@ import styles from './SiteContentEditor.module.css';
 
 const kinds = { home: 'Головна', course: 'Курс', workshop: 'Воркшоп', landing: 'Лендинг' };
 
+function outlineLabel(section: SiteSection) {
+  const text = section.fields.find(
+    (field) => ['text', 'heading', 'caption'].includes(field.id) && field.value.trim(),
+  )?.value;
+  return section.blockType && text ? section.label + ' · ' + text.slice(0, 48) : section.label;
+}
+
 export function SiteContentEditor(props: SiteContentEditorProps) {
   const h = useSiteContentEditor(props);
   const { page, record } = h;
   const busy = !!h.task;
-  const disabled = busy || !props.writable;
+  const disabled = busy || !props.writable || h.conflict;
   const section = page?.sections.find((s) => s.id === h.sectionId);
+  const nativeSections = page?.sections.filter((s) => !s.blockType) ?? [];
+  const authored = page?.sections.filter((s) => s.blockType) ?? [];
+  const blockIndex = authored.findIndex((s) => s.id === h.sectionId);
+  const currentImage = page?.sections
+    .find((s) => s.id === h.imageTarget?.sectionId)
+    ?.fields.find((f) => f.id === h.imageTarget?.fieldId);
   const customLanding = page?.sections.some((s) => s.id === 'landing-cover') ?? false;
   const filter = h.query.trim().toLocaleLowerCase('uk');
   const visiblePages = h.pages.filter((p) =>
@@ -44,6 +61,13 @@ export function SiteContentEditor(props: SiteContentEditorProps) {
             <div className={styles.actions}>
               <Button
                 className="button button-secondary"
+                disabled={disabled}
+                onClick={() => h.blocks.setLibraryOpen(true)}
+              >
+                <Plus size={17} aria-hidden="true" /> Додати блок
+              </Button>
+              <Button
+                className="button button-secondary"
                 disabled={disabled || !h.dirty || h.conflict}
                 onClick={() => h.save('save')}
               >
@@ -59,7 +83,7 @@ export function SiteContentEditor(props: SiteContentEditorProps) {
           </header>
           <div className={styles.feedback}>
             <p role="status" className={styles.state} data-dirty={h.dirty}>
-              {h.task === 'upload' ? 'Завантажуємо зображення…' : h.message || status}
+              {h.message && h.dirty ? h.message + ' · ' + status : h.message || status}
             </p>
             {h.error && (
               <p role="alert" className={styles.error}>
@@ -89,75 +113,99 @@ export function SiteContentEditor(props: SiteContentEditorProps) {
               aria-pressed={h.panel === 'fields'}
               onClick={() => h.setPanel('fields')}
             >
-              Поля
+              Структура й поля
             </button>
           </div>
           <div className={styles.split} data-panel={h.panel}>
             <section className={styles.fields} aria-label="Вміст сторінки">
               <div className={styles.sectionHead}>
-                <label htmlFor="site-editor-section">Розділ сторінки</label>
+                <label htmlFor="site-editor-section">Структура сторінки</label>
                 <select
                   id="site-editor-section"
                   value={h.sectionId}
-                  onChange={(e) => h.setSectionId(e.target.value)}
+                  onChange={(e) => h.selectField(e.target.value)}
                   disabled={busy}
                 >
-                  {page.sections.map((s) => (
-                    <option key={s.id} value={s.id}>
-                      {s.label}
-                    </option>
-                  ))}
+                  <optgroup label="Основний вміст">
+                    {nativeSections.map((s) => (
+                      <option key={s.id} value={s.id}>
+                        {s.label}
+                      </option>
+                    ))}
+                  </optgroup>
+                  {authored.length > 0 && (
+                    <optgroup label="Додані блоки">
+                      {authored.map((s, i) => (
+                        <option key={s.id} value={s.id}>
+                          {i + 1}. {outlineLabel(s)}
+                        </option>
+                      ))}
+                    </optgroup>
+                  )}
                 </select>
+                {section?.blockType && (
+                  <SiteBlockActions
+                    label={section.label}
+                    disabled={disabled}
+                    first={blockIndex === 0}
+                    last={blockIndex === authored.length - 1}
+                    onMove={h.blocks.moveBlock}
+                    onDuplicate={h.blocks.copyBlock}
+                    onRemove={h.blocks.deleteBlock}
+                  />
+                )}
               </div>
               {section && (
-                <div className={styles.fieldList} key={section.id}>
-                  {section.fields.map((field) => (
-                    <SiteEditorField
-                      key={field.id}
-                      field={field}
-                      disabled={disabled}
-                      removable={customLanding}
-                      onChange={(value) => h.update(section.id, field.id, value)}
-                      onUpload={(file) => h.upload(section.id, field.id, file)}
-                    />
-                  ))}
-                </div>
+                <SiteBlockInspector
+                  key={section.id}
+                  section={section}
+                  fieldId={h.fieldId}
+                  disabled={disabled}
+                  removableImages={customLanding || !!section.blockType}
+                  onSelectField={h.setFieldId}
+                  onChange={(id, value) => h.update(section.id, id, value)}
+                  onStyle={(id, style) => h.updateStyle(section.id, id, style)}
+                  onChooseImage={(id) => h.chooseImage({ sectionId: section.id, fieldId: id })}
+                  onAddItem={h.blocks.addItem}
+                  onRemoveItem={h.blocks.deleteItem}
+                  onMoveItem={h.blocks.moveItem}
+                />
               )}
-              {customLanding && (
+              {customLanding && section?.id.startsWith('landing-body-') && (
                 <div className={styles.sectionActions}>
-                  <button type="button" disabled={disabled} onClick={h.appendSection}>
-                    Додати розділ
+                  <button type="button" disabled={disabled} onClick={h.blocks.deleteBlock}>
+                    Видалити розділ
                   </button>
-                  {h.sectionId.startsWith('landing-body-') && (
-                    <button type="button" disabled={disabled} onClick={h.removeSection}>
-                      Видалити розділ
-                    </button>
-                  )}
                 </div>
               )}
             </section>
             <div className={styles.canvas}>
-              <input
-                ref={h.imagePicker}
-                type="file"
-                hidden
-                aria-label="Замінити фото на сторінці"
-                accept="image/jpeg,image/png,image/webp,image/avif"
-                disabled={disabled}
-                onChange={(event) => h.replaceCanvasImage(event.currentTarget.files?.[0])}
-              />
               <SiteEditorPreview
                 page={page}
                 savedPage={record.page}
                 editable={!disabled}
                 sectionId={h.sectionId}
-                onSelect={({ sectionId }) => h.setSectionId(sectionId)}
+                onSelect={({ sectionId, fieldId }) => h.selectField(sectionId, fieldId)}
                 onChange={({ sectionId, fieldId }, value) => h.update(sectionId, fieldId, value)}
-                onReplaceImage={h.chooseCanvasImage}
+                onReplaceImage={h.chooseImage}
                 version={h.previewKey}
               />
             </div>
           </div>
+          {h.blocks.libraryOpen && (
+            <SiteBlockLibrary
+              afterLabel={section?.blockType ? outlineLabel(section) : undefined}
+              onChoose={h.blocks.addBlock}
+              onClose={() => h.blocks.setLibraryOpen(false)}
+            />
+          )}
+          {h.imageTarget?.path === page.path && currentImage?.kind === 'image' && (
+            <SiteImageLibrary
+              current={currentImage.value}
+              onChoose={h.applyImage}
+              onClose={() => h.setImageTarget(null)}
+            />
+          )}
         </>
       ) : (
         <>

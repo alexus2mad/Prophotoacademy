@@ -1,13 +1,9 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import type { EditorPage, SitePage } from '@/lib/site-editor/types';
+import { useBlockComposition } from '@/components/organisms/SiteBlockInspector/hooks';
+import type { EditorPage, SitePage, SiteField, TextStyle } from '@/lib/site-editor/types';
 import type { PreviewField } from '@/components/molecules/SiteEditorPreview/types';
-import {
-  EditorRequestError,
-  fetchEditorPage,
-  uploadEditorImage,
-  writeEditorPage,
-} from './requests';
+import { EditorRequestError, fetchEditorPage, writeEditorPage } from './requests';
 import type {
   CanvasImageTarget,
   EditorPanel,
@@ -40,11 +36,29 @@ export function useSiteContentEditor({ initialPages, writable }: SiteContentEdit
   const [previewKey, setPreviewKey] = useState(0);
   const lock = useRef(false);
   const heading = useRef<HTMLHeadingElement>(null);
-  const imagePicker = useRef<HTMLInputElement>(null);
-  const imageTarget = useRef<CanvasImageTarget | null>(null);
+  const [imageTarget, setImageTarget] = useState<CanvasImageTarget | null>(null);
+  const [fieldId, setFieldId] = useState('');
   const dirty = !!page && !!record && JSON.stringify(page) !== JSON.stringify(record.page);
 
+  function selectField(id: string, field = '', focus = false) {
+    setSectionId(id);
+    setFieldId(field);
+    if (focus) {
+      setPanel('fields');
+      requestAnimationFrame(() => document.getElementById('editor-field-' + field)?.focus());
+    }
+  }
+  const blocks = useBlockComposition({
+    page,
+    sectionId,
+    disabled: !writable || !!task || conflict,
+    onChange: setPage,
+    onSelect: selectField,
+    onMessage: setMessage,
+  });
   function accept(result: EditorPage) {
+    setImageTarget(null);
+    blocks.setLibraryOpen(false);
     setRecord(result);
     setPage(result.page);
     setSectionId((id) =>
@@ -158,6 +172,9 @@ export function useSiteContentEditor({ initialPages, writable }: SiteContentEdit
     if (lock.current || (dirty && !window.confirm(leave))) return;
     setRecord(null);
     setPage(null);
+    setImageTarget(null);
+    setFieldId('');
+    blocks.setLibraryOpen(false);
     setError('');
     setMessage('');
     setConflict(false);
@@ -166,71 +183,46 @@ export function useSiteContentEditor({ initialPages, writable }: SiteContentEdit
     setPanel('fields');
     focusHeading();
   }
-  function update(section: string, id: string, value: string) {
-    if (!writable) return;
+  function updateField(section: string, id: string, change: (field: SiteField) => SiteField) {
+    if (!writable || lock.current || conflict) return;
     setPage(
       (p) =>
         p && {
           ...p,
           sections: p.sections.map((s) =>
             s.id === section
-              ? { ...s, fields: s.fields.map((f) => (f.id === id ? { ...f, value } : f)) }
+              ? { ...s, fields: s.fields.map((f) => (f.id === id ? change(f) : f)) }
               : s,
           ),
         },
     );
     setMessage('');
   }
-  function appendSection() {
-    if (!page || !writable || !page.sections.some((s) => s.id === 'landing-cover')) return;
-    const body = page.sections.find((s) => s.id === 'landing-body');
-    if (!body) return;
-    const id = 'landing-body-' + crypto.randomUUID();
-    const occupied = new Set(page.sections.map((s) => s.label));
-    let number = 2;
-    while (occupied.has('Розділ ' + number)) number++;
-    const section = {
-      ...body,
-      id,
-      label: 'Розділ ' + number,
-      fields: body.fields.map((f) => ({ ...f, value: '' })),
-    };
-    setPage({ ...page, sections: [...page.sections, section] });
-    setSectionId(id);
-    setMessage('Розділ додано до сторінки');
+  function update(section: string, id: string, value: string) {
+    updateField(section, id, (field) => ({ ...field, value }));
   }
-  function removeSection() {
+  function updateStyle(section: string, id: string, style?: TextStyle) {
+    updateField(section, id, (field) => ({ ...field, style }));
+  }
+  function chooseImage(field: PreviewField) {
+    if (!writable || lock.current || conflict || !page) return;
+    selectField(field.sectionId, field.fieldId);
+    setImageTarget({ ...field, path: page.path });
+  }
+  function applyImage(url: string) {
     if (
-      !page ||
-      !writable ||
-      !sectionId.startsWith('landing-body-') ||
-      !window.confirm('Видалити цей розділ із чернетки?')
-    )
-      return;
-    setPage({ ...page, sections: page.sections.filter((s) => s.id !== sectionId) });
-    setSectionId('landing-body');
-    setMessage('Розділ вилучено');
-  }
-  function upload(section: string, id: string, file: File) {
-    if (writable)
-      void perform('upload', async () => {
-        const { url } = await uploadEditorImage(file);
-        update(section, id, url);
-        setMessage('Зображення замінено. Збережіть чернетку');
-      });
-  }
-  function chooseCanvasImage(field: PreviewField) {
-    if (!writable || lock.current || !page || !imagePicker.current) return;
-    setSectionId(field.sectionId);
-    imageTarget.current = { ...field, path: page.path };
-    imagePicker.current.value = '';
-    imagePicker.current.click();
-  }
-  function replaceCanvasImage(file?: File) {
-    const target = imageTarget.current;
-    imageTarget.current = null;
-    if (file && target && target.path === page?.path)
-      upload(target.sectionId, target.fieldId, file);
+      imageTarget &&
+      page?.path === imageTarget.path &&
+      page.sections.some(
+        (s) =>
+          s.id === imageTarget.sectionId &&
+          s.fields.some((f) => f.id === imageTarget.fieldId && f.kind === 'image'),
+      )
+    ) {
+      update(imageTarget.sectionId, imageTarget.fieldId, url);
+      setMessage('Зображення обрано. Збережіть чернетку');
+    }
+    setImageTarget(null);
   }
   function save(action: 'save' | 'publish') {
     if (
@@ -261,7 +253,9 @@ export function useSiteContentEditor({ initialPages, writable }: SiteContentEdit
     page,
     task,
     sectionId,
-    setSectionId,
+    selectField,
+    fieldId,
+    setFieldId,
     panel,
     setPanel,
     previewKey,
@@ -277,13 +271,13 @@ export function useSiteContentEditor({ initialPages, writable }: SiteContentEdit
     library,
     open,
     update,
-    upload,
-    imagePicker,
-    chooseCanvasImage,
-    replaceCanvasImage,
+    updateStyle,
+    imageTarget,
+    setImageTarget,
+    chooseImage,
+    applyImage,
+    blocks,
     save,
     create,
-    appendSection,
-    removeSection,
   };
 }

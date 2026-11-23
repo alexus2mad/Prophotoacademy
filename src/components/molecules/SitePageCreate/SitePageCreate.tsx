@@ -1,4 +1,6 @@
 import { Button } from '@/components/atoms/Button/Button';
+import { SitePatternPreview } from '@/components/atoms/SitePatternPreview/SitePatternPreview';
+import { pageTemplates } from '@/lib/site-editor/templates';
 import { useSitePageCreate } from './hooks';
 import type { SitePageCreateProps } from './types';
 import styles from './SitePageCreate.module.css';
@@ -20,17 +22,18 @@ export function SitePageCreate({ busy, onCancel, onCreate }: SitePageCreateProps
           />
         </label>
         <label>
-          Тип сторінки
+          Розділ каталогу
           <select
             value={h.kind}
             onChange={(e) => {
               const kind = e.target.value;
-              if (kind === 'course' || kind === 'workshop' || kind === 'landing') h.setKind(kind);
+              if (kind === 'course' || kind === 'workshop' || kind === 'landing')
+                h.selectKind(kind);
             }}
           >
-            <option value="landing">Лендинг</option>
-            <option value="course">Курс</option>
-            <option value="workshop">Воркшоп</option>
+            <option value="landing">Окрема сторінка</option>
+            <option value="course">Курси</option>
+            <option value="workshop">Воркшопи</option>
           </select>
         </label>
         <label>
@@ -50,6 +53,27 @@ export function SitePageCreate({ busy, onCancel, onCreate }: SitePageCreateProps
         <small id="new-page-path-hint">
           {h.slug ? 'Адреса після публікації: /' + h.slug : 'Малі латинські літери, цифри й дефіси'}
         </small>
+      </fieldset>
+      <fieldset className={styles.templates} disabled={busy}>
+        <legend>Шаблон сторінки</legend>
+        <div className={styles.grid}>
+          {pageTemplates.map((entry) => (
+            <label key={entry.id} className={styles.tile}>
+              <SitePatternPreview pattern={entry.id} />
+              <span className={styles.choice}>
+                <input
+                  type="radio"
+                  name="page-template"
+                  value={entry.id}
+                  checked={entry.id === h.template}
+                  onChange={() => h.selectTemplate(entry.id)}
+                />
+                <strong>{entry.label}</strong>
+              </span>
+              <span className={styles.description}>{entry.description}</span>
+            </label>
+          ))}
+        </div>
       </fieldset>
       <div>
         <Button type="submit" disabled={busy || !h.title.trim() || !h.slug}>

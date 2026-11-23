@@ -1,5 +1,4 @@
 import type { EditorPage } from '@/lib/site-editor/types';
-import type { UploadedSiteImage } from './types';
 
 const endpoint = '/api/admin/site-content';
 
@@ -37,14 +36,5 @@ export async function writeEditorPage(payload: object) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     }),
-  );
-}
-
-export async function uploadEditorImage(file: File) {
-  if (file.size > 10 * 1024 * 1024) throw new Error('Оберіть зображення розміром до 10 МБ');
-  const body = new FormData();
-  body.set('file', file);
-  return readResponse<UploadedSiteImage>(
-    await fetch(endpoint + '/image', { method: 'POST', body }),
   );
 }

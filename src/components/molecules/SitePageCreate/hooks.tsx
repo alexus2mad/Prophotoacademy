@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import type { FormEvent } from 'react';
-import type { SitePage } from '@/lib/site-editor/types';
+import type { PageTemplateId, SitePage } from '@/lib/site-editor/types';
 import type { SitePageCreateProps } from './types';
 
 const letters: Record<string, string> = {
@@ -51,10 +51,29 @@ export function useSitePageCreate(onCreate: SitePageCreateProps['onCreate']) {
   const [title, setTitle] = useState('');
   const [customSlug, setCustomSlug] = useState<string | null>(null);
   const [kind, setKind] = useState<SitePage['kind']>('landing');
+  const [template, setTemplate] = useState<PageTemplateId>('blank');
   const slug = customSlug ?? slugFromTitle(title);
+  function selectKind(next: Exclude<SitePage['kind'], 'home'>) {
+    setKind(next);
+    setTemplate(next === 'landing' ? 'blank' : next);
+  }
+  function selectTemplate(next: PageTemplateId) {
+    setTemplate(next);
+    if (next === 'course' || next === 'workshop') setKind(next);
+  }
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (title.trim() && slug) onCreate({ title: title.trim(), path: '/' + slug, kind });
+    if (title.trim() && slug) onCreate({ title: title.trim(), path: '/' + slug, kind, template });
   }
-  return { title, setTitle, slug, setCustomSlug, kind, setKind, submit };
+  return {
+    title,
+    setTitle,
+    slug,
+    setCustomSlug,
+    kind,
+    selectKind,
+    template,
+    selectTemplate,
+    submit,
+  };
 }
