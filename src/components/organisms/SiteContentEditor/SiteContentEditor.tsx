@@ -5,7 +5,8 @@ import { SiteBlockActions } from '@/components/molecules/SiteBlockActions/SiteBl
 import { SiteBlockLibrary } from '@/components/molecules/SiteBlockLibrary/SiteBlockLibrary';
 import { SiteImageLibrary } from '@/components/molecules/SiteImageLibrary/SiteImageLibrary';
 import { SiteBlockInspector } from '@/components/organisms/SiteBlockInspector/SiteBlockInspector';
-import type { SiteSection } from '@/lib/site-editor/types';
+import { blockOutlineLabel, placementLabel } from '@/lib/site-editor/block-label';
+import { blocksAtPlacement, pagePlacements } from '@/lib/site-editor/placements';
 import { SiteEditorPreview } from '@/components/molecules/SiteEditorPreview/SiteEditorPreview';
 import { SitePageCreate } from '@/components/molecules/SitePageCreate/SitePageCreate';
 import { useSiteContentEditor } from './hooks';
@@ -14,13 +15,6 @@ import styles from './SiteContentEditor.module.css';
 
 const kinds = { home: 'Головна', course: 'Курс', workshop: 'Воркшоп', landing: 'Лендинг' };
 
-function outlineLabel(section: SiteSection) {
-  const text = section.fields.find(
-    (field) => ['text', 'heading', 'caption'].includes(field.id) && field.value.trim(),
-  )?.value;
-  return section.blockType && text ? section.label + ' · ' + text.slice(0, 48) : section.label;
-}
-
 export function SiteContentEditor(props: SiteContentEditorProps) {
   const h = useSiteContentEditor(props);
   const { page, record } = h;
@@ -28,8 +22,11 @@ export function SiteContentEditor(props: SiteContentEditorProps) {
   const disabled = busy || !props.writable || h.conflict;
   const section = page?.sections.find((s) => s.id === h.sectionId);
   const nativeSections = page?.sections.filter((s) => !s.blockType) ?? [];
-  const authored = page?.sections.filter((s) => s.blockType) ?? [];
-  const blockIndex = authored.findIndex((s) => s.id === h.sectionId);
+  const groups = page
+    ? pagePlacements(page)
+        .map((slot) => ({ ...slot, blocks: blocksAtPlacement(page, slot.id) }))
+        .filter((group) => group.blocks.length)
+    : [];
   const currentImage = page?.sections
     .find((s) => s.id === h.imageTarget?.sectionId)
     ?.fields.find((f) => f.id === h.imageTarget?.fieldId);
@@ -62,7 +59,7 @@ export function SiteContentEditor(props: SiteContentEditorProps) {
               <Button
                 className="button button-secondary"
                 disabled={disabled}
-                onClick={() => h.blocks.setLibraryOpen(true)}
+                onClick={() => h.blocks.openLibrary()}
               >
                 <Plus size={17} aria-hidden="true" /> Додати блок
               </Button>
@@ -133,22 +130,22 @@ export function SiteContentEditor(props: SiteContentEditorProps) {
                       </option>
                     ))}
                   </optgroup>
-                  {authored.length > 0 && (
-                    <optgroup label="Додані блоки">
-                      {authored.map((s, i) => (
+                  {groups.map((group) => (
+                    <optgroup key={group.id} label={placementLabel(group.id, group.label)}>
+                      {group.blocks.map((s, i) => (
                         <option key={s.id} value={s.id}>
-                          {i + 1}. {outlineLabel(s)}
+                          {i + 1}. {blockOutlineLabel(s)}
                         </option>
                       ))}
                     </optgroup>
-                  )}
+                  ))}
                 </select>
                 {section?.blockType && (
                   <SiteBlockActions
                     label={section.label}
                     disabled={disabled}
-                    first={blockIndex === 0}
-                    last={blockIndex === authored.length - 1}
+                    first={h.blocks.first}
+                    last={h.blocks.last}
                     onMove={h.blocks.moveBlock}
                     onDuplicate={h.blocks.copyBlock}
                     onRemove={h.blocks.deleteBlock}
@@ -188,15 +185,18 @@ export function SiteContentEditor(props: SiteContentEditorProps) {
                 onSelect={({ sectionId, fieldId }) => h.selectField(sectionId, fieldId)}
                 onChange={({ sectionId, fieldId }, value) => h.update(sectionId, fieldId, value)}
                 onReplaceImage={h.chooseImage}
+                onInsertAt={h.blocks.openLibrary}
+                onMoveTo={h.blocks.moveTo}
+                focusNewBlock={h.blocks.focusNewBlock}
                 version={h.previewKey}
               />
             </div>
           </div>
-          {h.blocks.libraryOpen && (
+          {!disabled && h.blocks.insertion && (
             <SiteBlockLibrary
-              afterLabel={section?.blockType ? outlineLabel(section) : undefined}
+              locationLabel={h.blocks.insertion.label}
               onChoose={h.blocks.addBlock}
-              onClose={() => h.blocks.setLibraryOpen(false)}
+              onClose={h.blocks.closeLibrary}
             />
           )}
           {h.imageTarget?.path === page.path && currentImage?.kind === 'image' && (

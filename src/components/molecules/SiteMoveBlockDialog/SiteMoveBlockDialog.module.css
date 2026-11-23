@@ -1,0 +1,47 @@
+.dialog {
+  box-sizing: border-box;
+  width: min(520px, calc(100% - 24px));
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+  padding: clamp(20px, 4vw, 32px);
+  background: var(--surface, #191919);
+  color: var(--text, #fafafa);
+  border: 1px solid var(--learn-border, #424242);
+  border-radius: 12px;
+}
+.dialog h2 {
+  font-size: clamp(24px, 3vw, 32px);
+  padding-right: 40px;
+  margin: 0;
+}
+.dialog p {
+  color: var(--learn-muted);
+  margin: 8px 0 24px;
+  overflow-wrap: anywhere;
+}
+.dialog form {
+  display: grid;
+  gap: 8px;
+}
+.dialog label {
+  font-weight: 600;
+  font-size: 15px;
+}
+.dialog select {
+  min-height: 46px;
+  min-width: 0;
+  width: 100%;
+  border: 1px solid var(--learn-border);
+  border-radius: 8px;
+  color: inherit;
+  background: var(--canvas);
+  padding: 8px 10px;
+  font: inherit;
+  font-size: 16px;
+}
+.dialog form > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}

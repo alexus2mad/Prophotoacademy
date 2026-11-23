@@ -5,7 +5,7 @@ import { useBlockLibraryDialog } from './hooks';
 import type { SiteBlockLibraryProps } from './types';
 import styles from './SiteBlockLibrary.module.css';
 
-export function SiteBlockLibrary({ afterLabel, onChoose, onClose }: SiteBlockLibraryProps) {
+export function SiteBlockLibrary({ locationLabel, onChoose, onClose }: SiteBlockLibraryProps) {
   const dialog = useBlockLibraryDialog();
   return (
     <Dialog
@@ -18,9 +18,7 @@ export function SiteBlockLibrary({ afterLabel, onChoose, onClose }: SiteBlockLib
       aria-describedby="block-library-position"
     >
       <h2 id="block-library-title">Додати блок</h2>
-      <p id="block-library-position">
-        {afterLabel ? `Після блоку «${afterLabel}»` : 'Після основного вмісту сторінки'}
-      </p>
+      <p id="block-library-position">{locationLabel}</p>
       <div className={styles.catalog}>
         {blockLibrary.map((entry) => (
           <button type="button" key={entry.type} onClick={() => onChoose(entry.type)}>

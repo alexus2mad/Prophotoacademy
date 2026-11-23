@@ -84,6 +84,8 @@ describe('Site content editor', () => {
             onSelect: () => {},
             onChange: () => {},
             onReplaceImage: () => {},
+            onInsertAt: () => {},
+            onMoveTo: () => {},
           }),
         ),
       );
@@ -119,7 +121,7 @@ describe('Site content editor', () => {
     const $ = load(
       renderToStaticMarkup(
         createElement(SiteBlockLibrary, {
-          afterLabel: 'Вступ',
+          locationLabel: 'Після блоку «Вступ»',
           onChoose: () => {},
           onClose: () => {},
         }),

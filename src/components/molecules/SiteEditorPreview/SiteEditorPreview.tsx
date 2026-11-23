@@ -1,5 +1,7 @@
 import { createPortal } from 'react-dom';
-import { MarketingBlock } from '@/components/molecules/MarketingBlock/MarketingBlock';
+import { SitePreviewSlot } from '@/components/molecules/SitePreviewSlot/SitePreviewSlot';
+import { SiteMoveBlockDialog } from '@/components/molecules/SiteMoveBlockDialog/SiteMoveBlockDialog';
+import { blocksAtPlacement } from '@/lib/site-editor/placements';
 import { Monitor, Smartphone } from 'lucide-react';
 import { useSiteEditorPreview } from './hooks';
 import type { SiteEditorPreviewProps } from './types';
@@ -12,6 +14,7 @@ export function SiteEditorPreview(props: SiteEditorPreviewProps) {
     editable,
   } = props;
   const h = useSiteEditorPreview(props);
+  const movingBlock = editable && props.page.sections.find((s) => s.id === h.moving && s.blockType);
   return (
     <section className={styles.preview} aria-label="Попередній перегляд сторінки">
       <div className={styles.bar}>
@@ -42,15 +45,32 @@ export function SiteEditorPreview(props: SiteEditorPreviewProps) {
           ? 'Натисніть на текст, щоб його змінити, або на фото, щоб замінити зображення'
           : 'Перегляд сторінки'}
       </p>
-      {h.portalHost &&
+      {h.hosts.map((host) =>
         createPortal(
-          props.page.sections
-            .filter((section) => section.blockType)
-            .map((section) => (
-              <MarketingBlock key={section.id} section={section} editing={editable} />
-            )),
-          h.portalHost,
-        )}
+          <SitePreviewSlot
+            slot={host.slot}
+            label={host.label}
+            blocks={blocksAtPlacement(props.page, host.slot)}
+            editable={editable}
+            selected={props.sectionId}
+            onInsert={props.onInsertAt}
+            onChooseMove={h.setMoving}
+          />,
+          host.element,
+          host.slot,
+        ),
+      )}
+      {movingBlock && (
+        <SiteMoveBlockDialog
+          page={props.page}
+          block={movingBlock}
+          onClose={h.finishMove}
+          onMove={(position) => {
+            props.onMoveTo(movingBlock.id, position);
+            h.finishMove();
+          }}
+        />
+      )}
       <div ref={h.stage} className={styles.stage}>
         <iframe
           ref={h.frame}

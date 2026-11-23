@@ -33,6 +33,8 @@ describe('live composition iframe', () => {
         onSelect: select,
         onChange: vi.fn(),
         onReplaceImage: replace,
+        onInsertAt: vi.fn(),
+        onMoveTo: vi.fn(),
       }),
       select,
     );

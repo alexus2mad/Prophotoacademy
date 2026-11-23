@@ -1,4 +1,6 @@
-import type { SitePage, SiteSection, TextStyle } from '@/lib/site-editor/types';
+import type { BlockPosition, SitePage, SiteSection, TextStyle } from '@/lib/site-editor/types';
+
+export type PendingBlockInsertion = { position: BlockPosition; label: string; canvas: boolean };
 
 export type CompositionControls = {
   page: SitePage | null;

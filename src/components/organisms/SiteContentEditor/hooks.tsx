@@ -58,7 +58,7 @@ export function useSiteContentEditor({ initialPages, writable }: SiteContentEdit
   });
   function accept(result: EditorPage) {
     setImageTarget(null);
-    blocks.setLibraryOpen(false);
+    blocks.closeLibrary();
     setRecord(result);
     setPage(result.page);
     setSectionId((id) =>
@@ -174,7 +174,7 @@ export function useSiteContentEditor({ initialPages, writable }: SiteContentEdit
     setPage(null);
     setImageTarget(null);
     setFieldId('');
-    blocks.setLibraryOpen(false);
+    blocks.closeLibrary();
     setError('');
     setMessage('');
     setConflict(false);

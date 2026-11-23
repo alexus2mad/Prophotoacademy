@@ -2,6 +2,7 @@ import { nativeTypographyRules } from '@/lib/site-editor/text-presentation';
 import type { SiteField, SitePage } from '@/lib/site-editor/types';
 import { bindPreviewFields } from './match';
 import { editCanvasText } from './text-control';
+import { placementStyles } from './placement-styles';
 import type { CanvasTarget, PreviewField, SiteEditorPreviewProps } from './types';
 
 const frameStyles = `
@@ -90,7 +91,7 @@ export function connectPreviewFrame(
   select: (field: PreviewField) => void,
 ) {
   const style = doc.createElement('style');
-  style.textContent = frameStyles;
+  style.textContent = frameStyles + placementStyles;
   doc.head.append(style);
   // Saved styles came from SSR. Replace the sheet so resetting a field also resets its preview.
   for (const sheet of doc.querySelectorAll('style[data-site-typography]')) sheet.remove();

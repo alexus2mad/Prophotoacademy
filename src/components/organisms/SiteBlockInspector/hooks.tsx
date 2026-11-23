@@ -7,8 +7,11 @@ import {
   moveBlockItem,
   removeBlockItem,
 } from '@/lib/site-editor/blocks';
-import type { BlockType, SiteSection } from '@/lib/site-editor/types';
-import type { CompositionControls } from './types';
+import type { BlockPosition, BlockType, SiteSection } from '@/lib/site-editor/types';
+import { addBlockAt, getBlockSlot, moveBlockTo } from '@/lib/site-editor/block-position';
+import { blocksAtPlacement, pagePlacements } from '@/lib/site-editor/placements';
+import { blockOutlineLabel } from '@/lib/site-editor/block-label';
+import type { CompositionControls, PendingBlockInsertion } from './types';
 
 export function useBlockComposition({
   page,
@@ -18,35 +21,58 @@ export function useBlockComposition({
   onSelect,
   onMessage,
 }: CompositionControls) {
-  const [libraryOpen, setLibraryOpen] = useState(false);
+  const [insertion, setInsertion] = useState<PendingBlockInsertion | null>(null);
+  const [focusNewBlock, setFocusNewBlock] = useState('');
   const section = page?.sections.find((entry) => entry.id === sectionId);
-  function insert(sectionToAdd: SiteSection) {
+  const siblings = page && section?.blockType ? blocksAtPlacement(page, getBlockSlot(section)) : [];
+  const index = siblings.findIndex((s) => s.id === sectionId);
+  const afterSelected: BlockPosition = section?.blockType
+    ? { slot: getBlockSlot(section), beforeBlockId: siblings[index + 1]?.id }
+    : { slot: 'end' };
+  function openLibrary(position?: BlockPosition, label?: string) {
     if (!page || disabled) return;
-    const index = section?.blockType ? page.sections.indexOf(section) + 1 : page.sections.length;
-    const sections = [...page.sections];
-    sections.splice(index, 0, sectionToAdd);
-    onChange({ ...page, sections });
-    setLibraryOpen(false);
-    onSelect(sectionToAdd.id, sectionToAdd.fields[0]?.id, true);
+    setInsertion({
+      position: position ?? afterSelected,
+      label:
+        label ??
+        (section?.blockType
+          ? 'Після блоку «' + blockOutlineLabel(section) + '»'
+          : 'Наприкінці сторінки'),
+      canvas: !!position,
+    });
+  }
+  function insert(sectionToAdd: SiteSection, position: BlockPosition, canvas = false) {
+    if (!page || disabled) return false;
+    const updated = addBlockAt(page, sectionToAdd, position);
+    if (updated === page) return false;
+    onChange(updated);
+    setInsertion(null);
+    onSelect(sectionToAdd.id, sectionToAdd.fields[0]?.id, !canvas);
+    if (canvas) setFocusNewBlock(sectionToAdd.id);
+    return true;
   }
   function addBlock(type: BlockType) {
-    insert(createBlock(type));
-    onMessage('Блок додано до чернетки');
+    if (insertion && insert(createBlock(type), insertion.position, insertion.canvas))
+      onMessage('Блок додано до чернетки');
   }
   function copyBlock() {
     if (!section?.blockType || disabled) return;
-    insert(duplicateBlock(section));
-    onMessage('Копію блоку додано');
+    if (insert(duplicateBlock(section), afterSelected)) onMessage('Копію блоку додано');
+  }
+  function moveTo(id: string, position: BlockPosition) {
+    if (!page || disabled) return;
+    const updated = moveBlockTo(page, id, position);
+    if (updated === page) return;
+    onChange(updated);
+    onSelect(id);
+    onMessage('Блок переміщено');
   }
   function moveBlock(direction: -1 | 1) {
-    if (!page || !section?.blockType || disabled) return;
-    const sections = [...page.sections];
-    const current = sections.indexOf(section);
-    const destination = current + direction;
-    if (!sections[destination]?.blockType) return;
-    [sections[current], sections[destination]] = [sections[destination], section];
-    onChange({ ...page, sections });
-    onMessage(`Блок переміщено ${direction === -1 ? 'вище' : 'нижче'}`);
+    if (!section?.blockType || !siblings[index + direction]) return;
+    moveTo(section.id, {
+      slot: getBlockSlot(section),
+      beforeBlockId: siblings[direction === -1 ? index - 1 : index + 2]?.id,
+    });
   }
   function deleteBlock() {
     if (
@@ -57,9 +83,17 @@ export function useBlockComposition({
     )
       return;
     if (!window.confirm(`Видалити «${section.label}» із чернетки?`)) return;
-    const sections = page.sections.filter((entry) => entry.id !== section.id);
-    const next = sections[Math.min(page.sections.indexOf(section), sections.length - 1)];
-    onChange({ ...page, sections });
+    const nextPage = {
+      ...page,
+      sections: page.sections.filter((entry) => entry.id !== section.id),
+    };
+    const slots = new Set(pagePlacements(nextPage).map((s) => s.id));
+    nextPage.sections = nextPage.sections.map((s) =>
+      s.blockType && !slots.has(getBlockSlot(s)) ? { ...s, placement: 'end' } : s,
+    );
+    const next =
+      nextPage.sections[Math.min(page.sections.indexOf(section), nextPage.sections.length - 1)];
+    onChange(nextPage);
     if (next) onSelect(next.id, next.fields[0]?.id, true);
     onMessage('Блок видалено з чернетки');
   }
@@ -108,8 +142,13 @@ export function useBlockComposition({
     onMessage('Порядок елементів змінено');
   }
   return {
-    libraryOpen,
-    setLibraryOpen,
+    insertion,
+    openLibrary,
+    closeLibrary: () => setInsertion(null),
+    focusNewBlock,
+    moveTo,
+    first: index <= 0,
+    last: index >= siblings.length - 1,
     addBlock,
     copyBlock,
     moveBlock,
