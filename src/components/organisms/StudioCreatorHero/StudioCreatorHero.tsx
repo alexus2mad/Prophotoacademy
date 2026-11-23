@@ -19,6 +19,7 @@ export function StudioCreatorHero({
   editorial,
 }: StudioCreatorHeroProps) {
   const { hero, intro } = editorial;
+  const isFood = program.id === 'program-food';
   const schedule = programSchedule(program, offering);
   const facts =
     presentation.open && schedule.date ? (
@@ -41,6 +42,7 @@ export function StudioCreatorHero({
     <>
       <section
         className={`${styles.hero} studio-dark`}
+        data-food-hero={isFood || undefined}
         data-header-tone="dark"
         data-site-section="hero"
         aria-labelledby="creator-title"
@@ -98,12 +100,15 @@ export function StudioCreatorHero({
       <section
         data-site-section="introduction"
         id="program-about"
+        data-food-intro={isFood || undefined}
         className={`${styles.intro} studio-dark studio-band studio-wrap`}
         aria-labelledby="creator-intro-title"
       >
-        <p className="studio-label studio-eyebrow" data-site-field="eyebrow">
-          {intro.eyebrow}
-        </p>
+        {intro.eyebrow && (
+          <p className="studio-label studio-eyebrow" data-site-field="eyebrow">
+            {intro.eyebrow}
+          </p>
+        )}
         <h2 id="creator-intro-title">
           {intro.heading.lines.map((line, index) => (
             <Fragment key={line}>
@@ -115,9 +120,22 @@ export function StudioCreatorHero({
             {intro.heading.hand}
           </span>
         </h2>
-        <p className={styles.description} data-site-field="description">
+        <p
+          className={styles.description}
+          data-site-field="description"
+          data-responsive-copy={intro.mobileDescription ? 'desktop' : undefined}
+        >
           {intro.description}
         </p>
+        {intro.mobileDescription && (
+          <p
+            className={styles.description}
+            data-site-field="mobile-description"
+            data-responsive-copy="mobile"
+          >
+            {intro.mobileDescription}
+          </p>
+        )}
         <div data-site-locked="" className={styles.capsule}>
           <span>{facts}</span>
           {offering?.duration && <span>{offering.duration}</span>}

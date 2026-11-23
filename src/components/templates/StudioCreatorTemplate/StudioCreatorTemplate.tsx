@@ -25,8 +25,22 @@ export function StudioCreatorTemplate({
   page,
 }: StudioCreatorTemplateProps) {
   const { offering, presentation, works } = studioProgramPage(program, content, enrollment);
+  const food = program.id === 'program-food';
+  const gallery = (
+    <>
+      <MarketingSlot page={page} id="gallery" />
+      <StudioCreatorWorks
+        works={works}
+        images={content.images}
+        opening={editorial.worksOpening}
+        devices={editorial.worksDevices}
+        layout={food ? 'two-rows' : undefined}
+        page={food ? page : undefined}
+      />
+    </>
+  );
   return (
-    <div className={styles.page} data-course-design="creator">
+    <div className={styles.page} data-course-design="creator" data-food-course={food || undefined}>
       <MarketingSlot page={page} id="hero" />
       <StudioCreatorHero
         page={page}
@@ -41,21 +55,21 @@ export function StudioCreatorTemplate({
         program={program}
         duration={offering?.duration ?? 'За програмою курсу'}
         editorial={editorial}
+        beforeCurriculum={food ? gallery : undefined}
       />
-      <MarketingSlot page={page} id="gallery" />
-      <StudioCreatorWorks
-        works={works}
-        images={content.images}
-        opening={editorial.worksOpening}
-        devices={editorial.worksDevices}
-      />
+      {!food && gallery}
       <MarketingSlot page={page} id="faculty" />
       {editorial.faculty && <StudioCreatorFaculty instructors={editorial.faculty} />}
       <MarketingSlot page={page} id="reviews" />
-      <StudioAcademyReviews variant="creator" page={page} />
+      <StudioAcademyReviews variant={food ? 'food' : 'creator'} page={page} />
       <MarketingSlot page={page} id="packages" />
       {offering?.packages.length ? (
-        <StudioCreatorPackages program={program} offering={offering} enrollment={enrollment} />
+        <StudioCreatorPackages
+          program={program}
+          offering={offering}
+          enrollment={enrollment}
+          page={page}
+        />
       ) : null}
       <MarketingSlot page={page} id="inquiry" />
       <StudioInquirySection

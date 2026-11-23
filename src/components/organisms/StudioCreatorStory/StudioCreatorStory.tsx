@@ -1,5 +1,8 @@
 import { MarketingSlot } from '@/components/molecules/MarketingSlot/MarketingSlot';
 import { StudioCreatorHeading } from '@/components/molecules/StudioCreatorHeading/StudioCreatorHeading';
+import { StudioFoodBenefits } from '@/components/organisms/StudioFoodBenefits/StudioFoodBenefits';
+import { InlineEmphasis } from '@/components/atoms/InlineEmphasis/InlineEmphasis';
+import { foodTopicEmphasis } from '@/lib/studio-food/emphasis';
 import { creatorCurriculumId } from '@/lib/studio-creator/content';
 import { creatorAssets } from '@/lib/studio-creator/assets';
 import { studioAssetUrl } from '@/lib/studio-design/urls';
@@ -11,6 +14,7 @@ export function StudioCreatorStory({
   duration,
   editorial,
   page,
+  beforeCurriculum,
 }: StudioCreatorStoryProps) {
   const { audience, benefits, learningSteps } = editorial;
   const audienceTotal = String(audience.length).padStart(2, '0');
@@ -40,38 +44,43 @@ export function StudioCreatorStory({
         </ol>
       </section>
       <MarketingSlot page={page} id="benefits" />
-      <section
-        className="studio-dark studio-band studio-wrap"
-        aria-labelledby="creator-benefits-title"
-        data-site-section="benefits"
-      >
-        <StudioCreatorHeading id="creator-benefits-title">
-          Чому <span className="studio-hand">*цей курс</span>
-        </StudioCreatorHeading>
-        <ul className={styles.benefits}>
-          {benefits.map((item, index) => (
-            <li key={item.title}>
-              <h3 data-site-field={'title-' + index}>{item.title}</h3>
-              <span className={styles.connector} aria-hidden="true">
-                <span
-                  className={styles.shaft}
-                  style={{
-                    backgroundImage: `url("${studioAssetUrl(connectors[index % connectors.length])}")`,
-                  }}
-                />
-                <img
-                  className={styles.arrow}
-                  src={studioAssetUrl(creatorAssets.connectorArrow)}
-                  width={8}
-                  height={14}
-                  alt=""
-                />
-              </span>
-              <p data-site-field={'text-' + index}>{item.text}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
+      {program.id === 'program-food' ? (
+        <StudioFoodBenefits items={benefits} />
+      ) : (
+        <section
+          className="studio-dark studio-band studio-wrap"
+          aria-labelledby="creator-benefits-title"
+          data-site-section="benefits"
+        >
+          <StudioCreatorHeading id="creator-benefits-title">
+            Чому <span className="studio-hand">*цей курс</span>
+          </StudioCreatorHeading>
+          <ul className={styles.benefits}>
+            {benefits.map((item, index) => (
+              <li key={item.title}>
+                <h3 data-site-field={'title-' + index}>{item.title}</h3>
+                <span className={styles.connector} aria-hidden="true">
+                  <span
+                    className={styles.shaft}
+                    style={{
+                      backgroundImage: `url("${studioAssetUrl(connectors[index % connectors.length])}")`,
+                    }}
+                  />
+                  <img
+                    className={styles.arrow}
+                    src={studioAssetUrl(creatorAssets.connectorArrow)}
+                    width={8}
+                    height={14}
+                    alt=""
+                  />
+                </span>
+                <p data-site-field={'text-' + index}>{item.text}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+      {beforeCurriculum}
       <MarketingSlot page={page} id="curriculum" />
       <section
         id={creatorCurriculumId}
@@ -94,7 +103,14 @@ export function StudioCreatorStory({
                 <ul>
                   {module.topics.map((topic, topicIndex) => (
                     <li key={topic} data-site-field={`topic-${index}-${topicIndex}`}>
-                      {topic}
+                      {program.id === 'program-food' ? (
+                        <InlineEmphasis
+                          text={topic}
+                          phrase={foodTopicEmphasis[index]?.[topicIndex]}
+                        />
+                      ) : (
+                        topic
+                      )}
                     </li>
                   ))}
                 </ul>

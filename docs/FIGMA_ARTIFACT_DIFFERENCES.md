@@ -1,5 +1,11 @@
 # Figma / Claude artifact source conflicts
 
+## Food and Product Photography — 23 November 2026
+
+The [new Food course artifact](https://claude.ai/artifact/8wVcbHJ8i579gWHhiUESQ1) updates `/food-product-photography`. The observed desktop and 390px reference replaces the previous Food benefit connectors with a stacking list, moves student work ahead of the curriculum, combines the approved 31 photographs in a two-row rail, and collapses package details behind individual disclosures. The Commercial Content frame continues to govern its own landing.
+
+One sentence in the reference promises permanent recording access to every participant, while the same reference limits BASE to six months. The Food landing describes recording access according to the selected package; prices, eligibility and access terms come from the actual offer. Original review links retain verified destinations where available.
+
 ## Homepage brand panels — 17 November 2026
 
 The Studio and Shop homepage tabs use the bodies from the linked desktop frames

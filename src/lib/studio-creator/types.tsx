@@ -40,7 +40,12 @@ export type StudioCourseEditorial = {
     position?: string;
     mobilePosition?: string;
   };
-  intro: { eyebrow: string; heading: CourseHeading; description: string };
+  intro: {
+    eyebrow: string;
+    heading: CourseHeading;
+    description: string;
+    mobileDescription?: string;
+  };
   audience: readonly CourseTextItem[];
   benefits: readonly CourseTextItem[];
   learningSteps: readonly CourseTextItem[];

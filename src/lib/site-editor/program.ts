@@ -3,9 +3,11 @@ import type { StudioCourseEditorial, CourseTextItem } from '@/lib/studio-creator
 import { courseEditorial } from '@/lib/studio-creator/selectors';
 import { studioProgramArtwork, studioProgramPage } from '@/lib/studio-program/selectors';
 import { brandReviewContent, programReviewContent } from './brand/reviews';
+import { studentWorksHeading } from './brand/student-works';
 import { sectionBindings } from './bindings';
 import { programFacultyContent } from './program-faculty';
 import type { SitePage } from './types';
+import { foodPackageSection } from '@/lib/studio-food/package-copy';
 
 export function programPresentationContent(
   content: AcademyContent,
@@ -77,6 +79,14 @@ export function programPresentationContent(
           hand: intro('accent', 'Акцент заголовка', base.intro.heading.hand),
         },
         description: intro('description', 'Текст', base.intro.description, 'multiline'),
+        ...(base.intro.mobileDescription !== undefined && {
+          mobileDescription: intro(
+            'mobile-description',
+            'Текст на телефоні',
+            base.intro.mobileDescription,
+            'multiline',
+          ),
+        }),
       },
       audience: textItems('audience', 'Для кого', base.audience),
       benefits: textItems('benefits', 'Переваги', base.benefits),
@@ -139,7 +149,7 @@ export function programPresentationContent(
   const generic = base ? undefined : studioProgramPage(original, content);
   const faculty = programFacultyContent(generic?.instructors ?? [], page);
   const reviews = base
-    ? brandReviewContent('creator')
+    ? brandReviewContent(original.id === 'program-food' ? 'food' : 'creator')
     : programReviewContent(generic?.reviews ?? []);
   return {
     program,
@@ -148,6 +158,8 @@ export function programPresentationContent(
     content: { ...content, images },
     sections: [
       ...sections.filter((s) => s.fields.length),
+      ...(original.id === 'program-food' ? [studentWorksHeading] : []),
+      ...(original.id === 'program-food' ? [foodPackageSection] : []),
       ...faculty.sections,
       ...reviews.sections,
     ],
