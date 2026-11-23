@@ -275,6 +275,7 @@
       "scripts/sandbox/start.mjs",
       "scripts/sandbox/store.mjs",
       "scripts/sandbox/verify-course-flow.mjs",
+      "scripts/sandbox/verify-preview-placement.mjs",
       "scripts/sandbox/verify.mjs",
       "scripts/serve-pages.mjs",
       "scripts/validate-pages.mjs",
