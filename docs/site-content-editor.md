@@ -21,9 +21,9 @@ Published course and workshop pages appear in the corresponding Academy lists. P
 | `SITE_EDITOR_MODE=readonly` | Default. Render the initial page inventory and allow administrators to inspect it |
 | `SITE_EDITOR_MODE=local` | Development or the local learning sandbox. Drafts, published pages and WebP images persist together under `.data/site-editor` or `SITE_EDITOR_LOCAL_DIR` |
 | `SITE_EDITOR_MODE=sanity` | Use Sanity for page drafts, publications and image uploads |
-| `SITE_EDITOR_PROJECT_ID` | Staging's server-only marketing project. Other installations continue using `NEXT_PUBLIC_SANITY_PROJECT_ID` and `NEXT_PUBLIC_SANITY_DATASET` |
+| `SITE_EDITOR_PROJECT_ID` | Server-only marketing project. Use `qy8emt0h` on production and `3k86g5dt` on staging |
 | `SITE_EDITOR_WRITE_TOKEN` | Dedicated server-side credential for marketing drafts, published documents and image uploads |
-| `SANITY_API_WRITE_TOKEN` | Existing non-staging fallback for the marketing writer |
+| `SANITY_API_WRITE_TOKEN` | Optional legacy writer for other installations. Both Academy deployments require a dedicated marketing writer |
 | `SANITY_API_READ_TOKEN` | Optional server credential for published reads when the dataset requires authentication |
 
 The private learning dataset and student records are managed separately. Keep the marketing writer scoped to its intended dataset. The GitHub Pages export uses the initial documents with its read-only adapter. Public editorial image uploads become public marketing assets by URL, including while the containing page is a draft. Use private course authoring for paid lesson media.
@@ -34,7 +34,7 @@ Staging edits public dataset `production` in marketing-only project `3k86g5dt`. 
 2. From a trusted source checkout, run `pnpm site:seed` to inspect the inventory. Run `pnpm site:seed --write` with the intended marketing dataset credentials to initialize published documents. Repeating the command preserves existing documents and drafts. Runtime release directories contain compiled files.
 3. Apply the request size settings in the supplied nginx environment template so authenticated administrators can upload images up to 10 MiB. Uploads are decoded and normalized to WebP. Restart the app after setting its environment.
 4. Sign in with an existing Academy administrator. Make a draft edit, check its phone and desktop preview and verify the published page in a signed-out browser. Publish only approved changes. A new course or workshop still needs a separately configured offer for sales.
-5. Repeat the verified activation on the production marketing dataset as a separate release. Returning the editor to readonly switches rendering back to the initial inventory. Existing Sanity documents remain available when Sanity mode is re-enabled.
+5. Production uses public dataset `production` in marketing-only project `qy8emt0h`. Use a dedicated `SITE_EDITOR_WRITE_TOKEN` from this project and `SITE_EDITOR_MODE=sanity`. The existing production learning project `sfzp6094` and dataset `learning` retain their own configuration. Published reads need no token. Seed with the reviewed release and production catalog, check an unpublished edit and publish the approved copy. Returning the editor to readonly switches rendering back to the initial inventory. Existing Sanity documents remain available when Sanity mode is re-enabled.
 
 For a local rehearsal, `pnpm sandbox:learning` uses its existing synthetic administrator and isolated marketing storage. Open `http://127.0.0.1:3200/admin/content`. Local sandbox credentials are listed by the command. Data survives a sandbox restart.
 

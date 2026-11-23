@@ -1,0 +1,3 @@
+- [ ] Bind the production editor to its own marketing project and verify isolation and compatibility.
+- [ ] Seed approved pages and verify a private draft and a public publication.
+- [ ] Promote the verified release with live settings, verify checkout and protected routes, and retain one previous release.

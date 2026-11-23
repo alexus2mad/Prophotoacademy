@@ -290,12 +290,48 @@ describe('visual editor persistence and authorization', () => {
     expect(siteEditorWritable()).toBe(false);
   });
 
-  it('retains the existing non-staging writer and prefers a dedicated one when configured', () => {
+  it('isolates production marketing reads and writes from learning and staging', () => {
+    vi.stubEnv('SITE_EDITOR_MODE', 'sanity');
+    vi.stubEnv('NEXT_PUBLIC_SITE_URL', 'https://prophotoacademy.com.ua');
+    vi.stubEnv('NEXT_PUBLIC_SANITY_PROJECT_ID', 'sfzp6094');
+    vi.stubEnv('SITE_EDITOR_PROJECT_ID', 'qy8emt0h');
+    vi.stubEnv('NEXT_PUBLIC_SANITY_DATASET', 'production');
+    vi.stubEnv('SANITY_LEARNING_DATASET', 'learning');
+    vi.stubEnv('SITE_EDITOR_WRITE_TOKEN', 'production-marketing');
+    vi.stubEnv('SANITY_LEARNING_WRITE_TOKEN', 'private-learning');
+    vi.stubEnv('SANITY_API_READ_TOKEN', 'legacy-reader');
+    vi.stubEnv('SANITY_API_WRITE_TOKEN', 'legacy-writer');
+    expect(storageConfig.marketingClient(true).config()).toMatchObject({
+      projectId: 'qy8emt0h',
+      dataset: 'production',
+      token: 'production-marketing',
+    });
+    expect(storageConfig.marketingClient().config().token).toBeUndefined();
+    for (const [key, invalid] of [
+      ['SITE_EDITOR_PROJECT_ID', '3k86g5dt'],
+      ['SITE_EDITOR_PROJECT_ID', 'sfzp6094'],
+      ['SITE_EDITOR_PROJECT_ID', ''],
+      ['NEXT_PUBLIC_SANITY_PROJECT_ID', 'p0dn7nmp'],
+      ['SANITY_LEARNING_DATASET', 'learning-staging'],
+      ['NEXT_PUBLIC_SANITY_DATASET', 'learning'],
+      ['SITE_EDITOR_WRITE_TOKEN', 'private-learning'],
+      ['SITE_EDITOR_WRITE_TOKEN', 'legacy-writer'],
+      ['SITE_EDITOR_WRITE_TOKEN', ''],
+    ]) {
+      const original = process.env[key];
+      vi.stubEnv(key, invalid);
+      expect(siteEditorWritable(), key).toBe(false);
+      expect(() => storageConfig.marketingClient(true), key).toThrow();
+      vi.stubEnv(key, original);
+    }
+  });
+
+  it('retains generic Sanity configuration on other installations', () => {
     vi.stubEnv('SITE_EDITOR_MODE', 'sanity');
     vi.stubEnv('NEXT_PUBLIC_SANITY_PROJECT_ID', 'sfzp6094');
     vi.stubEnv('NEXT_PUBLIC_SANITY_DATASET', 'production');
     vi.stubEnv('SANITY_LEARNING_DATASET', 'learning');
-    vi.stubEnv('NEXT_PUBLIC_ACADEMY_URL', 'https://prophotoacademy.com.ua');
+    vi.stubEnv('NEXT_PUBLIC_ACADEMY_URL', 'http://localhost:3000');
     vi.stubEnv('SITE_EDITOR_WRITE_TOKEN', '');
     vi.stubEnv('SANITY_API_WRITE_TOKEN', 'existing');
     vi.stubEnv('SANITY_API_READ_TOKEN', 'existing-reader');

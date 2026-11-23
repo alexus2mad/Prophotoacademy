@@ -6,6 +6,15 @@ const stagingLearningProject = 'p0dn7nmp';
 const stagingMarketingProject = '3k86g5dt';
 const stagingLearning = 'learning-staging';
 const stagingOrigin = 'https://staging.prophotoacademy.com.ua';
+const productionMarketingProject = 'qy8emt0h';
+const productionLearningProject = 'sfzp6094';
+const productionOrigins = ['https://prophotoacademy.com.ua', 'https://www.prophotoacademy.com.ua'];
+
+function isProductionAcademy() {
+  return [process.env.NEXT_PUBLIC_SITE_URL, process.env.NEXT_PUBLIC_ACADEMY_URL].some(
+    (origin) => origin && productionOrigins.includes(origin),
+  );
+}
 
 function isStaging() {
   return (
@@ -17,9 +26,8 @@ function isStaging() {
 }
 
 function marketingProjectId() {
-  return isStaging()
-    ? process.env.SITE_EDITOR_PROJECT_ID
-    : process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+  if (isStaging() || isProductionAcademy()) return process.env.SITE_EDITOR_PROJECT_ID;
+  return process.env.SITE_EDITOR_PROJECT_ID || process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
 }
 
 export function marketingImagePrefix() {
@@ -29,12 +37,14 @@ export function marketingImagePrefix() {
 
 export function marketingWriteToken() {
   const writer = process.env.SITE_EDITOR_WRITE_TOKEN;
-  if (!isStaging()) return writer || process.env.SANITY_API_WRITE_TOKEN;
+  if (!isStaging() && !isProductionAcademy() && !process.env.SITE_EDITOR_PROJECT_ID)
+    return writer || process.env.SANITY_API_WRITE_TOKEN;
   if (
     !marketingDatasetConfigured() ||
-    process.env.SANITY_API_WRITE_TOKEN ||
+    (isStaging() && process.env.SANITY_API_WRITE_TOKEN) ||
     !writer ||
-    writer === process.env.SANITY_LEARNING_WRITE_TOKEN
+    writer === process.env.SANITY_LEARNING_WRITE_TOKEN ||
+    writer === process.env.SANITY_API_WRITE_TOKEN
   )
     return undefined;
   return writer;
@@ -58,7 +68,9 @@ export function localDirectory() {
 export function marketingClient(write = false) {
   const projectId = marketingProjectId();
   const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
-  const readToken = isStaging() ? undefined : process.env.SANITY_API_READ_TOKEN;
+  const readToken = process.env.SITE_EDITOR_PROJECT_ID
+    ? undefined
+    : process.env.SANITY_API_READ_TOKEN;
   const token = write ? marketingWriteToken() : readToken;
   if (
     editorMode() !== 'sanity' ||
@@ -79,6 +91,15 @@ export function marketingClient(write = false) {
 }
 
 export function marketingDatasetConfigured() {
+  if (isProductionAcademy() || process.env.SITE_EDITOR_PROJECT_ID === productionMarketingProject) {
+    return (
+      !isStaging() &&
+      marketingProjectId() === productionMarketingProject &&
+      process.env.NEXT_PUBLIC_SANITY_PROJECT_ID === productionLearningProject &&
+      process.env.NEXT_PUBLIC_SANITY_DATASET === 'production' &&
+      process.env.SANITY_LEARNING_DATASET === 'learning'
+    );
+  }
   if (isStaging()) {
     return (
       marketingProjectId() === stagingMarketingProject &&
@@ -88,7 +109,8 @@ export function marketingDatasetConfigured() {
     );
   }
   return Boolean(
-    process.env.NEXT_PUBLIC_SANITY_PROJECT_ID &&
+    !process.env.SITE_EDITOR_PROJECT_ID &&
+      process.env.NEXT_PUBLIC_SANITY_PROJECT_ID &&
       process.env.NEXT_PUBLIC_SANITY_DATASET &&
       process.env.NEXT_PUBLIC_SANITY_DATASET !==
         (process.env.SANITY_LEARNING_DATASET || 'learning'),
