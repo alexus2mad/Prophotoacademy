@@ -11,7 +11,9 @@
     "evidence": [
       "docs/site-content-editor.md",
       "src/lib/site-editor/public.ts",
-      "src/lib/site-editor/store.ts"
+      "src/lib/site-editor/store.ts",
+      "tests/site-editor-composition.test.ts",
+      "tests/site-image-library.test.ts"
     ]
   },
   "public-navigation": {

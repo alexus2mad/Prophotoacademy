@@ -2,11 +2,15 @@
 
 Administrators open **Сторінки сайту** in the Academy workspace at `/admin/content`. Find a page by Ukrainian title or public path. Click or tap editable text on the page and type where the text appears. Keyboard users can focus a field and press Enter. Escape restores the value from when the active edit began.
 
-Select a photograph on the page to choose its replacement. After a successful upload, the new photo appears in the page and its field. Use **Поля** on phones, or the section inspector on desktop, for image descriptions, empty fields and content outside the current view. **Сторінка** returns to the mobile canvas. The desktop and phone preview controls let managers check how the working copy wraps and crops before saving it.
+## Авторська робота зі сторінкою
 
-**Зберегти чернетку** saves a private version. Check the result in the preview, then use **Опублікувати** to make it visible at the same public address. Leaving an unsaved edit prompts for confirmation. A revision conflict keeps local changes visible so the editor can copy their work before loading the newer version.
+- Щоб створити сторінку, відкрийте **Створити сторінку**, вкажіть назву й адресу та оберіть шаблон. **Чиста сторінка** починається з обкладинки. **Стаття** додає абзац і фотографію, **Курс** — вступ, заголовок і картки, **Воркшоп** — вступ і карусель. Кожна сторінка отримує власну копію блоків.
+- У структурі сторінки відкрийте бібліотеку блоків. Додайте заголовок, абзац, фотографію, картки або карусель. У вибраному блоці можна редагувати поля та змінювати порядок. Картки й слайди мають власні елементи керування. На сторінках із готовим дизайном додані блоки з’являються в окремій редакційній частині.
+- Натисніть текст у попередньому перегляді або виберіть його в полях. Для оформлюваного тексту можна вибрати шрифт, розмір, колір, насиченість і вирівнювання та повернути початковий вигляд. Перемикайте телефонний і настільний перегляд, щоб перевірити переноси й читабельність.
+- Натисніть фотографію або її поле, щоб відкрити **Бібліотеку зображень**. Знайдіть фото за назвою, виберіть із фотографій академії чи попередніх завантажень або скористайтеся **Завантажити файл**. Після вибору натисніть **Вставити зображення**. Впишіть опис, який пояснює цю фотографію саме в цьому місці.
+- Натисніть **Зберегти чернетку**, перевірте результат і виберіть **Опублікувати**, коли сторінка готова для відвідувачів. Якщо інший адміністратор змінив сторінку, редактор повідомить про конфлікт і збереже ваші зміни на екрані.
 
-Use **Створити сторінку** for a new course presentation, workshop or standalone landing. Choose its address before creating the draft. Fill in the opening section and add editorial sections as needed. Published course and workshop presentations appear in the corresponding Academy lists. Existing program enrollment, tickets, prices and payment eligibility continue to use their configured offers. Creating a promotional page alone does not create a purchasable product.
+Published course and workshop pages appear in the corresponding Academy lists. Prices, payment eligibility and enrollment are managed through their configured offers.
 
 ## Storage and activation
 
