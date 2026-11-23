@@ -16,6 +16,9 @@
 .format summary::-webkit-details-marker {
   display: none;
 }
+.format > summary::after {
+  display: none;
+}
 .format summary svg {
   flex: none;
 }
