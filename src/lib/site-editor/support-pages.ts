@@ -1,5 +1,6 @@
 import type { AcademyContent, EditorialPage } from '@/lib/content/types';
 import { academyHomePhoto } from '@/lib/photography/academy-home';
+import { isLegalHeading } from './legal-chapters';
 import { sectionBindings } from './bindings';
 import type { SitePage } from './types';
 
@@ -122,7 +123,8 @@ export function legalContent(original: EditorialPage, page?: SitePage) {
   const { sections, section } = sectionBindings(page);
   const title = section('intro', 'Назва сторінки')('title', 'Заголовок', original.title);
   const body = original.body.map((block, i) => {
-    const f = section('block-' + block._key, 'Абзац ' + (i + 1));
+    const label = isLegalHeading(block) ? 'Розділ · ' + (i + 1) : 'Абзац ' + (i + 1);
+    const f = section('block-' + block._key, label);
     return {
       ...block,
       children: block.children.map((span, j) => ({

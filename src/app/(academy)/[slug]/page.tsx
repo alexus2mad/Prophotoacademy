@@ -1,3 +1,6 @@
+import { Fragment } from 'react';
+import { MarketingSlot } from '@/components/molecules/MarketingSlot/MarketingSlot';
+import { legalChapters, isLegalHeading } from '@/lib/site-editor/legal-chapters';
 import { MarketingComposition } from '@/components/molecules/MarketingComposition/MarketingComposition';
 import type { SlugPageProps } from '@/app/types';
 import type { Metadata } from 'next';
@@ -111,22 +114,30 @@ export default async function Detail({ params, searchParams }: SlugPageProps & S
   return (
     <>
       <div className="container">
+        <MarketingSlot page={pageContent} id="intro" />
         <div className="page-heading" data-site-section="intro">
           <h1 data-site-field="title">{legal.title}</h1>
         </div>
         <article className="prose">
-          <PortableText
-            value={legalTypography(legal.body, pageContent)}
-            components={{
-              marks: {
-                siteTypography: ({ value, children }) => (
-                  <span data-site-section={value?.sectionId} data-site-field={value?.fieldId}>
-                    {children}
-                  </span>
-                ),
-              },
-            }}
-          />
+          {legalChapters(legalTypography(legal.body, pageContent)).map((blocks) => (
+            <Fragment key={blocks[0]._key}>
+              {isLegalHeading(blocks[0]) && (
+                <MarketingSlot page={pageContent} id={'block-' + blocks[0]._key} />
+              )}
+              <PortableText
+                value={blocks}
+                components={{
+                  marks: {
+                    siteTypography: ({ value, children }) => (
+                      <span data-site-section={value?.sectionId} data-site-field={value?.fieldId}>
+                        {children}
+                      </span>
+                    ),
+                  },
+                }}
+              />
+            </Fragment>
+          ))}
         </article>
       </div>
       <MarketingComposition page={pageContent} />

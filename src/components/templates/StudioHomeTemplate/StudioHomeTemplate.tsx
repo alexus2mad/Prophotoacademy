@@ -1,3 +1,4 @@
+import { MarketingSlot } from '@/components/molecules/MarketingSlot/MarketingSlot';
 import { MarketingComposition } from '@/components/molecules/MarketingComposition/MarketingComposition';
 import { homeInquiry } from '@/lib/site-editor/brand/home/inquiry';
 import { bindSection } from '@/lib/site-editor/bind-section';
@@ -27,6 +28,11 @@ export function StudioHomeTemplate({
       <StudioHomeExperience
         page={page}
         directions={studioHomeDirections(content)}
+        beforeHero={{
+          academy: <MarketingSlot page={page} id="hero" />,
+          studio: <MarketingSlot page={studioPage} id="hero" />,
+          shop: <MarketingSlot page={shopPage} id="hero" />,
+        }}
         studio={
           <>
             <StudioSpaceSections page={studioPage} address={content.hub.address} />
@@ -35,18 +41,26 @@ export function StudioHomeTemplate({
         }
         shop={
           <>
+            <MarketingSlot page={shopPage} id="selection" />
             <StudioShopSelection page={shopPage} shopUrl={ecosystemDestinations.shop} />
             <MarketingComposition page={shopPage} within="home-panel-shop" />
           </>
         }
         academy={
           <>
+            <MarketingSlot page={page} id="founder" />
             <StudioHomeFounder page={page} />
+            <MarketingSlot page={page} id="proof" />
             <StudioHomeProof page={page} />
+            <MarketingSlot page={page} id="reviews" />
             <StudioHomeReviews page={page} />
+            <MarketingSlot page={page} id="gallery" />
             <StudioHomeWorks page={page} works={studioHomeWorks} />
+            <MarketingSlot page={page} id="shop-banner" />
             <StudioHomeBanner page={page} destination="shop" />
+            <MarketingSlot page={page} id="studio-banner" />
             <StudioHomeBanner page={page} destination="studio" />
+            <MarketingSlot page={page} id="inquiry" />
             <div data-home-section="inquiry">
               <StudioInquirySection
                 identifiers={{

@@ -3,6 +3,7 @@ import { Photo } from '@/components/atoms/Photo/Photo';
 import { PreparedPhoto } from '@/components/atoms/PreparedPhoto/PreparedPhoto';
 import { Consultation } from '@/components/organisms/Consultation/Consultation';
 import { aboutContent } from '@/lib/site-editor/support-pages';
+import { MarketingSlot } from '@/components/molecules/MarketingSlot/MarketingSlot';
 import { MarketingComposition } from '@/components/molecules/MarketingComposition/MarketingComposition';
 import { readSitePage } from '@/lib/site-editor/public';
 import type { SiteRouteProps } from '@/lib/site-editor/types';
@@ -21,6 +22,7 @@ export default async function About({ searchParams }: SiteRouteProps) {
   return (
     <>
       <div className="container academy-about-page">
+        <MarketingSlot page={page} id="intro" />
         <div className="page-heading" data-site-section="intro">
           <h1 data-site-field="title">{intro.title}</h1>
         </div>
@@ -36,6 +38,7 @@ export default async function About({ searchParams }: SiteRouteProps) {
             <p data-site-field="detail">{intro.detail}</p>
           </div>
         </section>
+        <MarketingSlot page={page} id="figures" />
         <section
           className="section stats-grid"
           aria-label="Академія в цифрах"
@@ -48,6 +51,7 @@ export default async function About({ searchParams }: SiteRouteProps) {
             </div>
           ))}
         </section>
+        <MarketingSlot page={page} id="team" />
         <section className="section" id="team" data-site-section="team">
           <div className="section-heading">
             <div>
@@ -68,6 +72,7 @@ export default async function About({ searchParams }: SiteRouteProps) {
           </div>
         </section>
       </div>
+      <MarketingSlot page={page} id="inquiry" />
       <Consultation compact />
       <MarketingComposition page={page} />
     </>

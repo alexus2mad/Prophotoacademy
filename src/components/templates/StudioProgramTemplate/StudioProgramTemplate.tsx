@@ -1,3 +1,4 @@
+import { MarketingSlot } from '@/components/molecules/MarketingSlot/MarketingSlot';
 import Link from 'next/link';
 import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButton';
 import { StudioMobileAction } from '@/components/molecules/StudioMobileAction/StudioMobileAction';
@@ -40,6 +41,7 @@ export function StudioProgramTemplate({
 
   return (
     <div className={styles.program}>
+      <MarketingSlot page={page} id="hero" />
       <StudioProgramHero
         program={program}
         offering={offering}
@@ -62,6 +64,7 @@ export function StudioProgramTemplate({
           </InquiryButton>
         )}
       </StudioProgramNavigation>
+      <MarketingSlot page={page} id="outcomes" />
       {!!program.outcomes.length && (
         <section
           id="program-about"
@@ -84,6 +87,7 @@ export function StudioProgramTemplate({
           </ul>
         </section>
       )}
+      <MarketingSlot page={page} id="audience" />
       {!!program.audience.length && (
         <section
           id="program-audience"
@@ -106,6 +110,7 @@ export function StudioProgramTemplate({
           </ul>
         </section>
       )}
+      <MarketingSlot page={page} id="packages" />
       {hasPackages && offering && (
         <div className={`${styles.packages} studio-light studio-wrap`}>
           <ProgramPackages
@@ -116,6 +121,7 @@ export function StudioProgramTemplate({
           />
         </div>
       )}
+      <MarketingSlot page={page} id="curriculum" />
       {!!program.modules.length && (
         <section
           id="program-curriculum"
@@ -147,12 +153,15 @@ export function StudioProgramTemplate({
           </div>
         </section>
       )}
+      <MarketingSlot page={page} id="practice" />
       <div className={`${styles.practice} studio-light studio-wrap`}>
         <PracticePreview content={content} programId={program.id} compact />
       </div>
+      <MarketingSlot page={page} id="faculty" />
       {!!instructors.length && (
         <StudioProgramFaculty instructors={programFacultyContent(instructors, page).instructors} />
       )}
+      <MarketingSlot page={page} id="gallery" />
       {!!works.length && (
         <section
           id="student-works"
@@ -171,7 +180,9 @@ export function StudioProgramTemplate({
           <Gallery works={works} images={content.images} />
         </section>
       )}
+      <MarketingSlot page={page} id="reviews" />
       {!!reviews.length && <StudioProgramReviews reviews={reviews} page={page} />}
+      <MarketingSlot page={page} id="faq" />
       {!!program.faqs.length && (
         <section
           className={`${styles.faq} studio-light studio-band studio-wrap`}
@@ -196,6 +207,7 @@ export function StudioProgramTemplate({
           </div>
         </section>
       )}
+      <MarketingSlot page={page} id="inquiry" />
       <StudioInquirySection
         title="Є питання про"
         hand="курс?"

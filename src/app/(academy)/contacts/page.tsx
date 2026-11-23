@@ -1,5 +1,6 @@
 import { phoneLabel } from '@/lib/format';
 import type { SiteRouteProps } from '@/lib/site-editor/types';
+import { MarketingSlot } from '@/components/molecules/MarketingSlot/MarketingSlot';
 import { MarketingComposition } from '@/components/molecules/MarketingComposition/MarketingComposition';
 import { readSitePage } from '@/lib/site-editor/public';
 import { contactContent } from '@/lib/site-editor/support-pages';
@@ -22,19 +23,21 @@ export default async function Contacts({ searchParams }: SiteRouteProps) {
   if (academyDesign() === 'studio')
     return (
       <>
-        <StudioContactsTemplate settings={settings} intro={intro} />
+        <StudioContactsTemplate page={page} settings={settings} intro={intro} />
         <MarketingComposition page={page} />
       </>
     );
   return (
     <>
       <div className="container">
+        <MarketingSlot page={page} id="intro" />
         <div className="page-heading">
           <h1>Контакти</h1>
           <p className="lead muted">
             Потрібна допомога з курсом або особливий формат навчання? Зв’яжіться з академією.
           </p>
         </div>
+        <MarketingSlot page={page} id="contacts" />
         <div className="contact-grid">
           <div className="contact-details">
             <div>

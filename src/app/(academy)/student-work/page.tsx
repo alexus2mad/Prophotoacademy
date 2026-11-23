@@ -1,5 +1,6 @@
 import { getContent } from '@/lib/content';
 import type { SiteRouteProps } from '@/lib/site-editor/types';
+import { MarketingSlot } from '@/components/molecules/MarketingSlot/MarketingSlot';
 import { MarketingComposition } from '@/components/molecules/MarketingComposition/MarketingComposition';
 import { readSitePage } from '@/lib/site-editor/public';
 import { worksContent } from '@/lib/site-editor/support-pages';
@@ -20,14 +21,17 @@ export default async function Work({ searchParams }: SiteRouteProps) {
   return (
     <>
       <div className="container student-gallery-page">
+        <MarketingSlot page={page} id="intro" />
         <div className="page-heading" data-site-section="intro">
           <h1 data-site-field="title">{title}</h1>
           <p className="lead muted" data-site-field="description">
             {description}
           </p>
         </div>
+        <MarketingSlot page={page} id="gallery" />
         <Gallery works={works} images={images} />
       </div>
+      <MarketingSlot page={page} id="inquiry" />
       <Consultation compact />
       <MarketingComposition page={page} />
     </>

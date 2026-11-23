@@ -1,4 +1,5 @@
 import { SiteCopy } from '@/components/atoms/SiteCopy/SiteCopy';
+import { MarketingSlot } from '@/components/molecules/MarketingSlot/MarketingSlot';
 import { shopHero } from '@/lib/site-editor/brand/shop/hero';
 import { bindSection } from '@/lib/site-editor/bind-section';
 import type { BrandContentProps } from '@/lib/site-editor/brand/types';
@@ -14,6 +15,7 @@ export function StudioShopTemplate({ page }: BrandContentProps = {}) {
   const { text, image } = bindSection(page, shopHero);
   return (
     <>
+      <MarketingSlot page={page} id="hero" />
       <section data-site-section="hero" className={`${styles.hero} studio-dark`}>
         <StudioImage
           asset={image('image', studioAssets.shop.imgHero)}
@@ -39,6 +41,7 @@ export function StudioShopTemplate({ page }: BrandContentProps = {}) {
           </a>
         </div>
       </section>
+      <MarketingSlot page={page} id="selection" />
       <StudioShopSelection page={page} shopUrl={ecosystemDestinations.shop} />
       <MarketingComposition page={page} />
       <StudioMobileAction>

@@ -1,4 +1,5 @@
 import { SiteCopy } from '@/components/atoms/SiteCopy/SiteCopy';
+import { MarketingSlot } from '@/components/molecules/MarketingSlot/MarketingSlot';
 import { artworkWorkshop, featuredArtworks } from '@/lib/site-editor/brand/artwork/workshop';
 import { bindSection } from '@/lib/site-editor/bind-section';
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
@@ -39,6 +40,7 @@ export function StudioIntensiveTemplate({
   } = studioIntensiveOffer(content, enrollment);
   return (
     <>
+      <MarketingSlot page={page} id="hero" />
       <section data-site-section="workshop" className={`${styles.hero} studio-dark`}>
         <StudioImage
           fieldId="image"
@@ -78,6 +80,7 @@ export function StudioIntensiveTemplate({
           </div>
         </div>
       </section>
+      <MarketingSlot page={page} id="announcement" />
       <section
         data-site-section="workshop"
         className={`${styles.announcement} studio-band studio-dark`}
@@ -134,7 +137,9 @@ export function StudioIntensiveTemplate({
           )}
         </div>
       </section>
+      <MarketingSlot page={page} id="curriculum" />
       <StudioIntensiveProgram page={page} />
+      <MarketingSlot page={page} id="faculty" />
       <section data-site-section="workshop" className={`${styles.faculty} studio-band studio-dark`}>
         <div className="studio-wrap">
           <header>
@@ -183,6 +188,7 @@ export function StudioIntensiveTemplate({
           </ul>
         </div>
       </section>
+      <MarketingSlot page={page} id="gallery" />
       <section data-site-section="workshop" className={`${styles.works} studio-dark`}>
         <div className="studio-wrap">
           <h2 className="studio-title">
@@ -203,6 +209,7 @@ export function StudioIntensiveTemplate({
           />
         </div>
       </section>
+      <MarketingSlot page={page} id="inquiry" />
       <div id="intensive-inquiry">
         <StudioInquirySection
           identifiers={{

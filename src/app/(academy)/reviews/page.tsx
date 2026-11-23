@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { getContent } from '@/lib/content';
 import type { SiteRouteProps } from '@/lib/site-editor/types';
+import { MarketingSlot } from '@/components/molecules/MarketingSlot/MarketingSlot';
 import { MarketingComposition } from '@/components/molecules/MarketingComposition/MarketingComposition';
 import { readSitePage } from '@/lib/site-editor/public';
 import { reviewsContent } from '@/lib/site-editor/support-pages';
@@ -17,9 +18,11 @@ export default async function Reviews({ searchParams }: SiteRouteProps) {
   return (
     <>
       <div className="container">
+        <MarketingSlot page={page} id="intro" />
         <div className="page-heading" data-site-section="intro">
           <h1 data-site-field="title">{title}</h1>
         </div>
+        <MarketingSlot page={page} id="reviews" />
         <div className="review-grid">
           {testimonials.map((t) => (
             <article className="review-card" data-site-section={'review-' + t.id} key={t.id}>
@@ -51,6 +54,7 @@ export default async function Reviews({ searchParams }: SiteRouteProps) {
           ))}
         </div>
       </div>
+      <MarketingSlot page={page} id="inquiry" />
       <Consultation compact />
       <MarketingComposition page={page} />
     </>

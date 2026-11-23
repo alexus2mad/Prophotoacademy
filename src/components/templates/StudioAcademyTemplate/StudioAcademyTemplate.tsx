@@ -1,3 +1,4 @@
+import { MarketingSlot } from '@/components/molecules/MarketingSlot/MarketingSlot';
 import { SiteCopy } from '@/components/atoms/SiteCopy/SiteCopy';
 import { academyIntroduction } from '@/lib/site-editor/brand/academy/introduction';
 import { bindSection } from '@/lib/site-editor/bind-section';
@@ -18,6 +19,7 @@ export function StudioAcademyTemplate({
   const { text } = bindSection(page, academyIntroduction);
   return (
     <>
+      <MarketingSlot page={page} id="hero" />
       <section data-site-section="introduction" className={`${styles.hero} studio-light`}>
         <div className="studio-wrap">
           <p data-site-field="eyebrow" className={`${styles.label} studio-label studio-eyebrow`}>
@@ -68,6 +70,7 @@ export function StudioAcademyTemplate({
         images={content.images}
       />
       <StudioAcademyCommunity page={page} />
+      <MarketingSlot page={page} id="inquiry" />
       <StudioInquirySection
         identifiers={{
           section: 'introduction',

@@ -1,3 +1,4 @@
+import { MarketingSlot } from '@/components/molecules/MarketingSlot/MarketingSlot';
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
 import { StudioCreatorAction } from '@/components/molecules/StudioCreatorAction/StudioCreatorAction';
 import { StudioCreatorCurriculumLink } from '@/components/molecules/StudioCreatorCurriculumLink/StudioCreatorCurriculumLink';
@@ -14,6 +15,7 @@ export function StudioCreatorHero({
   offering,
   presentation,
   showInstallments,
+  page,
   editorial,
 }: StudioCreatorHeroProps) {
   const { hero, intro } = editorial;
@@ -92,6 +94,7 @@ export function StudioCreatorHero({
           </div>
         </div>
       </section>
+      <MarketingSlot page={page} id="intro" />
       <section
         data-site-section="introduction"
         id="program-about"

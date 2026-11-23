@@ -20,33 +20,42 @@
     display: flex;
     flex-direction: column;
   }
+  .academy > [data-site-placement='exposure'],
   .academy > [data-home-section='exposure'] {
     order: 2;
   }
+  .academy > [data-site-placement='directions'],
   .academy > [data-home-section='directions'] {
     order: 3;
   }
+  .academy > [data-site-placement='shop-banner'],
   .academy > [data-home-section='shop'] {
     order: 4;
   }
+  .academy > [data-site-placement='founder'],
   .academy > [data-home-section='founder'] {
     order: 5;
   }
+  .academy > [data-site-placement='proof'],
   .academy > [data-home-section='proof'] {
     order: 6;
   }
+  .academy > [data-site-placement='gallery'],
   .academy > [data-home-section='works'] {
     order: 7;
   }
+  .academy > [data-site-placement='studio-banner'],
   .academy > [data-home-section='studio'] {
     order: 8;
   }
+  .academy > [data-site-placement='reviews'],
   .academy > [data-home-section='reviews'] {
     order: 9;
   }
-  .academy > [data-site-composition] {
+  .academy > [data-site-placement='end'] {
     order: 11;
   }
+  .academy > [data-site-placement='inquiry'],
   .academy > [data-home-section='inquiry'] {
     order: 10;
   }

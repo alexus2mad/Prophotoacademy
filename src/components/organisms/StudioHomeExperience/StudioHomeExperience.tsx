@@ -1,4 +1,5 @@
 'use client';
+import { MarketingSlot } from '@/components/molecules/MarketingSlot/MarketingSlot';
 import { StudioHomeHero } from '@/components/organisms/StudioHomeHero/StudioHomeHero';
 import { StudioHomeExposure } from '@/components/organisms/StudioHomeExposure/StudioHomeExposure';
 import { StudioHomeDirections } from '@/components/organisms/StudioHomeDirections/StudioHomeDirections';
@@ -9,6 +10,7 @@ import styles from './StudioHomeExperience.module.css';
 export function StudioHomeExperience({
   page,
   directions,
+  beforeHero,
   academy,
   studio,
   shop,
@@ -18,7 +20,9 @@ export function StudioHomeExperience({
     studio,
     academy: (
       <>
+        <MarketingSlot page={page} id="exposure" />
         <StudioHomeExposure page={page} directionsRef={directionsRef} />
+        <MarketingSlot page={page} id="directions" />
         <StudioHomeDirections page={page} directions={directions} sectionRef={directionsRef} />
         {academy}
       </>
@@ -27,6 +31,7 @@ export function StudioHomeExperience({
   };
   return (
     <div className={styles.home} data-home-mode={mode}>
+      {beforeHero?.[mode]}
       <StudioHomeHero page={page} mode={mode} onModeChange={selectMode} />
       {Object.entries(panels).map(([name, panel]) => (
         <div

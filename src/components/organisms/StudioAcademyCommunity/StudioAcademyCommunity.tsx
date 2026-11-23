@@ -1,4 +1,5 @@
 import { SiteCopy } from '@/components/atoms/SiteCopy/SiteCopy';
+import { MarketingSlot } from '@/components/molecules/MarketingSlot/MarketingSlot';
 import { academyCommunity } from '@/lib/site-editor/brand/academy/community';
 import { bindSection } from '@/lib/site-editor/bind-section';
 import type { BrandContentProps } from '@/lib/site-editor/brand/types';
@@ -16,6 +17,7 @@ export function StudioAcademyCommunity({ page }: BrandContentProps = {}) {
   const { text, image } = bindSection(page, academyCommunity);
   return (
     <>
+      <MarketingSlot page={page} id="audience" />
       <section data-site-section="community" id="about" className="studio-band studio-light">
         <div className="studio-wrap">
           <header className={styles.head}>
@@ -45,6 +47,7 @@ export function StudioAcademyCommunity({ page }: BrandContentProps = {}) {
           </div>
         </div>
       </section>
+      <MarketingSlot page={page} id="trust" />
       <section data-site-section="community" className="studio-band studio-dark">
         <div className="studio-wrap">
           <header className={styles.head}>
@@ -64,6 +67,7 @@ export function StudioAcademyCommunity({ page }: BrandContentProps = {}) {
           </div>
         </div>
       </section>
+      <MarketingSlot page={page} id="faculty" />
       <section data-site-section="community" id="lecturers" className="studio-band studio-light">
         <div className="studio-wrap">
           <header className={styles.head}>
@@ -110,6 +114,7 @@ export function StudioAcademyCommunity({ page }: BrandContentProps = {}) {
           </div>
         </div>
       </section>
+      <MarketingSlot page={page} id="reviews" />
       <StudioAcademyReviews page={page} />
     </>
   );

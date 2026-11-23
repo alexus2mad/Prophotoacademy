@@ -1,3 +1,4 @@
+import { MarketingSlot } from '@/components/molecules/MarketingSlot/MarketingSlot';
 import { StudioCreatorHeading } from '@/components/molecules/StudioCreatorHeading/StudioCreatorHeading';
 import { creatorCurriculumId } from '@/lib/studio-creator/content';
 import { creatorAssets } from '@/lib/studio-creator/assets';
@@ -5,12 +6,18 @@ import { studioAssetUrl } from '@/lib/studio-design/urls';
 import type { StudioCreatorStoryProps } from './types';
 import styles from './StudioCreatorStory.module.css';
 
-export function StudioCreatorStory({ program, duration, editorial }: StudioCreatorStoryProps) {
+export function StudioCreatorStory({
+  program,
+  duration,
+  editorial,
+  page,
+}: StudioCreatorStoryProps) {
   const { audience, benefits, learningSteps } = editorial;
   const audienceTotal = String(audience.length).padStart(2, '0');
   const connectors = creatorAssets.connectors;
   return (
     <>
+      <MarketingSlot page={page} id="audience" />
       <section
         id="program-audience"
         data-site-section="audience"
@@ -32,6 +39,7 @@ export function StudioCreatorStory({ program, duration, editorial }: StudioCreat
           ))}
         </ol>
       </section>
+      <MarketingSlot page={page} id="benefits" />
       <section
         className="studio-dark studio-band studio-wrap"
         aria-labelledby="creator-benefits-title"
@@ -64,6 +72,7 @@ export function StudioCreatorStory({ program, duration, editorial }: StudioCreat
           ))}
         </ul>
       </section>
+      <MarketingSlot page={page} id="curriculum" />
       <section
         id={creatorCurriculumId}
         data-site-section="curriculum"
@@ -94,6 +103,7 @@ export function StudioCreatorStory({ program, duration, editorial }: StudioCreat
           </div>
         </details>
       </section>
+      <MarketingSlot page={page} id="steps" />
       <section
         className={`${styles.format} studio-dark studio-band studio-wrap`}
         aria-labelledby="creator-format-title"

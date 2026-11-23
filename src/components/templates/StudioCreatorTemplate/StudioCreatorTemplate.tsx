@@ -1,3 +1,4 @@
+import { MarketingSlot } from '@/components/molecules/MarketingSlot/MarketingSlot';
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
 import { StudioCreatorAction } from '@/components/molecules/StudioCreatorAction/StudioCreatorAction';
 import { StudioMobileAction } from '@/components/molecules/StudioMobileAction/StudioMobileAction';
@@ -26,7 +27,9 @@ export function StudioCreatorTemplate({
   const { offering, presentation, works } = studioProgramPage(program, content, enrollment);
   return (
     <div className={styles.page} data-course-design="creator">
+      <MarketingSlot page={page} id="hero" />
       <StudioCreatorHero
+        page={page}
         program={program}
         offering={offering}
         presentation={presentation}
@@ -34,21 +37,27 @@ export function StudioCreatorTemplate({
         editorial={editorial}
       />
       <StudioCreatorStory
+        page={page}
         program={program}
         duration={offering?.duration ?? 'За програмою курсу'}
         editorial={editorial}
       />
+      <MarketingSlot page={page} id="gallery" />
       <StudioCreatorWorks
         works={works}
         images={content.images}
         opening={editorial.worksOpening}
         devices={editorial.worksDevices}
       />
+      <MarketingSlot page={page} id="faculty" />
       {editorial.faculty && <StudioCreatorFaculty instructors={editorial.faculty} />}
+      <MarketingSlot page={page} id="reviews" />
       <StudioAcademyReviews variant="creator" page={page} />
+      <MarketingSlot page={page} id="packages" />
       {offering?.packages.length ? (
         <StudioCreatorPackages program={program} offering={offering} enrollment={enrollment} />
       ) : null}
+      <MarketingSlot page={page} id="inquiry" />
       <StudioInquirySection
         title="Залиште"
         hand="заявку"
@@ -64,6 +73,7 @@ export function StudioCreatorTemplate({
           source: 'consultation',
         }}
       />
+      <MarketingSlot page={page} id="studio-banner" />
       <aside className={`${styles.studio} studio-dark`} aria-label="Фотостудія ProPhoto">
         <div className={`${styles.studioCopy} studio-wrap`}>
           <p className="studio-label studio-eyebrow">Фотостудія екосистеми</p>

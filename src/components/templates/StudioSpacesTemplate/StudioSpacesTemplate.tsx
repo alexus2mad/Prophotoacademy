@@ -1,4 +1,5 @@
 import { SiteCopy } from '@/components/atoms/SiteCopy/SiteCopy';
+import { MarketingSlot } from '@/components/molecules/MarketingSlot/MarketingSlot';
 import { studioHero } from '@/lib/site-editor/brand/studio/hero';
 import { bindSection } from '@/lib/site-editor/bind-section';
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
@@ -15,6 +16,7 @@ export function StudioSpacesTemplate({ page, content }: StudioSpacesTemplateProp
   const bookingUrl = ecosystemDestinations.studioBooking;
   return (
     <>
+      <MarketingSlot page={page} id="hero" />
       <section data-site-section="hero" className={`${styles.hero} studio-dark`}>
         <StudioImage
           asset={image('image', studioAssets.artifact.hero_space)}

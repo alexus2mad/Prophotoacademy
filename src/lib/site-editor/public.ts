@@ -13,7 +13,7 @@ export async function readSitePage(
   if ((await searchParams)?.['site-editor-preview'] === '1') {
     if ((await currentMember())?.role !== 'admin') notFound();
     try {
-      return (await getEditorPage(path)).page;
+      return { ...(await getEditorPage(path)).page, editorPreview: true };
     } catch (error) {
       if (error instanceof HttpError && error.status === 404) notFound();
       throw error;

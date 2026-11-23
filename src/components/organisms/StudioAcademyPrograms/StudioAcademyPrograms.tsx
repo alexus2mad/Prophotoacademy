@@ -1,3 +1,4 @@
+import { MarketingSlot } from '@/components/molecules/MarketingSlot/MarketingSlot';
 import { NewSitePageLinks } from '@/components/molecules/NewSitePageLinks/NewSitePageLinks';
 import { academyPrograms, workshops } from '@/lib/site-editor/brand/academy/programs';
 import { bindSection } from '@/lib/site-editor/bind-section';
@@ -23,6 +24,7 @@ export function StudioAcademyPrograms({
 
   return (
     <>
+      <MarketingSlot page={page} id="courses" />
       <section data-site-section="programs" id="courses" className="studio-band studio-dark">
         <div className="studio-wrap">
           <header className={styles.head}>
@@ -46,6 +48,7 @@ export function StudioAcademyPrograms({
           </div>
         </div>
       </section>
+      <MarketingSlot page={page} id="workshops" />
       <section data-site-section="programs" id="workshops" className="studio-band studio-light">
         <div className="studio-wrap">
           <header className={styles.head}>
@@ -92,6 +95,7 @@ export function StudioAcademyPrograms({
           </div>
         </div>
       </section>
+      <MarketingSlot page={page} id="formats" />
       <section
         data-site-section="programs"
         className={styles.formats}

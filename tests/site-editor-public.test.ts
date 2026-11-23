@@ -73,7 +73,8 @@ describe('public content editor integration', () => {
       hasDraft: true,
       revision: 'one',
     });
-    expect(await readSitePage(sample.path, preview)).toBe(sample);
+    expect(await readSitePage(sample.path, preview)).toEqual({ ...sample, editorPreview: true });
+    expect(sample.editorPreview).toBeUndefined();
     expect(getPublishedPage).not.toHaveBeenCalled();
   });
   it('exposes only newly published template pages in discovery', async () => {

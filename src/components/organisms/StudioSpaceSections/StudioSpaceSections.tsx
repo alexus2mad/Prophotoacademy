@@ -1,4 +1,5 @@
 import { SiteCopy } from '@/components/atoms/SiteCopy/SiteCopy';
+import { MarketingSlot } from '@/components/molecules/MarketingSlot/MarketingSlot';
 import { studioSpaces, rooms } from '@/lib/site-editor/brand/studio/spaces';
 import { bindSection } from '@/lib/site-editor/bind-section';
 import { StudioSpacesGallery } from '@/components/organisms/StudioSpacesGallery/StudioSpacesGallery';
@@ -11,6 +12,7 @@ export function StudioSpaceSections({ page, address }: StudioSpaceSectionsProps)
   const bookingUrl = ecosystemDestinations.studioBooking;
   return (
     <>
+      <MarketingSlot page={page} id="spaces" />
       <section
         id="spaces"
         data-site-section="spaces"
@@ -48,6 +50,7 @@ export function StudioSpaceSections({ page, address }: StudioSpaceSectionsProps)
           ))}
         </div>
       </section>
+      <MarketingSlot page={page} id="booking" />
       <section
         id="studio-booking"
         data-site-section="spaces"
