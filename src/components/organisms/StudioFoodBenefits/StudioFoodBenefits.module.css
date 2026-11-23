@@ -1,0 +1,196 @@
+.section {
+  isolation: isolate;
+}
+.rail {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.card {
+  position: sticky;
+  top: calc(76px + 14px * var(--card-index));
+  min-width: 0;
+  margin-bottom: 24px;
+}
+.card:last-child {
+  margin-bottom: 0;
+}
+.sheet {
+  display: grid;
+  grid-template-columns: clamp(72px, 8vw, 120px) minmax(0, 1fr) minmax(0, 400px);
+  align-items: start;
+  gap: clamp(16px, 2.4vw, 40px);
+  padding: clamp(22px, 2.2vw, 32px) clamp(22px, 3vw, 44px);
+  color: var(--studio-paper);
+  background: var(--studio-ink);
+  border: 1px solid rgb(251 251 251 / 25%);
+}
+.card:nth-child(even) .sheet {
+  color: var(--studio-warm);
+  background: var(--studio-paper);
+}
+.marker {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  font:
+    400 12px/1 var(--font-studio-sans),
+    sans-serif;
+  letter-spacing: 0.12em;
+}
+.marker span:first-child {
+  color: var(--studio-red);
+}
+.marker span:last-child {
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+.sheet h3 {
+  font:
+    700 clamp(24px, 2.4vw, 36px) / 1.05 var(--font-studio-condensed),
+    sans-serif;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+.sheet:has(p:empty) h3 {
+  grid-column: span 2;
+}
+.sheet p {
+  font-size: 15px;
+  line-height: 1.55;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+.sheet p:empty {
+  display: none;
+}
+.controls {
+  display: none;
+}
+@media (max-width: 760px) {
+  .section {
+    container-type: inline-size;
+  }
+  .rail {
+    --stack-step: 6px;
+    --card-width: calc(100cqi - var(--previous-cards) * var(--stack-step));
+    display: grid;
+    grid-template-columns: repeat(calc(var(--previous-cards) + 1), var(--card-width));
+    gap: 10px;
+    margin-inline: calc(0px - var(--studio-gutter));
+    padding: 2px var(--studio-gutter);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline-start: var(--studio-gutter);
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+  .rail::-webkit-scrollbar {
+    display: none;
+  }
+  .rail:focus-visible {
+    outline: 2px solid var(--studio-red);
+    outline-offset: -2px;
+  }
+  .card {
+    --offset: calc(var(--card-index) * var(--stack-step));
+    position: relative;
+    inset: auto;
+    grid-column: calc(var(--card-index) + 1) / -1;
+    grid-row: 1;
+    margin: 0;
+    pointer-events: none;
+  }
+  /* The snap point stays at the original grid line while the card face sticks. */
+  .card::before {
+    position: absolute;
+    inset-inline-start: 0;
+    inset-block-start: 0;
+    width: 1px;
+    height: 1px;
+    content: '';
+    scroll-margin-inline-start: var(--offset);
+    scroll-snap-align: start;
+  }
+  .sheet {
+    position: sticky;
+    inset-inline-start: var(--offset);
+    width: var(--card-width);
+    display: flex;
+    flex-flow: column;
+    align-items: stretch;
+    gap: 28px;
+    min-height: 420px;
+    height: 100%;
+    padding: 24px 22px 28px;
+    transform-origin: left center;
+    pointer-events: auto;
+  }
+  .marker {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .sheet h3 {
+    font-size: clamp(22px, 6.4vw, 28px);
+    line-height: 1;
+  }
+  .controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 24px;
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.12em;
+  }
+  .controls button {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    background: transparent;
+    color: inherit;
+    font-size: 22px;
+    cursor: pointer;
+  }
+  .controls button:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+}
+@media (max-width: 760px) and (prefers-reduced-motion: no-preference) {
+  .sheet {
+    transition: transform 180ms ease-out;
+  }
+  .sheet > * {
+    transition: opacity 180ms ease-out;
+  }
+  .card[data-passed] .sheet {
+    transform: scale(0.94);
+  }
+  .card[data-passed] .sheet > * {
+    opacity: 0.55;
+  }
+}
+@media print {
+  .card {
+    position: static;
+    break-inside: avoid;
+  }
+  .rail {
+    display: block;
+    overflow: visible;
+  }
+  .controls {
+    display: none;
+  }
+}
