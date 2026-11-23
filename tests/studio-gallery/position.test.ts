@@ -17,6 +17,16 @@ describe('gallery navigation with different image widths', () => {
     expect(galleryImageTarget(offsets, 486, -1, 850)).toBe(304);
   });
 
+  it('moves one full column when two rows share the same offsets', () => {
+    const grid = [0, 0, 152, 152, 304, 304, 456];
+    expect(nearestGalleryImage(grid, 155)).toBe(2);
+    expect(galleryImageTarget(grid, 0, 1, 389)).toBe(152);
+    expect(galleryImageTarget(grid, 152, 1, 389)).toBe(304);
+    expect(galleryImageTarget(grid, 304, 1, 389)).toBe(389);
+    expect(galleryImageTarget(grid, 389, -1, 389)).toBe(304);
+    expect(galleryImageTarget(grid, 304, -1, 389)).toBe(152);
+  });
+
   it('navigates back from a final position clamped by the viewport', () => {
     expect(galleryImageTarget(offsets, 760, -1, 760)).toBe(486);
   });

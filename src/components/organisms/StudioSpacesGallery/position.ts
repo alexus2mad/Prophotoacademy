@@ -12,7 +12,8 @@ export function galleryImageTarget(
   direction: number,
   maxScroll: number,
 ) {
-  const stops = [...offsets.filter((offset) => offset < maxScroll - 1), maxScroll];
+  // Two works in the same grid column share one horizontal snap point.
+  const stops = [...new Set(offsets.filter((offset) => offset < maxScroll - 1)), maxScroll];
   const current = nearestGalleryImage(stops, scrollLeft);
   return stops[Math.max(0, Math.min(stops.length - 1, current + direction))];
 }

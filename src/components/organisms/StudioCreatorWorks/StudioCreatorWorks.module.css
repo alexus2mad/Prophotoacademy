@@ -66,6 +66,20 @@
 .work:focus-visible {
   outline-offset: -4px !important;
 }
+.rail.twoRows {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  grid-auto-columns: calc((100% - 24px) / 3.5);
+}
+.twoRows .work {
+  width: 100%;
+  min-inline-size: 0;
+  min-block-size: 0;
+}
+.twoRows .work:last-child {
+  scroll-snap-align: end;
+}
 .controls {
   display: flex;
   align-items: center;
@@ -115,5 +129,8 @@
   }
   .rail {
     margin-inline: calc(-1 * var(--studio-gutter));
+  }
+  .rail.twoRows {
+    grid-auto-columns: calc((100% - 16px) / 2.5);
   }
 }

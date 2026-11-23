@@ -1,5 +1,8 @@
 'use client';
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
+import { SiteCopy } from '@/components/atoms/SiteCopy/SiteCopy';
+import { bindSection } from '@/lib/site-editor/bind-section';
+import { studentWorksHeading } from '@/lib/site-editor/brand/student-works';
 import { StudioCreatorHeading } from '@/components/molecules/StudioCreatorHeading/StudioCreatorHeading';
 import { ImageGalleryDialog } from '@/components/molecules/ImageGalleryDialog/ImageGalleryDialog';
 import { useCreatorWorks } from './hooks';
@@ -10,40 +13,53 @@ const deviceLabels = { camera: 'На камеру', phone: 'На телефон'
 
 export function StudioCreatorWorks(props: StudioCreatorWorksProps) {
   const { devices, device, selectDevice, entries, carousel, gallery } = useCreatorWorks(props);
+  const twoRows = props.layout === 'two-rows';
+  const { text } = bindSection(props.page, studentWorksHeading);
   return (
     <section
       id="student-works"
       className={`${styles.section} studio-dark studio-band studio-wrap`}
       aria-labelledby="creator-works-title"
+      data-site-section={twoRows ? studentWorksHeading.id : undefined}
     >
       <StudioCreatorHeading id="creator-works-title">
-        Роботи <span className="studio-hand">*студентів</span>
+        {twoRows ? <SiteCopy id="title">{text('title')}</SiteCopy> : text('title')}{' '}
+        <span className="studio-hand" data-site-field={twoRows ? 'accent' : undefined}>
+          {text('accent')}
+        </span>
       </StudioCreatorHeading>
-      <p className={styles.description}>
-        Кожна робота — шлях від «як налаштувати камеру» до розуміння композиції, світла, кольору й
-        ідеї зйомки.
+      <p className={styles.description} data-site-field={twoRows ? 'description' : undefined}>
+        {text('description')}
       </p>
-      <div className={styles.filters} role="group" aria-label="Техніка зйомки">
-        {devices.map((option) => (
-          <button
-            type="button"
-            key={option}
-            aria-pressed={device === option}
-            aria-controls="creator-work-rail"
-            onClick={() => selectDevice(option)}
-          >
-            {deviceLabels[option]}
-          </button>
-        ))}
-      </div>
+      {devices.length > 1 && (
+        <div className={styles.filters} role="group" aria-label="Техніка зйомки">
+          {devices.map((option) => (
+            <button
+              type="button"
+              key={option}
+              aria-pressed={device === option}
+              aria-controls="creator-work-rail"
+              onClick={() => selectDevice(option)}
+            >
+              {deviceLabels[option]}
+            </button>
+          ))}
+        </div>
+      )}
       <div
         id="creator-work-rail"
-        className={styles.rail}
-        data-inline-gallery={entries.length > 2 ? 'scroll' : ''}
+        className={twoRows ? `${styles.rail} ${styles.twoRows}` : styles.rail}
+        data-inline-gallery={twoRows ? undefined : entries.length > 2 ? 'scroll' : ''}
         ref={carousel.track}
         tabIndex={0}
         role="region"
-        aria-label={device === 'camera' ? 'Роботи на камеру' : 'Роботи на телефон'}
+        aria-label={
+          twoRows
+            ? 'Роботи студентів курсу'
+            : device === 'camera'
+              ? 'Роботи на камеру'
+              : 'Роботи на телефон'
+        }
         onKeyDown={carousel.onKeyDown}
       >
         {entries.map((work, index) => (
@@ -71,6 +87,7 @@ export function StudioCreatorWorks(props: StudioCreatorWorksProps) {
         <button
           type="button"
           aria-label="Попередня робота"
+          aria-controls="creator-work-rail"
           disabled={carousel.position.start}
           onClick={() => carousel.move(-1)}
         >
@@ -82,6 +99,7 @@ export function StudioCreatorWorks(props: StudioCreatorWorksProps) {
         <button
           type="button"
           aria-label="Наступна робота"
+          aria-controls="creator-work-rail"
           disabled={carousel.position.end}
           onClick={() => carousel.move(1)}
         >

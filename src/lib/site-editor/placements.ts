@@ -74,6 +74,23 @@ const routes = new Map<string, PlacementDefinition[]>([
   ['/student-work', named('intro', 'gallery', 'inquiry')],
   ['/reviews', named('intro', 'reviews', 'inquiry')],
   ['/contacts', named('intro', 'contacts')],
+  [
+    '/food-product-photography',
+    named(
+      'hero',
+      'intro',
+      'audience',
+      'benefits',
+      'gallery',
+      'curriculum',
+      'steps',
+      'faculty',
+      'reviews',
+      'packages',
+      'inquiry',
+      'studio-banner',
+    ),
+  ],
 ]);
 const creator = named(
   'hero',

@@ -13,15 +13,16 @@ export function StudioAcademyReviews({ page, variant = 'academy' }: StudioAcadem
   const { rail, active, maximum, select, onKeyDown } = useStudioHomeCarousel();
 
   const copy = brandReviewContent(variant, page);
+  const course = variant !== 'academy';
   return (
     <section
       data-site-section="reviews-heading"
-      id={variant === 'creator' ? 'program-reviews' : undefined}
+      id={course ? 'program-reviews' : undefined}
       className="studio-band studio-dark"
       aria-labelledby="academy-reviews-title"
     >
       <div className="studio-wrap">
-        {variant === 'creator' ? (
+        {course ? (
           <StudioCreatorHeading
             id="academy-reviews-title"
             label={<SiteCopy id="eyebrow">{copy.label}</SiteCopy>}
@@ -41,6 +42,11 @@ export function StudioAcademyReviews({ page, variant = 'academy' }: StudioAcadem
             </h2>
           </header>
         )}
+        {copy.frame && (
+          <p className={styles.foodIntro} data-site-field="intro">
+            {copy.frame.intro}
+          </p>
+        )}
         <div
           id="academy-reviews"
           className={styles.rail}
@@ -58,7 +64,7 @@ export function StudioAcademyReviews({ page, variant = 'academy' }: StudioAcadem
             >
               <header>
                 <h3 data-site-field="name">{review.name}</h3>
-                {variant === 'creator' ? (
+                {course ? (
                   <img
                     src={studioAssetUrl('/images/studio/creator/review-stars-088b2ea487ba.svg')}
                     alt="5 із 5"
@@ -80,9 +86,20 @@ export function StudioAcademyReviews({ page, variant = 'academy' }: StudioAcadem
                   {review.quote}
                 </blockquote>
               )}
-              <a className={styles.source} href={review.sourceUrl} target="_blank" rel="noreferrer">
-                Переглянути оригінал
-              </a>
+              {review.sourceUrl === '/reviews' ? (
+                <Link className={styles.source} href="/reviews">
+                  Усі відгуки
+                </Link>
+              ) : (
+                <a
+                  className={styles.source}
+                  href={review.sourceUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Переглянути оригінал
+                </a>
+              )}
             </article>
           ))}
         </div>
@@ -109,6 +126,12 @@ export function StudioAcademyReviews({ page, variant = 'academy' }: StudioAcadem
           </div>
           <Link href="/reviews">Усі відгуки</Link>
         </div>
+        {copy.frame && (
+          <footer className={styles.foodOutro}>
+            <p data-site-field="outro">{copy.frame.outro}</p>
+            <p data-site-field="note">{copy.frame.note}</p>
+          </footer>
+        )}
       </div>
     </section>
   );

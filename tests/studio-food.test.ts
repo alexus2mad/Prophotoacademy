@@ -91,24 +91,31 @@ describe('Food and product photography course page', () => {
     });
   });
 
-  it('opens the works on the phone tab, listed before the camera tab, in the curated order', async () => {
+  it('presents the 31 curated Food photographs as one numbered gallery before the curriculum', async () => {
     const $ = await render();
-    expect(
-      $('#student-works [aria-controls="creator-work-rail"]')
-        .map((_, button) => $(button).text())
-        .get(),
-    ).toEqual(['На телефон', 'На камеру']);
-    expect($('#student-works [aria-pressed="true"]').text()).toBe('На телефон');
-    const phone = program.workIds.filter(
-      (id) => content.works.find((work) => work.id === id)?.device === 'phone',
+    expect($('#student-works [aria-pressed]')).toHaveLength(0);
+    expect($('#student-works > div > [aria-live]').text()).toBe('1 / 31');
+    const phone = program.workIds.flatMap(
+      (id) => content.works.find((work) => work.id === id && work.device === 'phone') ?? [],
     );
-    expect(phone.slice(0, 3)).toEqual([
+    expect(phone).toHaveLength(31);
+    expect(phone.slice(0, 3).map((work) => work.id)).toEqual([
       'food-chocolate-pattern',
       'food-spice-test-tubes',
       'food-water-glass-splash',
     ]);
-    expect(phone.at(-1)).toBe('food-glass-splash-landscape');
-    expect($('#creator-work-rail img')).toHaveLength(phone.length);
+    expect(phone.at(-1)?.id).toBe('food-glass-splash-landscape');
+    expect(
+      $('#creator-work-rail img')
+        .map((_, node) => $(node).attr('data-site-field'))
+        .get(),
+    ).toEqual(phone.map((work) => work.imageId));
+    expect($('#creator-work-rail button[aria-haspopup="dialog"]')).toHaveLength(31);
+    expect($('#student-works').prev().attr('data-site-section')).toBe('benefits');
+    expect($('#student-works').next().attr('id')).toBe('program-curriculum');
+    expect($('#student-works [data-site-field="description"]').text()).toBe(
+      'Кожна робота — шлях від «як налаштувати камеру» до розуміння композиції, світла, кольору й ідеї зйомки.',
+    );
   });
 
   it('shows only the food course works in the rail', async () => {

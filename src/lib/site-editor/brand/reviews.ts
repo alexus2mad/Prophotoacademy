@@ -7,15 +7,12 @@ import type { BrandReviewVariant } from './types';
 export function brandReviewContent(variant: BrandReviewVariant, page?: SitePage) {
   const { sections, section } = sectionBindings(page);
   const heading = section('reviews-heading', 'Відгуки · заголовок');
-  const label = heading(
-    'eyebrow',
-    'Надзаголовок',
-    variant === 'creator' ? 'Відгуки' : 'Відгуки учнів',
-  );
+  const course = variant === 'creator' || variant === 'food';
+  const label = heading('eyebrow', 'Надзаголовок', course ? 'Відгуки' : 'Відгуки учнів');
   const title =
     variant === 'home'
       ? heading('title', 'Початок цитати', '«Мій бренд говорить одразу,')
-      : heading('title', 'Заголовок', variant === 'creator' ? 'Що кажуть' : 'Що кажуть випускники');
+      : heading('title', 'Заголовок', course ? 'Що кажуть' : 'Що кажуть випускники');
   const accent =
     variant === 'academy'
       ? ''
@@ -26,16 +23,38 @@ export function brandReviewContent(variant: BrandReviewVariant, page?: SitePage)
     variant === 'home'
       ? heading('author', 'Авторка цитати', 'Яна Тітова, власниця бренду взуття ручної роботи')
       : '';
+  const frame =
+    variant === 'food'
+      ? {
+          intro: heading(
+            'intro',
+            'Вступ',
+            'Тисячі випускників вже переконалися в тому, що неважливо, на що ви знімаєте, важливо те, як ви це робите',
+            'multiline',
+          ),
+          outro: heading(
+            'outro',
+            'Підсумок',
+            'Ми навчаємо бачити та вміти працювати з композицією, кольором, світлом та налаштуванням камери',
+            'multiline',
+          ),
+          note: heading('note', 'Підпис', 'Ви можете знімати на камеру, на телефон, на плівку'),
+        }
+      : undefined;
   const reviews = studioReviews.map((review) => {
     const field = section('review-' + review.id, 'Відгук · ' + review.name);
     return {
       ...review,
+      sourceUrl:
+        variant === 'food' && review.sourceUrl === 'https://www.prophotoacademy.com.ua/reviews'
+          ? '/reviews'
+          : review.sourceUrl,
       name: field('name', 'Ім’я', review.name),
       title: field('title', 'Заголовок', review.title),
       quote: field('quote', 'Текст відгуку', review.quote, 'multiline'),
     };
   });
-  return { sections, label, title, accent, prefix, end, credit, reviews };
+  return { sections, label, title, accent, prefix, end, credit, frame, reviews };
 }
 
 export function programReviewContent(originals: Testimonial[], page?: SitePage) {
