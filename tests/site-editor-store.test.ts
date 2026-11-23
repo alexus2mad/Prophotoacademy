@@ -10,6 +10,7 @@ import { sanitySave } from '../src/lib/site-editor/storage/sanity';
 import { legacyAcademyIndexPaths } from '../src/lib/navigation/academy';
 import { revalidatePath } from 'next/cache';
 import { newSitePage } from '../src/lib/site-editor/fields';
+import { validateEdit } from '../src/lib/site-editor/validation';
 import {
   createSiteDraft,
   getEditorPage,
@@ -180,14 +181,35 @@ describe('visual editor persistence and authorization', () => {
     vi.stubEnv('SITE_EDITOR_MODE', 'sanity');
     vi.stubEnv('NEXT_PUBLIC_SITE_URL', 'https://staging.prophotoacademy.com.ua');
     vi.stubEnv('NEXT_PUBLIC_SANITY_PROJECT_ID', 'p0dn7nmp');
+    vi.stubEnv('SITE_EDITOR_PROJECT_ID', '3k86g5dt');
     vi.stubEnv('NEXT_PUBLIC_SANITY_DATASET', 'production');
     vi.stubEnv('SANITY_LEARNING_DATASET', 'learning-staging');
     vi.stubEnv('SANITY_LEARNING_WRITE_TOKEN', 'private-learning');
     vi.stubEnv('SANITY_API_WRITE_TOKEN', '');
+    vi.stubEnv('SANITY_API_READ_TOKEN', 'legacy-project-reader');
     vi.stubEnv('SITE_EDITOR_WRITE_TOKEN', 'public-marketing');
     expect(siteEditorWritable()).toBe(true);
-    expect(storageConfig.marketingClient(true).config().token).toBe('public-marketing');
+    expect(storageConfig.marketingClient(true).config()).toMatchObject({
+      projectId: '3k86g5dt',
+      dataset: 'production',
+      token: 'public-marketing',
+    });
+    const published = storageConfig.marketingClient().config();
+    expect(published).toMatchObject({ projectId: '3k86g5dt', perspective: 'published' });
+    expect(published.token).toBeUndefined();
+    const edited = existing();
+    const photo = edited.sections[0].fields[2];
+    photo.value = 'https://cdn.sanity.io/images/3k86g5dt/production/daea-32x16.webp';
+    expect(validateEdit(edited, existing(), true, false)).toEqual(edited);
+    for (const otherProject of ['p0dn7nmp', 'sfzp6094']) {
+      photo.value = `https://cdn.sanity.io/images/${otherProject}/production/daea-32x16.webp`;
+      expect(() => validateEdit(edited, existing(), true, false)).toThrow();
+    }
     for (const [key, value] of [
+      ['SITE_EDITOR_PROJECT_ID', ''],
+      ['SITE_EDITOR_PROJECT_ID', 'p0dn7nmp'],
+      ['SITE_EDITOR_PROJECT_ID', 'sfzp6094'],
+      ['SITE_EDITOR_PROJECT_ID', 'other'],
       ['SITE_EDITOR_WRITE_TOKEN', ''],
       ['SITE_EDITOR_WRITE_TOKEN', 'private-learning'],
       ['SANITY_API_WRITE_TOKEN', 'generic'],
@@ -214,6 +236,11 @@ describe('visual editor persistence and authorization', () => {
     vi.stubEnv('NEXT_PUBLIC_ACADEMY_URL', 'https://prophotoacademy.com.ua');
     vi.stubEnv('SITE_EDITOR_WRITE_TOKEN', '');
     vi.stubEnv('SANITY_API_WRITE_TOKEN', 'existing');
+    vi.stubEnv('SANITY_API_READ_TOKEN', 'existing-reader');
+    expect(storageConfig.marketingClient().config()).toMatchObject({
+      projectId: 'sfzp6094',
+      token: 'existing-reader',
+    });
     expect(storageConfig.marketingClient(true).config().token).toBe('existing');
     vi.stubEnv('SITE_EDITOR_WRITE_TOKEN', 'dedicated');
     expect(storageConfig.marketingClient(true).config().token).toBe('dedicated');

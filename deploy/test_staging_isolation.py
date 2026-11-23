@@ -54,10 +54,15 @@ class StagingIsolation(unittest.TestCase):
 
     def test_staging_editor_is_independently_scoped(self):
         enabled = {**self.valid(), "SITE_EDITOR_MODE": "sanity",
+                   "SITE_EDITOR_PROJECT_ID": "3k86g5dt",
                    "NEXT_PUBLIC_SANITY_DATASET": "production",
                    "SITE_EDITOR_WRITE_TOKEN": "test-staging-marketing"}
         guard.validate(enabled)
         for key, value in (
+            ("SITE_EDITOR_PROJECT_ID", ""),
+            ("SITE_EDITOR_PROJECT_ID", "p0dn7nmp"),
+            ("SITE_EDITOR_PROJECT_ID", "sfzp6094"),
+            ("SITE_EDITOR_PROJECT_ID", "other"),
             ("SITE_EDITOR_WRITE_TOKEN", ""),
             ("SITE_EDITOR_WRITE_TOKEN", enabled["SANITY_LEARNING_WRITE_TOKEN"]),
             ("SANITY_API_WRITE_TOKEN", "test-generic"),

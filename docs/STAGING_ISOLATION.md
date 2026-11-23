@@ -21,7 +21,8 @@ resource limits reduce interference but do not provide two-server availability.
 | Release root | /srv/prophotoacademy | /srv/prophotoacademy-staging |
 | Environment file | /etc/prophotoacademy/runtime.env | /etc/prophotoacademy-staging/runtime.env |
 | Supabase project | bydmqmrbfjufsyhlayku | jxfyofiqhjmiguujrtdd (Ireland) |
-| Sanity project | sfzp6094 | p0dn7nmp |
+| Sanity learning project | sfzp6094 | p0dn7nmp |
+| Marketing editor project | Existing production configuration | 3k86g5dt (public marketing only) |
 | Private learning dataset | learning | learning-staging |
 | Payments | wayforpay | mock (no charge, no grants) |
 | Application email / Make | Existing production services | No production keys or hooks |

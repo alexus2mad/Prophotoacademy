@@ -43,6 +43,7 @@ are enabled. Automatic reboots are disabled; schedule them for kernel updates.
 | Previous verified release         | `fca572a2715c8ab68462a103582c2d39168fc082` | `fca572a2715c8ab68462a103582c2d39168fc082` |
 | Supabase project                  | `bydmqmrbfjufsyhlayku`                     | `jxfyofiqhjmiguujrtdd`                     |
 | Sanity project / learning dataset | `sfzp6094` / `learning`                    | `p0dn7nmp` / `learning-staging`            |
+| Marketing editor project / dataset | Uses the production installation's existing configuration | `3k86g5dt` / `production` |
 | Payment mode                      | `wayforpay`                                | `mock`                                     |
 
 `current` selects the active release under each release root. Exactly the active

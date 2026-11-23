@@ -3,7 +3,7 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { HttpError } from '../http';
 import { legacyAcademyIndexPaths } from '../navigation/academy';
-import { editorMode, localDirectory } from './storage/config';
+import { editorMode, localDirectory, marketingImagePrefix } from './storage/config';
 import type { SitePage } from './types';
 
 export const pagePathSchema = z
@@ -92,15 +92,9 @@ function validateImage(src: string, original?: string) {
     existsSync(path.join('public', src.slice(1)))
   )
     return;
-  const root =
-    'https://cdn.sanity.io/images/' +
-    process.env.NEXT_PUBLIC_SANITY_PROJECT_ID +
-    '/' +
-    process.env.NEXT_PUBLIC_SANITY_DATASET +
-    '/';
+  const root = marketingImagePrefix();
   if (
-    process.env.NEXT_PUBLIC_SANITY_PROJECT_ID &&
-    process.env.NEXT_PUBLIC_SANITY_DATASET &&
+    root &&
     src.startsWith(root) &&
     /^[a-f0-9]+-\d+x\d+\.(?:webp|avif|jpe?g|png)$/.test(src.slice(root.length))
   )

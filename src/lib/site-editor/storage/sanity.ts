@@ -1,5 +1,10 @@
 import { createHash } from 'node:crypto';
-import { conflict, marketingClient, marketingDatasetConfigured } from './config';
+import {
+  conflict,
+  marketingClient,
+  marketingDatasetConfigured,
+  marketingImagePrefix,
+} from './config';
 import type { PageState, PublicDocument } from './types';
 import type { SitePage } from '../types';
 
@@ -54,15 +59,10 @@ export async function sanityPublished(path?: string) {
 // Sanity arrays need stable keys. Public API and render values keep the compact page shape.
 function governedContent(page: SitePage) {
   const assets = new Set<string>();
-  const prefix =
-    'https://cdn.sanity.io/images/' +
-    process.env.NEXT_PUBLIC_SANITY_PROJECT_ID +
-    '/' +
-    process.env.NEXT_PUBLIC_SANITY_DATASET +
-    '/';
+  const prefix = marketingImagePrefix();
   for (const section of page.sections) {
     for (const field of section.fields) {
-      if (field.kind !== 'image' || !field.value.startsWith(prefix)) continue;
+      if (!prefix || field.kind !== 'image' || !field.value.startsWith(prefix)) continue;
       const file = field.value.slice(prefix.length).split('?')[0];
       if (/^[a-f0-9]+-\d+x\d+\.[a-z0-9]+$/.test(file))
         assets.add('image-' + file.replace('.', '-'));

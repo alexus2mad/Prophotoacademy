@@ -65,6 +65,8 @@ def validate(env):
         raise ValueError("Staging editor must use Sanity or readonly mode")
     editor_token = env.get("SITE_EDITOR_WRITE_TOKEN")
     if editor_mode == "sanity" or editor_token:
+        if env.get("SITE_EDITOR_PROJECT_ID") != "3k86g5dt":
+            raise ValueError("Staging editor requires its dedicated marketing-only Sanity project")
         if env.get("NEXT_PUBLIC_SANITY_DATASET") != "production":
             raise ValueError("Staging editor requires the marketing dataset in the staging project")
         if not editor_token or editor_token == env.get("SANITY_LEARNING_WRITE_TOKEN"):
