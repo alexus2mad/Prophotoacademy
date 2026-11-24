@@ -5,13 +5,14 @@ import type {
   ImageSource,
   LibraryImage,
 } from '@/lib/site-editor/image-library/types';
+import type { EditorTarget } from '@/lib/site-editor/storage/types';
 import { browseImages, uploadImage } from './requests';
 
 const empty: ImageLibraryResult = { images: [], total: 0, next: null };
 const errorText = (error: unknown) =>
   error instanceof Error ? error.message : 'Не вдалося завантажити зображення.';
 
-export function useSiteImageLibrary() {
+export function useSiteImageLibrary(target: EditorTarget = 'production') {
   const dialog = useRef<HTMLDialogElement>(null);
   const input = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState('');
@@ -38,7 +39,7 @@ export function useSiteImageLibrary() {
     setError('');
     const timer = setTimeout(
       () => {
-        browseImages(query, source, 0, controller.signal)
+        browseImages(query, source, 0, controller.signal, target)
           .then((data) => {
             if (!controller.signal.aborted) setResult(data);
           })
@@ -63,7 +64,7 @@ export function useSiteImageLibrary() {
     setMore(true);
     setError('');
     try {
-      const next = await browseImages(query, source, result.next, controller.signal);
+      const next = await browseImages(query, source, result.next, controller.signal, target);
       if (!controller.signal.aborted)
         setResult((old) => ({
           ...next,
@@ -84,7 +85,7 @@ export function useSiteImageLibrary() {
     setUploading(true);
     setError('');
     try {
-      const url = await uploadImage(file, controller.signal);
+      const url = await uploadImage(file, controller.signal, target);
       if (!controller.signal.aborted) {
         select({ url, name: file.name, context: 'Завантаження' });
         setSource('uploads');

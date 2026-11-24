@@ -57,6 +57,10 @@ export type SitePage = {
 export type SitePageSummary = Pick<SitePage, 'path' | 'title' | 'kind'> & {
   hasDraft: boolean;
   published: boolean;
+  /** ISO time of the latest saved change, when the storage records it. */
+  updatedAt?: string | null;
+  /** First photograph of the page, for the list preview. */
+  cover?: string;
 };
 export type EditorPage = {
   page: SitePage;
@@ -66,4 +70,22 @@ export type EditorPage = {
 };
 export type SiteRouteProps = {
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
+};
+export type PageGroupId =
+  | 'home'
+  | 'courses'
+  | 'workshops'
+  | 'training'
+  | 'services'
+  | 'about'
+  | 'legal'
+  | 'other';
+export type PageGroup<T> = { id: PageGroupId; label: string; pages: T[] };
+export type EnvironmentState = { published: boolean; hasDraft: boolean; updatedAt: string | null };
+/** A page address with its state on each environment the admin manages. */
+export type BrowserPage = Pick<SitePage, 'path' | 'title' | 'kind'> & {
+  cover?: string;
+  production?: EnvironmentState;
+  staging?: EnvironmentState;
+  differs?: 'new' | 'changed';
 };

@@ -1,9 +1,23 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { useBlockComposition } from '@/components/organisms/SiteBlockInspector/hooks';
-import type { EditorPage, SitePage, SiteField, TextStyle } from '@/lib/site-editor/types';
+import type {
+  EditorPage,
+  SitePage,
+  SitePageSummary,
+  SiteField,
+  TextStyle,
+} from '@/lib/site-editor/types';
+import type { EditorTarget } from '@/lib/site-editor/storage/types';
+import type { SyncStatus } from '@/lib/site-editor/sync/types';
+import { mergeEnvironments } from '@/lib/site-editor/environments';
 import type { PreviewField } from '@/components/molecules/SiteEditorPreview/types';
-import { EditorRequestError, fetchEditorPage, writeEditorPage } from './requests';
+import {
+  EditorRequestError,
+  fetchEditorPage,
+  fetchStagingDifferences,
+  writeEditorPage,
+} from './requests';
 import type {
   CanvasImageTarget,
   EditorPanel,
@@ -14,15 +28,28 @@ import type {
 
 const leave = 'Є незбережені зміни. Залишити їх і продовжити?';
 
-function setAddress(path: string | null) {
+function setAddress(path: string | null, target: EditorTarget) {
   const url = new URL(window.location.href);
   if (path) url.searchParams.set('page', path);
   else url.searchParams.delete('page');
+  if (path && target === 'staging') url.searchParams.set('env', target);
+  else url.searchParams.delete('env');
   window.history.replaceState(window.history.state, '', url);
 }
 
-export function useSiteContentEditor({ initialPages, writable, sync }: SiteContentEditorProps) {
+export function useSiteContentEditor({
+  initialPages,
+  stagingPages,
+  writable,
+  sync,
+}: SiteContentEditorProps) {
   const [pages, setPages] = useState(initialPages);
+  const [stagingList, setStagingList] = useState(stagingPages);
+  const environments: EditorTarget[] = stagingPages ? ['staging', 'production'] : ['production'];
+  // Staging is the working stage; the production admin opens there when it manages both.
+  const [target, setTarget] = useState<EditorTarget>(stagingPages ? 'staging' : 'production');
+  const [differences, setDifferences] = useState<Record<string, SyncStatus>>({});
+  const [lastPath, setLastPath] = useState<string>();
   // null: closed; '' : open; a path: handed over from the staging editor.
   const [syncTarget, setSyncTarget] = useState<string | null>(null);
   const [record, setRecord] = useState<EditorPage | null>(null);
@@ -33,7 +60,6 @@ export function useSiteContentEditor({ initialPages, writable, sync }: SiteConte
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [conflict, setConflict] = useState(false);
-  const [query, setQuery] = useState('');
   const [creating, setCreating] = useState(false);
   const [previewKey, setPreviewKey] = useState(0);
   const lock = useRef(false);
@@ -58,19 +84,22 @@ export function useSiteContentEditor({ initialPages, writable, sync }: SiteConte
     onSelect: selectField,
     onMessage: setMessage,
   });
-  function remember(result: EditorPage) {
-    setPages((list) => {
-      const entry = {
+  function remember(result: EditorPage, env: EditorTarget = target) {
+    const merge = (list: SitePageSummary[] = []) => {
+      const prior = list.find((p) => p.path === result.page.path);
+      const entry: SitePageSummary = {
+        ...prior,
         path: result.page.path,
         title: result.page.title,
         kind: result.page.kind,
         hasDraft: result.hasDraft,
         published: result.published,
+        updatedAt: new Date().toISOString(),
       };
-      return list.some((p) => p.path === entry.path)
-        ? list.map((p) => (p.path === entry.path ? entry : p))
-        : [...list, entry];
-    });
+      return prior ? list.map((p) => (p.path === entry.path ? entry : p)) : [...list, entry];
+    };
+    if (env === 'staging') setStagingList((list) => merge(list));
+    else setPages((list) => merge(list));
   }
   function openSync(path = '') {
     if (lock.current) return;
@@ -86,7 +115,17 @@ export function useSiteContentEditor({ initialPages, writable, sync }: SiteConte
     window.history.replaceState(window.history.state, '', url);
     requestAnimationFrame(() => heading.current?.focus());
   }
-  function accept(result: EditorPage) {
+  function refreshDifferences(signal?: AbortSignal) {
+    if (!stagingPages) return;
+    fetchStagingDifferences(signal)
+      .then((found) => {
+        if (!signal?.aborted) setDifferences(found);
+      })
+      .catch(() => {
+        // The list still works without the comparison; the sync view reports its own errors.
+      });
+  }
+  function accept(result: EditorPage, env: EditorTarget = target) {
     setImageTarget(null);
     blocks.closeLibrary();
     setRecord(result);
@@ -94,12 +133,22 @@ export function useSiteContentEditor({ initialPages, writable, sync }: SiteConte
     setSectionId((id) =>
       result.page.sections.some((s) => s.id === id) ? id : (result.page.sections[0]?.id ?? ''),
     );
-    remember(result);
-    setAddress(result.page.path);
+    remember(result, env);
+    setTarget(env);
+    setLastPath(result.page.path);
+    setAddress(result.page.path, env);
     setCreating(false);
     setConflict(false);
     setPreviewKey((n) => n + 1);
   }
+
+  useEffect(() => {
+    const controller = new AbortController();
+    refreshDifferences(controller.signal);
+    return () => controller.abort();
+    // Loaded once on mount; publishing refreshes it explicitly.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const handed = new URL(window.location.href).searchParams.get('sync');
@@ -107,14 +156,17 @@ export function useSiteContentEditor({ initialPages, writable, sync }: SiteConte
   }, [sync]);
 
   useEffect(() => {
-    const path = new URL(window.location.href).searchParams.get('page');
+    const params = new URL(window.location.href).searchParams;
+    const path = params.get('page');
     if (!path) return;
+    const env: EditorTarget =
+      params.get('env') === 'staging' && stagingPages ? 'staging' : 'production';
     const controller = new AbortController();
     setTask('load');
     lock.current = true;
-    fetchEditorPage(path, controller.signal)
+    fetchEditorPage(path, env, controller.signal)
       .then((result) => {
-        if (!controller.signal.aborted) accept(result);
+        if (!controller.signal.aborted) accept(result, env);
       })
       .catch((e: unknown) => {
         if (!controller.signal.aborted)
@@ -184,10 +236,10 @@ export function useSiteContentEditor({ initialPages, writable, sync }: SiteConte
   function focusHeading() {
     requestAnimationFrame(() => heading.current?.focus());
   }
-  function open(path: string) {
+  function open(path: string, env: EditorTarget = target) {
     if (dirty && !window.confirm(leave)) return;
     void perform('load', async () => {
-      accept(await fetchEditorPage(path));
+      accept(await fetchEditorPage(path, env), env);
       setPanel('preview');
       focusHeading();
     });
@@ -203,7 +255,7 @@ export function useSiteContentEditor({ initialPages, writable, sync }: SiteConte
     setMessage('');
     setConflict(false);
     setCreating(false);
-    setAddress(null);
+    setAddress(null, target);
     setPanel('fields');
     focusHeading();
   }
@@ -263,14 +315,21 @@ export function useSiteContentEditor({ initialPages, writable, sync }: SiteConte
     )
       return;
     void perform(action, async () => {
-      accept(await writeEditorPage({ action, page, revision: record.revision }));
-      setMessage(action === 'save' ? 'Чернетку збережено' : 'Зміни опубліковано на сайті');
+      accept(await writeEditorPage({ action, page, revision: record.revision, env: target }));
+      setMessage(
+        action === 'save'
+          ? 'Чернетку збережено'
+          : target === 'staging'
+            ? 'Зміни опубліковано на staging'
+            : 'Зміни опубліковано на сайті',
+      );
+      if (action === 'publish') refreshDifferences();
     });
   }
   function create(values: NewPageValues) {
     if (writable)
       void perform('create', async () => {
-        accept(await writeEditorPage({ action: 'create', ...values }));
+        accept(await writeEditorPage({ action: 'create', ...values, env: target }));
         setMessage('Сторінку створено як чернетку');
         setPanel('fields');
         focusHeading();
@@ -288,8 +347,6 @@ export function useSiteContentEditor({ initialPages, writable, sync }: SiteConte
     panel,
     setPanel,
     previewKey,
-    query,
-    setQuery,
     error,
     message,
     conflict,
@@ -312,6 +369,14 @@ export function useSiteContentEditor({ initialPages, writable, sync }: SiteConte
     syncTarget,
     openSync,
     closeSync,
-    remember,
+    target,
+    setTarget,
+    environments,
+    lastPath,
+    browserPages: mergeEnvironments(pages, stagingList, differences),
+    syncPublished: (result: EditorPage) => {
+      remember(result, 'production');
+      refreshDifferences();
+    },
   };
 }

@@ -11,6 +11,7 @@ import {
   stagingMarketingSource,
 } from '../storage/config';
 import { editorStates, siteEditorWritable } from '../storage/repository';
+import { currentTarget } from '../storage/target';
 import { writeSitePage } from '../store';
 import type { SitePage } from '../types';
 import { pageSchema } from '../validation';
@@ -28,7 +29,11 @@ const uncached = { cache: 'no-store' } as const;
 const stagingImages = `https://cdn.sanity.io/images/${stagingMarketingSource.projectId}/${stagingMarketingSource.dataset}/`;
 
 function requireProduction() {
-  if (contentSyncRole() !== 'production' || !siteEditorWritable())
+  if (
+    contentSyncRole() !== 'production' ||
+    currentTarget() !== 'production' ||
+    !siteEditorWritable()
+  )
     throw new HttpError(404, 'Синхронізація доступна лише в редакторі продакшну.');
   const toImages = marketingImagePrefix();
   if (!toImages) throw new HttpError(503, 'Сховище контенту продакшну не налаштовано.');

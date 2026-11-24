@@ -12,8 +12,8 @@ const sources: [ImageSource, string][] = [
   ['academy', 'Фото академії'],
 ];
 
-export function SiteImageLibrary({ current, onChoose, onClose }: SiteImageLibraryProps) {
-  const ui = useSiteImageLibrary();
+export function SiteImageLibrary({ current, target, onChoose, onClose }: SiteImageLibraryProps) {
+  const ui = useSiteImageLibrary(target);
   return (
     <dialog
       ref={ui.dialog}

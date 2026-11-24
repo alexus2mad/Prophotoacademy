@@ -8,6 +8,8 @@ export type SiteContentEditorProps = {
   tickets?: WorkshopTicketChoice[];
   /** Production lists staging changes; staging hands a published page to production. */
   sync?: 'production' | 'staging' | null;
+  /** Staging pages, when this production admin also manages staging content. */
+  stagingPages?: SitePageSummary[];
 };
 export type NewPageValues = Pick<SitePage, 'path' | 'title' | 'kind'> & {
   template: PageTemplateId;

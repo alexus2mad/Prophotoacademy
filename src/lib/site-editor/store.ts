@@ -84,8 +84,20 @@ export async function listEditorPages() {
   const stored = new Map(states.map((s) => [s.path, s]));
   const seedMap = new Map(seeds.map((p) => [p.path, p]));
   return Array.from(new Set([...seedMap.keys(), ...stored.keys()]), (path) => {
-    const { page, published, hasDraft } = view(stored.get(path), seedMap.get(path));
-    return { path, kind: page.kind, title: page.title, published, hasDraft };
+    const state = stored.get(path);
+    const { page, published, hasDraft } = view(state, seedMap.get(path));
+    const cover = page.sections
+      .flatMap((section) => section.fields)
+      .find((field) => field.kind === 'image' && field.value)?.value;
+    return {
+      path,
+      kind: page.kind,
+      title: page.title,
+      published,
+      hasDraft,
+      updatedAt: state?.updatedAt ?? null,
+      ...(cover && { cover }),
+    };
   });
 }
 

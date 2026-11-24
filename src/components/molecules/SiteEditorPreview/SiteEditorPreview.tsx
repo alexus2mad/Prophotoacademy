@@ -2,6 +2,7 @@ import { createPortal } from 'react-dom';
 import { SitePreviewSlot } from '@/components/molecules/SitePreviewSlot/SitePreviewSlot';
 import { SiteMoveBlockDialog } from '@/components/molecules/SiteMoveBlockDialog/SiteMoveBlockDialog';
 import { blocksAtPlacement } from '@/lib/site-editor/placements';
+import { previewHref } from '@/lib/site-editor/environments';
 import { Monitor, Smartphone } from 'lucide-react';
 import { useSiteEditorPreview } from './hooks';
 import type { SiteEditorPreviewProps } from './types';
@@ -77,7 +78,7 @@ export function SiteEditorPreview(props: SiteEditorPreviewProps) {
           ref={h.frame}
           key={path + ':' + version}
           title={'Попередній перегляд: ' + title}
-          src={path + '?site-editor-preview=1'}
+          src={previewHref(path, props.target ?? 'production', 'draft')}
           sandbox="allow-same-origin"
           onLoad={h.guardFrame}
           style={{

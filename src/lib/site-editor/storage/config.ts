@@ -1,6 +1,8 @@
 import path from 'node:path';
 import { createClient } from '@sanity/client';
 import { HttpError } from '../../http';
+import { currentTarget, runInTarget } from './target';
+import type { EditorTarget } from './types';
 
 const stagingLearningProject = 'p0dn7nmp';
 const stagingMarketingProject = '3k86g5dt';
@@ -25,17 +27,30 @@ function isStaging() {
   );
 }
 
+const stagingScope = () => currentTarget() === 'staging';
+
 function marketingProjectId() {
+  if (stagingScope()) return stagingMarketingProject;
+  return installationProjectId();
+}
+
+function installationProjectId() {
   if (isStaging() || isProductionAcademy()) return process.env.SITE_EDITOR_PROJECT_ID;
   return process.env.SITE_EDITOR_PROJECT_ID || process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
 }
 
 export function marketingImagePrefix() {
   if (!marketingDatasetConfigured()) return undefined;
-  return `https://cdn.sanity.io/images/${marketingProjectId()}/${process.env.NEXT_PUBLIC_SANITY_DATASET}/`;
+  return `https://cdn.sanity.io/images/${marketingProjectId()}/${marketingDataset()}/`;
+}
+
+function marketingDataset() {
+  return stagingScope() ? stagingMarketingDataset : process.env.NEXT_PUBLIC_SANITY_DATASET;
 }
 
 export function marketingWriteToken() {
+  if (stagingScope())
+    return stagingTargetAvailable() ? process.env.SITE_EDITOR_STAGING_WRITE_TOKEN : undefined;
   const writer = process.env.SITE_EDITOR_WRITE_TOKEN;
   if (!isStaging() && !isProductionAcademy() && !process.env.SITE_EDITOR_PROJECT_ID)
     return writer || process.env.SANITY_API_WRITE_TOKEN;
@@ -67,10 +82,11 @@ export function localDirectory() {
 
 export function marketingClient(write = false) {
   const projectId = marketingProjectId();
-  const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
-  const readToken = process.env.SITE_EDITOR_PROJECT_ID
-    ? undefined
-    : process.env.SANITY_API_READ_TOKEN;
+  const dataset = marketingDataset();
+  const readToken =
+    stagingScope() || process.env.SITE_EDITOR_PROJECT_ID
+      ? undefined
+      : process.env.SANITY_API_READ_TOKEN;
   const token = write ? marketingWriteToken() : readToken;
   if (
     editorMode() !== 'sanity' ||
@@ -91,10 +107,15 @@ export function marketingClient(write = false) {
 }
 
 export function marketingDatasetConfigured() {
+  if (stagingScope()) return stagingTargetAvailable();
+  return installationDatasetConfigured();
+}
+
+function installationDatasetConfigured() {
   if (isProductionAcademy() || process.env.SITE_EDITOR_PROJECT_ID === productionMarketingProject) {
     return (
       !isStaging() &&
-      marketingProjectId() === productionMarketingProject &&
+      installationProjectId() === productionMarketingProject &&
       process.env.NEXT_PUBLIC_SANITY_PROJECT_ID === productionLearningProject &&
       process.env.NEXT_PUBLIC_SANITY_DATASET === 'production' &&
       process.env.SANITY_LEARNING_DATASET === 'learning'
@@ -102,7 +123,7 @@ export function marketingDatasetConfigured() {
   }
   if (isStaging()) {
     return (
-      marketingProjectId() === stagingMarketingProject &&
+      installationProjectId() === stagingMarketingProject &&
       process.env.NEXT_PUBLIC_SANITY_PROJECT_ID === stagingLearningProject &&
       process.env.NEXT_PUBLIC_SANITY_DATASET === 'production' &&
       process.env.SANITY_LEARNING_DATASET === stagingLearning
@@ -118,9 +139,10 @@ export function marketingDatasetConfigured() {
 }
 
 /** Staging's public marketing pages and assets, readable without credentials. */
+const stagingMarketingDataset = 'production';
 export const stagingMarketingSource = {
   projectId: stagingMarketingProject,
-  dataset: 'production',
+  dataset: stagingMarketingDataset,
   origin: stagingOrigin,
 } as const;
 export const productionEditorOrigin = productionOrigins[0];
@@ -130,11 +152,33 @@ export const productionEditorOrigin = productionOrigins[0];
  * Staging never receives production credentials.
  */
 export function contentSyncRole(): 'production' | 'staging' | null {
-  if (editorMode() !== 'sanity' || !marketingDatasetConfigured()) return null;
-  if (isProductionAcademy() && marketingProjectId() === productionMarketingProject)
+  if (editorMode() !== 'sanity' || !installationDatasetConfigured()) return null;
+  if (isProductionAcademy() && installationProjectId() === productionMarketingProject)
     return 'production';
-  if (isStaging() && marketingProjectId() === stagingMarketingProject) return 'staging';
+  if (isStaging() && installationProjectId() === stagingMarketingProject) return 'staging';
   return null;
+}
+
+/**
+ * The production admin also manages staging content with a dedicated staging writer.
+ * Staging itself never holds a production credential.
+ */
+export function stagingTargetAvailable() {
+  const writer = process.env.SITE_EDITOR_STAGING_WRITE_TOKEN;
+  const others = [
+    process.env.SITE_EDITOR_WRITE_TOKEN,
+    process.env.SANITY_LEARNING_WRITE_TOKEN,
+    process.env.SANITY_API_WRITE_TOKEN,
+    process.env.SANITY_API_READ_TOKEN,
+  ];
+  return contentSyncRole() === 'production' && !!writer && !others.includes(writer);
+}
+
+/** Run editor storage work against one environment's marketing content. */
+export function withEditorTarget<T>(target: EditorTarget, work: () => T): T {
+  if (target === 'staging' && !stagingTargetAvailable())
+    throw new HttpError(404, 'Керування staging недоступне в цьому редакторі.');
+  return runInTarget(target, work);
 }
 
 export function unavailable() {

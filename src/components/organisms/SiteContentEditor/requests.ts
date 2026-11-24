@@ -1,3 +1,5 @@
+import type { EditorTarget } from '@/lib/site-editor/storage/types';
+import type { SyncOverview } from '@/lib/site-editor/sync/types';
 import type { EditorPage } from '@/lib/site-editor/types';
 
 const endpoint = '/api/admin/site-content';
@@ -23,10 +25,20 @@ async function readResponse<T>(response: Response): Promise<T> {
   return json as T;
 }
 
-export async function fetchEditorPage(path: string, signal?: AbortSignal) {
+export async function fetchEditorPage(path: string, env: EditorTarget, signal?: AbortSignal) {
+  const params = new URLSearchParams({ path });
+  if (env === 'staging') params.set('env', env);
   return readResponse<EditorPage>(
-    await fetch(endpoint + '?path=' + encodeURIComponent(path), { signal, cache: 'no-store' }),
+    await fetch(endpoint + '?' + params, { signal, cache: 'no-store' }),
   );
+}
+
+/** Pages whose published staging version is new on production or differs from it. */
+export async function fetchStagingDifferences(signal?: AbortSignal) {
+  const overview = await readResponse<SyncOverview>(
+    await fetch(endpoint + '/sync', { signal, cache: 'no-store' }),
+  );
+  return Object.fromEntries(overview.candidates.map((c) => [c.path, c.status]));
 }
 
 export async function writeEditorPage(payload: object) {

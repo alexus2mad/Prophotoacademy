@@ -2,6 +2,18 @@
 
 Administrators open **Сторінки сайту** in the Academy workspace at `/admin/content`. Find a page by Ukrainian title or public path. Click or tap editable text on the page and type where the text appears. Keyboard users can focus a field and press Enter. Escape restores the value from when the active edit began.
 
+## Одна адмінка для staging і сайту
+
+Основна адмінка сторінок — на продакшні: `https://prophotoacademy.com.ua/admin/content`. Тут можна працювати і з staging, і з сайтом.
+
+- **Перелік сторінок** згруповано за розділами сайту: Головна та Академія, Курси, Воркшопи, Навчання на замовлення, Студія, магазин та AI, Про академію, Юридичні документи, Інші сторінки. Біля кожної сторінки дві позначки: **S** — staging, **P** — сайт. Зелена — опубліковано, жовта — є чернетка, синя — версія на staging відрізняється від сайту, порожня — сторінки там немає. Пошук шукає за назвою або адресою.
+- **Панель сторінки** праворуч показує стан на обох середовищах, дату останньої зміни й живий перегляд. Перемикачі над переглядом: **Комп’ютер / Телефон**, **Чернетка / Опубліковано** (якщо є і те, і те) та **Staging / Prod** над панеллю. Перегляд нічого не зберігає, кнопки оплати в ньому не працюють. На телефоні спершу показано перелік, а панель відкривається після вибору сторінки.
+- **Робочий порядок:** оберіть **Staging**, натисніть **Редагувати на Staging**, збережіть і опублікуйте на staging. Перевірте сторінку там, зокрема тестову оплату. Потім натисніть **Опублікувати на Prod** і підтвердьте, як описано нижче. Нові сторінки створюються в середовищі, вибраному в панелі.
+- Редагувати можна й одразу **Prod**, наприклад для термінового виправлення тексту. Публікація на Prod змінює сайт одразу.
+- **Редактор на staging** (`https://staging.prophotoacademy.com.ua/admin/content`) працює й далі — для шаблонів і блоків, яких ще немає на продакшні. Він показує посилання на ту саму сторінку в основній адмінці.
+
+Production holds a dedicated staging marketing writer, `SITE_EDITOR_STAGING_WRITE_TOKEN`, for project `3k86g5dt`. It must differ from every other credential. Each editor request carries its target (`env=staging`), and storage, photo uploads, the photo library and validation resolve to that project for the request only. Staging never holds production credentials, and each environment keeps its own payment mode.
+
 ## Як доручити редагування агенту
 
 Навичка **prophoto-editor** дає змогу працювати з цим редактором через Codex або Claude Code. Агенту потрібен браузер, яким він може керувати. Увійдіть у ньому до облікового запису адміністратора Академії.

@@ -1,5 +1,5 @@
 'use client';
-import { ArrowLeft, ArrowRight, Plus, RefreshCw, Search, Send } from 'lucide-react';
+import { ArrowLeft, Plus, RefreshCw, Send } from 'lucide-react';
 import { Button } from '@/components/atoms/Button/Button';
 import { SiteBlockActions } from '@/components/molecules/SiteBlockActions/SiteBlockActions';
 import { SiteBlockLibrary } from '@/components/molecules/SiteBlockLibrary/SiteBlockLibrary';
@@ -10,12 +10,16 @@ import { blocksAtPlacement, pagePlacements } from '@/lib/site-editor/placements'
 import { SiteEditorPreview } from '@/components/molecules/SiteEditorPreview/SiteEditorPreview';
 import { SitePageCreate } from '@/components/molecules/SitePageCreate/SitePageCreate';
 import { SiteContentSync } from '@/components/organisms/SiteContentSync/SiteContentSync';
-import { productionSyncHref } from '@/lib/site-editor/sync/links';
+import { SitePageBrowser } from '@/components/organisms/SitePageBrowser/SitePageBrowser';
+import { environmentLabels } from '@/lib/site-editor/environments';
+import {
+  productionEditorHref,
+  productionEditorRoot,
+  productionSyncHref,
+} from '@/lib/site-editor/sync/links';
 import { useSiteContentEditor } from './hooks';
 import type { SiteContentEditorProps } from './types';
 import styles from './SiteContentEditor.module.css';
-
-const kinds = { home: 'Головна', course: 'Курс', workshop: 'Воркшоп', landing: 'Лендинг' };
 
 export function SiteContentEditor(props: SiteContentEditorProps) {
   const h = useSiteContentEditor(props);
@@ -35,10 +39,7 @@ export function SiteContentEditor(props: SiteContentEditorProps) {
     .find((s) => s.id === h.imageTarget?.sectionId)
     ?.fields.find((f) => f.id === h.imageTarget?.fieldId);
   const customLanding = page?.sections.some((s) => s.id === 'landing-cover') ?? false;
-  const filter = h.query.trim().toLocaleLowerCase('uk');
-  const visiblePages = h.pages.filter((p) =>
-    (p.title + ' ' + p.path + ' ' + kinds[p.kind]).toLocaleLowerCase('uk').includes(filter),
-  );
+  const both = h.environments.length > 1;
   const status = h.dirty
     ? 'Незбережені зміни'
     : record?.hasDraft
@@ -57,7 +58,14 @@ export function SiteContentEditor(props: SiteContentEditorProps) {
               <h1 ref={h.heading} tabIndex={-1}>
                 {page.title}
               </h1>
-              <p className={styles.path}>{page.path}</p>
+              <p className={styles.path}>
+                {both && (
+                  <span className={styles.envBadge} data-env={h.target}>
+                    {environmentLabels[h.target]}
+                  </span>
+                )}
+                {page.path}
+              </p>
             </div>
             <div className={styles.actions}>
               <Button
@@ -78,7 +86,11 @@ export function SiteContentEditor(props: SiteContentEditorProps) {
                 disabled={disabled || h.dirty || !record.hasDraft || h.conflict}
                 onClick={() => h.save('publish')}
               >
-                {h.task === 'publish' ? 'Публікуємо…' : 'Опублікувати'}
+                {h.task === 'publish'
+                  ? 'Публікуємо…'
+                  : both
+                    ? 'Опублікувати на ' + environmentLabels[h.target]
+                    : 'Опублікувати'}
               </Button>
               {props.sync === 'staging' &&
                 (h.dirty || record.hasDraft || !record.published ? (
@@ -102,6 +114,12 @@ export function SiteContentEditor(props: SiteContentEditorProps) {
                 ))}
             </div>
           </header>
+          {props.sync === 'staging' && (
+            <p className={styles.mainAdmin}>
+              Цю сторінку можна редагувати й в основній адмінці на продакшні.{' '}
+              <a href={productionEditorHref(page.path, 'staging')}>Відкрити там</a>
+            </p>
+          )}
           {props.sync === 'staging' && (
             <p id="site-production-handoff" className={styles.handoffHint}>
               {h.dirty || record.hasDraft || !record.published
@@ -242,6 +260,7 @@ export function SiteContentEditor(props: SiteContentEditorProps) {
                 onMoveTo={h.blocks.moveTo}
                 focusNewBlock={h.blocks.focusNewBlock}
                 version={h.previewKey}
+                target={h.target}
               />
             </div>
           </div>
@@ -255,6 +274,7 @@ export function SiteContentEditor(props: SiteContentEditorProps) {
           {h.imageTarget?.path === page.path && currentImage?.kind === 'image' && (
             <SiteImageLibrary
               current={currentImage.value}
+              target={h.target}
               onChoose={h.applyImage}
               onClose={() => h.setImageTarget(null)}
             />
@@ -264,7 +284,7 @@ export function SiteContentEditor(props: SiteContentEditorProps) {
         <SiteContentSync
           focusPath={h.syncTarget || undefined}
           onClose={h.closeSync}
-          onPublished={h.remember}
+          onPublished={h.syncPublished}
         />
       ) : (
         <>
@@ -299,53 +319,44 @@ export function SiteContentEditor(props: SiteContentEditorProps) {
               Режим перегляду. Для збереження та публікації підключіть сховище контенту
             </p>
           )}
+          {props.sync === 'staging' && (
+            <p className={styles.mainAdmin}>
+              Основна адмінка сторінок — на продакшні, там можна керувати і staging, і сайтом. Цей
+              редактор залишено для шаблонів, яких ще немає на продакшні.{' '}
+              <a href={productionEditorRoot}>Відкрити основну адмінку</a>
+            </p>
+          )}
           {h.creating ? (
-            <SitePageCreate busy={busy} onCancel={h.library} onCreate={h.create} />
+            <>
+              {both && (
+                <p role="status" className={styles.notice}>
+                  Сторінку буде створено на {environmentLabels[h.target]}
+                </p>
+              )}
+              <SitePageCreate busy={busy} onCancel={h.library} onCreate={h.create} />
+            </>
           ) : (
             <>
-              <label className={styles.search}>
-                <Search size={19} aria-hidden="true" />
-                <input
-                  type="search"
-                  aria-label="Пошук сторінок"
-                  placeholder="Знайти за назвою або адресою"
-                  value={h.query}
-                  onChange={(e) => h.setQuery(e.target.value)}
-                />
-              </label>
               {h.task === 'load' && (
                 <p className={styles.notice} role="status">
                   Завантажуємо сторінку…
                 </p>
               )}
-              <ul className={styles.list} aria-label="Сторінки для редагування">
-                {visiblePages.map((p) => (
-                  <li key={p.path}>
-                    <button
-                      className={styles.card}
-                      type="button"
-                      disabled={busy}
-                      onClick={() => h.open(p.path)}
-                    >
-                      <span className={styles.cardTop}>
-                        <span>{kinds[p.kind]}</span>
-                        <span className={styles.badge} data-draft={p.hasDraft || !p.published}>
-                          {p.hasDraft || !p.published ? 'Чернетка' : 'Опубліковано'}
-                        </span>
-                      </span>
-                      <strong>{p.title}</strong>
-                      <span className={styles.cardBottom}>
-                        <span>{p.path}</span>
-                        <ArrowRight size={18} aria-hidden="true" />
-                      </span>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-              {visiblePages.length === 0 && (
-                <p role="status">
-                  {filter ? 'За цим запитом сторінок немає' : 'Поки немає сторінок'}
-                </p>
+              {h.browserPages.length ? (
+                <SitePageBrowser
+                  pages={h.browserPages}
+                  environments={h.environments}
+                  target={h.target}
+                  onTarget={h.setTarget}
+                  initialPath={h.lastPath}
+                  disabled={busy}
+                  onOpen={h.open}
+                  onPublishToProduction={
+                    props.sync === 'production' ? (path) => h.openSync(path) : undefined
+                  }
+                />
+              ) : (
+                <p role="status">Поки немає сторінок</p>
               )}
             </>
           )}

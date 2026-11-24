@@ -23,6 +23,7 @@ export async function editorStates(path?: string) {
       published,
       draft: null,
       revision: null,
+      updatedAt: null,
     }));
   }
   return [];

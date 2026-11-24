@@ -19,8 +19,10 @@ function ids(path: string) {
 }
 
 function state(path: string, published?: PublicDocument, working?: PublicDocument): PageState {
+  const times = [published?._updatedAt, working?._updatedAt].filter(Boolean) as string[];
   return {
     path,
+    updatedAt: times.sort().at(-1) ?? null,
     published: published?.page ?? null,
     draft: working?.page ?? null,
     revision:
@@ -31,7 +33,7 @@ function state(path: string, published?: PublicDocument, working?: PublicDocumen
 async function editorRecords(path?: string) {
   const filter = path ? ' && path == $path' : '';
   return marketingClient(true).fetch<PublicDocument[]>(
-    `*[_type in $types${filter}]{_id,_rev,_type,path,page}`,
+    `*[_type in $types${filter}]{_id,_rev,_type,_updatedAt,path,page}`,
     { types: [publishedType, workType], path: path || '' },
     uncached,
   );

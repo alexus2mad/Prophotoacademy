@@ -66,8 +66,10 @@ describe('Site content editor', () => {
     );
     expect($('p[role=status]').text()).toContain('Режим перегляду');
     expect($('header button').is(':disabled')).toBe(true);
+    // Viewing stays available: the page row and its details still open in readonly mode.
     expect($('li button').is(':disabled')).toBe(false);
-    expect($('li').text()).toContain('Опубліковано');
+    expect($('li [role=img]').attr('aria-label')).toBe('Prod: Опубліковано');
+    expect($('article dd').first().text()).toBe('Опубліковано');
   });
 
   it.each([false, true])(

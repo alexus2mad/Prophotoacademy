@@ -135,6 +135,8 @@ describe('visual editor persistence and authorization', () => {
       kind: 'course',
       hasDraft: true,
       published: false,
+      // Local storage keeps no change times; Sanity supplies _updatedAt.
+      updatedAt: null,
     });
     await expect(createSiteDraft('/novyi-kurs', 'Замінити', 'course')).rejects.toMatchObject({
       status: 409,
