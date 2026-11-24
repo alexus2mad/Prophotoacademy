@@ -7,7 +7,8 @@ Administrators open **Сторінки сайту** in the Academy workspace at 
 Навичка **prophoto-editor** дає змогу працювати з цим редактором через Codex або Claude Code. Агенту потрібен браузер, яким він може керувати. Увійдіть у ньому до облікового запису адміністратора Академії.
 
 - **Якщо ви відкрили репозиторій у Codex або Claude Code**, навичка вже є в проєкті. У новій сесії викличте її як `$prophoto-editor` у Codex або `/prophoto-editor` у Claude Code.
-- **Якщо ви працюєте без репозиторію**, розпакуйте папку `prophoto-editor` з архіву в `~/.agents/skills/` для Codex або `~/.claude/skills/` для Claude Code. На Windows `~` означає папку вашого користувача. Перевірте, що всередині `skills/prophoto-editor/` є файл `SKILL.md`, і відкрийте нову сесію. [Оригінал навички](../.agents/skills/prophoto-editor/SKILL.md) · [Навички в Codex](https://developers.openai.com/codex/skills/) · [Навички в Claude Code](https://code.claude.com/docs/en/skills)
+- **Щоб користуватися навичкою в будь-якому проєкті**, скопіюйте команду зі сторінки встановлення й виконайте її в терміналі. Потрібен Node.js версії 22 або новішої з npm. Команда встановлює навичку для поточного користувача в Codex і Claude Code. Якщо потрібен лише один агент, додайте `--target codex` або `--target claude`. Після встановлення відкрийте новий чат. [Скопіювати команду встановлення](https://staging.prophotoacademy.com.ua/skills/prophoto-editor/)
+- **Для ручного встановлення** завантажте ZIP і розпакуйте папку `prophoto-editor` у `~/.agents/skills/` для Codex або `~/.claude/skills/` для Claude Code. На Windows `~` означає папку вашого користувача. Перевірте, що всередині `skills/prophoto-editor/` є файл `SKILL.md`, і відкрийте новий чат. [Завантажити ZIP](https://staging.prophotoacademy.com.ua/skills/prophoto-editor/prophoto-editor.zip) · [Оригінал навички](../.agents/skills/prophoto-editor/SKILL.md) · [Навички в Codex](https://developers.openai.com/codex/skills/) · [Навички в Claude Code](https://code.claude.com/docs/en/skills)
 
 Приклад для дизайнера
 
@@ -69,7 +70,7 @@ With the sandbox running and Chrome installed, run `node scripts/sandbox/verify-
 
 ## Maintenance
 
-After committing a skill update, create a fresh team ZIP from the repository root with `git archive --format=zip --prefix=prophoto-editor/ --output=prophoto-editor.zip HEAD:.agents/skills/prophoto-editor`. The archive contains the portable skill and its launcher metadata.
+The staging installation page publishes the current one-command installer and a ZIP from the same release. Edit the portable skill and its launcher metadata in `.agents/skills/prophoto-editor/`. For a new release, update the version in `scripts/editor-skill/package.json` and run `pnpm skill:pack` from the repository root with Python 3 available. Distribute the [staging installation page](https://staging.prophotoacademy.com.ua/skills/prophoto-editor/) to the team.
 
 Page documents use stable section and field IDs. Keep IDs stable when changing labels or rendering. The same initial values populate the editor and the default presentation. A saved document overlays these slots within the existing design. Public reads use published records. The preview checks the signed-in administrator and applies its draft only to the requested path.
 

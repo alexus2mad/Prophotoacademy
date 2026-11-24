@@ -1,0 +1,12 @@
+{
+  "name": "prophoto-editor",
+  "version": "1.0.0",
+  "description": "Install the ProPhoto Academy visual editor skill for Codex and Claude Code",
+  "private": true,
+  "bin": {
+    "prophoto-editor": "install.cjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

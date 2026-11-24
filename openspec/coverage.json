@@ -6,11 +6,15 @@
       "src/app/api/admin/site-content/image/route.ts",
       "src/app/api/site-content/images/[id]/route.ts",
       "scripts/seed-site-pages.ts",
-      "package.json#site:seed"
+      "package.json#site:seed",
+      "package.json#skill:pack",
+      "scripts/editor-skill/install.cjs"
     ],
     "evidence": [
       "docs/site-content-editor.md",
       ".agents/skills/prophoto-editor/SKILL.md",
+      "scripts/editor-skill/build.py",
+      "tests/editor-skill-install.test.ts",
       "src/lib/site-editor/public.ts",
       "src/lib/site-editor/store.ts",
       "tests/site-editor-composition.test.ts",

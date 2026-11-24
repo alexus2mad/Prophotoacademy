@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,nofollow,noarchive">
+    <meta name="description" content="Встановіть навичку редактора ProPhoto Academy для Codex і Claude Code або завантажте її ZIP-архів.">
+    <title>Навичка редактора · ProPhoto Academy</title>
+    <link rel="icon" href="/brand/prophoto-icon.svg" type="image/svg+xml">
+    <style>
+      :root {
+        color-scheme: light;
+        font: 100%/1.55 system-ui, sans-serif;
+        color: #150b08;
+        background: #fbfbfb;
+      }
+      *, *::before, *::after { box-sizing: border-box; }
+      body { margin: 0; }
+      header { border-bottom: 1px solid #dedbd8; }
+      .masthead, main {
+        width: min(100% - clamp(24px, 7vw, 40px), 50rem);
+        margin-inline: auto;
+      }
+      .masthead {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: .25rem 1rem;
+        padding-block: .65rem;
+      }
+      .masthead img {
+        width: clamp(9rem, 27vw, 12rem);
+        max-width: 100%;
+        height: auto;
+        display: block;
+        filter: invert(1);
+      }
+      .masthead a {
+        max-width: 100%;
+        min-height: 2.75rem;
+        display: inline-flex;
+        align-items: center;
+        font-size: .9375rem;
+      }
+      main { padding-block: clamp(2.5rem, 7vw, 5rem); }
+      h1, h2, p, pre { margin: 0; }
+      h1, h2 { line-height: 1.1; letter-spacing: -.035em; overflow-wrap: anywhere; }
+      h1 { font-size: clamp(2.2rem, 5.5vw, 3.75rem); }
+      h2 { font-size: clamp(1.3rem, 3vw, 1.6rem); }
+      p { max-width: 65ch; }
+      .intro { margin-top: 1rem; font-size: clamp(1.05rem, 2vw, 1.2rem); }
+      section { margin-top: clamp(2rem, 6vw, 3rem); }
+      section > p { margin-top: .75rem; }
+      a { color: inherit; text-underline-offset: .2em; }
+      a:hover { text-decoration-thickness: 2px; }
+      :focus-visible { outline: 3px solid #ad302a; outline-offset: 4px; }
+      code { font: .95em/1.5 ui-monospace, Consolas, monospace; overflow-wrap: anywhere; }
+      pre {
+        margin-block: 1.25rem 1rem;
+        padding: 1.25rem;
+        border-radius: .5rem;
+        background: #161311;
+        color: #fbfbfb;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+      pre code { user-select: all; }
+      .actions { display: flex; flex-wrap: wrap; gap: .65rem; align-items: center; }
+      .action {
+        display: inline-flex;
+        align-items: center;
+        min-height: 2.875rem;
+        max-width: 100%;
+        border: 1px solid #817a76;
+        border-radius: 3rem;
+        background: transparent;
+        padding: .5rem 1.25rem;
+        font: 650 1rem/1.35 system-ui, sans-serif;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .action:hover { background: #eeebe9; }
+      button.action { background: #c7332c; color: #fff; border-color: transparent; }
+      button.action:hover { background: #ae2925; }
+      [hidden] { display: none; }
+      [role="status"]:not(:empty) { display: block; margin-top: .6rem; }
+      details { margin-top: .65rem; }
+      summary {
+        width: fit-content;
+        max-width: 100%;
+        min-height: 2.75rem;
+        padding-block: .65rem;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      details p { padding-bottom: .65rem; }
+      .next { border-top: 1px solid #dedbd8; padding-top: 1.5rem; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="masthead">
+        <a href="/" aria-label="ProPhoto Academy, головна">
+          <img src="/design/studio/components-logo-academy-41f1d5b9e2.svg" width="277" height="18" alt="ProPhoto Academy">
+        </a>
+        <a href="/admin/content">Відкрити редактор</a>
+      </div>
+    </header>
+    <main>
+      <h1>Навичка редактора ProPhoto</h1>
+      <p class="intro">Доручайте Codex або Claude Code редагувати сторінки Академії. Агент працює у візуальному редакторі й зберігає чернетку для вашого перегляду.</p>
+
+      <section aria-labelledby="installation">
+        <h2 id="installation">Встановлення</h2>
+        <p>Потрібен <a href="https://nodejs.org/">Node.js</a> версії 22 або новішої з npm. Вставте команду в термінал, щоб встановити навичку для Codex і Claude Code.</p>
+        <pre><code id="command" tabindex="0">{{INSTALL_COMMAND}}</code></pre>
+        <div class="actions">
+          <button class="action" id="copy" type="button" hidden>Скопіювати команду</button>
+          <a class="action" href="prophoto-editor.zip" download>Завантажити ZIP</a>
+        </div>
+        <span id="feedback" role="status"></span>
+        <details>
+          <summary>Встановити лише для одного агента</summary>
+          <p>Додайте наприкінці команди <code>--target codex</code> для Codex або <code>--target claude</code> для Claude Code.</p>
+        </details>
+      </section>
+
+      <section class="next" aria-labelledby="use">
+        <h2 id="use">Як почати роботу</h2>
+        <p>Відкрийте новий чат агента та під’єднайте браузер. Увійдіть у редактор як адміністратор Академії. Почніть запит із <code>$prophoto-editor</code> у Codex або <code>/prophoto-editor</code> у Claude Code та опишіть потрібну зміну.</p>
+      </section>
+    </main>
+    <script>
+      const command = document.getElementById('command');
+      const copy = document.getElementById('copy');
+      const feedback = document.getElementById('feedback');
+      copy.hidden = false;
+      copy.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(command.textContent);
+          feedback.textContent = 'Команду скопійовано';
+        } catch {
+          command.focus();
+          const selection = window.getSelection();
+          if (selection) {
+            selection.selectAllChildren(command);
+            feedback.textContent = 'Команду виділено. Скопіюйте її через меню або клавіатуру.';
+          } else {
+            feedback.textContent = 'Виділіть і скопіюйте команду вручну.';
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
