@@ -112,3 +112,10 @@ A workshop connected to an eligible ticket SHALL start a server-priced ticket or
 #### Scenario: Purchase the studio flash intensive
 - **WHEN** a visitor follows the purchase action on the published Flash without fear workshop
 - **THEN** checkout identifies one ₴4,200 workshop ticket, uses the configured environment payment provider, and the verified payment follows the normal ticket confirmation and notification policy without granting course access.
+
+### Requirement: Consistent published workshop entries
+The Academy workshop listing SHALL present published editor-created workshops with the same title hierarchy, details action, separators and responsive layout as the existing featured workshop.
+
+#### Scenario: Browse workshops from the homepage
+- **WHEN** a visitor follows the Workshops direction on the Academy homepage
+- **THEN** the published workshop appears once in the workshop list, and its row opens the workshop at its own public URL on desktop and mobile.

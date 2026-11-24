@@ -73,3 +73,14 @@ The Studio homepage SHALL preserve the outgoing photograph's pan or zoom through
 #### Scenario: Compact exposure
 - **WHEN** a visitor scrolls the compact homepage
 - **THEN** the exposure section lightens from black toward paper and displays the exposure meter without the desktop scene photograph.
+
+### Requirement: Steady workshop gallery dragging
+An overflowing workshop photo rail SHALL track horizontal dragging continuously and settle without visible jumps or flicker. Selecting a photograph and intentionally dragging the rail SHALL remain distinct interactions.
+
+#### Scenario: Drag and release a photograph
+- **WHEN** a visitor presses a photograph and drags the rail horizontally
+- **THEN** the photographs follow the gesture and settle without snapping back and forth, and the gesture does not open the dialog.
+
+#### Scenario: Browse or select after dragging
+- **WHEN** a visitor next uses a gallery control, swipes, or clicks a photograph
+- **THEN** the chosen action works and a deliberate photo click opens the matching photograph.
