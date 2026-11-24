@@ -10,4 +10,4 @@
 
 ## Verification
 
-Recorded in [the release note](../../../docs/releases/2026-11-25-flash-production.md). Production ran `dc04519` with unchanged runtime, payment, notification and nginx digests. Flash without fear was then published through the sync, after an empty production draft was created for the new path. A separate change (`require-workshop-buyer-details`) has since deployed `9de62be` to both environments and recorded the active and rollback releases.
+Recorded in [the release note](../../../../docs/releases/2026-11-25-flash-production.md). Production ran `dc04519` with unchanged runtime, payment, notification and nginx digests. Flash without fear was then published through the sync, after an empty production draft was created for the new path. A separate change (`require-workshop-buyer-details`) has since deployed `9de62be` to both environments and recorded the active and rollback releases.
