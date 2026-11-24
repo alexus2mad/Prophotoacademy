@@ -1,5 +1,6 @@
 import type {
   blockTypes,
+  intensiveBlockTypes,
   pageTemplateIds,
   textFonts,
   textSizes,
@@ -9,6 +10,7 @@ import type {
 } from './options';
 
 export type BlockType = (typeof blockTypes)[number];
+export type IntensiveBlockType = (typeof intensiveBlockTypes)[number];
 export type PageTemplateId = (typeof pageTemplateIds)[number];
 export type PlacementDefinition = { id: string; label: string };
 export type BlockPosition = { slot: string; beforeBlockId?: string };
@@ -48,6 +50,7 @@ export type SitePage = {
   kind: SitePageKind;
   sections: SiteSection[];
   template?: PageTemplateId;
+  offerId?: string;
   /** Set only for the authorized preview response. Excluded from the document schema. */
   editorPreview?: boolean;
 };

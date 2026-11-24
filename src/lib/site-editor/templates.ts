@@ -1,4 +1,6 @@
 import { createBlock } from './blocks';
+import { intensiveCoverFields } from './intensive';
+import { intensiveBlockTypes } from './options';
 import type { PageTemplateDefinition, PageTemplateId, SitePage } from './types';
 
 export const pageTemplates = [
@@ -26,10 +28,29 @@ export const pageTemplates = [
     description: 'Опис події та карусель робіт',
     blocks: ['paragraph', 'carousel'],
   },
+  {
+    id: 'workshop-intensive',
+    label: 'Практичний інтенсив',
+    description: 'Фотообкладинка, програма, галерея, формат і квиток на воркшоп',
+    blocks: intensiveBlockTypes,
+  },
 ] as const satisfies ReadonlyArray<PageTemplateDefinition>;
 
 export function templateShell(page: SitePage, template: PageTemplateId): SitePage {
-  return { ...page, template, sections: page.sections.filter((s) => s.id === 'landing-cover') };
+  const covers = page.sections.filter((s) => s.id === 'landing-cover');
+  if (template !== 'workshop-intensive') return { ...page, template, sections: covers };
+  return {
+    ...page,
+    kind: 'workshop',
+    template,
+    sections: covers.map((cover) => ({
+      ...cover,
+      fields: [
+        ...cover.fields,
+        ...intensiveCoverFields().filter((extra) => !cover.fields.some((f) => f.id === extra.id)),
+      ],
+    })),
+  };
 }
 
 export function applyPageTemplate(page: SitePage, template: PageTemplateId): SitePage {

@@ -24,6 +24,13 @@
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 145px), 1fr));
   gap: 10px;
 }
+.library section + section {
+  margin-top: 24px;
+}
+.library h3 {
+  font-size: 18px;
+  margin: 0 0 10px;
+}
 .catalog button {
   min-width: 0;
   display: grid;

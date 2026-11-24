@@ -11,6 +11,7 @@ import type { BlockPosition, BlockType, SiteSection } from '@/lib/site-editor/ty
 import { addBlockAt, getBlockSlot, moveBlockTo } from '@/lib/site-editor/block-position';
 import { blocksAtPlacement, pagePlacements } from '@/lib/site-editor/placements';
 import { blockOutlineLabel } from '@/lib/site-editor/block-label';
+import { collectionControls } from './collections';
 import type { CompositionControls, PendingBlockInsertion } from './types';
 
 export function useBlockComposition({
@@ -24,6 +25,7 @@ export function useBlockComposition({
   const [insertion, setInsertion] = useState<PendingBlockInsertion | null>(null);
   const [focusNewBlock, setFocusNewBlock] = useState('');
   const section = page?.sections.find((entry) => entry.id === sectionId);
+  const collection = collectionControls(section?.blockType);
   const siblings = page && section?.blockType ? blocksAtPlacement(page, getBlockSlot(section)) : [];
   const index = siblings.findIndex((s) => s.id === sectionId);
   const afterSelected: BlockPosition = section?.blockType
@@ -105,40 +107,30 @@ export function useBlockComposition({
       });
   }
   function addItem() {
-    if (!section?.itemIds || disabled) return;
+    if (!section?.itemIds || !collection || disabled) return;
     const next = addBlockItem(section);
     const added = next.itemIds?.at(-1);
     if (!added || next === section) return;
     replace(next);
-    onSelect(next.id, itemFieldId(added, next.blockType === 'cards' ? 'title' : 'image'), true);
-    onMessage(next.blockType === 'cards' ? 'Картку додано' : 'Слайд додано');
+    onSelect(next.id, itemFieldId(added, collection.target), true);
+    onMessage('Додано ' + collection.object);
   }
   function deleteItem(id: string) {
-    if (!section?.itemIds || disabled) return;
-    const isCards = section.blockType === 'cards';
-    if (
-      !window.confirm(
-        isCards ? 'Видалити цю картку з чернетки?' : 'Видалити цей слайд із чернетки?',
-      )
-    )
-      return;
+    if (!section?.itemIds || !collection || disabled) return;
+    if (!window.confirm('Видалити ' + collection.object + ' з чернетки?')) return;
     const next = removeBlockItem(section, id);
     replace(next);
     const remaining =
       next.itemIds?.[Math.min(section.itemIds.indexOf(id), (next.itemIds?.length ?? 0) - 1)];
-    onSelect(
-      section.id,
-      remaining ? itemFieldId(remaining, isCards ? 'title' : 'image') : 'heading',
-      true,
-    );
-    onMessage(isCards ? 'Картку видалено' : 'Слайд видалено');
+    onSelect(section.id, remaining ? itemFieldId(remaining, collection.target) : 'heading', true);
+    onMessage('Видалено ' + collection.object);
   }
   function moveItem(id: string, direction: -1 | 1) {
-    if (!section || disabled) return;
+    if (!section || !collection || disabled) return;
     const next = moveBlockItem(section, id, direction);
     if (next === section) return;
     replace(next);
-    onSelect(section.id, itemFieldId(id, section.blockType === 'cards' ? 'title' : 'image'));
+    onSelect(section.id, itemFieldId(id, collection.target));
     onMessage('Порядок елементів змінено');
   }
   return {

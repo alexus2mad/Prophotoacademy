@@ -112,3 +112,46 @@
 .preview[data-pattern='workshop'] .layout i:last-child {
   display: none;
 }
+.preview:is(
+    [data-pattern='workshop-intensive'],
+    [data-pattern='intensive-intro'],
+    [data-pattern='intensive-offer']
+  )
+  .layout {
+  grid-template-columns: 2fr 1fr;
+  gap: 4px 8px;
+}
+.preview:is(
+    [data-pattern='workshop-intensive'],
+    [data-pattern='intensive-intro'],
+    [data-pattern='intensive-offer']
+  )
+  .layout
+  i:first-child {
+  grid-row: 1 / 4;
+  height: 28px;
+  background: var(--wire-ink);
+}
+.preview[data-pattern='intensive-offer'] .layout i:first-child {
+  grid-column: 2;
+  border-radius: 3px;
+}
+.preview[data-pattern='intensive-gallery'] .layout {
+  grid-template: repeat(2, 13px) / repeat(2, 1fr);
+}
+.preview[data-pattern='intensive-gallery'] .layout i {
+  height: 100%;
+  width: auto;
+}
+.preview[data-pattern='intensive-program'] .layout i {
+  height: 5px;
+  width: 100%;
+}
+.preview[data-pattern='intensive-format'] .layout i {
+  background: linear-gradient(
+    to right,
+    var(--wire-ink) 5%,
+    transparent 5% 10%,
+    var(--wire-soft) 10%
+  );
+}

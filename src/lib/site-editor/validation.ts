@@ -42,6 +42,7 @@ export const pageSchema = z.object({
   title: pageTitleSchema,
   kind: z.enum(['home', 'course', 'workshop', 'landing']),
   template: pageTemplateSchema.optional(),
+  offerId: z.string().min(1).max(120).optional(),
   sections: z
     .array(
       z.object({
@@ -189,6 +190,16 @@ export function validateEdit(
         const alt = section.fields.find((f) => f.kind === 'text' && altIds.includes(f.id));
         if (publishing && field.value && field.value !== original.value && alt && !alt.value.trim())
           throw new HttpError(400, 'Додайте опис нового зображення перед публікацією.');
+      }
+    }
+    if (publishing && page.template === 'workshop-intensive' && section.id === 'landing-cover') {
+      for (const [id, message] of [
+        ['title', 'Введіть заголовок обкладинки.'],
+        ['image', 'Оберіть фотографію для обкладинки.'],
+        ['alt', 'Опишіть фотографію на обкладинці.'],
+      ]) {
+        if (!section.fields.find((f) => f.id === id)?.value.trim())
+          throw new HttpError(400, message);
       }
     }
   }

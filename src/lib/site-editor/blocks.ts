@@ -1,4 +1,5 @@
 import { siteField } from './fields';
+import { intensiveBlockFields, intensiveLibrary } from './intensive';
 import type { BlockDefinition, BlockType, SiteField, SiteSection } from './types';
 
 export const blockLibrary = [
@@ -11,6 +12,7 @@ export const blockLibrary = [
     description: 'Добірка матеріалів із заголовками та посиланнями',
   },
   { type: 'carousel', label: 'Карусель', description: 'Фотографії, які можна гортати' },
+  ...intensiveLibrary,
 ] as const satisfies ReadonlyArray<BlockDefinition>;
 
 export const maxBlockItems = 40;
@@ -18,7 +20,9 @@ export const maxBlockItems = 40;
 export function isStylableField(field: SiteField) {
   return (
     field.kind !== 'image' &&
-    !/(?:^|-)(?:alt|href|url|slug|price|date|email|phone|action|cta)(?:-|$)/.test(field.id)
+    !/(?:^|-)(?:alt|href|url|slug|price|currency|position|date|email|phone|action|cta)(?:-|$)/.test(
+      field.id,
+    )
   );
 }
 
@@ -27,21 +31,45 @@ export function itemFieldId(itemId: string, key: string) {
 }
 
 export function isCollection(type: BlockType | undefined) {
-  return type === 'cards' || type === 'carousel';
+  return (
+    type === 'cards' ||
+    type === 'carousel' ||
+    type === 'intensive-program' ||
+    type === 'intensive-gallery' ||
+    type === 'intensive-format'
+  );
 }
 
 function itemFields(type: BlockType, itemId: string) {
   const field = (key: string, label: string, kind: SiteField['kind'] = 'text') =>
     siteField(itemFieldId(itemId, key), label, '', kind);
   const image = [field('image', 'Фотографія', 'image'), field('alt', 'Опис фотографії')];
-  return type === 'cards'
-    ? [
+  switch (type) {
+    case 'cards':
+      return [
         field('title', 'Заголовок картки'),
         field('text', 'Текст картки', 'multiline'),
         ...image,
         field('href', 'Посилання'),
-      ]
-    : [...image, field('caption', 'Підпис')];
+      ];
+    case 'carousel':
+      return [...image, field('caption', 'Підпис')];
+    case 'intensive-program':
+      return [
+        field('title', 'Назва теми'),
+        field(
+          'text',
+          'Пункти програми — по одному на рядок. Для акценту обгорніть слова у **подвійні зірочки**',
+          'multiline',
+        ),
+      ];
+    case 'intensive-gallery':
+      return [...image, field('position', 'Центр кадру (X% Y%)')];
+    case 'intensive-format':
+      return [field('title', 'Особливість заняття')];
+    default:
+      return [];
+  }
 }
 
 // Each item shares its block's ordinary field list so the inspector, canvas and image
@@ -64,6 +92,8 @@ export function blockFields(type: BlockType, itemIds: readonly string[] = []): S
         siteField('heading', 'Заголовок розділу', ''),
         ...itemIds.flatMap((id) => itemFields(type, id)),
       ];
+    default:
+      return [...intensiveBlockFields(type), ...itemIds.flatMap((id) => itemFields(type, id))];
   }
 }
 

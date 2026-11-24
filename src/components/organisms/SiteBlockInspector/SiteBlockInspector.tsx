@@ -1,21 +1,22 @@
 import { Plus } from 'lucide-react';
 import { SiteBlockActions } from '@/components/molecules/SiteBlockActions/SiteBlockActions';
 import { SiteEditorField } from '@/components/molecules/SiteEditorField/SiteEditorField';
-import { isCollection, itemFieldId, maxBlockItems } from '@/lib/site-editor/blocks';
+import { itemFieldId, maxBlockItems } from '@/lib/site-editor/blocks';
+import { collectionControls } from './collections';
 import type { SiteField } from '@/lib/site-editor/types';
 import type { SiteBlockInspectorProps } from './types';
 import styles from './SiteBlockInspector.module.css';
 
 export function SiteBlockInspector(props: SiteBlockInspectorProps) {
   const { section, fieldId, disabled } = props;
-  const collection = isCollection(section.blockType);
+  const collection = collectionControls(section.blockType);
   const ids = section.itemIds ?? [];
   const selected = ids.find((id) => fieldId.startsWith(itemFieldId(id, ''))) ?? ids[0];
   const at = ids.indexOf(selected);
-  const isCards = section.blockType === 'cards';
-  const noun = isCards ? 'Картка' : 'Слайд';
   const itemLabel = (id: string, i: number) => {
-    const key = itemFieldId(id, isCards ? 'title' : 'caption');
+    if (!collection) return '';
+    const noun = collection.noun;
+    const key = itemFieldId(id, collection.label);
     const text = section.fields.find((f) => f.id === key)?.value.trim();
     return text ? `${noun} ${i + 1} · ${text.slice(0, 50)}` : `${noun} ${i + 1}`;
   };
@@ -39,29 +40,26 @@ export function SiteBlockInspector(props: SiteBlockInspectorProps) {
         fieldControl,
       )}
       {collection && (
-        <section
-          className={styles.collection}
-          aria-label={isCards ? 'Картки блоку' : 'Слайди каруселі'}
-        >
+        <section className={styles.collection} aria-label={collection.region}>
           <div className={styles.groupTitle}>
-            <h3>{isCards ? 'Картки' : 'Слайди'}</h3>
+            <h3>{collection.group}</h3>
             <button
               type="button"
               disabled={disabled || ids.length >= maxBlockItems}
               onClick={props.onAddItem}
             >
               <Plus size={16} aria-hidden="true" />
-              {isCards ? 'Додати картку' : 'Додати слайд'}
+              Додати {collection.object}
             </button>
           </div>
           {selected && (
             <>
               <label className={styles.picker}>
-                {isCards ? 'Картка для редагування' : 'Слайд для редагування'}
+                {collection.noun} для редагування
                 <select
                   value={selected}
                   onChange={(e) =>
-                    props.onSelectField(itemFieldId(e.target.value, isCards ? 'title' : 'image'))
+                    props.onSelectField(itemFieldId(e.target.value, collection.target))
                   }
                 >
                   {ids.map((id, i) => (

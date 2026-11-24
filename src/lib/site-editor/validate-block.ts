@@ -1,6 +1,7 @@
 import { HttpError } from '../http';
 import { blockFields, blockLibrary, isCollection, itemFieldId } from './blocks';
 import { validCardLink } from './card-link';
+import { validCropPosition } from './intensive';
 import type { SiteSection } from './types';
 
 const uuidBlock = /^block-[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -36,7 +37,10 @@ export function validateBlock(
   for (const field of section.fields) {
     if (field.kind === 'image') validateImage(field.value);
   }
-  if (type === 'heading') required('heading', 'введіть заголовок.');
+  if (type === 'heading' || type.startsWith('intensive-'))
+    required('heading', 'введіть заголовок.');
+  if (type === 'intensive-intro') required('description', 'додайте опис інтенсиву.');
+  if (type === 'intensive-offer') required('title', 'введіть назву квитка.');
   if (type === 'paragraph') required('text', 'додайте текст.');
   if (type === 'image') {
     required('image', 'оберіть фотографію.');
@@ -55,8 +59,20 @@ export function validateBlock(
           400,
           'Картка ' + position + ' — вкажіть адресу HTTPS, шлях сайту або якір.',
         );
-    } else {
+    } else if (type === 'carousel' || type === 'intensive-gallery') {
       required(fieldId('image'), 'оберіть фотографію для слайда ' + position + '.');
+      if (type === 'intensive-gallery' && !validCropPosition(value(fieldId('position'))))
+        throw new HttpError(
+          400,
+          'Фотографія ' +
+            position +
+            ' — вкажіть дві координати від 0% до 100% (наприклад, 50% 30%).',
+        );
+    } else if (type === 'intensive-program') {
+      required(fieldId('title'), 'вкажіть назву теми ' + position + '.');
+      required(fieldId('text'), 'додайте пункти теми ' + position + '.');
+    } else if (type === 'intensive-format') {
+      required(fieldId('title'), 'опишіть особливість заняття ' + position + '.');
     }
     if (value(fieldId('image'))) required(fieldId('alt'), 'опишіть фотографію ' + position + '.');
   }

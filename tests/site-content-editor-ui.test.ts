@@ -136,7 +136,7 @@ describe('Site content editor', () => {
     ).toEqual(blockLibrary.map((b) => b.label));
   });
 
-  it('presents four explicit templates with a single initial selection', () => {
+  it('presents the available templates with a single initial selection', () => {
     const $ = load(
       renderToStaticMarkup(
         createElement(SitePageCreate, { busy: false, onCreate: () => {}, onCancel: () => {} }),
@@ -148,6 +148,7 @@ describe('Site content editor', () => {
     );
     expect(radios.filter('[checked]').attr('value')).toBe('blank');
     expect(radios.parent().text()).toContain('Воркшоп');
+    expect(radios.parent().text()).toContain('Практичний інтенсив');
   });
 
   it('selects a slide by stable field identity and protects the list boundaries', () => {
@@ -176,6 +177,43 @@ describe('Site content editor', () => {
     expect($('details summary[aria-label*=Підпис]')).toHaveLength(1);
     expect($('summary[aria-label*="Опис фотографії"]')).toHaveLength(0);
   });
+
+  it.each([
+    ['intensive-program', 'Теми програми', 'Додати тему', 'title'],
+    ['intensive-gallery', 'Фотографії галереї', 'Додати фотографію', 'alt'],
+    ['intensive-format', 'Особливості заняття', 'Додати особливість', 'title'],
+  ] as const)(
+    'edits ordered %s items through a named selector and accessible actions',
+    (type, group, add, key) => {
+      const section = addBlockItem(createBlock(type));
+      const second = section.itemIds![1];
+      const fieldId = itemFieldId(second, key);
+      section.fields.find((f) => f.id === fieldId)!.value = 'Другий приклад';
+      const noop = () => {};
+      const $ = load(
+        renderToStaticMarkup(
+          createElement(SiteBlockInspector, {
+            section,
+            fieldId,
+            disabled: false,
+            removableImages: true,
+            onSelectField: noop,
+            onChange: noop,
+            onStyle: noop,
+            onChooseImage: noop,
+            onAddItem: noop,
+            onRemoveItem: noop,
+            onMoveItem: noop,
+          }),
+        ),
+      );
+      const list = $('section[aria-label="' + group + '"]');
+      expect(list.find('select').first().val()).toBe(second);
+      expect(list.find('option:selected').text()).toContain('2 · Другий приклад');
+      expect(list.find('button').first().text()).toBe(add);
+      expect(list.find('button[aria-label^="Перемістити вище"]').is(':disabled')).toBe(false);
+    },
+  );
 
   it('retains duplicate matches for disambiguation when inspecting the saved preview', () => {
     const index = previewIndex(page, 'https://example.test');

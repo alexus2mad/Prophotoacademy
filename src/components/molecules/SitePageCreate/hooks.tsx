@@ -59,6 +59,7 @@ export function useSitePageCreate(onCreate: SitePageCreateProps['onCreate']) {
   }
   function selectTemplate(next: PageTemplateId) {
     setTemplate(next);
+    if (next === 'workshop-intensive') setKind('workshop');
     if (next === 'course' || next === 'workshop') setKind(next);
   }
   function submit(event: FormEvent<HTMLFormElement>) {
