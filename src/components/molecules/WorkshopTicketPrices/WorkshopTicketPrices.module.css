@@ -1,26 +1,26 @@
-/* Owner's design, 24 Nov 2026: AI Artwork price layout with discounts.
-   Offline card filled, online outlined; lowercase format with the old price struck through;
-   large price with a raised «грн». */
+/* AI Artwork price cards (StudioIntensivePackage, StudioIntensiveTemplate .prices) with the owner's
+   discount design of 24 Nov 2026: offline card filled, online outlined, lowercase format with the
+   old price struck through, lowercase «грн». Sizes and spacing follow AI Artwork. */
 .prices {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: clamp(10px, 6vw, 96px);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
   width: 100%;
-  max-width: 960px;
+  max-width: 737.2px;
   margin: 0 auto;
 }
+.prices:has(> :only-child) {
+  grid-template-columns: minmax(0, 362.6px);
+  justify-content: center;
+}
 .card {
-  flex: 0 1 27rem;
-  min-width: min(100%, 13rem);
   display: grid;
   justify-items: center;
-  align-content: center;
-  gap: 0.2em;
-  min-height: clamp(93px, 15vw, 198px);
-  padding: clamp(14px, 2vw, 30px) clamp(8px, 3vw, 48px) clamp(18px, 2.6vw, 38px);
-  border: 1px solid rgb(251 251 251 / 85%);
-  border-radius: clamp(24px, 3.2vw, 44px);
+  align-content: start;
+  min-height: 145.4px;
+  padding: 16px 24px 30px;
+  border: 1px solid rgb(251 251 251 / 75%);
+  border-radius: 32px;
   background: var(--studio-ink, #0a0807);
   color: var(--studio-paper, #fbfbfb);
   font: inherit;
@@ -49,31 +49,32 @@ span.card {
   display: inline-flex;
   align-items: baseline;
   gap: 0.3em;
-  font-size: clamp(15px, 2.6vw, 34px);
+  font-size: 18px;
   font-weight: 400;
   line-height: 1.1;
   text-transform: lowercase;
 }
 .label s {
-  text-decoration-thickness: 0.07em;
+  text-decoration-thickness: 0.08em;
 }
 .price {
   display: inline-flex;
-  align-items: flex-start;
-  gap: 0.12em;
+  justify-content: center;
+  gap: 10px;
 }
 .price strong {
   font:
-    1000 clamp(38px, 7.4vw, 104px) / 1 var(--font-studio-sans),
+    1000 86.4px / 1 var(--font-studio-sans),
     sans-serif;
   letter-spacing: -0.02em;
   white-space: nowrap;
 }
 .price sup {
-  margin-top: 0.3em;
-  font-size: clamp(11px, 1.7vw, 24px);
-  font-weight: 800;
+  margin-top: 15px;
+  font-size: 14px;
+  font-weight: 700;
   line-height: 1;
+  letter-spacing: 1.12px;
 }
 @media (prefers-reduced-motion: reduce) {
   .card {
@@ -83,13 +84,27 @@ span.card {
     transform: none;
   }
 }
-@media (max-width: 560px) {
-  /* Two cards side by side on phones, as on AI Artwork. */
+@media (max-width: 760px) {
   .prices {
-    flex-wrap: nowrap;
+    gap: 10px;
   }
   .card {
-    flex: 1 1 0;
-    min-width: 0;
+    min-height: 93px;
+    padding: 14px 8px 24px;
+    border-radius: 24px;
+  }
+  .label {
+    font-size: 13px;
+  }
+  .price {
+    gap: 6px;
+    margin-top: 5px;
+  }
+  .price strong {
+    font-size: 38px;
+  }
+  .price sup {
+    margin-top: 6px;
+    font-size: 11px;
   }
 }

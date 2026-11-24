@@ -27,7 +27,7 @@
   align-items: center;
   gap: 8px 20px;
   max-width: 100%;
-  margin: 0 0 28px;
+  margin: 0 0 18px;
   padding: 10px 20px;
   border: 1px solid rgb(255 255 255 / 22%);
   border-radius: 30px;
@@ -41,7 +41,7 @@
   border-left: 1px solid rgb(255 255 255 / 50%);
 }
 .practice {
-  margin: 24px 0 0;
+  margin: 16px 0 0;
   color: #a9a5a2;
   font-size: 14px;
   line-height: 1.4;
