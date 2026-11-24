@@ -1,4 +1,0 @@
-- [ ] Specify the existing artwork design, reference examples and new-page authoring steps.
-- [ ] Compose the workshop artwork, inspect both crops and verify the generated JPEGs.
-- [ ] Verify the published workshop metadata and preserve unrelated cards and page publication boundaries.
-- [ ] Deliver and verify the staged cards and review gallery, then archive the specification.
