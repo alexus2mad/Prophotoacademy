@@ -1,8 +1,11 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { enableHorizontalRailDrag } from '../src/components/behaviors/HorizontalRail/drag';
+import {
+  createHorizontalRailDrag,
+  enableHorizontalRailDrag,
+} from '../src/components/behaviors/HorizontalRail/drag';
 
 class RailStub extends EventTarget {
-  ownerDocument = { defaultView: new EventTarget() };
+  ownerDocument = Object.assign(new EventTarget(), { defaultView: new EventTarget() });
   clientWidth = 390;
   scrollWidth = 520;
   scrollLeft = 0;
@@ -104,6 +107,41 @@ describe('direction rail mouse dragging', () => {
     expect(rail.scrollLeft).toBe(0);
     expect(rail.hasPointerCapture(1)).toBe(false);
     expect(click().defaultPrevented).toBe(false);
+  });
+
+  it('starts inertia from the dragged position before native snapping can reclaim the rail', () => {
+    cleanup?.();
+    let frame: FrameRequestCallback | undefined;
+    Object.assign(rail.ownerDocument.defaultView, {
+      matchMedia: () => ({ matches: false }),
+      performance,
+      requestAnimationFrame: (callback: FrameRequestCallback) => {
+        frame = callback;
+        return 1;
+      },
+      cancelAnimationFrame: () => {
+        frame = undefined;
+      },
+    });
+    rail.scrollWidth = 1600;
+    let position = 0;
+    Object.defineProperty(rail, 'scrollLeft', {
+      // Querying layout while mandatory snapping is enabled returns the previous snap point.
+      get: () =>
+        rail.attributes.has('data-dragging') || rail.attributes.has('data-coasting') ? position : 0,
+      set: (value: number) => {
+        position = value;
+      },
+    });
+    cleanup = createHorizontalRailDrag(rail as unknown as HTMLElement, { inertia: true })?.destroy;
+
+    drag();
+    expect(position).toBe(100);
+    pointer(rail.ownerDocument.defaultView, 'pointerup');
+    expect(rail.attributes.has('data-coasting')).toBe(true);
+    frame?.(performance.now() + 16);
+    expect(position).toBeGreaterThan(100);
+    expect(click().defaultPrevented).toBe(true);
   });
 
   it('allows the next ordinary click even if a previous drag did not emit a click', () => {

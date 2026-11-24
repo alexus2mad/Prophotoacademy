@@ -82,8 +82,9 @@ export function createHorizontalRailDrag(
     if (!gesture || event.pointerId !== gesture.pointerId) return;
     const velocity =
       gesture.dragging && event.timeStamp - gesture.lastTime < 80 ? gesture.velocity : 0;
-    finish();
+    // Read the release position and start coasting while CSS snapping is still suspended.
     momentum?.start(velocity);
+    finish();
   };
   const cancel = (event: PointerEvent) => {
     if (event.pointerId === gesture?.pointerId) finish();

@@ -55,6 +55,14 @@
 .rail[data-dragging] .photo {
   cursor: grabbing;
 }
+@media (hover: hover) and (pointer: fine) {
+  .rail {
+    scroll-snap-type: none;
+  }
+  .photo {
+    cursor: grab;
+  }
+}
 .controls {
   display: flex;
   align-items: center;
