@@ -4,3 +4,11 @@
 .title {
   text-wrap: balance;
 }
+@media (max-width: 760px) {
+  /* Editor facts can be long, such as a date with an address: let them wrap instead of widening the page. */
+  .page :is([data-editorial-hero]) .facts.facts > span {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}

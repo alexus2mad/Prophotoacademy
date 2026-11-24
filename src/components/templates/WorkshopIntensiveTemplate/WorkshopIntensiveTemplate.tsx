@@ -55,7 +55,7 @@ export function WorkshopIntensiveTemplate({ page, ticket }: WorkshopIntensiveTem
           <p className={hero.subject} data-site-field="description">
             {cover('description')}
           </p>
-          <div className={hero.facts} data-site-field="facts">
+          <div className={`${hero.facts} ${styles.facts}`} data-site-field="facts">
             {cover('facts')
               .split('\n')
               .filter(Boolean)
