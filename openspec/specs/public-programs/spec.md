@@ -107,11 +107,13 @@ The Studio Food and Product Photography landing SHALL present its own responsive
 - **THEN** supported editorial fields and block placements survive, Food-specific presentation stays scoped, and existing program, payment and accessibility rules hold.
 
 ### Requirement: Sell an authored workshop ticket
-A workshop connected to an eligible ticket SHALL start a server-priced ticket order and open the hosted payment directly on activation, without an Academy inquiry or contact form. Staging SHALL use the payment simulator. A published workshop SHALL appear once in the Academy workshop list.
+
+A workshop connected to an eligible ticket SHALL open Academy checkout for the selected package. A published workshop SHALL appear once in the Academy workshop list.
 
 #### Scenario: Purchase the studio flash intensive
-- **WHEN** a visitor follows the purchase action on the published Flash without fear workshop
-- **THEN** checkout identifies one ₴4,200 workshop ticket, uses the configured environment payment provider, and the verified payment follows the normal ticket confirmation and notification policy without granting course access.
+
+- **WHEN** a visitor selects any purchase card or ticket button on the published Flash without fear workshop
+- **THEN** Academy checkout shows that format and its current catalog amount, ₴3,700 for offline or ₴2,500 for online, and asks for buyer details before payment.
 
 ### Requirement: Consistent published workshop entries
 The Academy workshop listing SHALL present published editor-created workshops with the same title hierarchy, details action, separators and responsive layout as the existing featured workshop.

@@ -2,7 +2,7 @@
 
 ### Requirement: Hosted payment for a published workshop ticket
 
-For an editor-authored workshop bound to an eligible catalog ticket offer, the Academy SHALL validate and record the buyer's name, email, phone and consent through Academy checkout before starting payment for the selected server-priced package. Each environment SHALL use its own provider settings.
+For an editor-authored workshop bound to an eligible catalog ticket offer, the Academy SHALL require consent and validate and record the buyer's name, email and phone through Academy checkout before starting payment for the selected server-priced package. Each environment SHALL use its own provider settings.
 
 #### Scenario: Direct purchase and retry
 

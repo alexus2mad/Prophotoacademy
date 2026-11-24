@@ -123,29 +123,29 @@ A course grant SHALL retain its purchased release, lesson set and time window. O
 
 ### Requirement: Hosted payment for a published workshop ticket
 
-For an editor-authored workshop bound to an eligible catalog ticket offer, the Academy SHALL create a server-priced ticket order on an intentional purchase action for the package the visitor chose. An offer MAY define several packages, such as offline and online participation. The configured live provider SHALL collect buyer contact information. Each environment SHALL use its own provider settings.
+For an editor-authored workshop bound to an eligible catalog ticket offer, the Academy SHALL require consent and validate and record the buyer's name, email and phone through Academy checkout before starting payment for the selected server-priced package. Each environment SHALL use its own provider settings.
 
 #### Scenario: Direct purchase and retry
 
-- **WHEN** a visitor activates a published workshop’s ticket button or retries the same interrupted request
-- **THEN** the action opens the configured hosted payment for a single order with the catalog amount and currency, and a duplicate request reuses the order
+- **WHEN** a visitor submits valid contact details and consent for an eligible workshop ticket, or retries the same interrupted submission
+- **THEN** the API records one order with those contacts and the catalog amount and currency, and a duplicate request reuses the order.
 
 #### Scenario: Choose one of several formats
 
-- **WHEN** a workshop offers offline and online tickets and the visitor activates the online ticket
-- **THEN** the order records the online package and charges its catalog amount, not the offline amount or a displayed previous price
+- **WHEN** a visitor submits Academy checkout for the online ticket
+- **THEN** the order records the online package at its current catalog price.
 
 #### Scenario: Ineligible or unpublished ticket
 
-- **WHEN** the offer is closed, the ticket is unbound, the page exists only as a draft, or the requested package is not one of the offer's packages
-- **THEN** the payment endpoint rejects the request before creating an order
+- **WHEN** mandatory contact or consent is missing, the offer is closed, the ticket is unbound, the page exists only as a draft, or the package does not belong to the offer
+- **THEN** the request cannot create an order.
 
 #### Scenario: Verified ticket confirmation
 
-- **WHEN** WayForPay confirms the order with the valid merchant signature and order-bound callback proof
-- **THEN** the purchase is accounted for once, the normal ticket notifications use the available provider contact details, and the order grants no course entitlement
+- **WHEN** WayForPay verifies payment for a workshop order
+- **THEN** the purchase is accounted for once, normal ticket notifications use the recorded checkout contacts, and the order grants no course entitlement. Previously issued hosted orders still use their existing callback and contact handling.
 
 #### Scenario: Staging purchase
 
-- **WHEN** a visitor purchases a workshop ticket in the staging simulator
-- **THEN** the visitor can exercise the successful outcome without a real charge, ticket issuance, confirmation email, or live financial effects
+- **WHEN** a visitor completes a workshop order in the staging simulator
+- **THEN** the visitor can exercise the successful outcome without a real charge, ticket issuance, confirmation email, or live financial effects.
