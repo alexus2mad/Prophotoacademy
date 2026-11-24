@@ -21,19 +21,32 @@ export const workshopOffers: WorkshopOffer[] = [
     offering: {
       id: 'offering-flash-without-fear',
       programId: 'program-flash-without-fear',
-      format: 'offline',
+      format: 'hybrid',
       duration: '6 годин',
       availability: 'open',
       verificationRequired: false,
+      // Prices confirmed by the owner on 24 November 2026; previous prices are display only.
       packages: [
         {
+          // The original single-ticket ID is kept for the offline format.
           id: 'flash-without-fear-ticket',
-          name: 'Квиток на інтенсив',
+          name: 'Офлайн',
           kind: 'product',
-          price: 4200,
+          price: 3700,
+          previousPrice: 4200,
           availability: 'open',
-          description: '6-годинний практичний інтенсив зі студійного світла',
-          includes: [],
+          description: 'Участь у студії: практика зі світлом на моделях',
+          includes: ['13 грудня, 11:00–17:00', 'Київ, вул. Саксаганського, 24/25'],
+        },
+        {
+          id: 'flash-without-fear-online',
+          name: 'Онлайн',
+          kind: 'product',
+          price: 2500,
+          previousPrice: 3000,
+          availability: 'open',
+          description: 'Онлайн-участь у прямому ефірі',
+          includes: ['13 грудня, 11:00–17:00 за київським часом'],
         },
       ],
     },
@@ -46,18 +59,20 @@ export const findWorkshopOffer = (path: string) =>
 export const findWorkshopOfferById = (offeringId: string) =>
   workshopOffers.find(({ offering }) => offering.id === offeringId);
 
+/** Each ticket of an editor workshop with its checkout address when it is on sale. */
 export async function workshopCheckout(path: string) {
   const workshop = findWorkshopOffer(path);
   if (!workshop) return;
   const { offering } = workshop;
-  const [ticket] = offering.packages;
   const { mode, packageIds } = await enrollmentOptions(offering);
   return {
-    price: ticket.price,
     mode,
-    href: packageIds.includes(ticket.id)
-      ? '/api/checkout/workshop?' +
-        new URLSearchParams({ offering: offering.id, package: ticket.id })
-      : undefined,
+    tickets: offering.packages.map((ticket) => ({
+      ticket,
+      href: packageIds.includes(ticket.id)
+        ? '/api/checkout/workshop?' +
+          new URLSearchParams({ offering: offering.id, package: ticket.id })
+        : undefined,
+    })),
   };
 }

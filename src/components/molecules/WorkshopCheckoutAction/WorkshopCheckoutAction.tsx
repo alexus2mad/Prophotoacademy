@@ -2,10 +2,19 @@
 import { useWorkshopCheckout } from './hooks';
 import type { WorkshopCheckoutActionProps } from './types';
 
-export function WorkshopCheckoutAction({ ticket, editing, preview }: WorkshopCheckoutActionProps) {
+export function WorkshopCheckoutAction({
+  ticket,
+  option,
+  editing,
+  preview,
+  children,
+  className = 'studio-button',
+  label: name,
+}: WorkshopCheckoutActionProps) {
   const inert = editing || preview;
-  const { sending, error, submit } = useWorkshopCheckout(inert ? undefined : ticket?.href);
-  const label = (
+  const href = option ? option.href : ticket?.href;
+  const { sending, error, submit } = useWorkshopCheckout(inert ? undefined : href);
+  const label = children ?? (
     <>
       {sending ? 'Відкриваємо оплату…' : 'Записатися'}
       <span aria-hidden="true">→</span>
@@ -13,17 +22,24 @@ export function WorkshopCheckoutAction({ ticket, editing, preview }: WorkshopChe
   );
   if (inert)
     return (
-      <span className="studio-button" aria-disabled="true" data-site-locked="">
+      <span className={className} aria-disabled="true" aria-label={name} data-site-locked="">
         {label}
       </span>
     );
-  if (!ticket?.href) return null;
+  if (!href)
+    // A ticket off sale keeps showing its price card, without a purchase action.
+    return children ? (
+      <span className={className} aria-label={name} data-site-locked="">
+        {children}
+      </span>
+    ) : null;
   return (
     <>
       <button
         type="button"
-        className="studio-button"
+        className={className}
         data-site-locked=""
+        aria-label={name}
         disabled={sending}
         aria-busy={sending}
         onClick={submit}

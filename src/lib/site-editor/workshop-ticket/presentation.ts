@@ -4,18 +4,30 @@ import {
   workshopOffers,
 } from '@/lib/commerce/workshop-offers';
 import type { SitePage } from '../types';
-import type { WorkshopTicketChoice, WorkshopTicketPresentation } from './types';
+import type {
+  WorkshopTicketChoice,
+  WorkshopTicketOption,
+  WorkshopTicketPresentation,
+} from './types';
+
+const amount = (value: number) => new Intl.NumberFormat('uk-UA').format(value);
 
 async function ticketFor(path: string): Promise<WorkshopTicketPresentation | undefined> {
   const checkout = await workshopCheckout(path);
-  if (!checkout || checkout.price == null) return;
-  const amount = checkout.price;
-  return {
-    href: checkout.href ?? '',
-    amount,
-    price: new Intl.NumberFormat('uk-UA').format(amount),
-    currency: 'грн',
-  };
+  if (!checkout?.tickets.length) return;
+  const options: WorkshopTicketOption[] = checkout.tickets.map(({ ticket, href }) => ({
+    id: ticket.id,
+    label: ticket.name,
+    description: ticket.description,
+    includes: ticket.includes,
+    amount: ticket.price,
+    price: amount(ticket.price),
+    ...(ticket.previousPrice && { previousPrice: amount(ticket.previousPrice) }),
+    href: href ?? '',
+  }));
+  // The first ticket keeps describing single-ticket workshops.
+  const [first] = options;
+  return { href: first.href, amount: first.amount, price: first.price, currency: 'грн', options };
 }
 
 export async function workshopTicket(page: SitePage) {

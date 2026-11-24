@@ -57,6 +57,8 @@ const flash = findWorkshopOffer(flashPath)!;
 const flashPackage = flash.offering.packages[0];
 const flashCheckout =
   '/api/checkout/workshop?offering=offering-flash-without-fear&package=flash-without-fear-ticket';
+const onlineCheckout =
+  '/api/checkout/workshop?offering=offering-flash-without-fear&package=flash-without-fear-online';
 const publishedWorkshop = vi.hoisted(() => ({ active: true }));
 const ticketRequest = () => ({
   token: randomUUID().replaceAll('-', '').repeat(2),
@@ -194,11 +196,27 @@ describe('ticket and service products', () => {
   it('lists the authorized workshop ticket independently of published catalog programs and dates', async () => {
     expect(content.programs.some(({ slug }) => '/' + slug === flashPath)).toBe(false);
     expect(flash.offering.startDate).toBeUndefined();
-    expect(flashPackage).toMatchObject({ price: 4200, kind: 'product' });
-    expect(await workshopCheckout(flashPath)).toMatchObject({ price: 4200, href: flashCheckout });
+    // Owner's prices from 24 November 2026: the previous price is shown only.
+    expect(
+      flash.offering.packages.map(({ id, price, previousPrice, kind }) => ({
+        id,
+        price,
+        previousPrice,
+        kind,
+      })),
+    ).toEqual([
+      { id: 'flash-without-fear-ticket', price: 3700, previousPrice: 4200, kind: 'product' },
+      { id: 'flash-without-fear-online', price: 2500, previousPrice: 3000, kind: 'product' },
+    ]);
+    expect(
+      (await workshopCheckout(flashPath))?.tickets.map(({ ticket, href }) => [ticket.price, href]),
+    ).toEqual([
+      [3700, flashCheckout],
+      [2500, onlineCheckout],
+    ]);
     expect(await workshopCheckout('/some-other-workshop')).toBeUndefined();
     vi.stubEnv('PAYMENT_MODE', 'disabled');
-    expect((await workshopCheckout(flashPath))?.href).toBeUndefined();
+    expect((await workshopCheckout(flashPath))?.tickets.every(({ href }) => !href)).toBe(true);
     expect((await workshopCheckoutPost(post(flashCheckout, ticketRequest()))).status).toBe(409);
   });
   it('simulates one-click tickets on staging without contacting the provider or creating accounting events', async () => {
@@ -214,12 +232,25 @@ describe('ticket and service products', () => {
     expect(await order()).toMatchObject({
       status: 'approved',
       productKind: 'product',
-      amount: 4200,
+      amount: flashPackage.price,
+      listAmount: flashPackage.price,
     });
     expect(await events()).toHaveLength(0);
     expect((await pg.query('SELECT id FROM academy.transactions')).rows).toHaveLength(0);
     expect((await pg.query('SELECT id FROM academy.grants')).rows).toHaveLength(0);
     expect(transport).not.toHaveBeenCalled();
+  });
+  it('charges the chosen online ticket at its own catalog price', async () => {
+    vi.stubEnv('PAYMENT_MODE', 'mock');
+    const input = ticketRequest();
+    const result = await workshopCheckoutPost(post(onlineCheckout, input));
+    expect(result.status).toBe(200);
+    expect(await order()).toMatchObject({
+      packageId: 'flash-without-fear-online',
+      packageName: 'Онлайн',
+      amount: 2500,
+      listAmount: 2500,
+    });
   });
   it('opens one hosted payment, confirms the contact from WayForPay, and settles a ticket exactly once', async () => {
     let serviceUrl = '';
@@ -230,8 +261,8 @@ describe('ticket and service products', () => {
       serviceUrl = form.get('serviceUrl')!;
       expect(new URL(form.get('returnUrl')!).pathname).toBe('/api/payments/wayforpay/return');
       expect(form.get('clientEmail')).toBeNull();
-      expect(form.get('amount')).toBe('4200');
-      expect(form.get('productPrice[]')).toBe('4200');
+      expect(form.get('amount')).toBe(String(flashPackage.price));
+      expect(form.get('productPrice[]')).toBe(String(flashPackage.price));
       return Response.json({ url: providerUrl });
     });
     vi.stubGlobal('fetch', provider);
@@ -244,7 +275,7 @@ describe('ticket and service products', () => {
     expect(provider).toHaveBeenCalledTimes(1);
     const orderId = (await order()).id;
     const raw = {
-      ...providerCallback(orderId, 4200),
+      ...providerCallback(orderId, flashPackage.price),
       email: 'TEST@Example.test',
       phone: '+380630000000',
     };
@@ -263,7 +294,13 @@ describe('ticket and service products', () => {
     expect(paid.fulfillment).toBeUndefined();
     expect(
       (await pg.query('SELECT email, amount_minor, package_id FROM academy.transactions')).rows,
-    ).toEqual([{ email: 'test@example.test', amount_minor: 420000, package_id: flashPackage.id }]);
+    ).toEqual([
+      {
+        email: 'test@example.test',
+        amount_minor: flashPackage.price * 100,
+        package_id: flashPackage.id,
+      },
+    ]);
     expect((await pg.query('SELECT id FROM academy.grants')).rows).toHaveLength(0);
     const jobs = await events();
     expect(jobs.map(({ data }) => data.event)).toEqual(['payment_start', 'payment_success']);
@@ -317,11 +354,12 @@ describe('ticket and service products', () => {
     expect(returned.status).toBe(303);
     expect(returned.headers.get('location')).toBe('/thanks?token=' + input.token);
     expect((await order()).status).toBe('pending');
-    expect((await callback(post(servicePath, providerCallback(references[0], 4200)))).status).toBe(
-      200,
-    );
+    expect(
+      (await callback(post(servicePath, providerCallback(references[0], flashPackage.price))))
+        .status,
+    ).toBe(200);
     expect((await pg.query('SELECT email, amount_minor FROM academy.transactions')).rows).toEqual([
-      { email: null, amount_minor: 420000 },
+      { email: null, amount_minor: flashPackage.price * 100 },
     ]);
     expect((await events())[1].data).toMatchObject({
       event: 'payment_success',

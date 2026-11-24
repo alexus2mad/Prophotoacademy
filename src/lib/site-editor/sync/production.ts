@@ -82,7 +82,7 @@ async function productionAssets(files: string[]) {
 function ticketFor(page: SitePage) {
   const offer = page.offerId && findWorkshopOffer(page.path);
   if (!offer || offer.offering.id !== page.offerId) return undefined;
-  return { label: offer.program.title, price: offer.offering.packages[0].price };
+  return { label: offer.program.title, prices: offer.offering.packages.map((pack) => pack.price) };
 }
 
 export async function syncOverview(): Promise<SyncOverview> {

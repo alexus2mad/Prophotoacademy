@@ -7,7 +7,7 @@ export type SyncChanges = {
   removed: string[];
   changed: string[];
 };
-export type SyncTicket = { label: string; price: number };
+export type SyncTicket = { label: string; prices: number[] };
 export type SyncCandidate = {
   path: string;
   title: string;

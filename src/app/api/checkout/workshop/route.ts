@@ -27,8 +27,8 @@ export async function POST(request: Request) {
     const workshop = findWorkshopOfferById(query.get('offering') || '');
     if (!workshop) throw new HttpError(404, 'Воркшоп не знайдено.');
     const { program, offering, path } = workshop;
-    const [ticket] = offering.packages;
-    if (ticket.id !== query.get('package')) throw new HttpError(404, 'Квиток не знайдено.');
+    const ticket = offering.packages.find((pack) => pack.id === query.get('package'));
+    if (!ticket) throw new HttpError(404, 'Квиток не знайдено.');
     const page = await getPublishedPage(path);
     const mode = paymentMode();
     if (

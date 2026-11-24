@@ -1,4 +1,5 @@
 import { Plus } from 'lucide-react';
+import { ticketPriceSummary } from '@/lib/site-editor/workshop-ticket/summary';
 import { SiteBlockActions } from '@/components/molecules/SiteBlockActions/SiteBlockActions';
 import { SiteEditorField } from '@/components/molecules/SiteEditorField/SiteEditorField';
 import { itemFieldId, maxBlockItems } from '@/lib/site-editor/blocks';
@@ -29,10 +30,8 @@ export function SiteBlockInspector(props: SiteBlockInspectorProps) {
     if (ticket && field.id === 'price')
       return (
         <dl key={field.id} className={styles.ticketPrice}>
-          <dt>Ціна з обраного квитка</dt>
-          <dd>
-            {ticket.price} {ticket.currency}
-          </dd>
+          <dt>{ticket.options.length > 1 ? 'Ціни з обраних квитків' : 'Ціна з обраного квитка'}</dt>
+          <dd>{ticketPriceSummary(ticket)}</dd>
         </dl>
       );
     return (

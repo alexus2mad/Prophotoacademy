@@ -253,7 +253,22 @@ describe('Site content editor', () => {
         renderToStaticMarkup(
           createElement(SiteBlockInspector, {
             ...inspector,
-            ticket: { amount: 4200, currency: 'грн', price: '4 200', href: '/checkout' },
+            ticket: {
+              amount: 4200,
+              currency: 'грн',
+              price: '4 200',
+              href: '/checkout',
+              options: [
+                {
+                  id: 'one',
+                  label: 'Офлайн',
+                  includes: [],
+                  amount: 4200,
+                  price: '4 200',
+                  href: '/checkout',
+                },
+              ],
+            },
           }),
         ),
       );

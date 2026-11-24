@@ -3,16 +3,39 @@ import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import { MarketingBlock } from '@/components/molecules/MarketingBlock/MarketingBlock';
+import { WorkshopTicketPrices } from '@/components/molecules/WorkshopTicketPrices/WorkshopTicketPrices';
 import type { MarketingBlockProps } from '@/components/molecules/MarketingBlock/types';
 import { addBlockItem, createBlock, itemFieldId } from '@/lib/site-editor/blocks';
 import type { SiteSection } from '@/lib/site-editor/types';
 
-const checkout = {
+const single = {
+  id: 'two',
+  label: 'Квиток',
+  includes: [],
   href: '/api/checkout/workshop?offering=one&package=two',
   amount: 4200,
   price: '4 200',
-  currency: 'грн',
 };
+const checkout = { ...single, currency: 'грн', options: [single] };
+const offline = {
+  ...single,
+  label: 'Офлайн',
+  price: '3 700',
+  amount: 3700,
+  previousPrice: '4 200',
+  includes: ['13 грудня, 11:00–17:00'],
+};
+const online = {
+  ...single,
+  id: 'online',
+  label: 'Онлайн',
+  description: 'Онлайн-участь у прямому ефірі',
+  href: '/api/checkout/workshop?offering=one&package=online',
+  amount: 2500,
+  price: '2 500',
+  previousPrice: '3 000',
+};
+const formats = { ...offline, href: offline.href, currency: 'грн', options: [offline, online] };
 function set(section: SiteSection, id: string, value: string) {
   const field = section.fields.find((f) => id === f.id);
   if (!field) throw new Error('Unexpected workshop field ' + id);
@@ -62,6 +85,83 @@ describe('workshop design sections in public pages and the working editor', () =
       expect(savedPreview('[aria-disabled="true"]')).toHaveLength(1);
     },
   );
+  it('offers one purchase card per format with previous prices struck through', () => {
+    const offer = createBlock('intensive-offer');
+    set(offer, 'note', 'Кількість місць обмежена.');
+    const $ = render(offer, { ticket: formats });
+    const cards = $('article');
+    expect(cards).toHaveLength(2);
+    expect(
+      cards
+        .find('h3')
+        .map((_, n) => $(n).text())
+        .get(),
+    ).toEqual(['Офлайн', 'Онлайн']);
+    expect(
+      cards
+        .find('s')
+        .map((_, n) => $(n).text())
+        .get(),
+    ).toEqual(['4 200', '3 000']);
+    expect(
+      cards
+        .find('strong')
+        .map((_, n) => $(n).text())
+        .get(),
+    ).toEqual(['3 700', '2 500']);
+    expect(cards.eq(0).text()).toContain('13 грудня, 11:00–17:00');
+    expect(cards.eq(1).text()).toContain('Онлайн-участь у прямому ефірі');
+    expect(cards.find('button')).toHaveLength(2);
+    expect($('[data-site-field="note"]').text()).toBe('Кількість місць обмежена.');
+    const preview = render(offer, { ticket: formats, preview: true });
+    expect(preview('button,a')).toHaveLength(0);
+    expect(preview('[aria-disabled="true"]')).toHaveLength(2);
+    const intro = render(createBlock('intensive-intro'), { ticket: formats });
+    expect(
+      intro('li')
+        .map((_, n) => intro(n).text())
+        .get(),
+    ).toEqual(['Офлайн4 2003 700грн', 'Онлайн3 0002 500грн']);
+    expect(intro('a[href="#workshop-tickets"]').text()).toContain('Обрати формат');
+    expect(intro('button')).toHaveLength(0);
+  });
+  it('renders the cover price cards in the owner design with their own checkouts', () => {
+    const $ = load(
+      renderToStaticMarkup(
+        createElement(WorkshopTicketPrices, { ticket: formats, id: 'workshop-tickets' }),
+      ),
+    );
+    const cards = $('#workshop-tickets button');
+    expect(cards.map((_, n) => $(n).attr('aria-label')).get()).toEqual([
+      'Офлайн, 3 700 грн замість 4 200 — записатися',
+      'Онлайн, 2 500 грн замість 3 000 — записатися',
+    ]);
+    expect(cards.eq(0).text()).toBe('офлайн4200' + '3 700грн');
+    const editing = load(
+      renderToStaticMarkup(createElement(WorkshopTicketPrices, { ticket: formats, editing: true })),
+    );
+    expect(editing('button')).toHaveLength(0);
+    expect(editing('[aria-disabled="true"]')).toHaveLength(2);
+    const closed = load(
+      renderToStaticMarkup(
+        createElement(WorkshopTicketPrices, {
+          ticket: {
+            ...formats,
+            options: [
+              { ...offline, href: '' },
+              { ...online, href: '' },
+            ],
+          },
+        }),
+      ),
+    );
+    expect(closed('button')).toHaveLength(0);
+    expect(
+      closed('strong')
+        .map((_, n) => closed(n).text())
+        .get(),
+    ).toEqual(['3 700', '2 500']);
+  });
   it('uses native independent accordion disclosures, a single indicator per summary and escaped semantic bullet emphasis', () => {
     const section = addBlockItem(createBlock('intensive-program'));
     const [first, second] = section.itemIds!;

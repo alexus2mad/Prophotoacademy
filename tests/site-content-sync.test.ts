@@ -194,7 +194,7 @@ describe('production sync', () => {
     const [flash, terms] = overview.candidates;
     expect(flash).toMatchObject({
       photos: 1,
-      ticket: { label: 'Flash without fear', price: 4200 },
+      ticket: { label: 'Flash without fear', prices: [3700, 2500] },
       productionDraft: false,
       stagingDigest: digest(workshop()),
       revision: null,

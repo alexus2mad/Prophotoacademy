@@ -4,7 +4,7 @@ export type WorkshopOffer = {
   program: Pick<Program, 'id' | 'title' | 'shortTitle' | 'category'> & {
     image: Pick<ImageAsset, 'src' | 'alt' | 'width' | 'height'>;
   };
-  offering: Offering & { packages: [Package] };
+  offering: Offering & { packages: [Package, ...Package[]] };
 };
 export type PaymentMode = 'mock' | 'disabled' | 'wayforpay';
 export type EnrollmentOptions = {

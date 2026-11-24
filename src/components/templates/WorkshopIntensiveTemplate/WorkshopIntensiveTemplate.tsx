@@ -4,6 +4,7 @@ import { MarketingComposition } from '@/components/molecules/MarketingCompositio
 import { StudioMobileAction } from '@/components/molecules/StudioMobileAction/StudioMobileAction';
 import { StudioRentalBanner } from '@/components/organisms/StudioRentalBanner/StudioRentalBanner';
 import { WorkshopCheckoutAction } from '@/components/molecules/WorkshopCheckoutAction/WorkshopCheckoutAction';
+import { WorkshopTicketPrices } from '@/components/molecules/WorkshopTicketPrices/WorkshopTicketPrices';
 import { readField } from '@/lib/site-editor/fields';
 import type { WorkshopIntensiveTemplateProps } from './types';
 import hero from '@/components/organisms/StudioCreatorHero/StudioCreatorHero.module.css';
@@ -13,6 +14,13 @@ export function WorkshopIntensiveTemplate({ page, ticket }: WorkshopIntensiveTem
   const cover = (key: string) => readField(page, 'landing-cover', key);
   const program = page.sections.find((section) => section.blockType === 'intensive-program');
   const action = <WorkshopCheckoutAction ticket={ticket} editing={page.editorPreview} />;
+  // Several tickets are chosen on their price cards; one ticket keeps a single action.
+  const formats = ticket && ticket.options.length > 1 ? ticket : undefined;
+  const choose = (
+    <a className="studio-button" href="#workshop-tickets">
+      Обрати формат <span aria-hidden="true">→</span>
+    </a>
+  );
   return (
     <article className={styles.page}>
       <MarketingSlot page={page} id="landing-cover" ticket={ticket} />
@@ -55,8 +63,17 @@ export function WorkshopIntensiveTemplate({ page, ticket }: WorkshopIntensiveTem
                 <span key={index}>{fact}</span>
               ))}
           </div>
+          {formats && (
+            <div data-site-locked="">
+              <WorkshopTicketPrices
+                id="workshop-tickets"
+                ticket={formats}
+                editing={page.editorPreview}
+              />
+            </div>
+          )}
           <div className="studio-actions" data-site-locked="">
-            <div className={hero.desktopAction}>{action}</div>
+            {!formats && <div className={hero.desktopAction}>{action}</div>}
             {program && (
               <a className="studio-button-outline" href={'#' + program.id}>
                 Програма
@@ -67,7 +84,11 @@ export function WorkshopIntensiveTemplate({ page, ticket }: WorkshopIntensiveTem
       </section>
       <MarketingComposition page={page} ticket={ticket} />
       <StudioRentalBanner />
-      {ticket?.href && <StudioMobileAction>{action}</StudioMobileAction>}
+      {formats
+        ? formats.options.some((option) => option.href) && (
+            <StudioMobileAction>{choose}</StudioMobileAction>
+          )
+        : ticket?.href && <StudioMobileAction>{action}</StudioMobileAction>}
     </article>
   );
 }

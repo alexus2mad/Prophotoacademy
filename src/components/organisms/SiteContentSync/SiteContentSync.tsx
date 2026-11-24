@@ -83,8 +83,9 @@ export function SiteContentSync(props: SiteContentSyncProps) {
                 )}
                 {c.ticket && (
                   <li data-tone="warning">
-                    Квиток «{c.ticket.label}» за {price.format(c.ticket.price)} грн продаватиметься
-                    через живу оплату WayForPay на проді
+                    Квиток «{c.ticket.label}» за{' '}
+                    {c.ticket.prices.map((value) => price.format(value)).join(' / ')} грн
+                    продаватиметься через живу оплату WayForPay на проді
                   </li>
                 )}
                 {c.status === 'changed' && (

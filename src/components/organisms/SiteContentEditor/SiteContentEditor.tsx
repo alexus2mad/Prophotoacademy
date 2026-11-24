@@ -12,6 +12,7 @@ import { SitePageCreate } from '@/components/molecules/SitePageCreate/SitePageCr
 import { SiteContentSync } from '@/components/organisms/SiteContentSync/SiteContentSync';
 import { SitePageBrowser } from '@/components/organisms/SitePageBrowser/SitePageBrowser';
 import { environmentLabels } from '@/lib/site-editor/environments';
+import { ticketPriceSummary } from '@/lib/site-editor/workshop-ticket/summary';
 import {
   productionEditorHref,
   productionEditorRoot,
@@ -215,7 +216,7 @@ export function SiteContentEditor(props: SiteContentEditorProps) {
                       <option value="">Без продажу квитків</option>
                       {tickets.map((item) => (
                         <option key={item.id} value={item.id}>
-                          {item.label} · {item.presentation.price} {item.presentation.currency}
+                          {item.label} · {ticketPriceSummary(item.presentation)}
                         </option>
                       ))}
                     </select>

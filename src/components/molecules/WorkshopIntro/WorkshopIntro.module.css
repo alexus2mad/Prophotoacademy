@@ -95,3 +95,35 @@
     font-size: 12px;
   }
 }
+.formats {
+  display: grid;
+  gap: 10px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.formats li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px 10px;
+}
+.formats li > span:first-child {
+  min-width: 5.5em;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: right;
+}
+.formats s {
+  color: var(--studio-mute);
+  font-size: 18px;
+}
+.price .formats strong {
+  font-size: clamp(40px, 4vw, 56px);
+}
+.price .formats li > span:last-child {
+  padding-top: 0;
+}
