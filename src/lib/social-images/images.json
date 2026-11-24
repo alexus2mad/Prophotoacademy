@@ -241,6 +241,28 @@
       }
     ]
   },
+  "/flash-without-fear": {
+    "title": "Flash without fear",
+    "description": "Практичний воркшоп зі студійних спалахів: налаштування камери, робота з моделями та обробка портретів.",
+    "images": [
+      {
+        "src": "/social/flash-without-fear-4eea87272d47-wide.jpg",
+        "width": 1200,
+        "height": 630,
+        "alt": "Flash without fear · ProPhoto — Чорно-білий студійний портрет жінки із заплющеними очима у спрямованому світлі",
+        "sha256": "4eea87272d47b1c888f23f827633eaa5b66bf598ada1796c4cb0e482129f5fbb",
+        "bytes": 60605
+      },
+      {
+        "src": "/social/flash-without-fear-fb4f3df8ed25-square.jpg",
+        "width": 630,
+        "height": 630,
+        "alt": "Flash without fear · ProPhoto — Чорно-білий студійний портрет жінки із заплющеними очима у спрямованому світлі",
+        "sha256": "fb4f3df8ed25558e5aed6e6f68c9cfee0b5c239a493acb6fd941c4108b89a8eb",
+        "bytes": 46549
+      }
+    ]
+  },
   "/about-us": {
     "title": "Про академію",
     "description": "Засновниця Олена Попова, команда та підхід до навчання ProPhoto Academy.",

@@ -51,9 +51,11 @@ export async function generateMetadata({ params }: SlugPageProps): Promise<Metad
   if (!page) {
     const published = await readSitePage('/' + slug);
     if (!published?.sections.some((s) => s.id === 'landing-cover')) return {};
+    const title = readField(published, 'landing-cover', 'title') || published.title;
     return academyMetadata(published.path, {
-      title: readField(published, 'landing-cover', 'title') || published.title,
+      title,
       description: readField(published, 'landing-cover', 'description'),
+      socialTitle: title,
     });
   }
   return academyMetadata(`/${slug}`, {

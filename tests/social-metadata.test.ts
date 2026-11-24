@@ -5,6 +5,8 @@ import type { AcademyContent } from '../src/lib/content/types';
 import type { SocialImageEntry } from '../src/lib/social-images/types';
 import { socialMetadata, socialUrl } from '../src/lib/social-images/metadata';
 import { getContent } from '../src/lib/content';
+import { siteField, siteSection } from '../src/lib/site-editor/fields';
+import * as sitePages from '../src/lib/site-editor/public';
 import sitemap from '../src/app/sitemap';
 import { generateMetadata as programMetadata } from '../src/app/(academy)/[slug]/page';
 import { generateMetadata as hubMetadata } from '../src/app/hub/[slug]/page';
@@ -159,11 +161,59 @@ describe('page coverage and integration', () => {
     });
   });
 
-  it('does not invent a public page for an unknown course slug', async () => {
-    expect(await programMetadata({ params: Promise.resolve({ slug: 'missing-course' }) })).toEqual(
-      {},
-    );
-  });
+  it.each([production, 'https://staging.prophotoacademy.com.ua'])(
+    'uses the published workshop copy and its two dedicated images on %s',
+    async (origin) => {
+      vi.stubEnv('NEXT_PUBLIC_SITE_URL', origin);
+      vi.stubEnv('NEXT_PUBLIC_ACADEMY_URL', origin);
+      const path = '/flash-without-fear';
+      const title = 'Flash Without Fear — оновлений заголовок';
+      const description = 'Оновлений вступ із першого екрана воркшопу';
+      vi.spyOn(sitePages, 'readSitePage').mockResolvedValueOnce({
+        path,
+        title: 'Назва в редакторі',
+        kind: 'workshop',
+        sections: [
+          siteSection('landing-cover', 'Перший екран', [
+            siteField('title', 'Заголовок', title),
+            siteField('description', 'Вступ', description),
+          ]),
+        ],
+      });
+      const metadata = await programMetadata({ params: Promise.resolve({ slug: path.slice(1) }) });
+      const [wide, square] = catalog[path].images;
+      expect(metadata.alternates?.canonical).toBe(origin + path);
+      expect(metadata.openGraph).toMatchObject({
+        title,
+        description,
+        url: origin + path,
+        images: [
+          { url: origin + wide.src, width: 1200, height: 630, type: 'image/jpeg', alt: wide.alt },
+          {
+            url: origin + square.src,
+            width: 630,
+            height: 630,
+            type: 'image/jpeg',
+            alt: square.alt,
+          },
+        ],
+      });
+      expect(metadata.twitter).toMatchObject({
+        title,
+        description,
+        card: 'summary_large_image',
+        images: [{ url: origin + wide.src, alt: wide.alt }],
+      });
+    },
+  );
+
+  it.each(['missing-course', 'flash-without-fear'])(
+    'returns no page metadata for the unpublished slug %s even if artwork exists',
+    async (slug) => {
+      vi.spyOn(sitePages, 'readSitePage').mockResolvedValueOnce(undefined);
+      expect(await programMetadata({ params: Promise.resolve({ slug }) })).toEqual({});
+    },
+  );
 
   it.each([...fixture.rooms, ...fixture.practiceSessions].map((item) => item.slug))(
     'binds Hub route %s to its own branded image',

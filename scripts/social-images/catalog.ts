@@ -140,6 +140,23 @@ export const socialCards: SocialCard[] = [
     photos: [{ ...photo('ai-artwork'), position: '60% 50%', squarePosition: '48% 50%' }],
   },
   {
+    path: '/flash-without-fear',
+    title: 'Flash without fear',
+    lines: ['FLASH', 'WITHOUT FEAR'],
+    description:
+      'Практичний воркшоп зі студійних спалахів: налаштування камери, робота з моделями та обробка портретів.',
+    label: 'ВОРКШОП',
+    subtitle: 'Студійні спалахи на практиці',
+    photos: [
+      {
+        src: '/images/workshops/flash-without-fear-portrait.webp',
+        alt: 'Чорно-білий студійний портрет жінки із заплющеними очима у спрямованому світлі',
+        position: '50% 8%',
+        squarePosition: '30% 50%',
+      },
+    ],
+  },
+  {
     path: '/about-us',
     title: 'Про академію',
     lines: ['ЛЮДИ, ЯКІ', 'НАВЧАЮТЬ', 'БАЧИТИ'],

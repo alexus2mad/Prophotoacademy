@@ -18,6 +18,8 @@ Add one entry to the [artwork catalog](../scripts/social-images/catalog.ts). The
 | `photos` | Pick one approved photograph under `public/images/` or `public/design/`. Set `src` to its public path and `alt` to an accurate description of the actual subject. Choose a high-resolution source. Private lessons and account records belong outside this library. |
 | `position`, `squarePosition` | Set each cover crop using `x% y%` along the image's surplus width and height. The square inherits `position` unless overridden. Inspect both crops for cut-off heads, hands or equipment that explains the workshop. |
 
+**Flash Without Fear** uses photograph `w14.webp` from the published workshop gallery. The side light across the model’s face shows the portrait technique taught in the workshop. The landscape crop uses `50% 8%` and the square uses `30% 50%` to keep the face clear of the headline. [Source portrait](../public/images/workshops/flash-without-fear-portrait.webp) · [Wide card](../public/social/flash-without-fear-4eea87272d47-wide.jpg) · [Square card](../public/social/flash-without-fear-fb4f3df8ed25-square.jpg)
+
 ## Composition
 
 In the approved cards the photo extends to all four edges. The upper-left wordmark identifies the publisher. The red rule, optional category, headline and subtitle form one lower-left group. A reader should recognize the same page when an app chooses a different aspect ratio. Keep the photo, text order and line breaks consistent, then adjust the crop and type fit for each canvas. Information and private pages without suitable public photography use the quiet brand-mark background.
