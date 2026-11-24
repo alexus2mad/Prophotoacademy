@@ -1,4 +1,5 @@
 import type { BlockPosition, SitePage, SiteSection, TextStyle } from '@/lib/site-editor/types';
+import type { WorkshopTicketPresentation } from '@/lib/site-editor/workshop-ticket/types';
 
 export type PendingBlockInsertion = { position: BlockPosition; label: string; canvas: boolean };
 
@@ -13,6 +14,7 @@ export type CompositionControls = {
 
 export type SiteBlockInspectorProps = {
   section: SiteSection;
+  ticket?: WorkshopTicketPresentation;
   fieldId: string;
   disabled: boolean;
   removableImages: boolean;

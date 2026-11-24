@@ -225,4 +225,38 @@ describe('Site content editor', () => {
       { sectionId: 'hero', fieldId: 'photo' },
     ]);
   });
+
+  it.each(['intensive-intro', 'intensive-offer'] as const)(
+    'uses the bound ticket price and currency in the %s inspector',
+    (type) => {
+      const section = createBlock(type);
+      section.fields.find((f) => f.id === 'price')!.value = '1';
+      const noop = () => {};
+      const inspector = {
+        section,
+        fieldId: 'heading',
+        disabled: false,
+        removableImages: true,
+        onSelectField: noop,
+        onChange: noop,
+        onStyle: noop,
+        onChooseImage: noop,
+        onAddItem: noop,
+        onRemoveItem: noop,
+        onMoveItem: noop,
+      };
+      const unbound = load(renderToStaticMarkup(createElement(SiteBlockInspector, inspector)));
+      expect(unbound('#editor-field-price').val()).toBe('1');
+      const bound = load(
+        renderToStaticMarkup(
+          createElement(SiteBlockInspector, {
+            ...inspector,
+            ticket: { amount: 4200, currency: 'грн', price: '4 200', href: '/checkout' },
+          }),
+        ),
+      );
+      expect(bound('dd').text()).toBe('4 200 грн');
+      expect(bound('#editor-field-price, #editor-field-currency')).toHaveLength(0);
+    },
+  );
 });

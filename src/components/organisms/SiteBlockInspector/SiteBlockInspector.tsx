@@ -9,6 +9,10 @@ import styles from './SiteBlockInspector.module.css';
 
 export function SiteBlockInspector(props: SiteBlockInspectorProps) {
   const { section, fieldId, disabled } = props;
+  const ticket =
+    section.blockType === 'intensive-intro' || section.blockType === 'intensive-offer'
+      ? props.ticket
+      : undefined;
   const collection = collectionControls(section.blockType);
   const ids = section.itemIds ?? [];
   const selected = ids.find((id) => fieldId.startsWith(itemFieldId(id, ''))) ?? ids[0];
@@ -21,6 +25,16 @@ export function SiteBlockInspector(props: SiteBlockInspectorProps) {
     return text ? `${noun} ${i + 1} · ${text.slice(0, 50)}` : `${noun} ${i + 1}`;
   };
   function fieldControl(field: SiteField) {
+    if (ticket && field.id === 'currency') return null;
+    if (ticket && field.id === 'price')
+      return (
+        <dl key={field.id} className={styles.ticketPrice}>
+          <dt>Ціна з обраного квитка</dt>
+          <dd>
+            {ticket.price} {ticket.currency}
+          </dd>
+        </dl>
+      );
     return (
       <SiteEditorField
         key={field.id}
