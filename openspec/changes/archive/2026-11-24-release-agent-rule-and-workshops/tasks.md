@@ -20,4 +20,4 @@
 
 ## Verification
 
-Recorded in [the 24 November release note](../../../docs/releases/2026-11-24-content-sync.md): full suite, architecture, typecheck, OpenSpec checks and Pages export; candidate and live checks on both environments with unchanged runtime, payment and nginx digests; browser checks of the production sync list, confirmation, staging handoff and 390 px layout with every confirmation cancelled.
+Recorded in [the 24 November release note](../../../../docs/releases/2026-11-24-content-sync.md): full suite, architecture, typecheck, OpenSpec checks and Pages export; candidate and live checks on both environments with unchanged runtime, payment and nginx digests; browser checks of the production sync list, confirmation, staging handoff and 390 px layout with every confirmation cancelled.
