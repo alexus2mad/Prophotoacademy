@@ -1,10 +1,13 @@
-export const intensiveBlockTypes = [
+/** Sections a new practical intensive starts with, in page order. */
+export const intensiveTemplateBlocks = [
   'intensive-intro',
   'intensive-program',
   'intensive-gallery',
   'intensive-format',
   'intensive-offer',
 ] as const;
+// The announcement with prices is inserted from the library where the page needs it.
+export const intensiveBlockTypes = [...intensiveTemplateBlocks, 'intensive-announcement'] as const;
 export const blockTypes = [
   'heading',
   'paragraph',

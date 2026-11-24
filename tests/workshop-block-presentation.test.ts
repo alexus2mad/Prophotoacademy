@@ -136,7 +136,8 @@ describe('workshop design sections in public pages and the working editor', () =
       'Офлайн, 3 700 грн замість 4 200 — записатися',
       'Онлайн, 2 500 грн замість 3 000 — записатися',
     ]);
-    expect(cards.eq(0).text()).toBe('офлайн4200' + '3 700грн');
+    // The design's lowercase format comes from CSS; the accessible text keeps the package name.
+    expect(cards.eq(0).text()).toBe('Офлайн4200' + '3 700грн');
     const editing = load(
       renderToStaticMarkup(createElement(WorkshopTicketPrices, { ticket: formats, editing: true })),
     );
@@ -161,6 +162,39 @@ describe('workshop design sections in public pages and the working editor', () =
         .map((_, n) => closed(n).text())
         .get(),
     ).toEqual(['3 700', '2 500']);
+  });
+  it('announces the prices after the cover in the AI Artwork layout', () => {
+    const block = createBlock('intensive-announcement');
+    set(block, 'eyebrow', 'Анонс');
+    set(block, 'heading', 'Практичний інтенсив');
+    set(block, 'description', 'Студійні спалахи без страху');
+    set(
+      block,
+      'when',
+      ['13 грудня', '11:00 – 17:00', 'Київ, вул. Саксаганського, 24/25'].join('\n'),
+    );
+    set(block, 'practice', '6 годин практики');
+    const $ = render(block, { ticket: formats });
+    expect($('section').attr('data-block-type')).toBe('intensive-announcement');
+    expect($('h2').attr('id')).toBe($('section').attr('aria-labelledby'));
+    expect(
+      $('[data-site-field="when"] span')
+        .map((_, n) => $(n).text())
+        .get(),
+    ).toEqual(['13 грудня', '11:00 – 17:00', 'Київ, вул. Саксаганського, 24/25']);
+    expect($('#workshop-tickets button')).toHaveLength(2);
+    expect(
+      $('#workshop-tickets s')
+        .map((_, n) => $(n).text())
+        .get(),
+    ).toEqual(['4200', '3000']);
+    expect($('[data-site-field="price"], [data-site-field="currency"]')).toHaveLength(0);
+    const preview = render(block, { ticket: formats, preview: true });
+    expect(preview('button')).toHaveLength(0);
+    expect(preview('[aria-disabled="true"]')).toHaveLength(2);
+    const unbound = render(block, { editing: true });
+    expect(unbound('#workshop-tickets')).toHaveLength(0);
+    expect(unbound.text()).toContain('Ціни з’являться після вибору квитка');
   });
   it('uses native independent accordion disclosures, a single indicator per summary and escaped semantic bullet emphasis', () => {
     const section = addBlockItem(createBlock('intensive-program'));

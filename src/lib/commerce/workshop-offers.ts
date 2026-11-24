@@ -36,7 +36,7 @@ export const workshopOffers: WorkshopOffer[] = [
           previousPrice: 4200,
           availability: 'open',
           description: 'Участь у студії: практика зі світлом на моделях',
-          includes: ['13 грудня, 11:00–17:00', 'Київ, вул. Саксаганського, 24/25'],
+          includes: ['13 грудня, 11:00 – 17:00', 'Київ, вул. Саксаганського, 24/25'],
         },
         {
           id: 'flash-without-fear-online',
@@ -46,7 +46,7 @@ export const workshopOffers: WorkshopOffer[] = [
           previousPrice: 3000,
           availability: 'open',
           description: 'Онлайн-участь у прямому ефірі',
-          includes: ['13 грудня, 11:00–17:00 за київським часом'],
+          includes: ['13 грудня, 11:00 – 17:00 за київським часом'],
         },
       ],
     },

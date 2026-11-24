@@ -18,3 +18,8 @@ An administrator SHALL be able to create a workshop with a photographic cover, a
 
 - **WHEN** a published workshop's offer has offline and online tickets with previous prices
 - **THEN** the cover shows both prices with the previous ones struck through, the offline price filled and the online outlined, each starting its own checkout. The introduction lists both prices, the offer section shows one purchase card per ticket, and the editor preview keeps the purchase controls inert.
+
+#### Scenario: Announce the prices after the cover
+
+- **WHEN** an administrator adds «Анонс із цінами» to a workshop with a bound ticket offer
+- **THEN** the page shows a centred announcement with the authored eyebrow, title, subtitle, date pill and closing line, and the ticket prices in large cards with previous prices struck through; the cover's action leads to these cards, prices stay governed by the offer, and the editor preview keeps the cards inert.

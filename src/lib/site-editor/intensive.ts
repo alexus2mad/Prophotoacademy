@@ -3,6 +3,11 @@ import type { BlockDefinition, IntensiveBlockType, SiteField } from './types';
 
 export const intensiveLibrary = [
   {
+    type: 'intensive-announcement',
+    label: 'Анонс із цінами',
+    description: 'Назва, дата й великі картки цін квитків зі знижкою',
+  },
+  {
     type: 'intensive-intro',
     label: 'Вступ до інтенсиву',
     description: 'Ідея воркшопу, умови участі та вартість',
@@ -47,6 +52,15 @@ export function intensiveBlockFields(type: IntensiveBlockType): SiteField[] {
   const description = lines('description', 'Опис');
   const price = [text('price', 'Ціна для відображення'), text('currency', 'Позначення валюти')];
   switch (type) {
+    case 'intensive-announcement':
+      // Prices come from the bound ticket offer; only the surrounding copy is authored.
+      return [
+        text('eyebrow', 'Надзаголовок'),
+        text('heading', 'Заголовок'),
+        text('description', 'Підзаголовок'),
+        lines('when', 'Дата, час і місце — по одному на рядок'),
+        text('practice', 'Рядок під цінами'),
+      ];
     case 'intensive-intro':
       return [
         ...title,

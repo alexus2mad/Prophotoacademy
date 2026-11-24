@@ -1,6 +1,6 @@
 import { createBlock } from './blocks';
 import { intensiveCoverFields } from './intensive';
-import { intensiveBlockTypes } from './options';
+import { intensiveTemplateBlocks } from './options';
 import type { PageTemplateDefinition, PageTemplateId, SitePage } from './types';
 
 export const pageTemplates = [
@@ -32,7 +32,7 @@ export const pageTemplates = [
     id: 'workshop-intensive',
     label: 'Практичний інтенсив',
     description: 'Фотообкладинка, програма, галерея, формат і квиток на воркшоп',
-    blocks: intensiveBlockTypes,
+    blocks: intensiveTemplateBlocks,
   },
 ] as const satisfies ReadonlyArray<PageTemplateDefinition>;
 

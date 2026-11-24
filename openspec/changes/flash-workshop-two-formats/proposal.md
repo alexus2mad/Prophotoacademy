@@ -23,6 +23,8 @@ Editor workshops currently allow exactly one ticket package, and checkout always
 
   The editor shows all bound prices, and the production sync warning lists them. Single-ticket workshops are unchanged.
 
+- **Announcement block (added 24 November after the owner's review).** The first cover cards were smaller than the design and placed in the cover. A new editor block, «Анонс із цінами» (`intensive-announcement`), follows the AI Artwork announcement layout. It has an eyebrow, a title, a subtitle, a date-and-time pill, the price cards in the owner's discount design and a line under the prices. The cards are large and centred, offline filled and online outlined, with a lowercase format label, the old price struck through, a large price and raised «грн». When a workshop has this block, the cover leads to it with «Обрати формат». On the Flash page the block follows the cover.
+
 - **Staging page content** (no code): the date-and-location fact; «кількість місць обмежена» in place of «до 6–7 учасників» in the hero, introduction, format list and ticket note; and the format list's price line updated to the two prices. The page is published on staging only.
 
 ## Capabilities

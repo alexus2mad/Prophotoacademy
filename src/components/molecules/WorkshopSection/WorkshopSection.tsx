@@ -1,3 +1,4 @@
+import { WorkshopAnnouncement } from '@/components/molecules/WorkshopAnnouncement/WorkshopAnnouncement';
 import { WorkshopIntro } from '@/components/molecules/WorkshopIntro/WorkshopIntro';
 import { WorkshopProgram } from '@/components/molecules/WorkshopProgram/WorkshopProgram';
 import { WorkshopGallery } from '@/components/molecules/WorkshopGallery/WorkshopGallery';
@@ -7,6 +8,7 @@ import type { MarketingBlockProps } from '@/components/molecules/MarketingBlock/
 import styles from './WorkshopSection.module.css';
 
 const layouts = {
+  'intensive-announcement': { Component: WorkshopAnnouncement, tone: 'dark' },
   'intensive-intro': { Component: WorkshopIntro, tone: 'dark' },
   'intensive-program': { Component: WorkshopProgram, tone: 'light' },
   'intensive-gallery': { Component: WorkshopGallery, tone: 'dark' },

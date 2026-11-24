@@ -16,6 +16,8 @@ export function WorkshopIntensiveTemplate({ page, ticket }: WorkshopIntensiveTem
   const action = <WorkshopCheckoutAction ticket={ticket} editing={page.editorPreview} />;
   // Several tickets are chosen on their price cards; one ticket keeps a single action.
   const formats = ticket && ticket.options.length > 1 ? ticket : undefined;
+  // The announcement block shows the prices after the cover; the cover then leads to it.
+  const announced = page.sections.some((section) => section.blockType === 'intensive-announcement');
   const choose = (
     <a className="studio-button" href="#workshop-tickets">
       Обрати формат <span aria-hidden="true">→</span>
@@ -63,7 +65,7 @@ export function WorkshopIntensiveTemplate({ page, ticket }: WorkshopIntensiveTem
                 <span key={index}>{fact}</span>
               ))}
           </div>
-          {formats && (
+          {formats && !announced && (
             <div data-site-locked="">
               <WorkshopTicketPrices
                 id="workshop-tickets"
@@ -73,6 +75,7 @@ export function WorkshopIntensiveTemplate({ page, ticket }: WorkshopIntensiveTem
             </div>
           )}
           <div className="studio-actions" data-site-locked="">
+            {formats && announced && <div className={hero.desktopAction}>{choose}</div>}
             {!formats && <div className={hero.desktopAction}>{action}</div>}
             {program && (
               <a className="studio-button-outline" href={'#' + program.id}>
@@ -85,7 +88,7 @@ export function WorkshopIntensiveTemplate({ page, ticket }: WorkshopIntensiveTem
       <MarketingComposition page={page} ticket={ticket} />
       <StudioRentalBanner />
       {formats
-        ? formats.options.some((option) => option.href) && (
+        ? (announced || formats.options.some((option) => option.href)) && (
             <StudioMobileAction>{choose}</StudioMobileAction>
           )
         : ticket?.href && <StudioMobileAction>{action}</StudioMobileAction>}

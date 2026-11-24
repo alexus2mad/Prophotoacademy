@@ -10,7 +10,7 @@ import {
 } from '../src/lib/site-editor/blocks';
 import { newSitePage } from '../src/lib/site-editor/fields';
 import { validCropPosition } from '../src/lib/site-editor/intensive';
-import { intensiveBlockTypes } from '../src/lib/site-editor/options';
+import { intensiveTemplateBlocks } from '../src/lib/site-editor/options';
 import { applyPageTemplate, templateShell } from '../src/lib/site-editor/templates';
 import type { SiteSection } from '../src/lib/site-editor/types';
 import { validateEdit } from '../src/lib/site-editor/validation';
@@ -26,7 +26,7 @@ const fieldValues = (section: SiteSection, values: Record<string, string>) =>
 describe('editor-authored workshop intensive', () => {
   it('allows a partial draft, then publishes all five populated sections with native photo cover', () => {
     const page = applyPageTemplate(source, 'workshop-intensive');
-    expect(page.sections.slice(1).map((s) => s.blockType)).toEqual(intensiveBlockTypes);
+    expect(page.sections.slice(1).map((s) => s.blockType)).toEqual(intensiveTemplateBlocks);
     expect(validateEdit(page, shell, false, false)).toEqual(page);
     expect(() => validateEdit(page, shell, false, true)).toThrow(/фотографію для обкладинки/);
     const [cover, intro, program, gallery, format, offer] = page.sections;

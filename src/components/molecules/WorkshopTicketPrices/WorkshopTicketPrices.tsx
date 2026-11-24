@@ -23,7 +23,7 @@ export function WorkshopTicketPrices({ ticket, editing, id }: WorkshopTicketPric
           }
         >
           <span className={styles.label}>
-            {option.label.toLocaleLowerCase('uk')}
+            {option.label}
             {option.previousPrice && <s>{option.previousPrice.replace(/\s/g, '')}</s>}
           </span>
           <span className={styles.price}>

@@ -1,0 +1,81 @@
+/* Mirrors the AI Artwork announcement (StudioIntensiveTemplate .announcement). */
+.announcement {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
+.announcement h2 {
+  margin: 11px 0 25px;
+  font: 1000 clamp(40px, 6vw, 86.4px) / 0.95 var(--font-studio-sans);
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+.subtitle {
+  max-width: 60ch;
+  margin: 0 0 26px;
+  color: var(--studio-mute);
+  font-size: 15px;
+  font-weight: 200;
+  line-height: 1.55;
+  letter-spacing: 0.3px;
+}
+.when {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px 20px;
+  max-width: 100%;
+  margin: 0 0 28px;
+  padding: 10px 20px;
+  border: 1px solid rgb(255 255 255 / 22%);
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.84px;
+}
+.when span + span {
+  padding-left: 20px;
+  border-left: 1px solid rgb(255 255 255 / 50%);
+}
+.practice {
+  margin: 24px 0 0;
+  color: #a9a5a2;
+  font-size: 14px;
+  line-height: 1.4;
+  letter-spacing: 0.84px;
+  text-transform: uppercase;
+}
+.missing {
+  margin: 0;
+  color: var(--studio-mute);
+  font-size: 14px;
+}
+.announcement > :global(#workshop-tickets) {
+  width: 100%;
+}
+@media (max-width: 760px) {
+  .announcement h2 {
+    margin: 17px 0 18px;
+    font-size: 40px;
+    line-height: 38px;
+  }
+  .subtitle {
+    font-size: 13px;
+    letter-spacing: 0.26px;
+  }
+  .when {
+    flex-direction: column;
+    gap: 8px;
+    padding-inline: 16px;
+    border-radius: 22px;
+    font-size: 12px;
+    letter-spacing: 0.72px;
+  }
+  .when span + span {
+    padding-left: 0;
+    border-left: 0;
+  }
+}

@@ -1,18 +1,26 @@
-/* Owner's design, 24 Nov 2026: offline card filled, online card outlined, previous price struck through. */
+/* Owner's design, 24 Nov 2026: AI Artwork price layout with discounts.
+   Offline card filled, online outlined; lowercase format with the old price struck through;
+   large price with a raised «грн». */
 .prices {
   display: flex;
   flex-wrap: wrap;
-  gap: clamp(12px, 3vw, 72px);
-  margin-top: clamp(20px, 3vw, 36px);
+  justify-content: center;
+  gap: clamp(10px, 6vw, 96px);
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
 }
 .card {
+  flex: 0 1 27rem;
+  min-width: min(100%, 13rem);
   display: grid;
   justify-items: center;
-  gap: 2px;
-  min-width: min(100%, 15rem);
-  padding: clamp(14px, 1.6vw, 22px) clamp(22px, 3vw, 52px) clamp(16px, 2vw, 26px);
+  align-content: center;
+  gap: 0.2em;
+  min-height: clamp(93px, 15vw, 198px);
+  padding: clamp(14px, 2vw, 30px) clamp(8px, 3vw, 48px) clamp(18px, 2.6vw, 38px);
   border: 1px solid rgb(251 251 251 / 85%);
-  border-radius: clamp(20px, 2.6vw, 34px);
+  border-radius: clamp(24px, 3.2vw, 44px);
   background: var(--studio-ink, #0a0807);
   color: var(--studio-paper, #fbfbfb);
   font: inherit;
@@ -40,28 +48,31 @@ span.card {
 .label {
   display: inline-flex;
   align-items: baseline;
-  gap: 0.35em;
-  font-size: clamp(15px, 1.7vw, 26px);
+  gap: 0.3em;
+  font-size: clamp(15px, 2.6vw, 34px);
+  font-weight: 400;
   line-height: 1.1;
+  text-transform: lowercase;
 }
 .label s {
-  text-decoration-thickness: 2px;
+  text-decoration-thickness: 0.07em;
 }
 .price {
   display: inline-flex;
   align-items: flex-start;
-  gap: 0.18em;
+  gap: 0.12em;
 }
 .price strong {
   font:
-    1000 clamp(40px, 6vw, 86px) / 1 var(--font-studio-sans),
+    1000 clamp(38px, 7.4vw, 104px) / 1 var(--font-studio-sans),
     sans-serif;
   letter-spacing: -0.02em;
+  white-space: nowrap;
 }
 .price sup {
-  margin-top: 0.4em;
-  font-size: clamp(11px, 1.3vw, 18px);
-  font-weight: 700;
+  margin-top: 0.3em;
+  font-size: clamp(11px, 1.7vw, 24px);
+  font-weight: 800;
   line-height: 1;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -73,12 +84,12 @@ span.card {
   }
 }
 @media (max-width: 560px) {
+  /* Two cards side by side on phones, as on AI Artwork. */
   .prices {
     flex-wrap: nowrap;
   }
   .card {
     flex: 1 1 0;
     min-width: 0;
-    padding-inline: 10px;
   }
 }
