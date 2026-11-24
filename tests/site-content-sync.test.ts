@@ -59,7 +59,7 @@ vi.mock('next/cache', () => ({ revalidatePath: vi.fn() }));
 
 const stagingImages = 'https://cdn.sanity.io/images/3k86g5dt/production/';
 const productionImages = 'https://cdn.sanity.io/images/qy8emt0h/production/';
-const photo = 'a1b2c3-1200x800.webp';
+const photo = '7037807198c22a7d2b0807371d763779a84fdfcf-1200x800.webp';
 const addresses = {
   fromImages: stagingImages,
   toImages: productionImages,
@@ -87,9 +87,13 @@ function production() {
   vi.stubEnv('SANITY_LEARNING_DATASET', 'learning');
   vi.stubEnv('SITE_EDITOR_WRITE_TOKEN', 'production-marketing');
   vi.stubEnv('SANITY_LEARNING_WRITE_TOKEN', 'private-learning');
+  vi.stubEnv('SITE_EDITOR_STAGING_WRITE_TOKEN', 'staging-marketing');
 }
 
-function productionClient(present: string[] = [], uploaded = 'image-a1b2c3-1200x800-webp') {
+function productionClient(
+  present: string[] = [],
+  uploaded = 'image-7037807198c22a7d2b0807371d763779a84fdfcf-1200x800-webp',
+) {
   const upload = vi.fn(async () => ({ _id: uploaded }));
   const client = {
     fetch: vi.fn(async (_query: string, params: SanityTestParams) =>
@@ -214,7 +218,11 @@ describe('production sync', () => {
     );
     vi.stubGlobal('fetch', download);
     await syncPage('/flash-without-fear', digest(workshop()), null);
-    expect(download).toHaveBeenCalledWith(stagingImages + photo, { cache: 'no-store' });
+    // The CDN re-encodes by request headers; the authenticated raw download keeps the original.
+    expect(download).toHaveBeenCalledWith(stagingImages + photo + '?dlRaw=true', {
+      cache: 'no-store',
+      headers: { Authorization: 'Bearer staging-marketing' },
+    });
     expect(client.assets.upload).toHaveBeenCalledWith('image', expect.any(Buffer), {
       filename: 'flash.webp',
       contentType: 'image/webp',
@@ -232,19 +240,37 @@ describe('production sync', () => {
       status: 409,
     });
     expect(client.assets.upload).not.toHaveBeenCalled();
+    // A re-encoded copy (different bytes) is refused before anything is uploaded.
     vi.stubGlobal(
       'fetch',
-      async () => new Response(new Uint8Array([1]), { headers: { 'content-type': 'image/webp' } }),
+      async () => new Response(new Uint8Array([1]), { headers: { 'content-type': 'image/jpeg' } }),
+    );
+    await expect(syncPage('/flash-without-fear', digest(workshop()), null)).rejects.toMatchObject({
+      status: 502,
+    });
+    expect(client.assets.upload).not.toHaveBeenCalled();
+    // The original bytes stored under another asset ID are refused after upload.
+    vi.stubGlobal(
+      'fetch',
+      async () =>
+        new Response(new Uint8Array([1, 2, 3]), { headers: { 'content-type': 'image/webp' } }),
     );
     await expect(syncPage('/flash-without-fear', digest(workshop()), null)).rejects.toMatchObject({
       status: 502,
     });
     expect(writeSitePage).not.toHaveBeenCalled();
+    // Without production's staging writer the originals cannot be read.
+    vi.stubEnv('SITE_EDITOR_STAGING_WRITE_TOKEN', '');
+    await expect(syncPage('/flash-without-fear', digest(workshop()), null)).rejects.toMatchObject({
+      status: 503,
+    });
   });
 
   it('skips photos production already holds', async () => {
     production();
-    const client = productionClient(['image-a1b2c3-1200x800-webp']);
+    const client = productionClient([
+      'image-7037807198c22a7d2b0807371d763779a84fdfcf-1200x800-webp',
+    ]);
     staging.records = [{ path: '/flash-without-fear', page: workshop() }];
     const download = vi.fn();
     vi.stubGlobal('fetch', download);

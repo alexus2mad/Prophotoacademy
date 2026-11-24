@@ -6,6 +6,7 @@ import { getSiteSeeds } from '../seeds';
 import {
   contentSyncRole,
   marketingClient,
+  stagingAssetToken,
   marketingImagePrefix,
   productionEditorOrigin,
   stagingMarketingSource,
@@ -139,13 +140,22 @@ export async function syncOverview(): Promise<SyncOverview> {
 }
 
 async function copyPhoto(file: string, originalFilename?: string) {
-  const response = await fetch(stagingImages + file, { cache: 'no-store' });
+  // The public CDN converts formats by request headers; only the authenticated raw download
+  // returns the stored original, whose SHA-1 names the asset.
+  const token = stagingAssetToken();
+  if (!token) throw new HttpError(503, 'Для копіювання фото потрібен доступ продакшну до staging.');
+  const response = await fetch(stagingImages + file + '?dlRaw=true', {
+    cache: 'no-store',
+    headers: { Authorization: 'Bearer ' + token },
+  });
   const type = response.headers.get('content-type') || '';
   const size = Number(response.headers.get('content-length') || 0);
   if (!response.ok || !type.startsWith('image/') || size > maxPhotoBytes)
     throw new HttpError(502, 'Не вдалося отримати фото зі staging.');
   const bytes = Buffer.from(await response.arrayBuffer());
   if (bytes.length > maxPhotoBytes) throw new HttpError(502, 'Фото зі staging завелике.');
+  if (createHash('sha1').update(bytes).digest('hex') !== file.split('-')[0])
+    throw new HttpError(502, 'Фото зі staging не збігається з оригіналом.');
   const asset = await marketingClient(true).assets.upload('image', bytes, {
     filename: originalFilename || file,
     contentType: type,

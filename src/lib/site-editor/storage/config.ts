@@ -174,6 +174,11 @@ export function stagingTargetAvailable() {
   return contentSyncRole() === 'production' && !!writer && !others.includes(writer);
 }
 
+/** Staging writer for reading original photo bytes, which the public image CDN re-encodes. */
+export function stagingAssetToken() {
+  return stagingTargetAvailable() ? process.env.SITE_EDITOR_STAGING_WRITE_TOKEN : undefined;
+}
+
 /** Run editor storage work against one environment's marketing content. */
 export function withEditorTarget<T>(target: EditorTarget, work: () => T): T {
   if (target === 'staging' && !stagingTargetAvailable())
