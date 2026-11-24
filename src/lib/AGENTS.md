@@ -1,6 +1,6 @@
 # Domain rules
 
-Follow the repository [AGENTS.md](../../AGENTS.md) and [ARCHITECTURE.md](../../ARCHITECTURE.md).
+OpenSpec is mandatory here: work only within an OpenSpec change. Follow the repository [AGENTS.md](../../AGENTS.md) and [ARCHITECTURE.md](../../ARCHITECTURE.md).
 
 Read the active OpenSpec change's domain scenarios. Verify the relevant success, rejection and retry behavior at the owning boundary.
 

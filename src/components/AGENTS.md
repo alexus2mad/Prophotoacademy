@@ -1,6 +1,6 @@
 # Component rules
 
-Follow the repository [AGENTS.md](../../AGENTS.md) and [ARCHITECTURE.md](../../ARCHITECTURE.md).
+OpenSpec is mandatory here: work only within an OpenSpec change. Follow the repository [AGENTS.md](../../AGENTS.md) and [ARCHITECTURE.md](../../ARCHITECTURE.md).
 
 Read the active change's UI scenarios and design references. Check the affected mobile, keyboard and reduced-motion interactions.
 

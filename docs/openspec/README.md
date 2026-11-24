@@ -1,5 +1,7 @@
 # Working with OpenSpec
 
+OpenSpec is mandatory for every repository change, by people and agents alike, including subagents and delegated tasks. The rule and its scope boundary are in [AGENTS.md](../../AGENTS.md). Every agent instruction file (`AGENTS.md` and `CLAUDE.md` at any depth, Copilot instructions, `.claude/agents/*.md` and `.codex/agents/*.toml`) restates it. `node scripts/openspec/check-agent-rules.mjs`, part of `pnpm spec:check`, fails when one omits the mandate or the link to the root workflow.
+
 From the repository root, use Node 22.20.0 or newer and pnpm 11.25.0. `pnpm spec` runs the pinned OpenSpec 2.1.1 CLI through the package-manager cache. Its first run needs registry access. Use this prefix wherever an upstream skill shows the bare `openspec` executable.
 
 ## Find the behavior

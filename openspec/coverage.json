@@ -403,6 +403,7 @@
       "package.json#typecheck",
       "scripts/architecture/rules.mjs",
       "scripts/check-architecture.mjs",
+      "scripts/openspec/check-agent-rules.mjs",
       "scripts/openspec/check-coverage.mjs",
       "scripts/openspec/check-links.mjs"
     ],
@@ -410,7 +411,8 @@
       "AGENTS.md",
       "ARCHITECTURE.md",
       "scripts/openspec/check-links.test.mjs",
-      "scripts/openspec/check-coverage.test.mjs"
+      "scripts/openspec/check-coverage.test.mjs",
+      "scripts/openspec/check-agent-rules.test.mjs"
     ]
   }
 }

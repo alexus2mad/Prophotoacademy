@@ -1,5 +1,7 @@
 # HyperFrames Composition Project
 
+This project is part of the ProPhoto repository. Spec-driven development with OpenSpec is mandatory here: make no edit before an OpenSpec change exists, and follow the root [AGENTS.md](../../AGENTS.md) workflow.
+
 ## Skills — USE THESE FIRST
 
 **Always invoke the relevant skill before writing or modifying compositions.** Skills encode framework-specific patterns (e.g., `window.__timelines` registration, `data-*` attribute semantics, shader-compatible CSS rules) that are NOT in generic web docs. Skipping them produces broken compositions.

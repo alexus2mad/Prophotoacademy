@@ -9,7 +9,7 @@
   "scripts": {
     "spec": "pnpm dlx @fission-ai/openspec@2.1.1",
     "skill:pack": "python scripts/editor-skill/build.py",
-    "spec:check": "pnpm spec validate --all --strict --no-interactive && pnpm spec validate --archived --strict --no-interactive && node scripts/openspec/check-coverage.mjs",
+    "spec:check": "pnpm spec validate --all --strict --no-interactive && pnpm spec validate --archived --strict --no-interactive && node scripts/openspec/check-coverage.mjs && node scripts/openspec/check-agent-rules.mjs",
     "sandbox:learning": "node scripts/sandbox/start.mjs",
     "predev": "node scripts/prepare-learning.mjs && node scripts/prepare-hero-images.mjs",
     "prebuild": "node scripts/prepare-learning.mjs && node scripts/prepare-hero-images.mjs && tsx scripts/social-images/generate.ts --check",

@@ -30,8 +30,8 @@ jobs:
           # This check uses the isolated CLI and Node built-ins. Skip application dependency installation.
           pnpm_config_verify_deps_before_run: 'false'
         run: pnpm spec:check
-      - name: Exercise the commit-link and inventory checks
-        run: node --test scripts/openspec/check-links.test.mjs scripts/openspec/check-coverage.test.mjs
+      - name: Exercise the commit-link, inventory and agent-rule checks
+        run: node --test scripts/openspec/check-links.test.mjs scripts/openspec/check-coverage.test.mjs scripts/openspec/check-agent-rules.test.mjs
       - name: Check changes in this push or pull request
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}

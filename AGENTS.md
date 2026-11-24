@@ -1,5 +1,7 @@
 # Working on ProPhoto Academy
 
+**Spec-driven development with OpenSpec is mandatory.** It binds every contributor and coding agent that changes this repository, including subagents, delegated tasks and unattended sessions. Do not edit any tracked file — code, content, documentation, release notes or agent instructions — until an OpenSpec change records the request, its scope and its acceptance scenarios. Questions, reviews, explorations and page edits made only through the visual editor change no repository file and need no change. When delegating repository edits, pass the change ID and the relevant scenarios. A delegate that receives no change stops before editing and asks for one. Every agent instruction file in the repository restates this rule, and `pnpm spec:check` fails when one omits it.
+
 Start at the repository root. Every change has an OpenSpec ID and an observable acceptance condition. Read the applicable [capability specs](openspec/specs/), [coverage index](openspec/coverage.json), and scoped instructions before editing. The [contributor guide](docs/openspec/README.md) gives commands, evidence and examples.
 
 ## From request to verified change
