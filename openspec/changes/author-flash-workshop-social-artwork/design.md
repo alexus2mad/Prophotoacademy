@@ -1,0 +1,5 @@
+Use the existing Sharp renderer and its authored catalog. The wide artwork and square artwork are two compositions of the same photograph and text. Adjust the focal point independently to retain faces, lighting detail and legibility. Keep the primary creative specific to the page and the photograph cleared for public use.
+
+The canonical media requirement describes what a contributor must preserve. The linked social preview guide owns the practical recipe, dimensions, font metrics, output checks and visual examples. Keep route resolution and CMS publication authoritative for whether a page exists. Social card registration supplies its files.
+
+Use content-addressed JPEGs and the existing ordered metadata format. Inspect a new pair at native and message-thumbnail sizes and compare registry entries for unrelated pages. Verify the actual HTML head with representative crawler user agents on staging and compare the served JPEGs to the reviewed bytes. The staging gallery is a separate static artifact.

@@ -381,6 +381,7 @@
     "evidence": [
       "docs/openspec/operations.md",
       "docs/IMAGE_QUALITY.md",
+      "docs/SOCIAL_PREVIEWS.md",
       "scripts/social-images/generate.ts",
       "videos/prophoto-seeing/scripts/verify-export.mjs"
     ]

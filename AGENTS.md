@@ -13,6 +13,7 @@ Start at the repository root. Every change has an OpenSpec ID and an observable 
 
 ## Project contracts
 
+- For a new page’s Open Graph artwork, follow the [social card design and authoring guide](docs/SOCIAL_PREVIEWS.md). Inspect the wide and square compositions before releasing them.
 - For requests to create or edit marketing pages in the visual admin, follow the [ProPhoto editor skill](.agents/skills/prophoto-editor/SKILL.md). It covers the shared draft, responsive preview and publication workflow.
 - [ARCHITECTURE.md](ARCHITECTURE.md) owns Atomic Design, semantic HTML, KISS and SOLID. Keep one component in its own folder/file, contracts in colocated `types.tsx`, hooks in `hooks.tsx`, domain decisions outside UI and client boundaries small. Preserve keyboard access, visible focus, responsive behavior and reduced motion.
 - [Studio implementation](docs/FINAL_DESIGN_IMPLEMENTATION.md) and the [public evidence index](docs/openspec/public.md) identify the active design. Keep Studio and legacy explicitly selectable, their business policies shared, and their styles scoped. Preserve the flagship emphasis, early pricing, separate brand journeys, white primary CTA text on red, original design typography, and existing rules for titles, arrows and decorative numbering. Keep source-approved content counts in their owning design decisions.

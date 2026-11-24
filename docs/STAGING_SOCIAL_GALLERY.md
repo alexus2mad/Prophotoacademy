@@ -1,8 +1,8 @@
 # Staging social-image gallery
 
 The public review gallery is available at
-`https://staging.prophotoacademy.com.ua/social-previews/`. It shows the same
-33 page designs and 66 wide/square JPEGs as the local review, with original-file
+`https://staging.prophotoacademy.com.ua/social-previews/`. Each published review
+shows the wide and square JPEGs from its source manifest, with original-file
 downloads. It is a static review artifact, independent of the staging Next.js
 release. It does not publish the gallery on production or add site navigation.
 
@@ -160,7 +160,7 @@ The journal directory is root-owned `0700`; none of it is served by Nginx.
    failure restore the saved configuration; never reload an invalid configuration.
    Replacing HTML alone needs no reload or application restart.
 4. Fetch both exact gallery URLs anonymously. Verify status 200, the headers above,
-   the complete response SHA-256, 33 sections and 66 images. Check a nonexistent
+   the complete response SHA-256, one section per manifest entry and two images per section. Check a nonexistent
    child path returning 404. Open the HTTPS gallery
    on desktop/mobile and verify the download action.
 5. Confirm production does not serve this artifact at `/social-previews/`, and

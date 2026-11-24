@@ -30,6 +30,8 @@ Administrators open **Сторінки сайту** in the Academy workspace at 
 
 Published course and workshop pages appear in the corresponding Academy lists. Prices, payment eligibility and enrollment are managed through their configured offers.
 
+Для окремої картки сторінки у Facebook, Telegram, WhatsApp і Viber передайте її публічну адресу, назву, короткий опис і схвалене фото для публічного поширення. Широке й квадратне зображення готуються разом за [правилами соціальних прев’ю](SOCIAL_PREVIEWS.md).
+
 ## Як створити практичний інтенсив
 
 1. У **Створити сторінку** оберіть **Практичний інтенсив**. Додайте назву, адресу, обкладинку й опис фотографії. Короткі факти про тривалість, групу або моделей вводьте по одному на рядок.
