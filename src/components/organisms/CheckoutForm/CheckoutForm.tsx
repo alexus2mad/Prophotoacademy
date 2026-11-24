@@ -6,12 +6,12 @@ import { useCheckoutForm } from './hooks';
 import type { CheckoutFormProps } from './types';
 
 export function CheckoutForm(props: CheckoutFormProps) {
-  const { mode, kind, email, name } = props;
+  const { mode, kind, allowPromo = true, email, name } = props;
   const { state, error, fieldErrors, promo, changePromo, applyPromo, submit } =
     useCheckoutForm(props);
   const product = kind === 'product';
   return (
-    <form className="form-stack" onSubmit={submit}>
+    <form className="form-stack" method="post" onSubmit={submit}>
       <FormField
         id="checkout-name"
         label="Ваше ім’я"
@@ -69,7 +69,7 @@ export function CheckoutForm(props: CheckoutFormProps) {
           error={fieldErrors.instagram}
         />
       </div>
-      {mode === 'wayforpay' && (
+      {mode === 'wayforpay' && allowPromo && (
         <PromoCodeField
           value={promo.value}
           quote={promo.quote}

@@ -5,6 +5,7 @@ export type CheckoutFormProps = {
   packageId: string;
   mode: PaymentMode;
   kind?: PackageKind;
+  allowPromo?: boolean;
   email?: string;
   name?: string;
 };

@@ -9,7 +9,7 @@ export type WorkshopCheckoutActionProps = {
   option?: WorkshopTicketOption;
   editing?: boolean;
   preview?: boolean;
-  /** Custom button content, such as a price card; the default is «Записатися». */
+  /** Custom link content, such as a price card; the default is «Записатися». */
   children?: ReactNode;
   className?: string;
   /** Accessible name when the content is not a plain label. */

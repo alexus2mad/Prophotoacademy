@@ -70,8 +70,7 @@ export async function workshopCheckout(path: string) {
     tickets: offering.packages.map((ticket) => ({
       ticket,
       href: packageIds.includes(ticket.id)
-        ? '/api/checkout/workshop?' +
-          new URLSearchParams({ offering: offering.id, package: ticket.id })
+        ? '/checkout?' + new URLSearchParams({ offering: offering.id, package: ticket.id })
         : undefined,
     })),
   };

@@ -12,7 +12,7 @@ const single = {
   id: 'two',
   label: 'Квиток',
   includes: [],
-  href: '/api/checkout/workshop?offering=one&package=two',
+  href: '/checkout?offering=one&package=two',
   amount: 4200,
   price: '4 200',
 };
@@ -30,7 +30,7 @@ const online = {
   id: 'online',
   label: 'Онлайн',
   description: 'Онлайн-участь у прямому ефірі',
-  href: '/api/checkout/workshop?offering=one&package=online',
+  href: '/checkout?offering=one&package=online',
   amount: 2500,
   price: '2 500',
   previousPrice: '3 000',
@@ -71,7 +71,8 @@ describe('workshop design sections in public pages and the working editor', () =
       set(block, 'price', '1 999');
       set(block, 'currency', 'USD');
       const bound = render(block, { ticket: checkout });
-      expect(bound('button[type="button"]').text()).toContain('Записатися');
+      expect(bound('a').text()).toContain('Записатися');
+      expect(bound('a').attr('href')).toBe(single.href);
       expect(bound('strong').text()).toBe('4 200');
       expect(bound('[data-site-field="price"], [data-site-field="currency"],form')).toHaveLength(0);
       const unbound = render(block);
@@ -111,7 +112,12 @@ describe('workshop design sections in public pages and the working editor', () =
     ).toEqual(['3 700', '2 500']);
     expect(cards.eq(0).text()).toContain('13 грудня, 11:00–17:00');
     expect(cards.eq(1).text()).toContain('Онлайн-участь у прямому ефірі');
-    expect(cards.find('button')).toHaveLength(2);
+    expect(
+      cards
+        .find('a')
+        .map((_, n) => $(n).attr('href'))
+        .get(),
+    ).toEqual([offline.href, online.href]);
     expect($('[data-site-field="note"]').text()).toBe('Кількість місць обмежена.');
     const preview = render(offer, { ticket: formats, preview: true });
     expect(preview('button,a')).toHaveLength(0);
@@ -131,7 +137,8 @@ describe('workshop design sections in public pages and the working editor', () =
         createElement(WorkshopTicketPrices, { ticket: formats, id: 'workshop-tickets' }),
       ),
     );
-    const cards = $('#workshop-tickets button');
+    const cards = $('#workshop-tickets a');
+    expect(cards.map((_, n) => $(n).attr('href')).get()).toEqual([offline.href, online.href]);
     expect(cards.map((_, n) => $(n).attr('aria-label')).get()).toEqual([
       'Офлайн, 3 700 грн замість 4 200 — записатися',
       'Онлайн, 2 500 грн замість 3 000 — записатися',
@@ -141,7 +148,7 @@ describe('workshop design sections in public pages and the working editor', () =
     const editing = load(
       renderToStaticMarkup(createElement(WorkshopTicketPrices, { ticket: formats, editing: true })),
     );
-    expect(editing('button')).toHaveLength(0);
+    expect(editing('a,button')).toHaveLength(0);
     expect(editing('[aria-disabled="true"]')).toHaveLength(2);
     const closed = load(
       renderToStaticMarkup(
@@ -156,7 +163,7 @@ describe('workshop design sections in public pages and the working editor', () =
         }),
       ),
     );
-    expect(closed('button')).toHaveLength(0);
+    expect(closed('a,button')).toHaveLength(0);
     expect(
       closed('strong')
         .map((_, n) => closed(n).text())
@@ -182,7 +189,11 @@ describe('workshop design sections in public pages and the working editor', () =
         .map((_, n) => $(n).text())
         .get(),
     ).toEqual(['13 грудня', '11:00 – 17:00', 'Київ, вул. Саксаганського, 24/25']);
-    expect($('#workshop-tickets button')).toHaveLength(2);
+    expect(
+      $('#workshop-tickets a')
+        .map((_, n) => $(n).attr('href'))
+        .get(),
+    ).toEqual([offline.href, online.href]);
     expect(
       $('#workshop-tickets s')
         .map((_, n) => $(n).text())
@@ -190,7 +201,7 @@ describe('workshop design sections in public pages and the working editor', () =
     ).toEqual(['4200', '3000']);
     expect($('[data-site-field="price"], [data-site-field="currency"]')).toHaveLength(0);
     const preview = render(block, { ticket: formats, preview: true });
-    expect(preview('button')).toHaveLength(0);
+    expect(preview('a,button')).toHaveLength(0);
     expect(preview('[aria-disabled="true"]')).toHaveLength(2);
     const unbound = render(block, { editing: true });
     expect(unbound('#workshop-tickets')).toHaveLength(0);

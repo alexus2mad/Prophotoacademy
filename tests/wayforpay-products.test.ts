@@ -1,7 +1,7 @@
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
 import { readFile } from 'node:fs/promises';
-import { randomUUID } from 'node:crypto';
+import { createHmac, randomUUID } from 'node:crypto';
 import seed from '../content/academy.json';
 import { POST as checkout } from '../src/app/api/checkout/route';
 import { POST as workshopCheckoutPost } from '../src/app/api/checkout/workshop/route';
@@ -13,6 +13,7 @@ import { POST as simulatePayment } from '../src/app/api/payments/mock/route';
 import { GET as orderStatus } from '../src/app/api/orders/status/route';
 import { savePromoCode, discountedAmount, deletePromoCode } from '../src/lib/commerce/promo';
 import { resolvePurchase, testProduct } from '../src/lib/checkout';
+import { createOrder } from '../src/lib/commerce/orders';
 import { enrollmentOptions } from '../src/lib/commerce/catalog';
 import { findWorkshopOffer, workshopCheckout } from '../src/lib/commerce/workshop-offers';
 import { deliverNotifications } from '../src/lib/notifications/delivery';
@@ -56,14 +57,10 @@ const flashPath = '/flash-without-fear';
 const flash = findWorkshopOffer(flashPath)!;
 const flashPackage = flash.offering.packages[0];
 const flashCheckout =
-  '/api/checkout/workshop?offering=offering-flash-without-fear&package=flash-without-fear-ticket';
+  '/checkout?offering=offering-flash-without-fear&package=flash-without-fear-ticket';
 const onlineCheckout =
-  '/api/checkout/workshop?offering=offering-flash-without-fear&package=flash-without-fear-online';
+  '/checkout?offering=offering-flash-without-fear&package=flash-without-fear-online';
 const publishedWorkshop = vi.hoisted(() => ({ active: true }));
-const ticketRequest = () => ({
-  token: randomUUID().replaceAll('-', '').repeat(2),
-  idempotencyKey: randomUUID(),
-});
 const secret = 'test-secret-not-a-credential';
 const admin = randomUUID();
 const lab = ['program-lab'];
@@ -80,6 +77,41 @@ const payload = (extra: Record<string, unknown> = {}) => ({
   idempotencyKey: randomUUID(),
   ...extra,
 });
+const workshopPayload = (extra: Record<string, unknown> = {}) =>
+  payload({ offeringId: flash.offering.id, packageId: flashPackage.id, ...extra });
+const submitWorkshop = (input: ReturnType<typeof workshopPayload>) =>
+  checkout(post('/api/checkout', input));
+async function legacyHostedOrder() {
+  const input = workshopPayload();
+  const order = await createOrder(
+    {
+      idempotencyKey: input.idempotencyKey,
+      fingerprint: 'legacy-workshop-order',
+      offeringId: flash.offering.id,
+      packageId: flashPackage.id,
+      packageName: flashPackage.name,
+      programId: flash.program.id,
+      programTitle: flash.program.title,
+      amount: flashPackage.price,
+      listAmount: flashPackage.price,
+      currency: 'UAH',
+      mode: 'wayforpay',
+      hostedTicket: true,
+      merchantAccount: 'test-merchant',
+      customer: { name: '', email: '', phone: '' },
+      productKind: 'product',
+    },
+    input.token,
+  );
+  const proof = createHmac('sha256', secret)
+    .update('workshop-contact:' + order.id)
+    .digest('hex');
+  return {
+    orderId: order.id,
+    token: input.token,
+    servicePath: '/api/payments/wayforpay/callback?receipt=' + proof,
+  };
+}
 const post = (path: string, body: unknown) =>
   new Request(origin + path, {
     method: 'POST',
@@ -217,17 +249,20 @@ describe('ticket and service products', () => {
     expect(await workshopCheckout('/some-other-workshop')).toBeUndefined();
     vi.stubEnv('PAYMENT_MODE', 'disabled');
     expect((await workshopCheckout(flashPath))?.tickets.every(({ href }) => !href)).toBe(true);
-    expect((await workshopCheckoutPost(post(flashCheckout, ticketRequest()))).status).toBe(409);
+    expect((await submitWorkshop(workshopPayload())).status).toBe(409);
   });
-  it('simulates one-click tickets on staging without contacting the provider or creating accounting events', async () => {
+  it('simulates identified workshop tickets on staging without contacting the provider or creating accounting events', async () => {
     vi.stubEnv('PAYMENT_MODE', 'mock');
     const transport = vi.fn();
     vi.stubGlobal('fetch', transport);
-    const input = ticketRequest();
-    const result = await workshopCheckoutPost(post(flashCheckout, input));
+    const input = workshopPayload();
+    const result = await submitWorkshop(input);
     expect(result.status).toBe(200);
-    expect(await result.json()).toEqual({ mode: 'mock', url: '/thanks?token=' + input.token });
-    expect((await workshopCheckoutPost(post(flashCheckout, input))).status).toBe(200);
+    expect(await result.json()).toMatchObject({
+      mode: 'mock',
+      url: '/thanks?token=' + input.token,
+    });
+    expect((await submitWorkshop(input)).status).toBe(200);
     await simulatePayment(post('/api/payments/mock', { token: input.token, status: 'approved' }));
     expect(await order()).toMatchObject({
       status: 'approved',
@@ -240,40 +275,47 @@ describe('ticket and service products', () => {
     expect((await pg.query('SELECT id FROM academy.grants')).rows).toHaveLength(0);
     expect(transport).not.toHaveBeenCalled();
   });
-  it('charges the chosen online ticket at its own catalog price', async () => {
-    vi.stubEnv('PAYMENT_MODE', 'mock');
-    const input = ticketRequest();
-    const result = await workshopCheckoutPost(post(onlineCheckout, input));
-    expect(result.status).toBe(200);
-    expect(await order()).toMatchObject({
-      packageId: 'flash-without-fear-online',
-      packageName: 'Онлайн',
-      amount: 2500,
-      listAmount: 2500,
-    });
-  });
-  it('opens one hosted payment, confirms the contact from WayForPay, and settles a ticket exactly once', async () => {
-    let serviceUrl = '';
-    const providerUrl = 'https://secure.wayforpay.com/page?session=test';
-    const provider = vi.fn(async (url: string, request: RequestInit) => {
-      expect(url).toBe('https://secure.wayforpay.com/pay?behavior=offline');
-      const form = request.body as URLSearchParams;
-      serviceUrl = form.get('serviceUrl')!;
-      expect(new URL(form.get('returnUrl')!).pathname).toBe('/api/payments/wayforpay/return');
-      expect(form.get('clientEmail')).toBeNull();
-      expect(form.get('amount')).toBe(String(flashPackage.price));
-      expect(form.get('productPrice[]')).toBe(String(flashPackage.price));
-      return Response.json({ url: providerUrl });
-    });
-    vi.stubGlobal('fetch', provider);
-    const input = ticketRequest();
-    for (let attempt = 0; attempt < 2; attempt++) {
-      const result = await workshopCheckoutPost(post(flashCheckout, input));
-      expect(result.status).toBe(200);
-      expect(await result.json()).toEqual({ mode: 'wayforpay', url: providerUrl });
-    }
-    expect(provider).toHaveBeenCalledTimes(1);
-    const orderId = (await order()).id;
+  it.each(flash.offering.packages)(
+    'collects contacts before live payment for $name at $price',
+    async (pack) => {
+      const input = workshopPayload({ packageId: pack.id });
+      const first = await submitWorkshop(input);
+      expect(first.status).toBe(200);
+      const payment = await first.json();
+      expect(payment).toMatchObject({
+        mode: 'wayforpay',
+        amount: pack.price,
+        action: 'https://secure.wayforpay.com/pay',
+        fields: {
+          clientEmail: input.email,
+          clientPhone: input.phone,
+          orderReference: payment.orderId,
+        },
+      });
+      expect(await (await submitWorkshop(input)).json()).toEqual(payment);
+      expect((await pg.query('SELECT id FROM academy.orders')).rows).toHaveLength(1);
+      expect(await order()).toMatchObject({
+        packageId: pack.id,
+        packageName: pack.name,
+        amount: pack.price,
+        listAmount: pack.price,
+        customer: { name: input.name, email: input.email, phone: input.phone },
+      });
+      expect(
+        (
+          await callback(
+            post('/api/payments/wayforpay/callback', providerCallback(payment.orderId, pack.price)),
+          )
+        ).status,
+      ).toBe(200);
+      expect((await pg.query('SELECT email, amount_minor FROM academy.transactions')).rows).toEqual(
+        [{ email: input.email, amount_minor: pack.price * 100 }],
+      );
+      expect((await pg.query('SELECT id FROM academy.grants')).rows).toHaveLength(0);
+    },
+  );
+  it('confirms a previously started hosted order with provider contact exactly once', async () => {
+    const { orderId, servicePath } = await legacyHostedOrder();
     const raw = {
       ...providerCallback(orderId, flashPackage.price),
       email: 'TEST@Example.test',
@@ -284,7 +326,7 @@ describe('ticket and service products', () => {
     expect((await order()).status).toBe('pending');
     publishedWorkshop.active = false;
     for (let attempt = 0; attempt < 2; attempt++)
-      expect((await callback(post(serviceUrl.slice(origin.length), raw))).status).toBe(200);
+      expect((await callback(post(servicePath, raw))).status).toBe(200);
     const paid = await order();
     expect(paid).toMatchObject({
       status: 'approved',
@@ -317,46 +359,34 @@ describe('ticket and service products', () => {
       ).rows,
     ).toEqual([{ email: 'test@example.test' }]);
   });
-  it('requires the published offer binding, exact package, and server-set price for direct initiation', async () => {
-    const input = ticketRequest();
-    expect(
-      (await workshopCheckoutPost(post(flashCheckout.replace(flashPackage.id, 'other'), input)))
-        .status,
-    ).toBe(404);
-    expect((await workshopCheckoutPost(post(flashCheckout, { ...input, amount: 1 }))).status).toBe(
-      400,
-    );
+  it('rejects anonymous initiation, missing contacts or consent and ineligible workshop orders', async () => {
+    expect(workshopCheckoutPost().status).toBe(410);
+    for (const fields of [
+      { name: undefined },
+      { email: undefined },
+      { phone: undefined },
+      { consent: false },
+      { amount: 1 },
+    ])
+      expect((await submitWorkshop(workshopPayload(fields))).status).toBe(400);
+    expect((await submitWorkshop(workshopPayload({ packageId: 'other' }))).status).toBe(404);
+    expect((await submitWorkshop(workshopPayload({ promoCode: 'ACADEMY' }))).status).toBe(422);
     publishedWorkshop.active = false;
-    expect((await workshopCheckoutPost(post(flashCheckout, input))).status).toBe(409);
+    expect((await submitWorkshop(workshopPayload())).status).toBe(409);
     expect((await pg.query('SELECT id FROM academy.orders')).rows).toHaveLength(0);
   });
-  it('retries an unavailable gateway on the same reference and preserves a paid ticket without provider contacts', async () => {
-    const input = ticketRequest();
-    let servicePath = '';
-    const references: string[] = [];
-    const provider = vi.fn(async (_url: string, request: RequestInit) => {
-      const form = request.body as URLSearchParams;
-      references.push(form.get('orderReference')!);
-      servicePath = form.get('serviceUrl')!.slice(origin.length);
-      if (references.length === 1) throw new TypeError('Network unavailable');
-      return Response.json({ url: 'https://secure.wayforpay.com/page?session=recovered' });
-    });
-    vi.stubGlobal('fetch', provider);
-    expect((await workshopCheckoutPost(post(flashCheckout, input))).status).toBe(502);
-    expect((await workshopCheckoutPost(post(flashCheckout, input))).status).toBe(200);
-    expect(references).toHaveLength(2);
-    expect(references[0]).toBe(references[1]);
+  it('preserves a previously started hosted order paid without provider contacts', async () => {
+    const { orderId, token, servicePath } = await legacyHostedOrder();
     const returned = browserReturn(
-      post('/api/payments/wayforpay/return?token=' + input.token, {
+      post('/api/payments/wayforpay/return?token=' + token, {
         transactionStatus: 'Approved',
       }),
     );
     expect(returned.status).toBe(303);
-    expect(returned.headers.get('location')).toBe('/thanks?token=' + input.token);
+    expect(returned.headers.get('location')).toBe('/thanks?token=' + token);
     expect((await order()).status).toBe('pending');
     expect(
-      (await callback(post(servicePath, providerCallback(references[0], flashPackage.price))))
-        .status,
+      (await callback(post(servicePath, providerCallback(orderId, flashPackage.price)))).status,
     ).toBe(200);
     expect((await pg.query('SELECT email, amount_minor FROM academy.transactions')).rows).toEqual([
       { email: null, amount_minor: flashPackage.price * 100 },

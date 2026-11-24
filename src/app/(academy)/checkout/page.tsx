@@ -1,10 +1,8 @@
 import type { CheckoutPageProps } from '@/app/types';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
-import { findWorkshopOfferById } from '@/lib/commerce/workshop-offers';
 import { getContent, findImage } from '@/lib/content';
-import { resolvePurchase } from '@/lib/checkout';
+import { resolveCheckoutPurchase } from '@/lib/checkout';
 import { isEnrollmentClosed, money } from '@/lib/format';
 import { CheckoutForm } from '@/components/organisms/CheckoutForm/CheckoutForm';
 import { Photo } from '@/components/atoms/Photo/Photo';
@@ -26,15 +24,13 @@ export const metadata: Metadata = {
 };
 export default async function Checkout({ searchParams }: CheckoutPageProps) {
   const query = await searchParams;
-  const workshop = query.offering && findWorkshopOfferById(query.offering);
-  if (workshop && workshop.offering.packages[0].id === query.package) redirect(workshop.path);
   const content = await getContent();
   const mode = paymentMode();
   const member = await currentMember();
   let purchase;
   let automaticAccess = false;
   try {
-    purchase = resolvePurchase(
+    purchase = await resolveCheckoutPurchase(
       content,
       query.demo === '1' ? 'demo-offering' : query.offering || '',
       query.demo === '1' ? 'demo-base' : query.package || '',
@@ -94,12 +90,19 @@ export default async function Checkout({ searchParams }: CheckoutPageProps) {
           packageId={pack.id}
           mode={mode}
           kind={pack.kind}
+          allowPromo={!purchase.workshop}
           email={member?.email}
           name={member?.name}
         />
         <aside className="checkout-summary">
           <div className="checkout-summary-heading">
-            <Photo image={findImage(content, program.imageId)} />
+            <Photo
+              image={
+                purchase.workshop
+                  ? purchase.program.image
+                  : findImage(content, purchase.program.imageId)
+              }
+            />
             <div>
               <p className="eyebrow">{pack.name}</p>
               <h2>{program.shortTitle}</h2>
@@ -120,15 +123,17 @@ export default async function Checkout({ searchParams }: CheckoutPageProps) {
             </p>
           )}
           {pack.description && <p className="muted">{pack.description}</p>}
-          <OfferingSummary
-            program={program}
-            offering={offering}
-            packageId={pack.id}
-            packageName={pack.name}
-          />
+          {!purchase.workshop && (
+            <OfferingSummary
+              program={purchase.program}
+              offering={offering}
+              packageId={pack.id}
+              packageName={pack.name}
+            />
+          )}
           {!!pack.includes.length && (
-            <details className="checkout-includes">
-              <summary>Що входить у пакет</summary>
+            <details className="checkout-includes" open={purchase.workshop || undefined}>
+              <summary>{purchase.workshop ? 'Деталі участі' : 'Що входить у пакет'}</summary>
               <ul className="check-list">
                 {pack.includes.map((item) => (
                   <li key={item}>{item}</li>

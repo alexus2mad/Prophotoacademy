@@ -1,5 +1,5 @@
 import { getContent } from '@/lib/content';
-import { checkoutInput, resolvePurchase } from '@/lib/checkout';
+import { checkoutInput, resolveCheckoutPurchase } from '@/lib/checkout';
 import {
   createOrder,
   hash,
@@ -28,11 +28,12 @@ export async function POST(request: Request) {
         promoCode: 'Промокод недійсний',
       });
     const input = parsed.data;
-    const { program, pack } = resolvePurchase(
+    const { program, pack, workshop } = await resolveCheckoutPurchase(
       await getContent(),
       input.offeringId,
       input.packageId,
     );
+    if (workshop && input.promoCode) throw new HttpError(422, 'Промокоди не діють на цей квиток.');
     const fingerprint = hash(JSON.stringify(input));
     const existing = await orderByKey(input.idempotencyKey);
     const mode = paymentMode();

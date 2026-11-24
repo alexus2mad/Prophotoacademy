@@ -1,5 +1,4 @@
-'use client';
-import { useWorkshopCheckout } from './hooks';
+import Link from 'next/link';
 import type { WorkshopCheckoutActionProps } from './types';
 
 export function WorkshopCheckoutAction({
@@ -13,10 +12,9 @@ export function WorkshopCheckoutAction({
 }: WorkshopCheckoutActionProps) {
   const inert = editing || preview;
   const href = option ? option.href : ticket?.href;
-  const { sending, error, submit } = useWorkshopCheckout(inert ? undefined : href);
   const label = children ?? (
     <>
-      {sending ? 'Відкриваємо оплату…' : 'Записатися'}
+      Записатися
       <span aria-hidden="true">→</span>
     </>
   );
@@ -34,19 +32,8 @@ export function WorkshopCheckoutAction({
       </span>
     ) : null;
   return (
-    <>
-      <button
-        type="button"
-        className={className}
-        data-site-locked=""
-        aria-label={name}
-        disabled={sending}
-        aria-busy={sending}
-        onClick={submit}
-      >
-        {label}
-      </button>
-      {error && <p role="alert">{error}</p>}
-    </>
+    <Link href={href} className={className} data-site-locked="" aria-label={name}>
+      {label}
+    </Link>
   );
 }

@@ -57,16 +57,15 @@ copying their configuration to staging.
 An intensive may select a reviewed offer from `src/lib/commerce/workshop-offers.ts`.
 The offer owns the price, package, and eligible workshop path. Publishing the matching binding
 opens its purchase action. Removing the binding closes new orders and previously issued
-orders can still settle. Flash without fear sells one type of ticket for 4,200 UAH.
+orders can still settle. Flash without fear offers offline participation for 3,700 UAH
+and online participation for 2,500 UAH.
 Its public page, date and inventory do not come from a second course record.
 
-A tap creates an idempotent order and opens WayForPay's hosted checkout directly. The merchant
-should enable buyer contact collection in the hosted payment settings. WayForPay sends contact
-details to the order-specific callback, independently of the browser return. The callback verifies
-both the payment signature and its per-order proof before recording a ticket. The shared cashbox,
-confirmation email and Make/Telegram notifications use the existing purchase pipeline. When the
-provider supplies no email, the receipt goes unsent; a success notice identifies missing buyer
-contact data for the team. Staging uses the existing local payment simulator.
+Each ticket card opens Academy checkout for that format. The form requires name, email,
+phone and consent. A valid submission creates an idempotent order at the catalog price
+and provides the recorded contacts to WayForPay. Verified payments use the existing cashbox,
+confirmation email and notification pipeline. Previously issued hosted orders keep
+their order-specific callback verification. Staging uses the existing local payment simulator.
 
 ## Manager workflow
 

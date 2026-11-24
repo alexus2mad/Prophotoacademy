@@ -34,11 +34,11 @@
   border-color: transparent;
   background: #231f1d;
 }
-button.card:hover {
+a.card:hover {
   border-color: var(--studio-paper, #fbfbfb);
   transform: translateY(-2px);
 }
-button.card:focus-visible {
+a.card:focus-visible {
   outline: 2px solid var(--studio-paper, #fbfbfb);
   outline-offset: 4px;
 }
@@ -80,7 +80,7 @@ span.card {
   .card {
     transition: none;
   }
-  button.card:hover {
+  a.card:hover {
     transform: none;
   }
 }

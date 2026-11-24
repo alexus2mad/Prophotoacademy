@@ -5,6 +5,8 @@ import { canEnroll, isEnrollmentClosed } from './format';
 import { HttpError } from './http';
 import { paymentMode } from './commerce/payment-mode';
 import { canTestEnroll } from './commerce/selectors';
+import { findWorkshopOfferById } from './commerce/workshop-offers';
+import { getPublishedPage } from './site-editor/store';
 export const checkoutInput = z
   .object({
     acquisition: acquisitionSchema.optional(),
@@ -111,4 +113,27 @@ export function resolvePurchase(
   )
     throw new HttpError(409, 'Набір у цей пакет не підтверджено. Залиште заявку академії.');
   return { program, offering, pack };
+}
+
+export async function resolveCheckoutPurchase(
+  content: AcademyContent,
+  offeringId: string,
+  packageId: string,
+) {
+  const workshop = findWorkshopOfferById(offeringId);
+  if (!workshop)
+    return { ...resolvePurchase(content, offeringId, packageId), workshop: false as const };
+
+  const { program, offering, path } = workshop;
+  const pack = offering.packages.find((ticket) => ticket.id === packageId);
+  if (!pack) throw new HttpError(404, 'Квиток не знайдено.');
+  const page = await getPublishedPage(path);
+  if (
+    page?.kind !== 'workshop' ||
+    page.offerId !== offering.id ||
+    paymentMode() === 'disabled' ||
+    !canEnroll(offering, pack)
+  )
+    throw new HttpError(409, 'Продаж квитків на цей воркшоп наразі недоступний.');
+  return { program, offering, pack, workshop: true as const };
 }
