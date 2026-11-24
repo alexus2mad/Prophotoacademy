@@ -23,12 +23,12 @@
     linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 150px),
     linear-gradient(180deg, rgba(0, 0, 0, 0.05) 30%, rgba(0, 0, 0, 0.78));
 }
-.hero[data-food-hero]::before {
+.hero:is([data-food-hero], [data-editorial-hero])::before {
   background:
     linear-gradient(180deg, rgb(0 0 0 / 55%), transparent 150px),
     linear-gradient(180deg, transparent 30%, rgb(0 0 0 / 55%) 58%, rgb(0 0 0 / 90%));
 }
-.hero[data-food-hero]::after {
+.hero:is([data-food-hero], [data-editorial-hero])::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -234,14 +234,14 @@
     padding-left: 0;
     border-left: 0;
   }
-  .hero[data-food-hero] .facts {
+  .hero:is([data-food-hero], [data-editorial-hero]) .facts {
     gap: 10px;
     font-size: clamp(0.875rem, 4.2vw, 1.375rem);
   }
-  .hero[data-food-hero] .facts > span {
+  .hero:is([data-food-hero], [data-editorial-hero]) .facts > span {
     white-space: nowrap;
   }
-  .hero[data-food-hero] .facts > span + span {
+  .hero:is([data-food-hero], [data-editorial-hero]) .facts > span + span {
     flex-basis: auto;
     padding-left: 10px;
     border-left: 1px solid rgb(255 255 255 / 60%);

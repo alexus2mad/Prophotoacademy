@@ -18,6 +18,8 @@ const kinds = { home: 'Головна', course: 'Курс', workshop: 'Ворк�
 export function SiteContentEditor(props: SiteContentEditorProps) {
   const h = useSiteContentEditor(props);
   const { page, record } = h;
+  const tickets = (props.tickets ?? []).filter((option) => option.path === page?.path);
+  const ticket = tickets.find((option) => option.id === page?.offerId)?.presentation;
   const busy = !!h.task;
   const disabled = busy || !props.writable || h.conflict;
   const section = page?.sections.find((s) => s.id === h.sectionId);
@@ -152,9 +154,30 @@ export function SiteContentEditor(props: SiteContentEditorProps) {
                   />
                 )}
               </div>
+              {section?.id === 'landing-cover' &&
+                page.template === 'workshop-intensive' &&
+                tickets.length > 0 && (
+                  <div className={styles.sectionHead}>
+                    <label htmlFor="site-workshop-ticket">Квиток для оплати</label>
+                    <select
+                      id="site-workshop-ticket"
+                      value={page.offerId ?? ''}
+                      disabled={disabled}
+                      onChange={(event) => h.selectOffer(event.target.value)}
+                    >
+                      <option value="">Без продажу квитків</option>
+                      {tickets.map((item) => (
+                        <option key={item.id} value={item.id}>
+                          {item.label} · {item.presentation.price} {item.presentation.currency}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
               {section && (
                 <SiteBlockInspector
                   key={section.id}
+                  ticket={ticket}
                   section={section}
                   fieldId={h.fieldId}
                   disabled={disabled}
@@ -179,6 +202,7 @@ export function SiteContentEditor(props: SiteContentEditorProps) {
             <div className={styles.canvas}>
               <SiteEditorPreview
                 page={page}
+                ticket={ticket}
                 savedPage={record.page}
                 editable={!disabled}
                 sectionId={h.sectionId}

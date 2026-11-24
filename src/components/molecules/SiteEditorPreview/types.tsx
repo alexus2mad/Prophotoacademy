@@ -1,3 +1,4 @@
+import type { WorkshopTicketPresentation } from '@/lib/site-editor/workshop-ticket/types';
 import type { BlockPosition, SiteField, SitePage } from '@/lib/site-editor/types';
 
 export type PreviewField = { sectionId: string; fieldId: string };
@@ -7,6 +8,7 @@ export type PreviewFieldCandidates = { field: PreviewField; nodes: (HTMLElement 
 export type SiteEditorPreviewProps = {
   page: SitePage;
   savedPage: SitePage;
+  ticket?: WorkshopTicketPresentation;
   sectionId: string;
   editable: boolean;
   onSelect: (field: PreviewField) => void;

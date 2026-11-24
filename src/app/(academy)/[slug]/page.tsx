@@ -1,3 +1,5 @@
+import { WorkshopIntensiveTemplate } from '@/components/templates/WorkshopIntensiveTemplate/WorkshopIntensiveTemplate';
+import { workshopTicket } from '@/lib/site-editor/workshop-ticket/presentation';
 import { Fragment } from 'react';
 import { MarketingSlot } from '@/components/molecules/MarketingSlot/MarketingSlot';
 import { legalChapters, isLegalHeading } from '@/lib/site-editor/legal-chapters';
@@ -106,6 +108,10 @@ export default async function Detail({ params, searchParams }: SlugPageProps & S
   }
   const page = content.pages.find((p) => p.slug === slug);
   if (!page) {
+    if (pageContent?.template === 'workshop-intensive')
+      return (
+        <WorkshopIntensiveTemplate page={pageContent} ticket={await workshopTicket(pageContent)} />
+      );
     if (pageContent?.sections.some((s) => s.id === 'landing-cover'))
       return <EditorialLandingTemplate page={pageContent} />;
     notFound();

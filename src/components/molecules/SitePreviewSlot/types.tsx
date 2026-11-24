@@ -1,7 +1,9 @@
+import type { WorkshopTicketPresentation } from '@/lib/site-editor/workshop-ticket/types';
 import type { BlockPosition, SiteSection } from '@/lib/site-editor/types';
 
 export type SitePreviewSlotProps = {
   slot: string;
+  ticket?: WorkshopTicketPresentation;
   label: string;
   blocks: SiteSection[];
   editable: boolean;

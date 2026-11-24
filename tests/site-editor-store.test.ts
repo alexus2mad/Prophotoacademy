@@ -93,6 +93,38 @@ describe('visual editor persistence and authorization', () => {
     expect(await getPublishedPage(original.path)).toEqual(update);
   });
 
+  it('keeps a ticket private until publication and binds it only to its configured workshop', async () => {
+    const path = '/flash-without-fear';
+    const id = 'offering-flash-without-fear';
+    const draft = await createSiteDraft(
+      path,
+      'Flash without fear',
+      'workshop',
+      'workshop-intensive',
+    );
+    const bound = await writeSitePage({ ...draft.page, offerId: id }, draft.revision, false);
+    expect((await getEditorPage(path)).page.offerId).toBe(id);
+    expect(await getPublishedPage(path)).toBeNull();
+    await expect(
+      writeSitePage({ ...bound.page, offerId: 'unknown-ticket' }, bound.revision, false),
+    ).rejects.toMatchObject({ status: 400 });
+    const other = await createSiteDraft(
+      '/another-workshop',
+      'Another workshop',
+      'workshop',
+      'workshop-intensive',
+    );
+    await expect(
+      writeSitePage({ ...other.page, offerId: id }, other.revision, false),
+    ).rejects.toMatchObject({ status: 400 });
+    const unbound = await writeSitePage(
+      { ...bound.page, offerId: undefined },
+      bound.revision,
+      false,
+    );
+    expect(unbound.page.offerId).toBeUndefined();
+  });
+
   it('creates a private draft, extends its sections and atomically publishes at a free path', async () => {
     const draft = await createSiteDraft('/novyi-kurs', 'Новий курс', 'course');
     expect(draft).toMatchObject({ hasDraft: true, published: false });

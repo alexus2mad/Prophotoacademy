@@ -48,6 +48,7 @@ export function SiteEditorPreview(props: SiteEditorPreviewProps) {
       {h.hosts.map((host) =>
         createPortal(
           <SitePreviewSlot
+            ticket={props.ticket}
             slot={host.slot}
             label={host.label}
             blocks={blocksAtPlacement(props.page, host.slot)}

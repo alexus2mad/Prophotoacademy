@@ -1,0 +1,6 @@
+.page {
+  background: var(--studio-ink, #0a0807);
+}
+.title {
+  text-wrap: balance;
+}

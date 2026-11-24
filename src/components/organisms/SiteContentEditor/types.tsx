@@ -1,7 +1,12 @@
 import type { SitePage, SitePageSummary, PageTemplateId } from '@/lib/site-editor/types';
 import type { PreviewField } from '@/components/molecules/SiteEditorPreview/types';
 
-export type SiteContentEditorProps = { initialPages: SitePageSummary[]; writable: boolean };
+import type { WorkshopTicketChoice } from '@/lib/site-editor/workshop-ticket/types';
+export type SiteContentEditorProps = {
+  initialPages: SitePageSummary[];
+  writable: boolean;
+  tickets?: WorkshopTicketChoice[];
+};
 export type NewPageValues = Pick<SitePage, 'path' | 'title' | 'kind'> & {
   template: PageTemplateId;
 };

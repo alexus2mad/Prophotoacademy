@@ -204,6 +204,11 @@ export function useSiteContentEditor({ initialPages, writable }: SiteContentEdit
   function updateStyle(section: string, id: string, style?: TextStyle) {
     updateField(section, id, (field) => ({ ...field, style }));
   }
+  function selectOffer(id: string) {
+    if (!writable || lock.current || conflict) return;
+    setPage((current) => current && { ...current, offerId: id || undefined });
+    setMessage('');
+  }
   function chooseImage(field: PreviewField) {
     if (!writable || lock.current || conflict || !page) return;
     selectField(field.sectionId, field.fieldId);
@@ -272,6 +277,7 @@ export function useSiteContentEditor({ initialPages, writable }: SiteContentEdit
     open,
     update,
     updateStyle,
+    selectOffer,
     imageTarget,
     setImageTarget,
     chooseImage,

@@ -5,38 +5,3 @@
 .page :global(.studio-title) {
   overflow-wrap: anywhere;
 }
-.studio {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  background: #000 !important;
-}
-.studioCopy {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 18px;
-  padding-block: 80px;
-  min-width: 0;
-}
-.studioCopy > img {
-  width: min(355px, 100%);
-  height: auto;
-}
-.studioPhoto {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  min-width: 0;
-}
-@media (max-width: 760px) {
-  .studio {
-    grid-template-columns: 1fr;
-  }
-  .studioCopy {
-    padding-block: 48px;
-  }
-  .studioPhoto {
-    max-height: 300px;
-  }
-}

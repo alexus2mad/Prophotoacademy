@@ -1,5 +1,5 @@
+import { StudioRentalBanner } from '@/components/organisms/StudioRentalBanner/StudioRentalBanner';
 import { MarketingSlot } from '@/components/molecules/MarketingSlot/MarketingSlot';
-import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
 import { StudioCreatorAction } from '@/components/molecules/StudioCreatorAction/StudioCreatorAction';
 import { StudioMobileAction } from '@/components/molecules/StudioMobileAction/StudioMobileAction';
 import { StudioCreatorHero } from '@/components/organisms/StudioCreatorHero/StudioCreatorHero';
@@ -11,9 +11,6 @@ import { StudioAcademyReviews } from '@/components/organisms/StudioAcademyReview
 import { StudioInquirySection } from '@/components/organisms/StudioInquirySection/StudioInquirySection';
 import { studioProgramPage } from '@/lib/studio-program/selectors';
 import { showsInstallmentMethods } from '@/lib/commerce/selectors';
-import { creatorAssets } from '@/lib/studio-creator/assets';
-import { studioAssets } from '@/lib/studio-design/assets';
-import { ecosystemDestinations } from '@/lib/ecosystem';
 import type { StudioCreatorTemplateProps } from './types';
 import styles from './StudioCreatorTemplate.module.css';
 
@@ -88,27 +85,7 @@ export function StudioCreatorTemplate({
         }}
       />
       <MarketingSlot page={page} id="studio-banner" />
-      <aside className={`${styles.studio} studio-dark`} aria-label="Фотостудія ProPhoto">
-        <div className={`${styles.studioCopy} studio-wrap`}>
-          <p className="studio-label studio-eyebrow">Фотостудія екосистеми</p>
-          <StudioImage
-            asset={studioAssets.menu.imgLogoStudio}
-            alt="ProPhoto Studio"
-            sizes="355px"
-            fit="contain"
-          />
-          <a href={ecosystemDestinations.studioBooking} className="studio-button-outline">
-            Забронювати зал<span aria-hidden="true">→</span>
-          </a>
-        </div>
-        <StudioImage
-          asset={creatorAssets.studio}
-          alt="Світлий зал фотостудії ProPhoto"
-          className={styles.studioPhoto}
-          sizes="(max-width:760px) 100vw, 50vw"
-          fit="cover"
-        />
-      </aside>
+      <StudioRentalBanner />
       <StudioMobileAction>
         <StudioCreatorAction program={program} offering={offering} presentation={presentation} />
       </StudioMobileAction>

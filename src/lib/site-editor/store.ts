@@ -1,4 +1,5 @@
 import { HttpError } from '../http';
+import { findWorkshopOffer } from '../commerce/workshop-offers';
 import { getSiteSeeds, newSitePage } from './seeds';
 import { applyPageTemplate, templateShell } from './templates';
 import { isStylableField } from './blocks';
@@ -133,5 +134,12 @@ export async function writeSitePage(input: unknown, revision: string | null, pub
   const baseline =
     !seed && current.page.template ? templateShell(base, current.page.template) : base;
   const page = validateEdit(request, baseline, Boolean(seed), publish);
+  if (
+    page.offerId &&
+    (page.kind !== 'workshop' ||
+      page.template !== 'workshop-intensive' ||
+      findWorkshopOffer(page.path)?.offering.id !== page.offerId)
+  )
+    throw new HttpError(400, 'Оберіть квиток, налаштований для цієї сторінки.');
   return view(await persist(page, revision, publish), seed);
 }
