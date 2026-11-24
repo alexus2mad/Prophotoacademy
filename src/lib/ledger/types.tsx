@@ -33,6 +33,10 @@ export type Order = {
   acquisition?: Acquisition;
   fulfillment?: AccessSnapshot;
   merchantAccount?: string;
+  /** One-click ticket checkout obtains contact details from the hosted provider. */
+  hostedTicket?: boolean;
+  /** Private redirect for idempotent resumption; removed before any terminal notification. */
+  hostedPaymentUrl?: string;
 };
 export type LedgerGlobals = { academyDatabases?: Map<string, DatabaseSync> };
 export type ColumnRecord = { name: string };

@@ -1,3 +1,11 @@
+import type { ImageAsset, Offering, Package, Program } from '../content/types';
+export type WorkshopOffer = {
+  path: string;
+  program: Pick<Program, 'id' | 'title' | 'shortTitle' | 'category'> & {
+    image: Pick<ImageAsset, 'src' | 'alt' | 'width' | 'height'>;
+  };
+  offering: Offering & { packages: [Package] };
+};
 export type PaymentMode = 'mock' | 'disabled' | 'wayforpay';
 export type EnrollmentOptions = {
   mode: PaymentMode;

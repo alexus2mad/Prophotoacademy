@@ -1,4 +1,5 @@
 import { orderByToken, orderHasAccess } from '@/lib/commerce/orders';
+import { findWorkshopOfferById } from '@/lib/commerce/workshop-offers';
 export const runtime = 'nodejs';
 export async function GET(request: Request) {
   const token = new URL(request.url).searchParams.get('token');
@@ -15,9 +16,10 @@ export async function GET(request: Request) {
       productKind: order.productKind,
       mode: order.mode,
       retryUrl:
-        order.mode === 'mock' && order.offeringId === 'demo-offering'
+        (order.hostedTicket && findWorkshopOfferById(order.offeringId)?.path) ||
+        (order.mode === 'mock' && order.offeringId === 'demo-offering'
           ? '/checkout?demo=1'
-          : `/checkout?offering=${encodeURIComponent(order.offeringId)}&package=${encodeURIComponent(order.packageId)}`,
+          : `/checkout?offering=${encodeURIComponent(order.offeringId)}&package=${encodeURIComponent(order.packageId)}`),
     },
     { headers: { 'Cache-Control': 'no-store' } },
   );

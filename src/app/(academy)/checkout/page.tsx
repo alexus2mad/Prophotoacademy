@@ -1,6 +1,8 @@
 import type { CheckoutPageProps } from '@/app/types';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
+import { findWorkshopOfferById } from '@/lib/commerce/workshop-offers';
 import { getContent, findImage } from '@/lib/content';
 import { resolvePurchase } from '@/lib/checkout';
 import { isEnrollmentClosed, money } from '@/lib/format';
@@ -24,6 +26,8 @@ export const metadata: Metadata = {
 };
 export default async function Checkout({ searchParams }: CheckoutPageProps) {
   const query = await searchParams;
+  const workshop = query.offering && findWorkshopOfferById(query.offering);
+  if (workshop && workshop.offering.packages[0].id === query.package) redirect(workshop.path);
   const content = await getContent();
   const mode = paymentMode();
   const member = await currentMember();

@@ -8,6 +8,7 @@ import {
   confirmedOrderStatus,
 } from '@/lib/wayforpay';
 import { orderById, updateOrder } from '@/lib/commerce/orders';
+import { hostedTicketContact } from '@/lib/commerce/hosted-workshop';
 import { deliverSoon } from '@/lib/notifications/delivery';
 export const runtime = 'nodejs';
 export async function POST(request: Request) {
@@ -26,8 +27,15 @@ export async function POST(request: Request) {
     const order = await orderById(parsed.data.orderReference);
     if (!order) throw new HttpError(404, 'Order not found');
     verifyCallback(raw, order, merchant, secret);
+    const contact = hostedTicketContact(
+      new URL(request.url),
+      order,
+      secret,
+      parsed.data.email,
+      parsed.data.phone,
+    );
     const status = await confirmedOrderStatus(parsed.data, order, merchant, secret);
-    await updateOrder(order.id, status, merchant, callbackDetails(parsed.data));
+    await updateOrder(order.id, status, merchant, callbackDetails(parsed.data), contact);
     deliverSoon();
     return Response.json(callbackAck(parsed.data.orderReference, secret), {
       headers: { 'Cache-Control': 'no-store' },

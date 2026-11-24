@@ -92,6 +92,8 @@ export const callbackInput = z.object({
   cardType: z.string().max(40).optional(),
   paymentSystem: z.string().max(40).optional(),
   fee: z.union([z.number(), z.string()]).optional(),
+  email: z.unknown().optional(),
+  phone: z.unknown().optional(),
 });
 // Provider details forwarded with server payment events, as the original site did.
 export function callbackDetails(data: z.infer<typeof callbackInput>) {

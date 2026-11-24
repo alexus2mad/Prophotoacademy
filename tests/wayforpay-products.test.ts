@@ -4,14 +4,17 @@ import { readFile } from 'node:fs/promises';
 import { randomUUID } from 'node:crypto';
 import seed from '../content/academy.json';
 import { POST as checkout } from '../src/app/api/checkout/route';
+import { POST as workshopCheckoutPost } from '../src/app/api/checkout/workshop/route';
 import { POST as promoPreview } from '../src/app/api/checkout/promo/route';
 import { POST as widgetEvent } from '../src/app/api/checkout/events/route';
 import { POST as callback } from '../src/app/api/payments/wayforpay/callback/route';
+import { POST as browserReturn } from '../src/app/api/payments/wayforpay/return/route';
 import { POST as simulatePayment } from '../src/app/api/payments/mock/route';
 import { GET as orderStatus } from '../src/app/api/orders/status/route';
 import { savePromoCode, discountedAmount, deletePromoCode } from '../src/lib/commerce/promo';
 import { resolvePurchase, testProduct } from '../src/lib/checkout';
 import { enrollmentOptions } from '../src/lib/commerce/catalog';
+import { findWorkshopOffer, workshopCheckout } from '../src/lib/commerce/workshop-offers';
 import { deliverNotifications } from '../src/lib/notifications/delivery';
 import { canEnroll } from '../src/lib/format';
 import { sign } from '../src/lib/wayforpay';
@@ -49,6 +52,16 @@ content.offerings.push({
   ],
 });
 const origin = 'https://academy.example';
+const flashPath = '/flash-without-fear';
+const flash = findWorkshopOffer(flashPath)!;
+const flashPackage = flash.offering.packages[0];
+const flashCheckout =
+  '/api/checkout/workshop?offering=offering-flash-without-fear&package=flash-without-fear-ticket';
+const publishedWorkshop = vi.hoisted(() => ({ active: true }));
+const ticketRequest = () => ({
+  token: randomUUID().replaceAll('-', '').repeat(2),
+  idempotencyKey: randomUUID(),
+});
 const secret = 'test-secret-not-a-credential';
 const admin = randomUUID();
 const lab = ['program-lab'];
@@ -118,6 +131,12 @@ const promo = (code: string, extra: Record<string, unknown> = {}) => ({
   ...extra,
 });
 vi.mock('@/lib/content', () => ({ getContent: async () => content }));
+vi.mock('@/lib/site-editor/store', () => ({
+  getPublishedPage: async (path: string) =>
+    publishedWorkshop.active && path === flashPath
+      ? { path, kind: 'workshop', offerId: flash.offering.id }
+      : null,
+}));
 vi.mock('../src/lib/database/client', async (load) => ({
   ...(await load<typeof import('../src/lib/database/client')>()),
   consumeRateLimit: async () => true,
@@ -143,6 +162,7 @@ beforeAll(async () => {
     await pg.exec(await readFile('supabase/migrations/' + file, 'utf8'));
 });
 beforeEach(async () => {
+  publishedWorkshop.active = true;
   // Payment mechanics remain independent of the live course-sales closure.
   for (const offering of content.offerings)
     if (offering.availability === 'closed') offering.availability = 'open';
@@ -171,6 +191,146 @@ afterEach(() => {
 });
 
 describe('ticket and service products', () => {
+  it('lists the authorized workshop ticket independently of published catalog programs and dates', async () => {
+    expect(content.programs.some(({ slug }) => '/' + slug === flashPath)).toBe(false);
+    expect(flash.offering.startDate).toBeUndefined();
+    expect(flashPackage).toMatchObject({ price: 4200, kind: 'product' });
+    expect(await workshopCheckout(flashPath)).toMatchObject({ price: 4200, href: flashCheckout });
+    expect(await workshopCheckout('/some-other-workshop')).toBeUndefined();
+    vi.stubEnv('PAYMENT_MODE', 'disabled');
+    expect((await workshopCheckout(flashPath))?.href).toBeUndefined();
+    expect((await workshopCheckoutPost(post(flashCheckout, ticketRequest()))).status).toBe(409);
+  });
+  it('simulates one-click tickets on staging without contacting the provider or creating accounting events', async () => {
+    vi.stubEnv('PAYMENT_MODE', 'mock');
+    const transport = vi.fn();
+    vi.stubGlobal('fetch', transport);
+    const input = ticketRequest();
+    const result = await workshopCheckoutPost(post(flashCheckout, input));
+    expect(result.status).toBe(200);
+    expect(await result.json()).toEqual({ mode: 'mock', url: '/thanks?token=' + input.token });
+    expect((await workshopCheckoutPost(post(flashCheckout, input))).status).toBe(200);
+    await simulatePayment(post('/api/payments/mock', { token: input.token, status: 'approved' }));
+    expect(await order()).toMatchObject({
+      status: 'approved',
+      productKind: 'product',
+      amount: 4200,
+    });
+    expect(await events()).toHaveLength(0);
+    expect((await pg.query('SELECT id FROM academy.transactions')).rows).toHaveLength(0);
+    expect((await pg.query('SELECT id FROM academy.grants')).rows).toHaveLength(0);
+    expect(transport).not.toHaveBeenCalled();
+  });
+  it('opens one hosted payment, confirms the contact from WayForPay, and settles a ticket exactly once', async () => {
+    let serviceUrl = '';
+    const providerUrl = 'https://secure.wayforpay.com/page?session=test';
+    const provider = vi.fn(async (url: string, request: RequestInit) => {
+      expect(url).toBe('https://secure.wayforpay.com/pay?behavior=offline');
+      const form = request.body as URLSearchParams;
+      serviceUrl = form.get('serviceUrl')!;
+      expect(new URL(form.get('returnUrl')!).pathname).toBe('/api/payments/wayforpay/return');
+      expect(form.get('clientEmail')).toBeNull();
+      expect(form.get('amount')).toBe('4200');
+      expect(form.get('productPrice[]')).toBe('4200');
+      return Response.json({ url: providerUrl });
+    });
+    vi.stubGlobal('fetch', provider);
+    const input = ticketRequest();
+    for (let attempt = 0; attempt < 2; attempt++) {
+      const result = await workshopCheckoutPost(post(flashCheckout, input));
+      expect(result.status).toBe(200);
+      expect(await result.json()).toEqual({ mode: 'wayforpay', url: providerUrl });
+    }
+    expect(provider).toHaveBeenCalledTimes(1);
+    const orderId = (await order()).id;
+    const raw = {
+      ...providerCallback(orderId, 4200),
+      email: 'TEST@Example.test',
+      phone: '+380630000000',
+    };
+    const untrusted = await callback(post('/api/payments/wayforpay/callback', raw));
+    expect(untrusted.status).toBe(401);
+    expect((await order()).status).toBe('pending');
+    publishedWorkshop.active = false;
+    for (let attempt = 0; attempt < 2; attempt++)
+      expect((await callback(post(serviceUrl.slice(origin.length), raw))).status).toBe(200);
+    const paid = await order();
+    expect(paid).toMatchObject({
+      status: 'approved',
+      customer: { email: 'test@example.test', phone: '+380630000000' },
+    });
+    expect(paid).not.toHaveProperty('hostedPaymentUrl');
+    expect(paid.fulfillment).toBeUndefined();
+    expect(
+      (await pg.query('SELECT email, amount_minor, package_id FROM academy.transactions')).rows,
+    ).toEqual([{ email: 'test@example.test', amount_minor: 420000, package_id: flashPackage.id }]);
+    expect((await pg.query('SELECT id FROM academy.grants')).rows).toHaveLength(0);
+    const jobs = await events();
+    expect(jobs.map(({ data }) => data.event)).toEqual(['payment_start', 'payment_success']);
+    expect(jobs[1].data).toMatchObject({
+      buyerContactStatus: 'provided',
+      email: 'test@example.test',
+      productData: { type: 'ticket', id: flashPackage.id },
+    });
+    expect(
+      (
+        await pg.query(
+          "SELECT data->'customer'->>'email' AS email FROM academy.outbox WHERE kind='order-status'",
+        )
+      ).rows,
+    ).toEqual([{ email: 'test@example.test' }]);
+  });
+  it('requires the published offer binding, exact package, and server-set price for direct initiation', async () => {
+    const input = ticketRequest();
+    expect(
+      (await workshopCheckoutPost(post(flashCheckout.replace(flashPackage.id, 'other'), input)))
+        .status,
+    ).toBe(404);
+    expect((await workshopCheckoutPost(post(flashCheckout, { ...input, amount: 1 }))).status).toBe(
+      400,
+    );
+    publishedWorkshop.active = false;
+    expect((await workshopCheckoutPost(post(flashCheckout, input))).status).toBe(409);
+    expect((await pg.query('SELECT id FROM academy.orders')).rows).toHaveLength(0);
+  });
+  it('retries an unavailable gateway on the same reference and preserves a paid ticket without provider contacts', async () => {
+    const input = ticketRequest();
+    let servicePath = '';
+    const references: string[] = [];
+    const provider = vi.fn(async (_url: string, request: RequestInit) => {
+      const form = request.body as URLSearchParams;
+      references.push(form.get('orderReference')!);
+      servicePath = form.get('serviceUrl')!.slice(origin.length);
+      if (references.length === 1) throw new TypeError('Network unavailable');
+      return Response.json({ url: 'https://secure.wayforpay.com/page?session=recovered' });
+    });
+    vi.stubGlobal('fetch', provider);
+    expect((await workshopCheckoutPost(post(flashCheckout, input))).status).toBe(502);
+    expect((await workshopCheckoutPost(post(flashCheckout, input))).status).toBe(200);
+    expect(references).toHaveLength(2);
+    expect(references[0]).toBe(references[1]);
+    const returned = browserReturn(
+      post('/api/payments/wayforpay/return?token=' + input.token, {
+        transactionStatus: 'Approved',
+      }),
+    );
+    expect(returned.status).toBe(303);
+    expect(returned.headers.get('location')).toBe('/thanks?token=' + input.token);
+    expect((await order()).status).toBe('pending');
+    expect((await callback(post(servicePath, providerCallback(references[0], 4200)))).status).toBe(
+      200,
+    );
+    expect((await pg.query('SELECT email, amount_minor FROM academy.transactions')).rows).toEqual([
+      { email: null, amount_minor: 420000 },
+    ]);
+    expect((await events())[1].data).toMatchObject({
+      event: 'payment_success',
+      buyerContactStatus: 'unavailable',
+    });
+    expect(
+      (await pg.query("SELECT id FROM academy.outbox WHERE kind='order-status'")).rows,
+    ).toHaveLength(0);
+  });
   it('previews eligible tickets in mock mode without payments, receipts or learning access', async () => {
     vi.stubEnv('PAYMENT_MODE', 'mock');
     const offering = content.offerings.find((item) => item.id === 'offering-lab-next')!;

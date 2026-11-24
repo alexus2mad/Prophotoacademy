@@ -16,6 +16,15 @@ export async function enrollmentOptions(offering?: Offering): Promise<Enrollment
         .map((pack) => pack.id),
     };
   if (!managedDatabase()) return { mode, packageIds: [] };
+  // Tickets have no curriculum and can never produce zero-charge learning access.
+  if (offering.packages.every(isProduct))
+    return {
+      mode,
+      packageIds:
+        mode === 'wayforpay'
+          ? offering.packages.filter((pack) => canEnroll(offering, pack)).map((pack) => pack.id)
+          : [],
+    };
   const rules = await databasePool().query<PackageIdRow>(
     `SELECT p.package_id,
      (SELECT jsonb_agg(CASE WHEN lesson->>'number' IS NOT NULL

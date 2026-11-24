@@ -162,7 +162,7 @@ export async function fulfillOrder(
       [
         merchant,
         order.id,
-        email,
+        email || null,
         order.customer.name,
         order.programTitle,
         order.programId,
@@ -199,6 +199,7 @@ export async function updateOrder(
   status: OrderStatus,
   merchant = process.env.WAYFORPAY_MERCHANT_ACCOUNT || '',
   details: Record<string, unknown> = {},
+  contact?: Pick<Order['customer'], 'email' | 'phone'>,
 ) {
   requireBackend();
   if (!managedDatabase()) return local.updateOrder(id, status);
@@ -211,13 +212,19 @@ export async function updateOrder(
       (order.status === 'pending' && status !== 'refunded') ||
       (order.status === 'approved' && status === 'refunded');
     if (order.status !== status && allowed) {
+      if (order.hostedTicket) {
+        delete order.hostedPaymentUrl;
+        if (contact && order.status === 'pending')
+          order.customer = { ...order.customer, ...contact };
+      }
       order.status = status;
       await db.query('UPDATE academy.orders SET data=$1 WHERE id=$2', [JSON.stringify(order), id]);
       await fulfillOrder(db, order, status, merchant);
-      await db.query(
-        'INSERT INTO academy.outbox(id,kind,data) VALUES($1,$2,$3) ON CONFLICT DO NOTHING',
-        [id + ':' + status, 'order-status', JSON.stringify({ ...order, orderId: id })],
-      );
+      if (!order.hostedTicket || order.customer.email)
+        await db.query(
+          'INSERT INTO academy.outbox(id,kind,data) VALUES($1,$2,$3) ON CONFLICT DO NOTHING',
+          [id + ':' + status, 'order-status', JSON.stringify({ ...order, orderId: id })],
+        );
       if (order.mode === 'wayforpay' && status in serverEvents)
         await queuePaymentEvent(
           db,

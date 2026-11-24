@@ -22,6 +22,11 @@ export function paymentEventPayload(
     email: order.customer.email,
     phone: order.customer.phone,
     productName,
+    ...(order.hostedTicket &&
+      event === 'payment_success' && {
+        buyerContactStatus:
+          order.customer.email || order.customer.phone ? 'provided' : 'unavailable',
+      }),
     formData: {
       name: order.customer.name,
       phone: order.customer.phone,

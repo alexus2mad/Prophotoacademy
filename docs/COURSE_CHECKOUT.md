@@ -52,6 +52,22 @@ count a widget's approval event as a verified purchase. Verify the existing
 production `MAKE_WEBHOOK_URL` and notification worker during release without
 copying their configuration to staging.
 
+## Editor-created workshop tickets
+
+An intensive may select a reviewed offer from `src/lib/commerce/workshop-offers.ts`.
+The offer owns the price, package, and eligible workshop path. Publishing the matching binding
+opens its purchase action. Removing the binding closes new orders and previously issued
+orders can still settle. Flash without fear sells one type of ticket for 4,200 UAH.
+Its public page, date and inventory do not come from a second course record.
+
+A tap creates an idempotent order and opens WayForPay's hosted checkout directly. The merchant
+should enable buyer contact collection in the hosted payment settings. WayForPay sends contact
+details to the order-specific callback, independently of the browser return. The callback verifies
+both the payment signature and its per-order proof before recording a ticket. The shared cashbox,
+confirmation email and Make/Telegram notifications use the existing purchase pipeline. When the
+provider supplies no email, the receipt goes unsent; a success notice identifies missing buyer
+contact data for the team. Staging uses the existing local payment simulator.
+
 ## Manager workflow
 
 1. In Academy course authoring, supply lessons and required materials, then choose the completed lessons in the publishing dialog. Unselected outlines remain in the draft; empty modules are excluded from the immutable release. Selected lessons still undergo all text, quiz and media validation
