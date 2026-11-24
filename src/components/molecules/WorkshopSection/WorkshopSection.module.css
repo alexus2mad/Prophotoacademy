@@ -10,5 +10,5 @@
   white-space: pre-line;
 }
 .section[data-block-type='intensive-format'] {
-  padding-bottom: clamp(64px, 8vw, 120px);
+  padding-bottom: 0;
 }

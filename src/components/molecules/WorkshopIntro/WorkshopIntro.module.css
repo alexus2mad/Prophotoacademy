@@ -19,17 +19,14 @@
 }
 .intro .description,
 .intro .invitation {
+  margin-top: 44px;
   max-width: 640px;
   font-size: 17px;
   line-height: 1.5;
   text-wrap: balance;
 }
 .intro .description {
-  margin-top: 44px;
   color: var(--studio-mute);
-}
-.intro .invitation {
-  margin-top: 14px;
 }
 .facts {
   display: flex;
@@ -90,11 +87,9 @@
   }
   .intro .description,
   .intro .invitation {
+    margin-top: 28px;
     font-size: 14px;
     line-height: 1.45;
-  }
-  .intro .description {
-    margin-top: 28px;
   }
   .facts {
     font-size: 12px;
