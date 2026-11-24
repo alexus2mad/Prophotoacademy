@@ -38,6 +38,8 @@
 }
 .moduleTitle {
   margin: 0;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
   font:
     700 clamp(26px, 3vw, 44px) / 1.02 var(--font-studio-condensed),
     sans-serif;
