@@ -115,6 +115,30 @@ curl --fail https://prophotoacademy.com.ua/api/health
 curl --fail https://staging.prophotoacademy.com.ua/api/health
 ```
 
+## Editor skill downloads on staging
+
+The staging TLS server serves `/skills/prophoto-editor/` from
+`/var/www/prophoto-editor-skill/`. The installation page, npm tarball and ZIP
+are public. Editor access still uses the existing administrator login.
+
+1. Bump the package version for changes to the installer or its payload. Build
+   with `pnpm skill:pack` and run `python -B scripts/editor-skill/test_build.py`.
+2. Compute the SHA-256 of `.data/editor-skill-release/public/checksums.json`
+   locally. Transfer the four public files and the tracked publisher to a private
+   staging-host temporary directory. On the host, run
+   `python3 publish-editor-skill.py <public-directory> <local-manifest-sha256>`
+   with write access to the distribution directory.
+3. Run the publisher again with the same two arguments and `--verify-and-prune`.
+   It checks the public HTTPS bytes before retaining the current portal and
+   one previous verified release. From a clean user profile, run the exact
+   command printed on the installation page and confirm that each agent receives
+   the canonical skill. The npm archive for an issued version remains available
+   when the installation page advances.
+
+The staging nginx location is recorded in [the environment configuration](../deploy/nginx-environments.conf).
+The operator can restore the previous portal by pointing `current` back to its
+verified release under `releases/`.
+
 ## DNS, certificates and backups
 
 The apex, `www` and `staging` A records all point to `188.245.178.173`, with a

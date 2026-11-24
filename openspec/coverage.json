@@ -319,6 +319,7 @@
       "deploy/build-production.sh",
       "deploy/build-staging.sh",
       "deploy/nginx-environments.conf",
+      "deploy/publish-editor-skill.py",
       "deploy/nginx-http.conf",
       "deploy/nginx-https.conf",
       "deploy/prophotoacademy-staging.service",
