@@ -1,0 +1,4 @@
+- [ ] Reproduce the reported gallery and workshop listing issues.
+- [ ] Correct the gallery interaction and check drag, release, photo selection and responsive behavior.
+- [ ] Share the Academy workshop row styling and verify publication discovery, links and responsive layout.
+- [ ] Run repository checks, verify the staging experience and archive the change.

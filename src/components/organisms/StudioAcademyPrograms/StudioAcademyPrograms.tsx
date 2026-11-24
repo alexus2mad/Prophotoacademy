@@ -7,6 +7,7 @@ import { InquiryButton } from '@/components/molecules/InquiryButton/InquiryButto
 import { StudioAcademyProgramRow } from '@/components/molecules/StudioAcademyProgramRow/StudioAcademyProgramRow';
 import { findOffering } from '@/lib/content/selectors';
 import { academyCatalogContent } from '@/lib/site-editor/brand/academy/catalog';
+import { readField } from '@/lib/site-editor/fields';
 import type { StudioAcademyProgramsProps } from './types';
 import styles from './StudioAcademyPrograms.module.css';
 
@@ -19,6 +20,20 @@ export function StudioAcademyPrograms({
 }: StudioAcademyProgramsProps) {
   const { text } = bindSection(page, academyPrograms);
   const { courses, intensive } = academyCatalogContent(programs, images, page);
+  const linkedWorkshops = additionalPages
+    .filter((entry) => entry.kind === 'workshop')
+    .map((entry) => ({
+      path: entry.path,
+      title: readField(entry, 'landing-cover', 'title') || entry.title,
+      featured: false,
+    }));
+  if (intensive) {
+    linkedWorkshops.unshift({
+      path: `/${intensive.slug}`,
+      title: intensive.shortTitle,
+      featured: true,
+    });
+  }
   const individual = programs.find((program) => program.category === 'individual');
   const corporate = programs.find((program) => program.category === 'corporate');
 
@@ -60,21 +75,25 @@ export function StudioAcademyPrograms({
             </h2>
           </header>
           <div className={styles.rows}>
-            {intensive && (
-              <article className={styles.workshop}>
-                <h3 data-site-section="featured-workshop" data-site-field="title">
-                  {intensive.shortTitle}
+            {linkedWorkshops.map(({ path, title, featured }) => (
+              <article key={path} className={styles.workshop}>
+                <h3
+                  data-site-section={featured ? 'featured-workshop' : undefined}
+                  data-site-field={featured ? 'title' : undefined}
+                  data-site-locked={featured ? undefined : ''}
+                >
+                  {title}
                 </h3>
                 <Link
-                  href={`/${intensive.slug}`}
+                  href={path}
+                  data-site-field="workshop-action"
                   className={`${styles.archiveLink} ${styles.cardAction}`}
-                  aria-label={`${intensive.shortTitle}: детальніше`}
+                  aria-label={`${title}: детальніше`}
                 >
                   {text('workshop-action')}
                 </Link>
               </article>
-            )}
-            <NewSitePageLinks pages={additionalPages} kind="workshop" />
+            ))}
             {workshops.map((_, i) => {
               const title = text('workshop-' + i);
               return (
