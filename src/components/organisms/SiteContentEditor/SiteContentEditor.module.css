@@ -318,3 +318,17 @@
     transition: none;
   }
 }
+.handoff {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+}
+.handoffHint {
+  margin: -14px 0 18px;
+  color: var(--learn-muted);
+  font-size: 14px;
+  line-height: 1.45;
+}

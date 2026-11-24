@@ -117,6 +117,26 @@ export function marketingDatasetConfigured() {
   );
 }
 
+/** Staging's public marketing pages and assets, readable without credentials. */
+export const stagingMarketingSource = {
+  projectId: stagingMarketingProject,
+  dataset: 'production',
+  origin: stagingOrigin,
+} as const;
+export const productionEditorOrigin = productionOrigins[0];
+
+/**
+ * Production pulls staging content; staging only hands a page over to the production editor.
+ * Staging never receives production credentials.
+ */
+export function contentSyncRole(): 'production' | 'staging' | null {
+  if (editorMode() !== 'sanity' || !marketingDatasetConfigured()) return null;
+  if (isProductionAcademy() && marketingProjectId() === productionMarketingProject)
+    return 'production';
+  if (isStaging() && marketingProjectId() === stagingMarketingProject) return 'staging';
+  return null;
+}
+
 export function unavailable() {
   return new HttpError(503, 'Збереження не налаштовано. Підключіть сховище публічного контенту.');
 }

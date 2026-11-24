@@ -1,5 +1,5 @@
 'use client';
-import { ArrowLeft, ArrowRight, Plus, Search } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Plus, RefreshCw, Search, Send } from 'lucide-react';
 import { Button } from '@/components/atoms/Button/Button';
 import { SiteBlockActions } from '@/components/molecules/SiteBlockActions/SiteBlockActions';
 import { SiteBlockLibrary } from '@/components/molecules/SiteBlockLibrary/SiteBlockLibrary';
@@ -9,6 +9,8 @@ import { blockOutlineLabel, placementLabel } from '@/lib/site-editor/block-label
 import { blocksAtPlacement, pagePlacements } from '@/lib/site-editor/placements';
 import { SiteEditorPreview } from '@/components/molecules/SiteEditorPreview/SiteEditorPreview';
 import { SitePageCreate } from '@/components/molecules/SitePageCreate/SitePageCreate';
+import { SiteContentSync } from '@/components/organisms/SiteContentSync/SiteContentSync';
+import { productionSyncHref } from '@/lib/site-editor/sync/links';
 import { useSiteContentEditor } from './hooks';
 import type { SiteContentEditorProps } from './types';
 import styles from './SiteContentEditor.module.css';
@@ -78,8 +80,35 @@ export function SiteContentEditor(props: SiteContentEditorProps) {
               >
                 {h.task === 'publish' ? 'Публікуємо…' : 'Опублікувати'}
               </Button>
+              {props.sync === 'staging' &&
+                (h.dirty || record.hasDraft || !record.published ? (
+                  <Button
+                    className="button button-secondary"
+                    disabled
+                    aria-describedby="site-production-handoff"
+                  >
+                    <Send size={17} aria-hidden="true" /> Опублікувати на проді
+                  </Button>
+                ) : (
+                  <a
+                    className={'button button-secondary ' + styles.handoff}
+                    href={productionSyncHref(page.path)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-describedby="site-production-handoff"
+                  >
+                    <Send size={17} aria-hidden="true" /> Опублікувати на проді
+                  </a>
+                ))}
             </div>
           </header>
+          {props.sync === 'staging' && (
+            <p id="site-production-handoff" className={styles.handoffHint}>
+              {h.dirty || record.hasDraft || !record.published
+                ? 'Спочатку опублікуйте зміни на staging: на прод переноситься опублікована версія'
+                : 'Відкриє редактор продакшну в новій вкладці для перевірки й підтвердження'}
+            </p>
+          )}
           <div className={styles.feedback}>
             <p role="status" className={styles.state} data-dirty={h.dirty}>
               {h.message && h.dirty ? h.message + ' · ' + status : h.message || status}
@@ -231,6 +260,12 @@ export function SiteContentEditor(props: SiteContentEditorProps) {
             />
           )}
         </>
+      ) : props.sync === 'production' && h.syncTarget !== null ? (
+        <SiteContentSync
+          focusPath={h.syncTarget || undefined}
+          onClose={h.closeSync}
+          onPublished={h.remember}
+        />
       ) : (
         <>
           <header className={styles.pageHeader}>
@@ -238,9 +273,20 @@ export function SiteContentEditor(props: SiteContentEditorProps) {
               Сторінки сайту
             </h1>
             {!h.creating && (
-              <Button disabled={disabled} onClick={() => h.setCreating(true)}>
-                <Plus size={17} aria-hidden="true" /> Створити сторінку
-              </Button>
+              <div className={styles.actions}>
+                {props.sync === 'production' && (
+                  <Button
+                    className="button button-secondary"
+                    disabled={disabled}
+                    onClick={() => h.openSync()}
+                  >
+                    <RefreshCw size={17} aria-hidden="true" /> Зміни зі staging
+                  </Button>
+                )}
+                <Button disabled={disabled} onClick={() => h.setCreating(true)}>
+                  <Plus size={17} aria-hidden="true" /> Створити сторінку
+                </Button>
+              </div>
             )}
           </header>
           {h.error && (

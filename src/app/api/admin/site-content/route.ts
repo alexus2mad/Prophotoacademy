@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { revalidatePath } from 'next/cache';
 import { requireAdmin } from '@/lib/auth/server';
+import { revalidatePublication } from '@/lib/site-editor/revalidate';
 import { errorResponse, guardMutation, jsonBody } from '@/lib/http';
 import {
   createSiteDraft,
@@ -55,12 +55,7 @@ export async function POST(request: Request) {
         headers,
       });
     const result = await writeSitePage(data.page, data.revision, data.action === 'publish');
-    if (data.action === 'publish') {
-      revalidatePath(result.page.path);
-      if (result.page.kind === 'course' || result.page.kind === 'workshop')
-        revalidatePath('/academy');
-      revalidatePath('/sitemap.xml');
-    }
+    if (data.action === 'publish') revalidatePublication(result.page);
     return Response.json(result, { headers });
   } catch (error) {
     return errorResponse(error);

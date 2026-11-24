@@ -6,6 +6,8 @@ export type SiteContentEditorProps = {
   initialPages: SitePageSummary[];
   writable: boolean;
   tickets?: WorkshopTicketChoice[];
+  /** Production lists staging changes; staging hands a published page to production. */
+  sync?: 'production' | 'staging' | null;
 };
 export type NewPageValues = Pick<SitePage, 'path' | 'title' | 'kind'> & {
   template: PageTemplateId;

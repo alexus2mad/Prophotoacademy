@@ -21,8 +21,10 @@ function setAddress(path: string | null) {
   window.history.replaceState(window.history.state, '', url);
 }
 
-export function useSiteContentEditor({ initialPages, writable }: SiteContentEditorProps) {
+export function useSiteContentEditor({ initialPages, writable, sync }: SiteContentEditorProps) {
   const [pages, setPages] = useState(initialPages);
+  // null: closed; '' : open; a path: handed over from the staging editor.
+  const [syncTarget, setSyncTarget] = useState<string | null>(null);
   const [record, setRecord] = useState<EditorPage | null>(null);
   const [page, setPage] = useState<SitePage | null>(null);
   const [sectionId, setSectionId] = useState('');
@@ -56,14 +58,7 @@ export function useSiteContentEditor({ initialPages, writable }: SiteContentEdit
     onSelect: selectField,
     onMessage: setMessage,
   });
-  function accept(result: EditorPage) {
-    setImageTarget(null);
-    blocks.closeLibrary();
-    setRecord(result);
-    setPage(result.page);
-    setSectionId((id) =>
-      result.page.sections.some((s) => s.id === id) ? id : (result.page.sections[0]?.id ?? ''),
-    );
+  function remember(result: EditorPage) {
     setPages((list) => {
       const entry = {
         path: result.page.path,
@@ -76,11 +71,40 @@ export function useSiteContentEditor({ initialPages, writable }: SiteContentEdit
         ? list.map((p) => (p.path === entry.path ? entry : p))
         : [...list, entry];
     });
+  }
+  function openSync(path = '') {
+    if (lock.current) return;
+    setError('');
+    setMessage('');
+    setCreating(false);
+    setSyncTarget(path);
+  }
+  function closeSync() {
+    setSyncTarget(null);
+    const url = new URL(window.location.href);
+    url.searchParams.delete('sync');
+    window.history.replaceState(window.history.state, '', url);
+    requestAnimationFrame(() => heading.current?.focus());
+  }
+  function accept(result: EditorPage) {
+    setImageTarget(null);
+    blocks.closeLibrary();
+    setRecord(result);
+    setPage(result.page);
+    setSectionId((id) =>
+      result.page.sections.some((s) => s.id === id) ? id : (result.page.sections[0]?.id ?? ''),
+    );
+    remember(result);
     setAddress(result.page.path);
     setCreating(false);
     setConflict(false);
     setPreviewKey((n) => n + 1);
   }
+
+  useEffect(() => {
+    const handed = new URL(window.location.href).searchParams.get('sync');
+    if (sync === 'production' && handed?.startsWith('/')) setSyncTarget(handed);
+  }, [sync]);
 
   useEffect(() => {
     const path = new URL(window.location.href).searchParams.get('page');
@@ -285,5 +309,9 @@ export function useSiteContentEditor({ initialPages, writable }: SiteContentEdit
     blocks,
     save,
     create,
+    syncTarget,
+    openSync,
+    closeSync,
+    remember,
   };
 }

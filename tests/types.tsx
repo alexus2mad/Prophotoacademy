@@ -17,3 +17,5 @@ export type AccessChangeInput = {
 export type OutboxEventRow = { id: string; kind: string; data: Record<string, unknown> };
 export type AdminAuthState = { role: 'admin' | 'student'; fresh: boolean };
 export type GrantRevocationRow = { revoked_at: string | null };
+export type SanityTestConfig = { projectId: string };
+export type SanityTestParams = { path?: string; ids?: string[] };
