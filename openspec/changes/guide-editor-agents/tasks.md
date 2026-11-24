@@ -1,0 +1,3 @@
+- [x] Deliver a self-contained editor skill, project discovery for Codex and Claude Code, and a team installation guide.
+- [x] Validate the skill metadata and portable distribution, and exercise the workflow against an isolated editor.
+- [ ] Independently check draft, conflict and publication decisions, then validate and archive the specification.

@@ -2,6 +2,23 @@
 
 Administrators open **Сторінки сайту** in the Academy workspace at `/admin/content`. Find a page by Ukrainian title or public path. Click or tap editable text on the page and type where the text appears. Keyboard users can focus a field and press Enter. Escape restores the value from when the active edit began.
 
+## Як доручити редагування агенту
+
+Навичка **prophoto-editor** дає змогу працювати з цим редактором через Codex або Claude Code. Агенту потрібен браузер, яким він може керувати. Увійдіть у ньому до облікового запису адміністратора Академії.
+
+- **Якщо ви відкрили репозиторій у Codex або Claude Code**, навичка вже є в проєкті. У новій сесії викличте її як `$prophoto-editor` у Codex або `/prophoto-editor` у Claude Code.
+- **Якщо ви працюєте без репозиторію**, розпакуйте папку `prophoto-editor` з архіву в `~/.agents/skills/` для Codex або `~/.claude/skills/` для Claude Code. На Windows `~` означає папку вашого користувача. Перевірте, що всередині `skills/prophoto-editor/` є файл `SKILL.md`, і відкрийте нову сесію. [Оригінал навички](../.agents/skills/prophoto-editor/SKILL.md) · [Навички в Codex](https://developers.openai.com/codex/skills/) · [Навички в Claude Code](https://code.claude.com/docs/en/skills)
+
+Приклад для дизайнера
+
+> $prophoto-editor На staging на сторінці /flash-without-fear додай перед галереєю абзац «Візьміть із собою камеру». Перевір, як він виглядає на телефоні й комп’ютері, і дай мені посилання на чернетку.
+
+Приклад для контент-менеджера
+
+> /prophoto-editor Створи на staging чернетку воркшопу за прикріпленим брифом. Візьми обкладинку з моїх файлів, а фотографії для каруселі — з бібліотеки. Покажи чернетку на перевірку.
+
+Посилання на чернетку відкривається адміністраторам. Для публікації вкажіть середовище й сторінку, наприклад «Опублікуй погоджену чернетку /flash-without-fear на staging». Публікація застосовує всю збережену чернетку.
+
 ## Авторська робота зі сторінкою
 
 - Щоб створити сторінку, відкрийте **Створити сторінку**, вкажіть назву й адресу та оберіть шаблон. **Чиста сторінка** починається з обкладинки. **Стаття** додає абзац і фотографію, **Курс** — вступ, заголовок і картки, **Воркшоп** — вступ і карусель. Кожна сторінка отримує власну копію блоків.
@@ -49,6 +66,8 @@ For a local rehearsal, `pnpm sandbox:learning` uses its existing synthetic admin
 With the sandbox running and Chrome installed, run `node scripts/sandbox/verify-preview-placement.mjs` to check inserting two blocks, canceling a drag, and reordering them in the scaled preview. An optional argument selects a different local sandbox port. The check closes its browser session without saving the working copy.
 
 ## Maintenance
+
+After committing a skill update, create a fresh team ZIP from the repository root with `git archive --format=zip --prefix=prophoto-editor/ --output=prophoto-editor.zip HEAD:.agents/skills/prophoto-editor`. The archive contains the portable skill and its launcher metadata.
 
 Page documents use stable section and field IDs. Keep IDs stable when changing labels or rendering. The same initial values populate the editor and the default presentation. A saved document overlays these slots within the existing design. Public reads use published records. The preview checks the signed-in administrator and applies its draft only to the requested path.
 

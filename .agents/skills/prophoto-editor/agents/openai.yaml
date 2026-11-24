@@ -1,0 +1,4 @@
+interface:
+  display_name: "ProPhoto Academy Editor"
+  short_description: "Редагування сторінок ProPhoto у візуальному редакторі"
+  default_prompt: "Використай $prophoto-editor, щоб підготувати чернетку сторінки на staging за моїм брифом."

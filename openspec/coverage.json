@@ -10,6 +10,7 @@
     ],
     "evidence": [
       "docs/site-content-editor.md",
+      ".agents/skills/prophoto-editor/SKILL.md",
       "src/lib/site-editor/public.ts",
       "src/lib/site-editor/store.ts",
       "tests/site-editor-composition.test.ts",
