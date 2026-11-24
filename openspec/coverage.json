@@ -13,6 +13,7 @@
       "src/lib/site-editor/public.ts",
       "src/lib/site-editor/store.ts",
       "tests/site-editor-composition.test.ts",
+      "tests/workshop-block-presentation.test.ts",
       "tests/site-editor-block-position.test.ts",
       "tests/site-editor-placement-rendering.test.ts",
       "tests/site-editor-placement-controls.test.ts",
@@ -43,6 +44,7 @@
     "evidence": [
       "docs/openspec/public.md",
       "tests/confirmed-product-offers.test.ts",
+      "tests/wayforpay-products.test.ts",
       "tests/studio-creator.test.ts"
     ]
   },
@@ -107,9 +109,11 @@
       "src/app/api/checkout/events/route.ts",
       "src/app/api/checkout/promo/route.ts",
       "src/app/api/checkout/route.ts",
+      "src/app/api/checkout/workshop/route.ts",
       "src/app/api/orders/status/route.ts",
       "src/app/api/payments/mock/route.ts",
       "src/app/api/payments/wayforpay/callback/route.ts",
+      "src/app/api/payments/wayforpay/return/route.ts",
       "supabase/migrations/202610120001_test_enrollment.sql",
       "supabase/migrations/202610170001_promo_codes.sql",
       "supabase/migrations/202610170002_promo_code_delete.sql"
