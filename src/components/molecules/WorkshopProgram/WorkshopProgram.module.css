@@ -1,0 +1,109 @@
+.modules {
+  border-top: 1px solid currentColor;
+  margin-top: clamp(32px, 4vw, 56px);
+}
+.modules .module {
+  border: 0;
+  border-bottom: 1px solid rgb(21 11 8 / 20%);
+  margin: 0;
+  padding: 0;
+}
+.modules .module > summary {
+  list-style: none;
+  display: grid;
+  grid-template-columns: clamp(48px, 8vw, 120px) minmax(0, 1fr) 40px;
+  align-items: center;
+  gap: 16px;
+  padding: clamp(20px, 2.4vw, 32px) 0;
+  cursor: pointer;
+  font-size: inherit;
+  line-height: inherit;
+}
+.module > summary::-webkit-details-marker {
+  display: none;
+}
+.modules .module > summary::after {
+  display: none;
+  content: none;
+}
+.module > summary:focus-visible {
+  outline: 2px solid var(--studio-red);
+  outline-offset: 4px;
+}
+.number {
+  color: var(--studio-red);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+}
+.moduleTitle {
+  margin: 0;
+  font:
+    700 clamp(26px, 3vw, 44px) / 1.02 var(--font-studio-condensed),
+    sans-serif;
+  text-transform: uppercase;
+}
+.indicator {
+  position: relative;
+  justify-self: end;
+  width: 22px;
+  height: 22px;
+}
+.indicator::before,
+.indicator::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: 50%;
+  height: 2px;
+  margin-top: -1px;
+  background: currentColor;
+}
+.indicator::after {
+  transform: rotate(90deg);
+  transition: transform 0.25s;
+}
+.module[open] .indicator::after {
+  transform: rotate(0);
+}
+.module > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 clamp(24px, 3vw, 40px) calc(clamp(48px, 8vw, 120px) + 16px);
+  max-width: 900px;
+  color: var(--studio-warm);
+}
+.module li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.2;
+}
+.module li + li {
+  margin-top: 14px;
+}
+.module li::before {
+  content: '*';
+  position: absolute;
+  left: 0;
+  top: 0.05em;
+  color: var(--studio-red);
+  font-weight: 700;
+}
+.module li strong {
+  font-weight: 700;
+}
+@media (max-width: 760px) {
+  .modules .module > summary {
+    grid-template-columns: 32px minmax(0, 1fr) 28px;
+    gap: 10px;
+  }
+  .module > ul {
+    padding-left: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .indicator::after {
+    transition: none;
+  }
+}

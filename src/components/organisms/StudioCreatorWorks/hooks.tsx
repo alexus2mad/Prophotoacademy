@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import type { Work } from '@/lib/content/types';
-import { useStudioGallery } from '@/components/organisms/StudioSpacesGallery/hooks';
+import { useStudioGallery } from '@/components/behaviors/GalleryRail/hooks';
 import { useImageGallery } from '@/components/molecules/ImageGalleryDialog/hooks';
 import { creatorWorks } from './selectors';
 import type { StudioCreatorWorksProps } from './types';

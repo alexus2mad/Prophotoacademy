@@ -3,7 +3,7 @@
 import { ReviewSourceLink } from '@/components/atoms/ReviewSourceLink/ReviewSourceLink';
 import Link from 'next/link';
 import { programReviewContent } from '@/lib/site-editor/brand/reviews';
-import { useStudioGallery } from '@/components/organisms/StudioSpacesGallery/hooks';
+import { useStudioGallery } from '@/components/behaviors/GalleryRail/hooks';
 import type { StudioProgramReviewsProps } from './types';
 import styles from './StudioProgramReviews.module.css';
 

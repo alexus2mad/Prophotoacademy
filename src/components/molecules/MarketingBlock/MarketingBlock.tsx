@@ -4,10 +4,15 @@ import { MarketingCarousel } from '@/components/molecules/MarketingCarousel/Mark
 import { fieldTypography } from '@/lib/site-editor/text-presentation';
 import { validCardLink } from '@/lib/site-editor/card-link';
 import { itemFieldId } from '@/lib/site-editor/blocks';
+import { WorkshopSection } from '@/components/molecules/WorkshopSection/WorkshopSection';
 import type { MarketingBlockProps } from './types';
 import styles from './MarketingBlock.module.css';
 
-export function MarketingBlock({ section, editing }: MarketingBlockProps) {
+export function MarketingBlock({ section, editing, preview, ticket }: MarketingBlockProps) {
+  if (section.blockType?.startsWith('intensive-'))
+    return (
+      <WorkshopSection section={section} editing={editing} preview={preview} ticket={ticket} />
+    );
   const fields = new Map(section.fields.map((field) => [field.id, field]));
   const { blockType, itemIds = [] } = section;
   function photo(id: string, alt: string, sizes?: string) {

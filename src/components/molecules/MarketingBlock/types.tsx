@@ -1,2 +1,8 @@
 import type { SiteSection } from '@/lib/site-editor/types';
-export type MarketingBlockProps = { section: SiteSection; editing?: boolean };
+import type { WorkshopTicketPresentation } from '@/lib/site-editor/workshop-ticket/types';
+export type MarketingBlockProps = {
+  section: SiteSection;
+  editing?: boolean;
+  preview?: boolean;
+  ticket?: WorkshopTicketPresentation;
+};

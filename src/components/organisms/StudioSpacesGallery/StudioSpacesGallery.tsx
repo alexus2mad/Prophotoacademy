@@ -4,7 +4,7 @@ import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
 import { ImageGalleryDialog } from '@/components/molecules/ImageGalleryDialog/ImageGalleryDialog';
 import { useImageGallery } from '@/components/molecules/ImageGalleryDialog/hooks';
 import { studioAssetUrl } from '@/lib/studio-design/urls';
-import { useStudioGallery } from './hooks';
+import { useStudioGallery } from '@/components/behaviors/GalleryRail/hooks';
 import type { StudioSpacesGalleryProps } from './types';
 import styles from './StudioSpacesGallery.module.css';
 

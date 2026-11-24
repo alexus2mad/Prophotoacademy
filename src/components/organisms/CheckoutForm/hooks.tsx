@@ -1,5 +1,6 @@
 'use client';
 import { getAcquisition } from '@/lib/attribution';
+import { createCheckoutIdentity } from '@/lib/commerce/checkout-identity';
 import { useEffect, useRef, useState } from 'react';
 import type {
   CheckoutFormProps,
@@ -147,13 +148,7 @@ export function useCheckoutForm({ offeringId, packageId }: CheckoutFormProps) {
     setError('');
     setFieldErrors({});
     const formElement = event.currentTarget;
-    if (!identity.current) {
-      const bytes = crypto.getRandomValues(new Uint8Array(32));
-      identity.current = {
-        token: Array.from(bytes, (b) => b.toString(16).padStart(2, '0')).join(''),
-        key: crypto.randomUUID(),
-      };
-    }
+    identity.current ??= createCheckoutIdentity();
     const data = new FormData(formElement);
     const optional = (name: string) => String(data.get(name) || '').trim() || undefined;
     try {

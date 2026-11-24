@@ -14,7 +14,11 @@ function imageOffsets(element: HTMLDivElement) {
   );
 }
 
-export function useStudioGallery(length: number, draggable = false) {
+export function useStudioGallery(
+  length: number,
+  draggable = false,
+  step: 'image' | 'viewport' = 'image',
+) {
   const track = useRef<HTMLDivElement>(null);
   const drag = useRef<HorizontalRailController | undefined>(undefined);
   const [position, setPosition] = useState({ index: 1, start: true, end: length < 2 });
@@ -33,7 +37,10 @@ export function useStudioGallery(length: number, draggable = false) {
     const update = () => {
       const end = element.scrollLeft + element.clientWidth >= element.scrollWidth - 4;
       setPosition({
-        index: end ? length : nearestGalleryImage(imageOffsets(element), element.scrollLeft) + 1,
+        index:
+          end && step === 'image'
+            ? length
+            : nearestGalleryImage(imageOffsets(element), element.scrollLeft) + 1,
         start: element.scrollLeft < 4,
         end,
       });
@@ -47,19 +54,26 @@ export function useStudioGallery(length: number, draggable = false) {
       element.removeEventListener('scroll', update);
       resize.disconnect();
     };
-  }, [length]);
+  }, [length, step]);
   const move = (direction: number) => {
     drag.current?.cancelMomentum();
     const element = track.current;
     if (!element) return;
+    const offsets = imageOffsets(element);
+    const column = offsets.find((offset) => offset > offsets[0] + 1);
+    const columns =
+      step === 'viewport' && column !== undefined
+        ? Math.max(1, Math.floor(element.clientWidth / (column - offsets[0])))
+        : 1;
     element.scrollTo({
       left: galleryImageTarget(
-        imageOffsets(element),
+        offsets,
         element.scrollLeft,
-        direction,
+        direction * columns,
         element.scrollWidth - element.clientWidth,
       ),
-      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      behavior: element.ownerDocument.defaultView?.matchMedia('(prefers-reduced-motion: reduce)')
+        .matches
         ? 'instant'
         : 'smooth',
     });

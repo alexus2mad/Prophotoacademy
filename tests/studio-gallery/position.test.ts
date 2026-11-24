@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   galleryImageTarget,
   nearestGalleryImage,
-} from '../../src/components/organisms/StudioSpacesGallery/position';
+} from '../../src/components/behaviors/GalleryRail/position';
 
 describe('gallery navigation with different image widths', () => {
   const offsets = [0, 304, 486, 850];
