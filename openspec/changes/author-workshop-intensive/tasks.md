@@ -1,5 +1,0 @@
-- [ ] Capture the artifact’s visible design, all original photos, content and interactions.
-- [ ] Implement the intensive template, block editing and shared responsive renderers.
-- [ ] Bind the ticket and exercise existing payment, notification and access rules.
-- [ ] Create and fill the workshop through the editor and verify save/reopen/publication.
-- [ ] Verify responsive parity, public discovery, checkout, regression suite, OpenSpec, builds and deployment.
