@@ -19,4 +19,4 @@
 
 ## Verification
 
-Recorded in [the release note](../../../docs/releases/2026-11-24-unified-admin.md).
+Recorded in [the release note](../../../../docs/releases/2026-11-24-unified-admin.md).
