@@ -6,7 +6,7 @@
 ## 2. API and UI
 
 - [x] 2.1 Add `GET/POST /api/admin/site-content/sync` with administrator, origin and availability checks and publication revalidation; cover denial, listing and publishing in route tests.
-- [ ] 2.2 Add the `SiteContentSync` organism and the production and staging entry points in `SiteContentEditor`; cover the entry points, the loading state, change descriptions and the handoff address in markup tests, then check listing, warnings, confirmation, the `?sync=` deep link, desktop and mobile layout, keyboard use and focus in a browser on the released environments.
+- [x] 2.2 Add the `SiteContentSync` organism and the production and staging entry points in `SiteContentEditor`; cover the entry points, the loading state, change descriptions and the handoff address in markup tests, then check listing, warnings, confirmation, the `?sync=` deep link, desktop and mobile layout, keyboard use and focus in a browser on the released environments.
 
 ## 3. Documentation and checks
 
@@ -14,5 +14,9 @@
 
 ## 4. Release
 
-- [ ] 4.1 Release one revision to staging and production through the guarded procedure, keeping each environment's payment mode, runtime and nginx digests; verify on production that the read-only sync list shows the Flash workshop and the two legal pages.
-- [ ] 4.2 Record the release, then archive this change with the release change.
+- [x] 4.1 Release one revision to staging and production through the guarded procedure, keeping each environment's payment mode, runtime and nginx digests; verify on production that the read-only sync list shows the Flash workshop and the two legal pages.
+- [x] 4.2 Record the release, then archive this change with the release change.
+
+## Verification
+
+Recorded in [the 24 November release note](../../../docs/releases/2026-11-24-content-sync.md): full suite, architecture, typecheck, OpenSpec checks and Pages export; candidate and live checks on both environments with unchanged runtime, payment and nginx digests; browser checks of the production sync list, confirmation, staging handoff and 390 px layout with every confirmation cancelled.
