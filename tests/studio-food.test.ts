@@ -60,6 +60,17 @@ describe('Food and product photography course page', () => {
     expect(weeks).toEqual(Array.from({ length: 12 }, (_, index) => index + 1));
   });
 
+  it('embeds the approved video just below the early package action', async () => {
+    const $ = await render();
+    const video = $('#program-about a[href="#packages"] + iframe');
+    expect(video).toHaveLength(1);
+    expect(video.attr('src')).toBe(
+      'https://www.youtube-nocookie.com/embed/f1a-B-s8Hkg?rel=0&playsinline=1',
+    );
+    expect(video.attr('title')).toContain('Вітальне відео');
+    expect(video.attr('loading')).toBe('lazy');
+  });
+
   it('lists every audience card, benefit and curriculum week from the course brief', async () => {
     const $ = await render();
     expect($('#program-audience ol > li')).toHaveLength(foodEditorial.audience.length);

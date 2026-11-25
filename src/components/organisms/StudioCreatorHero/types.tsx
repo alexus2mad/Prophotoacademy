@@ -4,5 +4,5 @@ import type { BrandContentProps } from '@/lib/site-editor/brand/types';
 export type StudioCreatorHeroProps = BrandContentProps &
   StudioCreatorActionProps & {
     showInstallments: boolean;
-    editorial: Pick<StudioCourseEditorial, 'hero' | 'intro'>;
+    editorial: Pick<StudioCourseEditorial, 'hero' | 'intro' | 'welcomeVideo'>;
   };

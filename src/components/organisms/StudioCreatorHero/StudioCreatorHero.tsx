@@ -18,7 +18,7 @@ export function StudioCreatorHero({
   page,
   editorial,
 }: StudioCreatorHeroProps) {
-  const { hero, intro } = editorial;
+  const { hero, intro, welcomeVideo } = editorial;
   const isFood = program.id === 'program-food';
   const schedule = programSchedule(program, offering);
   const facts =
@@ -165,6 +165,17 @@ export function StudioCreatorHero({
           </a>
         ) : (
           <StudioCreatorAction program={program} offering={offering} presentation={presentation} />
+        )}
+        {welcomeVideo && (
+          <iframe
+            className={styles.welcomeVideo}
+            src={`https://www.youtube-nocookie.com/embed/${welcomeVideo.youtubeId}?rel=0&playsinline=1`}
+            title={welcomeVideo.title}
+            loading="lazy"
+            allow="encrypted-media; picture-in-picture"
+            allowFullScreen
+            referrerPolicy="strict-origin-when-cross-origin"
+          />
         )}
       </section>
     </>

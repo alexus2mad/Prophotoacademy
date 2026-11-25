@@ -92,6 +92,7 @@
   border-left: 1px solid rgba(255, 255, 255, 0.6);
 }
 .intro {
+  --intro-content-gap: 44px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -113,7 +114,7 @@
 }
 .description {
   max-width: 750px;
-  margin-top: 44px !important;
+  margin-top: var(--intro-content-gap) !important;
   color: #a9a5a2;
   font-size: clamp(16px, 1.3vw, 19px);
   line-height: 1.55;
@@ -200,6 +201,13 @@
 .intro > .installments + :global(.studio-button) {
   margin-top: 20px;
 }
+.welcomeVideo {
+  inline-size: min(100%, 900px);
+  aspect-ratio: 16 / 9;
+  margin-block-start: var(--intro-content-gap);
+  border: 0;
+  background: var(--studio-ink);
+}
 @media (max-width: 760px) {
   .hero {
     min-height: 620px;
@@ -260,14 +268,14 @@
     padding-inline: 16px;
     font-size: 11px;
   }
+  .intro {
+    --intro-content-gap: 28px;
+  }
   .intro h2 {
     font-size: clamp(30px, 7.9vw, 58px);
   }
   .intro h2 :global(.studio-hand) {
     font-size: clamp(40px, 10vw, 68px);
-  }
-  .description {
-    margin-top: 28px !important;
   }
   .capsule {
     font-size: 12px;

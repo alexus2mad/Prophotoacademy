@@ -28,7 +28,7 @@ export type CourseWorksOpening = {
   extras: readonly CourseExtraWork[];
 };
 
-/** Course-specific copy and photography for the Creator-style course layout. */
+/** Course-specific copy and media for the Creator-style course layout. */
 export type StudioCourseEditorial = {
   hero: {
     asset: StudioAsset;
@@ -46,6 +46,7 @@ export type StudioCourseEditorial = {
     description: string;
     mobileDescription?: string;
   };
+  welcomeVideo?: { youtubeId: string; title: string };
   audience: readonly CourseTextItem[];
   benefits: readonly CourseTextItem[];
   learningSteps: readonly CourseTextItem[];

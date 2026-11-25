@@ -1,8 +1,9 @@
 ## Implementation
 
 - [x] 1.1 Add the primary Food course CTA below the student gallery. Local desktop and phone previews confirmed that it sits below the carousel navigation and jumps to the package cards.
-- [ ] 1.2 Embed the approved video directly below the first price section’s CTA.
+- [x] 1.2 Embed the supplied YouTube video directly below the first price section’s CTA.
 
 ## Verification
 
-- [ ] 2.1 Check the layout and video playback on desktop and mobile. Verify the gallery CTA target and repository checks.
+- [x] 2.1 Check local desktop and mobile playback and the gallery CTA. Verify the 16:9 frame and page gutters at 320, 360, 390, 600, 760, 761, 768, 1024, 1440 and 1920 px, including the change from 28 px to 44 px introductory spacing.
+- [ ] 2.2 Verify the repository checks, release the staging candidate and check the public staging page.
