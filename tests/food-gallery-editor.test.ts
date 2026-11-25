@@ -47,6 +47,10 @@ it('retains editable Food work and review fields and presents the sources accura
     'Приклади роботи зі світлом',
   );
   expect($('#creator-work-rail img').first().attr('alt')).toBe('Деталь плитки шоколаду');
+  const galleryAction = $('#student-works a[href="#packages"]');
+  expect(galleryAction.text()).toContain('Хочу на курс');
+  expect($('#creator-work-rail').next().next().find('a').is(galleryAction)).toBe(true);
+  expect($('#packages')).toHaveLength(1);
   const reviews = $('#program-reviews');
   expect(reviews.find('h2').text()).toContain('Що кажуть *випускники');
   expect(reviews.find('[data-site-field="intro"]').text()).toBe('Враження учасників');

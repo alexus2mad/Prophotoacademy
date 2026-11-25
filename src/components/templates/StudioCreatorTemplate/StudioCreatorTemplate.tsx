@@ -33,6 +33,15 @@ export function StudioCreatorTemplate({
         devices={editorial.worksDevices}
         layout={food ? 'two-rows' : undefined}
         page={food ? page : undefined}
+        action={
+          food && (
+            <StudioCreatorAction
+              program={program}
+              offering={offering}
+              presentation={presentation}
+            />
+          )
+        }
       />
     </>
   );

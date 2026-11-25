@@ -102,6 +102,9 @@
   opacity: 0.35;
   cursor: default;
 }
+.action {
+  margin-top: 28px;
+}
 .rail[data-dragging],
 .rail[data-coasting] {
   scroll-snap-type: none;

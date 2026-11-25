@@ -106,6 +106,11 @@ export function StudioCreatorWorks(props: StudioCreatorWorksProps) {
           →
         </button>
       </div>
+      {props.action && (
+        <div className={styles.action} data-site-locked="">
+          {props.action}
+        </div>
+      )}
       <ImageGalleryDialog
         images={entries}
         dialogRef={gallery.dialog}

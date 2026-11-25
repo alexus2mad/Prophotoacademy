@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import type { ImageAsset, Work } from '@/lib/content/types';
 import type { GalleryImage } from '@/components/molecules/ImageGalleryDialog/types';
 import type { CourseWorksOpening } from '@/lib/studio-creator/types';
@@ -14,6 +15,7 @@ export type StudioCreatorWorksProps = {
   works: Work[];
   images: ImageAsset[];
   opening?: CourseWorksOpening;
+  action?: ReactNode;
   /** Filter order; the first device with works is selected initially. */
   devices?: readonly Work['device'][];
 };
