@@ -6,4 +6,4 @@
 
 ## 2. Release
 
-- [ ] 2.1 Deploy the verified revision on staging and production and check both public checkout formats and anchor targets.
+- [x] 2.1 Deploy the verified revision on staging and production and check both public checkout formats and anchor targets. Both environments run `8330a9733d30a145b3c98d583880a5d9e349c605`. Candidate and HTTPS checks verified the offline and online forms, required buyer details, and unique ticket targets. Browser checks on staging and production exercised the ticket anchors, the repeated phone package jump after reload, and checkout dismissal. Live verification stopped at the form.
