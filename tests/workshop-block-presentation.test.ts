@@ -3,9 +3,11 @@ import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import { MarketingBlock } from '@/components/molecules/MarketingBlock/MarketingBlock';
+import { MarketingSlot } from '@/components/molecules/MarketingSlot/MarketingSlot';
 import { WorkshopTicketPrices } from '@/components/molecules/WorkshopTicketPrices/WorkshopTicketPrices';
 import type { MarketingBlockProps } from '@/components/molecules/MarketingBlock/types';
 import { addBlockItem, createBlock, itemFieldId } from '@/lib/site-editor/blocks';
+import { newSitePage } from '@/lib/site-editor/fields';
 import type { SiteSection } from '@/lib/site-editor/types';
 
 const single = {
@@ -206,6 +208,30 @@ describe('workshop design sections in public pages and the working editor', () =
     const unbound = render(block, { editing: true });
     expect(unbound('#workshop-tickets')).toHaveLength(0);
     expect(unbound.text()).toContain('Ціни з’являться після вибору квитка');
+  });
+  it('shows announced prices once before the introduction and keeps the introduction copy and action', () => {
+    const page = newSitePage('/flash-without-fear', 'Flash without fear', 'workshop');
+    const announcement = createBlock('intensive-announcement');
+    set(announcement, 'when', '13 грудня\nКиїв, вул. Саксаганського, 24/25');
+    const intro = createBlock('intensive-intro');
+    set(intro, 'heading', 'Досі боїшся студійних спалахів?');
+    set(intro, 'invitation', 'Запрошуємо на інтенсив.');
+    page.sections.push(announcement, intro);
+    const $ = load(
+      renderToStaticMarkup(createElement(MarketingSlot, { page, id: 'end', ticket: formats })),
+    );
+    const introduction = $('[data-block-type="intensive-intro"]');
+    expect(introduction.find('h2').text().trim()).toBe('Досі боїшся студійних спалахів?');
+    expect(introduction.find('[data-site-field="invitation"]').text()).toBe(
+      'Запрошуємо на інтенсив.',
+    );
+    expect(introduction.find('[data-site-field="facts"], strong')).toHaveLength(0);
+    expect(introduction.find('a').attr('href')).toBe('#workshop-tickets');
+    expect($('#workshop-tickets a')).toHaveLength(2);
+    expect($('[data-site-field="when"]').text()).toContain('Київ, вул. Саксаганського, 24/25');
+    const preview = render(intro, { ticket: formats, ticketAnnounced: true, editing: true });
+    expect(preview('strong')).toHaveLength(0);
+    expect(preview('[data-site-field="facts"]').attr('data-canvas-field')).toBe('multiline');
   });
   it('uses native independent accordion disclosures, a single indicator per summary and escaped semantic bullet emphasis', () => {
     const section = addBlockItem(createBlock('intensive-program'));

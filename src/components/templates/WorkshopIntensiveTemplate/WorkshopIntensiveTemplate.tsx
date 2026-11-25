@@ -6,6 +6,7 @@ import { StudioRentalBanner } from '@/components/organisms/StudioRentalBanner/St
 import { WorkshopCheckoutAction } from '@/components/molecules/WorkshopCheckoutAction/WorkshopCheckoutAction';
 import { WorkshopTicketPrices } from '@/components/molecules/WorkshopTicketPrices/WorkshopTicketPrices';
 import { readField } from '@/lib/site-editor/fields';
+import { hasWorkshopAnnouncement } from '@/lib/site-editor/intensive';
 import type { WorkshopIntensiveTemplateProps } from './types';
 import hero from '@/components/organisms/StudioCreatorHero/StudioCreatorHero.module.css';
 import styles from './WorkshopIntensiveTemplate.module.css';
@@ -17,7 +18,7 @@ export function WorkshopIntensiveTemplate({ page, ticket }: WorkshopIntensiveTem
   // Several tickets are chosen on their price cards; one ticket keeps a single action.
   const formats = ticket && ticket.options.length > 1 ? ticket : undefined;
   // The announcement block shows the prices after the cover; the cover then leads to it.
-  const announced = page.sections.some((section) => section.blockType === 'intensive-announcement');
+  const announced = hasWorkshopAnnouncement(page.sections);
   const choose = (
     <a className="studio-button" href="#workshop-tickets">
       Обрати формат <span aria-hidden="true">→</span>

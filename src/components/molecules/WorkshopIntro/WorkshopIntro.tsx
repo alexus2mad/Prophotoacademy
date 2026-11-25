@@ -3,7 +3,13 @@ import { workshopFields } from '@/components/molecules/WorkshopSection/fields';
 import { WorkshopCheckoutAction } from '@/components/molecules/WorkshopCheckoutAction/WorkshopCheckoutAction';
 import styles from './WorkshopIntro.module.css';
 
-export function WorkshopIntro({ section, editing, preview, ticket }: MarketingBlockProps) {
+export function WorkshopIntro({
+  section,
+  editing,
+  preview,
+  ticket,
+  ticketAnnounced,
+}: MarketingBlockProps) {
   const { copy, value } = workshopFields(section, editing);
   const formats = ticket && ticket.options.length > 1 ? ticket.options : undefined;
   const facts = value('facts')
@@ -22,7 +28,7 @@ export function WorkshopIntro({ section, editing, preview, ticket }: MarketingBl
         styles.facts,
         facts.map((fact, i) => <span key={i}>{fact}</span>),
       )}
-      {(ticket || editing || value('price')) && (
+      {!ticketAnnounced && (ticket || editing || value('price')) && (
         <div className={styles.price} data-site-locked={ticket ? '' : undefined}>
           <p className="studio-label">Вартість</p>
           {formats ? (

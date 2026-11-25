@@ -1,5 +1,9 @@
 import { siteField } from './fields';
-import type { BlockDefinition, IntensiveBlockType, SiteField } from './types';
+import type { BlockDefinition, IntensiveBlockType, SiteField, SiteSection } from './types';
+
+export function hasWorkshopAnnouncement(sections: readonly SiteSection[]) {
+  return sections.some(({ blockType }) => blockType === 'intensive-announcement');
+}
 
 export const intensiveLibrary = [
   {

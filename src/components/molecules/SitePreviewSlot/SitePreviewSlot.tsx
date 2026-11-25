@@ -10,6 +10,7 @@ export function SitePreviewSlot({
   label,
   blocks,
   ticket,
+  ticketAnnounced,
   editable,
   selected,
   onInsert,
@@ -52,7 +53,13 @@ export function SitePreviewSlot({
               </button>
             </div>
           )}
-          <MarketingBlock section={section} editing={editable} ticket={ticket} preview />
+          <MarketingBlock
+            section={section}
+            editing={editable}
+            ticket={ticket}
+            ticketAnnounced={ticketAnnounced}
+            preview
+          />
         </Fragment>
       ))}
       {editable && boundary(blocks.length)}

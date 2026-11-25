@@ -8,11 +8,9 @@ import { WorkshopSection } from '@/components/molecules/WorkshopSection/Workshop
 import type { MarketingBlockProps } from './types';
 import styles from './MarketingBlock.module.css';
 
-export function MarketingBlock({ section, editing, preview, ticket }: MarketingBlockProps) {
-  if (section.blockType?.startsWith('intensive-'))
-    return (
-      <WorkshopSection section={section} editing={editing} preview={preview} ticket={ticket} />
-    );
+export function MarketingBlock(props: MarketingBlockProps) {
+  const { section, editing } = props;
+  if (section.blockType?.startsWith('intensive-')) return <WorkshopSection {...props} />;
   const fields = new Map(section.fields.map((field) => [field.id, field]));
   const { blockType, itemIds = [] } = section;
   function photo(id: string, alt: string, sizes?: string) {

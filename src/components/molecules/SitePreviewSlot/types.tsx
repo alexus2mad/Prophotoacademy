@@ -4,6 +4,7 @@ import type { BlockPosition, SiteSection } from '@/lib/site-editor/types';
 export type SitePreviewSlotProps = {
   slot: string;
   ticket?: WorkshopTicketPresentation;
+  ticketAnnounced?: boolean;
   label: string;
   blocks: SiteSection[];
   editable: boolean;
