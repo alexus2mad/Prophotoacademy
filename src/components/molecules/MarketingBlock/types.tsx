@@ -6,4 +6,5 @@ export type MarketingBlockProps = {
   preview?: boolean;
   ticket?: WorkshopTicketPresentation;
   ticketAnnounced?: boolean;
+  ticketOfferId?: string;
 };

@@ -1,4 +1,5 @@
 import { StudioImage } from '@/components/atoms/StudioImage/StudioImage';
+import { FragmentLink } from '@/components/atoms/FragmentLink/FragmentLink';
 import { MarketingSlot } from '@/components/molecules/MarketingSlot/MarketingSlot';
 import { MarketingComposition } from '@/components/molecules/MarketingComposition/MarketingComposition';
 import { StudioMobileAction } from '@/components/molecules/StudioMobileAction/StudioMobileAction';
@@ -6,7 +7,11 @@ import { StudioRentalBanner } from '@/components/organisms/StudioRentalBanner/St
 import { WorkshopCheckoutAction } from '@/components/molecules/WorkshopCheckoutAction/WorkshopCheckoutAction';
 import { WorkshopTicketPrices } from '@/components/molecules/WorkshopTicketPrices/WorkshopTicketPrices';
 import { readField } from '@/lib/site-editor/fields';
-import { hasWorkshopAnnouncement } from '@/lib/site-editor/intensive';
+import {
+  hasWorkshopAnnouncement,
+  workshopTicketOfferId,
+  workshopTicketsId,
+} from '@/lib/site-editor/intensive';
 import type { WorkshopIntensiveTemplateProps } from './types';
 import hero from '@/components/organisms/StudioCreatorHero/StudioCreatorHero.module.css';
 import styles from './WorkshopIntensiveTemplate.module.css';
@@ -19,10 +24,11 @@ export function WorkshopIntensiveTemplate({ page, ticket }: WorkshopIntensiveTem
   const formats = ticket && ticket.options.length > 1 ? ticket : undefined;
   // The announcement block shows the prices after the cover; the cover then leads to it.
   const announced = hasWorkshopAnnouncement(page.sections);
+  const offer = workshopTicketOfferId(page.sections, ticket);
   const choose = (
-    <a className="studio-button" href="#workshop-tickets">
-      Обрати формат <span aria-hidden="true">→</span>
-    </a>
+    <FragmentLink className="studio-button" targetId={workshopTicketsId}>
+      {offer ? 'Обрати пакет' : 'Обрати формат'} <span aria-hidden="true">→</span>
+    </FragmentLink>
   );
   return (
     <article className={styles.page}>
@@ -69,19 +75,20 @@ export function WorkshopIntensiveTemplate({ page, ticket }: WorkshopIntensiveTem
           {formats && !announced && (
             <div data-site-locked="">
               <WorkshopTicketPrices
-                id="workshop-tickets"
+                id={offer ? undefined : workshopTicketsId}
+                linkToOffer={Boolean(offer)}
                 ticket={formats}
                 editing={page.editorPreview}
               />
             </div>
           )}
           <div className="studio-actions" data-site-locked="">
-            {formats && announced && <div className={hero.desktopAction}>{choose}</div>}
+            {formats && (announced || offer) && <div className={hero.desktopAction}>{choose}</div>}
             {!formats && <div className={hero.desktopAction}>{action}</div>}
             {program && (
-              <a className="studio-button-outline" href={'#' + program.id}>
+              <FragmentLink className="studio-button-outline" targetId={program.id}>
                 Програма
-              </a>
+              </FragmentLink>
             )}
           </div>
         </div>
@@ -89,7 +96,7 @@ export function WorkshopIntensiveTemplate({ page, ticket }: WorkshopIntensiveTem
       <MarketingComposition page={page} ticket={ticket} />
       <StudioRentalBanner />
       {formats
-        ? (announced || formats.options.some((option) => option.href)) && (
+        ? (offer || announced || formats.options.some((option) => option.href)) && (
             <StudioMobileAction>{choose}</StudioMobileAction>
           )
         : ticket?.href && <StudioMobileAction>{action}</StudioMobileAction>}

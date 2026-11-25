@@ -32,7 +32,14 @@ export function WorkshopCheckoutAction({
       </span>
     ) : null;
   return (
-    <Link href={href} className={className} data-site-locked="" aria-label={name}>
+    <Link
+      href={href}
+      scroll={false}
+      className={className}
+      data-site-locked=""
+      aria-label={name}
+      aria-haspopup="dialog"
+    >
       {label}
     </Link>
   );

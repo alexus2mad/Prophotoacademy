@@ -9,9 +9,15 @@ export function Dialog({
   closeLabel,
   closeOnBackdrop = false,
   closeIconSize,
+  onDismiss,
   onClick,
   ...props
 }: DialogProps) {
+  function dismiss() {
+    if (onDismiss) onDismiss();
+    else dialogRef.current?.close();
+  }
+
   return (
     <dialog
       {...props}
@@ -19,14 +25,10 @@ export function Dialog({
       className={`dialog ${className}`.trim()}
       onClick={(event) => {
         onClick?.(event);
-        if (closeOnBackdrop && event.target === event.currentTarget) dialogRef.current?.close();
+        if (closeOnBackdrop && event.target === event.currentTarget) dismiss();
       }}
     >
-      <IconButton
-        className="dialog-close"
-        aria-label={closeLabel}
-        onClick={() => dialogRef.current?.close()}
-      >
+      <IconButton className="dialog-close" aria-label={closeLabel} onClick={dismiss}>
         <X size={closeIconSize} />
       </IconButton>
       {children}

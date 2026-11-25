@@ -17,6 +17,8 @@ export function StudioIntensivePackage({ option }: StudioIntensivePackageProps) 
     return (
       <Link
         href={option.purchaseUrl}
+        scroll={false}
+        aria-haspopup="dialog"
         className={styles.card}
         aria-label={`${option.label}, ${option.price} грн — оформити квиток`}
       >

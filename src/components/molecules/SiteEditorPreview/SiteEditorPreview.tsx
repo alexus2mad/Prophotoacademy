@@ -2,7 +2,7 @@ import { createPortal } from 'react-dom';
 import { SitePreviewSlot } from '@/components/molecules/SitePreviewSlot/SitePreviewSlot';
 import { SiteMoveBlockDialog } from '@/components/molecules/SiteMoveBlockDialog/SiteMoveBlockDialog';
 import { blocksAtPlacement } from '@/lib/site-editor/placements';
-import { hasWorkshopAnnouncement } from '@/lib/site-editor/intensive';
+import { hasWorkshopAnnouncement, workshopTicketOfferId } from '@/lib/site-editor/intensive';
 import { previewHref } from '@/lib/site-editor/environments';
 import { Monitor, Smartphone } from 'lucide-react';
 import { useSiteEditorPreview } from './hooks';
@@ -17,6 +17,7 @@ export function SiteEditorPreview(props: SiteEditorPreviewProps) {
   } = props;
   const h = useSiteEditorPreview(props);
   const ticketAnnounced = Boolean(props.ticket && hasWorkshopAnnouncement(props.page.sections));
+  const ticketOfferId = workshopTicketOfferId(props.page.sections, props.ticket);
   const movingBlock = editable && props.page.sections.find((s) => s.id === h.moving && s.blockType);
   return (
     <section className={styles.preview} aria-label="Попередній перегляд сторінки">
@@ -53,6 +54,7 @@ export function SiteEditorPreview(props: SiteEditorPreviewProps) {
           <SitePreviewSlot
             ticket={props.ticket}
             ticketAnnounced={ticketAnnounced}
+            ticketOfferId={ticketOfferId}
             slot={host.slot}
             label={host.label}
             blocks={blocksAtPlacement(props.page, host.slot)}

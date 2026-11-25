@@ -37,12 +37,14 @@ export function Header({ site = 'academy' }: HeaderProps) {
         )}
         <div className="header-actions">
           {focused ? (
-            <Link
-              href={siteHref(site, site === 'hub' ? '' : academyIndexPath)}
-              className="text-link"
-            >
-              {site === 'hub' ? 'До студії' : 'До програм'}
-            </Link>
+            path !== '/checkout' && (
+              <Link
+                href={siteHref(site, site === 'hub' ? '' : academyIndexPath)}
+                className="text-link"
+              >
+                {site === 'hub' ? 'До студії' : 'До програм'}
+              </Link>
+            )
           ) : (
             <>
               <Link

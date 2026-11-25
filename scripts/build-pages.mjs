@@ -37,7 +37,11 @@ for (const target of [stage, output]) {
   }
 }
 await mkdir(stage, { recursive: true });
-await cp(path.join(root, 'src'), path.join(stage, 'src'), { recursive: true });
+const liveCheckoutOverlay = path.join(root, 'src/app/(academy)/@checkout/(.)checkout');
+await cp(path.join(root, 'src'), path.join(stage, 'src'), {
+  recursive: true,
+  filter: (source) => source !== liveCheckoutOverlay,
+});
 await cp(path.join(root, 'public'), path.join(stage, 'public'), {
   recursive: true,
   filter: (source) => !source.endsWith('-original.jpg'),

@@ -23,6 +23,7 @@ export type CheckoutResult = {
 };
 export type WidgetCallback = (response: unknown) => void;
 export type WayforpayWidget = {
+  closeit: () => void;
   run: (
     params: PaymentFields,
     approved: WidgetCallback,
@@ -30,5 +31,6 @@ export type WayforpayWidget = {
     pending: WidgetCallback,
   ) => void;
 };
+export type CheckoutWidget = { instance: WayforpayWidget; dialog: HTMLDialogElement | null };
 export type WayforpayWindow = Window & { Wayforpay?: new () => WayforpayWidget };
 export type WidgetEvent = 'approved' | 'declined' | 'pending';

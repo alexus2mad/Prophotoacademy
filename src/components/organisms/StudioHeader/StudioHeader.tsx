@@ -100,9 +100,11 @@ export function StudioHeader({ settings }: StudioHeaderProps) {
           />
         </Link>
         {focused ? (
-          <Link href={studioAcademyDestinations.overview} className="studio-header-back">
-            До програм
-          </Link>
+          path !== '/checkout' && (
+            <Link href={studioAcademyDestinations.overview} className="studio-header-back">
+              До програм
+            </Link>
+          )
         ) : (
           <>
             <nav className="studio-header-nav" aria-label="Головна навігація">

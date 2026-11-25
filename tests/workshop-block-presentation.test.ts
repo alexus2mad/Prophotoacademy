@@ -5,6 +5,7 @@ import { describe, expect, it } from 'vitest';
 import { MarketingBlock } from '@/components/molecules/MarketingBlock/MarketingBlock';
 import { MarketingSlot } from '@/components/molecules/MarketingSlot/MarketingSlot';
 import { WorkshopTicketPrices } from '@/components/molecules/WorkshopTicketPrices/WorkshopTicketPrices';
+import { WorkshopIntensiveTemplate } from '@/components/templates/WorkshopIntensiveTemplate/WorkshopIntensiveTemplate';
 import type { MarketingBlockProps } from '@/components/molecules/MarketingBlock/types';
 import { addBlockItem, createBlock, itemFieldId } from '@/lib/site-editor/blocks';
 import { newSitePage } from '@/lib/site-editor/fields';
@@ -232,6 +233,41 @@ describe('workshop design sections in public pages and the working editor', () =
     const preview = render(intro, { ticket: formats, ticketAnnounced: true, editing: true });
     expect(preview('strong')).toHaveLength(0);
     expect(preview('[data-site-field="facts"]').attr('data-canvas-field')).toBe('multiline');
+  });
+  it('routes each announced price and package chooser to unique lower cards before checkout', () => {
+    const page = newSitePage('/flash-without-fear', 'Flash without fear', 'workshop');
+    page.sections.push(
+      createBlock('intensive-announcement'),
+      createBlock('intensive-intro'),
+      createBlock('intensive-offer'),
+      createBlock('intensive-offer'),
+    );
+    const $ = load(
+      renderToStaticMarkup(createElement(WorkshopIntensiveTemplate, { page, ticket: formats })),
+    );
+    const announcement = $('[data-block-type="intensive-announcement"]');
+    expect(
+      announcement
+        .find('a')
+        .map((_, link) => $(link).attr('href'))
+        .get(),
+    ).toEqual(['#workshop-ticket-two', '#workshop-ticket-online']);
+    const selectors = $('a').filter((_, link) => $(link).text().includes('Обрати пакет'));
+    expect(selectors).toHaveLength(3);
+    expect(selectors.map((_, link) => $(link).attr('href')).get()).toEqual([
+      '#workshop-tickets',
+      '#workshop-tickets',
+      '#workshop-tickets',
+    ]);
+    for (const [option, target] of [
+      [offline, '#workshop-ticket-two'],
+      [online, '#workshop-ticket-online'],
+    ] as const) {
+      expect($(target)).toHaveLength(1);
+      expect($(target).closest('#workshop-tickets')).toHaveLength(1);
+      expect($(target).find('a').attr('href')).toBe(option.href);
+    }
+    expect($('#workshop-tickets')).toHaveLength(1);
   });
   it('uses native independent accordion disclosures, a single indicator per summary and escaped semantic bullet emphasis', () => {
     const section = addBlockItem(createBlock('intensive-program'));

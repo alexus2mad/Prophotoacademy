@@ -116,6 +116,8 @@
       "package.json#db:import-legacy",
       "scripts/migrate-ledger.ts",
       "src/app/(academy)/checkout/page.tsx",
+      "src/app/(academy)/@checkout/(.)checkout/page.tsx",
+      "src/app/(academy)/@checkout/default.tsx",
       "src/app/(academy)/thanks/page.tsx",
       "src/app/api/checkout/events/route.ts",
       "src/app/api/checkout/promo/route.ts",

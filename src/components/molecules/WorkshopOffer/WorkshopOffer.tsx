@@ -1,10 +1,18 @@
 import type { MarketingBlockProps } from '@/components/molecules/MarketingBlock/types';
 import { workshopFields } from '@/components/molecules/WorkshopSection/fields';
 import { WorkshopCheckoutAction } from '@/components/molecules/WorkshopCheckoutAction/WorkshopCheckoutAction';
+import { workshopTicketCardId, workshopTicketsId } from '@/lib/site-editor/intensive';
 import styles from './WorkshopOffer.module.css';
 
-export function WorkshopOffer({ section, editing, preview, ticket }: MarketingBlockProps) {
+export function WorkshopOffer({
+  section,
+  editing,
+  preview,
+  ticket,
+  ticketOfferId,
+}: MarketingBlockProps) {
   const { copy, value } = workshopFields(section, editing);
+  const anchor = ticketOfferId === section.id;
   if (ticket && ticket.options.length > 1)
     return (
       <div className={styles.result} data-formats="">
@@ -14,9 +22,21 @@ export function WorkshopOffer({ section, editing, preview, ticket }: MarketingBl
           </h2>
           {copy('description', 'p')}
         </div>
-        <div className={styles.cards} data-site-locked="">
+        <div
+          className={styles.cards}
+          id={anchor ? workshopTicketsId : undefined}
+          tabIndex={anchor ? -1 : undefined}
+          role="group"
+          aria-label="Квитки на інтенсив"
+          data-site-locked=""
+        >
           {ticket.options.map((option) => (
-            <article key={option.id} className={styles.card}>
+            <article
+              key={option.id}
+              className={styles.card}
+              id={anchor ? workshopTicketCardId(option.id) : undefined}
+              tabIndex={anchor ? -1 : undefined}
+            >
               <h3>{option.label}</h3>
               {option.description && <p className={styles.subtitle}>{option.description}</p>}
               {option.includes.length > 0 && (

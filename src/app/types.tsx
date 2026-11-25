@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 export type LayoutProps = { children: ReactNode };
+export type AcademyLayoutProps = LayoutProps & { checkout: ReactNode };
 export type SlugPageProps = { params: Promise<{ slug: string }> };
 export type CoursesPageProps = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
@@ -7,6 +8,7 @@ export type CoursesPageProps = {
 export type CheckoutPageProps = {
   searchParams: Promise<{ offering?: string; package?: string; demo?: string }>;
 };
+export type CheckoutRouteProps = CheckoutPageProps & { intercepted?: boolean };
 export type ThanksPageProps = { searchParams: Promise<{ token?: string }> };
 export type BookingPageProps = { searchParams: Promise<{ room?: string }> };
 export type ErrorBoundaryProps = { reset: () => void };

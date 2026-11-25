@@ -67,7 +67,7 @@ export function OrderStatus({ token }: OrderStatusProps) {
         </div>
       )}
       {order && ['declined', 'canceled'].includes(order.status) && (
-        <Link href={order.retryUrl} className="button">
+        <Link href={order.retryUrl} scroll={false} className="button" aria-haspopup="dialog">
           Повторити оформлення
         </Link>
       )}

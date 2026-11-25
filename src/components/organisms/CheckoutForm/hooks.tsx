@@ -7,6 +7,7 @@ import type {
   CheckoutIdentity,
   CheckoutResult,
   CheckoutState,
+  CheckoutWidget,
   PaymentFields,
   PromoState,
   WayforpayWindow,
@@ -65,25 +66,50 @@ function reportWidgetEvent(token: string, event: WidgetEvent) {
   }).catch(() => undefined);
 }
 
+function checkoutStillOpen(form: HTMLFormElement) {
+  const dialog = form.closest('dialog');
+  return form.isConnected && (!dialog || dialog.open);
+}
+
+function closeWidget(widget: CheckoutWidget) {
+  try {
+    widget.instance.closeit();
+  } catch {
+    // WayForPay can remove its iframe before the close or navigation callback runs.
+  }
+}
+
+function restoreCheckout(widget: CheckoutWidget) {
+  const dialog = widget.dialog;
+  if (dialog?.isConnected && !dialog.open) dialog.showModal();
+}
+
 export function useCheckoutForm({ offeringId, packageId }: CheckoutFormProps) {
   const [state, setState] = useState<CheckoutState>('idle');
   const [error, setError] = useState('');
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [promo, setPromo] = useState<PromoState>({ value: '', checking: false });
   const identity = useRef<CheckoutIdentity | null>(null);
+  const payment = useRef<CheckoutWidget | null>(null);
 
   // Closing the widget without paying returns the form; the next attempt is a new order,
   // because WayForPay does not accept a second payment for an order reference.
   useEffect(() => {
-    if (state !== 'paying') return;
     const onMessage = (event: MessageEvent) => {
-      if (event.data !== 'WfpWidgetEventClose') return;
+      if (event.data !== 'WfpWidgetEventClose' || !payment.current) return;
+      const widget = payment.current;
+      payment.current = null;
+      restoreCheckout(widget);
       identity.current = null;
       setState('idle');
     };
     window.addEventListener('message', onMessage);
-    return () => window.removeEventListener('message', onMessage);
-  }, [state]);
+    return () => {
+      window.removeEventListener('message', onMessage);
+      if (payment.current) closeWidget(payment.current);
+      payment.current = null;
+    };
+  }, []);
 
   function changePromo(value: string) {
     setPromo({ value, checking: false });
@@ -112,34 +138,50 @@ export function useCheckoutForm({ offeringId, packageId }: CheckoutFormProps) {
     }
   }
 
-  async function pay(result: CheckoutResult, token: string) {
+  async function pay(result: CheckoutResult, token: string, form: HTMLFormElement) {
     const fields = result.fields!;
     const thanks = String(fields.returnUrl);
     let Widget;
     try {
       Widget = await loadWidget();
     } catch {
-      submitHostedForm(result.action!, fields);
+      if (checkoutStillOpen(form)) submitHostedForm(result.action!, fields);
       return;
     }
+    if (!checkoutStillOpen(form)) return;
+    const widget: CheckoutWidget = { instance: new Widget(), dialog: form.closest('dialog') };
+    payment.current = widget;
+    // The provider appends its widget outside the checkout dialog and needs the top layer.
+    widget.dialog?.close();
     setState('paying');
-    new Widget().run(
-      { ...fields, straightWidget: true },
-      () => {
-        reportWidgetEvent(token, 'approved');
-        window.location.assign(thanks);
-      },
-      () => {
-        reportWidgetEvent(token, 'declined');
-        identity.current = null;
-        setState('error');
-        setError('Оплату відхилено. Перевірте дані картки або спробуйте іншу.');
-      },
-      () => {
-        reportWidgetEvent(token, 'pending');
-        window.location.assign(thanks);
-      },
-    );
+    try {
+      widget.instance.run(
+        { ...fields, straightWidget: true },
+        () => {
+          reportWidgetEvent(token, 'approved');
+          window.location.assign(thanks);
+        },
+        () => {
+          if (payment.current !== widget) return;
+          payment.current = null;
+          closeWidget(widget);
+          restoreCheckout(widget);
+          reportWidgetEvent(token, 'declined');
+          identity.current = null;
+          setState('error');
+          setError('Оплату відхилено. Перевірте дані картки або спробуйте іншу.');
+        },
+        () => {
+          reportWidgetEvent(token, 'pending');
+          window.location.assign(thanks);
+        },
+      );
+    } catch (error) {
+      payment.current = null;
+      closeWidget(widget);
+      restoreCheckout(widget);
+      throw error;
+    }
   }
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
@@ -171,6 +213,7 @@ export function useCheckoutForm({ offeringId, packageId }: CheckoutFormProps) {
         }),
       });
       const result: CheckoutResult = await response.json();
+      if (!checkoutStillOpen(formElement)) return;
       if (!response.ok) {
         if (response.status >= 400 && response.status < 500) identity.current = null;
         const fields = result.fieldErrors || {};
@@ -185,7 +228,7 @@ export function useCheckoutForm({ offeringId, packageId }: CheckoutFormProps) {
         window.location.assign(result.url!);
         return;
       }
-      await pay(result, identity.current.token);
+      await pay(result, identity.current.token, formElement);
     } catch (error) {
       setState('error');
       setError(error instanceof Error ? error.message : 'Спробуйте ще раз.');

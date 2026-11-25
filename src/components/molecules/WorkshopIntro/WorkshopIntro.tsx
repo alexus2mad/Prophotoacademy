@@ -1,6 +1,8 @@
 import type { MarketingBlockProps } from '@/components/molecules/MarketingBlock/types';
+import { FragmentLink } from '@/components/atoms/FragmentLink/FragmentLink';
 import { workshopFields } from '@/components/molecules/WorkshopSection/fields';
 import { WorkshopCheckoutAction } from '@/components/molecules/WorkshopCheckoutAction/WorkshopCheckoutAction';
+import { workshopTicketsId } from '@/lib/site-editor/intensive';
 import styles from './WorkshopIntro.module.css';
 
 export function WorkshopIntro({
@@ -9,6 +11,7 @@ export function WorkshopIntro({
   preview,
   ticket,
   ticketAnnounced,
+  ticketOfferId,
 }: MarketingBlockProps) {
   const { copy, value } = workshopFields(section, editing);
   const formats = ticket && ticket.options.length > 1 ? ticket.options : undefined;
@@ -60,9 +63,9 @@ export function WorkshopIntro({
         </div>
       )}
       {formats ? (
-        <a className="studio-button" href="#workshop-tickets" data-site-locked="">
-          Обрати формат <span aria-hidden="true">→</span>
-        </a>
+        <FragmentLink className="studio-button" targetId={workshopTicketsId} data-site-locked="">
+          {ticketOfferId ? 'Обрати пакет' : 'Обрати формат'} <span aria-hidden="true">→</span>
+        </FragmentLink>
       ) : (
         <WorkshopCheckoutAction ticket={ticket} editing={editing} preview={preview} />
       )}

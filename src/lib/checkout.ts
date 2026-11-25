@@ -135,5 +135,5 @@ export async function resolveCheckoutPurchase(
     !canEnroll(offering, pack)
   )
     throw new HttpError(409, 'Продаж квитків на цей воркшоп наразі недоступний.');
-  return { program, offering, pack, workshop: true as const };
+  return { program, offering, pack, path, workshop: true as const };
 }

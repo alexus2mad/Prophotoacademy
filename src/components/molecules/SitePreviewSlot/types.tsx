@@ -5,6 +5,7 @@ export type SitePreviewSlotProps = {
   slot: string;
   ticket?: WorkshopTicketPresentation;
   ticketAnnounced?: boolean;
+  ticketOfferId?: string;
   label: string;
   blocks: SiteSection[];
   editable: boolean;

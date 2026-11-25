@@ -6,4 +6,5 @@ export type DialogProps = Omit<DialogHTMLAttributes<HTMLDialogElement>, 'childre
   closeLabel: string;
   closeOnBackdrop?: boolean;
   closeIconSize?: number;
+  onDismiss?: () => void;
 };

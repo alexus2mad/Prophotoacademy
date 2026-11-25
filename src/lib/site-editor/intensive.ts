@@ -1,5 +1,20 @@
 import { siteField } from './fields';
 import type { BlockDefinition, IntensiveBlockType, SiteField, SiteSection } from './types';
+import type { WorkshopTicketPresentation } from './workshop-ticket/types';
+
+export const workshopTicketsId = 'workshop-tickets';
+
+export function workshopTicketCardId(ticketId: string) {
+  return 'workshop-ticket-' + ticketId;
+}
+
+export function workshopTicketOfferId(
+  sections: readonly SiteSection[],
+  ticket?: WorkshopTicketPresentation,
+) {
+  if (ticket && ticket.options.length > 1)
+    return sections.find(({ blockType }) => blockType === 'intensive-offer')?.id;
+}
 
 export function hasWorkshopAnnouncement(sections: readonly SiteSection[]) {
   return sections.some(({ blockType }) => blockType === 'intensive-announcement');

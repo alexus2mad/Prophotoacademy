@@ -1,10 +1,17 @@
 import type { MarketingBlockProps } from '@/components/molecules/MarketingBlock/types';
 import { workshopFields } from '@/components/molecules/WorkshopSection/fields';
 import { WorkshopTicketPrices } from '@/components/molecules/WorkshopTicketPrices/WorkshopTicketPrices';
+import { workshopTicketsId } from '@/lib/site-editor/intensive';
 import styles from './WorkshopAnnouncement.module.css';
 
 /** AI Artwork's announcement layout for editor workshops, with the bound ticket prices. */
-export function WorkshopAnnouncement({ section, editing, preview, ticket }: MarketingBlockProps) {
+export function WorkshopAnnouncement({
+  section,
+  editing,
+  preview,
+  ticket,
+  ticketOfferId,
+}: MarketingBlockProps) {
   const { copy, value } = workshopFields(section, editing);
   const when = value('when')
     .split('\n')
@@ -22,7 +29,12 @@ export function WorkshopAnnouncement({ section, editing, preview, ticket }: Mark
           when.map((line, index) => <span key={index}>{line}</span>),
         )}
       {ticket ? (
-        <WorkshopTicketPrices id="workshop-tickets" ticket={ticket} editing={editing || preview} />
+        <WorkshopTicketPrices
+          id={ticketOfferId ? undefined : workshopTicketsId}
+          linkToOffer={Boolean(ticketOfferId)}
+          ticket={ticket}
+          editing={editing || preview}
+        />
       ) : (
         editing && (
           <p className={styles.missing} data-site-locked="">

@@ -71,6 +71,8 @@ export function PackageCard({
       {purchaseAvailable ? (
         <Link
           href={`/checkout?offering=${encodeURIComponent(offering.id)}&package=${encodeURIComponent(pack.id)}`}
+          scroll={false}
+          aria-haspopup="dialog"
           className={`button button-wide${pack.featured ? '' : ' button-secondary'}`}
         >
           {paymentDisabled

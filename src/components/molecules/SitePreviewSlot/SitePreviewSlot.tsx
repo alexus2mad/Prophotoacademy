@@ -11,6 +11,7 @@ export function SitePreviewSlot({
   blocks,
   ticket,
   ticketAnnounced,
+  ticketOfferId,
   editable,
   selected,
   onInsert,
@@ -58,6 +59,7 @@ export function SitePreviewSlot({
             editing={editable}
             ticket={ticket}
             ticketAnnounced={ticketAnnounced}
+            ticketOfferId={ticketOfferId}
             preview
           />
         </Fragment>

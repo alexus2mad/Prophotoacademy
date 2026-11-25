@@ -1,0 +1,53 @@
+.modal:global(.dialog) {
+  --checkout-gutter: 24px;
+  width: min(1160px, calc(100% - 2 * var(--checkout-gutter)));
+  max-width: none;
+  max-height: none;
+  padding: 0;
+  overflow: hidden;
+  background: var(--canvas);
+}
+
+.modal :global(.dialog-close) {
+  z-index: 1;
+  top: 12px;
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  background: var(--canvas);
+}
+
+.content {
+  max-height: calc(100dvh - 2 * var(--checkout-gutter) - 2px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  scroll-padding-top: 56px;
+  padding: 56px clamp(20px, 4vw, 56px) 32px;
+}
+
+.content :global(.checkout-page) {
+  width: 100%;
+}
+
+.content :global(.checkout-page .page-heading) {
+  padding-top: 0;
+}
+
+.content :global(.checkout-grid),
+.content :global(.status-panel) {
+  margin-block: 0;
+}
+
+:global(html):has(.modal:modal) {
+  overflow: hidden;
+}
+
+@media (max-width: 767px) {
+  .modal:global(.dialog) {
+    --checkout-gutter: 8px;
+  }
+
+  .content {
+    padding-inline: 16px;
+  }
+}

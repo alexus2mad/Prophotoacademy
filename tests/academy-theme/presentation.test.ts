@@ -110,7 +110,7 @@ describe('Academy presentation boundaries', () => {
     expect(hub('a[href$="/hub/booking"]').length).toBeGreaterThan(0);
   });
 
-  it('keeps checkout focused on completion while retaining return and legal links', () => {
+  it('keeps checkout focused on completion and lets its dialog own dismissal', () => {
     navigation.path = '/checkout';
     const $ = render(
       createElement(SiteShell, {
@@ -120,7 +120,7 @@ describe('Academy presentation boundaries', () => {
       }),
     );
     expect($('.site-header .desktop-nav, .site-header .header-account-link').length).toBe(0);
-    expect($('.header-actions a[href="/academy"]').text()).toBe('До програм');
+    expect($('.header-actions a[href="/academy"]')).toHaveLength(0);
     expect($('.footer-focused a[href="/terms-of-service"]').length).toBe(1);
     expect($('.footer-focused a[href="/privacy-policy"]').length).toBe(1);
   });

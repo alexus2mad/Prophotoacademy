@@ -75,6 +75,8 @@ export function PackageComparisonTable({
                 <Link
                   className="text-link"
                   href={pack.purchaseUrl}
+                  scroll={false}
+                  aria-haspopup="dialog"
                   onClick={() => onClose()}
                   aria-label={`Обрати ${pack.name}`}
                 >

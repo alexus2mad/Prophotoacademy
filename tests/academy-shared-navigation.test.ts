@@ -6,7 +6,7 @@ import fixture from '../content/academy.json';
 import type { AcademyContent } from '../src/lib/content/types';
 import { academyProgramsHref } from '../src/lib/navigation/academy';
 import { getContent } from '../src/lib/content';
-import Checkout from '../src/app/(academy)/checkout/page';
+import { CheckoutRoute } from '../src/app/(academy)/checkout/CheckoutRoute';
 import Thanks from '../src/app/(academy)/thanks/page';
 import Detail from '../src/app/(academy)/[slug]/page';
 import NotFound from '../src/app/not-found';
@@ -15,11 +15,13 @@ import { OrderStatus } from '../src/components/organisms/OrderStatus/OrderStatus
 import { InquiryDialog } from '../src/components/organisms/InquiryDialog/InquiryDialog';
 import { ReviewUnavailableTemplate } from '../src/components/templates/ReviewUnavailableTemplate/ReviewUnavailableTemplate';
 
+const navigation = vi.hoisted(() => ({ path: '/missing' }));
 vi.mock('next/server', () => ({ connection: vi.fn(async () => undefined) }));
 vi.mock('next/font/local', () => ({ default: () => ({ variable: 'font-test' }) }));
 vi.mock('next/navigation', async (importOriginal) => ({
   ...(await importOriginal<typeof import('next/navigation')>()),
-  usePathname: () => '/missing',
+  usePathname: () => navigation.path,
+  useRouter: () => ({ back: vi.fn(), replace: vi.fn() }),
 }));
 vi.mock('../src/lib/content', async () => ({
   getContent: vi.fn(),
@@ -42,6 +44,7 @@ vi.mock('../src/components/organisms/InquiryDialog/hooks', () => ({
 
 const content = fixture as AcademyContent;
 beforeEach(() => {
+  navigation.path = '/missing';
   vi.stubEnv('NEXT_PUBLIC_SITE_URL', 'https://prophotoacademy.com.ua');
   vi.stubEnv('NEXT_PUBLIC_REVIEW_MODE', '');
   vi.stubEnv('PAYMENT_MODE', 'mock');
@@ -85,18 +88,21 @@ describe.each([
     }
   });
 
-  it('returns unsuccessful checkout and missing-order visitors to the same approved destination', async () => {
-    const surfaces = [
-      await Checkout({
-        searchParams: Promise.resolve({ offering: 'missing', package: 'missing' }),
-      }),
-      await Thanks({ searchParams: Promise.resolve({}) }),
-    ];
-    for (const surface of surfaces) {
-      const $ = load(renderToStaticMarkup(surface));
-      expect($(`a[href="${destination}"]`)).toHaveLength(1);
-      expect($('a[href^="/courses"]')).toHaveLength(0);
-    }
+  it('uses the shared dismissal on unavailable checkout and a catalog link on missing receipts', async () => {
+    navigation.path = '/checkout';
+    const checkout = load(
+      renderToStaticMarkup(
+        await CheckoutRoute({
+          searchParams: Promise.resolve({ offering: 'missing', package: 'missing' }),
+        }),
+      ),
+    );
+    expect(checkout('dialog[aria-labelledby="checkout-title"]')).toHaveLength(1);
+    expect(checkout('button[aria-label="Закрити оформлення"]')).toHaveLength(1);
+    expect(checkout('a').text()).not.toContain('до програм');
+    const receipt = load(renderToStaticMarkup(await Thanks({ searchParams: Promise.resolve({}) })));
+    expect(receipt(`a[href="${destination}"]`)).toHaveLength(1);
+    expect(receipt('a[href^="/courses"]')).toHaveLength(0);
   });
 
   it('uses the variant destination in the online alternative inside a practice inquiry', () => {
