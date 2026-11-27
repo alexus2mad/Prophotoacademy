@@ -12,4 +12,4 @@
 
 ## 3. Release
 
-- [ ] 3.1 Release to production and staging and verify the inquiry flow.
+- [x] 3.1 Release to production and staging and verify the inquiry flow. Both run `3c534c2f8f1624f20ef8a0c5f70ff9a6e297219f`; `83fd33e` is the rollback. A labelled production test inquiry showed «Дякуємо за заявку» and reached Telegram in the same second. See `docs/releases/2026-11-27-inquiry-delivery.md`.
