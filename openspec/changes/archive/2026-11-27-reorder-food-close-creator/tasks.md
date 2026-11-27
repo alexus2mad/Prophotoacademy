@@ -7,6 +7,6 @@
 
 ## 2. Release
 
-- [ ] 2.1 At the owner's request, build and activate on production first through the existing isolated-builder flow, verifying the loopback candidate and the public site.
-- [ ] 2.2 Build and activate the same revision on staging and verify it.
-- [ ] 2.3 Retain exactly the active and previous verified release per environment and record the release.
+- [x] 2.1 At the owner's request, build and activate on production first through the existing isolated-builder flow, verifying the loopback candidate and the public site. Production runs `83fd33e52eaa3a0cf3378575c18d9d09989dd2e7`; the candidate and public checks passed.
+- [x] 2.2 Build and activate the same revision on staging and verify it. Staging runs the same revision in mock payment mode; the candidate and public checks passed.
+- [x] 2.3 Retain exactly the active and previous verified release per environment and record the release. `8330a97` was pruned from both; `ee092c4` is the rollback. See `docs/releases/2026-11-27-food-first-creator-archive.md`.
