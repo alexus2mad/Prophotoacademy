@@ -40,6 +40,16 @@ export function programSchedule(
       inquirySuggested: false,
     };
 
+  if (isEnrollmentClosed(offering) && offering?.availableInRecordings)
+    return {
+      label: 'Старт потоку',
+      ...(dated || { value: 'Дату не зазначено' }),
+      status: 'Доступно в записі',
+      explanation:
+        'Продаж курсу закрито, матеріали доступні в записі. Залиште заявку, щоб дізнатися про доступ і наступний набір.',
+      inquirySuggested: true,
+    };
+
   if (isEnrollmentClosed(offering))
     return {
       label: dated && dated.date < kyivDate(now) ? 'Попередня дата старту' : 'Наступний набір',

@@ -4,7 +4,7 @@ import type { AcademyContent } from '../src/lib/content/types';
 import { findOffering } from '../src/lib/content/selectors';
 import { resolvePurchase } from '../src/lib/checkout';
 import { enrollmentOptions } from '../src/lib/commerce/catalog';
-import { canEnroll } from '../src/lib/format';
+import { canEnroll, programStatusLabel } from '../src/lib/format';
 import { programSchedule } from '../src/lib/program-schedule';
 import { studioIntensiveOffer } from '../src/lib/studio-pages/intensive';
 
@@ -69,7 +69,7 @@ describe('owner-confirmed November offers', () => {
     ]);
   });
 
-  it('closes the dated event after its day while keeping the confirmed future course open', () => {
+  it('closes the dated event after its day and Content Creator while it stays available in recordings', () => {
     vi.stubEnv('PAYMENT_MODE', 'wayforpay');
     const later = new Date('2026-11-23T10:00:00Z');
     for (const pack of eventOffering.packages) {
@@ -78,19 +78,20 @@ describe('owner-confirmed November offers', () => {
     }
     expect(commercialOffering.startDate).toBe('2026-11-27');
     for (const pack of commercialOffering.packages) {
-      expect(canEnroll(commercialOffering, pack, now)).toBe(true);
-      expect(resolvePurchase(content, commercialOffering.id, pack.id, now).pack).toBe(pack);
+      expect(canEnroll(commercialOffering, pack, now)).toBe(false);
+      expect(() => resolvePurchase(content, commercialOffering.id, pack.id, now)).toThrow();
     }
     expect(programSchedule(commercial, commercialOffering, now)).toMatchObject({
-      label: 'Старт навчання',
-      status: 'Набір відкрито',
+      label: 'Старт потоку',
+      status: 'Доступно в записі',
       date: '2026-11-27',
-      inquirySuggested: false,
+      inquirySuggested: true,
     });
+    expect(programStatusLabel(commercial, commercialOffering)).toBe('Доступно в записі');
   });
 
   it.each(['mock', 'wayforpay'])(
-    'opens the three confirmed Content Creator packages in %s mode with unchanged prices',
+    'keeps the three closed Content Creator packages unpurchasable in %s mode with unchanged prices',
     (mode) => {
       vi.stubEnv('PAYMENT_MODE', mode);
       expect(commercialOffering.packages.map((pack) => [pack.id, pack.price])).toEqual([
@@ -99,8 +100,8 @@ describe('owner-confirmed November offers', () => {
         ['commercial-platinum', 79900],
       ]);
       for (const pack of commercialOffering.packages) {
-        expect(resolvePurchase(content, commercialOffering.id, pack.id, now).offering).toBe(
-          commercialOffering,
+        expect(() => resolvePurchase(content, commercialOffering.id, pack.id, now)).toThrow(
+          'Набір закрито',
         );
       }
       expect(commercialOffering.packages.find((pack) => pack.featured)?.id).toBe('commercial-gold');
@@ -113,7 +114,7 @@ describe('owner-confirmed November offers', () => {
     const offering = findOffering(content, food.id)!;
     expect(offering).toMatchObject({
       id: 'offering-food-2026-12',
-      startDate: '2026-12-18',
+      startDate: '2026-12-17',
       availability: 'open',
       verificationRequired: false,
     });

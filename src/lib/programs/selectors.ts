@@ -46,19 +46,23 @@ export function programPresentation(
   const hasFutureStart = Boolean(offering?.startDate && offering.startDate >= kyivDate(now));
   const inquiryTitle = isCustom
     ? program.title
-    : closed
-      ? 'Повідомити про наступний набір'
-      : status === 'archived'
-        ? 'Повідомити про наступну подію'
-        : 'Дізнатися про найближчий набір';
+    : closed && offering?.availableInRecordings
+      ? 'Дізнатися про доступ до записів'
+      : closed
+        ? 'Повідомити про наступний набір'
+        : status === 'archived'
+          ? 'Повідомити про наступну подію'
+          : 'Дізнатися про найближчий набір';
   const buttonLabel = isCustom
     ? 'Обговорити програму'
-    : closed
-      ? 'Наступний набір'
-      : status === 'archived'
-        ? 'Наступна подія'
-        : hasFutureStart
-          ? 'Уточнити набір'
-          : 'Дізнатися про набір';
+    : closed && offering?.availableInRecordings
+      ? 'Дізнатися про доступ'
+      : closed
+        ? 'Наступний набір'
+        : status === 'archived'
+          ? 'Наступна подія'
+          : hasFutureStart
+            ? 'Уточнити набір'
+            : 'Дізнатися про набір';
   return { price, open, isCustom, status, inquiryTitle, buttonLabel, hasFutureStart };
 }

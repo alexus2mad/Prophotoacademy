@@ -53,6 +53,8 @@ export type Offering = {
   openAfterStart?: boolean;
   learningState?: 'recorded' | 'selfPaced' | 'ongoing';
   joiningOpen?: boolean;
+  // A closed offering whose material stays available in recordings; sales remain closed.
+  availableInRecordings?: boolean;
   packages: Package[];
   sourceNotes?: string[];
 };

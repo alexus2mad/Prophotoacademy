@@ -77,8 +77,9 @@ describe('Content Creator route and commercial boundaries', () => {
       );
       expect($('a[href^="/checkout"]')).toHaveLength(0);
       expect($('[data-installment-methods]')).toHaveLength(0);
-      expect($.text()).toContain('Набір закрито');
-      expect($.text()).toContain('Наступний набір');
+      expect($.text()).toContain('Доступно в записі');
+      expect($.text()).not.toContain('Набір закрито');
+      expect($.text()).toContain('Дізнатися про доступ');
       expect($.text()).not.toContain('Private lesson title');
       expect($.text()).not.toContain('Отримати доступ');
       expect($('.package-grid .package-card')).toHaveLength(offering.packages.length);
@@ -124,9 +125,19 @@ describe('Content Creator route and commercial boundaries', () => {
 
 describe('Content Creator learning outline and work sources', () => {
   it('exposes the real curriculum through one initially collapsed native disclosure', () => {
+    const openContent = {
+      ...content,
+      offerings: content.offerings.map((item) =>
+        item.id === offering.id ? { ...item, availability: 'open' as const } : item,
+      ),
+    };
     const $ = load(
       renderToStaticMarkup(
-        createElement(StudioCreatorTemplate, { program, editorial: creatorEditorial, content }),
+        createElement(StudioCreatorTemplate, {
+          program,
+          editorial: creatorEditorial,
+          content: openContent,
+        }),
       ),
     );
     const disclosure = $('#program-curriculum > details');

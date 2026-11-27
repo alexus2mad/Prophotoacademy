@@ -75,7 +75,12 @@ describe('temporary closure of courses other than Content Creator and Food Photo
     const pack = commercial.packages[0];
     const inquiry = { ...commercial.packages[1], inquiryOnly: true };
     const soldOut = { ...commercial.packages[2], availability: 'soldOut' as const };
-    const offering = { ...commercial, openAfterStart: true, packages: [pack, inquiry, soldOut] };
+    const offering = {
+      ...commercial,
+      availability: 'open' as const,
+      openAfterStart: true,
+      packages: [pack, inquiry, soldOut],
+    };
     const packageIds = offering.packages.map((entry) => entry.id);
     const live = { mode: 'wayforpay' as const, packageIds };
     expect(showsInstallmentMethods(offering, live, pack)).toBe(true);

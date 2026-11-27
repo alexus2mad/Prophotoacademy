@@ -609,7 +609,7 @@
       "featured": false,
       "seo": {
         "title": "Курс предметної та фуд-зйомки у Києві й онлайн",
-        "description": "Спец курс предметної та фуд-зйомки: 12 тижнів, 40+ лекцій наживо, практика на телефон і камеру, контент-відео, AI, SMM і вихід на комерцію. Старт 18 грудня."
+        "description": "Спец курс предметної та фуд-зйомки: 12 тижнів, 40+ лекцій наживо, практика на телефон і камеру, контент-відео, AI, SMM і вихід на комерцію. Старт 17 грудня."
       }
     },
     {
@@ -820,7 +820,8 @@
       "duration": "7–13 тижнів",
       "format": "hybrid",
       "location": "Київ",
-      "availability": "open",
+      "availability": "closed",
+      "availableInRecordings": true,
       "verificationRequired": false,
       "packages": [
         {
@@ -1066,7 +1067,7 @@
     {
       "id": "offering-food-2026-12",
       "programId": "program-food",
-      "startDate": "2026-12-18",
+      "startDate": "2026-12-17",
       "duration": "12 тижнів",
       "format": "hybrid",
       "location": "Київ",
@@ -5504,7 +5505,7 @@
     "heroImageId": "hero",
     "heroTitle": "Навчіться бачити більше",
     "heroDescription": "Фотографія, відео та контент для себе й брендів. Навчайтеся на телефон або камеру — онлайн та в Києві.",
-    "primaryProgramId": "program-commercial"
+    "primaryProgramId": "program-food"
   },
   "rooms": [
     {

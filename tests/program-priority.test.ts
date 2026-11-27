@@ -7,15 +7,15 @@ const content = fixture as AcademyContent;
 
 describe('editorial course priority', () => {
   it('selects the configured primary course and leads the catalog without duplicating it', () => {
-    expect(primaryProgram(content)?.slug).toBe('content-creator');
+    expect(primaryProgram(content)?.slug).toBe('food-product-photography');
     const ordered = prioritizePrograms(content.programs, content.settings.primaryProgramId);
-    expect(ordered[0].id).toBe('program-commercial');
+    expect(ordered[0].id).toBe('program-food');
     expect(ordered.map((program) => program.id)).toHaveLength(content.programs.length);
     expect(new Set(ordered.map((program) => program.id)).size).toBe(content.programs.length);
     expect(ordered.slice(1)).toEqual(
-      content.programs.filter((program) => program.id !== 'program-commercial'),
+      content.programs.filter((program) => program.id !== 'program-food'),
     );
-    expect(content.programs[0].id).not.toBe('program-commercial');
+    expect(content.programs[0].id).not.toBe('program-food');
   });
 
   it('follows a different course selected by the editor', () => {

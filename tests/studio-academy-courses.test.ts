@@ -15,10 +15,10 @@ describe('Academy main courses', () => {
     const originalIds = programs.map((program) => program.id);
 
     expect(studioAcademyCourses(programs).map((program) => program.id)).toEqual([
+      'program-food',
       'program-commercial',
       'program-visual',
       'program-instagram',
-      'program-food',
       'cms-additional-course',
     ]);
     expect(programs.map((program) => program.id)).toEqual(originalIds);
@@ -32,7 +32,7 @@ describe('Academy main courses', () => {
 
     expect(program.id).toBe('program-food');
     expect(presentation).toMatchObject({ open: true, price: 7900 });
-    expect(programSchedule(program, offering)).toMatchObject({ date: '2026-12-18' });
+    expect(programSchedule(program, offering)).toMatchObject({ date: '2026-12-17' });
     expect(image).toEqual(content.images.find((item) => item.id === 'food-chocolate-pattern'));
     expect(studioProgramArtwork(program, content).asset).toEqual(image);
     expect(content.programs.find((item) => item.id === 'program-commercial')?.slug).toBe(

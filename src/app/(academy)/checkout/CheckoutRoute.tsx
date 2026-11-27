@@ -1,7 +1,7 @@
 import type { CheckoutRouteProps } from '@/app/types';
 import { getContent, findImage } from '@/lib/content';
 import { resolveCheckoutPurchase } from '@/lib/checkout';
-import { isEnrollmentClosed, money } from '@/lib/format';
+import { closedStatusLabel, isEnrollmentClosed, money } from '@/lib/format';
 import { CheckoutForm } from '@/components/organisms/CheckoutForm/CheckoutForm';
 import { CheckoutDialog } from '@/components/molecules/CheckoutDialog/CheckoutDialog';
 import { Photo } from '@/components/atoms/Photo/Photo';
@@ -46,11 +46,13 @@ export async function CheckoutRoute({ searchParams, intercepted }: CheckoutRoute
         intercepted={intercepted}
       >
         <div className="container status-panel">
-          <h1 id="checkout-title">{closed ? 'Набір закрито' : 'Уточнімо ваш набір'}</h1>
+          <h1 id="checkout-title">{closed ? closedStatusLabel(offering) : 'Уточнімо ваш набір'}</h1>
           <p>
-            {closed
-              ? 'Продаж цього пакета тимчасово закрито. Залиште заявку, щоб дізнатися про наступний набір.'
-              : 'Цей пакет ще готується до запису. Команда підтвердить доступність навчальних матеріалів і деталі набору.'}
+            {closed && offering?.availableInRecordings
+              ? 'Продаж курсу закрито, матеріали доступні в записі. Залиште заявку, щоб дізнатися про доступ і наступний набір.'
+              : closed
+                ? 'Продаж цього пакета тимчасово закрито. Залиште заявку, щоб дізнатися про наступний набір.'
+                : 'Цей пакет ще готується до запису. Команда підтвердить доступність навчальних матеріалів і деталі набору.'}
           </p>
           <InquiryButton className="button">Зв’язатися з академією</InquiryButton>
         </div>

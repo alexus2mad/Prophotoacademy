@@ -70,8 +70,8 @@ describe('Published brand page presentations', () => {
   });
   it('changes a catalog card without changing the underlying offer or program URL', () => {
     const page = seeded('/academy');
-    edit(page, 'catalog-program-commercial', 'title', 'Новий заголовок курсу');
-    edit(page, 'catalog-program-commercial', 'image', '/images/catalog.webp');
+    edit(page, 'catalog-program-food', 'title', 'Новий заголовок курсу');
+    edit(page, 'catalog-program-food', 'image', '/images/catalog.webp');
     const before = load(render('/academy'));
     const after = load(render('/academy', page));
     const oldRow = before('#courses a').first();

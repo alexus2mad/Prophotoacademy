@@ -402,6 +402,13 @@ export const schemaTypes = [
           'Set only with confirmed delivery evidence. Leave empty when the learning state is unknown.',
       }),
       defineField({
+        name: 'availableInRecordings',
+        title: 'Closed, available in recordings',
+        type: 'boolean',
+        description:
+          'Presentation fact only. A closed offering shows «Доступно в записі» instead of «Набір закрито»; sales stay closed.',
+      }),
+      defineField({
         name: 'joiningOpen',
         title: 'Joining the ongoing cohort is confirmed',
         type: 'boolean',

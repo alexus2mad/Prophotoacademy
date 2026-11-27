@@ -36,13 +36,18 @@ export function audienceLabel(program: Program) {
 export function programStatusLabel(program: Program, offering?: Offering) {
   return ['individual', 'corporate'].includes(program.category)
     ? 'За вашим запитом'
-    : availabilityLabel[offering ? offeringStatus(offering) : 'waitlist'];
+    : offering && offeringStatus(offering) === 'closed'
+      ? closedStatusLabel(offering)
+      : availabilityLabel[offering ? offeringStatus(offering) : 'waitlist'];
 }
 export function phoneLabel(phone: string) {
   return phone.replace(/^\+380(\d{2})(\d{3})(\d{2})(\d{2})$/, '+380 $1 $2 $3 $4');
 }
 export function isEnrollmentClosed(offering?: Offering, pack?: Package) {
   return offering?.availability === 'closed' || pack?.availability === 'closed';
+}
+export function closedStatusLabel(offering?: Offering) {
+  return offering?.availableInRecordings ? 'Доступно в записі' : availabilityLabel.closed;
 }
 export function canEnroll(offering: Offering, pack?: Package, now = new Date()) {
   const today = new Intl.DateTimeFormat('en-CA', {

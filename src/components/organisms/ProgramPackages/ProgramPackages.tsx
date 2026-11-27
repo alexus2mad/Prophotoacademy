@@ -1,6 +1,6 @@
 import { PackageCard } from '@/components/molecules/PackageCard/PackageCard';
 import { PackageComparison } from '@/components/organisms/PackageComparison/PackageComparison';
-import { canEnroll, isEnrollmentClosed } from '@/lib/format';
+import { canEnroll, closedStatusLabel, isEnrollmentClosed } from '@/lib/format';
 import { OfferingSummary } from '@/components/molecules/OfferingSummary/OfferingSummary';
 import { showsInstallmentMethods } from '@/lib/commerce/selectors';
 import type { ProgramPackagesProps } from './types';
@@ -21,7 +21,7 @@ export function ProgramPackages({
   const compared = offering.packages.map((pack) => ({
     ...pack,
     statusLabel: isEnrollmentClosed(offering, pack)
-      ? 'Набір закрито'
+      ? closedStatusLabel(offering)
       : pack.availability === 'soldOut'
         ? 'Місць немає'
         : pack.inquiryOnly

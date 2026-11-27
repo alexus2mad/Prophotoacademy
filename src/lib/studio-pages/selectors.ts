@@ -2,7 +2,7 @@ import type { ImageAsset, Program } from '@/lib/content/types';
 import { studioAssets } from '@/lib/studio-design/assets';
 
 const academyCourseOrder = new Map(
-  ['program-commercial', 'program-visual', 'program-instagram', 'program-food'].map((id, index) => [
+  ['program-food', 'program-commercial', 'program-visual', 'program-instagram'].map((id, index) => [
     id,
     index,
   ]),
