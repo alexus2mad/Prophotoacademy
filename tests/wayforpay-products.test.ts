@@ -686,7 +686,7 @@ describe('courses sold like the original site', () => {
       }),
     );
     expect(quote.status).toBe(409);
-    expect(JSON.stringify(await quote.json())).toContain('Набір закрито');
+    expect(JSON.stringify(await quote.json())).toContain('Продаж курсу закрито');
     const confirmation = await callback(
       post('/api/payments/wayforpay/callback', providerCallback(orderId, amount)),
     );

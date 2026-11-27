@@ -101,7 +101,7 @@ describe('owner-confirmed November offers', () => {
       ]);
       for (const pack of commercialOffering.packages) {
         expect(() => resolvePurchase(content, commercialOffering.id, pack.id, now)).toThrow(
-          'Набір закрито',
+          'Продаж курсу закрито',
         );
       }
       expect(commercialOffering.packages.find((pack) => pack.featured)?.id).toBe('commercial-gold');

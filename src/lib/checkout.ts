@@ -107,7 +107,12 @@ export function resolvePurchase(
   const program = content.programs.find((p) => p.id === offering?.programId);
   if (!offering || !pack || !program) throw new HttpError(404, 'Пакет не знайдено.');
   if (isEnrollmentClosed(offering, pack))
-    throw new HttpError(409, 'Набір закрито. Залиште заявку, щоб дізнатися про наступний набір.');
+    throw new HttpError(
+      409,
+      program.category === 'course'
+        ? 'Продаж курсу закрито, матеріали доступні в записі. Залиште заявку, щоб дізнатися про доступ.'
+        : 'Набір закрито. Залиште заявку, щоб дізнатися про наступний набір.',
+    );
   if (
     !(paymentMode() === 'disabled' ? canTestEnroll(offering, pack) : canEnroll(offering, pack, now))
   )

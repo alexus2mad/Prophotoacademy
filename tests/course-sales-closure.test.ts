@@ -46,7 +46,7 @@ describe('temporary closure of courses other than Content Creator and Food Photo
           expect(canEnroll(offering, pack, now)).toBe(false);
           expect(canTestEnroll(offering, pack)).toBe(false);
           expect(() => resolvePurchase(content, offering.id, pack.id, now)).toThrow(
-            'Набір закрито',
+            'Продаж курсу закрито',
           );
         }
       }
@@ -100,15 +100,15 @@ describe('temporary closure of courses other than Content Creator and Food Photo
         mode: 'disabled' as const,
         packageIds: offering.packages.map((p) => p.id),
       };
-      expect(programStatusLabel(program, offering)).toBe('Набір закрито');
+      expect(programStatusLabel(program, offering)).toBe('Доступно в записі');
       expect(programSchedule(program, offering, now)).toMatchObject({
-        status: 'Набір закрито',
+        status: 'Доступно в записі',
         inquirySuggested: true,
       });
       expect(programPresentation(program, offering, now)).toMatchObject({
         status: 'closed',
         open: false,
-        buttonLabel: 'Наступний набір',
+        buttonLabel: 'Дізнатися про доступ',
       });
       expect(studioProgramPage(program, content, enrollment).presentation.open).toBe(false);
       const $ = load(
@@ -116,9 +116,10 @@ describe('temporary closure of courses other than Content Creator and Food Photo
       );
       expect($('a[href^="/checkout?"]')).toHaveLength(0);
       expect($('.package-source-note')).toHaveLength(0);
-      expect($.text()).toContain('Повідомити про наступний набір');
+      expect($.text()).toContain('Дізнатися про доступ до записів');
       expect($.text()).not.toContain('Уточнити умови навчання');
-      expect($('.comparison-desktop').text()).toContain('Набір закрито');
+      expect($('.comparison-desktop').text()).toContain('Доступно в записі');
+      expect($.text()).not.toContain('Набір закрито');
       expect($('.package-grid article')).toHaveLength(3);
       expect(
         $('.package-grid button')

@@ -46,9 +46,9 @@ export async function CheckoutRoute({ searchParams, intercepted }: CheckoutRoute
         intercepted={intercepted}
       >
         <div className="container status-panel">
-          <h1 id="checkout-title">{closed ? closedStatusLabel(offering) : 'Уточнімо ваш набір'}</h1>
+          <h1 id="checkout-title">{closed ? closedStatusLabel(program) : 'Уточнімо ваш набір'}</h1>
           <p>
-            {closed && offering?.availableInRecordings
+            {closed && program?.category === 'course'
               ? 'Продаж курсу закрито, матеріали доступні в записі. Залиште заявку, щоб дізнатися про доступ і наступний набір.'
               : closed
                 ? 'Продаж цього пакета тимчасово закрито. Залиште заявку, щоб дізнатися про наступний набір.'

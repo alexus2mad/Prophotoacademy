@@ -227,6 +227,7 @@
       ],
       "sourceUrl": "https://www.prophotoacademy.com.ua/food-product-photography",
       "featured": true,
+      "archived": true,
       "audienceLabel": "Для кріейторів і бізнесу",
       "homepageDescription": "Створюйте предметні та фуд-фото й відео для брендів: працюйте зі світлом, фактурами та комерційними завданнями.",
       "equipmentDescription": "Телефон; додаткове навчання на фотокамеру — у PLATINUM.",
@@ -821,7 +822,6 @@
       "format": "hybrid",
       "location": "Київ",
       "availability": "closed",
-      "availableInRecordings": true,
       "verificationRequired": false,
       "packages": [
         {

@@ -12,6 +12,7 @@ export function OfferingSummary({
 }: OfferingSummaryProps) {
   const schedule = programSchedule(program, offering);
   const closed = isEnrollmentClosed(offering);
+  const recorded = closed && program.category === 'course';
   return (
     <div className={styles.summary}>
       <p>
@@ -28,15 +29,21 @@ export function OfferingSummary({
           offeringId={offering.id}
           packageId={packageId}
           title={
-            closed
-              ? `${program.shortTitle}: наступний набір`
-              : packageName
-                ? `${program.shortTitle}: ${packageName}`
-                : program.shortTitle
+            recorded
+              ? `${program.shortTitle}: доступ до записів`
+              : closed
+                ? `${program.shortTitle}: наступний набір`
+                : packageName
+                  ? `${program.shortTitle}: ${packageName}`
+                  : program.shortTitle
           }
           className="text-link"
         >
-          {closed ? 'Повідомити про наступний набір' : 'Уточнити умови навчання'}
+          {recorded
+            ? 'Дізнатися про доступ до записів'
+            : closed
+              ? 'Повідомити про наступний набір'
+              : 'Уточнити умови навчання'}
         </InquiryButton>
       )}
     </div>

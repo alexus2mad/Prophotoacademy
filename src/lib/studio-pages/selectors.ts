@@ -1,5 +1,6 @@
 import type { ImageAsset, Program } from '@/lib/content/types';
 import { studioAssets } from '@/lib/studio-design/assets';
+import { listedPrograms } from '@/lib/content/selectors';
 
 const academyCourseOrder = new Map(
   ['program-food', 'program-commercial', 'program-visual', 'program-instagram'].map((id, index) => [
@@ -9,7 +10,7 @@ const academyCourseOrder = new Map(
 );
 
 export function studioAcademyCourses(programs: Program[]) {
-  return programs
+  return listedPrograms(programs)
     .filter((program) => program.category === 'course')
     .sort(
       (left, right) =>

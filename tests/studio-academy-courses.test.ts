@@ -16,7 +16,6 @@ describe('Academy main courses', () => {
 
     expect(studioAcademyCourses(programs).map((program) => program.id)).toEqual([
       'program-food',
-      'program-commercial',
       'program-visual',
       'program-instagram',
       'cms-additional-course',

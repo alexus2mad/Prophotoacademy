@@ -21,7 +21,8 @@ afterEach(() => vi.resetAllMocks());
 
 describe('public content editor integration', () => {
   it('gives every known page a unique path and unambiguous field and section IDs', () => {
-    expect(docs).toHaveLength(18);
+    // Archived programs, such as Content Creator, have no editor page.
+    expect(docs).toHaveLength(17);
     expect(new Set(docs.map((p) => p.path)).size).toBe(docs.length);
     for (const page of docs) {
       expect(new Set(page.sections.map((s) => s.id)).size, page.path).toBe(page.sections.length);

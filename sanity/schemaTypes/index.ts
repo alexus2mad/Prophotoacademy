@@ -331,6 +331,14 @@ export const schemaTypes = [
         initialValue: false,
       }),
       defineField({
+        name: 'archived',
+        title: 'Archived and delisted',
+        type: 'boolean',
+        initialValue: false,
+        description:
+          'Hides the program from public lists, the sitemap and its page. Students and admin keep access; clear to restore.',
+      }),
+      defineField({
         name: 'seo',
         title: 'SEO',
         type: 'object',
@@ -400,13 +408,6 @@ export const schemaTypes = [
         options: { list: ['recorded', 'selfPaced', 'ongoing'] },
         description:
           'Set only with confirmed delivery evidence. Leave empty when the learning state is unknown.',
-      }),
-      defineField({
-        name: 'availableInRecordings',
-        title: 'Closed, available in recordings',
-        type: 'boolean',
-        description:
-          'Presentation fact only. A closed offering shows «Доступно в записі» instead of «Набір закрито»; sales stay closed.',
       }),
       defineField({
         name: 'joiningOpen',

@@ -132,7 +132,6 @@ for (const privatePath of [
 for (const slug of [
   'course-smm-instagram',
   'visual-content',
-  'content-creator',
   'food-product-photography',
   'courses',
   'hub',

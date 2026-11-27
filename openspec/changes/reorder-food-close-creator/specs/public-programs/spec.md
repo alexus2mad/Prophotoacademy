@@ -7,7 +7,7 @@ The Studio Academy index SHALL separate main courses from workshops, individual 
 #### Scenario: Choosing a course or workshop
 
 - **WHEN** a visitor browses the Studio index
-- **THEN** the course list prioritizes Food, Commercial, Visual and Instagram programs that are present, and AI Artwork is linked in workshops.
+- **THEN** the course list prioritizes Food, Commercial, Visual and Instagram programs that are present and listed, and AI Artwork is linked in workshops.
 
 #### Scenario: Filtering the legacy catalog
 
@@ -16,16 +16,30 @@ The Studio Academy index SHALL separate main courses from workshops, individual 
 
 ## ADDED Requirements
 
+### Requirement: Archived programs
+
+A program MAY be archived. An archived program SHALL be omitted from public course lists, the catalog, the sitemap and the page editor, and its page SHALL not render. Its content, offering and packages SHALL remain stored so administrators, enrolled students and a later restoration keep them.
+
+#### Scenario: Visiting an archived course
+
+- **WHEN** a visitor opens the address of the archived Content Creator course
+- **THEN** a temporary redirect takes them to the homepage, and no course list or sitemap links to it.
+
+#### Scenario: Restoring a course
+
+- **WHEN** an administrator clears the archive flag and the redirect
+- **THEN** the course reappears in lists and its page renders from the retained content.
+
 ### Requirement: Closed course available in recordings
 
-A closed course offering MAY be marked as available in recordings. Such an offering SHALL remain unpurchasable and SHALL present «Доступно в записі» wherever other closed offerings present «Набір закрито».
+A closed course SHALL remain unpurchasable and SHALL present «Доступно в записі» wherever a closed offering previously presented «Набір закрито».
 
-#### Scenario: Viewing a recorded closed course
+#### Scenario: Viewing a closed course
 
-- **WHEN** a visitor views the catalog entry, course page, packages or checkout of a closed offering marked as available in recordings
-- **THEN** the status reads «Доступно в записі», no purchase link is offered, and an inquiry remains available.
+- **WHEN** a visitor views the catalog entry, course page, packages or checkout of a closed course
+- **THEN** the status reads «Доступно в записі», no purchase link is offered, and an inquiry about access remains available.
 
-#### Scenario: Other closed courses
+#### Scenario: Closed non-course program
 
-- **WHEN** a closed offering has no recordings marker
+- **WHEN** a closed offering belongs to a program other than a course
 - **THEN** its status continues to read «Набір закрито».

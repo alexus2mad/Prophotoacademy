@@ -13,6 +13,10 @@ import { StudioCreatorTemplate } from '../src/components/templates/StudioCreator
 import { creatorEditorial } from '../src/lib/studio-creator/content';
 import { creatorWorks } from '../src/components/organisms/StudioCreatorWorks/selectors';
 import { creatorAssets } from '../src/lib/studio-creator/assets';
+import nextConfig from '../next.config';
+import sitemap from '../src/app/sitemap';
+import { studioAcademyCourses } from '../src/lib/studio-pages/selectors';
+import { buildSiteSeeds } from '../src/lib/site-editor/seed-model';
 
 vi.mock('../src/lib/content', () => ({ getContent: vi.fn() }));
 vi.mock('../src/lib/commerce/catalog', () => ({ enrollmentOptions: vi.fn() }));
@@ -31,8 +35,35 @@ beforeEach(() => {
 });
 afterEach(() => vi.unstubAllEnvs());
 
+describe('archived Content Creator', () => {
+  it('is delisted, returns no page and temporarily redirects home while its data stays', async () => {
+    expect(program.archived).toBe(true);
+    expect(offering.packages).toHaveLength(3);
+    expect(studioAcademyCourses(content.programs).map((item) => item.id)).not.toContain(program.id);
+    expect(buildSiteSeeds(content).map((page) => page.path)).not.toContain('/' + program.slug);
+    expect((await sitemap()).map((entry) => new URL(entry.url).pathname)).not.toContain(
+      '/' + program.slug,
+    );
+    await expect(Detail({ params: Promise.resolve({ slug: program.slug }) })).rejects.toThrow(
+      'NEXT_HTTP_ERROR_FALLBACK;404',
+    );
+    expect(await nextConfig.redirects!()).toContainEqual({
+      source: '/content-creator',
+      destination: '/',
+      permanent: false,
+    });
+  });
+});
+
 describe('Content Creator route and commercial boundaries', () => {
   it('selects the new course design only for the commercial course in the studio variant', async () => {
+    // Restoring the course is a matter of clearing the archive flag.
+    vi.mocked(getContent).mockResolvedValue({
+      ...content,
+      programs: content.programs.map((item) =>
+        item.id === program.id ? { ...item, archived: false } : item,
+      ),
+    });
     const commercial = load(
       renderToStaticMarkup(await Detail({ params: Promise.resolve({ slug: program.slug }) })),
     );

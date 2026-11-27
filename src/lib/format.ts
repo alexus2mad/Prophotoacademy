@@ -37,7 +37,7 @@ export function programStatusLabel(program: Program, offering?: Offering) {
   return ['individual', 'corporate'].includes(program.category)
     ? 'За вашим запитом'
     : offering && offeringStatus(offering) === 'closed'
-      ? closedStatusLabel(offering)
+      ? closedStatusLabel(program)
       : availabilityLabel[offering ? offeringStatus(offering) : 'waitlist'];
 }
 export function phoneLabel(phone: string) {
@@ -46,8 +46,9 @@ export function phoneLabel(phone: string) {
 export function isEnrollmentClosed(offering?: Offering, pack?: Package) {
   return offering?.availability === 'closed' || pack?.availability === 'closed';
 }
-export function closedStatusLabel(offering?: Offering) {
-  return offering?.availableInRecordings ? 'Доступно в записі' : availabilityLabel.closed;
+// A closed course stays available in recordings; other closed programs keep the plain status.
+export function closedStatusLabel(program?: Pick<Program, 'category'>) {
+  return program?.category === 'course' ? 'Доступно в записі' : availabilityLabel.closed;
 }
 export function canEnroll(offering: Offering, pack?: Package, now = new Date()) {
   const today = new Intl.DateTimeFormat('en-CA', {

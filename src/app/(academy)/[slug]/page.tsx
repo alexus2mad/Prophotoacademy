@@ -42,6 +42,7 @@ export async function generateMetadata({ params }: SlugPageProps): Promise<Metad
   const { slug } = await params;
   const content = await getContent();
   const program = content.programs.find((p) => p.slug === slug);
+  if (program?.archived) return {};
   if (program) {
     const title = program.seo?.title?.trim() || program.title;
     const description = program.seo?.description?.trim() || program.description;
@@ -70,6 +71,8 @@ export default async function Detail({ params, searchParams }: SlugPageProps & S
   const content = await getContent();
   const pageContent = await readSitePage('/' + slug, searchParams);
   const original = content.programs.find((p) => p.slug === slug);
+  // The redirect sends visitors home; an archived program never renders directly.
+  if (original?.archived) notFound();
   if (original) {
     const studio = academyDesign() === 'studio';
     const updated = programPresentationContent(content, original, pageContent);

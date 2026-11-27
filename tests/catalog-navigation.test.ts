@@ -31,7 +31,6 @@ describe('URL-addressable course selection', () => {
     expect(catalogPrograms(programs, 'course').map((program) => program.id)).toEqual([
       'program-instagram',
       'program-visual',
-      'program-commercial',
       'program-food',
     ]);
   });

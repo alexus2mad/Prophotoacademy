@@ -108,7 +108,7 @@ const detail = path.join(stage, 'src/app/(academy)/[slug]/page.tsx');
 await writeFile(
   detail,
   (await readFile(detail, 'utf8')) +
-    `\nexport const dynamicParams=false;\nexport async function generateStaticParams(){const content=await getContent();return [...content.programs,...content.pages].filter(item=>item.slug!=='ai-artwork').map(item=>({slug:item.slug}));}\n`,
+    `\nexport const dynamicParams=false;\nexport async function generateStaticParams(){const content=await getContent();return [...content.programs,...content.pages].filter(item=>item.slug!=='ai-artwork'&&!item.archived).map(item=>({slug:item.slug}));}\n`,
 );
 const hubDetail = path.join(stage, 'src/app/hub/[slug]/page.tsx');
 await writeFile(

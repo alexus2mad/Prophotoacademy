@@ -18,6 +18,8 @@ const config: NextConfig = {
     return [
       { source: '/401', destination: '/', permanent: true },
       { source: '/food-photography', destination: '/food-product-photography', permanent: true },
+      // Content Creator is archived; temporary so the course can be restored later.
+      { source: '/content-creator', destination: '/', permanent: false },
     ];
   },
   async headers() {

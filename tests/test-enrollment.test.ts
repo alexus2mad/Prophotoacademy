@@ -95,7 +95,7 @@ describe('explicit payment-disabled checkout', () => {
       offering.availability = 'closed';
       const response = await checkout(request(payload()));
       expect(response.status).toBe(409);
-      expect(JSON.stringify(await response.json())).toContain('Набір закрито');
+      expect(JSON.stringify(await response.json())).toContain('Продаж курсу закрито');
       for (const table of ['orders', 'grants', 'transactions', 'payment_events', 'outbox'])
         expect(await count(table)).toBe(0);
     },

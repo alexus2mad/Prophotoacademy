@@ -117,7 +117,8 @@ describe('social image URL boundaries', () => {
 describe('page coverage and integration', () => {
   it('provides a distinct authored preview for every current indexable Academy URL', async () => {
     const routes = (await sitemap()).map((entry) => new URL(entry.url).pathname);
-    expect(routes).toHaveLength(16);
+    expect(routes).toHaveLength(15);
+    expect(routes).not.toContain('/content-creator');
     const primaryImages = routes.map((route) => {
       expect(Object.hasOwn(catalog, route), route).toBe(true);
       const entry = catalog[route];
@@ -128,21 +129,22 @@ describe('page coverage and integration', () => {
     expect(new Set(primaryImages).size).toBe(routes.length);
   });
 
-  it.each([...content.programs, ...content.pages].map((page) => page.slug))(
-    'binds the %s content route to its own public preview and current SEO title',
-    async (slug) => {
-      const page = [...content.programs, ...content.pages].find((item) => item.slug === slug)!;
-      const metadata = await programMetadata({ params: Promise.resolve({ slug }) });
-      const title = ('seo' in page ? page.seo?.title : undefined) || page.title;
-      expect(metadata.title).toBe(title);
-      expect(metadata.alternates?.canonical).toBe(production + '/' + slug);
-      expect(metadata.openGraph).toMatchObject({
-        title,
-        url: production + '/' + slug,
-        images: [{ url: production + catalog['/' + slug].images[0].src }, {}],
-      });
-    },
-  );
+  it.each(
+    [...content.programs.filter((program) => !program.archived), ...content.pages].map(
+      (page) => page.slug,
+    ),
+  )('binds the %s content route to its own public preview and current SEO title', async (slug) => {
+    const page = [...content.programs, ...content.pages].find((item) => item.slug === slug)!;
+    const metadata = await programMetadata({ params: Promise.resolve({ slug }) });
+    const title = ('seo' in page ? page.seo?.title : undefined) || page.title;
+    expect(metadata.title).toBe(title);
+    expect(metadata.alternates?.canonical).toBe(production + '/' + slug);
+    expect(metadata.openGraph).toMatchObject({
+      title,
+      url: production + '/' + slug,
+      images: [{ url: production + catalog['/' + slug].images[0].src }, {}],
+    });
+  });
 
   it('preserves updated public CMS SEO rather than replacing it with the generated image caption', async () => {
     const content = structuredClone(fixture) as AcademyContent;

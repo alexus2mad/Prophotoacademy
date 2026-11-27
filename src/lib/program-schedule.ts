@@ -40,7 +40,7 @@ export function programSchedule(
       inquirySuggested: false,
     };
 
-  if (isEnrollmentClosed(offering) && offering?.availableInRecordings)
+  if (isEnrollmentClosed(offering) && program.category === 'course')
     return {
       label: 'Старт потоку',
       ...(dated || { value: 'Дату не зазначено' }),

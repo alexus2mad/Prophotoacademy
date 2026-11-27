@@ -1,4 +1,5 @@
 import type { AcademyContent } from '@/lib/content/types';
+import { listedPrograms } from '@/lib/content/selectors';
 import type { AcademyDesign } from '@/lib/studio-design/types';
 import { legacyAcademyIndexPaths } from '../navigation/academy';
 import { academyCanonical } from './urls';
@@ -48,7 +49,7 @@ export function academySitemap(
     '/401',
     '/404',
   ]);
-  const editorial = [...content.programs, ...content.pages].flatMap(({ slug }) => {
+  const editorial = [...listedPrograms(content.programs), ...content.pages].flatMap(({ slug }) => {
     const path = `/${slug}`;
     return /^[\p{L}\p{N}]+(?:-[\p{L}\p{N}]+)*$/u.test(slug) && !reserved.has(path) ? [path] : [];
   });

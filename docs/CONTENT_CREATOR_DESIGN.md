@@ -1,5 +1,7 @@
 # Content Creator page — November 2026
 
+> **Archived on 27 November 2026.** `program-commercial` has `"archived": true` in `content/academy.json`, its offering is closed and `/content-creator` redirects temporarily to `/`. The content, offering and packages are kept. To restore the course, clear the flag, remove the redirect in `next.config.ts` and reopen the offering.
+
 The Studio presentation of `/content-creator` uses updated Figma frame
 **949:443** in `CvY4dgmOevd9ehxk9Xsaqd`. Program and package identities remain
 unchanged. On 19 November 2026 the course moved from `/food-product-photography`,

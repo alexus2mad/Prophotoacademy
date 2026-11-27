@@ -21,7 +21,7 @@ export function ProgramPackages({
   const compared = offering.packages.map((pack) => ({
     ...pack,
     statusLabel: isEnrollmentClosed(offering, pack)
-      ? closedStatusLabel(offering)
+      ? closedStatusLabel(program)
       : pack.availability === 'soldOut'
         ? 'Місць немає'
         : pack.inquiryOnly

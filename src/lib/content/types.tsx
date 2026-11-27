@@ -53,8 +53,6 @@ export type Offering = {
   openAfterStart?: boolean;
   learningState?: 'recorded' | 'selfPaced' | 'ongoing';
   joiningOpen?: boolean;
-  // A closed offering whose material stays available in recordings; sales remain closed.
-  availableInRecordings?: boolean;
   packages: Package[];
   sourceNotes?: string[];
 };
@@ -80,6 +78,8 @@ export type Program = {
   faqs: { question: string; answer: string }[];
   sourceUrl: string;
   featured: boolean;
+  // Delisted from the public site and redirected; kept for students, admin and later recovery.
+  archived?: boolean;
   seo?: { title?: string; description?: string };
 };
 export type Instructor = { id: string; name: string; role: string; bio: string; imageId: string };

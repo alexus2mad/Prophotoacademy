@@ -46,7 +46,7 @@ export function programPresentation(
   const hasFutureStart = Boolean(offering?.startDate && offering.startDate >= kyivDate(now));
   const inquiryTitle = isCustom
     ? program.title
-    : closed && offering?.availableInRecordings
+    : closed && program.category === 'course'
       ? 'Дізнатися про доступ до записів'
       : closed
         ? 'Повідомити про наступний набір'
@@ -55,7 +55,7 @@ export function programPresentation(
           : 'Дізнатися про найближчий набір';
   const buttonLabel = isCustom
     ? 'Обговорити програму'
-    : closed && offering?.availableInRecordings
+    : closed && program.category === 'course'
       ? 'Дізнатися про доступ'
       : closed
         ? 'Наступний набір'

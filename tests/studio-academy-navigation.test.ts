@@ -143,7 +143,9 @@ describe('one approved Studio Academy destination', () => {
     });
     expect(page.type).toBe(CatalogTemplate);
     expect(page.props.content).toBe(content);
-    expect(page.props.programs).toHaveLength(content.programs.length);
+    expect(page.props.programs).toHaveLength(
+      content.programs.filter((program) => !program.archived).length,
+    );
     expect(page.props.query).toBe('category=course&utm_source=first&utm_source=second');
     expect(generateMetadata()).toMatchObject({
       title: 'Курси фотографії, відео та створення контенту',
