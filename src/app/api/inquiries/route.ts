@@ -5,6 +5,8 @@ import { guardMutation, jsonBody, errorResponse, HttpError, validationError } fr
 import { acquisitionSchema } from '@/lib/acquisition-schema';
 import { inquirySourceSchema, inquirySubjectSchema } from '@/lib/inquiries/schema';
 import { inquirySubjectTitle } from '@/lib/inquiries/presentation';
+import { inquiriesForwarded } from '@/lib/inquiries/admin';
+import { deliverSoon } from '@/lib/notifications/delivery';
 const schema = z
   .object({
     name: z.string().trim().min(2).max(80),
@@ -73,8 +75,10 @@ export async function POST(request: Request) {
       packageName: pack?.name,
       consentAt: new Date().toISOString(),
     });
+    // Send the inquiry to the team right after responding; the timer retries failures.
+    deliverSoon();
     return Response.json(
-      { ok: true, mode: process.env.NOTIFICATION_MODE === 'make' ? 'queued' : 'local' },
+      { ok: true, mode: inquiriesForwarded() ? 'queued' : 'local' },
       { headers: { 'Cache-Control': 'no-store' } },
     );
   } catch (error) {

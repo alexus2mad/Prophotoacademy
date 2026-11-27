@@ -191,10 +191,14 @@ describe('customer API flow', () => {
       consent: true,
       programId: seed.programs[0].id,
     };
-    expect((await inquiry(request('/api/inquiries', payload))).status).toBe(200);
-    expect(
-      (await inquiry(request('/api/inquiries', { ...payload, website: 'robot' }))).status,
-    ).toBe(200);
+    const accepted = await inquiry(request('/api/inquiries', payload));
+    expect(accepted.status).toBe(200);
+    expect(await accepted.json()).toEqual({ ok: true, mode: 'local' });
+    vi.stubEnv('MAKE_WEBHOOK_URL', 'https://hook.example.test/inquiries');
+    vi.stubEnv('NOTIFICATION_MODE', 'make');
+    const forwarded = await inquiry(request('/api/inquiries', { ...payload, website: 'robot' }));
+    expect(forwarded.status).toBe(200);
+    vi.unstubAllEnvs();
     expect(
       (database().prepare('SELECT COUNT(*) AS count FROM inquiries').get() as CountRow).count,
     ).toBe(1);

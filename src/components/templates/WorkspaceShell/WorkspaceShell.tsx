@@ -17,6 +17,7 @@ export function WorkspaceShell({
         ['courses', 'Курси'],
         ...(!demo ? [['content', 'Сторінки сайту']] : []),
         ['students', 'Студенти'],
+        ...(!demo ? [['inquiries', 'Заявки']] : []),
         ['team', 'Команда'],
         ['promo-codes', 'Промокоди'],
         ['cashbox', 'Каса'],
